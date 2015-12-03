@@ -1,0 +1,599 @@
+﻿Option Explicit On
+
+Imports System.Data.SqlClient
+
+
+Public Class CompanyDAO
+    Inherits iPerson
+
+#Region "Property"
+
+    Dim mOwner As String
+    Dim mTaxID As String
+    Dim mTaxType As String
+    Dim mTaxRate As Double
+    Dim mRegisterDate As Date
+    Dim mRegisterNo As String
+    Dim mRegisterAsset As Double
+    Dim mRegisterNum As Double
+    Dim mRegisterCost As Double
+    Dim mCommitteeNum As Double
+    Dim mCommitteeName As String
+    Dim mCheckLimitReserve As Integer
+    Dim mCheckLimitSellOrder As Integer
+    Dim mIsApproveQua As Integer
+    Dim mIsApproveReserve As Integer
+    Dim mIsApproveSellOrder As Integer
+    Dim mIsApproveOffer As Integer
+    Dim mIsApproveBuyOrder As Integer
+    Dim llngHistoryID As Long
+    Dim mBranch As String
+    Dim mBankAccount As String = ""
+    Dim mBankAccount2 As String = ""
+
+
+    Public ReadOnly Property TableName() As String
+        Get
+            Return "Company"
+        End Get
+    End Property
+    Public Property Owner() As String
+        Get
+            Return mOwner
+        End Get
+        Set(ByVal value As String)
+            mOwner = value
+        End Set
+    End Property
+    Public Property Branch() As String
+        Get
+            Return mBranch
+        End Get
+        Set(ByVal value As String)
+            mBranch = value
+        End Set
+    End Property
+    Public Property TaxID() As String
+        Get
+            Return mTaxID
+        End Get
+        Set(ByVal value As String)
+            mTaxID = value
+        End Set
+    End Property
+    Public Property TaxType() As String
+        Get
+            Return mTaxType
+        End Get
+        Set(ByVal value As String)
+            mTaxType = value
+        End Set
+    End Property
+    Public Property TaxRate() As Double
+        Get
+            Return mTaxRate
+        End Get
+        Set(ByVal value As Double)
+            mTaxRate = value
+        End Set
+    End Property
+    Public Property RegisterDate() As Date
+        Get
+            Return mRegisterDate
+        End Get
+        Set(ByVal value As Date)
+            mRegisterDate = value
+        End Set
+    End Property
+    Public Property RegisterAsset() As Double
+        Get
+            Return mRegisterAsset
+        End Get
+        Set(ByVal value As Double)
+            mRegisterAsset = value
+        End Set
+    End Property
+    Public Property RegisterNum() As Double
+        Get
+            Return mRegisterNum
+        End Get
+        Set(ByVal value As Double)
+            mRegisterNum = value
+        End Set
+    End Property
+    Public Property RegisterCost() As Double
+        Get
+            Return mRegisterCost
+        End Get
+        Set(ByVal value As Double)
+            mRegisterCost = value
+        End Set
+    End Property
+    Public Property RegisterNo() As String
+        Get
+            Return mRegisterNo
+        End Get
+        Set(ByVal value As String)
+            mRegisterNo = value
+        End Set
+    End Property
+    Public Property CommitteeNum() As Double
+        Get
+            Return mCommitteeNum
+        End Get
+        Set(ByVal value As Double)
+            mCommitteeNum = value
+        End Set
+    End Property
+    Public Property CommitteeName() As String
+        Get
+            Return mCommitteeName
+        End Get
+        Set(ByVal value As String)
+            mCommitteeName = value
+        End Set
+    End Property
+    Public Property CheckLimitReserve() As Integer
+        Get
+            Return mCheckLimitReserve
+        End Get
+        Set(ByVal value As Integer)
+            mCheckLimitReserve = value
+        End Set
+    End Property
+    Public Property CheckLimitSellOrder() As Integer
+        Get
+            Return mCheckLimitSellOrder
+        End Get
+        Set(ByVal value As Integer)
+            mCheckLimitSellOrder = value
+        End Set
+    End Property
+    Public Property IsApproveQua() As Integer
+        Get
+            Return mIsApproveQua
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveQua = value
+        End Set
+    End Property
+    Public Property IsApproveReserve() As Integer
+        Get
+            Return mIsApproveReserve
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveReserve = value
+        End Set
+    End Property
+    Public Property IsApproveSellOrder() As Integer
+        Get
+            Return mIsApproveSellOrder
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveSellOrder = value
+        End Set
+    End Property
+    Public Property IsApproveOffer() As Integer
+        Get
+            Return mIsApproveOffer
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveOffer = value
+        End Set
+    End Property
+    Public Property IsApproveBuyOrder() As Integer
+        Get
+            Return mIsApproveBuyOrder
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveBuyOrder = value
+        End Set
+    End Property
+    Public Property BankAccount() As String
+        Get
+            Return mBankAccount
+        End Get
+        Set(ByVal value As String)
+            mBankAccount = value
+        End Set
+    End Property
+    Public Property BankAccount2() As String
+        Get
+            Return mBankAccount2
+        End Get
+        Set(ByVal value As String)
+            mBankAccount2 = value
+        End Set
+    End Property
+#End Region
+   
+    Public Function CHECKSUM_AGG() As Long
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+        Try
+            SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM Company WITH (NOLOCK);"
+
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    Return ConvertNullToZero(dr(0))
+                    Exit For
+                Next
+            End If
+            Return 0
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.CHECKSUM_AGG : " & e.Message)
+            Return 0
+        Finally
+            dataTable = Nothing
+        End Try
+    End Function
+
+    Public Overrides Function InitailData(ByVal pID As Long, Optional ByVal pName As String = "", Optional ByVal tr As SqlTransaction = Nothing) As Boolean
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+        Dim lUserDAO As New UserDAO
+        Try
+            SQL = "SELECT *   "
+            SQL = SQL & " FROM Company "
+            SQL = SQL & " WHERE CompanyID=" & pID
+
+            dataTable = gConnection.executeSelectQuery(SQL, tr)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    'Company 
+
+                    Owner = ConvertNullToString(dr("Owner"))
+                    TaxID = ConvertNullToString(dr("TaxID"))
+                    TaxType = ConvertNullToString(dr("TaxType"))
+                    TaxRate = ConvertNullToZero(dr("TaxRate"))
+                    If IsDBNull(dr("RegisterDate")) Then
+                        RegisterDate = GetCurrentDate(tr)
+                    Else
+                        RegisterDate = dr("RegisterDate")
+                    End If
+                    RegisterNo = ConvertNullToString(dr("RegisterNo"))
+                    RegisterAsset = ConvertNullToZero(dr("RegisterAsset"))
+                    RegisterNum = ConvertNullToZero(dr("RegisterNum"))
+                    RegisterCost = ConvertNullToZero(dr("RegisterCost"))
+                    CommitteeNum = ConvertNullToZero(dr("CommitteeNum"))
+                    CommitteeName = ConvertNullToString(dr("CommitteeName"))
+                    CheckLimitReserve = ConvertNullToZero(dr("CheckLimitReserve"))
+                    CheckLimitSellOrder = ConvertNullToZero(dr("CheckLimitSellOrder"))
+                    IsMainCompany = ConvertNullToZero(dr("IsMainCompany"))
+                    Branch = ConvertNullToString(dr("Branch"))
+                    IsApproveQua = ConvertNullToZero(dr("IsApproveQua"))
+                    IsApproveReserve = ConvertNullToZero(dr("IsApproveReserve"))
+                    IsApproveSellOrder = ConvertNullToZero(dr("IsApproveSellOrder"))
+                    IsApproveOffer = ConvertNullToZero(dr("IsApproveOffer"))
+                    IsApproveBuyOrder = ConvertNullToZero(dr("IsApproveBuyOrder"))
+                    BankAccount = ConvertNullToString(dr("BankAccount"))
+                    BankAccount2 = ConvertNullToString(dr("BankAccount2"))
+                    'Person
+                    ID = Int32.Parse(dr("CompanyID"))
+                    IsInActive = dr("IsInActive")
+                    CompanyName = ConvertNullToString(dr("CompanyName"))
+                    FirstName = ConvertNullToString(dr("CompanyName"))
+                    FirstNameEng = ConvertNullToString(dr("CompanyNameEng"))
+                    Remark = dr("Remark").ToString
+                    CreateTime = ConvertNullToDateTime(dr("CreateTime"))
+                    ModifiedTime = ConvertNullToDateTime(dr("ModifiedTime"))
+                    If lUserDAO.InitailData(True, ConvertNullToZero(dr("CreateBy")), "", tr) Then
+                        CreateBy = lUserDAO.UserName
+                    Else
+                        CreateBy = ""
+                    End If
+
+                    If ConvertNullToZero(dr("CreateBy")) = ConvertNullToZero(dr("ModifiedBy")) Then
+                        ModifiedBy = CreateBy
+                    Else
+                        If lUserDAO.InitailData(True, ConvertNullToZero(dr("ModifiedBy")), "", tr) Then
+                            ModifiedBy = lUserDAO.UserName
+                        Else
+                            ModifiedBy = ""
+                        End If
+                    End If
+                  
+                    'Load AddressDAO
+                    AddressS = Nothing
+                    AddressS = New AddressDAO
+                    AddressS.InitailData(ConvertNullToZero(dr("AddressID")), tr)
+
+
+                    HistoryDAO = Nothing
+                    HistoryDAO = New HistoryDAO
+                    HistoryDAO.InitailData(ConvertNullToZero(dr("HistoryID")), tr)
+
+                    'Load FileAttach
+                    FileAttachs = LoadFileAttach(ID, TableName, tr)
+
+                    Return True
+                    Exit For
+                Next
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.InitailData : " & e.Message)
+            Return False
+        Finally
+            lUserDAO = Nothing
+            dataTable = Nothing
+        End Try
+
+    End Function
+
+    Public Function GetInfoHtml() As String
+        Dim Info As String = ""
+        Try
+            'Info &= Constants.vbCrLf & Constants.vbCrLf & "รหัสพนักงาน: " & EmpCode
+            'Info &= Constants.vbCrLf & Constants.vbCrLf & "ชื่อ - สกุล: " & Title & FirstName & " " & LastName
+            'Info &= Constants.vbCrLf & "ชื่อเล่น: " & NickName
+            'If Not PositionDAO Is Nothing Then
+            '    Info &= Constants.vbCrLf & "ตำแหน่ง: " & PositionDAO.NameThai
+            '    If Not PositionDAO.Department Is Nothing Then
+            '        Info &= Constants.vbCrLf & "แผนก: " & PositionDAO.Department.NameThai
+            '    End If
+            'End If
+
+            'Info &= Constants.vbCrLf & "โทรศัพท์มือถือ: " & AddressS.MobilePhone
+            'Info &= Constants.vbCrLf & "เบอร์โทรศัพท์: " & AddressS.Phone1
+            'Info &= Constants.vbCrLf & "เบอร์โทรสาร: " & AddressS.Fax
+            'Info &= Constants.vbCrLf & "อีเมลล์: " & AddressS.Email1
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.GetInfoHtml : " & e.Message)
+
+        End Try
+        Return Info
+    End Function
+
+
+    Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean) As DataTable
+        Dim SQL As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = "SELECT Company.CompanyID AS ID,Company.CompanyName,Company.Branch  ,ModifiedTime"
+            SQL = SQL & " FROM Company  " 
+            SQL = SQL & " "
+            SQL = SQL & " WHERE Company.IsDelete =0   "
+            If pID > 0 Then
+                SQL = SQL & "  AND Company.CompanyID=" & pID
+            End If
+            If pOnlyActive = True Then
+                SQL = SQL & "  AND Company.IsInActive = 0"
+            End If
+            SQL = SQL & " ORDER BY Company.CompanyName,Company.Branch "
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.GetDataTable : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
+
+
+    Public Overrides Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean
+        Dim SQL As String
+        Dim llngAddressID As Long = 0
+        Dim myCommand As SqlCommand
+        Dim tr As SqlTransaction = Nothing
+
+        SQL = ""
+        Try
+            tr = gConnection.Connection.BeginTransaction
+
+            llngAddressID = SaveAddress(AddressS, ModeData, tr)
+            'History 
+            If HistoryDAO Is Nothing Then
+                HistoryDAO = New HistoryDAO
+            Else
+                HistoryDAO.ModeData = ModeData
+                HistoryDAO.SaveData(tr)
+                llngHistoryID = HistoryDAO.ID
+            End If
+
+            Select Case ModeData
+                Case DataMode.ModeNew
+                    ID = GenNewID("CompanyID", TableName, tr)
+                    SQL = " INSERT INTO Company  (CompanyID,CompanyName,CompanyNameEng,Owner,TaxID,TaxType "
+                    SQL = SQL & " ,TaxRate,RegisterDate,Remark,RegisterNo,RegisterAsset,RegisterNum,RegisterCost "
+                    SQL = SQL & " ,CommitteeNum,CommitteeName,HistoryID,AddressID,CheckLimitReserve,CheckLimitSellOrder,IsApproveQua "
+                    SQL = SQL & " ,IsApproveReserve,IsApproveSellOrder,IsApproveOffer,IsApproveBuyOrder"
+                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,IsMainCompany,Branch,BankAccount,BankAccount2   "
+                    SQL = SQL & " )"
+                    SQL = SQL & " VALUES ( @mIDs"
+                    SQL = SQL & " ,  @CompanyName"
+                    SQL = SQL & " ,  @CompanyNameEng"
+                    SQL = SQL & " ,  @Owner"
+                    SQL = SQL & " ,  @TaxID"
+                    SQL = SQL & " ,  @TaxType"
+                    SQL = SQL & " ,  @TaxRate"
+                    SQL = SQL & " ,  @RegisterDate"
+                    SQL = SQL & " ,  @Remark"
+                    SQL = SQL & " ,  @RegisterNo"
+                    SQL = SQL & " ,  @RegisterAsset "
+                    SQL = SQL & " ,  @RegisterNum "
+                    SQL = SQL & " ,  @RegisterCost "
+                    SQL = SQL & " ,  @CommitteeNum "
+                    SQL = SQL & " ,  @CommitteeName "
+                    SQL = SQL & " ,  @HistoryID "
+                    SQL = SQL & " ,  @AddressID "
+                    SQL = SQL & " ,  @CheckLimitReserve "
+                    SQL = SQL & " ,  @CheckLimitSellOrder "
+                    SQL = SQL & " ,  @IsApproveQua "
+                    SQL = SQL & " ,  @IsApproveReserve "
+                    SQL = SQL & " ,  @IsApproveSellOrder "
+                    SQL = SQL & " ,  @IsApproveOffer "
+                    SQL = SQL & " ,  @IsApproveBuyOrder "
+                    SQL = SQL & " ,  @gUserID"
+                    SQL = SQL & " ,  @CreateTime"
+                    SQL = SQL & " ,  @IsInActive"
+                    SQL = SQL & " ,  @IsDelete"
+                    SQL = SQL & " ,  @IsMainCompany"
+                    SQL = SQL & " ,  @Branch"
+                    SQL = SQL & " ,  @BankAccount"
+                    SQL = SQL & " ,  @BankAccount2"
+                    SQL = SQL & " ) "
+                Case DataMode.ModeEdit
+                    SQL = " UPDATE Company SET "
+                    SQL = SQL & " CompanyName=@CompanyName"
+                    SQL = SQL & " ,  CompanyNameEng=@CompanyNameEng"
+                    SQL = SQL & " ,  Owner=@Owner"
+                    SQL = SQL & " ,  TaxID=@TaxID"
+                    SQL = SQL & " ,  TaxType=@TaxType"
+                    SQL = SQL & " ,  TaxRate=@TaxRate"
+                    SQL = SQL & " ,  RegisterDate=@RegisterDate"
+                    SQL = SQL & " ,  Remark=@Remark"
+                    SQL = SQL & " ,  RegisterNo=@RegisterNo"
+                    SQL = SQL & " ,  RegisterAsset=@RegisterAsset "
+                    SQL = SQL & " ,  RegisterNum=@RegisterNum "
+                    SQL = SQL & " ,  RegisterCost=@RegisterCost "
+                    SQL = SQL & " ,  CommitteeNum=@CommitteeNum "
+                    SQL = SQL & " ,  CommitteeName=@CommitteeName "
+                    SQL = SQL & " ,  AddressID=@AddressID "
+                    SQL = SQL & " ,  CheckLimitReserve=@CheckLimitReserve "
+                    SQL = SQL & " ,  CheckLimitSellOrder=@CheckLimitSellOrder "
+                    SQL = SQL & " ,  IsApproveQua=@IsApproveQua "
+                    SQL = SQL & " ,  IsApproveReserve=@IsApproveReserve "
+                    SQL = SQL & " ,  IsApproveOffer=@IsApproveOffer "
+                    SQL = SQL & " ,  IsApproveBuyOrder=@IsApproveBuyOrder "
+                    SQL = SQL & " ,  IsApproveSellOrder=@IsApproveSellOrder "
+                    SQL = SQL & " ,  IsMainCompany=@IsMainCompany "
+                    SQL = SQL & " ,  Branch=@Branch "
+                    SQL = SQL & " ,  BankAccount=@BankAccount "
+                    SQL = SQL & " ,  BankAccount2=@BankAccount2 "
+                    SQL = SQL & " WHERE CompanyID= @mIDs"
+                Case DataMode.ModeDelete
+                    SQL = " UPDATE Company SET IsDelete=@IsDelete "
+                    SQL = SQL & " ,ModifiedBy= @gUserID"
+                    SQL = SQL & " ,ModifiedTime= @CreateTime"
+                    SQL = SQL & " WHERE CompanyID= @mIDs"
+            End Select
+            myCommand = New SqlCommand
+            myCommand.CommandText = SQL
+            myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))
+            myCommand.Parameters.Add(New SqlParameter("@CompanyName", Trim(FirstName)))
+            myCommand.Parameters.Add(New SqlParameter("@RegisterDate", formatSQLDate(RegisterDate)))
+            myCommand.Parameters.Add(New SqlParameter("@CompanyNameEng", FirstNameEng))
+            myCommand.Parameters.Add(New SqlParameter("@Owner", Trim(Owner)))
+            myCommand.Parameters.Add(New SqlParameter("@TaxID", Trim(TaxID)))
+            myCommand.Parameters.Add(New SqlParameter("@TaxType", Trim(TaxType)))
+            myCommand.Parameters.Add(New SqlParameter("@TaxRate", ConvertNullToZero(TaxRate)))
+            myCommand.Parameters.Add(New SqlParameter("@Remark", Trim(Remark)))
+            myCommand.Parameters.Add(New SqlParameter("@RegisterNo", Trim(RegisterNo)))
+            myCommand.Parameters.Add(New SqlParameter("@RegisterAsset", ConvertNullToZero(RegisterAsset)))
+            myCommand.Parameters.Add(New SqlParameter("@RegisterNum", ConvertNullToZero(RegisterNum)))
+            myCommand.Parameters.Add(New SqlParameter("@RegisterCost", ConvertNullToZero(RegisterCost)))
+            myCommand.Parameters.Add(New SqlParameter("@CommitteeNum", ConvertNullToZero(CommitteeNum)))
+            myCommand.Parameters.Add(New SqlParameter("@CommitteeName", Trim(CommitteeName)))
+            myCommand.Parameters.Add(New SqlParameter("@HistoryID", llngHistoryID))
+            myCommand.Parameters.Add(New SqlParameter("@AddressID", llngAddressID))
+            myCommand.Parameters.Add(New SqlParameter("@CheckLimitReserve", ConvertNullToZero(CheckLimitReserve)))
+            myCommand.Parameters.Add(New SqlParameter("@CheckLimitSellOrder", ConvertNullToZero(CheckLimitSellOrder)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveQua", ConvertNullToZero(IsApproveQua)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveReserve", ConvertNullToZero(IsApproveReserve)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveOffer", ConvertNullToZero(IsApproveOffer)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveBuyOrder", ConvertNullToZero(IsApproveBuyOrder)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveSellOrder", ConvertNullToZero(IsApproveSellOrder)))
+            myCommand.Parameters.Add(New SqlParameter("@IsMainCompany", ConvertNullToZero(IsMainCompany)))
+            myCommand.Parameters.Add(New SqlParameter("@Branch", ConvertNullToString(Branch)))
+            myCommand.Parameters.Add(New SqlParameter("@BankAccount", ConvertNullToString(BankAccount)))
+            myCommand.Parameters.Add(New SqlParameter("@BankAccount2", ConvertNullToString(BankAccount2)))
+            myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
+            myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
+            myCommand.Parameters.Add(New SqlParameter("@IsInActive", IsInActive))
+
+
+            Select Case ModeData
+                Case DataMode.ModeNew
+                    myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))
+                Case DataMode.ModeDelete
+                    myCommand.Parameters.Add(New SqlParameter("@IsDelete", 1))
+            End Select
+
+            gConnection.executeInsertSqlCommand(myCommand, tr)
+
+            'Save Note
+            SaveNote(NoteDAOs, ModeData, ID, TableName, tr)
+
+            'Save Attach file
+            SaveAttachFile(FileAttachs, ModeData, ID, TableName, tr)
+            If ModeData = DataMode.ModeNew Then
+                UpdateLastID(MasterType.Company, tr)
+            End If
+
+            tr.Commit()
+            Return True
+        Catch e As Exception
+            tr.Rollback()
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.SaveData : " & e.Message)
+            Return False
+        End Try
+
+    End Function
+
+    Public Function CheckExist() As Boolean
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = "SELECT CompanyID  FROM Company"
+            SQL = SQL & " WHERE IsDelete =0 AND CompanyName='" & Trim(FirstName) & "'"
+            If ModeData = DataMode.ModeEdit Then
+                SQL = SQL & " AND CompanyID <> " & ID
+            End If
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Return dataTable.Rows.Count > 0
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.CheckExist : " & e.Message)
+            Return False
+        Finally
+            dataTable = Nothing
+        End Try
+
+    End Function
+
+    Public Function CheckIsToUse() As Boolean ''ถูกใช้งานอยู่ ???
+
+        'Dim SQL As String
+        'Dim dataTable As New DataTable()
+
+        Try
+            'SQL = "SELECT LeadID  FROM Lead"
+            'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
+            'If mMode = DataMode.ModeEdit Then
+            '    SQL = SQL & " AND LeadID <> " & mIDs
+            'End If
+            'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            'Return dataTable.Rows.Count > 0
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CompanyDAO.CheckNotExist : " & e.Message)
+        End Try
+        Return False
+    End Function
+
+
+    Public Sub New()
+        mOwner = ""
+        mTaxID = ""
+        mTaxType = ""
+        mTaxRate = 0
+        mRegisterDate = Now
+        mRegisterNo = ""
+        mRegisterAsset = 0
+        mRegisterNum = 0
+        mRegisterCost = 0
+        mCommitteeNum = 0
+        mCommitteeName = ""
+        mCheckLimitReserve = 0
+        mCheckLimitSellOrder = 0
+        mIsApproveQua = 0
+        mIsApproveReserve = 0
+        mIsApproveSellOrder = 0
+        mIsApproveOffer = 0
+        mIsApproveBuyOrder = 0
+        llngHistoryID = 0
+        mBranch = ""
+    End Sub
+End Class
+ 

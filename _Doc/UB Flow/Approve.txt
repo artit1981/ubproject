@@ -1,0 +1,15 @@
+                      '*** Check Approve
+                    If gIsApproveSellOrder = True And TableID = MasterType.SellOrders Then
+                        OrderStatus = "Wait Approve"
+                    ElseIf gIsApproveReserve = True And TableID = MasterType.Reserve Then
+                        OrderStatus = "Wait Approve"
+                    ElseIf gIsApproveQua = True And TableID = MasterType.Quotation Then
+                        OrderStatus = "Wait Approve"
+                    ElseIf gIsApproveBuyOrder And TableID = MasterType.PurchaseOrder Then
+                        OrderStatus = "Wait Approve"
+                    ElseIf TableID = MasterType.PurchaseOrder Then
+                        OrderStatus = "Waiting"
+                    Else
+                        OrderStatus = "Open"
+                    End If
+ 

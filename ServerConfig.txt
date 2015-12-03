@@ -1,0 +1,6 @@
+SERVER-UNIQUE\MSSQLSERVER2
+pass-db   admin1234
+inst. MSSQLSERVER2
+
+
+Server-unique/office/deploy
