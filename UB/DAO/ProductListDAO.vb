@@ -472,7 +472,7 @@ Public Class ProductListDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductListID", "ProductList", tr)
                     SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,Total,Remark,IsDelete"
-                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,IsShow ,IsMerge ,UnitMainID)"
+                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,IsShow ,IsMerge ,UnitMainID,AdjustUnit,RateUnit)"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"
                     SQL = SQL & " ,  @SEQ"
@@ -496,6 +496,8 @@ Public Class ProductListDAO
                     SQL = SQL & " ,  @IsShow"
                     SQL = SQL & " ,  @IsMerge"
                     SQL = SQL & " ,  @UnitMainID"
+                    SQL = SQL & " ,  @AdjustUnit"
+                    SQL = SQL & " ,  @RateUnit"
                     SQL = SQL & " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update ProductList   "
@@ -513,7 +515,8 @@ Public Class ProductListDAO
                     SQL = SQL & " ,ProductNameExt=@ProductNameExt"
                     SQL = SQL & " ,Discount=@Discount"
                     SQL = SQL & " ,LocationDTLID=@LocationDTLID"
-                    SQL = SQL & " ,UnitMainID=@UnitMainID"
+                    SQL = SQL & " ,AdjustUnit=@AdjustUnit"
+                    SQL = SQL & " ,RateUnit=@RateUnit"
                     SQL = SQL & " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
@@ -544,6 +547,8 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@ProductListRefID", ProductListRefID))
             myCommand.Parameters.Add(New SqlParameter("@IsShow", IsShow))
             myCommand.Parameters.Add(New SqlParameter("@IsMerge", IsMerge))
+            myCommand.Parameters.Add(New SqlParameter("@AdjustUnit", AdjustUnit))
+            myCommand.Parameters.Add(New SqlParameter("@RateUnit", RateUnit))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

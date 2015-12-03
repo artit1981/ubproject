@@ -263,8 +263,6 @@ Public Class ucProductLists
                             mTotal = mTotal + (lDataDAO.Units * lDataDAO.Price) - (lDataDAO.Discount * lDataDAO.Units)
                         End If
 
-
-
                         If pIsCheckError = True And pProSub.IsShow = 1 Then
                             If lDataDAO.ProductCode = "" Then
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุชื่อสินค้า"
@@ -290,11 +288,6 @@ Public Class ucProductLists
                                     End If
                                 End If
 
-                                'If pRefTable = MasterType.UpdateStock.ToString Then
-                                '    If lDataDAO.Units < 0 Then
-                                '        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " รายการปรับยอดสินค้า Serial Number ยังไม่สามารถปรับยอดติดลบได้"
-                                '    End If
-                                'End If
                             ElseIf lDataDAO.IsSN = 1 And (pRefTable = MasterType.SellOrders.ToString Or (lIsCheckCreditType = True And mStockType = "O")) Then
 
                                 Dim lclsSN As New SnDAO
@@ -709,14 +702,6 @@ Public Class ucProductLists
                 End If
                 rec.IsSN = lcls.IsSN
                 rec.Remark = ""
-                If rec.Units = 0 Then rec.Units = 1
-                If rec.ID = 0 Then
-                    rec.Units_Old = 0
-                Else
-                    rec.Units_Old = rec.Units
-                End If
-                rec.IsShow = 1
-                rec.IsMerge = 0
 
                 'Set Unitname
                 llngBuyOrSell = IIf(mIsUsePriceSell = True, 2, 1)
@@ -730,7 +715,15 @@ Public Class ucProductLists
                     Next
                 End If
 
-
+                If rec.AdjustUnit = 0 Then rec.AdjustUnit = 1
+                rec.Units = rec.AdjustUnit * rec.RateUnit
+                If rec.ID = 0 Then
+                    rec.Units_Old = 0
+                Else
+                    rec.Units_Old = rec.Units
+                End If
+                rec.IsShow = 1
+                rec.IsMerge = 0
                 If llIndex = 0 Then
                     bindingSource1.Add(rec)
 
