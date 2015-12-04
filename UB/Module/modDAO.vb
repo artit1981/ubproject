@@ -5,6 +5,12 @@ Imports DevExpress.XtraEditors.Controls
 
 Module modDAO
 
+    Public Enum RefOrderStatus
+        NotToRef = 1
+        RefSome = 2
+        RefAll = 3
+    End Enum
+
     Public Sub SetComboMaster(ByVal pCombo As DevExpress.XtraEditors.ComboBoxEdit, ByVal pMasterType As MasterType, ByVal pUseCodeThai As Boolean)
         Dim lcls As New MasterDAO
         Dim dataTable As New DataTable()
@@ -1331,43 +1337,46 @@ Module modDAO
         End Try
     End Sub
 
-    Public Function CompareUnitIsClose(ByVal pRefOrderID As Long, ByVal pCurrentTable As String, RefFromTable As String, ByRef ptr As SqlTransaction) As Boolean
+    Public Function CompareUnitToClose(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByRef ptr As SqlTransaction) As RefOrderStatus
         Dim SQL As String
         Dim DataTable As DataTable
-        Dim lCurrentUnit As Long = 0, lRefFromUnit As Long = 0
+        Dim pRefFromUnit As Long = 0, pRefToUnit As Long = 0
+
         SQL = ""
         SQL = "SELECT Sum(p1.Units) as Units  "
         SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  "
+        SQL = SQL & " WHERE p1.IsDelete =0  and IsShow=1"
         SQL = SQL & " AND p1.RefTable in (" & RefFromTable & " )"
         SQL = SQL & " AND p1.RefID =" & pRefOrderID
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
-            lRefFromUnit = ConvertNullToZero(pRow("Units"))
+            pRefFromUnit = ConvertNullToZero(pRow("Units"))
             Exit For
         Next
 
         SQL = "SELECT Sum(p1.Units) as Units  "
         SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  "
-        SQL = SQL & " AND p1.RefTable in (" & pCurrentTable & " )"
+        SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1"
+        SQL = SQL & " AND p1.RefTable in (" & pRefToTable & " )"
         SQL = SQL & " AND p1.ProductListRefID in ( "
         SQL = SQL & "   select p2.ProductListID from ProductList p2 "
-        SQL = SQL & "   WHERE p2.IsDelete =0  "
+        SQL = SQL & "   WHERE p2.IsDelete =0  and p2.IsShow=1"
         SQL = SQL & "   AND p2.RefID =" & pRefOrderID
         SQL = SQL & "   AND p2.RefTable in (" & RefFromTable & "))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
-            lCurrentUnit = ConvertNullToZero(pRow("Units"))
+            pRefToUnit = ConvertNullToZero(pRow("Units"))
             Exit For
         Next
 
-        If lCurrentUnit < lRefFromUnit Then 'ยังดึงรายการมาทำไม่ครบ
-            Return False
-        Else
-            Return True ' Is close
+        If pRefToUnit = 0 Then                  'not to ref
+            Return RefOrderStatus.NotToRef
+        ElseIf pRefFromUnit > pRefToUnit Then   'ref some line,unit
+            Return RefOrderStatus.RefSome
+        Else                                    'ref all
+            Return RefOrderStatus.RefAll
         End If
     End Function
 
@@ -1715,7 +1724,7 @@ Module modDAO
         Dim tr As SqlTransaction = Nothing
         Dim DataTable As DataTable
         Dim lRefOrderType As MasterType, lCount As Long = 0
-        Dim lRefFromUnit As Long, lCurrentUnit As Long
+        Dim lRefStatus As RefOrderStatus = 0
         SQL = ""
         Try
             If ptr Is Nothing Then
@@ -1728,318 +1737,91 @@ Module modDAO
             lRefOrderType = lclsRefOrder.GetOrderTypeFromID(pRefOrderID, tr)
 
             If pOrderType = MasterType.StockIn Then 'Ref from PO
-                'If pIsClose = False Then
-                '    lStatus = "Waiting"
-                'Else
-                SQL = "SELECT p1.*  "
-                SQL = SQL & " FROM ProductList p1"
-                SQL = SQL & " WHERE p1.IsDelete =0  "
-                SQL = SQL & " AND p1.RefTable in ('PurchaseOrder' )"
-                SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                SQL = SQL & " AND p1.ProductListID not in ( "
-                SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                SQL = SQL & "   AND p2.RefTable ='StockIn' )"
-                DataTable = gConnection.executeSelectQuery(SQL, tr)
-                If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                    'check unit
-                    SQL = "SELECT Sum(p1.Units) as Units  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('PurchaseOrder' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    DataTable = New DataTable
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    For Each pRow In DataTable.Rows
-                        lRefFromUnit = ConvertNullToZero(pRow("Units"))
-                        Exit For
-                    Next
-
-                    SQL = "SELECT Sum(p1.Units) as Units  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('StockIn' )"
-                    SQL = SQL & " AND p1.ProductListRefID in ( "
-                    SQL = SQL & "   select p2.ProductListID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  "
-                    SQL = SQL & "   AND p2.RefID =" & pRefOrderID
-                    SQL = SQL & "   AND p2.RefTable ='PurchaseOrder' )"
-                    DataTable = New DataTable
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    For Each pRow In DataTable.Rows
-                        lCurrentUnit = ConvertNullToZero(pRow("Units"))
-                        Exit For
-                    Next
-
-                    If lRefFromUnit > lCurrentUnit Then
-                        lStatus = "Waiting"
-                    Else
-                        lStatus = "Receive"
-                    End If
-                Else
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", tr)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = "Waiting" 'still wait
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
                     lStatus = "Waiting"
+                Else
+                    lStatus = "Close"
                 End If
-                'End If
-                SQL = " UPDATE Orders SET "
-                SQL = SQL & " OrderStatus='" & lStatus & "'"
-                SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                gConnection.executeInsertQuery(SQL, tr)
             ElseIf pOrderType = MasterType.Invoice And lRefOrderType = MasterType.Borrow Then
-                If pMode = DataMode.ModeDelete Then
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('Borrow' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID   in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in( 'Invoice' ) )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Open"
-                    Else
-                    End If
-                Else ' new ,Edit
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('Borrow' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in( 'Invoice' ) )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close"
-                    Else
-                        lStatus = "Waiting"
-                    End If
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", tr)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = "Open"
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = "Waiting"
+                Else
+                    lStatus = "Close"
                 End If
-                SQL = " UPDATE Orders SET "
-                SQL = SQL & " OrderStatus='" & lStatus & "'"
-                SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                gConnection.executeInsertQuery(SQL, tr)
             ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Then 'Ref from Sell
-                If pMode = DataMode.ModeDelete Then
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('SellOrders' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID  in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Borrow','Invoice','Shiping') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Open"
-                    Else
-                        lStatus = "Waiting"
-                    End If
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'", tr)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = "Open"
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = "Waiting"
                 Else
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('SellOrders' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Borrow','Invoice','Shiping') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close"
-                    Else
-                        lStatus = "Waiting"
-                    End If
+                    lStatus = "Close"
                 End If
-
-                'End If
-                SQL = " UPDATE Orders SET "
-                SQL = SQL & " OrderStatus='" & lStatus & "'"
-                SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                gConnection.executeInsertQuery(SQL, tr)
-            ElseIf pOrderType = MasterType.InvoiceBuy Or pOrderType = MasterType.ShipingBuy Then ' 
+            ElseIf pOrderType = MasterType.InvoiceBuy Or pOrderType = MasterType.ShipingBuy Then ' ref from PO
                 If pMode = DataMode.ModeDelete Then
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='PurchaseOrder'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable ='StockIn' )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Receive" 'PO ที่ทำ stockin หมดแล้ว
-                    Else
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", tr)
+                    If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = "Waiting" 'รอทำ stockin  
+                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                        lStatus = "Waiting" 'รอทำ stockin  
+                    Else
+                        lStatus = "Receive" 'PO ที่ทำ stockin หมดแล้ว
                     End If
                 Else
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='PurchaseOrder'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in ('InvoiceBuy','ShipingBuy') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close" 'PO ที่ทำ InvoiceBuy หมดแล้ว
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'", tr)
+                    If lRefStatus = RefOrderStatus.NotToRef Then
+                        ''
+                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                        ''
                     Else
-                        'lStatus = "Waiting"
+                        lStatus = "Close" 'PO ที่ทำ InvoiceBuy หมดแล้ว
                     End If
-                End If
-                If lStatus <> "" Then
-                    SQL = " UPDATE Orders SET "
-                    SQL = SQL & " OrderStatus='" & lStatus & "'"
-                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                    gConnection.executeInsertQuery(SQL, tr)
                 End If
             ElseIf pOrderType = MasterType.Reserve Then 'Ref from QUOTAION
-                If pMode = DataMode.ModeDelete Then 'เช็ค QUOTAION โดนดึงไปทำ Reserve บางส่วนไหม ถ้าไม่คืนเป็น Open ถ้ามีเป็น Waiting 
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='Quotation'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Open" 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
-                    Else
-                        lStatus = "Waiting" 'รอทำ Reserve  
-                    End If
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'", tr)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = "Open"
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = "Waiting"
                 Else
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('Quotation' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close" 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
-                    Else
+                    lStatus = "Close" 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
+                End If
+            ElseIf pOrderType = MasterType.SellOrders Then
+                If lRefOrderType = MasterType.Reserve Then '  ใบสั่งขายดึง Reserve มาทำ
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'SellOrders'", tr)
+                    If lRefStatus = RefOrderStatus.NotToRef Then
+                        lStatus = "Open"
+                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
                         lStatus = "Waiting"
+                    Else
+                        lStatus = "Close" 'Reserve ที่ทำ  SellOrders หมดแล้ว
+                    End If
+                ElseIf lRefOrderType = MasterType.Quotation Then
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'", tr)
+                    If lRefStatus = RefOrderStatus.NotToRef Then
+                        lStatus = "Open"
+                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                        lStatus = "Waiting"
+                    Else
+                        lStatus = "Close" 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
                     End If
                 End If
+            Else ''อื่นๆ
+                lStatus = ConvertNullToString(pStatus)
+            End If
 
+            If lStatus <> "" Then
                 SQL = " UPDATE Orders SET "
                 SQL = SQL & " OrderStatus='" & lStatus & "'"
                 SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
                 gConnection.executeInsertQuery(SQL, tr)
-
-            ElseIf pOrderType = MasterType.SellOrders Then
-                If pMode = DataMode.ModeDelete And lRefOrderType = MasterType.Quotation Then
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='Quotation'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Open" 'Quotation ที่ยังไม่เคยทำ Reserve,SellOrders  
-                    Else
-                        lCount = DataTable.Rows.Count
-
-                        SQL = "SELECT p1.*  "
-                        SQL = SQL & " FROM ProductList p1"
-                        SQL = SQL & " WHERE p1.IsDelete =0  "
-                        SQL = SQL & " AND p1.RefTable ='Quotation'"
-                        SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                        SQL = SQL & " AND p1.ProductListID in ( "
-                        SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                        SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                        SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') )"
-                        DataTable = gConnection.executeSelectQuery(SQL, tr)
-                        If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                            lStatus = "Open" 'Quotation ที่ยังไม่เคยทำ Reserve,SellOrders  
-                        Else
-                            lStatus = "Waiting" 'รอทำ Reserve  ,SellOrders
-                        End If
-
-                        lStatus = "Waiting" 'รอทำ Reserve  ,SellOrders
-                    End If
-                ElseIf pMode = DataMode.ModeDelete And lRefOrderType = MasterType.Reserve Then '  ใบสั่งขายดึง Reserve มาทำ
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='Reserve'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable ='SellOrders' )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Open" 'Reserve ที่ยังไม่เคยทำ  SellOrders  
-                    Else
-                        lStatus = "Waiting" 'รอทำ SellOrders  
-                    End If
-                ElseIf (pMode = DataMode.ModeNew Or pMode = DataMode.ModeEdit) And lRefOrderType = MasterType.Quotation Then
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable in ('Quotation' )"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close" 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
-                    Else
-                        lStatus = "Waiting"
-                    End If
-                Else 'Reserve
-                    SQL = "SELECT p1.*  "
-                    SQL = SQL & " FROM ProductList p1"
-                    SQL = SQL & " WHERE p1.IsDelete =0  "
-                    SQL = SQL & " AND p1.RefTable ='Reserve'"
-                    SQL = SQL & " AND p1.RefID =" & pRefOrderID
-                    SQL = SQL & " AND p1.ProductListID not in ( "
-                    SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-                    SQL = SQL & "   AND p2.RefTable in ('SellOrders') )"
-                    DataTable = gConnection.executeSelectQuery(SQL, tr)
-                    If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                        lStatus = "Close" 'Reserve ที่ทำ SellOrders หมดแล้ว
-                    Else
-                        'lStatus = "Waiting"
-                    End If
-                End If
-                If lStatus <> "" Then
-                    SQL = " UPDATE Orders SET "
-                    SQL = SQL & " OrderStatus='" & lStatus & "'"
-                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                    gConnection.executeInsertQuery(SQL, tr)
-                End If
-            Else ''อื่นๆ
-                If ConvertNullToString(pStatus) <> "" Then
-                    SQL = " UPDATE Orders SET "
-                    SQL = SQL & " OrderStatus='" & ConvertNullToString(pStatus) & "'"
-                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                    gConnection.executeInsertQuery(SQL, tr)
-                End If
             End If
-
             If pMode = DataMode.ModeNew Then
                 SQL = " Insert into OrdersRef (OrderID,RefOrderID,IsDelete) values( " & pParentOrderID & "," & pRefOrderID & ",0)"
                 gConnection.executeInsertQuery(SQL, tr)

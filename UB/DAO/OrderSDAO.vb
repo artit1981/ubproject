@@ -36,13 +36,10 @@ Public Class OrderSDAO
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
-                    'CustomerID_Old = 0
                     Code = dr("OrderCode").ToString
                     TableID = ConvertNullToZero(dr("TableID"))
                     CustomerID = ConvertNullToZero(dr("CustomerID"))
-                    'CustomerID_Old = CustomerID
                     EmpID = ConvertNullToZero(dr("EmpID"))
-                    'AgencyID = ConvertNullToZero(dr("AgencyID"))
                     CreditRuleID = ConvertNullToZero(dr("CreditRuleID"))
                     VatTypeID = ConvertNullToZero(dr("VatTypeID"))
                     ShipingByID = ConvertNullToZero(dr("ShipingByID"))
@@ -97,7 +94,6 @@ Public Class OrderSDAO
                     Remark = ConvertNullToString(dr("Remark"))
                     SendBy = ConvertNullToString(dr("SendBy"))
                     InvoiceSuplierID = ConvertNullToString(dr("InvoiceSuplierID"))
-                    'RefOrderID = ConvertNullToZero(dr("RefOrderID"))
                     RefBillID = ConvertNullToZero(dr("RefBillID"))
                     RefReceiptID = ConvertNullToZero(dr("RefReceiptID"))
                     StockType = ConvertNullToString(dr("StockType"))
@@ -373,15 +369,12 @@ Public Class OrderSDAO
                 BuildProductList(ID, TableName, tr)
             End If
 
-            'UpdateStock(tr)
             UpdateCost(tr)
-            'UpdateSN(tr)
 
             'Condition for update etc.
             If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
                 If ModeData = DataMode.ModeNew Then
                     UpdateLastID(TableID, tr)
-                    'UpdateMaxID(ID, "Orders", tr)
                 End If
 
                 'Ref Bill
@@ -529,10 +522,8 @@ Public Class OrderSDAO
                             For Each pOrderID As Long In RefToOrderID
                                 If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit Then
                                     UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
-                                    'SetFlagProductList(ProductDAOs, True, pOrderID, tr)
                                 Else 'Delete
                                     UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
-                                    'SetFlagProductList(ProductDAOs, False, pOrderID, tr)
                                 End If
                             Next
                         End If
@@ -965,37 +956,7 @@ Public Class OrderSDAO
         Try
             'Condition for Up Stock
             lIsUpdate = CheckIsUseStock(TableID, RefToOrderID, StockType, tr)
-            'If TableID = MasterType.SellOrders Then
-            '    lIsUpdate = 1
-            'ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Then
-            '    lIsUpdate = 2
-            '    If IsNothing(RefToOrderID) = False Then
-            '        If RefToOrderID.Count > 0 And TableID = MasterType.Invoice Then
-            '            For Each pOrderID As Long In RefToOrderID
-            '                Dim lclsOrder As New OrderSDAO
-            '                If lclsOrder.InitailData(pOrderID, , tr) Then
-            '                    If lclsOrder.TableID = MasterType.Borrow Then
-            '                        lIsUpdate = 0
-            '                    End If
-            '                End If
-            '            Next
-            '        End If
-            '    End If
-            'ElseIf (TableID = MasterType.ReduceCredit) Or (TableID = MasterType.AddCredit) _
-            '        Or (TableID = MasterType.ReduceCreditBuy) Or (TableID = MasterType.AddCreditBuy) Then
-            '    If StockType = "N" Or StockType = "" Then
-            '        lIsUpdate = 0
-            '    Else
-            '        lIsUpdate = 3
-            '    End If
-            'ElseIf (TableID = MasterType.StockIn) Then
-            '    lIsUpdate = 4
-            'ElseIf (TableID = MasterType.UpdateStock) Then
-            '    lIsUpdate = 5
-            'End If
-            'Condition for Up Stock
-
-
+            
             If ProductList Is Nothing Then
                 '**** not delete prolist when delete order
             ElseIf ProductList.Count = 0 Then

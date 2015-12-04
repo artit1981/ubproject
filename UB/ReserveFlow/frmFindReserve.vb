@@ -159,13 +159,11 @@ Public Class frmFindReserve
                     rec.Discount = pProLIst.Discount
                     rec.Total = pProLIst.Total
                     rec.ModePro = DataMode.ModeNew
-                    If pProLIst.IsShow = 0 Then
-                        rec.IsShow = 0
-                    Else
-                        rec.IsShow = 1
-
-                    End If
+                    rec.IsShow = pProLIst.IsShow
                     rec.SNList = pProLIst.SNList
+                    rec.UnitMainID = pProLIst.UnitMainID
+                    rec.AdjustUnit = pProLIst.AdjustUnit
+                    rec.RateUnit = pProLIst.RateUnit
                     rec.IsMerge = 0
                     mProductSubList.Add(rec)
                 Else
@@ -196,6 +194,9 @@ Public Class frmFindReserve
                             rec.Cost = pProLIst.Cost
                             rec.Discount = pProLIst.Discount
                             rec.Total = pProLIst.Total
+                            rec.UnitMainID = pProLIst.UnitMainID
+                            rec.AdjustUnit = pProLIst.AdjustUnit
+                            rec.RateUnit = pProLIst.RateUnit
                             rec.ModePro = DataMode.ModeNew
                             rec.IsShow = 1
                             rec.IsMerge = 0
@@ -212,30 +213,34 @@ Public Class frmFindReserve
                         Next
 
                         mProductSubList.Item(lIndex).IsMerge = 1
-                        rec = New ProductSubDAO
-                        rec.IsSelect = True
-                        rec.ID = pProLIst.ID
-                        rec.ProductListRefID = pProLIst.ID
-                        rec.SEQ = 0
-                        rec.IsSN = pProLIst.IsSN
-                        rec.ProductID = pProLIst.ProductID
-                        rec.ProductCode = pProLIst.ProductCode
-                        rec.ProductNames = pProLIst.ProductName
-                        rec.ProductNameExt = pProLIst.ProductNameExt
-                        rec.LocationDTLID = pProLIst.LocationDTLID
-                        rec.UnitID = pProLIst.UnitID
-                        rec.UnitName = pProLIst.UnitName
-                        rec.Remark = pProLIst.Remark
-                        rec.KeepMin = pProLIst.KeepMin
-                        rec.Units = pProLIst.Units
-                        rec.Price = pProLIst.Price
-                        rec.Cost = pProLIst.Cost
-                        rec.Discount = pProLIst.Discount
-                        rec.Total = pProLIst.Total
-                        rec.ModePro = DataMode.ModeNew
-                        rec.IsShow = 0
-                        rec.IsMerge = 1
-                        mProductSubList.Add(rec)
+                        '***** Cancel not show row ,check order status by sum unit on prolist
+                        'rec = New ProductSubDAO
+                        'rec.IsSelect = True
+                        'rec.ID = pProLIst.ID
+                        'rec.ProductListRefID = pProLIst.ID
+                        'rec.SEQ = 0
+                        'rec.IsSN = pProLIst.IsSN
+                        'rec.ProductID = pProLIst.ProductID
+                        'rec.ProductCode = pProLIst.ProductCode
+                        'rec.ProductNames = pProLIst.ProductName
+                        'rec.ProductNameExt = pProLIst.ProductNameExt
+                        'rec.LocationDTLID = pProLIst.LocationDTLID
+                        'rec.UnitID = pProLIst.UnitID
+                        'rec.UnitName = pProLIst.UnitName
+                        'rec.Remark = pProLIst.Remark
+                        'rec.KeepMin = pProLIst.KeepMin
+                        'rec.Units = pProLIst.Units
+                        'rec.Price = pProLIst.Price
+                        'rec.Cost = pProLIst.Cost
+                        'rec.Discount = pProLIst.Discount
+                        'rec.Total = pProLIst.Total
+                        'rec.ModePro = DataMode.ModeNew
+                        'rec.IsShow = 0
+                        'rec.IsMerge = 1
+                        'rec.UnitMainID = pProLIst.UnitMainID
+                        'rec.AdjustUnit = pProLIst.AdjustUnit
+                        'rec.RateUnit = pProLIst.RateUnit
+                        'mProductSubList.Add(rec)
                     End If
                 End If
             Next
@@ -352,6 +357,9 @@ Public Class frmFindReserve
                         rec.Total = ConvertNullToZero(dr("Total"))
                         rec.IsShow = ConvertNullToZero(dr("IsShow"))
                         rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
+                        rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                        rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                        rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
                         rec.ModePro = DataMode.ModeEdit
                         'Load S/N
                         rec.IsSN = ConvertNullToZero(dr("IsSN"))

@@ -997,73 +997,23 @@ Public Class frmOrderS
                         rec.Cost = ConvertNullToZero(dr("Cost"))
                         rec.Discount = ConvertNullToZero(dr("Discount"))
                         rec.Total = ConvertNullToZero(dr("Total"))
-                        If ConvertNullToZero(dr("IsShow")) = 0 Then
-                            rec.IsShow = 0
-                        Else
-                            rec.IsShow = 1
-                        End If
-                        If rec.IsSN = 1 Then
-                            rec.SNList = New List(Of SnDAO)
-                            For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                                rec.SNList.Add(pSN)
-                            Next
-                        End If
-                        rec.IsMerge = 0
-                        rec.ModePro = DataMode.ModeNew
-                        mProductList.Add(rec)
+                        rec.IsShow = ConvertNullToZero(dr("IsShow"))
+                     
+                    If rec.IsSN = 1 Then
+                        rec.SNList = New List(Of SnDAO)
+                        For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                            rec.SNList.Add(pSN)
+                        Next
+                    End If
+                    rec.IsMerge = 0
+                    rec.ModePro = DataMode.ModeNew
+                    mProductList.Add(rec)
                     Else
-                        If mIsGroupDupProduct = 0 Then
-                            If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                                mIsGroupDupProduct = 2
-                            Else
-                                mIsGroupDupProduct = 1
-                                rec = New ProductSubDAO
-                                rec.IsSelect = True
-                                rec.IsSN = ConvertNullToZero(dr("IsSN"))
-                                rec.SEQ = 0
-                                rec.ID = ConvertNullToZero(dr("ID"))
-                                rec.ProductID = ConvertNullToZero(dr("ProductID"))
-                                rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                                rec.ProductNames = ConvertNullToString(dr("ProductName"))
-                                rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
-                                rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                                rec.UnitID = ConvertNullToZero(dr("UnitID"))
-                                rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
-                                rec.UnitName = ConvertNullToString(dr("UnitName"))
-                                rec.Remark = ConvertNullToString(dr("Remark"))
-                                rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
-                                rec.Units = ConvertNullToZero(dr("Units"))
-                                rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
-                                rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
-                                rec.Price = ConvertNullToZero(dr("Price"))
-                                rec.Cost = ConvertNullToZero(dr("Cost"))
-                                rec.Discount = ConvertNullToZero(dr("Discount"))
-                                rec.Total = ConvertNullToZero(dr("Total"))
-                                rec.ModePro = DataMode.ModeNew
-                                rec.IsShow = 1
-                                rec.IsMerge = 0
-                                If rec.IsSN = 1 Then
-                                    rec.SNList = New List(Of SnDAO)
-                                    For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                                        rec.SNList.Add(pSN)
-                                    Next
-                                End If
-                                mProductList.Add(rec)
-                            End If
-                        End If
-                        If mIsGroupDupProduct = 2 Then
-                            'mProductList.Item(lIndex).ID = 0
-                            mProductList.Item(lIndex).Units = mProductList.Item(lIndex).Units + ConvertNullToZero(dr("Units"))
-                            mProductList.Item(lIndex).Discount = mProductList.Item(lIndex).Discount + ConvertNullToZero(dr("Discount"))
-                            mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + ConvertNullToZero(dr("Total"))
-                            If ConvertNullToZero(dr("IsSN")) = 1 Then
-                                For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                                    mProductList.Item(lIndex).SNList.Add(pSN)
-                                Next
-                            End If
-
-
-                            mProductList.Item(lIndex).IsMerge = 1
+                    If mIsGroupDupProduct = 0 Then
+                        If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                            mIsGroupDupProduct = 2
+                        Else
+                            mIsGroupDupProduct = 1
                             rec = New ProductSubDAO
                             rec.IsSelect = True
                             rec.IsSN = ConvertNullToZero(dr("IsSN"))
@@ -1087,11 +1037,57 @@ Public Class frmOrderS
                             rec.Discount = ConvertNullToZero(dr("Discount"))
                             rec.Total = ConvertNullToZero(dr("Total"))
                             rec.ModePro = DataMode.ModeNew
-                            rec.IsShow = 0
-
-                            rec.IsMerge = 1
+                            rec.IsShow = 1
+                            rec.IsMerge = 0
+                            If rec.IsSN = 1 Then
+                                rec.SNList = New List(Of SnDAO)
+                                For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                                    rec.SNList.Add(pSN)
+                                Next
+                            End If
                             mProductList.Add(rec)
                         End If
+                    End If
+                    If mIsGroupDupProduct = 2 Then
+                        'mProductList.Item(lIndex).ID = 0
+                        mProductList.Item(lIndex).Units = mProductList.Item(lIndex).Units + ConvertNullToZero(dr("Units"))
+                        mProductList.Item(lIndex).Discount = mProductList.Item(lIndex).Discount + ConvertNullToZero(dr("Discount"))
+                        mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + ConvertNullToZero(dr("Total"))
+                        If ConvertNullToZero(dr("IsSN")) = 1 Then
+                            For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                                mProductList.Item(lIndex).SNList.Add(pSN)
+                            Next
+                        End If
+
+                        mProductList.Item(lIndex).IsMerge = 1
+                            'rec = New ProductSubDAO
+                            'rec.IsSelect = True
+                            'rec.IsSN = ConvertNullToZero(dr("IsSN"))
+                            'rec.SEQ = 0
+                            'rec.ID = ConvertNullToZero(dr("ID"))
+                            'rec.ProductID = ConvertNullToZero(dr("ProductID"))
+                            'rec.ProductCode = ConvertNullToString(dr("ProductCode"))
+                            'rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                            'rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
+                            'rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                            'rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                            'rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                            'rec.UnitName = ConvertNullToString(dr("UnitName"))
+                            'rec.Remark = ConvertNullToString(dr("Remark"))
+                            'rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
+                            'rec.Units = ConvertNullToZero(dr("Units"))
+                            'rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                            'rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                            'rec.Price = ConvertNullToZero(dr("Price"))
+                            'rec.Cost = ConvertNullToZero(dr("Cost"))
+                            'rec.Discount = ConvertNullToZero(dr("Discount"))
+                            'rec.Total = ConvertNullToZero(dr("Total"))
+                            'rec.ModePro = DataMode.ModeNew
+                            'rec.IsShow = 0
+
+                            'rec.IsMerge = 1
+                            'mProductList.Add(rec)
+                    End If
                     End If
                 Next
             End If
