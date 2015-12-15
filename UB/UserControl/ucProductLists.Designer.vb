@@ -42,7 +42,7 @@ Partial Class ucProductLists
         Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.KeepMin = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AdjustUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.Price = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -69,6 +69,9 @@ Partial Class ucProductLists
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
+        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -118,7 +121,7 @@ Partial Class ucProductLists
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -287,21 +290,21 @@ Partial Class ucProductLists
         Me.UnitsSpin.IsFloatValue = False
         Me.UnitsSpin.Name = "UnitsSpin"
         '
-        'Units
+        'AdjustUnit
         '
-        Me.Units.AppearanceHeader.Options.UseTextOptions = True
-        Me.Units.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Units.Caption = "จำนวน"
-        Me.Units.ColumnEdit = Me.UnitsSpin
-        Me.Units.DisplayFormat.FormatString = "n0"
-        Me.Units.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Units.FieldName = "Units"
-        Me.Units.MaxWidth = 100
-        Me.Units.MinWidth = 50
-        Me.Units.Name = "Units"
-        Me.Units.Visible = True
-        Me.Units.VisibleIndex = 6
-        Me.Units.Width = 62
+        Me.AdjustUnit.AppearanceHeader.Options.UseTextOptions = True
+        Me.AdjustUnit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.AdjustUnit.Caption = "จำนวน"
+        Me.AdjustUnit.ColumnEdit = Me.UnitsSpin
+        Me.AdjustUnit.DisplayFormat.FormatString = "n0"
+        Me.AdjustUnit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AdjustUnit.FieldName = "AdjustUnit"
+        Me.AdjustUnit.MaxWidth = 100
+        Me.AdjustUnit.MinWidth = 50
+        Me.AdjustUnit.Name = "AdjustUnit"
+        Me.AdjustUnit.Visible = True
+        Me.AdjustUnit.VisibleIndex = 6
+        Me.AdjustUnit.Width = 62
         '
         'Cost
         '
@@ -577,6 +580,24 @@ Partial Class ucProductLists
         Me.btnFind.Text = "เพิ่มสินค้า"
         Me.btnFind.ToolTip = "เพิ่มสินค้า"
         '
+        'Units
+        '
+        Me.Units.Caption = "Units"
+        Me.Units.FieldName = "Units"
+        Me.Units.Name = "Units"
+        '
+        'UnitMainID
+        '
+        Me.UnitMainID.Caption = "UnitMainID"
+        Me.UnitMainID.FieldName = "UnitMainID"
+        Me.UnitMainID.Name = "UnitMainID"
+        '
+        'RateUnit
+        '
+        Me.RateUnit.Caption = "RateUnit"
+        Me.RateUnit.FieldName = "RateUnit"
+        Me.RateUnit.Name = "RateUnit"
+        '
         'ucProductLists
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -622,7 +643,7 @@ Partial Class ucProductLists
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents AdjustUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents UnitsSpin As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Friend WithEvents Price As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
@@ -652,5 +673,8 @@ Partial Class ucProductLists
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Image As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnImage As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitMainID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class

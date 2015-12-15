@@ -5,7 +5,7 @@ Imports DevExpress.XtraReports.UI
 Imports System.Data.SqlClient
 Imports Zen.Barcode
 Imports System.IO
-Imports Spire.Barcode
+'Imports Spire.Barcode
 
 Public Class frmPreReport
     Private mReportCode As String
@@ -797,42 +797,42 @@ Public Class frmPreReport
 
 
 
-    Private Function GenBarcode(ByVal pText As String) As Image
-        Dim settings As BarcodeSettings
-        settings = New BarcodeSettings()
-        'Dim data As String = "12345"
-        Dim type As String = "Code128"
+    'Private Function GenBarcode(ByVal pText As String) As Image
+    '    Dim settings As BarcodeSettings
+    '    settings = New BarcodeSettings()
+    '    'Dim data As String = "12345"
+    '    Dim type As String = "Code128"
 
 
-        settings.Data2D = pText
-        settings.Data = pText
+    '    settings.Data2D = pText
+    '    settings.Data = pText
 
-        settings.Type = CType(System.Enum.Parse(GetType(BarCodeType), type), BarCodeType)
+    '    settings.Type = CType(System.Enum.Parse(GetType(BarCodeType), type), BarCodeType)
 
-        Dim fontSize As Short = 8
-        Dim font As String = "SimSun"
+    '    Dim fontSize As Short = 8
+    '    Dim font As String = "SimSun"
 
-        Dim barHeight As Short = 20
+    '    Dim barHeight As Short = 20
 
-        settings.ShowText = False
-
-
-
-        settings.ShowCheckSumChar = True
+    '    settings.ShowText = False
 
 
 
+    '    settings.ShowCheckSumChar = True
 
-        'generate the barcode use the settings
-        Dim generator As New BarCodeGenerator(settings)
-        Dim barcode As Image = generator.GenerateImage()
-        Return barcode
-        ''save the barcode as an image
-        'barcode.Save("..\..\..\..\Data\barcode.png")
 
-        ''launch the generated barcode image
-        'Process.Start("..\..\..\..\Data\barcode.png")
-    End Function
+
+
+    '    'generate the barcode use the settings
+    '    Dim generator As New BarCodeGenerator(settings)
+    '    Dim barcode As Image = generator.GenerateImage()
+    '    Return barcode
+    '    ''save the barcode as an image
+    '    'barcode.Save("..\..\..\..\Data\barcode.png")
+
+    '    ''launch the generated barcode image
+    '    'Process.Start("..\..\..\..\Data\barcode.png")
+    'End Function
 
     'Public Sub PrintBarCode()
     '    Dim report As New XtraReport
