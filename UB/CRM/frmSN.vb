@@ -579,7 +579,7 @@ Public Class frmSN
 
         If rowHandle < 0 Then Exit Sub
         lStatus = ConvertNullToString(GridView1.GetRowCellValue(rowHandle, "Status"))
-        ControlNavigator1.Buttons.Remove.Enabled = Not (lStatus = "Close")
+        ControlNavigator1.Buttons.Remove.Enabled = Not (lStatus = EnumStatus.Close.ToString)
         'ControlNavigator1.Buttons.Remove.Enabled = True
     End Sub
 End Class

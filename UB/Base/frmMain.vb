@@ -180,12 +180,12 @@ Public Class frmMain
                 UpdateDatabar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
                 UpdateDatabar.Enabled = True
             End If
-            'Dim mCtlForm = New frmNotify
-            'With mCtlForm
-            '    .Text = "ข้อความแจ้งเตือน"
-            '    .MdiParent = Me
-            '    .Show()
-            'End With
+            Dim mCtlForm = New frmNotify
+            With mCtlForm
+                .Text = "ข้อความแจ้งเตือน"
+                .MdiParent = Me
+                .Show()
+            End With
             'modReport.PrintOrder(1)
             'modReport.PrintBarCode()
         Catch ex As Exception

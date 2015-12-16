@@ -193,7 +193,7 @@ Partial Class ucApproveTX
         '
         Me.ApproveComboBox.AutoHeight = False
         Me.ApproveComboBox.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ApproveComboBox.Items.AddRange(New Object() {"Wait Approve", "Approve", "Not Approve"})
+        Me.ApproveComboBox.Items.AddRange(New Object() {"WaitApprove", "Approve", "NotApprove"})
         Me.ApproveComboBox.Name = "ApproveComboBox"
         '
         'ID

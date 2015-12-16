@@ -379,13 +379,13 @@ Public Class OrderControl
             lcls.TableID = mOrderType
             If lcls.InitailData(pID) Then
                 If mCtlForm.MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always Then
-                    mCtlForm.MakeOrderBar.Enabled = (lcls.OrderStatus = "Open" Or lcls.OrderStatus = "Approve" Or lcls.OrderStatus = "Receive" Or lcls.OrderStatus = "Waiting")
+                    mCtlForm.MakeOrderBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString Or lcls.OrderStatus = EnumStatus.Receive.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString)
                 End If
 
                 If mOrderType = MasterType.UpdateStock Then
                     mCtlForm.DeleteBar.Enabled = False
                 Else
-                    mCtlForm.DeleteBar.Enabled = (lcls.OrderStatus = "Open" Or lcls.OrderStatus = "Waiting") And lcls.IsDelete = False
+                    mCtlForm.DeleteBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString) And lcls.IsDelete = False
                 End If
 
             End If

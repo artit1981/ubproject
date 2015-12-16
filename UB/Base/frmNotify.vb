@@ -9,6 +9,6 @@
 
     Private Sub frmNotify_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         mcls = New clsNotifi
-
+        mcls.InitialNotifi()
     End Sub
 End Class

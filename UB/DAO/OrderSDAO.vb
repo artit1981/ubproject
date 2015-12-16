@@ -179,20 +179,20 @@ Public Class OrderSDAO
 
                     '*** Check Approve
                     If gIsApproveSellOrder = True And TableID = MasterType.SellOrders Then
-                        OrderStatus = "Wait Approve"
+                        OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveReserve = True And TableID = MasterType.Reserve Then
-                        OrderStatus = "Wait Approve"
+                        OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveQua = True And TableID = MasterType.Quotation Then
-                        OrderStatus = "Wait Approve"
+                        OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveBuyOrder And TableID = MasterType.PurchaseOrder Then
-                        OrderStatus = "Wait Approve"
+                        OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf TableID = MasterType.PurchaseOrder Then
-                        OrderStatus = "Waiting"
+                        OrderStatus = EnumStatus.Waiting.ToString
                     Else
-                        OrderStatus = "Open"
+                        OrderStatus = EnumStatus.Open.ToString
                     End If
 
-                    If OrderStatus = "Wait Approve" Then
+                    If OrderStatus = EnumStatus.WaitApprove.ToString Then
                         SaveApproveTX(1, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal, "", OrderStatus, tr)
                     End If
 
@@ -206,7 +206,7 @@ Public Class OrderSDAO
 
                     If lIsCheckOver = True Then
                         If CheckOverCreditAmount(CustomerID, GrandTotal, tr) Then
-                            OrderStatus = "Wait Approve"
+                            OrderStatus = EnumStatus.WaitApprove.ToString
                             SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal, "เกินวงเงิน", OrderStatus, tr)
                         End If
                     End If
@@ -216,8 +216,8 @@ Public Class OrderSDAO
                         'if cash to close status
                         Select Case TableID
                             Case MasterType.InvoiceBuy, MasterType.ShipingBuy
-                                If OrderStatus = "Open" Then
-                                    OrderStatus = "Close"
+                                If OrderStatus = EnumStatus.Open.ToString Then
+                                    OrderStatus = EnumStatus.Close.ToString
                                 End If
                         End Select
                     Else
@@ -225,250 +225,33 @@ Public Class OrderSDAO
                     End If
 
                     If IsCancel = True Then
-                        OrderStatus = "Cancel"
+                        OrderStatus = EnumStatus.Cancel.ToString
                     End If
 
                     If TableID = MasterType.Reserve Then
-                        MakePOStatus = "Ordering"
+                        MakePOStatus = EnumStatus.Ordering.ToString
                     Else
                         MakePOStatus = ""
                     End If
 
-                    SQL = " INSERT INTO Orders  (OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus"
-                    SQL = SQL & " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal"
-                    SQL = SQL & " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
-                    SQL = SQL & " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType"
-                    SQL = SQL & " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
-                    SQL = SQL & " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
-                    SQL = SQL & " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
-                    SQL = SQL & " ,QuotationRemarkID,IsNotPass)"
-                    SQL = SQL & " VALUES ( " & ID
-                    SQL = SQL & " , " & TableID
-                    SQL = SQL & " , '" & Trim(Code) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(PO) & "'"
-                    SQL = SQL & " , '" & formatSQLDate(OrderDate) & "'"
-                    SQL = SQL & " , '" & formatSQLDate(ShipingDate) & "'"
-                    SQL = SQL & " , " & ConvertNullToZero(CustomerID)
-                    SQL = SQL & " , " & ConvertNullToZero(EmpID)
-                    SQL = SQL & " , " & ConvertNullToZero(CreditRuleID)
-                    SQL = SQL & " , " & ConvertNullToZero(VatTypeID)
-                    SQL = SQL & " , '" & ConvertNullToString(OrderStatus) & "'"
-                    SQL = SQL & " , " & IIf(IsCancel = True, 1, 0)
-                    SQL = SQL & " , '" & ConvertNullToString(CancelRemark) & "'"
-                    SQL = SQL & " ,  " & ConvertNullToZero(Total)
-                    SQL = SQL & " ,  " & ConvertNullToZero(DiscountPercen)
-                    SQL = SQL & " ,  " & ConvertNullToZero(DiscountAmount)
-                    SQL = SQL & " ,  " & ConvertNullToZero(VatPercen)
-                    SQL = SQL & " ,  " & ConvertNullToZero(VatAmount)
-                    SQL = SQL & " ,  " & ConvertNullToZero(GrandTotal)
-                    SQL = SQL & " ,  " & ConvertNullToZero(PledgeTotal)
-                    SQL = SQL & " , '" & ConvertNullToString(Remark) & "'"
-                    SQL = SQL & " ,  " & gUserID
-                    SQL = SQL & " , '" & formatSQLDateTime(GetCurrentDate(tr)) & "'"
-                    SQL = SQL & " ,  " & IIf(IsInActive = True, 1, 0)
-                    SQL = SQL & " ,0 "
-                    'SQL = SQL & " , " & RefOrderID
-                    SQL = SQL & " , " & RefBillID
-                    SQL = SQL & " , '" & ConvertNullToString(SendBy) & "'"
-                    SQL = SQL & " , '" & formatSQLDate(ExpireDate) & "'"
-                    SQL = SQL & " ,  " & ConvertNullToZero(QuotationDays)
-                    SQL = SQL & " ,  " & ConvertNullToZero(ShipingByID)
-                    SQL = SQL & " ,  " & ConvertNullToZero(ShipingMethodID)
-                    SQL = SQL & " ,  " & 0
-                    SQL = SQL & " , '" & ConvertNullToString(PayType) & "'"
-                    SQL = SQL & " ,  " & ConvertNullToZero(BillMedthodID)
-                    SQL = SQL & " ,  " & ConvertNullToZero(PayTotal)
-                    SQL = SQL & " ,  " & ConvertNullToZero(CurrencyID)
-                    SQL = SQL & " ,  " & ConvertNullToZero(ExchangeRate)
-                    SQL = SQL & " , '" & ConvertNullToString(TaxCanYes) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(TaxCondition) & "'"
-                    SQL = SQL & " , '" & formatSQLDate(TaxMonthYear) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(TaxNumber) & "'"
-                    SQL = SQL & " ,  " & ConvertNullToZero(TaxTotal)
-                    SQL = SQL & " , '" & ConvertNullToString(TaxRemark) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(TaxSection) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(TaxType) & "'"
-                    SQL = SQL & " ,  " & ConvertNullToZero(ShipingRuleID)
-                    SQL = SQL & " , '" & ConvertNullToString(InvoiceSuplierID) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(Institute) & "'"
-                    SQL = SQL & " , '" & ConvertNullToString(StockType) & "'"
-                    SQL = SQL & " ,  " & IIf(IsSumStock = True, 1, 0)
-                    SQL = SQL & " ,  " & IIf(IsMakePO = True, 1, 0)
-                    SQL = SQL & " , '" & ConvertNullToString(MakePOStatus) & "'"
-                    SQL = SQL & " ,  " & IIf(IsEditVat = True, 1, 0)
-                    SQL = SQL & " ,  " & ConvertNullToZero(QuotationRemarkID)
-                    SQL = SQL & " ,  " & IIf(IsNotPass = True, 1, 0)
-                    SQL = SQL & " ) "
-
-                Case DataMode.ModeEdit
-                    If IsCancel = True Then
-                        OrderStatus = "Cancel"
-                    End If
-                    SQL = " UPDATE Orders SET "
-                    SQL = SQL & " EmpID=" & ConvertNullToZero(EmpID)
-                    SQL = SQL & " , OrderCode='" & ConvertNullToString(Code) & "'"
-                    SQL = SQL & " , CustomerID=" & ConvertNullToZero(CustomerID)
-                    SQL = SQL & " , CreditRuleID=" & ConvertNullToZero(CreditRuleID)
-                    SQL = SQL & " , VatTypeID=" & ConvertNullToZero(VatTypeID)
-                    SQL = SQL & " , PO='" & ConvertNullToString(PO) & "'"
-                    SQL = SQL & " , OrderStatus='" & ConvertNullToString(OrderStatus) & "'"
-                    SQL = SQL & " , IsCancel=" & IIf(IsCancel = True, 1, 0)
-                    SQL = SQL & " , CancelRemark='" & ConvertNullToString(CancelRemark) & "'"
-                    SQL = SQL & " , Total=" & ConvertNullToZero(Total)
-                    SQL = SQL & " , DiscountPercen=" & ConvertNullToZero(DiscountPercen)
-                    SQL = SQL & " , DiscountAmount= " & ConvertNullToZero(DiscountAmount)
-                    SQL = SQL & " , VatPercen=" & ConvertNullToZero(VatPercen)
-                    SQL = SQL & " , VatAmount=" & ConvertNullToZero(VatAmount)
-                    SQL = SQL & " , GrandTotal=" & ConvertNullToZero(GrandTotal)
-                    SQL = SQL & " , PledgeTotal=" & ConvertNullToZero(PledgeTotal)
-                    SQL = SQL & " , Remark='" & ConvertNullToString(Remark) & "'"
-                    SQL = SQL & " , ModifiedBy=" & gUserID
-                    SQL = SQL & " , ModifiedTime= '" & formatSQLDateTime(GetCurrentDate(tr)) & "'"
-                    SQL = SQL & " , IsInActive= " & IIf(IsInActive = True, 1, 0)
-                    SQL = SQL & " , ShipingDate= '" & formatSQLDate(ShipingDate) & "'"
-                    SQL = SQL & " , IsSumStock= " & IIf(IsSumStock = True, 1, 0)
-                    SQL = SQL & " , IsEditVat= " & IIf(IsEditVat = True, 1, 0)
-                    SQL = SQL & " , IsNotPass= " & IIf(IsNotPass = True, 1, 0)
-                    SQL = SQL & " , RefBillID= " & RefBillID
-                    SQL = SQL & " , RefReceiptID= " & RefReceiptID
-                    SQL = SQL & " , SendBy= '" & ConvertNullToString(SendBy) & "'"
-                    SQL = SQL & " , OrderDate='" & formatSQLDate(OrderDate) & "'"
-                    SQL = SQL & " , ExpireDate='" & formatSQLDate(ExpireDate) & "'"
-                    SQL = SQL & " , QuotationDays=" & ConvertNullToZero(QuotationDays)
-                    SQL = SQL & " ,ShipingByID= " & ConvertNullToZero(ShipingByID)
-                    SQL = SQL & " ,ShipingMethodeID= " & ConvertNullToZero(ShipingMethodID)
-                    SQL = SQL & " ,PayType= '" & ConvertNullToString(PayType) & "'"
-                    SQL = SQL & " ,BillMedthodID=" & ConvertNullToZero(BillMedthodID)
-                    SQL = SQL & " ,PayTotal=" & ConvertNullToZero(PayTotal)
-                    SQL = SQL & " ,CurrencyID=" & ConvertNullToZero(CurrencyID)
-                    SQL = SQL & " ,ExchangeRate= " & ConvertNullToZero(ExchangeRate)
-                    SQL = SQL & " ,TaxCanYes='" & ConvertNullToString(TaxCanYes) & "'"
-                    SQL = SQL & " ,TaxCondition='" & ConvertNullToString(TaxCondition) & "'"
-                    SQL = SQL & " ,TaxMonthYear= '" & formatSQLDate(TaxMonthYear) & "'"
-                    SQL = SQL & " ,TaxNumber='" & ConvertNullToString(TaxNumber) & "'"
-                    SQL = SQL & " ,TaxTotal= " & ConvertNullToZero(TaxTotal)
-                    SQL = SQL & " ,TaxRemark='" & ConvertNullToString(TaxRemark) & "'"
-                    SQL = SQL & " ,TaxSection='" & ConvertNullToString(TaxSection) & "'"
-                    SQL = SQL & " ,TaxType='" & ConvertNullToString(TaxType) & "'"
-                    SQL = SQL & " ,ShipingRuleID=" & ConvertNullToZero(ShipingRuleID)
-                    SQL = SQL & " ,InvoiceSuplierID='" & ConvertNullToString(InvoiceSuplierID) & "'"
-                    SQL = SQL & " ,Institute='" & ConvertNullToString(Institute) & "'"
-                    SQL = SQL & " ,StockType='" & ConvertNullToString(StockType) & "'"
-                    SQL = SQL & " ,QuotationRemarkID=" & ConvertNullToZero(QuotationRemarkID)
-                    SQL = SQL & " WHERE OrderID=" & ID
-                Case DataMode.ModeDelete
-                        SQL = " UPDATE Orders SET IsDelete=1 "
-                        SQL = SQL & " ,ModifiedBy= " & gUserID
-                        SQL = SQL & " ,ModifiedTime='" & formatSQLDateTime(GetCurrentDate(tr)) & "'"
-                        SQL = SQL & " WHERE OrderID=" & ID
             End Select
-            gConnection.executeInsertQuery(SQL, tr)
+
+            'Insert data to order table
+            Call InsertOrder(tr)
 
             'Initial ALL List
             If ProductDAOs Is Nothing OrElse ProductDAOs.Count = 0 Then
                 BuildProductList(ID, TableName, tr)
             End If
 
-            UpdateCost(tr)
-
-            'Condition for update etc.
-            If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
-                If ModeData = DataMode.ModeNew Then
-                    UpdateLastID(TableID, tr)
-                End If
-
-                'Ref Bill
-                If TableID = MasterType.Bill Then   '*** Check Order Type
-                    If IsNothing(OrderDAOs) Then
-                        BuildOrderList(ID, tr)
-                    End If
-                    If OrderDAOs.Count > 0 Then
-                        For Each lRefOrder As SubOrder In OrderDAOs
-                            If lRefOrder.OrderID > 0 Then
-                                If ModeData = DataMode.ModeNew Then
-                                    UpdateOrderByBill(ID, lRefOrder.OrderID, tr)
-                                Else
-                                    UpdateOrderByBill(0, lRefOrder.OrderID, tr)
-                                End If
-                            End If
-                        Next
-                    End If
-                End If
-
-                'Ref Receipt
-                If TableID = MasterType.Receipt Or TableID = MasterType.ReceiptBuy Or TableID = MasterType.ReceiptCut Then   '*** Check Order Type
-                    If IsNothing(OrderDAOs) Then
-                        BuildOrderList(ID, tr)
-                    End If
-                    If OrderDAOs.Count > 0 Then
-                        For Each lRefOrder As SubOrder In OrderDAOs
-                            If lRefOrder.OrderID > 0 Then
-                                If ModeData = DataMode.ModeNew Then
-                                    UpdateOrderByReceipt(ID, lRefOrder.OrderID, lRefOrder.BillTotal, tr)
-                                Else
-                                    UpdateOrderByReceipt(0, lRefOrder.OrderID, 0, tr)
-                                End If
-
-                            End If
-                        Next
-                    End If
-                End If
-
-                'Add CreditBalance
-                If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
-                    Dim clsBalance As New CreditBalanceDAO
-                    If ModeData = DataMode.ModeNew Then
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal, "")
-                    Else
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
-                    End If
-
-                End If
-
-                'Dis CreditBalance
-                If TableID = MasterType.Receipt And PayType = "CASH" Then
-                    Dim clsBalance As New CreditBalanceDAO
-                    If ModeData = DataMode.ModeNew Then
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal * -1, "")
-                    Else
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
-                    End If
-                End If
-            ElseIf ModeData = DataMode.ModeEdit Then
-                Dim clsBalance As CreditBalanceDAO
-                If CustomerID <> Order_Old(tr).CustomerID Then
-                    'Add CreditBalance
-                    If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
-                        clsBalance = New CreditBalanceDAO
-                        'New Cus
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal, "")
-                        'Old Cus
-                        clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(tr, Order_Old(tr).CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
-                    End If
-                    'Dis CreditBalance
-                    If TableID = MasterType.Receipt And PayType = "CASH" Then
-                        clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal * -1, "")
-                        'Old Cus
-                        clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(tr, Order_Old(tr).CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
-                    End If
-                ElseIf Order_Old(tr).GrandTotal <> GrandTotal Then
-                    'Add CreditBalance
-                    If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
-                        clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, GrandTotal - Order_Old(tr).GrandTotal, "Edit Order")
-                    End If
-
-                    'Dis CreditBalance
-                    If TableID = MasterType.Receipt And PayType = "CASH" Then
-                        clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(tr, CustomerID, ID, OrderDate, (GrandTotal - Order_Old(tr).GrandTotal) * -1, "Edit Order")
-                    End If
-                End If
-
+            'Reset id as first day of year
+            If ModeData = DataMode.ModeNew Then
+                UpdateLastID(TableID, tr)
             End If
+
+            Call UpdateCost(tr)
+            Call UpdateBillReceipt(tr)
+            Call SaveBalance(tr)
             Call SaveNote(NoteDAOs, ModeData, ID, TableName, tr)
             Call SaveAttachFile(FileAttachs, ModeData, ID, TableName, tr)
             Call SavePledge(PledgeDAOs, ModeData, ID, tr)
@@ -489,42 +272,33 @@ Public Class OrderSDAO
 
             Call SaveProductList(ProductDAOs, ModeData, ID, TableName, tr)
           
-            'If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
-            'Ref Order
             'Rebuild RefToOrderID
-            If ModeData = DataMode.ModeDelete Then
+            If ModeData = DataMode.ModeDelete Or OrderStatus = EnumStatus.NotApprove.ToString Then
                 Call GetToRefOrderCode(ID, tr)
                 If IsMakePO = True Then
                     Call GetToRefReserveCode(ID, tr)
                 End If
             End If
 
-            If IsNothing(RefToOrderID) = False Then
+            'Ref Order Status
+            If IsNothing(RefToOrderID) = False And OrderStatus <> EnumStatus.WaitApprove.ToString Then
                 Select Case TableID
                     Case MasterType.SellOrders, MasterType.Invoice, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy
-
                         If RefToOrderID.Count > 0 Then
                             For Each pOrderID As Long In RefToOrderID
                                 If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit Then
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, "Close", tr, ModeData)
+                                    UpdateRefOrderStatus(TableID, ID, pOrderID, EnumStatus.Close.ToString, tr, ModeData)
                                     SetFlagProductList(ProductDAOs, True, pOrderID, tr)
                                 Else 'Delete
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, "Open", tr, ModeData)
+                                    UpdateRefOrderStatus(TableID, ID, pOrderID, EnumStatus.Open.ToString, tr, ModeData)
                                     SetFlagProductList(ProductDAOs, False, pOrderID, tr)
                                 End If
                             Next
                         End If
                     Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset, MasterType.Claim, MasterType.Expose
-                        If ModeData = DataMode.ModeDelete Then
-                            Call GetToRefOrderCode(ID, tr)
-                        End If
                         If RefToOrderID.Count > 0 Then
                             For Each pOrderID As Long In RefToOrderID
-                                If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit Then
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
-                                Else 'Delete
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
-                                End If
+                                UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
                             Next
                         End If
                 End Select
@@ -951,7 +725,7 @@ Public Class OrderSDAO
         Dim lOrderList As New List(Of Long), lSNInList As String = ""
         Dim lUpdateStstus As Boolean = False
         Dim lIsUpdate As Integer = 0  ' 0=no, 1=sum, 2=second
-        Dim lclsStock As ProductStockDAO
+        'Dim lclsStock As ProductStockDAO
 
         Try
             'Condition for Up Stock
@@ -968,6 +742,8 @@ Public Class OrderSDAO
                     pProList.SEQ = lSEQ
                     If ModeData = DataMode.ModeDelete Then
                         pProList.ModeData = DataMode.ModeDelete
+                    ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
+                        pProList.ModeData = DataMode.ModeDelete
                     ElseIf ModeData = DataMode.ModeNew Then
                         pProList.ModeData = DataMode.ModeNew
                         pProList.IsConfirm = 0
@@ -982,10 +758,10 @@ Public Class OrderSDAO
 
                         If pProList.IsShow = 1 Then
                             '*** Stock
-                            UpdateStock(tr, pProList, lIsUpdate)
+                            UpdateStock(tr, pProList, lIsUpdate, ModeData)
 
                             '*** SN
-                            If ModeData = DataMode.ModeDelete Then
+                            If ModeData = DataMode.ModeDelete Or OrderStatus = EnumStatus.NotApprove.ToString Then
                                 'Re Open status
                                 If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
                                     lOrderList = New List(Of Long)
@@ -998,11 +774,9 @@ Public Class OrderSDAO
                                         lclsSN2.SetStatusBySN(tr, ConvertNullToZero(dr2("ProductID")), ConvertNullToString(dr2("SerialNumberNo")), "New")
                                     Next
                                 End If
-
                                 'Delete
                                 lclsSN2 = New SnDAO
                                 lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
-
                             Else
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList
@@ -1030,7 +804,7 @@ Public Class OrderSDAO
                                         'Close SN
                                         If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
                                             lclsSN2 = New SnDAO
-                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, lclsSN.SerialNumberNo, "Close")
+                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, lclsSN.SerialNumberNo, EnumStatus.Close.ToString)
                                         End If
 
                                         If ModeData = DataMode.ModeEdit Then
@@ -1071,80 +845,28 @@ Public Class OrderSDAO
                     lclsSN2.DeleteFromProListRemove(tr, RefID, lstrStayIDList)
 
                     'Stock
-                    If lIsUpdate = 4 Then
-                        Dim lclsProlist As New ProductListDAO
-                        Dim dataTable As New DataTable()
-                        lOrderList = New List(Of Long)
-                        lOrderList.Add(ID)
-                        dataTable = lclsProlist.GetDataTable(lOrderList, TableName, tr, False, lstrStayIDList, False, 0, True)
+                    Dim lclsProlist As New ProductListDAO
+                    Dim dataTable As New DataTable()
+                    lOrderList = New List(Of Long)
+                    lOrderList.Add(ID)
+                    dataTable = lclsProlist.GetDataTable(lOrderList, TableName, tr, False, lstrStayIDList, False, 0, True)
+                    For Each dr As DataRow In dataTable.Rows
+                        If ConvertNullToZero(dr("IsShow")) = 1 Then
+                            lclsProlist = New ProductListDAO
+                            lclsProlist.ID = ConvertNullToZero(dr("ID"))
+                            lclsProlist.ProductID = ConvertNullToZero(dr("ProductID"))
+                            lclsProlist.UnitID = ConvertNullToZero(dr("UnitID"))
+                            lclsProlist.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                            lclsProlist.Cost = ConvertNullToZero(dr("Cost"))
+                            lclsProlist.Units = ConvertNullToZero(dr("Units"))
+                            lclsProlist.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID_Old"))
+                            lclsProlist.Units_Old = ConvertNullToZero(dr("Units_Old"))
 
-                        For Each dr As DataRow In dataTable.Rows
-                            If ConvertNullToZero(dr("IsShow")) = 1 Then
-                                lclsStock = New ProductStockDAO
-                                lclsStock.ProductID = ConvertNullToZero(dr("ProductID"))
-                                lclsStock.UnitID = ConvertNullToZero(dr("UnitID"))
-                                lclsStock.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                                lclsStock.Units = ConvertNullToZero(dr("Units")) * -1
+                            Call UpdateStock(tr, lclsProlist, lIsUpdate, DataMode.ModeDelete)
 
-                                lclsStock.SaveData(tr, False, False, ID, Code)
-                                lclsStock.SaveData(tr, True, False, ID, Code)
-                            End If
-
-                         
-                        Next
-
-                    ElseIf lIsUpdate = 5 Then
-                        Dim lclsProlist As New ProductListDAO
-                        Dim dataTable As New DataTable()
-                        lOrderList = New List(Of Long)
-                        lOrderList.Add(ID)
-                        dataTable = lclsProlist.GetDataTable(lOrderList, TableName, tr, False, lstrStayIDList, False, 0, True)
-
-                        For Each dr As DataRow In dataTable.Rows
-                            If ConvertNullToZero(dr("IsShow")) = 1 Then
-                                lclsStock = New ProductStockDAO
-                                lclsStock.ProductID = ConvertNullToZero(dr("ProductID"))
-                                lclsStock.UnitID = ConvertNullToZero(dr("UnitID"))
-                                lclsStock.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                                lclsStock.Units = ConvertNullToZero(dr("Units")) * -1
-
-                                lclsStock.SaveData(tr, False, False, ID, Code)
-                                If IsSumStock = True Then
-                                    lclsStock.SaveData(tr, True, False, ID, Code)
-                                End If
-                            End If
-
-                        Next
-                    ElseIf lIsUpdate > 0 Then
-                        Dim lclsProlist As New ProductListDAO
-                        Dim dataTable As New DataTable()
-                        lOrderList = New List(Of Long)
-                        lOrderList.Add(ID)
-                        dataTable = lclsProlist.GetDataTable(lOrderList, TableName, tr, False, lstrStayIDList, False, 0, True)
-
-                        For Each dr As DataRow In dataTable.Rows
-                            If ConvertNullToZero(dr("IsShow")) = 1 Then
-                                lclsStock = New ProductStockDAO
-                                lclsStock.ProductID = ConvertNullToZero(dr("ProductID"))
-                                lclsStock.UnitID = ConvertNullToZero(dr("UnitID"))
-                                lclsStock.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-
-                                lclsStock.Units = ConvertNullToZero(dr("Units")) * 1
-
-                                If lIsUpdate = 1 Then  'sell stock sum
-                                    lclsStock.SaveData(tr, True, False, ID, Code)
-                                ElseIf lIsUpdate = 2 Then
-                                    lclsStock.SaveData(tr, False, False, ID, Code)
-                                ElseIf lIsUpdate = 3 Then
-                                    If StockType = "I" Then
-                                        lclsStock.Units = lclsStock.Units * -1 ' I = คืนสต็อก
-                                    End If
-                                    lclsStock.SaveData(tr, False, False, ID, Code)
-                                    lclsStock.SaveData(tr, True, False, ID, Code)
-                                End If
-                            End If
-                        Next
-                    End If
+                            lclsProlist = Nothing
+                        End If
+                    Next
 
                     'ProList
                     Dim ProList As New ProductListDAO
@@ -1161,13 +883,11 @@ Public Class OrderSDAO
     End Sub
 
 
-    Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer)
+    Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer, ByVal pMode As DataMode)
         Dim lcls As New ProductStockDAO
         Try
-
             Dim lclsStock As ProductStockDAO
             Dim lclsStock_Old As ProductStockDAO
-
 
             If pIsUpdate = 4 Then ''** Stock in
                 'Update Stock +
@@ -1176,9 +896,9 @@ Public Class OrderSDAO
                 lclsStock.UnitID = pProductList.UnitID
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
                 lclsStock.Cost = pProductList.Cost
-
-
-                If ModeData = DataMode.ModeDelete Then
+                If pMode = DataMode.ModeDelete Then
+                    lclsStock.Units = pProductList.Units * -1
+                ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
                     lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID = 0 Then
                     lclsStock.Units = pProductList.Units * 1
@@ -1194,7 +914,6 @@ Public Class OrderSDAO
                         lclsStock_Old.Units = pProductList.Units_Old * -1
                         lclsStock_Old.SaveData(ptr, False, False, ID, Code)
                         lclsStock_Old.SaveData(ptr, True, False, ID, Code)
-
                         'Add new unit to new location
                         lclsStock.Units = pProductList.Units
                     Else
@@ -1204,25 +923,19 @@ Public Class OrderSDAO
                             lclsStock.Units = (pProductList.Units - pProductList.Units_Old)
                         End If
                     End If
-
                 End If
- 
-
                 lclsStock.SaveData(ptr, False, False, ID, Code)
                 lclsStock.SaveData(ptr, True, False, ID, Code)
-
-
-                 
-
             ElseIf pIsUpdate = 5 Then ''Update stock
-
                 lclsStock = New ProductStockDAO
                 lclsStock.ProductID = pProductList.ProductID
                 lclsStock.UnitID = pProductList.UnitID
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
                 lclsStock.Cost = pProductList.Cost
 
-                If ModeData = DataMode.ModeDelete Then
+                If pMode = DataMode.ModeDelete Then
+                    lclsStock.Units = pProductList.Units * -1
+                ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
                     lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID = 0 Then
                     lclsStock.Units = pProductList.Units * 1
@@ -1256,17 +969,16 @@ Public Class OrderSDAO
                 If IsSumStock = True Then
                     lclsStock.SaveData(ptr, True, False, ID, Code)
                 End If
-                 
-
             ElseIf pIsUpdate > 0 Then
-
                 lcls = New ProductStockDAO
                 lcls.ProductID = pProductList.ProductID
                 lcls.UnitID = pProductList.UnitID
                 lcls.LocationDTLID = pProductList.LocationDTLID
 
-                If ModeData = DataMode.ModeDelete Then
+                If pMode = DataMode.ModeDelete Then
                     lcls.Units = pProductList.Units * 1
+                ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
+                    lcls.Units = pProductList.Units * -1
                 ElseIf pProductList.ID = 0 Then
                     lcls.Units = pProductList.Units * -1
                 ElseIf pProductList.ID > 0 Then
@@ -1289,7 +1001,6 @@ Public Class OrderSDAO
                     lcls.SaveData(ptr, True, False, ID, Code)
                 End If
             End If
-            'End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateStock : " & e.Message)
         Finally
@@ -1297,287 +1008,261 @@ Public Class OrderSDAO
         End Try
     End Sub
 
+    Private Sub InsertOrder(ByRef ptr As SqlTransaction)
+        Dim Sql As String = ""
+        Try
+            Select Case ModeData
+                Case DataMode.ModeNew
+                    Sql = " INSERT INTO Orders  (OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus"
+                    Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal"
+                    Sql &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
+                    Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType"
+                    Sql &= " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
+                    Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
+                    Sql &= " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
+                    Sql &= " ,QuotationRemarkID,IsNotPass)"
+                    Sql &= " VALUES ( " & ID
+                    Sql &= " , " & TableID
+                    Sql &= " , '" & Trim(Code) & "'"
+                    Sql &= " , '" & ConvertNullToString(PO) & "'"
+                    Sql &= " , '" & formatSQLDate(OrderDate) & "'"
+                    Sql &= " , '" & formatSQLDate(ShipingDate) & "'"
+                    Sql &= " , " & ConvertNullToZero(CustomerID)
+                    Sql &= " , " & ConvertNullToZero(EmpID)
+                    Sql &= " , " & ConvertNullToZero(CreditRuleID)
+                    Sql &= " , " & ConvertNullToZero(VatTypeID)
+                    Sql &= " , '" & ConvertNullToString(OrderStatus) & "'"
+                    Sql &= " , " & IIf(IsCancel = True, 1, 0)
+                    Sql &= " , '" & ConvertNullToString(CancelRemark) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(Total)
+                    Sql &= " ,  " & ConvertNullToZero(DiscountPercen)
+                    Sql &= " ,  " & ConvertNullToZero(DiscountAmount)
+                    Sql &= " ,  " & ConvertNullToZero(VatPercen)
+                    Sql &= " ,  " & ConvertNullToZero(VatAmount)
+                    Sql &= " ,  " & ConvertNullToZero(GrandTotal)
+                    Sql &= " ,  " & ConvertNullToZero(PledgeTotal)
+                    Sql &= " , '" & ConvertNullToString(Remark) & "'"
+                    Sql &= " ,  " & gUserID
+                    Sql &= " , '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
+                    Sql &= " ,  " & IIf(IsInActive = True, 1, 0)
+                    Sql &= " ,0 "
+                    Sql &= " , " & RefBillID
+                    Sql &= " , '" & ConvertNullToString(SendBy) & "'"
+                    Sql &= " , '" & formatSQLDate(ExpireDate) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(QuotationDays)
+                    Sql &= " ,  " & ConvertNullToZero(ShipingByID)
+                    Sql &= " ,  " & ConvertNullToZero(ShipingMethodID)
+                    Sql &= " ,  " & 0
+                    Sql &= " , '" & ConvertNullToString(PayType) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(BillMedthodID)
+                    Sql &= " ,  " & ConvertNullToZero(PayTotal)
+                    Sql &= " ,  " & ConvertNullToZero(CurrencyID)
+                    Sql &= " ,  " & ConvertNullToZero(ExchangeRate)
+                    Sql &= " , '" & ConvertNullToString(TaxCanYes) & "'"
+                    Sql &= " , '" & ConvertNullToString(TaxCondition) & "'"
+                    Sql &= " , '" & formatSQLDate(TaxMonthYear) & "'"
+                    Sql &= " , '" & ConvertNullToString(TaxNumber) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(TaxTotal)
+                    Sql &= " , '" & ConvertNullToString(TaxRemark) & "'"
+                    Sql &= " , '" & ConvertNullToString(TaxSection) & "'"
+                    Sql &= " , '" & ConvertNullToString(TaxType) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(ShipingRuleID)
+                    Sql &= " , '" & ConvertNullToString(InvoiceSuplierID) & "'"
+                    Sql &= " , '" & ConvertNullToString(Institute) & "'"
+                    Sql &= " , '" & ConvertNullToString(StockType) & "'"
+                    Sql &= " ,  " & IIf(IsSumStock = True, 1, 0)
+                    Sql &= " ,  " & IIf(IsMakePO = True, 1, 0)
+                    Sql &= " , '" & ConvertNullToString(MakePOStatus) & "'"
+                    Sql &= " ,  " & IIf(IsEditVat = True, 1, 0)
+                    Sql &= " ,  " & ConvertNullToZero(QuotationRemarkID)
+                    Sql &= " ,  " & IIf(IsNotPass = True, 1, 0)
+                    Sql &= " ) "
 
-    'Private Sub UpdateStock(ByRef ptr As SqlTransaction)
-    '    Dim lcls As New ProductStockDAO
-    '    Dim lIsUpdate As Integer = 0  ' 0=no, 1=sum, 2=second
-    '    Dim lProInList As String = ""
+                Case DataMode.ModeEdit
+                    If IsCancel = True Then
+                        OrderStatus = EnumStatus.Cancel.ToString
+                    End If
+                    Sql = " UPDATE Orders SET "
+                    Sql &= " EmpID=" & ConvertNullToZero(EmpID)
+                    Sql &= " , OrderCode='" & ConvertNullToString(Code) & "'"
+                    Sql &= " , CustomerID=" & ConvertNullToZero(CustomerID)
+                    Sql &= " , CreditRuleID=" & ConvertNullToZero(CreditRuleID)
+                    Sql &= " , VatTypeID=" & ConvertNullToZero(VatTypeID)
+                    Sql &= " , PO='" & ConvertNullToString(PO) & "'"
+                    Sql &= " , OrderStatus='" & ConvertNullToString(OrderStatus) & "'"
+                    Sql &= " , IsCancel=" & IIf(IsCancel = True, 1, 0)
+                    Sql &= " , CancelRemark='" & ConvertNullToString(CancelRemark) & "'"
+                    Sql &= " , Total=" & ConvertNullToZero(Total)
+                    Sql &= " , DiscountPercen=" & ConvertNullToZero(DiscountPercen)
+                    Sql &= " , DiscountAmount= " & ConvertNullToZero(DiscountAmount)
+                    Sql &= " , VatPercen=" & ConvertNullToZero(VatPercen)
+                    Sql &= " , VatAmount=" & ConvertNullToZero(VatAmount)
+                    Sql &= " , GrandTotal=" & ConvertNullToZero(GrandTotal)
+                    Sql &= " , PledgeTotal=" & ConvertNullToZero(PledgeTotal)
+                    Sql &= " , Remark='" & ConvertNullToString(Remark) & "'"
+                    Sql &= " , ModifiedBy=" & gUserID
+                    Sql &= " , ModifiedTime= '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
+                    Sql &= " , IsInActive= " & IIf(IsInActive = True, 1, 0)
+                    Sql &= " , ShipingDate= '" & formatSQLDate(ShipingDate) & "'"
+                    Sql &= " , IsSumStock= " & IIf(IsSumStock = True, 1, 0)
+                    Sql &= " , IsEditVat= " & IIf(IsEditVat = True, 1, 0)
+                    Sql &= " , IsNotPass= " & IIf(IsNotPass = True, 1, 0)
+                    Sql &= " , RefBillID= " & RefBillID
+                    Sql &= " , RefReceiptID= " & RefReceiptID
+                    Sql &= " , SendBy= '" & ConvertNullToString(SendBy) & "'"
+                    Sql &= " , OrderDate='" & formatSQLDate(OrderDate) & "'"
+                    Sql &= " , ExpireDate='" & formatSQLDate(ExpireDate) & "'"
+                    Sql &= " , QuotationDays=" & ConvertNullToZero(QuotationDays)
+                    Sql &= " ,ShipingByID= " & ConvertNullToZero(ShipingByID)
+                    Sql &= " ,ShipingMethodeID= " & ConvertNullToZero(ShipingMethodID)
+                    Sql &= " ,PayType= '" & ConvertNullToString(PayType) & "'"
+                    Sql &= " ,BillMedthodID=" & ConvertNullToZero(BillMedthodID)
+                    Sql &= " ,PayTotal=" & ConvertNullToZero(PayTotal)
+                    Sql &= " ,CurrencyID=" & ConvertNullToZero(CurrencyID)
+                    Sql &= " ,ExchangeRate= " & ConvertNullToZero(ExchangeRate)
+                    Sql &= " ,TaxCanYes='" & ConvertNullToString(TaxCanYes) & "'"
+                    Sql &= " ,TaxCondition='" & ConvertNullToString(TaxCondition) & "'"
+                    Sql &= " ,TaxMonthYear= '" & formatSQLDate(TaxMonthYear) & "'"
+                    Sql &= " ,TaxNumber='" & ConvertNullToString(TaxNumber) & "'"
+                    Sql &= " ,TaxTotal= " & ConvertNullToZero(TaxTotal)
+                    Sql &= " ,TaxRemark='" & ConvertNullToString(TaxRemark) & "'"
+                    Sql &= " ,TaxSection='" & ConvertNullToString(TaxSection) & "'"
+                    Sql &= " ,TaxType='" & ConvertNullToString(TaxType) & "'"
+                    Sql &= " ,ShipingRuleID=" & ConvertNullToZero(ShipingRuleID)
+                    Sql &= " ,InvoiceSuplierID='" & ConvertNullToString(InvoiceSuplierID) & "'"
+                    Sql &= " ,Institute='" & ConvertNullToString(Institute) & "'"
+                    Sql &= " ,StockType='" & ConvertNullToString(StockType) & "'"
+                    Sql &= " ,QuotationRemarkID=" & ConvertNullToZero(QuotationRemarkID)
+                    Sql &= " WHERE OrderID=" & ID
+                Case DataMode.ModeDelete
+                    Sql = " UPDATE Orders SET IsDelete=1 "
+                    Sql &= " ,ModifiedBy= " & gUserID
+                    Sql &= " ,ModifiedTime='" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
+                    Sql &= " WHERE OrderID=" & ID
+            End Select
+            gConnection.executeInsertQuery(Sql, ptr)
 
-    '    Try
-    '        If TableID = MasterType.SellOrders Then
-    '            lIsUpdate = 1
-    '        ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Then
-    '            lIsUpdate = 2
-    '            If IsNothing(RefToOrderID) = False Then
-    '                If RefToOrderID.Count > 0 And TableID = MasterType.Invoice Then
-    '                    For Each pOrderID As Long In RefToOrderID
-    '                        Dim lclsOrder As New OrderSDAO
-    '                        If lclsOrder.InitailData(pOrderID, , ptr) Then
-    '                            If lclsOrder.TableID = MasterType.Borrow Then
-    '                                lIsUpdate = 0
-    '                            End If
-    '                        End If
-    '                    Next
-    '                End If
-    '            End If
-    '        ElseIf (TableID = MasterType.ReduceCredit) Or (TableID = MasterType.AddCredit) _
-    '                Or (TableID = MasterType.ReduceCreditBuy) Or (TableID = MasterType.AddCreditBuy) Then
-    '            If StockType = "N" Or StockType = "" Then
-    '                lIsUpdate = 0
-    '            Else
-    '                lIsUpdate = 3
-    '            End If
-    '        ElseIf (TableID = MasterType.StockIn) Then
-    '            lIsUpdate = 4
-    '        ElseIf (TableID = MasterType.UpdateStock) Then
-    '            lIsUpdate = 5
-    '        End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrder : " & e.Message)
+        Finally
 
-    '        Dim lclsStock As ProductStockDAO
-    '        Dim lclsStock_Old As ProductStockDAO
-
-
-    '        If lIsUpdate = 4 Then ''** Stock in
-    '            lProInList = ""
-    '            'Update Stock +
-
-    '            If ProductDAOs Is Nothing Then
-    '            ElseIf ProductDAOs.Count = 0 Then
-    '            Else
-    '                For Each ProductList As ProductListDAO In ProductDAOs
-    '                    lclsStock = New ProductStockDAO
-    '                    lclsStock.ProductID = ProductList.ProductID
-    '                    lclsStock.UnitID = ProductList.UnitID
-    '                    lclsStock.LocationDTLID = ProductList.LocationDTLID
-    '                    lclsStock.Cost = ProductList.Cost
-
-
-    '                    If ModeData = DataMode.ModeDelete Then
-    '                        lclsStock.Units = ProductList.Units * -1
-    '                    ElseIf ProductList.ID = 0 Then
-    '                        lclsStock.Units = ProductList.Units * 1
-    '                    ElseIf ProductList.ID > 0 Then
-    '                        'if change location in mode edit
-    '                        If ProductList.LocationDTLID <> ProductList.LocationDTLID_Old Then
-    '                            'Remove unit from old location stock
-    '                            lclsStock_Old = New ProductStockDAO
-    '                            lclsStock_Old.ProductID = ProductList.ProductID
-    '                            lclsStock_Old.UnitID = ProductList.UnitID
-    '                            lclsStock_Old.LocationDTLID = ProductList.LocationDTLID_Old
-    '                            lclsStock_Old.Cost = ProductList.Cost
-    '                            lclsStock_Old.Units = ProductList.Units_Old * -1
-    '                            lclsStock_Old.SaveData(ptr, False, False, ID, Code)
-    '                            lclsStock_Old.SaveData(ptr, True, False, ID, Code)
-
-    '                            'Add new unit to new location
-    '                            lclsStock.Units = ProductList.Units
-    '                        Else
-    '                            If ProductList.Units = ProductList.Units_Old Then
-    '                                lclsStock.Units = 0
-    '                            Else
-    '                                lclsStock.Units = (ProductList.Units - ProductList.Units_Old)
-    '                            End If
-    '                        End If
-
-    '                    End If
-
-    '                    If ModeData = DataMode.ModeEdit Then
-    '                        'Build prolist
-    '                        If ProductList.ID > 0 Then
-    '                            lProInList = IIf(lProInList = "", ProductList.ID, lProInList & "," & ProductList.ID)
-    '                        End If
-    '                    End If
-
-    '                    lclsStock.SaveData(ptr, False, False, ID, Code)
-    '                    lclsStock.SaveData(ptr, True, False, ID, Code)
-    '                Next
-
-    '                If lProInList <> "" Then
-    '                    'Update for delete row
-    '                    Dim lclsProlist As New ProductListDAO
-    '                    Dim dataTable As New DataTable()
-    '                    Dim lOrderList As New List(Of Long)
-    '                    lOrderList.Add(ID)
-    '                    dataTable = lclsProlist.GetDataTable(lOrderList, TableName, ptr, False, lProInList, False, False, False, False)
-
-    '                    For Each dr As DataRow In dataTable.Rows
-    '                        lclsStock = New ProductStockDAO
-    '                        lclsStock.ProductID = ConvertNullToZero(dr("ProductID"))
-    '                        lclsStock.UnitID = ConvertNullToZero(dr("UnitID"))
-    '                        lclsStock.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-    '                        lclsStock.Units = ConvertNullToZero(dr("Units")) * -1
-
-    '                        lclsStock.SaveData(ptr, False, False, ID, Code)
-    '                        lclsStock.SaveData(ptr, True, False, ID, Code)
-    '                    Next
-    '                End If
-    '            End If
-
-    '            ' ''Update Cost
-    '            'Dim lclsCost As New ProductCostDAO
-    '            'If ProductDAOs Is Nothing Then
-    '            'ElseIf ProductDAOs.Count > 0 Then
-    '            '    For Each ProductList As ProductListDAO In ProductDAOs
-    '            '        lclsCost.ModeData = ModeData
-    '            '        lclsCost.SaveData(ProductList.ProductID, ProductCostDAO.CostTypes.Average, ProductList.Cost, ProductList.ID, ptr)
-    '            '    Next
-    '            'End If
-
-    '        ElseIf lIsUpdate = 5 Then ''Update stock
-    '            For Each ProductList As ProductListDAO In ProductDAOs
-    '                lclsStock = New ProductStockDAO
-    '                lclsStock.ProductID = ProductList.ProductID
-    '                lclsStock.UnitID = ProductList.UnitID
-    '                lclsStock.LocationDTLID = ProductList.LocationDTLID
-    '                lclsStock.Cost = ProductList.Cost
-
-    '                If ModeData = DataMode.ModeDelete Then
-    '                    lclsStock.Units = ProductList.Units * -1
-    '                ElseIf ProductList.ID = 0 Then
-    '                    lclsStock.Units = ProductList.Units * 1
-    '                ElseIf ProductList.ID > 0 Then
-    '                    'if change location in mode edit
-    '                    If ProductList.LocationDTLID <> ProductList.LocationDTLID_Old Then
-    '                        'Remove unit from old location stock
-    '                        lclsStock_Old = New ProductStockDAO
-    '                        lclsStock_Old.ProductID = ProductList.ProductID
-    '                        lclsStock_Old.UnitID = ProductList.UnitID
-    '                        lclsStock_Old.LocationDTLID = ProductList.LocationDTLID_Old
-    '                        lclsStock_Old.Cost = ProductList.Cost
-    '                        lclsStock_Old.Units = ProductList.Units_Old * -1
-    '                        lclsStock_Old.SaveData(ptr, False, False, ID, Code)
-    '                        If IsSumStock = True Then
-    '                            lclsStock_Old.SaveData(ptr, True, False, ID, Code)
-    '                        End If
+        End Try
+    End Sub
 
 
-    '                        'Add new unit to new location
-    '                        lclsStock.Units = ProductList.Units
-    '                    Else
-    '                        If ProductList.Units = ProductList.Units_Old Then
-    '                            lclsStock.Units = 0
-    '                        Else
-    '                            lclsStock.Units = (ProductList.Units - ProductList.Units_Old)
-    '                        End If
-    '                    End If
-    '                End If
-    '                If ModeData = DataMode.ModeEdit Then
-    '                    'Build prolist
-    '                    If ProductList.ID > 0 Then
-    '                        lProInList = IIf(lProInList = "", ProductList.ID, lProInList & "," & ProductList.ID)
-    '                    End If
-    '                End If
-    '                lclsStock.SaveData(ptr, False, False, ID, Code)
-    '                If IsSumStock = True Then
-    '                    lclsStock.SaveData(ptr, True, False, ID, Code)
-    '                End If
+    Private Sub SaveBalance(ByRef ptr As SqlTransaction)
+        Try
+            If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
+                If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
+                    Dim clsBalance As New CreditBalanceDAO
+                    If ModeData = DataMode.ModeNew Then
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal, "")
+                    Else
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
+                    End If
+
+                End If
+
+                'Dis CreditBalance
+                If TableID = MasterType.Receipt And PayType = "CASH" Then
+                    Dim clsBalance As New CreditBalanceDAO
+                    If ModeData = DataMode.ModeNew Then
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal * -1, "")
+                    Else
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
+                    End If
+                End If
+            ElseIf ModeData = DataMode.ModeEdit Then
+                Dim clsBalance As CreditBalanceDAO
+                If CustomerID <> Order_Old(ptr).CustomerID Then
+                    'Add CreditBalance
+                    If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
+                        clsBalance = New CreditBalanceDAO
+                        'New Cus
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal, "")
+                        'Old Cus
+                        clsBalance = New CreditBalanceDAO
+                        clsBalance.AddBalanc(ptr, Order_Old(ptr).CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
+                    End If
+                    'Dis CreditBalance
+                    If TableID = MasterType.Receipt And PayType = "CASH" Then
+                        clsBalance = New CreditBalanceDAO
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal * -1, "")
+                        'Old Cus
+                        clsBalance = New CreditBalanceDAO
+                        clsBalance.AddBalanc(ptr, Order_Old(ptr).CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
+                    End If
+                ElseIf Order_Old(ptr).GrandTotal <> GrandTotal Then
+                    'Add CreditBalance
+                    If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
+                        clsBalance = New CreditBalanceDAO
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal - Order_Old(ptr).GrandTotal, "Edit Order")
+                    End If
+
+                    'Dis CreditBalance
+                    If TableID = MasterType.Receipt And PayType = "CASH" Then
+                        clsBalance = New CreditBalanceDAO
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, (GrandTotal - Order_Old(ptr).GrandTotal) * -1, "Edit Order")
+                    End If
+                End If
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.SaveBalance : " & e.Message)
+        Finally
+
+        End Try
+    End Sub
 
 
-    '            Next
-    '            If lProInList <> "" Then
-    '                'Update for delete row
-    '                Dim lclsProlist As New ProductListDAO
-    '                Dim dataTable As New DataTable()
-    '                Dim lOrderList As New List(Of Long)
-    '                lOrderList.Add(ID)
-    '                dataTable = lclsProlist.GetDataTable(lOrderList, TableName, ptr, False, lProInList, False, False, False, False)
+    Private Sub UpdateBillReceipt(ByRef ptr As SqlTransaction)
+        Try
+            If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
+                'Ref Bill
+                If TableID = MasterType.Bill Then   '*** Check Order Type
+                    If IsNothing(OrderDAOs) Then
+                        BuildOrderList(ID, ptr)
+                    End If
+                    If OrderDAOs.Count > 0 Then
+                        For Each lRefOrder As SubOrder In OrderDAOs
+                            If lRefOrder.OrderID > 0 Then
+                                If ModeData = DataMode.ModeNew Then
+                                    UpdateOrderByBill(ID, lRefOrder.OrderID, ptr)
+                                Else
+                                    UpdateOrderByBill(0, lRefOrder.OrderID, ptr)
+                                End If
+                            End If
+                        Next
+                    End If
+                End If
 
-    '                For Each dr As DataRow In dataTable.Rows
-    '                    lclsStock = New ProductStockDAO
-    '                    lclsStock.ProductID = ConvertNullToZero(dr("ProductID"))
-    '                    lclsStock.UnitID = ConvertNullToZero(dr("UnitID"))
-    '                    lclsStock.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-    '                    lclsStock.Units = ConvertNullToZero(dr("Units")) * -1
+                'Ref Receipt
+                If TableID = MasterType.Receipt Or TableID = MasterType.ReceiptBuy Or TableID = MasterType.ReceiptCut Then   '*** Check Order Type
+                    If IsNothing(OrderDAOs) Then
+                        BuildOrderList(ID, ptr)
+                    End If
+                    If OrderDAOs.Count > 0 Then
+                        For Each lRefOrder As SubOrder In OrderDAOs
+                            If lRefOrder.OrderID > 0 Then
+                                If ModeData = DataMode.ModeNew Then
+                                    UpdateOrderByReceipt(ID, lRefOrder.OrderID, lRefOrder.BillTotal, ptr)
+                                Else
+                                    UpdateOrderByReceipt(0, lRefOrder.OrderID, 0, ptr)
+                                End If
 
-    '                    lclsStock.SaveData(ptr, False, False, ID, Code)
-    '                    If IsSumStock = True Then
-    '                        lclsStock.SaveData(ptr, True, False, ID, Code)
-    '                    End If
+                            End If
+                        Next
+                    End If
+                End If
+            End If
 
-    '                Next
-    '            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateCost : " & e.Message)
+        Finally
 
-    '        ElseIf lIsUpdate > 0 Then
-    '            For Each ProductList As ProductListDAO In ProductDAOs
-    '                lcls = New ProductStockDAO
-    '                lcls.ProductID = ProductList.ProductID
-    '                lcls.UnitID = ProductList.UnitID
-    '                lcls.LocationDTLID = ProductList.LocationDTLID
-
-    '                If ModeData = DataMode.ModeDelete Then
-    '                    lcls.Units = ProductList.Units * 1
-    '                ElseIf ProductList.ID = 0 Then
-    '                    lcls.Units = ProductList.Units * -1
-    '                ElseIf ProductList.ID > 0 Then
-    '                    If ProductList.Units = ProductList.Units_Old Then
-    '                        lcls.Units = 0
-    '                    Else
-    '                        lcls.Units = (ProductList.Units - ProductList.Units_Old) * -1
-    '                    End If
-    '                End If
-
-    '                If ModeData = DataMode.ModeEdit Then
-    '                    'Build prolist
-    '                    If ProductList.ID > 0 Then
-    '                        lProInList = IIf(lProInList = "", ProductList.ID, lProInList & "," & ProductList.ID)
-    '                    End If
-    '                End If
-
-
-    '                If lIsUpdate = 1 Then  'sell stock sum
-    '                    lcls.SaveData(ptr, True, False, ID, Code)
-    '                ElseIf lIsUpdate = 2 Then
-    '                    lcls.SaveData(ptr, False, False, ID, Code)
-    '                ElseIf lIsUpdate = 3 Then
-    '                    If StockType = "I" Then
-    '                        lcls.Units = lcls.Units * -1 ' I = คืนสต็อก
-    '                    End If
-    '                    lcls.SaveData(ptr, False, False, ID, Code)
-    '                    lcls.SaveData(ptr, True, False, ID, Code)
-    '                End If
-    '            Next
-
-    '            If lProInList <> "" Then
-    '                'Update for delete row
-    '                Dim lclsProlist As New ProductListDAO
-    '                Dim dataTable As New DataTable()
-    '                Dim lOrderList As New List(Of Long)
-    '                lOrderList.Add(ID)
-    '                dataTable = lclsProlist.GetDataTable(lOrderList, TableName, ptr, False, lProInList, False, False, False, False)
-
-    '                For Each dr As DataRow In dataTable.Rows
-    '                    lcls = New ProductStockDAO
-    '                    lcls.ProductID = ConvertNullToZero(dr("ProductID"))
-    '                    lcls.UnitID = ConvertNullToZero(dr("UnitID"))
-    '                    lcls.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-
-    '                    lcls.Units = ConvertNullToZero(dr("Units")) * 1
-
-    '                    If lIsUpdate = 1 Then  'sell stock sum
-    '                        lcls.SaveData(ptr, True, False, ID, Code)
-    '                    ElseIf lIsUpdate = 2 Then
-    '                        lcls.SaveData(ptr, False, False, ID, Code)
-    '                    ElseIf lIsUpdate = 3 Then
-    '                        If StockType = "I" Then
-    '                            lcls.Units = lcls.Units * -1 ' I = คืนสต็อก
-    '                        End If
-    '                        lcls.SaveData(ptr, False, False, ID, Code)
-    '                        lcls.SaveData(ptr, True, False, ID, Code)
-    '                    End If
-    '                Next
-
-    '            End If
-
-    '        End If
-    '        'End If
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateStock : " & e.Message)
-    '    Finally
-    '        lcls = Nothing
-    '    End Try
-    'End Sub
-
-
+        End Try
+    End Sub
+     
     Private Sub UpdateCost(ByRef ptr As SqlTransaction)
         Try
             If ModeData = DataMode.ModeNew Then
@@ -1594,116 +1279,13 @@ Public Class OrderSDAO
                     End If
                 End If
             End If
-           
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateCost : " & e.Message)
         Finally
 
         End Try
     End Sub
-
-    'Private Sub UpdateSN(ByRef ptr As SqlTransaction)
-    '    Dim lclsSN As SnDAO, lclsSNRef As SnDAO, lSNInList As String = "", lProIDList As String = ""
-    '    Dim lSNTable As DataTable
-    '    Dim lUpdateStstus As Boolean = False
-    '    Try
-    '        If ProductDAOs Is Nothing Then
-    '        ElseIf ProductDAOs.Count = 0 Then
-    '        Else
-    '            If ModeData = DataMode.ModeDelete Then
-    '                'Re Open status
-    '                If TableID = MasterType.SellOrders Then
-    '                    Dim lOrderList As New List(Of Long)
-    '                    lOrderList.Add(ID)
-
-    '                    lclsSN = New SnDAO
-    '                    lSNTable = lclsSN.GetDataTable(lOrderList, 0, "", ptr)
-    '                    For Each dr2 As DataRow In lSNTable.Rows
-    '                        lclsSN = New SnDAO
-    '                        lclsSN.SetStatusBySN(ptr, ConvertNullToZero(dr2("ProductID")), ConvertNullToString(dr2("SerialNumberNo")), "New")
-    '                    Next
-    '                End If
-    '                lclsSN = New SnDAO
-    '                lclsSN.DeleteFromModeDelete(ptr, ID, 0)
-    '            Else
-    '                For Each ProductList As ProductListDAO In ProductDAOs
-    '                    lSNInList = ""
-
-    '                    If ModeData = DataMode.ModeDelete Then
-    '                        lclsSN = New SnDAO
-    '                        lclsSN.DeleteFromModeDelete(ptr, ID, ProductList.ProductID)
-    '                    Else
-
-    '                        If IsNothing(ProductList.SNList) = False Then
-    '                            For Each pclsSN As SnDAO In ProductList.SNList
-    '                                lclsSN = pclsSN
-    '                                If ModeData = DataMode.ModeNew Then
-    '                                    lclsSN.SerialNumberID = 0
-    '                                    If TableID = MasterType.StockIn Or TableID = MasterType.UpdateStock Then
-    '                                        lclsSN.Status = "New"
-    '                                    Else
-    '                                        lclsSN.Status = "None"
-    '                                    End If
-    '                                End If
-    '                                If TableID = MasterType.UpdateStock And ProductList.Units < 0 Then
-    '                                    lclsSN.Status = "None"
-    '                                    lUpdateStstus = True
-    '                                End If
-    '                                lclsSN.OrderID = ID
-    '                                lclsSN.ProductID = ProductList.ProductID
-    '                                lclsSN.SerialNumberNo = pclsSN.SerialNumberNo
-    '                                lclsSN.SaveData(ptr, ModeData, lUpdateStstus)
-
-    '                                'Close SN
-    '                                If TableID = MasterType.SellOrders Then
-    '                                    lclsSNRef = New SnDAO
-    '                                    lclsSNRef.SetStatusBySN(ptr, ProductList.ProductID, pclsSN.SerialNumberNo, "Close")
-    '                                End If
-
-    '                                If ModeData = DataMode.ModeEdit Then
-    '                                    If lclsSN.SerialNumberID > 0 Then
-    '                                        lSNInList = IIf(lSNInList = "", lclsSN.SerialNumberID, lSNInList & "," & lclsSN.SerialNumberID)
-    '                                    End If
-    '                                End If
-    '                            Next
-
-    '                        End If
-    '                        If lSNInList <> "" And ModeData = DataMode.ModeEdit Then
-
-    '                            If TableID = MasterType.SellOrders Then
-    '                                lclsSNRef = New SnDAO
-    '                                lclsSNRef.SetStatusBySNAtRemove(ptr, ID, ProductList.ProductID, lSNInList, "New")
-    '                            End If
-
-    '                            lclsSN = New SnDAO
-    '                            lclsSN.DeleteRemoveData(ptr, ID, ProductList.ProductID, lSNInList)
-    '                        End If
-    '                    End If
-
-    '                    If ModeData = DataMode.ModeEdit Then
-    '                        'Build prolist
-    '                        If ProductList.ProductID > 0 Then
-    '                            lProIDList = IIf(lProIDList = "", ProductList.ProductID, lProIDList & "," & ProductList.ProductID)
-    '                        End If
-    '                    End If
-
-    '                Next
-    '                If lProIDList <> "" Then 'Remove when Prolist delete
-    '                    If TableID = MasterType.SellOrders Then
-    '                        lclsSNRef = New SnDAO
-    '                        lclsSNRef.SetStatusFromProListRemove(ptr, ID, lProIDList, "New")
-    '                    End If
-
-    '                    lclsSN = New SnDAO
-    '                    lclsSN.DeleteFromProListRemove(ptr, ID, lProIDList)
-    '                End If
-    '            End If
-    '        End If
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateSN : " & e.Message)
-    '    Finally
-    '        lclsSN = Nothing
-    '    End Try
-    'End Sub
+     
 
 End Class

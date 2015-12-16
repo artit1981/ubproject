@@ -449,7 +449,7 @@ Public Class frmControls
 
                     lStatus = ConvertNullToString(GridView.GetRowCellValue(e.RowHandle, GridView.Columns("OrderStatus")))
                     lChequeID = ConvertNullToZero(GridView.GetRowCellValue(e.RowHandle, GridView.Columns("ChequeID")))
-                    If (lStatus = "Open" Or lStatus = "Receive") And lData = 0 And lChequeID = 0 Then
+                    If (lStatus = EnumStatus.Open.ToString Or lStatus = EnumStatus.Receive.ToString) And lData = 0 And lChequeID = 0 Then
                         e.Appearance.BackColor = Color.LightGreen
                         'e.Appearance.ForeColor = Color.Red
 

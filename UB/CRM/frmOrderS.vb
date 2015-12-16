@@ -434,11 +434,11 @@ Public Class frmOrderS
 
                 Call mcls.SaveData()
                 ShowProgress(False, "")
-                'If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = "Open" Or mcls.OrderStatus = "Approve") Then
+                'If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString) Then
                 '    If XtraMessageBox.Show(Me, "ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                 '        modReport.PrintOrder(mcls.ID)
                 '    End If
-                If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = "Wait Approve") Then
+                If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = EnumStatus.WaitApprove.ToString) Then
                     'ShowProgress(False, "")
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     'If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
@@ -1152,7 +1152,7 @@ Public Class frmOrderS
 
             MakeOrderBar.Enabled = False  'Set First Time
             If pMode = DataMode.ModeNew Then
-                OrderStatus.EditValue = "Open"
+                OrderStatus.EditValue = EnumStatus.Open.ToString
                 OrderCode.EditValue = AutoGenCode(mOrderType)
                 EmpID.EditValue = gEmpID
 
@@ -1162,9 +1162,6 @@ Public Class frmOrderS
                         mRefReserveID.Add(pOrderID)
                         InitialRefReserve(pOrderID, "", False)
                     Next
-                    'btnRefOrder.Enabled = False
-                    'txtRefOrder.Properties.ReadOnly = True
-                    'txtRefOrder.BackColor = Color.LightYellow
                     Calculation()
                 End If
             ElseIf pMode = DataMode.ModeConvert Then
@@ -1193,13 +1190,13 @@ Public Class frmOrderS
                         UcFileAttach1.ShowControl(mcls.FileAttachs)
                         txtRefOrder.Properties.ReadOnly = True
                         btnRefOrder.Enabled = False
-                        MakeOrderBar.Enabled = (mcls.OrderStatus = "Open" Or mcls.OrderStatus = "Approve" Or mcls.OrderStatus = "Cancel" Or mcls.OrderStatus = "Waiting" Or mcls.OrderStatus = "Receive") And mcls.IsDelete = False
+                        MakeOrderBar.Enabled = (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Or mcls.OrderStatus = EnumStatus.Cancel.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString Or mcls.OrderStatus = EnumStatus.Receive.ToString) And mcls.IsDelete = False
 
                         Select Case mOrderType
                             Case MasterType.InvoiceBuy, MasterType.ShipingBuy
                                 SaveBar.Enabled = True
                             Case Else
-                                SaveBar.Enabled = (mcls.OrderStatus = "Open" Or mcls.OrderStatus = "Approve" Or mcls.OrderStatus = "Cancel" Or mcls.OrderStatus = "Waiting" Or mcls.OrderStatus = "Receive") And mcls.IsDelete = False
+                                SaveBar.Enabled = (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Or mcls.OrderStatus = EnumStatus.Cancel.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString Or mcls.OrderStatus = EnumStatus.Receive.ToString) And mcls.IsDelete = False
 
                         End Select
                         PrintBar2.Enabled = (mcls.IsDelete = False)
@@ -1215,7 +1212,7 @@ Public Class frmOrderS
                         MyBase.SetMode = DataMode.ModeNew
                         mMode = DataMode.ModeNew
                         IsCancel.EditValue = False
-                        OrderStatus.EditValue = "Open"
+                        OrderStatus.EditValue = EnumStatus.Open.ToString
                         OrderCode.EditValue = AutoGenCode(mOrderType)
                     End If
                     PayType.EditValue = mcls.PayType
@@ -1283,7 +1280,7 @@ Public Class frmOrderS
                 lIsReadOnly = False
             ElseIf mcls.IsDelete = True Then
                 lIsReadOnly = True
-            ElseIf mcls.OrderStatus = "Open" Or mcls.OrderStatus = "Approve" Or mcls.OrderStatus = "Waiting" Then
+            ElseIf mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString Then
                 lIsReadOnly = False
             Else
                 lIsReadOnly = True
@@ -1324,7 +1321,7 @@ Public Class frmOrderS
             mMode = DataMode.ModeNew
             OrderCode.EditValue = AutoGenCode(mOrderType)
             IsCancel.EditValue = False
-            OrderStatus.EditValue = "Open"
+            OrderStatus.EditValue = EnumStatus.Open.ToString
             CustomerID.Properties.ReadOnly = True
             If IsNothing(mclsConvert) Then
                 mclsConvert = New OrderSDAO

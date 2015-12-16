@@ -215,7 +215,7 @@ Public Class ApproveTX
         Try
             SQL = "SELECT * "
             SQL = SQL & " FROM ApproveTX  "
-            SQL = SQL & " WHERE ApproveStatus='Wait Approve'  "
+            SQL = SQL & " WHERE ApproveStatus='WaitApprove'  "
 
             If gIsApproveLimitUser = False And gIsApproveOrderUser = False Then
                 SQL &= " and 1>2 "
@@ -305,7 +305,7 @@ Public Class ApproveTX
             'End Select
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
-            If ModeData = DataMode.ModeEdit And (ApproveStatus = "Approve" Or ApproveStatus = "Not Approve") Then
+            If ModeData = DataMode.ModeEdit And (ApproveStatus = EnumStatus.Approve.ToString Or ApproveStatus = EnumStatus.NotApprove.ToString) Then
                 SetOrderApproveTX(OrderTable, OrderID, OrderType, ApproveType, ApproveStatus, tr)
             End If
 

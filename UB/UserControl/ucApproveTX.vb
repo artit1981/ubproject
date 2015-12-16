@@ -28,7 +28,7 @@
             If gridView.RowCount > 0 Then
                 For lRow = 0 To gridView.RowCount
                     If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ID")) <> 0 Then
-                        If gridView.GetRowCellDisplayText(lRow, "ApproveStatus") = "Approve" Or gridView.GetRowCellDisplayText(lRow, "ApproveStatus") = "Not Approve" Then
+                        If gridView.GetRowCellDisplayText(lRow, "ApproveStatus") = EnumStatus.Approve.ToString Or gridView.GetRowCellDisplayText(lRow, "ApproveStatus") = EnumStatus.NotApprove.ToString Then
                             lDataDAO = New ApproveTX
                             lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
                             lDataDAO.OrderID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "OrderID"))

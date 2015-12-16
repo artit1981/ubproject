@@ -44,7 +44,7 @@ Module modApprove
             If Not IsMeetOtherTX(pOrderTable, pOrderID, pApproveType, tr) Then
                 lclsOrder.InitailData(pOrderID, , tr)
                 If lclsOrder.TableID = MasterType.PurchaseOrder Then
-                    lclsOrder.OrderStatus = "Waiting"
+                    lclsOrder.OrderStatus = EnumStatus.Waiting.ToString
                 Else
                     lclsOrder.OrderStatus = pStatus
                 End If
@@ -67,7 +67,7 @@ Module modApprove
         Try
             SQL = "SELECT * "
             SQL = SQL & " FROM ApproveTX  "
-            SQL = SQL & " WHERE ApproveStatus='Wait Approve'  "
+            SQL = SQL & " WHERE ApproveStatus='WaitApprove'  "
             SQL = SQL & " AND OrderTable='" & pOrderTable.Trim & "'"
             SQL = SQL & " AND OrderID=" & pOrderID
             SQL = SQL & " AND ApproveType <> " & pApproveType

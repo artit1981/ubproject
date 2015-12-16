@@ -98,42 +98,42 @@ Public Class clsNotifi
     End Property
 #End Region
 #Region "Function"
-    Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean, ByVal pProCategoryID As Long) As DataTable
-        Dim SQL As String, lstrProTypeID As String = ""
-        Dim dataTable As New DataTable()
+    'Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean, ByVal pProCategoryID As Long) As DataTable
+    '    Dim SQL As String, lstrProTypeID As String = ""
+    '    Dim dataTable As New DataTable()
 
-        Try
-            If pProCategoryID > 0 Then
-                SQL = "SELECT ProductTypeID"
-                SQL = SQL & " FROM ProductCategory  "
-                SQL = SQL & " WHERE CategoryID =" & pProCategoryID
-                dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-                If dataTable.Rows.Count > 0 Then
-                    For Each dr As DataRow In dataTable.Rows
-                        lstrProTypeID = ConvertNullToString(dr("ProductTypeID"))
-                    Next
-                End If
-            End If
+    '    Try
+    '        If pProCategoryID > 0 Then
+    '            SQL = "SELECT ProductTypeID"
+    '            SQL = SQL & " FROM ProductCategory  "
+    '            SQL = SQL & " WHERE CategoryID =" & pProCategoryID
+    '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+    '            If dataTable.Rows.Count > 0 Then
+    '                For Each dr As DataRow In dataTable.Rows
+    '                    lstrProTypeID = ConvertNullToString(dr("ProductTypeID"))
+    '                Next
+    '            End If
+    '        End If
 
-            SQL = "SELECT ProductTypeID AS ID,IDCode,NameThai "
-            SQL = SQL & " FROM ProductType  "
-            SQL = SQL & " WHERE IsDelete =0   "
-            If pID > 0 Then
-                SQL = SQL & "  AND ProductTypeID=" & pID
-            End If
-            If lstrProTypeID <> "" Then
-                SQL = SQL & "  AND ProductTypeID in(" & lstrProTypeID & ")"
-            End If
-            If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
-            End If
-            SQL = SQL & " ORDER BY IDCode,NameThai"
-            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "ProductTypeDAO.GetDataTable : " & e.Message)
-        End Try
-        Return dataTable
-    End Function
+    '        SQL = "SELECT ProductTypeID AS ID,IDCode,NameThai "
+    '        SQL = SQL & " FROM ProductType  "
+    '        SQL = SQL & " WHERE IsDelete =0   "
+    '        If pID > 0 Then
+    '            SQL = SQL & "  AND ProductTypeID=" & pID
+    '        End If
+    '        If lstrProTypeID <> "" Then
+    '            SQL = SQL & "  AND ProductTypeID in(" & lstrProTypeID & ")"
+    '        End If
+    '        If pOnlyActive = True Then
+    '            SQL = SQL & "  AND IsInActive = 0"
+    '        End If
+    '        SQL = SQL & " ORDER BY IDCode,NameThai"
+    '        dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "ProductTypeDAO.GetDataTable : " & e.Message)
+    '    End Try
+    '    Return dataTable
+    'End Function
 
     Public Function InitialNotifi() As Boolean
         Dim dataTable As New DataTable()

@@ -120,6 +120,19 @@ Module modGlobal
         ModeImport = 10
     End Enum
 
+    Public Enum EnumStatus
+        Open = 1
+        Close = 2
+        WaitApprove = 3
+        Approve = 4
+        NotApprove = 5
+        Ordering = 6
+        Ordered = 7
+        Receive = 8
+        Billed = 9
+        Waiting = 10
+        Cancel = 11
+    End Enum
 
     Public Enum Privilege
         Visible = 1

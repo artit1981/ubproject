@@ -67,7 +67,7 @@ Public Class frmOpportunity
             mcls.OppContactRoleDAOs = UcContactRole1.GetDAOs
             mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, False, "", pMode, "")
 
-            If Status.EditValue = "Close" Then
+            If Status.EditValue = EnumStatus.Close.ToString Then
                 mcls.IsClose = True
                 mcls.CloseDate = CloseDate.EditValue
                 mcls.RealRevenue = RealRevenue.EditValue
@@ -188,7 +188,7 @@ Public Class frmOpportunity
 
                 'Status
                 Status.Properties.Items.Clear()
-                Status.Properties.Items.Add("Open")
+                Status.Properties.Items.Add(EnumStatus.Open.ToString)
                 Status.SelectedIndex = 0 'Open
                 Status.Enabled = False
                 CloseDate.EditValue = Nothing
@@ -223,7 +223,7 @@ Public Class frmOpportunity
                     'Status
                     Status.Properties.Items.Clear()
                     If mcls.IsClose = True Then
-                        Status.Properties.Items.Add("Close")
+                        Status.Properties.Items.Add(EnumStatus.Close.ToString)
                         Status.Properties.Items.Add("Reopen")
                         Status.SelectedIndex = 0 'Close
                         CloseDate.EditValue = mcls.CloseDate
@@ -231,8 +231,8 @@ Public Class frmOpportunity
                         RealRevenue.EditValue = mcls.RealRevenue
                         CloseRemark.EditValue = mcls.CloseRemark
                     Else 'New
-                        Status.Properties.Items.Add("Open")
-                        Status.Properties.Items.Add("Close")
+                        Status.Properties.Items.Add(EnumStatus.Open.ToString)
+                        Status.Properties.Items.Add(EnumStatus.Close.ToString)
                         Status.SelectedIndex = 0 'Close
                         CloseDate.EditValue = Nothing
                     End If
@@ -443,7 +443,7 @@ Public Class frmOpportunity
 
     Private Sub Status_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Status.SelectedIndexChanged
         'Status        
-        If Status.EditValue = "Close" Then
+        If Status.EditValue = EnumStatus.Close.ToString Then
             CloseDate.EditValue = GetCurrentDate(Nothing)
             CloseDate.Enabled = True
             CloseResult.Enabled = True
@@ -451,7 +451,7 @@ Public Class frmOpportunity
             RealRevenue.Enabled = True
             RealRevenue.EditValue = 0
             CloseRemark.Enabled = True
-        ElseIf Status.EditValue = "Reopen" Or Status.EditValue = "Open" Then
+        ElseIf Status.EditValue = "Reopen" Or Status.EditValue = EnumStatus.Open.ToString Then
             CloseDate.EditValue = Nothing
             CloseDate.Enabled = False
             CloseResult.Enabled = False
