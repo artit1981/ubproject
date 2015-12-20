@@ -1059,9 +1059,6 @@ Public Class ucProductLists
                     rec.SNList = lfrmSN.SnList
                     gridView.SetFocusedRowCellValue("SNList", lfrmSN.SnList)
                 End If
-
-
-
             End If
         End If
     End Sub
