@@ -42,6 +42,7 @@ Partial Class ucProductLists
         Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.KeepMin = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.AdjustUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
@@ -67,11 +68,11 @@ Partial Class ucProductLists
         Me.IsMerge = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Image = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
-        Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
-        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
+        Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -121,7 +122,7 @@ Partial Class ucProductLists
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -289,6 +290,12 @@ Partial Class ucProductLists
         Me.UnitsSpin.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.UnitsSpin.IsFloatValue = False
         Me.UnitsSpin.Name = "UnitsSpin"
+        '
+        'Units
+        '
+        Me.Units.Caption = "Units"
+        Me.Units.FieldName = "Units"
+        Me.Units.Name = "Units"
         '
         'AdjustUnit
         '
@@ -546,6 +553,18 @@ Partial Class ucProductLists
         Me.btnImage.Name = "btnImage"
         Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
+        'UnitMainID
+        '
+        Me.UnitMainID.Caption = "UnitMainID"
+        Me.UnitMainID.FieldName = "UnitMainID"
+        Me.UnitMainID.Name = "UnitMainID"
+        '
+        'RateUnit
+        '
+        Me.RateUnit.Caption = "RateUnit"
+        Me.RateUnit.FieldName = "RateUnit"
+        Me.RateUnit.Name = "RateUnit"
+        '
         'ControlNavigator1
         '
         Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -557,7 +576,8 @@ Partial Class ucProductLists
         Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
         Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
         Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
-        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(-1, 1, True, True, "Insert", "Insert")})
+        Me.ControlNavigator1.Buttons.Remove.Visible = False
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, True, "Insert", "Insert")})
         Me.ControlNavigator1.Location = New System.Drawing.Point(0, 413)
         Me.ControlNavigator1.Name = "ControlNavigator1"
         Me.ControlNavigator1.NavigatableControl = Me.gridControl
@@ -580,23 +600,11 @@ Partial Class ucProductLists
         Me.btnFind.Text = "เพิ่มสินค้า"
         Me.btnFind.ToolTip = "เพิ่มสินค้า"
         '
-        'Units
+        'IsDelete
         '
-        Me.Units.Caption = "Units"
-        Me.Units.FieldName = "Units"
-        Me.Units.Name = "Units"
-        '
-        'UnitMainID
-        '
-        Me.UnitMainID.Caption = "UnitMainID"
-        Me.UnitMainID.FieldName = "UnitMainID"
-        Me.UnitMainID.Name = "UnitMainID"
-        '
-        'RateUnit
-        '
-        Me.RateUnit.Caption = "RateUnit"
-        Me.RateUnit.FieldName = "RateUnit"
-        Me.RateUnit.Name = "RateUnit"
+        Me.IsDelete.Caption = "IsDelete"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
         '
         'ucProductLists
         '
@@ -676,5 +684,6 @@ Partial Class ucProductLists
     Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents UnitMainID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class

@@ -14,21 +14,21 @@
     Private mTotal As Decimal
     Private mLocationDTLID As Long
     Private mDiscount As Decimal
-    'Private mColumnData As ProColumn
     Private mMode As Integer
     Private mKeepMin As Long
     Private mProductNameExt As String
     Private mUnits_Old As Long
-    Dim mLocationDTLID_Old As Long
-    Dim mProductListRefID As Long = 0
-    Dim mSNList As List(Of SnDAO)
-    Dim mSN As String
-    Dim mIsSN As Integer
-    Dim mIsShow As Integer = 1
-    Dim mIsMerge As Integer = 0
-    Dim mUnitMainID As Long = 0
-    Dim mAdjustUnit As Long = 0
-    Dim mRateUnit As Decimal = 1
+    Private mLocationDTLID_Old As Long
+    Private mProductListRefID As Long = 0
+    Private mSNList As List(Of SnDAO)
+    Private mSN As String
+    Private mIsSN As Integer
+    Private mIsShow As Integer = 1
+    Private mIsMerge As Integer = 0
+    Private mUnitMainID As Long = 0
+    Private mAdjustUnit As Long = 0
+    Private mRateUnit As Decimal = 1
+    Private mIsDelete As Integer = 0
 
 
     Public Property IsSelect() As Boolean
@@ -290,6 +290,15 @@
         End Get
         Set(ByVal value As Decimal)
             mRateUnit = value
+        End Set
+    End Property
+
+    Public Property IsDelete() As Integer
+        Get
+            Return mIsDelete
+        End Get
+        Set(ByVal value As Integer)
+            mIsDelete = value
         End Set
     End Property
 End Class

@@ -148,6 +148,7 @@ Public Class ucProductLists
                 rec.IsShow = pPro.IsShow
                 rec.IsMerge = pPro.IsMerge
                 rec.UnitMainID = pPro.UnitMainID
+                rec.IsDelete = pPro.IsDelete
                 'Load S/N
                 rec.IsSN = lclsProduct.IsSerialNumber(pPro.ProductID)
                 rec.SNList = pPro.SNList
@@ -166,7 +167,6 @@ Public Class ucProductLists
                         Next
                     End If
                 End If
-
                 bindingSource1.Add(rec)
             Next
 
@@ -249,6 +249,7 @@ Public Class ucProductLists
                         lDataDAO.IsSN = pProSub.IsSN
                         lDataDAO.IsShow = pProSub.IsShow
                         lDataDAO.IsMerge = pProSub.IsMerge
+                        lDataDAO.IsDelete = pProSub.IsDelete
                         lDataDAO.UnitMainID = pProSub.UnitMainID
                         lDataDAO.AdjustUnit = pProSub.AdjustUnit
                         lDataDAO.RateUnit = pProSub.RateUnit
@@ -259,11 +260,11 @@ Public Class ucProductLists
                         End If
                         lDataDAO.SEQ = lRow + 1
 
-                        If pProSub.IsShow = 1 Then
+                        If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
                             mTotal = mTotal + (lDataDAO.Units * lDataDAO.Price) - (lDataDAO.Discount * lDataDAO.Units)
                         End If
 
-                        If pIsCheckError = True And pProSub.IsShow = 1 Then
+                        If pIsCheckError = True And pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
                             If lDataDAO.ProductCode = "" Then
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุชื่อสินค้า"
                             End If
@@ -275,7 +276,7 @@ Public Class ucProductLists
                             If ConvertNullToZero(lDataDAO.LocationDTLID) <= 0 Then
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุตำแหน่งเก็บ"
                             End If
-                            
+
                             If lDataDAO.IsSN = 1 And (pRefTable = MasterType.StockIn.ToString Or pRefTable = MasterType.UpdateStock.ToString _
                                                 Or (lIsCheckCreditType = True And mStockType = "I")) Then
                                 If IsNothing(lDataDAO.SNList) Then
@@ -354,7 +355,7 @@ Public Class ucProductLists
                         mDataDAOs.Add(lDataDAO)
                         info.ErrorText = ""
 
-                        If pProSub.IsShow = 1 Then
+                        If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
                             lRow = lRow + 1
                         End If
 
@@ -393,7 +394,7 @@ Public Class ucProductLists
         Try
             If Not bindingSource1 Is Nothing > 0 Then
                 For Each pProSub As ProductSubDAO In bindingSource1
-                    If pProSub.ProductID <> 0 And pProSub.IsSelect = True Then
+                    If pProSub.ProductID <> 0 And pProSub.IsSelect = True And pProSub.IsDelete = 0 Then
                         lProSubList.Add(pProSub)
                     End If
                 Next
@@ -465,7 +466,7 @@ Public Class ucProductLists
                     rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
                     rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
                     rec.ModePro = DataMode.ModeEdit
-
+                    rec.IsDelete = ConvertNullToZero(dr("RateUnit"))
                     'Load S/N
                     rec.IsSN = ConvertNullToZero(dr("IsSN"))
                     dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
@@ -549,7 +550,7 @@ Public Class ucProductLists
                 End If
 
             End If
-            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1  ")
+            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 OR [IsDelete]=0  ")
         End With
     End Sub
 
@@ -724,6 +725,7 @@ Public Class ucProductLists
                 End If
                 rec.IsShow = 1
                 rec.IsMerge = 0
+                rec.IsDelete = 0
                 If llIndex = 0 Then
                     bindingSource1.Add(rec)
 
@@ -794,8 +796,6 @@ Public Class ucProductLists
         End Try
     End Function
 
-
-
     Private Sub gridView_CellValueChanged(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles gridView.CellValueChanged
         If e.Column.FieldName = "ProductID" Then
             mlngProductID = e.Value
@@ -808,18 +808,18 @@ Public Class ucProductLists
     Private Sub gridView_CellValueChanging(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles gridView.CellValueChanging
         Dim lIndex As Long = 0
         If e.Column.FieldName = "IsSelect" Then
-            If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "IsMerge")) = 1 Then
-                If Not bindingSource1 Is Nothing > 0 Then
-                    For Each pProSub As ProductSubDAO In bindingSource1
-                        If pProSub.ProductID = ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "ProductID")) Then
-                            If pProSub.IsShow = 0 Then
-                                pProSub.IsSelect = e.Value
-                            End If
-                        End If
-                        lIndex = lIndex + 1
-                    Next
-                End If
-            End If
+            'If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "IsMerge")) = 1 Then
+            '    If Not bindingSource1 Is Nothing Then
+            '        For Each pProSub As ProductSubDAO In bindingSource1
+            '            If pProSub.ProductID = ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "ProductID")) Then
+            '                If pProSub.IsShow = 0 Then
+            '                    pProSub.IsSelect = e.Value
+            '                End If
+            '            End If
+            '            lIndex = lIndex + 1
+            '        Next
+            '    End If
+            'End If
         End If
     End Sub
 
@@ -936,11 +936,11 @@ Public Class ucProductLists
 
         If rowHandle < 0 Then Exit Sub
         mlngProductID = ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "ProductID"))
-        If ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "IsMerge")) = 1 Then
-            ControlNavigator1.Buttons.Remove.Enabled = False
-        Else
-            ControlNavigator1.Buttons.Remove.Enabled = True
-        End If
+        'If ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "IsMerge")) = 1 Then
+        '    ControlNavigator1.Buttons.Remove.Enabled = False
+        'Else
+        '    ControlNavigator1.Buttons.Remove.Enabled = True
+        'End If
         RaiseEvent SelectedProduct(mlngProductID)
     End Sub
 
@@ -1068,18 +1068,29 @@ Public Class ucProductLists
     End Sub
 
     Private Sub ControlNavigator1_ButtonClick(sender As System.Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
+        view.GridControl.Focus()
+        Dim index As Integer = view.FocusedRowHandle
         Select Case e.Button.Tag
             Case "Insert"
-                Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
-                view.GridControl.Focus()
-                Dim index As Integer = view.FocusedRowHandle
                 Dim rec As New ProductSub
                 bindingSource1.Insert(index, rec)
                 gridControl.DataSource = bindingSource1
                 gridView.RefreshData()
                 gridControl.RefreshDataSource()
+            Case "Remove"
+                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    If mMode = DataMode.ModeNew Then
+                        gridView.DeleteSelectedRows()
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    Else
+                        gridView.SetRowCellValue(index, "IsDelete", 1)
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    End If
+                End If
         End Select
-
     End Sub
 
     Private Sub btnImage_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles btnImage.ButtonClick

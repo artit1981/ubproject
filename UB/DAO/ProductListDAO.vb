@@ -23,18 +23,19 @@ Public Class ProductListDAO
     Private mIsConfirm As Boolean
     Private mKeepMin As Long
     Private mProductNameExt As String
-    Dim mUnits_Old As Long
-    Dim mProductCode As String
-    Dim mUnitName As String
-    Dim mLocationDTLID_Old As Long
-    Dim mProductListRefID As Long
-    Dim mSNList As List(Of SnDAO)
-    Dim mIsSN As Integer
-    Dim mIsShow As Integer = 1
-    Dim mIsMerge As Integer = 0
-    Dim mUnitMainID As Long = 0
-    Dim mAdjustUnit As Long = 0
-    Dim mRateUnit As Decimal = 1
+    Private mUnits_Old As Long
+    Private mProductCode As String
+    Private mUnitName As String
+    Private mLocationDTLID_Old As Long
+    Private mProductListRefID As Long
+    Private mSNList As List(Of SnDAO)
+    Private mIsSN As Integer
+    Private mIsShow As Integer = 1
+    Private mIsMerge As Integer = 0
+    Private mUnitMainID As Long = 0
+    Private mAdjustUnit As Long = 0
+    Private mRateUnit As Decimal = 1
+    Private mIsDelete As Integer = 0
 
     Public ReadOnly Property UnitDAO() As MasterDAO
         Get
@@ -324,6 +325,14 @@ Public Class ProductListDAO
             mRateUnit = value
         End Set
     End Property
+    Public Property IsDelete() As Integer
+        Get
+            Return mIsDelete
+        End Get
+        Set(ByVal Value As Integer)
+            mIsDelete = Value
+        End Set
+    End Property
 #End Region
 
     Public Function GetDataTable(ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal tr As SqlTransaction, ByVal pIsCheckConfirm As Boolean _
@@ -337,7 +346,7 @@ Public Class ProductListDAO
             SQL = "SELECT  ProductList.ProductID,ProductList.ProductListID AS ID,ProductList.SEQ  , Product.Remark,ProductList.RefID,ProductList.RefTable"
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.Units,ProductList.KeepMin "
             SQL = SQL & " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
-            SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit"
+            SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
             SQL = SQL & " FROM ProductList"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
