@@ -22,40 +22,71 @@ Partial Class frmOrderDTL
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOrderDTL))
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SelectCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
-        Me.PriceStandard = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.Price1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.Price2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.Price3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.Unit = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PriceInform = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.ProductNames = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductNameBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.LocationDTLID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
+        Me.UnitName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.KeepMin = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AdjustUnit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.Price = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.Discount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.DiscountCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
-        Me.DiscountOld = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PriceInformOld = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.InformPriceID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Total = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TotalEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ModePro = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductNameExt = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Units_Old = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LocationDTLID_Old = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductListRefID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SN = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemButtonSN = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.SNList = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsSN = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsShow = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsMerge = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Image = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.RepositoryItemMemoExEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit()
+        Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ProductNameBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitsSpin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CostCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemMemoExEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -75,20 +106,22 @@ Partial Class frmOrderDTL
         Me.gridControl.Location = New System.Drawing.Point(2, 2)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
-        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1, Me.DiscountCalcEdit1, Me.RepositoryItemMemoExEdit1, Me.RepositoryItemMemoEdit1, Me.btnImage})
+        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
         Me.gridControl.Size = New System.Drawing.Size(597, 265)
-        Me.gridControl.TabIndex = 291
+        Me.gridControl.TabIndex = 10
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Unit, Me.PriceInform, Me.Discount, Me.DiscountOld, Me.PriceInformOld, Me.InformPriceID, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
         Me.gridView.GridControl = Me.gridControl
-        Me.gridView.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", Me.Price1, "")})
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
         Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.gridView.OptionsFind.AlwaysVisible = True
+        Me.gridView.OptionsDetail.AllowZoomDetail = False
+        Me.gridView.OptionsDetail.EnableMasterViewMode = False
+        Me.gridView.OptionsDetail.ShowDetailTabs = False
+        Me.gridView.OptionsDetail.SmartDetailExpand = False
         Me.gridView.OptionsLayout.Columns.AddNewColumns = False
         Me.gridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.gridView.OptionsMenu.EnableColumnMenu = False
@@ -100,13 +133,6 @@ Partial Class frmOrderDTL
         Me.gridView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
-        'ProductID
-        '
-        Me.ProductID.Caption = "GridColumn1"
-        Me.ProductID.FieldName = "ProductID"
-        Me.ProductID.Name = "ProductID"
-        Me.ProductID.OptionsColumn.TabStop = False
-        '
         'IsSelect
         '
         Me.IsSelect.AppearanceCell.Options.UseTextOptions = True
@@ -114,176 +140,215 @@ Partial Class frmOrderDTL
         Me.IsSelect.AppearanceHeader.Options.UseTextOptions = True
         Me.IsSelect.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.IsSelect.Caption = "เลือก"
+        Me.IsSelect.ColumnEdit = Me.SelectCheckEdit2
         Me.IsSelect.FieldName = "IsSelect"
         Me.IsSelect.MaxWidth = 50
+        Me.IsSelect.MinWidth = 40
         Me.IsSelect.Name = "IsSelect"
-        Me.IsSelect.UnboundType = DevExpress.Data.UnboundColumnType.[Boolean]
-        Me.IsSelect.Width = 50
+        Me.IsSelect.Visible = True
+        Me.IsSelect.VisibleIndex = 0
+        Me.IsSelect.Width = 41
+        '
+        'SelectCheckEdit2
+        '
+        Me.SelectCheckEdit2.AutoHeight = False
+        Me.SelectCheckEdit2.Name = "SelectCheckEdit2"
+        '
+        'ID
+        '
+        Me.ID.Caption = "ID"
+        Me.ID.FieldName = "ID"
+        Me.ID.Name = "ID"
+        '
+        'ProductID
+        '
+        Me.ProductID.Caption = "GridColumn1"
+        Me.ProductID.FieldName = "ProductID"
+        Me.ProductID.Name = "ProductID"
         '
         'ProductCode
         '
-        Me.ProductCode.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ProductCode.AppearanceCell.Options.UseBackColor = True
         Me.ProductCode.AppearanceHeader.Options.UseTextOptions = True
         Me.ProductCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.ProductCode.Caption = "รหัสสินค้า"
+        Me.ProductCode.ColumnEdit = Me.ProductBtn
         Me.ProductCode.FieldName = "ProductCode"
-        Me.ProductCode.MaxWidth = 150
-        Me.ProductCode.MinWidth = 80
+        Me.ProductCode.MaxWidth = 160
+        Me.ProductCode.MinWidth = 90
         Me.ProductCode.Name = "ProductCode"
-        Me.ProductCode.OptionsColumn.ReadOnly = True
-        Me.ProductCode.OptionsColumn.TabStop = False
         Me.ProductCode.Visible = True
-        Me.ProductCode.VisibleIndex = 0
-        Me.ProductCode.Width = 80
+        Me.ProductCode.VisibleIndex = 1
+        Me.ProductCode.Width = 91
         '
-        'ProductName
+        'ProductBtn
         '
-        Me.ProductName.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ProductName.AppearanceCell.Options.UseBackColor = True
-        Me.ProductName.AppearanceHeader.Options.UseTextOptions = True
-        Me.ProductName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.ProductName.Caption = "ชื่อสินค้า"
-        Me.ProductName.ColumnEdit = Me.RepositoryItemMemoEdit1
-        Me.ProductName.FieldName = "ProductName"
-        Me.ProductName.MaxWidth = 250
-        Me.ProductName.MinWidth = 200
-        Me.ProductName.Name = "ProductName"
-        Me.ProductName.OptionsColumn.ReadOnly = True
-        Me.ProductName.OptionsColumn.TabStop = False
-        Me.ProductName.Visible = True
-        Me.ProductName.VisibleIndex = 1
-        Me.ProductName.Width = 200
+        Me.ProductBtn.AutoHeight = False
+        Me.ProductBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.ProductBtn.Name = "ProductBtn"
         '
-        'RepositoryItemMemoEdit1
+        'ProductNames
         '
-        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
+        Me.ProductNames.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.ProductNames.AppearanceCell.Options.UseBackColor = True
+        Me.ProductNames.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductNames.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductNames.Caption = "ชื่อสินค้า"
+        Me.ProductNames.ColumnEdit = Me.ProductNameBtn
+        Me.ProductNames.FieldName = "ProductNames"
+        Me.ProductNames.MinWidth = 140
+        Me.ProductNames.Name = "ProductNames"
+        Me.ProductNames.OptionsColumn.ReadOnly = True
+        Me.ProductNames.Visible = True
+        Me.ProductNames.VisibleIndex = 2
+        Me.ProductNames.Width = 182
         '
-        'PriceStandard
+        'ProductNameBtn
         '
-        Me.PriceStandard.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.PriceStandard.AppearanceCell.Options.UseBackColor = True
-        Me.PriceStandard.AppearanceCell.Options.UseTextOptions = True
-        Me.PriceStandard.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.PriceStandard.AppearanceHeader.Options.UseTextOptions = True
-        Me.PriceStandard.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.PriceStandard.Caption = "ราคามาตรฐาน"
-        Me.PriceStandard.DisplayFormat.FormatString = "n2"
-        Me.PriceStandard.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.PriceStandard.FieldName = "PriceStandard"
-        Me.PriceStandard.MaxWidth = 150
-        Me.PriceStandard.MinWidth = 100
-        Me.PriceStandard.Name = "PriceStandard"
-        Me.PriceStandard.OptionsColumn.ReadOnly = True
-        Me.PriceStandard.OptionsColumn.TabStop = False
-        Me.PriceStandard.Visible = True
-        Me.PriceStandard.VisibleIndex = 2
-        Me.PriceStandard.Width = 100
+        Me.ProductNameBtn.AutoHeight = False
+        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, True)})
+        Me.ProductNameBtn.Name = "ProductNameBtn"
         '
-        'Price1
+        'LocationDTLID
         '
-        Me.Price1.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Price1.AppearanceCell.Options.UseBackColor = True
-        Me.Price1.AppearanceCell.Options.UseTextOptions = True
-        Me.Price1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.Price1.AppearanceHeader.Options.UseTextOptions = True
-        Me.Price1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Price1.Caption = "ราคา 1"
-        Me.Price1.DisplayFormat.FormatString = "n2"
-        Me.Price1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Price1.FieldName = "Price1"
-        Me.Price1.MaxWidth = 150
-        Me.Price1.MinWidth = 100
-        Me.Price1.Name = "Price1"
-        Me.Price1.OptionsColumn.AllowEdit = False
-        Me.Price1.OptionsColumn.ReadOnly = True
-        Me.Price1.OptionsColumn.TabStop = False
-        Me.Price1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:#,##0 .00; ( #,##0.00 ); """"""""}")})
-        Me.Price1.Visible = True
-        Me.Price1.VisibleIndex = 3
-        Me.Price1.Width = 100
+        Me.LocationDTLID.AppearanceHeader.Options.UseTextOptions = True
+        Me.LocationDTLID.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.LocationDTLID.Caption = "ตำแหน่งเก็บ"
+        Me.LocationDTLID.ColumnEdit = Me.LocationDTLIDLookUpEdit1
+        Me.LocationDTLID.FieldName = "LocationDTLID"
+        Me.LocationDTLID.MaxWidth = 100
+        Me.LocationDTLID.MinWidth = 70
+        Me.LocationDTLID.Name = "LocationDTLID"
+        Me.LocationDTLID.Visible = True
+        Me.LocationDTLID.VisibleIndex = 3
+        Me.LocationDTLID.Width = 100
         '
-        'Price2
+        'LocationDTLIDLookUpEdit1
         '
-        Me.Price2.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Price2.AppearanceCell.Options.UseBackColor = True
-        Me.Price2.AppearanceCell.Options.UseTextOptions = True
-        Me.Price2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.Price2.AppearanceHeader.Options.UseTextOptions = True
-        Me.Price2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Price2.Caption = "ราคา 2"
-        Me.Price2.DisplayFormat.FormatString = "n2"
-        Me.Price2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Price2.FieldName = "Price2"
-        Me.Price2.MaxWidth = 150
-        Me.Price2.MinWidth = 100
-        Me.Price2.Name = "Price2"
-        Me.Price2.OptionsColumn.ReadOnly = True
-        Me.Price2.OptionsColumn.TabStop = False
-        Me.Price2.Visible = True
-        Me.Price2.VisibleIndex = 4
-        Me.Price2.Width = 100
+        Me.LocationDTLIDLookUpEdit1.AutoHeight = False
+        Me.LocationDTLIDLookUpEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "คลังสินค้า", 25, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", 40, "ตำแหน่ง"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "Name6", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default])})
+        Me.LocationDTLIDLookUpEdit1.DisplayMember = "LocationDTL"
+        Me.LocationDTLIDLookUpEdit1.Name = "LocationDTLIDLookUpEdit1"
+        Me.LocationDTLIDLookUpEdit1.NullText = ""
+        Me.LocationDTLIDLookUpEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
+        Me.LocationDTLIDLookUpEdit1.ValueMember = "LocationDTLID"
         '
-        'Price3
+        'UnitName
         '
-        Me.Price3.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Price3.AppearanceCell.Options.UseBackColor = True
-        Me.Price3.AppearanceCell.Options.UseTextOptions = True
-        Me.Price3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.Price3.AppearanceHeader.Options.UseTextOptions = True
-        Me.Price3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Price3.Caption = "ราคา 3"
-        Me.Price3.DisplayFormat.FormatString = "n2"
-        Me.Price3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Price3.FieldName = "Price3"
-        Me.Price3.MaxWidth = 150
-        Me.Price3.MinWidth = 100
-        Me.Price3.Name = "Price3"
-        Me.Price3.OptionsColumn.ReadOnly = True
-        Me.Price3.OptionsColumn.TabStop = False
-        Me.Price3.Visible = True
-        Me.Price3.VisibleIndex = 5
-        Me.Price3.Width = 100
+        Me.UnitName.AppearanceHeader.Options.UseTextOptions = True
+        Me.UnitName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.UnitName.Caption = "หน่วยนับ"
+        Me.UnitName.ColumnEdit = Me.UnitBtn
+        Me.UnitName.FieldName = "UnitName"
+        Me.UnitName.MaxWidth = 90
+        Me.UnitName.MinWidth = 60
+        Me.UnitName.Name = "UnitName"
+        Me.UnitName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor
+        Me.UnitName.Visible = True
+        Me.UnitName.VisibleIndex = 4
+        Me.UnitName.Width = 90
         '
-        'Unit
+        'UnitBtn
         '
-        Me.Unit.AppearanceCell.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.Unit.AppearanceCell.Options.UseBackColor = True
-        Me.Unit.AppearanceCell.Options.UseTextOptions = True
-        Me.Unit.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Unit.AppearanceHeader.Options.UseTextOptions = True
-        Me.Unit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Unit.Caption = "ยอดคงเหลือ"
-        Me.Unit.DisplayFormat.FormatString = "n0"
-        Me.Unit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Unit.FieldName = "Unit"
-        Me.Unit.MaxWidth = 150
-        Me.Unit.MinWidth = 100
-        Me.Unit.Name = "Unit"
-        Me.Unit.OptionsColumn.TabStop = False
-        Me.Unit.Visible = True
-        Me.Unit.VisibleIndex = 6
-        Me.Unit.Width = 100
+        Me.UnitBtn.AutoHeight = False
+        Me.UnitBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitBtn.Name = "UnitBtn"
         '
-        'PriceInform
+        'KeepMin
         '
-        Me.PriceInform.AppearanceCell.BackColor = System.Drawing.Color.White
-        Me.PriceInform.AppearanceCell.Options.UseBackColor = True
-        Me.PriceInform.AppearanceCell.Options.UseTextOptions = True
-        Me.PriceInform.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.PriceInform.AppearanceHeader.Options.UseTextOptions = True
-        Me.PriceInform.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.PriceInform.Caption = "ราคาแจ้ง"
-        Me.PriceInform.ColumnEdit = Me.PriceCalcEdit1
-        Me.PriceInform.DisplayFormat.FormatString = "n2"
-        Me.PriceInform.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.PriceInform.FieldName = "PriceInform"
-        Me.PriceInform.MaxWidth = 150
-        Me.PriceInform.MinWidth = 100
-        Me.PriceInform.Name = "PriceInform"
-        Me.PriceInform.Visible = True
-        Me.PriceInform.VisibleIndex = 7
-        Me.PriceInform.Width = 100
+        Me.KeepMin.AppearanceCell.Options.UseTextOptions = True
+        Me.KeepMin.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.KeepMin.AppearanceHeader.Options.UseTextOptions = True
+        Me.KeepMin.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.KeepMin.Caption = "จำนวนต่ำสุด"
+        Me.KeepMin.ColumnEdit = Me.UnitsSpin
+        Me.KeepMin.DisplayFormat.FormatString = "n0"
+        Me.KeepMin.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.KeepMin.FieldName = "KeepMin"
+        Me.KeepMin.MaxWidth = 120
+        Me.KeepMin.MinWidth = 50
+        Me.KeepMin.Name = "KeepMin"
+        Me.KeepMin.ToolTip = "จำนวนต่ำสุด"
+        Me.KeepMin.Visible = True
+        Me.KeepMin.VisibleIndex = 5
+        Me.KeepMin.Width = 50
+        '
+        'UnitsSpin
+        '
+        Me.UnitsSpin.AutoHeight = False
+        Me.UnitsSpin.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitsSpin.EditFormat.FormatString = "n0"
+        Me.UnitsSpin.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.UnitsSpin.IsFloatValue = False
+        Me.UnitsSpin.Name = "UnitsSpin"
+        '
+        'Units
+        '
+        Me.Units.Caption = "Units"
+        Me.Units.FieldName = "Units"
+        Me.Units.Name = "Units"
+        '
+        'AdjustUnit
+        '
+        Me.AdjustUnit.AppearanceHeader.Options.UseTextOptions = True
+        Me.AdjustUnit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.AdjustUnit.Caption = "จำนวน"
+        Me.AdjustUnit.ColumnEdit = Me.UnitsSpin
+        Me.AdjustUnit.DisplayFormat.FormatString = "n0"
+        Me.AdjustUnit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AdjustUnit.FieldName = "AdjustUnit"
+        Me.AdjustUnit.MaxWidth = 100
+        Me.AdjustUnit.MinWidth = 50
+        Me.AdjustUnit.Name = "AdjustUnit"
+        Me.AdjustUnit.Visible = True
+        Me.AdjustUnit.VisibleIndex = 6
+        Me.AdjustUnit.Width = 62
+        '
+        'Cost
+        '
+        Me.Cost.AppearanceHeader.Options.UseTextOptions = True
+        Me.Cost.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Cost.Caption = "ต้นทุน"
+        Me.Cost.ColumnEdit = Me.CostCalcEdit1
+        Me.Cost.DisplayFormat.FormatString = "n2"
+        Me.Cost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Cost.FieldName = "Cost"
+        Me.Cost.MaxWidth = 120
+        Me.Cost.MinWidth = 90
+        Me.Cost.Name = "Cost"
+        Me.Cost.Visible = True
+        Me.Cost.VisibleIndex = 7
+        Me.Cost.Width = 91
+        '
+        'CostCalcEdit1
+        '
+        Me.CostCalcEdit1.AutoHeight = False
+        Me.CostCalcEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.CostCalcEdit1.DisplayFormat.FormatString = "n2"
+        Me.CostCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CostCalcEdit1.EditFormat.FormatString = "n2"
+        Me.CostCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CostCalcEdit1.Name = "CostCalcEdit1"
+        '
+        'Price
+        '
+        Me.Price.AppearanceCell.BackColor = System.Drawing.Color.White
+        Me.Price.AppearanceCell.Options.UseBackColor = True
+        Me.Price.AppearanceCell.Options.UseTextOptions = True
+        Me.Price.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Price.AppearanceHeader.Options.UseTextOptions = True
+        Me.Price.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Price.Caption = "ราคา"
+        Me.Price.ColumnEdit = Me.PriceCalcEdit1
+        Me.Price.DisplayFormat.FormatString = "n2"
+        Me.Price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Price.FieldName = "Price"
+        Me.Price.MaxWidth = 120
+        Me.Price.MinWidth = 80
+        Me.Price.Name = "Price"
+        Me.Price.Visible = True
+        Me.Price.VisibleIndex = 8
+        Me.Price.Width = 101
         '
         'PriceCalcEdit1
         '
@@ -298,45 +363,162 @@ Partial Class frmOrderDTL
         '
         'Discount
         '
-        Me.Discount.AppearanceCell.Options.UseTextOptions = True
-        Me.Discount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.Discount.AppearanceHeader.Options.UseTextOptions = True
         Me.Discount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Discount.Caption = "ส่วนลด"
+        Me.Discount.Caption = "ส่วนลด/หน่วย"
         Me.Discount.ColumnEdit = Me.DiscountCalcEdit1
         Me.Discount.DisplayFormat.FormatString = "n2"
         Me.Discount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.Discount.FieldName = "Discount"
-        Me.Discount.MaxWidth = 150
-        Me.Discount.MinWidth = 100
+        Me.Discount.MaxWidth = 100
+        Me.Discount.MinWidth = 60
         Me.Discount.Name = "Discount"
         Me.Discount.Visible = True
-        Me.Discount.VisibleIndex = 8
-        Me.Discount.Width = 100
+        Me.Discount.VisibleIndex = 9
+        Me.Discount.Width = 71
         '
         'DiscountCalcEdit1
         '
         Me.DiscountCalcEdit1.AutoHeight = False
         Me.DiscountCalcEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DiscountCalcEdit1.DisplayFormat.FormatString = "n2"
+        Me.DiscountCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.DiscountCalcEdit1.EditFormat.FormatString = "n2"
+        Me.DiscountCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.DiscountCalcEdit1.Name = "DiscountCalcEdit1"
+        Me.DiscountCalcEdit1.Precision = 2
         '
-        'DiscountOld
+        'Total
         '
-        Me.DiscountOld.Caption = "DiscountOld"
-        Me.DiscountOld.FieldName = "DiscountOld"
-        Me.DiscountOld.Name = "DiscountOld"
+        Me.Total.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Total.AppearanceCell.Options.UseBackColor = True
+        Me.Total.AppearanceCell.Options.UseTextOptions = True
+        Me.Total.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Total.AppearanceHeader.Options.UseTextOptions = True
+        Me.Total.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Total.Caption = "จำนวนเงิน"
+        Me.Total.ColumnEdit = Me.TotalEdit
+        Me.Total.DisplayFormat.FormatString = "n2"
+        Me.Total.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Total.FieldName = "Total"
+        Me.Total.MaxWidth = 150
+        Me.Total.MinWidth = 80
+        Me.Total.Name = "Total"
+        Me.Total.OptionsColumn.AllowEdit = False
+        Me.Total.OptionsColumn.ReadOnly = True
+        Me.Total.OptionsColumn.TabStop = False
+        Me.Total.Visible = True
+        Me.Total.VisibleIndex = 10
+        Me.Total.Width = 101
         '
-        'PriceInformOld
+        'TotalEdit
         '
-        Me.PriceInformOld.Caption = "PriceInformOld"
-        Me.PriceInformOld.FieldName = "PriceInformOld"
-        Me.PriceInformOld.Name = "PriceInformOld"
+        Me.TotalEdit.AutoHeight = False
+        Me.TotalEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TotalEdit.Name = "TotalEdit"
         '
-        'InformPriceID
+        'Remark
         '
-        Me.InformPriceID.Caption = "InformPriceID"
-        Me.InformPriceID.FieldName = "InformPriceID"
-        Me.InformPriceID.Name = "InformPriceID"
+        Me.Remark.AppearanceHeader.Options.UseTextOptions = True
+        Me.Remark.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Remark.Caption = "รายละเอียด"
+        Me.Remark.FieldName = "Remark"
+        Me.Remark.MinWidth = 50
+        Me.Remark.Name = "Remark"
+        Me.Remark.Visible = True
+        Me.Remark.VisibleIndex = 11
+        Me.Remark.Width = 50
+        '
+        'SEQ
+        '
+        Me.SEQ.Caption = "SEQ"
+        Me.SEQ.FieldName = "SEQ"
+        Me.SEQ.Name = "SEQ"
+        '
+        'UnitID
+        '
+        Me.UnitID.Caption = "GridColumn2"
+        Me.UnitID.FieldName = "UnitID"
+        Me.UnitID.Name = "UnitID"
+        '
+        'ModePro
+        '
+        Me.ModePro.Caption = "ModePro"
+        Me.ModePro.FieldName = "ModePro"
+        Me.ModePro.Name = "ModePro"
+        '
+        'ProductNameExt
+        '
+        Me.ProductNameExt.Caption = "GridColumn1"
+        Me.ProductNameExt.FieldName = "ProductNameExt"
+        Me.ProductNameExt.Name = "ProductNameExt"
+        '
+        'Units_Old
+        '
+        Me.Units_Old.Caption = "GridColumn1"
+        Me.Units_Old.FieldName = "Units_Old"
+        Me.Units_Old.Name = "Units_Old"
+        '
+        'LocationDTLID_Old
+        '
+        Me.LocationDTLID_Old.Caption = "LocationDTLID_Old"
+        Me.LocationDTLID_Old.FieldName = "LocationDTLID_Old"
+        Me.LocationDTLID_Old.Name = "LocationDTLID_Old"
+        '
+        'ProductListRefID
+        '
+        Me.ProductListRefID.Caption = "GridColumn1"
+        Me.ProductListRefID.FieldName = "ProductListRefID"
+        Me.ProductListRefID.Name = "ProductListRefID"
+        '
+        'SN
+        '
+        Me.SN.AppearanceHeader.Options.UseTextOptions = True
+        Me.SN.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.SN.Caption = "S/N"
+        Me.SN.ColumnEdit = Me.RepositoryItemButtonSN
+        Me.SN.FieldName = "SN"
+        Me.SN.MaxWidth = 30
+        Me.SN.Name = "SN"
+        Me.SN.OptionsColumn.ReadOnly = True
+        Me.SN.Visible = True
+        Me.SN.VisibleIndex = 12
+        Me.SN.Width = 23
+        '
+        'RepositoryItemButtonSN
+        '
+        Me.RepositoryItemButtonSN.AutoHeight = False
+        Me.RepositoryItemButtonSN.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.RepositoryItemButtonSN.Name = "RepositoryItemButtonSN"
+        Me.RepositoryItemButtonSN.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'SNList
+        '
+        Me.SNList.Caption = "SNList"
+        Me.SNList.FieldName = "SNList"
+        Me.SNList.Name = "SNList"
+        '
+        'IsSN
+        '
+        Me.IsSN.Caption = "IsSN"
+        Me.IsSN.FieldName = "IsSN"
+        Me.IsSN.Name = "IsSN"
+        '
+        'IsShow
+        '
+        Me.IsShow.Caption = "IsShow"
+        Me.IsShow.FieldName = "IsShow"
+        Me.IsShow.MaxWidth = 20
+        Me.IsShow.Name = "IsShow"
+        Me.IsShow.Width = 20
+        '
+        'IsMerge
+        '
+        Me.IsMerge.Caption = "GridColumn1"
+        Me.IsMerge.FieldName = "IsMerge"
+        Me.IsMerge.MaxWidth = 20
+        Me.IsMerge.Name = "IsMerge"
+        Me.IsMerge.Width = 20
         '
         'Image
         '
@@ -349,29 +531,36 @@ Partial Class frmOrderDTL
         Me.Image.MinWidth = 30
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 9
+        Me.Image.VisibleIndex = 13
         Me.Image.Width = 38
         '
         'btnImage
         '
+        Me.btnImage.Appearance.Image = CType(resources.GetObject("btnImage.Appearance.Image"), System.Drawing.Image)
+        Me.btnImage.Appearance.Options.UseImage = True
         Me.btnImage.AutoHeight = False
-        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("btnImage.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
         Me.btnImage.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
         Me.btnImage.Name = "btnImage"
         Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
-        'ProductBtn
+        'UnitMainID
         '
-        Me.ProductBtn.AutoHeight = False
-        Me.ProductBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.ProductBtn.Name = "ProductBtn"
-        Me.ProductBtn.ValidateOnEnterKey = True
+        Me.UnitMainID.Caption = "UnitMainID"
+        Me.UnitMainID.FieldName = "UnitMainID"
+        Me.UnitMainID.Name = "UnitMainID"
         '
-        'RepositoryItemMemoExEdit1
+        'RateUnit
         '
-        Me.RepositoryItemMemoExEdit1.AutoHeight = False
-        Me.RepositoryItemMemoExEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RepositoryItemMemoExEdit1.Name = "RepositoryItemMemoExEdit1"
+        Me.RateUnit.Caption = "RateUnit"
+        Me.RateUnit.FieldName = "RateUnit"
+        Me.RateUnit.Name = "RateUnit"
+        '
+        'IsDelete
+        '
+        Me.IsDelete.Caption = "IsDelete"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
         '
         'frmOrderDTL
         '
@@ -386,37 +575,65 @@ Partial Class frmOrderDTL
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ProductNameBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitsSpin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CostCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemMemoExEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
     Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsSelect As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SelectCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents ID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
-    Friend WithEvents PriceStandard As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents Price1 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents Price2 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents Price3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents Unit As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents PriceInform As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductNameBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents LocationDTLID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LocationDTLIDLookUpEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
+    Friend WithEvents UnitName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents KeepMin As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitsSpin As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents AdjustUnit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Cost As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CostCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents Price As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Friend WithEvents Discount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DiscountCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
-    Friend WithEvents DiscountOld As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents PriceInformOld As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents InformPriceID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Total As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TotalEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents Remark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SEQ As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ModePro As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductNameExt As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Units_Old As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LocationDTLID_Old As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductListRefID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SN As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemButtonSN As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents SNList As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents IsSN As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents IsShow As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents IsMerge As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Image As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnImage As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents RepositoryItemMemoExEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit
+    Friend WithEvents UnitMainID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
 End Class

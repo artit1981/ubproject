@@ -30,7 +30,45 @@
     Private mRateUnit As Decimal = 1
     Private mIsDelete As Integer = 0
 
+    Public Property ProductCode() As String
+        Get
+            Return mProductCode
+        End Get
+        Set(ByVal value As String)
+            mProductCode = value
+        End Set
+    End Property
 
+    Public Property ProductNames() As String
+        Get
+            Return mProductName
+        End Get
+        Set(ByVal value As String)
+            mProductName = value
+        End Set
+    End Property
+
+    Public Property LocationDTLID() As Long
+        Get
+            Return mLocationDTLID
+        End Get
+        Set(ByVal value As Long)
+            mLocationDTLID = value
+        End Set
+    End Property
+
+    Public Property UnitName() As String
+        Get
+            Return mUnitName
+        End Get
+        Set(ByVal value As String)
+            mUnitName = value
+        End Set
+    End Property
+
+
+
+    '-----------------
     Public Property IsSelect() As Boolean
         Get
             Return mIsSelect
@@ -51,14 +89,7 @@
 
     End Property
 
-    Public Property ProductNames() As String
-        Get
-            Return mProductName
-        End Get
-        Set(ByVal value As String)
-            mProductName = value
-        End Set
-    End Property
+   
 
     Public Property ProductNameExt() As String
         Get
@@ -69,14 +100,6 @@
         End Set
 
     End Property
-    Public Property ProductCode() As String
-        Get
-            Return mProductCode
-        End Get
-        Set(ByVal value As String)
-            mProductCode = value
-        End Set
-    End Property
 
     Public Property ProductID() As Long
         Get
@@ -84,16 +107,6 @@
         End Get
         Set(ByVal Value As Long)
             mProductID = Value
-        End Set
-    End Property
-
-
-    Public Property UnitName() As String
-        Get
-            Return mUnitName
-        End Get
-        Set(ByVal value As String)
-            mUnitName = value
         End Set
     End Property
 
@@ -186,14 +199,7 @@
         End Set
     End Property
 
-    Public Property LocationDTLID() As Long
-        Get
-            Return mLocationDTLID
-        End Get
-        Set(ByVal value As Long)
-            mLocationDTLID = value
-        End Set
-    End Property
+
 
     Public Property LocationDTLID_Old() As Long
         Get

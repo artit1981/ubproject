@@ -198,7 +198,7 @@ Public Class SnDAO
     End Function
 
 
-    Public Sub SetStatusBySN(ByVal tr As SqlTransaction, ByVal pProductID As Long, ByVal pSN As String, ByVal pStatus As String)
+    Public Sub SetStatusBySN(ByVal tr As SqlTransaction, ByVal pProductID As Long, ByVal pSN As String, ByVal pStatus As String, ByVal pSNID As Long)
         Dim SQL As String
         SQL = ""
         Try
@@ -207,6 +207,9 @@ Public Class SnDAO
             SQL = SQL & " WHERE SerialNumberNo='" & pSN & "'"
             SQL = SQL & " AND ProductID=" & pProductID
             SQL = SQL & " AND Status <> 'None'  and IsDelete=0"
+            If pSNID > 0 Then
+                SQL = SQL & " AND SerialNumberID=" & pSNID
+            End If
             gConnection.executeInsertQuery(SQL, tr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "SnDAO.SetStatusBySN : " & e.Message)
