@@ -136,7 +136,7 @@ Public Class ucProductLists
                 If pMode = DataMode.ModeNew Then
                     rec.Units_Old = 0
                 Else
-                    rec.Units_Old = pPro.Units
+                    rec.Units_Old = pPro.AdjustUnit
                 End If
 
                 rec.ModePro = pPro.ModePro
@@ -191,6 +191,8 @@ Public Class ucProductLists
         Dim lProductListFail As ProductListDAO
         Dim lUnitDiff As Long
         Dim lSnIDList As String = "" ' กันกรณีขายสินค้าเดี่ยวกันใน 1 บิล จะตัด SN ซ้ำเพราะ DB ยังไม่ Commit
+        Dim lIsChangeProduct As Boolean = False
+
         pProListStockFail = New List(Of ProductListDAO)
         Try
             mDataDAOs = New List(Of ProductListDAO)
@@ -355,6 +357,18 @@ Public Class ucProductLists
                         mDataDAOs.Add(lDataDAO)
                         info.ErrorText = ""
 
+                        If mIsError = "" And mMode = DataMode.ModeEdit Then
+                            If lDataDAO.ID = 0 Then
+                                mIsError = "PRODUCTCHANGE"
+                            ElseIf lDataDAO.LocationDTLID <> lDataDAO.LocationDTLID_Old Then
+                                mIsError = "PRODUCTCHANGE"
+                            ElseIf lDataDAO.AdjustUnit <> lDataDAO.Units_Old Then
+                                mIsError = "PRODUCTCHANGE"
+                            ElseIf lDataDAO.IsDelete = 1 Then
+                                mIsError = "PRODUCTCHANGE"
+                            End If
+                        End If
+
                         If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
                             lRow = lRow + 1
                         End If
@@ -436,7 +450,7 @@ Public Class ucProductLists
                         rec.Units_Old = 0
                     Else
                         rec.ID = dr("ID")
-                        rec.Units_Old = ConvertNullToZero(dr("Units"))
+                        rec.Units_Old = ConvertNullToZero(dr("AdjustUnit"))
                     End If
                     If pIsLoadFromRefOrder = True Then
                         rec.ProductListRefID = dr("ID")

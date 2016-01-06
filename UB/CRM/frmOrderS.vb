@@ -1370,7 +1370,16 @@ Public Class frmOrderS
             End If
 
             lstrErr = lstrErr & UcProductLists1.IsError
-            If lstrErr.Trim <> "" Then
+            If lstrErr = "PRODUCTCHANGE" Then
+                Dim lfrm As New frmOrderDTL
+                lfrm.ProList = mcls.ProductDAOs
+                lfrm.ShowDialog()
+                If lfrm.IsSave = True Then
+                    Return True
+                Else
+                    Return False
+                End If
+            ElseIf lstrErr.Trim <> "" Then
                 ShowProgress(False, "")
                 lstrErr = "พบข้อผิดพลาดกรุณาตรวจสอบ : " & vbNewLine & lstrErr
                 XtraMessageBox.Show(Me, lstrErr, "ตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Error)

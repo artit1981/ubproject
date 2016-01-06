@@ -43,6 +43,7 @@ Partial Class frmOrderDTL
         Me.KeepMin = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Units_Old = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.AdjustUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
@@ -57,7 +58,6 @@ Partial Class frmOrderDTL
         Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ModePro = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductNameExt = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.Units_Old = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LocationDTLID_Old = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductListRefID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SN = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -92,9 +92,9 @@ Partial Class frmOrderDTL
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.gridControl)
-        Me.PanelControl1.Location = New System.Drawing.Point(21, 58)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 36)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(601, 269)
+        Me.PanelControl1.Size = New System.Drawing.Size(650, 359)
         Me.PanelControl1.TabIndex = 0
         '
         'gridControl
@@ -107,13 +107,13 @@ Partial Class frmOrderDTL
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(597, 265)
+        Me.gridControl.Size = New System.Drawing.Size(646, 355)
         Me.gridControl.TabIndex = 10
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units_Old, Me.AdjustUnit, Me.Units, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -147,7 +147,7 @@ Partial Class frmOrderDTL
         Me.IsSelect.Name = "IsSelect"
         Me.IsSelect.Visible = True
         Me.IsSelect.VisibleIndex = 0
-        Me.IsSelect.Width = 41
+        Me.IsSelect.Width = 40
         '
         'SelectCheckEdit2
         '
@@ -178,7 +178,7 @@ Partial Class frmOrderDTL
         Me.ProductCode.Name = "ProductCode"
         Me.ProductCode.Visible = True
         Me.ProductCode.VisibleIndex = 1
-        Me.ProductCode.Width = 91
+        Me.ProductCode.Width = 90
         '
         'ProductBtn
         '
@@ -200,7 +200,7 @@ Partial Class frmOrderDTL
         Me.ProductNames.OptionsColumn.ReadOnly = True
         Me.ProductNames.Visible = True
         Me.ProductNames.VisibleIndex = 2
-        Me.ProductNames.Width = 182
+        Me.ProductNames.Width = 140
         '
         'ProductNameBtn
         '
@@ -220,7 +220,7 @@ Partial Class frmOrderDTL
         Me.LocationDTLID.Name = "LocationDTLID"
         Me.LocationDTLID.Visible = True
         Me.LocationDTLID.VisibleIndex = 3
-        Me.LocationDTLID.Width = 100
+        Me.LocationDTLID.Width = 70
         '
         'LocationDTLIDLookUpEdit1
         '
@@ -246,7 +246,7 @@ Partial Class frmOrderDTL
         Me.UnitName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor
         Me.UnitName.Visible = True
         Me.UnitName.VisibleIndex = 4
-        Me.UnitName.Width = 90
+        Me.UnitName.Width = 60
         '
         'UnitBtn
         '
@@ -288,6 +288,19 @@ Partial Class frmOrderDTL
         Me.Units.FieldName = "Units"
         Me.Units.Name = "Units"
         '
+        'Units_Old
+        '
+        Me.Units_Old.Caption = "จำนวนก่อนแก้ไข"
+        Me.Units_Old.DisplayFormat.FormatString = "Numeric ""n0"""
+        Me.Units_Old.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.Units_Old.FieldName = "Units_Old"
+        Me.Units_Old.MaxWidth = 100
+        Me.Units_Old.MinWidth = 50
+        Me.Units_Old.Name = "Units_Old"
+        Me.Units_Old.Visible = True
+        Me.Units_Old.VisibleIndex = 6
+        Me.Units_Old.Width = 62
+        '
         'AdjustUnit
         '
         Me.AdjustUnit.AppearanceHeader.Options.UseTextOptions = True
@@ -301,8 +314,8 @@ Partial Class frmOrderDTL
         Me.AdjustUnit.MinWidth = 50
         Me.AdjustUnit.Name = "AdjustUnit"
         Me.AdjustUnit.Visible = True
-        Me.AdjustUnit.VisibleIndex = 6
-        Me.AdjustUnit.Width = 62
+        Me.AdjustUnit.VisibleIndex = 7
+        Me.AdjustUnit.Width = 50
         '
         'Cost
         '
@@ -317,8 +330,8 @@ Partial Class frmOrderDTL
         Me.Cost.MinWidth = 90
         Me.Cost.Name = "Cost"
         Me.Cost.Visible = True
-        Me.Cost.VisibleIndex = 7
-        Me.Cost.Width = 91
+        Me.Cost.VisibleIndex = 8
+        Me.Cost.Width = 90
         '
         'CostCalcEdit1
         '
@@ -347,8 +360,8 @@ Partial Class frmOrderDTL
         Me.Price.MinWidth = 80
         Me.Price.Name = "Price"
         Me.Price.Visible = True
-        Me.Price.VisibleIndex = 8
-        Me.Price.Width = 101
+        Me.Price.VisibleIndex = 9
+        Me.Price.Width = 80
         '
         'PriceCalcEdit1
         '
@@ -374,8 +387,8 @@ Partial Class frmOrderDTL
         Me.Discount.MinWidth = 60
         Me.Discount.Name = "Discount"
         Me.Discount.Visible = True
-        Me.Discount.VisibleIndex = 9
-        Me.Discount.Width = 71
+        Me.Discount.VisibleIndex = 10
+        Me.Discount.Width = 60
         '
         'DiscountCalcEdit1
         '
@@ -408,8 +421,8 @@ Partial Class frmOrderDTL
         Me.Total.OptionsColumn.ReadOnly = True
         Me.Total.OptionsColumn.TabStop = False
         Me.Total.Visible = True
-        Me.Total.VisibleIndex = 10
-        Me.Total.Width = 101
+        Me.Total.VisibleIndex = 11
+        Me.Total.Width = 80
         '
         'TotalEdit
         '
@@ -426,7 +439,7 @@ Partial Class frmOrderDTL
         Me.Remark.MinWidth = 50
         Me.Remark.Name = "Remark"
         Me.Remark.Visible = True
-        Me.Remark.VisibleIndex = 11
+        Me.Remark.VisibleIndex = 12
         Me.Remark.Width = 50
         '
         'SEQ
@@ -453,12 +466,6 @@ Partial Class frmOrderDTL
         Me.ProductNameExt.FieldName = "ProductNameExt"
         Me.ProductNameExt.Name = "ProductNameExt"
         '
-        'Units_Old
-        '
-        Me.Units_Old.Caption = "GridColumn1"
-        Me.Units_Old.FieldName = "Units_Old"
-        Me.Units_Old.Name = "Units_Old"
-        '
         'LocationDTLID_Old
         '
         Me.LocationDTLID_Old.Caption = "LocationDTLID_Old"
@@ -482,8 +489,8 @@ Partial Class frmOrderDTL
         Me.SN.Name = "SN"
         Me.SN.OptionsColumn.ReadOnly = True
         Me.SN.Visible = True
-        Me.SN.VisibleIndex = 12
-        Me.SN.Width = 23
+        Me.SN.VisibleIndex = 13
+        Me.SN.Width = 20
         '
         'RepositoryItemButtonSN
         '
@@ -531,8 +538,8 @@ Partial Class frmOrderDTL
         Me.Image.MinWidth = 30
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 13
-        Me.Image.Width = 38
+        Me.Image.VisibleIndex = 14
+        Me.Image.Width = 30
         '
         'btnImage
         '
@@ -608,6 +615,7 @@ Partial Class frmOrderDTL
     Friend WithEvents KeepMin As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents UnitsSpin As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Units_Old As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents AdjustUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Cost As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CostCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
@@ -622,7 +630,6 @@ Partial Class frmOrderDTL
     Friend WithEvents UnitID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ModePro As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductNameExt As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents Units_Old As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LocationDTLID_Old As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductListRefID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SN As DevExpress.XtraGrid.Columns.GridColumn

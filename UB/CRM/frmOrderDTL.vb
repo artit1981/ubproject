@@ -5,25 +5,15 @@ Imports DevExpress.XtraGrid.Columns
 Public Class frmOrderDTL
     Inherits iEditForm
 
-    Private mOrderMode As DataMode
-    Private mColData As ProColumn
+    Private mIsSave As Boolean = False
     Private mProList As List(Of ProductListDAO)
 
-    Public Property OrderMode() As Integer
+    Public Property IsSave() As Boolean
         Get
-            Return mOrderMode
+            Return mIsSave
         End Get
-        Set(ByVal value As Integer)
-            mOrderMode = value
-        End Set
-    End Property
-
-    Public Property ColData() As Integer
-        Get
-            Return mColData
-        End Get
-        Set(ByVal value As Integer)
-            mColData = value
+        Set(ByVal value As Boolean)
+            mIsSave = value
         End Set
     End Property
 
@@ -38,6 +28,8 @@ Public Class frmOrderDTL
 
 
     Private Sub frmOrderDTL_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        IsSave = False
+
         Me.Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
@@ -93,41 +85,47 @@ Public Class frmOrderDTL
             .Columns("ProductID").Visible = False
             .Columns("UnitID").Visible = False
             .Columns("ProductListRefID").Visible = False
-            .Columns("LocationDTLID").Visible = (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID
-            .Columns("UnitName").Visible = (mColData And ProColumn.UnitName) = ProColumn.UnitName
-            .Columns("Remark").Visible = (mColData And ProColumn.Remark) = ProColumn.Remark
-            .Columns("KeepMin").Visible = (mColData And ProColumn.KeepMin) = ProColumn.KeepMin
-            If (mColData And ProColumn.Units) = ProColumn.Units Then
-                .Columns("AdjustUnit").Visible = True
-                .Columns("SN").Visible = True
-            Else
-                .Columns("AdjustUnit").Visible = False
-                .Columns("SN").Visible = False
-            End If
+            .Columns("LocationDTLID").Visible = True
+            .Columns("UnitName").Visible = True
+            .Columns("Remark").Visible = True
+            .Columns("KeepMin").Visible = False
 
-            .Columns("Price").Visible = (mColData And ProColumn.Price) = ProColumn.Price
-            .Columns("Cost").Visible = (mColData And ProColumn.Cost) = ProColumn.Cost
-            .Columns("Total").Visible = (mColData And ProColumn.Total) = ProColumn.Total
-            .Columns("Discount").Visible = (mColData And ProColumn.Discount) = ProColumn.Discount
-            .Columns("IsSelect").Visible = (mColData And ProColumn.IsSelect) = ProColumn.IsSelect
+            .Columns("AdjustUnit").Visible = True
+            .Columns("SN").Visible = True
+            .Columns("Units_Old").Visible = True
+
+            
+            .Columns("Price").Visible = True
+            .Columns("Cost").Visible = False
+            .Columns("Total").Visible = True
+            .Columns("Discount").Visible = True
+            .Columns("IsSelect").Visible = False
 
             gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False
             gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False
-            If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
-            If .Columns("UnitName").Visible Then .Columns("UnitName").OptionsColumn.ReadOnly = True
-            If .Columns("Remark").Visible Then .Columns("Remark").OptionsColumn.ReadOnly = True
-            If .Columns("Units").Visible Then .Columns("Units").OptionsColumn.ReadOnly = True
-            If .Columns("KeepMin").Visible Then .Columns("KeepMin").OptionsColumn.ReadOnly = True
-            If .Columns("Price").Visible Then .Columns("Price").OptionsColumn.ReadOnly = True
-            If .Columns("Cost").Visible Then .Columns("Cost").OptionsColumn.ReadOnly = True
-            If .Columns("Total").Visible Then .Columns("Total").OptionsColumn.ReadOnly = True
-            If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
-            If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
-            .Columns("ProductCode").OptionsColumn.ReadOnly = True
-            .Columns("ProductNames").OptionsColumn.ReadOnly = True
-            .Columns("UnitName").OptionsColumn.ReadOnly = True
-            .Columns("ProductCode").OptionsColumn.ReadOnly = True
+            gridView.OptionsBehavior.ReadOnly = True
+            'If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
+            'If .Columns("UnitName").Visible Then .Columns("UnitName").OptionsColumn.ReadOnly = True
+            'If .Columns("Remark").Visible Then .Columns("Remark").OptionsColumn.ReadOnly = True
+            'If .Columns("Units").Visible Then .Columns("Units").OptionsColumn.ReadOnly = True
+            'If .Columns("KeepMin").Visible Then .Columns("KeepMin").OptionsColumn.ReadOnly = True
+            'If .Columns("Price").Visible Then .Columns("Price").OptionsColumn.ReadOnly = True
+            'If .Columns("Cost").Visible Then .Columns("Cost").OptionsColumn.ReadOnly = True
+            'If .Columns("Total").Visible Then .Columns("Total").OptionsColumn.ReadOnly = True
+            'If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
+            'If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
+            '.Columns("ProductCode").OptionsColumn.ReadOnly = True
+            '.Columns("ProductNames").OptionsColumn.ReadOnly = True
+            '.Columns("UnitName").OptionsColumn.ReadOnly = True
+            '.Columns("ProductCode").OptionsColumn.ReadOnly = True
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 OR [IsDelete]=0  ")
         End With
     End Sub
+
+
+    Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
+        IsSave = True
+        Me.Close()
+    End Function
+
 End Class
