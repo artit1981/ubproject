@@ -42,9 +42,9 @@ Partial Class frmOrderDTL
         Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.KeepMin = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Units_Old = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.AdjustUnit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.Price = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -91,10 +91,13 @@ Partial Class frmOrderDTL
         '
         'PanelControl1
         '
+        Me.PanelControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PanelControl1.Controls.Add(Me.gridControl)
         Me.PanelControl1.Location = New System.Drawing.Point(0, 36)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(650, 359)
+        Me.PanelControl1.Size = New System.Drawing.Size(932, 394)
         Me.PanelControl1.TabIndex = 0
         '
         'gridControl
@@ -107,13 +110,14 @@ Partial Class frmOrderDTL
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(646, 355)
+        Me.gridControl.Size = New System.Drawing.Size(928, 390)
         Me.gridControl.TabIndex = 10
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
         Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units_Old, Me.AdjustUnit, Me.Units, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
+        Me.gridView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -122,14 +126,13 @@ Partial Class frmOrderDTL
         Me.gridView.OptionsDetail.EnableMasterViewMode = False
         Me.gridView.OptionsDetail.ShowDetailTabs = False
         Me.gridView.OptionsDetail.SmartDetailExpand = False
+        Me.gridView.OptionsFind.AllowFindPanel = False
         Me.gridView.OptionsLayout.Columns.AddNewColumns = False
         Me.gridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.gridView.OptionsMenu.EnableColumnMenu = False
         Me.gridView.OptionsMenu.EnableFooterMenu = False
         Me.gridView.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.[False]
-        Me.gridView.OptionsNavigation.AutoFocusNewRow = True
-        Me.gridView.OptionsNavigation.EnterMoveNextColumn = True
-        Me.gridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom
+        Me.gridView.OptionsNavigation.AutoMoveRowFocus = False
         Me.gridView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
@@ -188,8 +191,6 @@ Partial Class frmOrderDTL
         '
         'ProductNames
         '
-        Me.ProductNames.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
-        Me.ProductNames.AppearanceCell.Options.UseBackColor = True
         Me.ProductNames.AppearanceHeader.Options.UseTextOptions = True
         Me.ProductNames.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.ProductNames.Caption = "ชื่อสินค้า"
@@ -282,24 +283,22 @@ Partial Class frmOrderDTL
         Me.UnitsSpin.IsFloatValue = False
         Me.UnitsSpin.Name = "UnitsSpin"
         '
-        'Units
-        '
-        Me.Units.Caption = "Units"
-        Me.Units.FieldName = "Units"
-        Me.Units.Name = "Units"
-        '
         'Units_Old
         '
-        Me.Units_Old.Caption = "จำนวนก่อนแก้ไข"
-        Me.Units_Old.DisplayFormat.FormatString = "Numeric ""n0"""
-        Me.Units_Old.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.Units_Old.AppearanceCell.Options.UseTextOptions = True
+        Me.Units_Old.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Units_Old.AppearanceHeader.Options.UseTextOptions = True
+        Me.Units_Old.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Units_Old.Caption = "จน.ก่อนแก้"
+        Me.Units_Old.DisplayFormat.FormatString = "n0"
+        Me.Units_Old.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.Units_Old.FieldName = "Units_Old"
-        Me.Units_Old.MaxWidth = 100
-        Me.Units_Old.MinWidth = 50
+        Me.Units_Old.MaxWidth = 120
+        Me.Units_Old.MinWidth = 70
         Me.Units_Old.Name = "Units_Old"
         Me.Units_Old.Visible = True
         Me.Units_Old.VisibleIndex = 6
-        Me.Units_Old.Width = 62
+        Me.Units_Old.Width = 80
         '
         'AdjustUnit
         '
@@ -316,6 +315,12 @@ Partial Class frmOrderDTL
         Me.AdjustUnit.Visible = True
         Me.AdjustUnit.VisibleIndex = 7
         Me.AdjustUnit.Width = 50
+        '
+        'Units
+        '
+        Me.Units.Caption = "Units"
+        Me.Units.FieldName = "Units"
+        Me.Units.Name = "Units"
         '
         'Cost
         '
@@ -345,8 +350,6 @@ Partial Class frmOrderDTL
         '
         'Price
         '
-        Me.Price.AppearanceCell.BackColor = System.Drawing.Color.White
-        Me.Price.AppearanceCell.Options.UseBackColor = True
         Me.Price.AppearanceCell.Options.UseTextOptions = True
         Me.Price.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.Price.AppearanceHeader.Options.UseTextOptions = True
@@ -403,8 +406,6 @@ Partial Class frmOrderDTL
         '
         'Total
         '
-        Me.Total.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Total.AppearanceCell.Options.UseBackColor = True
         Me.Total.AppearanceCell.Options.UseTextOptions = True
         Me.Total.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.Total.AppearanceHeader.Options.UseTextOptions = True
@@ -573,9 +574,12 @@ Partial Class frmOrderDTL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(662, 396)
+        Me.ClientSize = New System.Drawing.Size(932, 431)
         Me.Controls.Add(Me.PanelControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frmOrderDTL"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "frmOrderDTL"
         Me.Controls.SetChildIndex(Me.PanelControl1, 0)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()

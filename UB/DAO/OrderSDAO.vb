@@ -719,12 +719,13 @@ Public Class OrderSDAO
     End Sub
 
     Public Sub SaveProductList(ByRef ProductList As List(Of ProductListDAO), ByVal ModeData As Long, ByVal RefID As Long, ByVal TableName As String , ByRef tr As SqlTransaction)
-        Dim lstrStayIDList As String = "", lSEQ As Long = 1
-        Dim lclsSN As SnDAO, lclsSN2 As SnDAO
+        Dim lSEQ As Long = 1 ', lstrStayIDList As String = ""
+        Dim lclsSN2 As SnDAO
         Dim lSNTable As DataTable
-        Dim lOrderList As New List(Of Long), lSNInList As String = ""
+        Dim lOrderList As New List(Of Long) ', lSNInList As String = ""
         Dim lUpdateStstus As Boolean = False
         Dim lIsUpdate As Integer = 0  ' 0=no, 1=sum, 2=second
+        Dim lclsSN As SnDAO
         Try
             'Condition for Up Stock
             lIsUpdate = CheckIsUseStock(TableID, RefToOrderID, StockType, tr)
@@ -741,7 +742,7 @@ Public Class OrderSDAO
                     If ModeData = DataMode.ModeDelete Then
                         pProList.ModeData = DataMode.ModeDelete
                     ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
-                        pProList.ModeData = DataMode.ModeDelete
+                        pProList.ModeData = DataMode.ModeNotApprove
                     ElseIf pProList.IsDelete = 1 Then
                         pProList.ModeData = DataMode.ModeDelete
                     ElseIf ModeData = DataMode.ModeNew Then
@@ -753,11 +754,11 @@ Public Class OrderSDAO
                     End If
 
                     If pProList.SaveData(tr) Then
-                        If ModeData = DataMode.ModeEdit Then
-                            If pProList.ID > 0 Then
-                                lstrStayIDList = IIf(lstrStayIDList = "", pProList.ID, lstrStayIDList & "," & pProList.ID)
-                            End If
-                        End If
+                        'If ModeData = DataMode.ModeEdit Then
+                        '    If pProList.ID > 0 Then
+                        '        lstrStayIDList = IIf(lstrStayIDList = "", pProList.ID, lstrStayIDList & "," & pProList.ID)
+                        '    End If
+                        'End If
 
                         If pProList.IsShow = 1 Then
                             '*** Stock
@@ -771,7 +772,7 @@ Public Class OrderSDAO
                                     lOrderList.Add(RefID)
 
                                     lclsSN = New SnDAO
-                                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", tr, ModeData = DataMode.ModeDelete, "")
+                                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", tr, False, "")
                                     For Each dr2 As DataRow In lSNTable.Rows
                                         lclsSN2 = New SnDAO
                                         lclsSN2.SetStatusBySN(tr, ConvertNullToZero(dr2("ProductID")), ConvertNullToString(dr2("SerialNumberNo")) _
@@ -781,41 +782,39 @@ Public Class OrderSDAO
                                 'Delete
                                 lclsSN2 = New SnDAO
                                 lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
-                            Else
+                            Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList
                                         lUpdateStstus = False
-                                        lclsSN = pclsSN
                                         If pProList.ModeData = DataMode.ModeNew Then
-                                            lclsSN.SerialNumberID = 0
+                                            pclsSN.SerialNumberID = 0
                                             If TableName = MasterType.StockIn.ToString Or TableName = MasterType.UpdateStock.ToString _
                                                 Or (lIsUpdate = 3 And StockType = "I") Then
-                                                lclsSN.Status = "New"
+                                                pclsSN.Status = "New"
                                             Else
-                                                lclsSN.Status = "None"
+                                                pclsSN.Status = "None"
                                             End If
                                         End If
                                         If TableName = MasterType.UpdateStock.ToString And pProList.Units < 0 Then
-                                            lclsSN.Status = "None"
+                                            pclsSN.Status = "None"
                                             lUpdateStstus = True
                                         End If
-                                        lclsSN.OrderID = RefID
-                                        lclsSN.ProductListID = pProList.ID
-                                        lclsSN.ProductID = pProList.ProductID
-                                        lclsSN.SerialNumberNo = pclsSN.SerialNumberNo
-                                        lclsSN.SaveData(tr, ModeData, lUpdateStstus)
+                                        pclsSN.OrderID = RefID
+                                        pclsSN.ProductListID = pProList.ID
+                                        pclsSN.ProductID = pProList.ProductID
+                                        pclsSN.SaveData(tr, ModeData, lUpdateStstus)
 
                                         'Close SN
                                         If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
                                             lclsSN2 = New SnDAO
-                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, lclsSN.SerialNumberNo, EnumStatus.Close.ToString, 0)
+                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, EnumStatus.Close.ToString, 0)
                                         End If
 
-                                        If ModeData = DataMode.ModeEdit Then
-                                            If lclsSN.SerialNumberID > 0 Then
-                                                lSNInList = IIf(lSNInList = "", lclsSN.SerialNumberID, lSNInList & "," & lclsSN.SerialNumberID)
-                                            End If
-                                        End If
+                                        'If ModeData = DataMode.ModeEdit Then
+                                        '    If lclsSN.SerialNumberID > 0 Then
+                                        '        lSNInList = IIf(lSNInList = "", lclsSN.SerialNumberID, lSNInList & "," & lclsSN.SerialNumberID)
+                                        '    End If
+                                        'End If
                                     Next
 
                                     'If lSNInList <> "" And ModeData = DataMode.ModeEdit Then
@@ -826,60 +825,16 @@ Public Class OrderSDAO
                                     '    lclsSN2 = New SnDAO
                                     '    lclsSN2.DeleteRemoveData(tr, RefID, pProList.ProductID, lSNInList, pProList.ID)
                                     'End If
-                                    lSNInList = ""
+                                    'lSNInList = ""
                                 End If
                             End If '*** SN
                         End If '*** Is show
-
                     End If
                     If pProList.IsShow = 1 And pProList.IsDelete = 0 Then
                         lSEQ = lSEQ + 1
                     End If
                 Next
-
-                ''Delete Remove Item
-                'If ModeData = DataMode.ModeEdit And lstrStayIDList <> "" Then
-                '    'SN
-                '    If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
-                '        lclsSN = New SnDAO
-                '        lclsSN.SetStatusFromProListRemove(tr, RefID, lstrStayIDList, "New")
-                '    End If
-
-                '    lclsSN2 = New SnDAO
-                '    lclsSN2.DeleteFromProListRemove(tr, RefID, lstrStayIDList)
-
-                '    'Stock
-                '    Dim lclsProlist As New ProductListDAO
-                '    Dim dataTable As New DataTable()
-                '    lOrderList = New List(Of Long)
-                '    lOrderList.Add(ID)
-                '    dataTable = lclsProlist.GetDataTable(lOrderList, TableName, tr, False, lstrStayIDList, False, 0, True)
-                '    For Each dr As DataRow In dataTable.Rows
-                '        If ConvertNullToZero(dr("IsShow")) = 1 Then
-                '            lclsProlist = New ProductListDAO
-                '            lclsProlist.ID = ConvertNullToZero(dr("ID"))
-                '            lclsProlist.ProductID = ConvertNullToZero(dr("ProductID"))
-                '            lclsProlist.UnitID = ConvertNullToZero(dr("UnitID"))
-                '            lclsProlist.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                '            lclsProlist.Cost = ConvertNullToZero(dr("Cost"))
-                '            lclsProlist.Units = ConvertNullToZero(dr("Units"))
-                '            lclsProlist.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID_Old"))
-                '            lclsProlist.Units_Old = ConvertNullToZero(dr("Units_Old"))
-
-                '            Call UpdateStock(tr, lclsProlist, lIsUpdate, DataMode.ModeDelete)
-
-                '            lclsProlist = Nothing
-                '        End If
-                '    Next
-
-                '    'ProList
-                '    Dim ProList As New ProductListDAO
-                '    ProList.RefID = RefID
-                '    ProList.RefTable = TableName
-                '    ProList.DeleteRemoveData(tr, lstrStayIDList)
-                'End If
             End If
-
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.SaveProductList" & e.Message)
         End Try
@@ -900,7 +855,7 @@ Public Class OrderSDAO
                 lclsStock.UnitID = pProductList.UnitID
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
                 lclsStock.Cost = pProductList.Cost
-                If pProductList.ModeData = DataMode.ModeDelete Then
+                If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
                     lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID = 0 Then
                     lclsStock.Units = pProductList.Units * 1
@@ -976,7 +931,7 @@ Public Class OrderSDAO
                 lcls.UnitID = pProductList.UnitID
                 lcls.LocationDTLID = pProductList.LocationDTLID
 
-                If pProductList.ModeData = DataMode.ModeDelete Then
+                If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
                     lcls.Units = pProductList.Units * 1
                 ElseIf pProductList.ID = 0 Then
                     lcls.Units = pProductList.Units * -1

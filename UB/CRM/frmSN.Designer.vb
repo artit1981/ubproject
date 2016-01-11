@@ -55,6 +55,7 @@ Partial Class frmSN
         Me.Units = New DevExpress.XtraEditors.SpinEdit()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.btnSelectSN = New DevExpress.XtraEditors.SimpleButton()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,7 +79,7 @@ Partial Class frmSN
         '
         'GridView1
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.SerialNumberID, Me.OrderID, Me.ProductID, Me.SerialNumberNo, Me.Status})
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.SerialNumberID, Me.OrderID, Me.ProductID, Me.SerialNumberNo, Me.Status, Me.IsDelete})
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -139,7 +140,7 @@ Partial Class frmSN
         'GridControl1
         '
         Me.GridControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GridControl1.Location = New System.Drawing.Point(3, 182)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
@@ -320,8 +321,9 @@ Partial Class frmSN
         Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
         Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
         Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
+        Me.ControlNavigator1.Buttons.Remove.Visible = False
         Me.ControlNavigator1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003
-        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(1)})
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(8, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(9, 1, True, False, "", Nothing)})
         Me.ControlNavigator1.Location = New System.Drawing.Point(3, 411)
         Me.ControlNavigator1.Name = "ControlNavigator1"
         Me.ControlNavigator1.NavigatableControl = Me.GridControl1
@@ -510,6 +512,12 @@ Partial Class frmSN
         Me.btnSelectSN.Text = "Select S/N"
         Me.btnSelectSN.ToolTip = "Auto Gen S/N"
         '
+        'IsDelete
+        '
+        Me.IsDelete.Caption = "GridColumn1"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
+        '
         'frmSN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -600,4 +608,5 @@ Partial Class frmSN
     Friend WithEvents Units As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btnSelectSN As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
 End Class

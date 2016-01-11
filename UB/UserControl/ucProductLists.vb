@@ -163,6 +163,7 @@ Public Class ucProductLists
                             lclsSN.Status = ConvertNullToString(dr2("Status"))
                             lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
                             lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
+                            lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                             rec.SNList.Add(lclsSN)
                         Next
                     End If
@@ -480,7 +481,7 @@ Public Class ucProductLists
                     rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
                     rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
                     rec.ModePro = DataMode.ModeEdit
-                    rec.IsDelete = ConvertNullToZero(dr("RateUnit"))
+                    rec.IsDelete = ConvertNullToZero(dr("IsDelete"))
                     'Load S/N
                     rec.IsSN = ConvertNullToZero(dr("IsSN"))
                     dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
@@ -492,6 +493,7 @@ Public Class ucProductLists
                         lclsSN.Status = ConvertNullToString(dr2("Status"))
                         lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
                         lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
+                        lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                         rec.SNList.Add(lclsSN)
                     Next
 
@@ -564,7 +566,8 @@ Public Class ucProductLists
                 End If
 
             End If
-            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 OR [IsDelete]=0  ")
+            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1")
+            gridView.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
         End With
     End Sub
 

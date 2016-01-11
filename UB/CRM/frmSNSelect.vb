@@ -86,6 +86,7 @@ Public Class frmSNSelect
                 lclsSN.SerialNumberID = ConvertNullToZero(dr2("SerialNumberID"))
                 lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
                 lclsSN.Status = ConvertNullToString(dr2("Status"))
+                lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                 mSnList.Add(lclsSN)
                 'End If
             Next
@@ -116,6 +117,7 @@ Public Class frmSNSelect
                         lSnData = New SnDAO
                         lSnData.SerialNumberID = 0 ' GridView1.GetRowCellValue(lRow, "SerialNumberID")
                         lSnData.SerialNumberNo = GridView1.GetRowCellValue(lRow, "SerialNumberNo")
+                        lSnData.IsDelete = 0
                         lSnData.Status = "None"
                         mSnList.Add(lSnData)
                     End If

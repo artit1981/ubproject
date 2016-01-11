@@ -41,6 +41,7 @@ Public Class frmOrderDTL
         Dim lProSub As ProductSubDAO
 
         bindingSource1.DataSource = GetType(ProductSubDAO)
+        LoadDataLocationDTL()
 
         For Each pProlist As ProductListDAO In ProList
             lProSub = New ProductSubDAO
@@ -118,14 +119,40 @@ Public Class frmOrderDTL
             '.Columns("ProductNames").OptionsColumn.ReadOnly = True
             '.Columns("UnitName").OptionsColumn.ReadOnly = True
             '.Columns("ProductCode").OptionsColumn.ReadOnly = True
-            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 OR [IsDelete]=0  ")
+            gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 ")
         End With
     End Sub
 
+    Private Sub LoadDataLocationDTL()
+        Dim lcls As New ProductLocationSDAO
+        Dim dataTable As New DataTable()
+
+        Try
+            dataTable = lcls.GetDataTableDTL(0, "")
+            LocationDTLIDLookUpEdit1.DataSource = dataTable
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "ucProductLists.LoadDataLocationDTL : " & e.Message)
+        Finally
+            dataTable = Nothing
+            lcls = Nothing
+        End Try
+    End Sub
 
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         IsSave = True
         Me.Close()
     End Function
 
+    Private Sub gridView_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles gridView.RowStyle
+        If (e.RowHandle >= 0) Then
+            If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("IsDelete"))) = 1 Then
+                e.Appearance.BackColor = Color.WhiteSmoke
+                e.Appearance.ForeColor = Color.Red
+            ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("ID"))) = 0 Then
+                e.Appearance.BackColor = Color.LightGreen
+            ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units"))) Then
+                e.Appearance.BackColor = Color.LightYellow
+            End If
+        End If
+    End Sub
 End Class

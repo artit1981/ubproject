@@ -91,7 +91,7 @@ Public Class SnDAO
         Dim dataTable As New DataTable()
         Dim lRefOrderList As String = ConvertListToString(pOrderID)
         Try
-            SQL = "SELECT  SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID"
+            SQL = "SELECT  SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID,IsDelete"
             SQL = SQL & " FROM SerialNumber"
             SQL = SQL & " WHERE 1=1 "
             If lRefOrderList <> "" Then
@@ -150,6 +150,8 @@ Public Class SnDAO
             Else
                 If SerialNumberID = 0 Then
                     pMode = DataMode.ModeNew
+                ElseIf pMode = DataMode.ModeEdit And IsDelete = 1 And SerialNumberID > 0 Then
+                    pMode = DataMode.ModeDelete
                 End If
 
                 Select Case pMode

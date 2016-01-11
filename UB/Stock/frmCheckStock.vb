@@ -81,7 +81,7 @@
             End If
 
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".InitialOrder : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mFormName & ".LoadData : " & e.Message)
         Finally
         End Try
     End Function

@@ -274,8 +274,8 @@ Public Class ProductStockDAO
         Try
             SQL = " select a.ProcessID, a.ProductID,b.ProductCode,b.ProductName"
             SQL &= " ,c.NameThai as Location,d.CodeThai as Unit"
-            SQL &= " ,a.Units,a.StockUnits,a.IsSumStock,a.IsDiff"
-            SQL &= " from Product_Stock_His a"
+            SQL &= " ,a.Units "
+            SQL &= " from Product_Stock a"
             SQL &= " left outer join Product b on a.ProductID=b.ProductID"
             SQL &= " left outer join Product_LocationDTL c on a.LocationDTLID=c.LocationDTLID"
             SQL &= " left outer join Product_Unit d on a.UnitID=d.UnitID"
@@ -297,7 +297,7 @@ Public Class ProductStockDAO
             If pProductBrandID > 0 Then
                 SQL = SQL & " and b.ProductBrandID = '" & pProductBrandID & "'"
             End If
-            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName "
+            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductStockDAO.GetDataStockByLocation2 : " & e.Message)

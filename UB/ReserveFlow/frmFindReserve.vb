@@ -217,9 +217,14 @@ Public Class frmFindReserve
             Next
 
             'ReCalc Price
+            Dim lPrice As Decimal = 0
             If mProductSubList.Count > 0 Then
                 For Each pProSub In mProductSubList
-                    pProSub.Price = LoadLowerPrice(pProSub.ProductID, False)
+                    lPrice = LoadLowerPrice(pProSub.ProductID, False)
+                    If lPrice > 0 Then
+                        pProSub.Price = LoadLowerPrice(pProSub.ProductID, False)
+                    End If
+
                 Next
             End If
 

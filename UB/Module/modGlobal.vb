@@ -118,6 +118,7 @@ Module modGlobal
         ModeCopy = 8
         ModeConvert = 9
         ModeImport = 10
+        ModeNotApprove = 11
     End Enum
 
     Public Enum EnumStatus

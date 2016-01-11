@@ -1086,6 +1086,7 @@ Public Class frmOrderS
                 lclsSN.Status = ConvertNullToString(dr2("Status"))
                 lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
                 lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
+                lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                 lSNList.Add(lclsSN)
             Next
             Return lSNList
@@ -1370,7 +1371,8 @@ Public Class frmOrderS
             End If
 
             lstrErr = lstrErr & UcProductLists1.IsError
-            If lstrErr = "PRODUCTCHANGE" Then
+            If lstrErr.Trim = "PRODUCTCHANGE" Then
+                ShowProgress(False, "")
                 Dim lfrm As New frmOrderDTL
                 lfrm.ProList = mcls.ProductDAOs
                 lfrm.ShowDialog()

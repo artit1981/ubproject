@@ -76,6 +76,7 @@ Public Class frmSNUpdateStatus
                 lclsSN.SerialNumberID = ConvertNullToZero(dr2("SerialNumberID"))
                 lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
                 lclsSN.Status = ConvertNullToString(dr2("Status"))
+                lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                 mSnList.Add(lclsSN)
             Next
             GridControl1.DataSource = mSnList

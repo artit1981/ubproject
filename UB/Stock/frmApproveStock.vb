@@ -9,7 +9,7 @@ Public Class frmApproveStock
 
     Private Sub frmCheckStock_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            Me.Text = "อนุมัติสต๊อก"
+            Me.Text = "Update Stock"
             mIsFromLoad = True
             lblRemark.Text = "ไม่พบข้อมูล"
             InitialCombo()
@@ -78,7 +78,7 @@ Public Class frmApproveStock
             If dataTable.Rows.Count > 0 Then
                 If dataTable.Rows.Count > 0 Then
                     gridControl.DataSource = dataTable
-                    gridView.ViewCaption = "Approve Stock"
+                    gridView.ViewCaption = "Update Stock"
                     Call GridStyle()
                 Else
                     gridControl.DataSource = Nothing
@@ -97,9 +97,6 @@ Public Class frmApproveStock
         With gridView
 
             .Columns("ProductID").Visible = False
-            .Columns("ProcessID").Visible = False
-            .Columns("IsDiff").Visible = False
-            .Columns("IsSumStock").Visible = False
 
             .Columns("ProductCode").Caption = "รหัสสินค้า"
             .Columns("ProductCode").Width = 150
@@ -120,7 +117,7 @@ Public Class frmApproveStock
             .Columns("Unit").MaxWidth = 200
             .Columns("Unit").MinWidth = 100
 
-            .Columns("Units").Caption = "จำนวนคำนวนใหม่"
+            .Columns("Units").Caption = "จำนวน"
             .Columns("Units").Width = 200
             .Columns("Units").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("Units").DisplayFormat.FormatString = "n2"
@@ -128,12 +125,12 @@ Public Class frmApproveStock
             .Columns("Units").MinWidth = 150
 
 
-            .Columns("StockUnits").Caption = "จำนวนสต๊อกเดิม"
-            .Columns("StockUnits").Width = 200
-            .Columns("StockUnits").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-            .Columns("StockUnits").DisplayFormat.FormatString = "n2"
-            .Columns("StockUnits").MaxWidth = 200
-            .Columns("StockUnits").MinWidth = 150
+            '.Columns("StockUnits").Caption = "จำนวนสต๊อกเดิม"
+            '.Columns("StockUnits").Width = 200
+            '.Columns("StockUnits").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            '.Columns("StockUnits").DisplayFormat.FormatString = "n2"
+            '.Columns("StockUnits").MaxWidth = 200
+            '.Columns("StockUnits").MinWidth = 150
 
             '.Columns("Remark").Caption = "รายละเอียด"
             '.Columns("Remark").Width = 200
@@ -232,7 +229,7 @@ Public Class frmApproveStock
     Private Sub btnExportExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExportExcel.Click
         Try
             Dim lfrm As New frmPreExport
-            lfrm.InitialForm("Approve Stock", gridControl)
+            lfrm.InitialForm("Update Stock", gridControl)
             lfrm.ShowDialog()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -273,10 +270,9 @@ Public Class frmApproveStock
             If mProcessID > 0 Then
                 tr = gConnection.Connection.BeginTransaction
                 UpdateProduct_Stock_Process(tr)
-                BackupAndDeleteStock(tr)
+
                 tr.Commit()
                 XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                LoadLastProcess()
                 LoadData()
             Else
                 XtraMessageBox.Show(Me, "ไม่พบรายการประมวลผลล่าสุด", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
@@ -289,30 +285,7 @@ Public Class frmApproveStock
         End Try
     End Function
 
-    Private Sub LoadLastProcess()
-        Dim dataTable As New DataTable()
-        Dim SQL As String = ""
-        Try
-            lblRemark.Text = "ไม่พบข้อมูล"
-            mProcessID = 0
-
-            SQL = " select ProcessID,ProcessDate from Product_Stock_Process"
-            SQL &= "  where  ProcessID =(select max(ProcessID) from Product_Stock_Process where IsComfirm=0 )"
-            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-            If dataTable.Rows.Count > 0 Then
-                For Each dr As DataRow In dataTable.Rows
-                    mProcessID = Int32.Parse(dr("ProcessID"))
-                    lblRemark.Text = "ประมวลผลล่าสุด " & Format(Date.Parse(dr("ProcessDate")), "dd MMMM yyyy")
-                    mProcessDate = dr("ProcessDate")
-                    Exit For
-                Next
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".UpdateProduct_Stock_Process : " & e.Message)
-        End Try
-
-    End Sub
+  
     Private Sub UpdateProduct_Stock_Process(ByRef ptr As SqlTransaction)
         Dim SQL As String = ""
         Try
@@ -327,39 +300,7 @@ Public Class frmApproveStock
         End Try
     End Sub
 
-    Private Sub BackupAndDeleteStock(ByRef ptr As SqlTransaction)
-        Dim SQL As String = ""
-        Try
-            SQL = " INSERT INTO Product_Stock_BK (ProcessID,ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock)  "
-            SQL &= "   Select " & mProcessID & ",ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock "
-            SQL &= " from Product_Stock "
-            gConnection.executeInsertQuery(SQL, ptr)
-
-            If Int16.Parse(rdoStockUse.EditValue) = 1 Then ''Use in calc
-                SQL = " Delete from Product_Stock "
-                gConnection.executeInsertQuery(SQL, ptr)
-
-                SQL = " INSERT INTO Product_Stock (ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock)  "
-                SQL &= "  Select ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock "
-                SQL &= " from Product_Stock_His where ProcessID=" & mProcessID
-                gConnection.executeInsertQuery(SQL, ptr)
-            Else 'Use old stock
-                SQL = " Delete from Product_Stock_His where ProcessID=" & mProcessID
-                gConnection.executeInsertQuery(SQL, ptr)
-
-                SQL = " INSERT INTO Product_Stock_His (ProcessID,ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock,StockUnits,ProcessDate,IsDiff)  "
-                SQL &= " Select " & mProcessID & ",ProductID,UnitID,LocationDTLID,Units,Cost,CostType,Lot,IsSumStock,Units "
-                SQL &= " ,'" & formatSQLDate(mProcessDate) & "'"
-                SQL &= " ,0"  'IsDiff
-                SQL &= " from Product_Stock "
-                gConnection.executeInsertQuery(SQL, ptr)
-
-
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".BackupAndDeleteStock : " & e.Message)
-        End Try
-    End Sub
+   
 
      
 End Class

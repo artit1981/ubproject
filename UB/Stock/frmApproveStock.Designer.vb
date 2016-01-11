@@ -20,6 +20,8 @@ Partial Class frmApproveStock
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmApproveStock))
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.chkIsDiff = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
@@ -51,9 +53,27 @@ Partial Class frmApproveStock
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.SelectCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductNameBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.Location = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
+        Me.Unit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.Units = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CostCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.DiscountCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.TotalEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.LocationDTLID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Edit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.chkIsDiff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,9 +93,18 @@ Partial Class frmApproveStock
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ProductNameBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitBtn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitsSpin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CostCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemButtonEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -466,22 +495,25 @@ Partial Class frmApproveStock
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.Location = New System.Drawing.Point(4, 124)
+        Me.gridControl.Location = New System.Drawing.Point(12, 135)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
-        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1})
-        Me.gridControl.Size = New System.Drawing.Size(1017, 387)
-        Me.gridControl.TabIndex = 295
-        Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
+        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonEdit, Me.btnImage})
+        Me.gridControl.Size = New System.Drawing.Size(1012, 248)
+        Me.gridControl.TabIndex = 301
+        Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.ProductCode, Me.ProductName, Me.Location, Me.Unit, Me.Units, Me.Edit, Me.LocationDTLID, Me.UnitID})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
-        Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
-        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
-        Me.gridView.OptionsBehavior.ReadOnly = True
-        Me.gridView.OptionsFind.AlwaysVisible = True
+        Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.gridView.OptionsDetail.AllowZoomDetail = False
+        Me.gridView.OptionsDetail.EnableMasterViewMode = False
+        Me.gridView.OptionsDetail.ShowDetailTabs = False
+        Me.gridView.OptionsDetail.SmartDetailExpand = False
         Me.gridView.OptionsLayout.Columns.AddNewColumns = False
         Me.gridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.gridView.OptionsMenu.EnableColumnMenu = False
@@ -490,14 +522,138 @@ Partial Class frmApproveStock
         Me.gridView.OptionsNavigation.AutoFocusNewRow = True
         Me.gridView.OptionsNavigation.EnterMoveNextColumn = True
         Me.gridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom
+        Me.gridView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
         Me.gridView.OptionsView.ShowGroupPanel = False
+        '
+        'SelectCheckEdit2
+        '
+        Me.SelectCheckEdit2.AutoHeight = False
+        Me.SelectCheckEdit2.Name = "SelectCheckEdit2"
+        '
+        'ProductID
+        '
+        Me.ProductID.Caption = "GridColumn1"
+        Me.ProductID.FieldName = "ProductID"
+        Me.ProductID.Name = "ProductID"
+        '
+        'ProductCode
+        '
+        Me.ProductCode.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductCode.Caption = "รหัสสินค้า"
+        Me.ProductCode.ColumnEdit = Me.ProductBtn
+        Me.ProductCode.FieldName = "ProductCode"
+        Me.ProductCode.MaxWidth = 160
+        Me.ProductCode.MinWidth = 90
+        Me.ProductCode.Name = "ProductCode"
+        Me.ProductCode.Visible = True
+        Me.ProductCode.VisibleIndex = 0
+        Me.ProductCode.Width = 98
         '
         'ProductBtn
         '
         Me.ProductBtn.AutoHeight = False
         Me.ProductBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.ProductBtn.Name = "ProductBtn"
-        Me.ProductBtn.ValidateOnEnterKey = True
+        '
+        'ProductName
+        '
+        Me.ProductName.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.ProductName.AppearanceCell.Options.UseBackColor = True
+        Me.ProductName.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductName.Caption = "ชื่อสินค้า"
+        Me.ProductName.FieldName = "ProductName"
+        Me.ProductName.MinWidth = 140
+        Me.ProductName.Name = "ProductName"
+        Me.ProductName.OptionsColumn.ReadOnly = True
+        Me.ProductName.Visible = True
+        Me.ProductName.VisibleIndex = 1
+        Me.ProductName.Width = 546
+        '
+        'ProductNameBtn
+        '
+        Me.ProductNameBtn.AutoHeight = False
+        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, True)})
+        Me.ProductNameBtn.Name = "ProductNameBtn"
+        '
+        'Location
+        '
+        Me.Location.AppearanceHeader.Options.UseTextOptions = True
+        Me.Location.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Location.Caption = "ตำแหน่งเก็บ"
+        Me.Location.FieldName = "Location"
+        Me.Location.MaxWidth = 100
+        Me.Location.MinWidth = 70
+        Me.Location.Name = "Location"
+        Me.Location.Visible = True
+        Me.Location.VisibleIndex = 2
+        Me.Location.Width = 100
+        '
+        'LocationDTLIDLookUpEdit1
+        '
+        Me.LocationDTLIDLookUpEdit1.AutoHeight = False
+        Me.LocationDTLIDLookUpEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "คลังสินค้า", 25, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", 40, "ตำแหน่ง"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "Name6", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default])})
+        Me.LocationDTLIDLookUpEdit1.DisplayMember = "LocationDTL"
+        Me.LocationDTLIDLookUpEdit1.Name = "LocationDTLIDLookUpEdit1"
+        Me.LocationDTLIDLookUpEdit1.NullText = ""
+        Me.LocationDTLIDLookUpEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
+        Me.LocationDTLIDLookUpEdit1.ValueMember = "LocationDTLID"
+        '
+        'Unit
+        '
+        Me.Unit.AppearanceHeader.Options.UseTextOptions = True
+        Me.Unit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Unit.Caption = "หน่วยนับ"
+        Me.Unit.FieldName = "Unit"
+        Me.Unit.MaxWidth = 90
+        Me.Unit.MinWidth = 60
+        Me.Unit.Name = "Unit"
+        Me.Unit.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor
+        Me.Unit.Visible = True
+        Me.Unit.VisibleIndex = 3
+        Me.Unit.Width = 90
+        '
+        'UnitBtn
+        '
+        Me.UnitBtn.AutoHeight = False
+        Me.UnitBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitBtn.Name = "UnitBtn"
+        '
+        'UnitsSpin
+        '
+        Me.UnitsSpin.AutoHeight = False
+        Me.UnitsSpin.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitsSpin.EditFormat.FormatString = "n0"
+        Me.UnitsSpin.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.UnitsSpin.IsFloatValue = False
+        Me.UnitsSpin.Name = "UnitsSpin"
+        '
+        'Units
+        '
+        Me.Units.AppearanceHeader.Options.UseTextOptions = True
+        Me.Units.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Units.Caption = "จำนวน"
+        Me.Units.DisplayFormat.FormatString = "n0"
+        Me.Units.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Units.FieldName = "Units"
+        Me.Units.MaxWidth = 100
+        Me.Units.MinWidth = 50
+        Me.Units.Name = "Units"
+        Me.Units.Visible = True
+        Me.Units.VisibleIndex = 4
+        Me.Units.Width = 100
+        '
+        'CostCalcEdit1
+        '
+        Me.CostCalcEdit1.AutoHeight = False
+        Me.CostCalcEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.CostCalcEdit1.DisplayFormat.FormatString = "n2"
+        Me.CostCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CostCalcEdit1.EditFormat.FormatString = "n2"
+        Me.CostCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CostCalcEdit1.Name = "CostCalcEdit1"
         '
         'PriceCalcEdit1
         '
@@ -510,10 +666,65 @@ Partial Class frmApproveStock
         Me.PriceCalcEdit1.Name = "PriceCalcEdit1"
         Me.PriceCalcEdit1.Precision = 2
         '
-        'GridView1
+        'DiscountCalcEdit1
         '
-        Me.GridView1.GridControl = Me.gridControl
-        Me.GridView1.Name = "GridView1"
+        Me.DiscountCalcEdit1.AutoHeight = False
+        Me.DiscountCalcEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DiscountCalcEdit1.DisplayFormat.FormatString = "n2"
+        Me.DiscountCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.DiscountCalcEdit1.EditFormat.FormatString = "n2"
+        Me.DiscountCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.DiscountCalcEdit1.Name = "DiscountCalcEdit1"
+        Me.DiscountCalcEdit1.Precision = 2
+        '
+        'TotalEdit
+        '
+        Me.TotalEdit.AutoHeight = False
+        Me.TotalEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TotalEdit.Name = "TotalEdit"
+        '
+        'LocationDTLID
+        '
+        Me.LocationDTLID.Caption = "LocationDTLID"
+        Me.LocationDTLID.FieldName = "LocationDTLID"
+        Me.LocationDTLID.Name = "LocationDTLID"
+        '
+        'Edit
+        '
+        Me.Edit.AppearanceHeader.Options.UseTextOptions = True
+        Me.Edit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Edit.Caption = "แก้ไข"
+        Me.Edit.ColumnEdit = Me.RepositoryItemButtonEdit
+        Me.Edit.FieldName = "Edit"
+        Me.Edit.MaxWidth = 60
+        Me.Edit.Name = "Edit"
+        Me.Edit.OptionsColumn.ReadOnly = True
+        Me.Edit.Visible = True
+        Me.Edit.VisibleIndex = 5
+        Me.Edit.Width = 50
+        '
+        'RepositoryItemButtonEdit
+        '
+        Me.RepositoryItemButtonEdit.AutoHeight = False
+        Me.RepositoryItemButtonEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.RepositoryItemButtonEdit.Name = "RepositoryItemButtonEdit"
+        Me.RepositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'btnImage
+        '
+        Me.btnImage.Appearance.Image = CType(resources.GetObject("btnImage.Appearance.Image"), System.Drawing.Image)
+        Me.btnImage.Appearance.Options.UseImage = True
+        Me.btnImage.AutoHeight = False
+        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("btnImage.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        Me.btnImage.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
+        Me.btnImage.Name = "btnImage"
+        Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'UnitID
+        '
+        Me.UnitID.Caption = "UnitID"
+        Me.UnitID.FieldName = "UnitID"
+        Me.UnitID.Name = "UnitID"
         '
         'frmApproveStock
         '
@@ -548,9 +759,18 @@ Partial Class frmApproveStock
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ProductNameBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitBtn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitsSpin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CostCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemButtonEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -569,11 +789,6 @@ Partial Class frmApproveStock
     Private WithEvents Label18 As System.Windows.Forms.Label
     Private WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents ProductBrandID As DevExpress.XtraEditors.LookUpEdit
-    Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
-    Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents btnExportExcel As DevExpress.XtraEditors.PictureEdit
     Friend WithEvents cboRefreshTime As DevExpress.XtraEditors.ComboBoxEdit
@@ -588,4 +803,27 @@ Partial Class frmApproveStock
     Private WithEvents lblRemark As System.Windows.Forms.Label
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents chkIsDiff As DevExpress.XtraEditors.CheckEdit
+    Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
+    Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Location As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Unit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Units As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LocationDTLID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Edit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemButtonEdit As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents UnitID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents UnitsSpin As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents LocationDTLIDLookUpEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
+    Friend WithEvents DiscountCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents CostCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents SelectCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents ProductNameBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents TotalEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents btnImage As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
 End Class
