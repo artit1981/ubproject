@@ -341,7 +341,7 @@ Public Class frmSN
     End Sub
 
     Private Sub SNNo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles SNNo.KeyPress
-        Dim lclsSN As SnDAO, lIndex As Long, lIsError As Boolean = False
+        Dim lclsSN As SnDAO, lIndex As Long, lIsError As String = ""
         If e.KeyChar = ChrW(Keys.Enter) And ConvertNullToString(SNNo.EditValue) <> "" Then
             If mSnList.Count > Math.Abs(Units.EditValue) Then
                 MessageBox.Show("รายการครบจำนวน", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -362,31 +362,31 @@ Public Class frmSN
 
                 If mOrderType = MasterType.StockIn.ToString Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue > 0 Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue < 0 Then  '' คืนสต๊อก
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 ElseIf mOrderType = MasterType.SellOrders.ToString Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 ElseIf lIsCheckCreditType = True And mStockType = "I" Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf lIsCheckCreditType = True And mStockType = "O" Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 End If
 
-                If lIsError = False Then
+                If lIsError = "" Then
                     lclsSN.SerialNumberID = 0
                     lclsSN.SerialNumberNo = ConvertNullToString(SNNo.EditValue)
                     lclsSN.Status = "New"
@@ -395,18 +395,7 @@ Public Class frmSN
                     GridControl1.RefreshDataSource()
                     SNNo.EditValue = ""
                 Else
-                    If mOrderType = MasterType.UpdateStock.ToString And Units.EditValue < 0 Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf mOrderType = MasterType.StockIn.ToString Or mOrderType = MasterType.UpdateStock.ToString Then
-                        MessageBox.Show("Serial Number ซ้ำ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf mOrderType = MasterType.SellOrders.ToString Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf lIsCheckCreditType = True And mStockType = "I" Then
-                        MessageBox.Show("Serial Number ซ้ำ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf lIsCheckCreditType = True And mStockType = "O" Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    End If
-
+                    MessageBox.Show(lIsError, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     SNNo.SelectAll()
                 End If
             End If

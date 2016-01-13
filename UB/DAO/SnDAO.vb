@@ -138,16 +138,12 @@ Public Class SnDAO
         End Try
     End Function
 
-    Public Function SaveData(ByVal tr As SqlTransaction, ByVal pMode As Integer, ByVal pUpdateBySNNo As Boolean) As Boolean
+    Public Function SaveData(ByVal tr As SqlTransaction, ByVal pMode As Integer) As Boolean
         Dim SQL As String
         Dim myCommand As SqlCommand
         SQL = ""
         Try
-            If pUpdateBySNNo = True Then
-                SQL = " Update SerialNumber   "
-                SQL = SQL & " SET Status=@Status"
-                SQL = SQL & " WHERE SerialNumberNo=@SerialNumberNo"
-            Else
+            
                 If SerialNumberID = 0 Then
                     pMode = DataMode.ModeNew
                 ElseIf pMode = DataMode.ModeEdit And IsDelete = 1 And SerialNumberID > 0 Then
@@ -180,7 +176,6 @@ Public Class SnDAO
                         Return False
                         Exit Function
                 End Select
-            End If
             
             myCommand = New SqlCommand
             myCommand.CommandText = SQL

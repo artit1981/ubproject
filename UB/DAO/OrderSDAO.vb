@@ -723,7 +723,6 @@ Public Class OrderSDAO
         Dim lclsSN2 As SnDAO
         Dim lSNTable As DataTable
         Dim lOrderList As New List(Of Long) ', lSNInList As String = ""
-        Dim lUpdateStstus As Boolean = False
         Dim lIsUpdate As Integer = 0  ' 0=no, 1=sum, 2=second
         Dim lclsSN As SnDAO
         Try
@@ -754,12 +753,6 @@ Public Class OrderSDAO
                     End If
 
                     If pProList.SaveData(tr) Then
-                        'If ModeData = DataMode.ModeEdit Then
-                        '    If pProList.ID > 0 Then
-                        '        lstrStayIDList = IIf(lstrStayIDList = "", pProList.ID, lstrStayIDList & "," & pProList.ID)
-                        '    End If
-                        'End If
-
                         If pProList.IsShow = 1 Then
                             '*** Stock
                             UpdateStock(tr, pProList, lIsUpdate, ModeData)
@@ -785,47 +778,28 @@ Public Class OrderSDAO
                             Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList
-                                        lUpdateStstus = False
                                         If pProList.ModeData = DataMode.ModeNew Then
                                             pclsSN.SerialNumberID = 0
-                                            If TableName = MasterType.StockIn.ToString Or TableName = MasterType.UpdateStock.ToString _
-                                                Or (lIsUpdate = 3 And StockType = "I") Then
+                                            If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
                                                 pclsSN.Status = "New"
                                             Else
                                                 pclsSN.Status = "None"
                                             End If
-                                        End If
-                                        If TableName = MasterType.UpdateStock.ToString And pProList.Units < 0 Then
-                                            pclsSN.Status = "None"
-                                            lUpdateStstus = True
+                                        Else 'Edit
                                         End If
                                         pclsSN.OrderID = RefID
                                         pclsSN.ProductListID = pProList.ID
                                         pclsSN.ProductID = pProList.ProductID
-                                        pclsSN.SaveData(tr, ModeData, lUpdateStstus)
+                                        pclsSN.SaveData(tr, ModeData)
 
-                                        'Close SN
-                                        If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
-                                            lclsSN2 = New SnDAO
-                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, EnumStatus.Close.ToString, 0)
+                                        'Update SN Status
+                                        lclsSN2 = New SnDAO
+                                        If pclsSN.IsDelete = 1 And (TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O")) Then
+                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, "New", 0)
+                                        ElseIf TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then 'Close SN
+                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, "Close", 0)
                                         End If
-
-                                        'If ModeData = DataMode.ModeEdit Then
-                                        '    If lclsSN.SerialNumberID > 0 Then
-                                        '        lSNInList = IIf(lSNInList = "", lclsSN.SerialNumberID, lSNInList & "," & lclsSN.SerialNumberID)
-                                        '    End If
-                                        'End If
                                     Next
-
-                                    'If lSNInList <> "" And ModeData = DataMode.ModeEdit Then
-                                    '    If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
-                                    '        lclsSN2 = New SnDAO
-                                    '        lclsSN2.SetStatusBySNAtRemove(tr, RefID, pProList.ProductID, lSNInList, "New", pProList.ID)
-                                    '    End If
-                                    '    lclsSN2 = New SnDAO
-                                    '    lclsSN2.DeleteRemoveData(tr, RefID, pProList.ProductID, lSNInList, pProList.ID)
-                                    'End If
-                                    'lSNInList = ""
                                 End If
                             End If '*** SN
                         End If '*** Is show
@@ -843,10 +817,10 @@ Public Class OrderSDAO
 
 
     Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer, ByVal pMode As DataMode)
-        Dim lcls As New ProductStockDAO
         Try
             Dim lclsStock As ProductStockDAO
             Dim lclsStock_Old As ProductStockDAO
+            Dim lclsClone As ProductStockDAO
 
             If pIsUpdate = 4 Then ''** Stock in
                 'Update Stock +
@@ -869,8 +843,15 @@ Public Class OrderSDAO
                         lclsStock_Old.LocationDTLID = pProductList.LocationDTLID_Old
                         lclsStock_Old.Cost = pProductList.Cost
                         lclsStock_Old.Units = pProductList.Units_Old * -1
-                        lclsStock_Old.SaveData(ptr, False, False, ID, Code)
+
+                        'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                        lclsClone = New ProductStockDAO
+                        lclsClone = lclsStock_Old.Clone
+                        lclsClone.SaveData(ptr, False, False, ID, Code)
+
+                        'Update #02 with original class **SUM STOCK
                         lclsStock_Old.SaveData(ptr, True, False, ID, Code)
+
                         'Add new unit to new location
                         lclsStock.Units = pProductList.Units
                     Else
@@ -881,84 +862,50 @@ Public Class OrderSDAO
                         End If
                     End If
                 End If
-                lclsStock.SaveData(ptr, False, False, ID, Code)
+                'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                lclsClone = New ProductStockDAO
+                lclsClone = lclsStock.Clone
+                lclsClone.SaveData(ptr, False, False, ID, Code)
+                'Update #02 with original class **SUM STOCK
                 lclsStock.SaveData(ptr, True, False, ID, Code)
-                'ElseIf pIsUpdate = 5 Then ''Update stock
-                '    lclsStock = New ProductStockDAO
-                '    lclsStock.ProductID = pProductList.ProductID
-                '    lclsStock.UnitID = pProductList.UnitID
-                '    lclsStock.LocationDTLID = pProductList.LocationDTLID
-                '    lclsStock.Cost = pProductList.Cost
 
-                '    If pMode = DataMode.ModeDelete Then
-                '        lclsStock.Units = pProductList.Units * -1
-                '    ElseIf OrderStatus = EnumStatus.NotApprove.ToString Then
-                '        lclsStock.Units = pProductList.Units * -1
-                '    ElseIf pProductList.ID = 0 Then
-                '        lclsStock.Units = pProductList.Units * 1
-                '    ElseIf pProductList.ID > 0 Then
-                '        'if change location in mode edit
-                '        If pProductList.LocationDTLID <> pProductList.LocationDTLID_Old Then
-                '            'Remove unit from old location stock
-                '            lclsStock_Old = New ProductStockDAO
-                '            lclsStock_Old.ProductID = pProductList.ProductID
-                '            lclsStock_Old.UnitID = pProductList.UnitID
-                '            lclsStock_Old.LocationDTLID = pProductList.LocationDTLID_Old
-                '            lclsStock_Old.Cost = pProductList.Cost
-                '            lclsStock_Old.Units = pProductList.Units_Old * -1
-                '            lclsStock_Old.SaveData(ptr, False, False, ID, Code)
-                '            If IsSumStock = True Then
-                '                lclsStock_Old.SaveData(ptr, True, False, ID, Code)
-                '            End If
-
-                '            'Add new unit to new location
-                '            lclsStock.Units = pProductList.Units
-                '        Else
-                '            If pProductList.Units = pProductList.Units_Old Then
-                '                lclsStock.Units = 0
-                '            Else
-                '                lclsStock.Units = (pProductList.Units - pProductList.Units_Old)
-                '            End If
-                '        End If
-                '    End If
-                '    lclsStock.SaveData(ptr, False, False, ID, Code)
-                '    If IsSumStock = True Then
-                '        lclsStock.SaveData(ptr, True, False, ID, Code)
-                '    End If
             ElseIf pIsUpdate > 0 Then
-                lcls = New ProductStockDAO
-                lcls.ProductID = pProductList.ProductID
-                lcls.UnitID = pProductList.UnitID
-                lcls.LocationDTLID = pProductList.LocationDTLID
+                lclsStock = New ProductStockDAO
+                lclsStock.ProductID = pProductList.ProductID
+                lclsStock.UnitID = pProductList.UnitID
+                lclsStock.LocationDTLID = pProductList.LocationDTLID
 
                 If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
-                    lcls.Units = pProductList.Units * 1
+                    lclsStock.Units = pProductList.Units * 1
                 ElseIf pProductList.ID = 0 Then
-                    lcls.Units = pProductList.Units * -1
+                    lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID > 0 Then
                     If pProductList.Units = pProductList.Units_Old Then
-                        lcls.Units = 0
+                        lclsStock.Units = 0
                     Else
-                        lcls.Units = (pProductList.Units - pProductList.Units_Old) * -1
+                        lclsStock.Units = (pProductList.Units - pProductList.Units_Old) * -1
                     End If
                 End If
 
                 If pIsUpdate = 1 Then  'sell stock sum
-                    lcls.SaveData(ptr, True, False, ID, Code)
+                    lclsStock.SaveData(ptr, True, False, ID, Code)
                 ElseIf pIsUpdate = 2 Then 'Invoice,Shiping
-                    lcls.SaveData(ptr, False, False, ID, Code)
+                    lclsStock.SaveData(ptr, False, False, ID, Code)
                 ElseIf pIsUpdate = 3 Then
                     If StockType = "I" Then
-                        lcls.Units = lcls.Units * -1 ' I = คืนสต็อก
+                        lclsStock.Units = lclsStock.Units * -1 ' I = คืนสต็อก
                     End If
-                    lcls.SaveData(ptr, False, False, ID, Code)
-                    lcls.SaveData(ptr, True, False, ID, Code)
+                    'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                    lclsClone = New ProductStockDAO
+                    lclsClone = lclsStock.Clone
+                    lclsClone.SaveData(ptr, False, False, ID, Code)
+                    'Update #02 with original class **SUM STOCK
+                    lclsStock.SaveData(ptr, True, False, ID, Code)
                 End If
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateStock : " & e.Message)
         Finally
-            lcls = Nothing
         End Try
     End Sub
 
