@@ -104,7 +104,7 @@ Public Class frmSNUpdateStatus
                             lSnData.SerialNumberID = GridView1.GetRowCellValue(lRow, "SerialNumberID")
                             lSnData.SerialNumberNo = GridView1.GetRowCellValue(lRow, "SerialNumberNo")
                             lSnData.Status = ConvertNullToString(SNStatus.EditValue)
-                            lSnData.SaveData(Nothing, DataMode.ModeEdit, False)
+                            lSnData.SaveData(Nothing, DataMode.ModeEdit)
                         End If
                     Next
                     LoadSN()

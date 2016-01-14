@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frmUpdateStock
     Private Const mFormName As String = "frmUpdateStock"
@@ -153,11 +154,9 @@ Public Class frmUpdateStock
 
 #End Region
 
-
-
     Private Sub frmCheckStock_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyData = Keys.Escape Then
-            Me.Close()
+            Me.Close() 'ssds
         End If
     End Sub
 
@@ -166,8 +165,27 @@ Public Class frmUpdateStock
     End Sub
 
     Private Sub RepositoryItemButtonEdit_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonEdit.ButtonClick
+        Dim rowHandle As Integer
+        Dim lFrmEditStock As New frmUpdateStockDTL
+        Dim lProductListDAO As ProductListDAO
         Try
-            Dim lFrmEditStock As New frmUpdateStock
+
+
+            If gridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(gridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            lProductListDAO = New ProductListDAO
+            lProductListDAO.ProductID = gridView.GetRowCellValue(rowHandle, "ProductID")
+            lProductListDAO.ProductCode = gridView.GetRowCellValue(rowHandle, "ProductCode")
+            lProductListDAO.ProductName = gridView.GetRowCellValue(rowHandle, "ProductName")
+            lProductListDAO.LocationDTLID = gridView.GetRowCellValue(rowHandle, "LocationDTLID")
+            lProductListDAO.UnitName = gridView.GetRowCellValue(rowHandle, "Unit")
+            lProductListDAO.Units = gridView.GetRowCellValue(rowHandle, "Units")
+            lProductListDAO.IsSN = gridView.GetRowCellValue(rowHandle, "IsSN")
+            lFrmEditStock.ProductListDAO = lProductListDAO
+            If lFrmEditStock.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                LoadData()
+            End If
 
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)

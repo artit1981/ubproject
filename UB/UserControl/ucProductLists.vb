@@ -822,24 +822,6 @@ Public Class ucProductLists
     End Sub
 
 
-    Private Sub gridView_CellValueChanging(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles gridView.CellValueChanging
-        Dim lIndex As Long = 0
-        If e.Column.FieldName = "IsSelect" Then
-            'If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "IsMerge")) = 1 Then
-            '    If Not bindingSource1 Is Nothing Then
-            '        For Each pProSub As ProductSubDAO In bindingSource1
-            '            If pProSub.ProductID = ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, "ProductID")) Then
-            '                If pProSub.IsShow = 0 Then
-            '                    pProSub.IsSelect = e.Value
-            '                End If
-            '            End If
-            '            lIndex = lIndex + 1
-            '        Next
-            '    End If
-            'End If
-        End If
-    End Sub
-
     Private Sub CalcToForm()
         If Not mFormOrder Is Nothing Then
             Call mFormOrder.Calculation()

@@ -35,11 +35,11 @@ Partial Class frmUpdateStockDTL
         Me.txtUnitName = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.btnSN = New DevExpress.XtraEditors.SimpleButton()
         Me.lblUpdateStr = New System.Windows.Forms.Label()
         Me.IsSumStock = New DevExpress.XtraEditors.CheckEdit()
         Me.SpinUnit = New DevExpress.XtraEditors.SpinEdit()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,6 +93,7 @@ Partial Class frmUpdateStockDTL
         Me.btnOK.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnOK.Appearance.Options.UseFont = True
         Me.btnOK.Appearance.Options.UseImage = True
+        Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
         Me.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnOK.Location = New System.Drawing.Point(554, 12)
@@ -241,6 +242,15 @@ Partial Class frmUpdateStockDTL
         Me.GroupControl2.TabIndex = 334
         Me.GroupControl2.Text = "GroupControl2"
         '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(30, 50)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(80, 14)
+        Me.LabelControl4.TabIndex = 328
+        Me.LabelControl4.Text = "จำนวน(ปัจจุบัน)"
+        '
         'btnSN
         '
         Me.btnSN.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -287,15 +297,6 @@ Partial Class frmUpdateStockDTL
         Me.SpinUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.SpinUnit.Size = New System.Drawing.Size(100, 20)
         Me.SpinUnit.TabIndex = 1
-        '
-        'LabelControl4
-        '
-        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(30, 50)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(80, 14)
-        Me.LabelControl4.TabIndex = 328
-        Me.LabelControl4.Text = "จำนวน(ปัจจุบัน)"
         '
         'frmUpdateStockDTL
         '
