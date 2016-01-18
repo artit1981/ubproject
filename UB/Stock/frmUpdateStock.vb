@@ -170,7 +170,6 @@ Public Class frmUpdateStock
         Dim lProductListDAO As ProductListDAO
         Try
 
-
             If gridView.RowCount = 0 Then Exit Sub
             rowHandle = (TryCast(gridControl.MainView, ColumnView)).FocusedRowHandle
             If rowHandle < 0 Then Exit Sub
@@ -193,4 +192,12 @@ Public Class frmUpdateStock
     End Sub
 
 
+    Private Sub RepositoryItemButtonHist_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonHist.ButtonClick
+        Try
+ 
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 End Class
