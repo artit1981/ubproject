@@ -469,6 +469,7 @@ Public Class ProductListDAO
         Try
             If mMode = DataMode.ModeNew Then
             ElseIf mMode = DataMode.ModeDelete Then
+            ElseIf mMode = DataMode.ModeNotApprove Then
             ElseIf ID <= 0 And ProductID <> 0 Then
                 mMode = DataMode.ModeNew
             ElseIf ID > 0 And ProductID <> 0 Then

@@ -3,6 +3,7 @@
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Columns
 
 Public Class frmSN
 
@@ -75,12 +76,6 @@ Public Class frmSN
         End Set
     End Property
 
-    'Public WriteOnly Property ProductListIDs() As Long
-    '    Set(ByVal value As Long)
-    '        mProductListIDs = value
-    '    End Set
-
-    'End Property
     Private Sub frmSN_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mIsFromLoad = True
         btnPrint.Visible = False
@@ -149,6 +144,7 @@ Public Class frmSN
 
 
         GridControl1.DataSource = mSnList
+        GridView1.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
 
         Init()
         InitialCombo()
@@ -166,21 +162,18 @@ Public Class frmSN
     End Sub
 
     Private Sub Init()
-
         Try
             If mIsFromLoad = False Then
                 If SNType.EditValue = "M" Then
                     If IsNothing(mSnList) Then
                         mSnList = New List(Of SnDAO)
                     End If
-
                     SNNo.Focus()
                 Else
                     FormatFront.Focus()
                     SNNo.EditValue = ""
                 End If
             End If
-
 
             FormatFront.Enabled = (SNType.EditValue = "A")
             FormatMidle.Enabled = (SNType.EditValue = "A")
@@ -195,7 +188,6 @@ Public Class frmSN
         Finally
 
         End Try
-
     End Sub
 
     Private Sub InitialCombo()
@@ -217,18 +209,13 @@ Public Class frmSN
         Init()
     End Sub
 
-
     Private Sub LoadData()
-
         Try
-
             GridControl1.DataSource = mSnList
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
-
         End Try
-
     End Sub
 
 
@@ -298,9 +285,9 @@ Public Class frmSN
                 lclsSN.SerialNumberID = 0
                 lclsSN.SerialNumberNo = lCode
                 lclsSN.Status = "New"
+                lclsSN.IsDelete = 0
                 lSNAdd = lSNAdd + 1
                 lLastCount = lLastCount + 1
-                'lUnit = lUnit - 1
                 mSnList.Add(lclsSN)
             Loop
 
@@ -341,6 +328,7 @@ Public Class frmSN
                     lclsSN = New SnDAO
                     lclsSN.SerialNumberID = 0
                     lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
+                    lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                     lclsSN.Status = "None"
                     mSnList.Add(lclsSN)
                 End If
@@ -353,7 +341,7 @@ Public Class frmSN
     End Sub
 
     Private Sub SNNo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles SNNo.KeyPress
-        Dim lclsSN As SnDAO, lIndex As Long, lIsError As Boolean = False
+        Dim lclsSN As SnDAO, lIndex As Long, lIsError As String = ""
         If e.KeyChar = ChrW(Keys.Enter) And ConvertNullToString(SNNo.EditValue) <> "" Then
             If mSnList.Count > Math.Abs(Units.EditValue) Then
                 MessageBox.Show("รายการครบจำนวน", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -374,50 +362,40 @@ Public Class frmSN
 
                 If mOrderType = MasterType.StockIn.ToString Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue > 0 Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue < 0 Then  '' คืนสต๊อก
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 ElseIf mOrderType = MasterType.SellOrders.ToString Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 ElseIf lIsCheckCreditType = True And mStockType = "I" Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
-                        lIsError = True
+                        lIsError = "Serial Number ซ้ำ"
                     End If
                 ElseIf lIsCheckCreditType = True And mStockType = "O" Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
-                        lIsError = True
+                        lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
                 End If
 
-                If lIsError = False Then
+                If lIsError = "" Then
                     lclsSN.SerialNumberID = 0
                     lclsSN.SerialNumberNo = ConvertNullToString(SNNo.EditValue)
                     lclsSN.Status = "New"
+                    lclsSN.IsDelete = 0
                     mSnList.Add(lclsSN)
                     GridControl1.RefreshDataSource()
                     SNNo.EditValue = ""
                 Else
-                    If mOrderType = MasterType.UpdateStock.ToString And Units.EditValue < 0 Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf mOrderType = MasterType.StockIn.ToString Or mOrderType = MasterType.UpdateStock.ToString Then
-                        MessageBox.Show("Serial Number ซ้ำ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf mOrderType = MasterType.SellOrders.ToString Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf lIsCheckCreditType = True And mStockType = "I" Then
-                        MessageBox.Show("Serial Number ซ้ำ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ElseIf lIsCheckCreditType = True And mStockType = "O" Then
-                        MessageBox.Show("ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    End If
-
+                    MessageBox.Show(lIsError, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     SNNo.SelectAll()
                 End If
             End If
@@ -431,15 +409,30 @@ Public Class frmSN
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        Dim lSnData As SnDAO
         If mSnList.Count <> Math.Abs(Units.EditValue) Then
             MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             SNNo.Focus()
         Else
+            If GridView1.RowCount > 0 Then
+                mSnList = Nothing
+                mSnList = New List(Of SnDAO)
+                For lRow = 0 To GridView1.RowCount
+                    lSnData = New SnDAO
+                    lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
+                    lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+                    lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
+                    lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
+                    mSnList.Add(lSnData)
+                Next
+            End If
+
             If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Then
                 If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                     modReport.PrintBarCode(ProductName.EditValue, mSnList)
                 End If
             End If
+
             Me.Close()
         End If
     End Sub
@@ -450,14 +443,8 @@ Public Class frmSN
             If mSnList.Count = 0 Then
                 MessageBox.Show("กรุณาระบุรายการ S/N", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 SNNo.Focus()
-                'ElseIf ConvertListToString(ProductName.EditValue) = "" Then
-                '    MessageBox.Show("กรุณาระบุสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                '    ProductCode.Focus()
-                '    ProductCode.SelectAll()
             Else
-
                 modReport.PrintBarCode(ProductName.EditValue, mSnList)
-                'Me.Close()
             End If
         Catch ex As Exception
             Cursor = Cursors.Default
@@ -523,9 +510,7 @@ Public Class frmSN
             lfrmSN.ProductNames = mProductName
             lfrmSN.Unit = Units.EditValue - GridView1.RowCount
             lfrmSN.ProductIDs = mProductIDs
-            'lfrmSN.SnList = mSnList
             lfrmSN.ShowDialog()
-            'mSnList = lfrmSN.SnList
             lSnList = lfrmSN.SnList
             For Each pSN As SnDAO In lSnList
                 mSnList.Add(pSN)
@@ -539,38 +524,6 @@ Public Class frmSN
         End Try
     End Sub
 
-    'Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    Try
-    '        Dim SQL As String = ""
-    '        Dim dataTable As New DataTable()
-
-    '        If XtraMessageBox.Show(Me, "Confirm to continue", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-    '            Cursor = Cursors.WaitCursor
-    '            SQL = " select  ProductList.ProductListID,SerialNumber.OrderID ,ProductList.ProductID "
-    '            SQL = SQL & " from ProductList ,SerialNumber "
-    '            SQL = SQL & " where ProductList.RefID=SerialNumber.OrderID  "
-    '            SQL = SQL & " and ProductList.ProductID=SerialNumber.ProductID and IsDelete=0   "
-    '            SQL = SQL & " group by ProductList.ProductListID,SerialNumber.OrderID, ProductList.ProductID  "
-    '            SQL = SQL & " order by SerialNumber.OrderID, ProductList.ProductID ,ProductList.ProductListID "
-    '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-    '            For Each dr As DataRow In dataTable.Rows
-    '                SQL = " update SerialNumber set ProductListID=" & ConvertNullToZero(dr("ProductListID"))
-    '                SQL = SQL & " where OrderID=" & ConvertNullToZero(dr("OrderID"))
-    '                SQL = SQL & " and ProductID=" & ConvertNullToZero(dr("ProductID"))
-    '                gConnection.executeInsertQuery(SQL, Nothing)
-    '            Next
-
-    '            MsgBox("Complete")
-    '        End If
-
-
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    Finally
-    '        Cursor = Cursors.Default
-    '    End Try
-    'End Sub
-
     Private Sub GridView1_FocusedRowChanged(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GridView1.FocusedRowChanged
         Dim lStatus As String = ""
         Dim View As GridView = sender
@@ -579,7 +532,26 @@ Public Class frmSN
 
         If rowHandle < 0 Then Exit Sub
         lStatus = ConvertNullToString(GridView1.GetRowCellValue(rowHandle, "Status"))
-        ControlNavigator1.Buttons.Remove.Enabled = Not (lStatus = EnumStatus.Close.ToString)
-        'ControlNavigator1.Buttons.Remove.Enabled = True
+        ControlNavigator1.Buttons.CustomButtons.Item("Remove").Enabled = Not (lStatus = EnumStatus.Close.ToString)
+    End Sub
+
+    Private Sub ControlNavigator1_ButtonClick(sender As Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridView1
+        view.GridControl.Focus()
+        Dim index As Integer = view.FocusedRowHandle
+        Select Case e.Button.Tag
+            Case "Remove"
+                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    If ConvertNullToZero(GridView1.GetRowCellValue(index, "SerialNumberID")) = 0 Then
+                        GridView1.DeleteSelectedRows()
+                        GridView1.RefreshData()
+                        GridControl1.RefreshDataSource()
+                    Else
+                        GridView1.SetRowCellValue(index, "IsDelete", 1)
+                        GridView1.RefreshData()
+                        GridControl1.RefreshDataSource()
+                    End If
+                End If
+        End Select
     End Sub
 End Class

@@ -1,11 +1,15 @@
-﻿Public Class frmCheckStock 
-    Private Const mFormName As String = "frmCheckStock"
+﻿Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Base
+
+Public Class frmUpdateStock
+    Private Const mFormName As String = "frmUpdateStock"
     Private mIsFromLoad As Boolean = False
 
     Private Sub frmCheckStock_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            Me.Text = "Update Stock"
             mIsFromLoad = True
-            'ShowProgress(True, "Loading...")
             InitialCombo()
             LoadData()
             mIsFromLoad = False
@@ -16,7 +20,6 @@
         End Try
 
     End Sub
-
 
 
 #Region "Private"
@@ -66,18 +69,17 @@
             Dim lcls As New ProductStockDAO
             Dim dataTable As New DataTable()
 
-           
-            dataTable = lcls.GetDataStockByLocation(ConvertNullToZero(ProductCategoryID.EditValue), ConvertNullToZero(ProductTypeID.EditValue) _
+            dataTable = lcls.GetDataStockByLocation2(ConvertNullToZero(ProductCategoryID.EditValue), ConvertNullToZero(ProductTypeID.EditValue) _
                                           , ConvertNullToZero(ProductGroupID.EditValue), ConvertNullToZero(ProductBrandID.EditValue))
             If dataTable.Rows.Count > 0 Then
-                 If dataTable.Rows.Count > 0 Then
-                    GridControl.DataSource = dataTable
-                    GridView.ViewCaption = "Stock"
-                    Call GridStyle()
+                If dataTable.Rows.Count > 0 Then
+                    gridControl.DataSource = dataTable
+                    gridView.ViewCaption = "Update Stock"
                 Else
-                    GridControl.DataSource = Nothing
+                    gridControl.DataSource = Nothing
                 End If
-
+            Else
+                gridControl.DataSource = Nothing
             End If
 
         Catch e As Exception
@@ -86,39 +88,11 @@
         End Try
     End Function
 
-
-    Private Sub GridStyle()
-        With GridView
-
-            .Columns("ProductID").Visible = False
-            '.Columns("LocationDTLID").Visible = False
-
-            .Columns("ProductCode").Caption = "รหัสสินค้า"
-            .Columns("ProductCode").Width = 150
-
-            .Columns("ProductName").Caption = "ชื่อสินค้า"
-            .Columns("ProductName").Width = 400
-
-            .Columns("UnitName").Caption = "หน่วยสินค้า"
-            .Columns("UnitName").Width = 100
-            '.Columns("Price").Caption = "ราคามาตรฐาน"
-            '.Columns("Price").Width = 700
-            '.Columns("Price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-            '.Columns("Price").DisplayFormat.FormatString = "n2"
-
-            .Columns("Remark").Caption = "รายละเอียด"
-            .Columns("Remark").Width = 200
-
-
-        End With
-    End Sub
-
 #End Region
 
-
 #Region "Event"
-    
-    
+
+
 
     Private Sub btnBrandRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBrandRefresh.Click
         Try
@@ -128,16 +102,19 @@
         End Try
     End Sub
 
-    Private Sub btnFind_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         Try
             ShowProgress(True, "Loading...")
             LoadData()
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
         End Try
     End Sub
+
+
     Private Sub btnProductCategory_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnProductCategory.Click
         Try
             SetComboProductCategory()
@@ -161,15 +138,7 @@
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
-    'Private Sub ProductGroupID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductGroupID.EditValueChanged
-    '    Try
-    '        If mIsFromLoad = False Then
-    '            SetComboProductCategory()
-    '        End If
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
+
 
     Private Sub ProductCategoryID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductCategoryID.EditValueChanged
         Try
@@ -183,46 +152,52 @@
         End Try
     End Sub
 
-    'Private Sub ProductTypeID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.EditValueChanged
-    '    Try
-    '        If mIsFromLoad = False Then
-    '            SetComboProductBrand(ConvertNullToZero(ProductTypeID.EditValue))
-    '        End If
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
 #End Region
 
-    Private Sub btnFind_Click_1(sender As System.Object, e As System.EventArgs) Handles btnFind.Click
-        Try
-            ShowProgress(True, "Loading...")
-            LoadData()
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
-
-  
-    Private Sub btnExportExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExportExcel.Click
-        Try
-            Dim lfrm As New frmPreExport
-            lfrm.InitialForm("Stock", gridControl)
-            lfrm.ShowDialog()
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        Finally
-        End Try
-    End Sub
-    Private Sub frmCheckStock_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub frmCheckStock_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyData = Keys.Escape Then
-            Me.Close()
+            Me.Close() 'ssds
         End If
     End Sub
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
         Me.Close()
+    End Sub
+
+    Private Sub RepositoryItemButtonEdit_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonEdit.ButtonClick
+        Dim rowHandle As Integer
+        Dim lFrmEditStock As New frmUpdateStockDTL
+        Dim lProductListDAO As ProductListDAO
+        Try
+
+            If gridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(gridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            lProductListDAO = New ProductListDAO
+            lProductListDAO.ProductID = gridView.GetRowCellValue(rowHandle, "ProductID")
+            lProductListDAO.ProductCode = gridView.GetRowCellValue(rowHandle, "ProductCode")
+            lProductListDAO.ProductName = gridView.GetRowCellValue(rowHandle, "ProductName")
+            lProductListDAO.LocationDTLID = gridView.GetRowCellValue(rowHandle, "LocationDTLID")
+            lProductListDAO.UnitName = gridView.GetRowCellValue(rowHandle, "Unit")
+            lProductListDAO.Units = gridView.GetRowCellValue(rowHandle, "Units")
+            lProductListDAO.IsSN = gridView.GetRowCellValue(rowHandle, "IsSN")
+            lFrmEditStock.ProductListDAO = lProductListDAO
+            If lFrmEditStock.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                LoadData()
+            End If
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+
+    Private Sub RepositoryItemButtonHist_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonHist.ButtonClick
+        Try
+ 
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
     End Sub
 End Class

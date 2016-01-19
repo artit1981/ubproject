@@ -13,6 +13,10 @@ Public Class ProductStockDAO
     Private mCost As Decimal
     Private mSumStockLocationDTLID As Long
 
+    Public Function Clone() As ProductStockDAO
+        Return DirectCast(Me.MemberwiseClone(), ProductStockDAO)
+    End Function
+
     Public Property ProductID() As Long
         Get
             Return mProductID
@@ -94,9 +98,8 @@ Public Class ProductStockDAO
         Dim dataTable As New DataTable()
         IsExist_Initial = False
         Try
-            'If pIsSumLocation = True Or pSpecifySum = False Then
+
             Call CheckSumStock(tr, pIsSumLocation)
-            'End If
 
             SQL = "SELECT Product_Stock.ProductID,Product_Stock.Units,Product.CostType,Product_Stock.Cost,Product_Stock.Lot "
             SQL = SQL & " FROM Product_Stock"
@@ -131,22 +134,6 @@ Public Class ProductStockDAO
                     Exit For
                 Next
             Else
-                '    SQL = "SELECT ProductID, CostType "
-                '    SQL = SQL & " FROM Product  "
-                ''    SQL = SQL & " WHERE ProductID =" & ProductID
-                '    dataTable = gConnection.executeSelectQuery(SQL, tr)
-                '    If dataTable.Rows.Count > 0 Then
-                '        For Each dr As DataRow In dataTable.Rows
-                '            Units = 0
-                '            'Cost = 0
-                '            'Lot = 0
-                '            'CostType = ConvertNullToZero(dr("CostType"))
-                '            Return False
-                '            Exit For
-                '        Next
-                '    Else
-
-                '    End If
                 Return False
             End If
 
@@ -200,11 +187,8 @@ Public Class ProductStockDAO
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product_Unit.CodeThai AS UnitName,Product_LocationS.KeepMin "
             SQL = SQL & " FROM Product_Stock"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=Product_Stock.ProductID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_ProductCategory ON Product_ProductCategory.MasterID=Product.ProductCategoryID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_ProductType ON Product_ProductType.MasterID=Product.ProductTypeID "
-            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
+             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
             SQL = SQL & " LEFT OUTER JOIN Product_LocationS ON Product_LocationS.RefID=Product_Stock.ProductID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL ON Product_Unit.UnitID=ProductList.UnitID "
             SQL = SQL & " WHERE 1=1 "
             If pProductID > 0 Then
                 SQL = SQL & " AND Product_Stock.ProductID =" & pProductID
@@ -266,23 +250,19 @@ Public Class ProductStockDAO
 
 
     Public Function GetDataStockByLocation2(ByVal pProductCategoryID As Long, ByVal pProductTypeID As Long _
-                                 , ByVal pProductGroupID As Long, ByVal pProductBrandID As Long _
-                                 , ByVal pProcessID As Long, ByVal pIsDiffOnly As Boolean) As DataTable
+                                 , ByVal pProductGroupID As Long, ByVal pProductBrandID As Long ) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
-            SQL = " select a.ProcessID, a.ProductID,b.ProductCode,b.ProductName"
+            SQL = " select a.ProductID,b.ProductCode,b.ProductName"
             SQL &= " ,c.NameThai as Location,d.CodeThai as Unit"
-            SQL &= " ,a.Units,a.StockUnits,a.IsSumStock,a.IsDiff"
-            SQL &= " from Product_Stock_His a"
+            SQL &= " ,a.Units,a.LocationDTLID,a.UnitID ,b.IsSN "
+            SQL &= " from Product_Stock a"
             SQL &= " left outer join Product b on a.ProductID=b.ProductID"
             SQL &= " left outer join Product_LocationDTL c on a.LocationDTLID=c.LocationDTLID"
             SQL &= " left outer join Product_Unit d on a.UnitID=d.UnitID"
-            SQL &= " where  a.ProcessID =" & pProcessID
-            If pIsDiffOnly = True Then
-                SQL &= " and a.IsDiff=1 "
-            End If
+            SQL &= " where  1=1 "
 
             SQL &= "  "
             If pProductCategoryID > 0 Then
@@ -297,7 +277,7 @@ Public Class ProductStockDAO
             If pProductBrandID > 0 Then
                 SQL = SQL & " and b.ProductBrandID = '" & pProductBrandID & "'"
             End If
-            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName "
+            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductStockDAO.GetDataStockByLocation2 : " & e.Message)
