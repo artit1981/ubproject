@@ -187,11 +187,8 @@ Public Class ProductStockDAO
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product_Unit.CodeThai AS UnitName,Product_LocationS.KeepMin "
             SQL = SQL & " FROM Product_Stock"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=Product_Stock.ProductID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_ProductCategory ON Product_ProductCategory.MasterID=Product.ProductCategoryID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_ProductType ON Product_ProductType.MasterID=Product.ProductTypeID "
-            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
+             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
             SQL = SQL & " LEFT OUTER JOIN Product_LocationS ON Product_LocationS.RefID=Product_Stock.ProductID "
-            'SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL ON Product_Unit.UnitID=ProductList.UnitID "
             SQL = SQL & " WHERE 1=1 "
             If pProductID > 0 Then
                 SQL = SQL & " AND Product_Stock.ProductID =" & pProductID

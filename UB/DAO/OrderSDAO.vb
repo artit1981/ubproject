@@ -754,7 +754,7 @@ Public Class OrderSDAO
 
                     If pProList.SaveData(tr) Then
                         If pProList.IsShow = 1 Then
-                            '*** Stock
+                            '*** Main Stock
                             UpdateStock(tr, pProList, lIsUpdate, ModeData)
 
                             '*** SN
@@ -832,14 +832,14 @@ Public Class OrderSDAO
                 If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
                     lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID = 0 Then
-                    lclsStock.Units = pProductList.Units * 1
+                    lclsStock.Units = pProductList.Units
                 ElseIf pProductList.ID > 0 Then
                     'if change location in mode edit
                     If pProductList.LocationDTLID <> pProductList.LocationDTLID_Old Then
                         'Remove unit from old location stock
                         lclsStock_Old = New ProductStockDAO
                         lclsStock_Old.ProductID = pProductList.ProductID
-                        lclsStock_Old.UnitID = pProductList.UnitID
+                        lclsStock_Old.UnitID = pProductList.UnitMainID
                         lclsStock_Old.LocationDTLID = pProductList.LocationDTLID_Old
                         lclsStock_Old.Cost = pProductList.Cost
                         lclsStock_Old.Units = pProductList.Units_Old * -1
@@ -872,7 +872,7 @@ Public Class OrderSDAO
             ElseIf pIsUpdate > 0 Then
                 lclsStock = New ProductStockDAO
                 lclsStock.ProductID = pProductList.ProductID
-                lclsStock.UnitID = pProductList.UnitID
+                lclsStock.UnitID = pProductList.UnitMainID
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
 
                 If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
