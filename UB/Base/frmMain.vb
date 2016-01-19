@@ -140,6 +140,7 @@ Public Class frmMain
         AppConfigFileSettings.UpdateAppSettings("SkinName", UserLookAndFeel.Default.SkinName)
         AppConfigFileSettings.UpdateAppSettings("OpenTab", ribbonMain.SelectedPage.Name)
         InsertActivity(DataMode.ModeLogOut, 0, "", Nothing)
+        System.Windows.Forms.Application.Exit()
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
