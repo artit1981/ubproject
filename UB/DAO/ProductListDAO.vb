@@ -3,6 +3,12 @@ Option Explicit On
 Imports System.Data.SqlClient
 
 Public Class ProductListDAO
+
+
+
+    Public Function Clone() As ProductListDAO
+        Return DirectCast(Me.MemberwiseClone(), ProductListDAO)
+    End Function
 #Region "Property"
     Private mMode As DataMode
     Private mIDs As Long
@@ -36,6 +42,7 @@ Public Class ProductListDAO
     Private mAdjustUnit As Long = 0
     Private mRateUnit As Decimal = 1
     Private mIsDelete As Integer = 0
+    Dim mAdjustUnit_Old As Long = 0
 
     Public ReadOnly Property UnitDAO() As MasterDAO
         Get
@@ -317,6 +324,15 @@ Public Class ProductListDAO
             mAdjustUnit = value
         End Set
     End Property
+    Public Property AdjustUnit_Old() As Long
+        Get
+            Return mAdjustUnit_Old
+        End Get
+        Set(ByVal value As Long)
+            mAdjustUnit_Old = value
+        End Set
+    End Property
+
     Public Property RateUnit() As Decimal
         Get
             Return mRateUnit
@@ -435,7 +451,7 @@ Public Class ProductListDAO
         Dim dataTable As New DataTable()
 
         Try 'ใช้ชื่อสินค้าจาก Table Product
-            SQL = "SELECT count( ProductList.ProductID) as SEQ  
+            SQL = "SELECT count( ProductList.ProductID) as SEQ  "
             SQL = SQL & " FROM ProductList"
             SQL = SQL & " WHERE ProductList.IsDelete =0 and SEQ=1  "
 
@@ -454,7 +470,7 @@ Public Class ProductListDAO
             For Each pRow As DataRow In dataTable.Rows
                 Return ConvertNullToZero(pRow.Item("SEQ")) > 1
             Next
-             
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductListDAO.CheckSeqDup : " & e.Message)
         End Try
@@ -595,7 +611,7 @@ Public Class ProductListDAO
 
                 gConnection.executeInsertSqlCommand(myCommand, tr)
             End If
-         
+
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductListDAO.SaveData : " & e.Message)

@@ -135,8 +135,10 @@ Public Class ucProductLists
                 rec.Total = pPro.Total
                 If pMode = DataMode.ModeNew Then
                     rec.Units_Old = 0
+                    rec.AdjustUnit_Old = 0
                 Else
-                    rec.Units_Old = pPro.AdjustUnit
+                    rec.Units_Old = pPro.Units
+                    rec.AdjustUnit_Old = pPro.AdjustUnit
                 End If
 
                 rec.ModePro = pPro.ModePro
@@ -224,6 +226,7 @@ Public Class ucProductLists
                         lDataDAO.UnitID = pProSub.UnitID
                         lDataDAO.UnitName = pProSub.UnitName
                         lDataDAO.Units_Old = pProSub.Units_Old
+                        lDataDAO.AdjustUnit_Old = pProSub.AdjustUnit_Old
                         lDataDAO.KeepMin = pProSub.KeepMin
                         lDataDAO.Price = pProSub.Price
                         lDataDAO.Cost = pProSub.Cost
@@ -363,7 +366,7 @@ Public Class ucProductLists
                                 mIsError = "PRODUCTCHANGE"
                             ElseIf lDataDAO.LocationDTLID <> lDataDAO.LocationDTLID_Old Then
                                 mIsError = "PRODUCTCHANGE"
-                            ElseIf lDataDAO.AdjustUnit <> lDataDAO.Units_Old Then
+                            ElseIf lDataDAO.AdjustUnit <> lDataDAO.AdjustUnit_Old Then
                                 mIsError = "PRODUCTCHANGE"
                             ElseIf lDataDAO.IsDelete = 1 Then
                                 mIsError = "PRODUCTCHANGE"
@@ -449,9 +452,11 @@ Public Class ucProductLists
                     If mMode = DataMode.ModeNew Then
                         rec.ID = 0
                         rec.Units_Old = 0
+                        rec.AdjustUnit_Old = 0
                     Else
                         rec.ID = dr("ID")
-                        rec.Units_Old = ConvertNullToZero(dr("AdjustUnit"))
+                        rec.Units_Old = ConvertNullToZero(dr("Units"))
+                        rec.AdjustUnit_Old = ConvertNullToZero(dr("AdjustUnit"))
                     End If
                     If pIsLoadFromRefOrder = True Then
                         rec.ProductListRefID = dr("ID")
@@ -737,8 +742,10 @@ Public Class ucProductLists
                 rec.Units = rec.AdjustUnit * rec.RateUnit
                 If rec.ID = 0 Then
                     rec.Units_Old = 0
+                    rec.AdjustUnit_Old = 0
                 Else
                     rec.Units_Old = rec.Units
+                    rec.AdjustUnit_Old = rec.AdjustUnit
                 End If
                 rec.IsShow = 1
                 rec.IsMerge = 0
