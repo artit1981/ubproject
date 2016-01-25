@@ -205,6 +205,14 @@ Partial Class frmProduct
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.AlertControl1 = New DevExpress.XtraBars.Alerter.AlertControl(Me.components)
+        Me.UnitBuyRefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.UnitMainIDBuy = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView12 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn37 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Label37 = New System.Windows.Forms.Label()
         CType(Me.ProductNameS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -271,6 +279,8 @@ Partial Class frmProduct
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView12, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProductNameS
@@ -310,7 +320,7 @@ Partial Class frmProduct
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Remark, "TextChanged")
         Me.Remark.EditValue = ""
         Me.Remark.EnterMoveNextControl = True
-        Me.Remark.Location = New System.Drawing.Point(151, 358)
+        Me.Remark.Location = New System.Drawing.Point(151, 382)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Remark, True)
         Me.Remark.Name = "Remark"
         Me.Remark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -343,7 +353,7 @@ Partial Class frmProduct
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.FomulaRefresh, "")
         Me.FomulaRefresh.Image = CType(resources.GetObject("FomulaRefresh.Image"), System.Drawing.Image)
         Me.FomulaRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.FomulaRefresh.Location = New System.Drawing.Point(426, 306)
+        Me.FomulaRefresh.Location = New System.Drawing.Point(426, 330)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.FomulaRefresh, True)
         Me.FomulaRefresh.Name = "FomulaRefresh"
         Me.FomulaRefresh.Size = New System.Drawing.Size(21, 21)
@@ -545,7 +555,7 @@ Partial Class frmProduct
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ProductFomulaID, "TextChanged")
         Me.ProductFomulaID.EnterMoveNextControl = True
-        Me.ProductFomulaID.Location = New System.Drawing.Point(151, 306)
+        Me.ProductFomulaID.Location = New System.Drawing.Point(151, 330)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductFomulaID, True)
         Me.ProductFomulaID.Name = "ProductFomulaID"
         Me.ProductFomulaID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -652,7 +662,7 @@ Partial Class frmProduct
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UnitSecondRefresh, "")
         Me.UnitSecondRefresh.Image = CType(resources.GetObject("UnitSecondRefresh.Image"), System.Drawing.Image)
         Me.UnitSecondRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.UnitSecondRefresh.Location = New System.Drawing.Point(426, 279)
+        Me.UnitSecondRefresh.Location = New System.Drawing.Point(426, 303)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UnitSecondRefresh, True)
         Me.UnitSecondRefresh.Name = "UnitSecondRefresh"
         Me.UnitSecondRefresh.Size = New System.Drawing.Size(21, 21)
@@ -680,7 +690,7 @@ Partial Class frmProduct
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UnitSecondID, "TextChanged")
         Me.UnitSecondID.EnterMoveNextControl = True
-        Me.UnitSecondID.Location = New System.Drawing.Point(151, 279)
+        Me.UnitSecondID.Location = New System.Drawing.Point(151, 303)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UnitSecondID, True)
         Me.UnitSecondID.Name = "UnitSecondID"
         Me.UnitSecondID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -771,7 +781,7 @@ Partial Class frmProduct
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TabControl1, True)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.TabControl1.Size = New System.Drawing.Size(900, 486)
+        Me.TabControl1.Size = New System.Drawing.Size(900, 491)
         Me.TabControl1.TabIndex = 7
         Me.TabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.GroupTabPage, Me.UnitBuyTabPage, Me.UnitSellTabPage, Me.LocationTabPage, Me.SubstituteTabPage, Me.ProSetTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TabControl1, "")
@@ -782,6 +792,9 @@ Partial Class frmProduct
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.UnitBuyRefresh)
+        Me.GeneralTabPage.Controls.Add(Me.UnitMainIDBuy)
+        Me.GeneralTabPage.Controls.Add(Me.Label37)
         Me.GeneralTabPage.Controls.Add(Me.Label36)
         Me.GeneralTabPage.Controls.Add(Me.Label35)
         Me.GeneralTabPage.Controls.Add(Me.GuaranteeDay)
@@ -826,7 +839,7 @@ Partial Class frmProduct
         Me.GeneralTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(894, 458)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(894, 463)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -836,7 +849,7 @@ Partial Class frmProduct
         Me.Label36.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label36, "")
         Me.Label36.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label36.Location = New System.Drawing.Point(260, 334)
+        Me.Label36.Location = New System.Drawing.Point(260, 358)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label36, True)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(20, 14)
@@ -851,7 +864,7 @@ Partial Class frmProduct
         Me.Label35.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label35, "")
         Me.Label35.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label35.Location = New System.Drawing.Point(49, 334)
+        Me.Label35.Location = New System.Drawing.Point(49, 358)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label35, True)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(70, 14)
@@ -864,7 +877,7 @@ Partial Class frmProduct
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GuaranteeDay, "TextChanged")
         Me.GuaranteeDay.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.GuaranteeDay.Location = New System.Drawing.Point(151, 332)
+        Me.GuaranteeDay.Location = New System.Drawing.Point(151, 356)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GuaranteeDay, True)
         Me.GuaranteeDay.Name = "GuaranteeDay"
         Me.GuaranteeDay.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -1177,7 +1190,7 @@ Partial Class frmProduct
         Me.Label22.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label22, "")
         Me.Label22.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label22.Location = New System.Drawing.Point(49, 282)
+        Me.Label22.Location = New System.Drawing.Point(49, 306)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label22, True)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(77, 14)
@@ -1196,9 +1209,9 @@ Partial Class frmProduct
         Me.Label21.Location = New System.Drawing.Point(49, 255)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label21, True)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(72, 14)
+        Me.Label21.Size = New System.Drawing.Size(102, 14)
         Me.Label21.TabIndex = 212
-        Me.Label21.Text = "หน่วยนับหลัก"
+        Me.Label21.Text = "หน่วยนับหลัก(ขาย)"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label21, "")
         '
         'Label16
@@ -1221,7 +1234,7 @@ Partial Class frmProduct
         Me.Label20.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label20, "")
         Me.Label20.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label20.Location = New System.Drawing.Point(49, 309)
+        Me.Label20.Location = New System.Drawing.Point(49, 333)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label20, True)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(65, 14)
@@ -1280,7 +1293,7 @@ Partial Class frmProduct
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(52, 361)
+        Me.Label5.Location = New System.Drawing.Point(52, 385)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 14)
@@ -2557,11 +2570,94 @@ Partial Class frmProduct
         'FormChangedComponent1
         '
         '
+        'UnitBuyRefresh
+        '
+        Me.UnitBuyRefresh.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitBuyRefresh.Appearance.Options.UseFont = True
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UnitBuyRefresh, "")
+        Me.UnitBuyRefresh.Image = CType(resources.GetObject("UnitBuyRefresh.Image"), System.Drawing.Image)
+        Me.UnitBuyRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.UnitBuyRefresh.Location = New System.Drawing.Point(426, 278)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UnitBuyRefresh, True)
+        Me.UnitBuyRefresh.Name = "UnitBuyRefresh"
+        Me.UnitBuyRefresh.Size = New System.Drawing.Size(21, 21)
+        Me.UnitBuyRefresh.TabIndex = 243
+        Me.UnitBuyRefresh.TabStop = False
+        Me.UnitBuyRefresh.ToolTip = "Refresh"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UnitBuyRefresh, "")
+        '
+        'UnitMainIDBuy
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UnitMainIDBuy, "TextChanged")
+        Me.UnitMainIDBuy.EnterMoveNextControl = True
+        Me.UnitMainIDBuy.Location = New System.Drawing.Point(151, 278)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UnitMainIDBuy, True)
+        Me.UnitMainIDBuy.Name = "UnitMainIDBuy"
+        Me.UnitMainIDBuy.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UnitMainIDBuy.Properties.Appearance.Options.UseFont = True
+        Me.UnitMainIDBuy.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.UnitMainIDBuy.Properties.NullText = ""
+        Me.UnitMainIDBuy.Properties.View = Me.GridView12
+        Me.UnitMainIDBuy.Size = New System.Drawing.Size(273, 20)
+        Me.UnitMainIDBuy.TabIndex = 241
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UnitMainIDBuy, "Text")
+        '
+        'GridView12
+        '
+        Me.GridView12.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn37})
+        Me.GridView12.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView12.Name = "GridView12"
+        Me.GridView12.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView12.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "รหัสหน่วยนับ"
+        Me.GridColumn4.FieldName = " ID"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "ชื่อหน่วยนับ"
+        Me.GridColumn5.FieldName = "CodeThai"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "GridColumn46"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn37
+        '
+        Me.GridColumn37.Caption = "รายละเอียด"
+        Me.GridColumn37.FieldName = "Remark "
+        Me.GridColumn37.Name = "GridColumn37"
+        Me.GridColumn37.Visible = True
+        Me.GridColumn37.VisibleIndex = 1
+        Me.GridColumn37.Width = 100
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label37, "")
+        Me.Label37.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label37.Location = New System.Drawing.Point(49, 281)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label37, True)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(97, 14)
+        Me.Label37.TabIndex = 242
+        Me.Label37.Text = "หน่วยนับหลัก(ซื้อ)"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label37, "")
+        '
         'frmProduct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(900, 523)
+        Me.ClientSize = New System.Drawing.Size(900, 528)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmProduct"
         Me.Text = " "
@@ -2637,6 +2733,8 @@ Partial Class frmProduct
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView12, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2825,4 +2923,12 @@ Partial Class frmProduct
     Private WithEvents Label35 As System.Windows.Forms.Label
     Friend WithEvents GuaranteeDay As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents AlertControl1 As DevExpress.XtraBars.Alerter.AlertControl
+    Friend WithEvents UnitBuyRefresh As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents UnitMainIDBuy As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView12 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn37 As DevExpress.XtraGrid.Columns.GridColumn
+    Private WithEvents Label37 As System.Windows.Forms.Label
 End Class

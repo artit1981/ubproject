@@ -52,6 +52,7 @@ Public Class ProductDAO
     Dim mProductBrand As ProductBrandDAO
     Dim mProductGroupID As Long
     Dim mGuaranteeDay As Long = 0
+    Dim mUnitMainIDBuy As Long = 0
 
 
     Public ReadOnly Property TableName() As String
@@ -182,6 +183,15 @@ Public Class ProductDAO
         End Get
         Set(ByVal value As Long)
             mUnitMainID = value
+        End Set
+    End Property
+
+    Public Property UnitMainIDBuy() As Long
+        Get
+            Return mUnitMainIDBuy
+        End Get
+        Set(ByVal value As Long)
+            mUnitMainIDBuy = value
         End Set
     End Property
 
@@ -574,6 +584,7 @@ Public Class ProductDAO
                     IsSN = ConvertNullToZero(dr("IsSN"))
                     IsProductSet = ConvertNullToBoolean(dr("IsProductSet"))
                     UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                    UnitMainIDBuy = ConvertNullToZero(dr("UnitMainIDBuy"))
                     UnitSecondID = ConvertNullToZero(dr("UnitSecondID"))
 
                     ProductFomulaID = ConvertNullToZero(dr("ProductFomulaID"))
@@ -784,7 +795,7 @@ Public Class ProductDAO
                     ID = GenNewID("ProductID", TableName, tr)
                     SQL = " INSERT INTO Product  (ProductID,ProductCode,ProductName,ProductNameEng "
                     SQL = SQL & " ,CostType,PriceStandard,Price1,Price2,Price3,Price4,Price5,Price6"
-                    SQL = SQL & " ,TaxType,IsSN,IsProductSet,UnitMainID,UnitSecondID,ProductFomulaID "
+                    SQL = SQL & " ,TaxType,IsSN,IsProductSet,UnitMainID,UnitMainIDBuy,UnitSecondID,ProductFomulaID "
                     SQL = SQL & " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
                     SQL = SQL & " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
                     SQL = SQL & " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
@@ -805,6 +816,7 @@ Public Class ProductDAO
                     SQL = SQL & " ,  @IsSN"
                     SQL = SQL & " ,  @IsProductSet"
                     SQL = SQL & " ,  @UnitMainID"
+                    SQL = SQL & " ,  @UnitMainIDBuy"
                     SQL = SQL & " ,  @UnitSecondID"
                     SQL = SQL & " ,  @ProductFomulaID"
                     SQL = SQL & " ,  @ProductCategoryID"
@@ -851,6 +863,7 @@ Public Class ProductDAO
                     SQL = SQL & " ,  IsProductSet=@IsProductSet"
                     SQL = SQL & " ,  UnitSecondID=@UnitSecondID"
                     SQL = SQL & " ,  UnitMainID=@UnitMainID"
+                    SQL = SQL & " ,  UnitMainIDBuy=@UnitMainIDBuy"
                     SQL = SQL & " ,  ProductFomulaID=@ProductFomulaID"
                     SQL = SQL & " ,  ProductCategoryID=@ProductCategoryID"
                     SQL = SQL & " ,  ProductBrandID=@ProductBrandID"
@@ -906,6 +919,7 @@ Public Class ProductDAO
             myCommand.Parameters.Add(New SqlParameter("@IsProductSet", IsProductSet))
             myCommand.Parameters.Add(New SqlParameter("@UnitSecondID", ConvertNullToZero(UnitSecondID)))
             myCommand.Parameters.Add(New SqlParameter("@UnitMainID", ConvertNullToZero(UnitMainID)))
+            myCommand.Parameters.Add(New SqlParameter("@UnitMainIDBuy", ConvertNullToZero(UnitMainIDBuy)))
             myCommand.Parameters.Add(New SqlParameter("@ProductFomulaID", ConvertNullToZero(ProductFomulaID)))
             myCommand.Parameters.Add(New SqlParameter("@ProductCategoryID", ConvertNullToZero(ProductCategoryID)))
             myCommand.Parameters.Add(New SqlParameter("@ProductBrandID", ConvertNullToZero(ProductBrandID)))

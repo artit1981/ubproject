@@ -823,4 +823,9 @@ Public Class frmMain
         frmUpdateStock.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)
     End Sub
+
+    Private Sub ProvinceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProvinceBar.ItemClick
+        ShowMaster(MasterType.Province)
+        InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
+    End Sub
 End Class

@@ -396,13 +396,13 @@ Public Class frmOrderS
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.IsMakePO = mIsMakePO
 
-            'Check Approve stock
-            Dim lIsApproveStock As Boolean = (CheckIsUseStock(mcls.TableID, Nothing, mcls.StockType, Nothing) > 0)
-            If lIsApproveStock And CheckIsWaitApproveStock() Then
-                ShowProgress(False, "")
-                XtraMessageBox.Show(Me, "ไม่สามารถทำรายการได้ เนื่องจากระบบมีการคำนวนสต๊อกใหม่ กรุณาทำการอนุมัติสต๊อก ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1)
-                Return False
-            End If
+            ''Check Approve stock
+            'Dim lIsApproveStock As Boolean = (CheckIsUseStock(mcls.TableID, Nothing, mcls.StockType, Nothing) > 0)
+            'If lIsApproveStock And CheckIsWaitApproveStock() Then
+            '    ShowProgress(False, "")
+            '    XtraMessageBox.Show(Me, "ไม่สามารถทำรายการได้ เนื่องจากระบบมีการคำนวนสต๊อกใหม่ กรุณาทำการอนุมัติสต๊อก ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1)
+            '    Return False
+            'End If
 
             If TaxGroup.Enabled = True Then
                 mcls.TaxOrderDAOs = GetTaxOrderList()

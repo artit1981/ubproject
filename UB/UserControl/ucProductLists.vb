@@ -501,7 +501,6 @@ Public Class ucProductLists
                         lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
                         rec.SNList.Add(lclsSN)
                     Next
-
                     bindingSource1.Add(rec)
                 Next
             End If
@@ -712,10 +711,11 @@ Public Class ucProductLists
                 rec.ProductCode = lcls.Code
                 rec.ProductNames = lcls.NameThai
                 rec.ProductNameExt = ""
-                rec.UnitMainID = lcls.UnitMainID
                 If mIsUsePriceSell = True Then
+                    rec.UnitMainID = lcls.UnitMainID
                     rec.Price = lcls.PriceSale
                 Else
+                    rec.UnitMainID = lcls.UnitMainIDBuy
                     rec.Price = lcls.PriceBuy
                 End If
                 If mRefTable = MasterType.PurchaseOrder.ToString Then

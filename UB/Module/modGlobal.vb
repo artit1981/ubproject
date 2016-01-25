@@ -104,6 +104,7 @@ Module modGlobal
         OrderSellHis = 95
         OrderSellHisExp = 96
         ApproveStock = 97
+        Province = 98
     End Enum
 
     Public Enum DataMode
