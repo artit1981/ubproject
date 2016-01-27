@@ -25,83 +25,85 @@ Public Class OrderControl
 
     Private Sub SetFormByOrderType()
         Dim lMakeOrderCation As String = ""
+        Dim lFilterCol As FilterBy
 
         mCtlForm.DatePanel.Visible = True
         Select Case mOrderType
             Case MasterType.SellOrders
                 mCaption = "ใบสั่งขาย"
                 lMakeOrderCation = "Make Invoice & Shiping"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Quotation
                 mCaption = "ใบเสนอราคา"
                 lMakeOrderCation = "Make Order"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Bill
                 mCaption = "ใบวางบิล"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Invoice
                 mCaption = "ใบกำกับภาษี(ขาย)"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Borrow
                 mCaption = "ยืมสินค้า (ขาย)"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.PurchaseOrder
                 mCaption = "ใบสั่งซื้อ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.CancelPO
                 mCaption = "ยกเลิกการสั่งซื้อ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Reserve
                 mCaption = "ใบสั่งจอง"
                 lMakeOrderCation = "Make Order"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Shiping
                 mCaption = "ใบส่งของ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.AddCredit
                 mCaption = "ตั้งลูกหนี้"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Receipt
                 mCaption = "ใบเสร็จรับเงิน /ชำระเงิน"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.ReceiptCut
                 mCaption = "ตัดรับชำระ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.InvoiceBuy
                 mCaption = "ใบกำกับภาษี(ซื้อ)"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ShipingBuy
                 mCaption = "ใบส่งของ(ซื้อ)"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReceiptBuy
                 mCaption = "ใบเสร็จรับเงิน /ชำระเงิน(ซื้อ)"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Asset
                 mCaption = "บันทึกค่าใช้จ่ายอื่นๆ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReduceCredit
                 mCaption = "บันทึกลดหนี้"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.AddCreditBuy
                 mCaption = "ตั้งลูกหนี้"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReduceCreditBuy
                 mCaption = "บันทึกลดหนี้"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ClaimOut
                 mCaption = "แจ้งเคลม Supplier "
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Agency + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Claim
                 mCaption = "รับแจ้งเคลม"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.Customer + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.StockIn
                 mCaption = "นำสินค้าเข้าระบบ"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.EmpName
             Case MasterType.UpdateStock
                 mCaption = "ปรับยอดสินค้า"
-                Call InitialFilterCon(mCtlForm.cboFindIn, FilterBy.Code + FilterBy.EmpName)
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.EmpName
         End Select
 
+        Call InitialFilterCon(mCtlForm.cboFindIn, lFilterCol)
         With mCtlForm
             .Text = mCaption
             .MdiParent = frmMain
@@ -196,11 +198,14 @@ Public Class OrderControl
             Select Case mOrderType
                 Case MasterType.PurchaseOrder, MasterType.Asset, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.ShipingBuy, MasterType.CancelPO
                     .Columns("Customer").Caption = "เจ้าหนี้"
-                    '.Columns("Customer").Width = 250
+                    .Columns("CustomerCode").Caption = "รหัสเจ้าหนี้"
                 Case Else
                     .Columns("Customer").Caption = "ลูกค้า"
-                    '.Columns("Customer").Width = 250
+                    .Columns("CustomerCode").Caption = "รหัสลูกค้า"
             End Select
+            .Columns("CustomerCode").Width = 120
+            .Columns("CustomerCode").MinWidth = 100
+            .Columns("CustomerCode").MaxWidth = 160
 
             Select Case mOrderType
                 Case MasterType.Bill, MasterType.Receipt, MasterType.ReceiptBuy, MasterType.ReceiptCut

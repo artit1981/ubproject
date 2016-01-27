@@ -343,14 +343,14 @@ Public Class OrderSDAO
                     , MasterType.AddCredit, MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.ReceiptCut _
                     , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL = SQL & ",Customer.CustomerCode ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 Case MasterType.Quotation
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate,Orders.ExpireDate  "
-                    SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 Case MasterType.PurchaseOrder, MasterType.Asset, MasterType.ShipingBuy, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy _
                     , MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.CancelPO
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                     'Case MasterType.Bill, MasterType.Receipt
                     '    SQL = "SELECT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
                     '    SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
@@ -755,7 +755,9 @@ Public Class OrderSDAO
                     If pProList.SaveData(tr) Then
                         If pProList.IsShow = 1 Then
                             '*** Main Stock
-                            UpdateStock(tr, pProList, lIsUpdate, ModeData)
+                            UpdateStock(tr, pProList, lIsUpdate, True)
+                            '*** ORG. Stock
+                            UpdateStock(tr, pProList, lIsUpdate, False)
 
                             '*** SN
                             If pProList.ModeData = DataMode.ModeDelete Then
@@ -816,7 +818,7 @@ Public Class OrderSDAO
     End Sub
 
 
-    Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer, ByVal pMode As DataMode)
+    Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer, ByVal pIsMainUnitID As Boolean)
         Try
             Dim lclsStock As ProductStockDAO
             Dim lclsStock_Old As ProductStockDAO
@@ -826,24 +828,42 @@ Public Class OrderSDAO
                 'Update Stock +
                 lclsStock = New ProductStockDAO
                 lclsStock.ProductID = pProductList.ProductID
-                lclsStock.UnitID = pProductList.UnitID
+                If pIsMainUnitID = True Then
+                    lclsStock.UnitID = pProductList.UnitMainID
+                Else
+                    lclsStock.UnitID = pProductList.UnitID
+                End If
+
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
                 lclsStock.Cost = pProductList.Cost
                 If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
-                    lclsStock.Units = pProductList.Units * -1
+                    If pIsMainUnitID = True Then
+                        lclsStock.Units = pProductList.Units * -1
+                    Else
+                        lclsStock.Units = pProductList.AdjustUnit * -1
+                    End If
                 ElseIf pProductList.ID = 0 Then
-                    lclsStock.Units = pProductList.Units
+                    If pIsMainUnitID = True Then
+                        lclsStock.Units = pProductList.Units
+                    Else
+                        lclsStock.Units = pProductList.AdjustUnit
+                    End If 
                 ElseIf pProductList.ID > 0 Then
                     'if change location in mode edit
                     If pProductList.LocationDTLID <> pProductList.LocationDTLID_Old Then
                         'Remove unit from old location stock
                         lclsStock_Old = New ProductStockDAO
                         lclsStock_Old.ProductID = pProductList.ProductID
-                        lclsStock_Old.UnitID = pProductList.UnitMainID
                         lclsStock_Old.LocationDTLID = pProductList.LocationDTLID_Old
                         lclsStock_Old.Cost = pProductList.Cost
-                        lclsStock_Old.Units = pProductList.Units_Old * -1
 
+                        If pIsMainUnitID = True Then
+                            lclsStock_Old.UnitID = pProductList.UnitMainID
+                            lclsStock_Old.Units = pProductList.Units_Old * -1
+                        Else
+                            lclsStock_Old.UnitID = pProductList.UnitID
+                            lclsStock_Old.Units = pProductList.AdjustUnit_Old * -1
+                        End If
                         'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
                         lclsClone = New ProductStockDAO
                         lclsClone = lclsStock_Old.Clone
@@ -853,13 +873,27 @@ Public Class OrderSDAO
                         lclsStock_Old.SaveData(ptr, True, False, ID, Code)
 
                         'Add new unit to new location
+                        If pIsMainUnitID = True Then
+                            lclsStock.Units = pProductList.Units
+                        Else
+                            lclsStock.Units = pProductList.AdjustUnit
+                        End If
                         lclsStock.Units = pProductList.Units
                     Else
-                        If pProductList.Units = pProductList.Units_Old Then
-                            lclsStock.Units = 0
+                        If pIsMainUnitID = True Then
+                            If pProductList.Units = pProductList.Units_Old Then
+                                lclsStock.Units = 0
+                            Else
+                                lclsStock.Units = (pProductList.Units - pProductList.Units_Old)
+                            End If
                         Else
-                            lclsStock.Units = (pProductList.Units - pProductList.Units_Old)
+                            If pProductList.AdjustUnit = pProductList.AdjustUnit_Old Then
+                                lclsStock.Units = 0
+                            Else
+                                lclsStock.Units = (pProductList.AdjustUnit - pProductList.AdjustUnit_Old)
+                            End If
                         End If
+                      
                     End If
                 End If
                 'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
@@ -872,11 +906,21 @@ Public Class OrderSDAO
             ElseIf pIsUpdate > 0 Then
                 lclsStock = New ProductStockDAO
                 lclsStock.ProductID = pProductList.ProductID
-                lclsStock.UnitID = pProductList.UnitMainID
+                If pIsMainUnitID = True Then
+                    lclsStock.UnitID = pProductList.UnitMainID
+                Else
+                    lclsStock.UnitID = pProductList.UnitID
+                End If
+
                 lclsStock.LocationDTLID = pProductList.LocationDTLID
 
                 If pProductList.ModeData = DataMode.ModeDelete Or pProductList.ModeData = DataMode.ModeNotApprove Then
-                    lclsStock.Units = pProductList.Units * 1
+                    If pIsMainUnitID = True Then
+                        lclsStock.Units = pProductList.Units
+                    Else
+                        lclsStock.Units = pProductList.AdjustUnit
+                    End If
+
                 ElseIf pProductList.ID = 0 Then
                     lclsStock.Units = pProductList.Units * -1
                 ElseIf pProductList.ID > 0 Then

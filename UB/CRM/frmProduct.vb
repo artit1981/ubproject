@@ -8,7 +8,7 @@ Public Class frmProduct
     Private Const mFormName As String = "frmProduct"
     Private mIsFromLoad As Boolean
     Private mcls As New ProductDAO
-    Private mUnitMainID As Long
+    'Private mUnitMainID As Long
 
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
@@ -75,6 +75,7 @@ Public Class frmProduct
             mcls.Generation = ConvertNullToString(Generation.EditValue)
             mcls.Color = ConvertNullToString(Color.EditValue)
             mcls.UnitMainID = ConvertNullToZero(UnitMainID.EditValue)
+            mcls.UnitMainIDBuy = ConvertNullToZero(UnitMainIDBuy.EditValue)
             mcls.UnitSecondID = ConvertNullToZero(UnitSecondID.EditValue)
             mcls.ProductCategoryID = ConvertNullToZero(ProductCategoryID.EditValue)
             mcls.ProductBrandID = ConvertNullToZero(ProductBrandID.EditValue)
@@ -97,7 +98,7 @@ Public Class frmProduct
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.ProductImageS(Nothing) = UcImage_41.GetFileAttachs()
             mcls.ProductLocationSDAOs = UcProductLocation1.GetDAOs
-            mcls.ProductUnitBuyDAOs = UcProductUnitBuy.GetDAOs(mcls.UnitMainID)
+            mcls.ProductUnitBuyDAOs = UcProductUnitBuy.GetDAOs(mcls.UnitMainIDBuy)
             mcls.ProductUnitSellDAOs = UcProductUnitSell.GetDAOs(mcls.UnitMainID)
             mcls.ProductSubstituteDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, False, "", 0, "")
 
@@ -105,7 +106,7 @@ Public Class frmProduct
             Dim lProUnitDAO As ProductUnitDAO
             If mcls.ProductUnitBuyDAOs.Count <= 0 Then
                 lProUnitDAO = New ProductUnitDAO
-                lProUnitDAO.UnitID = mcls.UnitMainID
+                lProUnitDAO.UnitID = mcls.UnitMainIDBuy
                 lProUnitDAO.Rate = 1
                 mcls.ProductUnitBuyDAOs.Add(lProUnitDAO)
             End If
@@ -137,7 +138,8 @@ Public Class frmProduct
 #Region "Private"
     Private Sub InitialCombo()
         Try
-            SetCombo1Unit()
+            SetComboUnitSell()
+            SetComboUnitBuy()
             SetCombo2Unit()
             SetComboProductCategory()
             SetComboProductBrand(0)
@@ -203,7 +205,8 @@ Public Class frmProduct
                     IsSN.Checked = IIf(mcls.IsSN = 1, True, False)
                     UnitSecondID.EditValue = mcls.UnitSecondID
                     UnitMainID.EditValue = mcls.UnitMainID
-                    mUnitMainID = mcls.UnitMainID
+                    UnitMainIDBuy.EditValue = mcls.UnitMainIDBuy
+                    'mUnitMainID = mcls.UnitMainID
                     ProductCategoryID.EditValue = mcls.ProductCategoryID
                     ProductTypeID.EditValue = mcls.ProductTypeID
                     ProductBrandID.EditValue = mcls.ProductBrandID
@@ -271,7 +274,12 @@ Public Class frmProduct
                 If ConvertNullToZero(UnitMainID.EditValue) <= 0 Then
                     SetErrorProvider(DxErrorProvider1, UnitMainID, "กรุณาระบุข้อมูล")
                 End If
+            End If
 
+            If DxErrorProvider1.HasErrors = False Then
+                If ConvertNullToZero(UnitMainIDBuy.EditValue) <= 0 Then
+                    SetErrorProvider(DxErrorProvider1, UnitMainIDBuy, "กรุณาระบุข้อมูล")
+                End If
             End If
 
             If txtPriceStandart.EditValue < 0 Then
@@ -329,13 +337,22 @@ Public Class frmProduct
 #End Region
 
 #Region "Set combo"
-    Private Sub SetCombo1Unit()
+    Private Sub SetComboUnitSell()
         Try
             SetComboUnits(UnitMainID)
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboUnit : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboUnitSell : " & e.Message)
         End Try
     End Sub
+
+    Private Sub SetComboUnitBuy()
+        Try
+            SetComboUnits(UnitMainIDBuy)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboUnitBuy : " & e.Message)
+        End Try
+    End Sub
+
     Private Sub SetCombo2Unit()
         Try
             SetComboUnits(UnitSecondID)
@@ -574,7 +591,19 @@ Public Class frmProduct
     Private Sub UnitRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UnitRefresh.Click
         Try
             ShowProgress(True, "Loading...")
-            SetCombo1Unit()
+            SetComboUnitSell()
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+            ShowProgress(False, "")
+        End Try
+    End Sub
+
+
+    Private Sub UnitBuyRefresh_Click(sender As Object, e As System.EventArgs) Handles UnitBuyRefresh.Click
+        Try
+            ShowProgress(True, "Loading...")
+            SetComboUnitBuy()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -662,26 +691,26 @@ Public Class frmProduct
     End Sub
 
   
-    Private Sub UnitMainID_EditValueChanged(sender As Object, e As System.EventArgs) Handles UnitMainID.EditValueChanged
-        Dim lcls As ProductStockDAO
-        Try
-            If mIsFromLoad = False Then
-                If ModeData = DataMode.ModeEdit And UnitMainID.EditValue <> mUnitMainID Then
-                    lcls = New ProductStockDAO
+    'Private Sub UnitMainID_EditValueChanged(sender As Object, e As System.EventArgs) Handles UnitMainID.EditValueChanged
+    '    'Dim lcls As ProductStockDAO
+    '    Try
+    '        If mIsFromLoad = False Then
+    '            'If ModeData = DataMode.ModeEdit And UnitMainID.EditValue <> mUnitMainID Then
+    '            '    lcls = New ProductStockDAO
 
-                End If
-                ShowProgress(True, "Loading...")
-                SetComboProductGroupID(ConvertNullToZero(ProductCategoryID.EditValue))
-                SetComboProductType(ConvertNullToZero(ProductCategoryID.EditValue))
-                SetComboProductBrand(ConvertNullToZero(ProductCategoryID.EditValue))
+    '            'End If
+    '            ShowProgress(True, "Loading...")
+    '            SetComboProductGroupID(ConvertNullToZero(ProductCategoryID.EditValue))
+    '            SetComboProductType(ConvertNullToZero(ProductCategoryID.EditValue))
+    '            SetComboProductBrand(ConvertNullToZero(ProductCategoryID.EditValue))
 
-            End If
-        Catch ex As Exception
-            ShowProgress(False, "")
-            ShowErrorMsg(False, ex.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
+    '        End If
+    '    Catch ex As Exception
+    '        ShowProgress(False, "")
+    '        ShowErrorMsg(False, ex.Message)
+    '    Finally
+    '        ShowProgress(False, "")
+    '    End Try
+    'End Sub
  
 End Class

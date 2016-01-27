@@ -633,9 +633,15 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateStockBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles UpdateStockBar.ItemClick
-        Dim lcls As New OrderControl
-        ShowDataOnControl(lcls, MasterType.UpdateStock)
-        InsertActivity(DataMode.ModeOpen, MasterType.UpdateStock, "", Nothing)
+        Try
+            Dim lFormEdit As New frmUpdateStock
+            With lFormEdit
+                .Show()
+                InsertActivity(DataMode.ModeOpen, MasterType.UpdateStock, "", Nothing)
+            End With
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
     End Sub
 
     Private Sub BankAccounBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BankAccounBar.ItemClick
@@ -646,15 +652,13 @@ Public Class frmMain
 
     Private Sub OrderHisBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles OrderHisBar.ItemClick
         Try
-           
+
             Dim lFormEdit As New frmOrderHis
             With lFormEdit
-             
-
                 .Show()
                 InsertActivity(DataMode.ModeOpen, MasterType.OrderHis, "", Nothing)
             End With
-            
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -770,7 +774,7 @@ Public Class frmMain
         InsertActivity(DataMode.ModeOpen, MasterType.CancelPO, "", Nothing)
     End Sub
 
-   
+
     Private Sub InformPriceProBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles InformPriceProBar.ItemClick
         Dim lFormEdit As frmInformPricePro
         Try
@@ -818,10 +822,15 @@ Public Class frmMain
         InsertActivity(DataMode.ModeOpen, MasterType.OrderSellHis, "", Nothing)
     End Sub
 
- 
+
     Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ApproveStockBar.ItemClick
         frmUpdateStock.MdiParent = Me
         frmUpdateStock.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)
+    End Sub
+
+    Private Sub ProvinceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProvinceBar.ItemClick
+        ShowMaster(MasterType.Province)
+        InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
     End Sub
 End Class

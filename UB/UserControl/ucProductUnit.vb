@@ -36,16 +36,18 @@ Public Class ucProductUnit
                         lDataDAO.IsInActive = gridView.GetRowCellValue(lRow, "IsInActive")
                         lDataDAO.Remark = gridView.GetRowCellDisplayText(lRow, "Remark")
                         mDataDAOs.Add(lDataDAO)
-
-                        If lRow = 0 Then
-                            If pUnitMainID <> lDataDAO.UnitID Then
-                                mIsError = "หน่วยนับเริ่มต้นต้องเป็นหน่วยนับหลัก"
-                            End If
-                        Else
-                            If lDataDAO.Rate <= lPreRate Then
-                                mIsError = gridView.GetRowCellDisplayText(lRow, "UnitName") & " : อัตราส่วนต้องมากกว่าลำดับก่อนหน้า"
-                            End If
+                        If pUnitMainID = lDataDAO.UnitID Then
+                            mIsError = "ไม่สามารถระบุหน่วยนับหลักได้"
                         End If
+                        'If lRow = 0 Then
+                        '    If pUnitMainID <> lDataDAO.UnitID Then
+                        '        mIsError = "หน่วยนับเริ่มต้นต้องเป็นหน่วยนับหลัก"
+                        '    End If
+                        'Else
+                        '    If lDataDAO.Rate <= lPreRate Then
+                        '        mIsError = gridView.GetRowCellDisplayText(lRow, "UnitName") & " : อัตราส่วนต้องมากกว่าลำดับก่อนหน้า"
+                        '    End If
+                        'End If
 
                         lPreRate = lDataDAO.Rate
 

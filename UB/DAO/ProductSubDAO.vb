@@ -29,6 +29,7 @@
     Private mAdjustUnit As Long = 0
     Private mRateUnit As Decimal = 1
     Private mIsDelete As Integer = 0
+    Dim mAdjustUnit_Old As Long = 0
 
     Public Property ProductCode() As String
         Get
@@ -288,6 +289,14 @@
         End Get
         Set(ByVal value As Long)
             mAdjustUnit = value
+        End Set
+    End Property
+    Public Property AdjustUnit_Old() As Long
+        Get
+            Return mAdjustUnit_Old
+        End Get
+        Set(ByVal value As Long)
+            mAdjustUnit_Old = value
         End Set
     End Property
     Public Property RateUnit() As Decimal

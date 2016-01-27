@@ -19,6 +19,7 @@ Module modFunction
         Customer = 64
         OppName = 128
         Agency = 256
+        CustomerCode = 512
     End Enum
 
 
@@ -30,10 +31,11 @@ Module modFunction
     Private mFindOwner(1) As String
     Private mFindRate(1) As String
     Private mFindCode(1) As String
+    Private mFindCustomerCode(1) As String
     Private mFindCustomer(1) As String
     Private mFindOppName(1) As String
     Private mFindAgency(1) As String
-
+  
     Public Sub InitialFilterCon(ByVal pCombo As DevExpress.XtraEditors.ComboBoxEdit, ByVal pFilterBy As FilterBy)
         mFindAll(0) = "ทั้งหมด"
         mFindAll(1) = "*"
@@ -51,6 +53,8 @@ Module modFunction
         mFindRate(1) = "Rating"
         mFindCustomer(0) = "ลูกค้า"
         mFindCustomer(1) = "Customer"
+        mFindCustomerCode(0) = "รหัสลูกค้า"
+        mFindCustomerCode(1) = "CustomerCode"
         mFindOppName(0) = "ชื่อโอกาสทางการขาย"
         mFindOppName(1) = "OppName"
         mFindAgency(0) = "เจ้าหนี้"
@@ -64,6 +68,7 @@ Module modFunction
             If (pFilterBy And FilterBy.Code) = FilterBy.Code Then pCombo.Properties.Items.Add(mFindCode(0))
             If (pFilterBy And FilterBy.Rate) = FilterBy.Rate Then pCombo.Properties.Items.Add(mFindRate(0))
             If (pFilterBy And FilterBy.Customer) = FilterBy.Customer Then pCombo.Properties.Items.Add(mFindCustomer(0))
+            If (pFilterBy And FilterBy.CustomerCode) = FilterBy.CustomerCode Then pCombo.Properties.Items.Add(mFindCustomerCode(0))
             If (pFilterBy And FilterBy.OppName) = FilterBy.OppName Then pCombo.Properties.Items.Add(mFindOppName(0))
             If (pFilterBy And FilterBy.Agency) = FilterBy.Agency Then pCombo.Properties.Items.Add(mFindAgency(0))
             pCombo.SelectedIndex = 0
@@ -96,6 +101,8 @@ Module modFunction
                     Return mFindRate(1)
                 Case mFindCustomer(0)
                     Return mFindCustomer(1)
+                Case mFindCustomerCode(0)
+                    Return mFindCustomerCode(1)
                 Case mFindOppName(0)
                     Return mFindOppName(1)
                 Case mFindAgency(0)
@@ -110,9 +117,6 @@ Module modFunction
     End Function
 
     Public Sub ChangeLanguage()
-
-        'System.Threading.Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("en-us")
-        'System.Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("en-us")
         System.Threading.Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("th-TH")
         System.Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("th-TH")
     End Sub
