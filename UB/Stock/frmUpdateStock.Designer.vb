@@ -51,6 +51,7 @@ Partial Class frmUpdateStock
         Me.RepositoryItemButtonHist = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.LocationDTLID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsSN = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.UnitsSpin = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
@@ -62,7 +63,6 @@ Partial Class frmUpdateStock
         Me.ProductNameBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.TotalEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.IsSN = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.ProductTypeID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -312,15 +312,16 @@ Partial Class frmUpdateStock
         Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.ProductCode, Me.ProductName, Me.Location, Me.Unit, Me.Units, Me.Edit, Me.Hist, Me.LocationDTLID, Me.UnitID, Me.IsSN})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
-        Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
+        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
+        Me.gridView.OptionsBehavior.ReadOnly = True
         Me.gridView.OptionsDetail.AllowZoomDetail = False
         Me.gridView.OptionsDetail.EnableMasterViewMode = False
         Me.gridView.OptionsDetail.ShowDetailTabs = False
         Me.gridView.OptionsDetail.SmartDetailExpand = False
+        Me.gridView.OptionsFind.AlwaysVisible = True
         Me.gridView.OptionsLayout.Columns.AddNewColumns = False
         Me.gridView.OptionsLayout.Columns.RemoveOldColumns = False
-        Me.gridView.OptionsMenu.EnableColumnMenu = False
         Me.gridView.OptionsMenu.EnableFooterMenu = False
         Me.gridView.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.[False]
         Me.gridView.OptionsNavigation.AutoFocusNewRow = True
@@ -462,6 +463,12 @@ Partial Class frmUpdateStock
         Me.UnitID.FieldName = "UnitID"
         Me.UnitID.Name = "UnitID"
         '
+        'IsSN
+        '
+        Me.IsSN.Caption = "IsSN"
+        Me.IsSN.FieldName = "IsSN"
+        Me.IsSN.Name = "IsSN"
+        '
         'UnitBtn
         '
         Me.UnitBtn.AutoHeight = False
@@ -552,12 +559,6 @@ Partial Class frmUpdateStock
         Me.btnImage.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
         Me.btnImage.Name = "btnImage"
         Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
-        '
-        'IsSN
-        '
-        Me.IsSN.Caption = "IsSN"
-        Me.IsSN.FieldName = "IsSN"
-        Me.IsSN.Name = "IsSN"
         '
         'frmUpdateStock
         '

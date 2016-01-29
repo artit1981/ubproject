@@ -14,8 +14,14 @@ Public Class frmUpdateStockDTL
         End Set
     End Property
 
+    Private Sub frmUpdateStockDTL_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If Me.DialogResult <> Windows.Forms.DialogResult.OK Then
+            e.Cancel = True
+        End If
+    End Sub
 
-    Private Sub frmSN_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    Private Sub frmUpdateStockDTL_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mIsFromLoad = True
         Try
             ProductCode.EditValue = mProductListDAO.ProductCode
@@ -46,47 +52,49 @@ Public Class frmUpdateStockDTL
         Dim tr As SqlTransaction = Nothing
         Dim lUnits As Long = 0
         Try
-            If Verify() = False Then Exit Sub
+            If Verify() Then
+                If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    tr = gConnection.Connection.BeginTransaction
 
-            If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                tr = gConnection.Connection.BeginTransaction
+                    lUnits = GetUnitForUpdate()
 
-                lUnits = GetUnitForUpdate()
+                    lclsStock = New ProductStockDAO
+                    lclsStock.ProductID = mProductListDAO.ProductID
+                    lclsStock.UnitID = mProductListDAO.UnitID
+                    lclsStock.LocationDTLID = mProductListDAO.LocationDTLID
+                    lclsStock.Cost = mProductListDAO.Cost
+                    lclsStock.Units = lUnits
 
-                lclsStock = New ProductStockDAO
-                lclsStock.ProductID = mProductListDAO.ProductID
-                lclsStock.UnitID = mProductListDAO.UnitID
-                lclsStock.LocationDTLID = mProductListDAO.LocationDTLID
-                lclsStock.Cost = mProductListDAO.Cost
-                lclsStock.Units = lUnits
+                    'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                    lclsClone = New ProductStockDAO
+                    lclsClone = lclsStock.Clone
+                    lclsClone.SaveData(tr, False, False, 0, MasterType.UpdateStock.ToString)
 
-                'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
-                lclsClone = New ProductStockDAO
-                lclsClone = lclsStock.Clone
-                lclsClone.SaveData(tr, False, False, 0, MasterType.UpdateStock.ToString)
-
-                'Sum Stock
-                If IsSumStock.CheckState = CheckState.Checked Then
-                    lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
-                End If
-
-                'SN
-                For Each pclsSN In mProductListDAO.SNList
-                    If lUnits < 0 Then
-                        pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
-                    Else
-                        pclsSN.Status = "New"
-                        pclsSN.SerialNumberID = 0 ''New
-                        pclsSN.OrderID = 0
-                        pclsSN.ProductListID = 0
-                        pclsSN.ProductID = mProductListDAO.ProductID
-                        pclsSN.SaveData(tr, DataMode.ModeNew)
+                    'Sum Stock
+                    If IsSumStock.CheckState = CheckState.Checked Then
+                        lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
                     End If
-                Next
 
-                tr.Commit()
-                XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                Me.Close()
+                    'SN
+                    For Each pclsSN In mProductListDAO.SNList
+                        If lUnits < 0 Then
+                            pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
+                        Else
+                            pclsSN.Status = "New"
+                            pclsSN.SerialNumberID = 0 ''New
+                            pclsSN.OrderID = 0
+                            pclsSN.ProductListID = 0
+                            pclsSN.ProductID = mProductListDAO.ProductID
+                            pclsSN.SaveData(tr, DataMode.ModeNew)
+                        End If
+                    Next
+
+                    tr.Commit()
+                    XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                    Me.Close()
+                End If
+            Else
+                Me.DialogResult = Windows.Forms.DialogResult.Cancel
             End If
         Catch ex As Exception
             tr.Rollback()
@@ -110,8 +118,10 @@ Public Class frmUpdateStockDTL
             If mProductListDAO.IsSN = 1 Then
                 If mProductListDAO.IsSN = 1 And mProductListDAO.SNList Is Nothing Then
                     lstrErr = "กรุณาระบุ Serial number" & vbNewLine
+                    btnSN.Focus()
                 ElseIf GetUnitForUpdate() <> mProductListDAO.SNList.Count Then
                     lstrErr = "Serial number ไม่ถูกต้อง" & vbNewLine
+                    btnSN.Focus()
                 Else
                     For Each pclsSN In mProductListDAO.SNList
                         If GetUnitForUpdate() > 0 And pclsSN.CheckSNIsExist(mProductListDAO.ProductID, ConvertNullToString(pclsSN.SerialNumberNo), "'New','Close'", Nothing) = True Then
@@ -141,7 +151,6 @@ Public Class frmUpdateStockDTL
     Private Sub btnSN_Click(sender As Object, e As System.EventArgs) Handles btnSN.Click
         Dim lfrmSN As New frmSN
         Try
-            If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                 If Not mProductListDAO Is Nothing Then
                     lfrmSN.Unit = GetUnitForUpdate()
                     lfrmSN.ProductCodes = mProductListDAO.ProductCode
@@ -153,13 +162,8 @@ Public Class frmUpdateStockDTL
                     lfrmSN.StockType = ""
                     lfrmSN.SnList = mProductListDAO.SNList
                     lfrmSN.ShowDialog()
-
-                    mProductListDAO.SNList = lfrmSN.SnList
-
-                End If
+                mProductListDAO.SNList = lfrmSN.SnList
             End If
-
-
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try

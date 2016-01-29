@@ -418,12 +418,15 @@ Public Class frmSN
                 mSnList = Nothing
                 mSnList = New List(Of SnDAO)
                 For lRow = 0 To GridView1.RowCount
-                    lSnData = New SnDAO
-                    lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
-                    lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
-                    lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
-                    lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
-                    mSnList.Add(lSnData)
+                    If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
+                        lSnData = New SnDAO
+                        lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
+                        lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+                        lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
+                        lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
+                        mSnList.Add(lSnData)
+                    End If
+                   
                 Next
             End If
 
@@ -532,7 +535,7 @@ Public Class frmSN
 
         If rowHandle < 0 Then Exit Sub
         lStatus = ConvertNullToString(GridView1.GetRowCellValue(rowHandle, "Status"))
-        ControlNavigator1.Buttons.CustomButtons.Item("Remove").Enabled = Not (lStatus = EnumStatus.Close.ToString)
+        ControlNavigator1.Buttons.CustomButtons.Item(1).Enabled = Not (lStatus = EnumStatus.Close.ToString)
     End Sub
 
     Private Sub ControlNavigator1_ButtonClick(sender As Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick

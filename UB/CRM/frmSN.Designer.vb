@@ -27,6 +27,7 @@ Partial Class frmSN
         Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SerialNumberNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Status = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
@@ -55,7 +56,6 @@ Partial Class frmSN
         Me.Units = New DevExpress.XtraEditors.SpinEdit()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.btnSelectSN = New DevExpress.XtraEditors.SimpleButton()
-        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +84,7 @@ Partial Class frmSN
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView1.OptionsBehavior.Editable = False
         Me.GridView1.OptionsCustomization.AllowGroup = False
         Me.GridView1.OptionsHint.ShowColumnHeaderHints = False
         Me.GridView1.OptionsHint.ShowFooterHints = False
@@ -136,6 +137,12 @@ Partial Class frmSN
         Me.Status.Visible = True
         Me.Status.VisibleIndex = 1
         Me.Status.Width = 100
+        '
+        'IsDelete
+        '
+        Me.IsDelete.Caption = "GridColumn1"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
         '
         'GridControl1
         '
@@ -511,12 +518,6 @@ Partial Class frmSN
         Me.btnSelectSN.TabIndex = 343
         Me.btnSelectSN.Text = "Select S/N"
         Me.btnSelectSN.ToolTip = "Auto Gen S/N"
-        '
-        'IsDelete
-        '
-        Me.IsDelete.Caption = "GridColumn1"
-        Me.IsDelete.FieldName = "IsDelete"
-        Me.IsDelete.Name = "IsDelete"
         '
         'frmSN
         '
