@@ -1050,16 +1050,23 @@ Public Class ucProductLists
     Private Sub RepositoryItemButtonSN_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonSN.ButtonClick
         Dim lfrmSN As New frmSN
         Dim rec As ProductSub = TryCast(gridView.GetFocusedRow, ProductSub)
+        Dim lclsUnit As New UnitDAO
         If Not rec Is Nothing Then
             If rec.ProductID > 0 And rec.IsSN = 1 Then
                 lfrmSN.ProductCodes = rec.ProductCode
                 lfrmSN.ProductNames = rec.ProductNames
+                lfrmSN.UnitNames = rec.UnitName
                 lfrmSN.Unit = rec.Units
+                lfrmSN.UnitMain = rec.AdjustUnit
                 lfrmSN.IsReadOnly = mIsReaOnly
                 lfrmSN.ProductIDs = rec.ProductID
                 lfrmSN.OrderType = mRefTable
                 lfrmSN.StockType = mStockType
                 lfrmSN.SnList = rec.SNList
+                If lclsUnit.InitailData(rec.UnitMainID, "") Then
+                    lfrmSN.UnitMainNames = lclsUnit.NameThai
+                End If
+
                 lfrmSN.ShowDialog()
                 If mIsReaOnly = False Then
                     rec.SNList = lfrmSN.SnList

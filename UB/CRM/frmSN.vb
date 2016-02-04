@@ -17,8 +17,10 @@ Public Class frmSN
     Dim mProductIDs As Long
     Dim mIsModePrint As Boolean = False
     Dim mStockType As String = ""
-    'Dim mProductListIDs As Long
-
+    Dim mUnitMain As Long
+    Dim mUnitName As String
+    Dim mUnitMainName As String
+    
     Public Property SnList() As List(Of SnDAO)
         Get
             Return mSnList
@@ -43,6 +45,23 @@ Public Class frmSN
     Public WriteOnly Property Unit() As Long
         Set(ByVal value As Long)
             mUnit = value
+        End Set
+    End Property
+
+    Public WriteOnly Property UnitMain() As Long
+        Set(ByVal value As Long)
+            mUnitMain = value
+        End Set
+    End Property
+
+    Public WriteOnly Property UnitNames() As String
+        Set(ByVal value As String)
+            mUnitName = value
+        End Set
+    End Property
+    Public WriteOnly Property UnitMainNames() As String
+        Set(ByVal value As String)
+            mUnitMainName = value
         End Set
     End Property
 
@@ -91,10 +110,10 @@ Public Class frmSN
             lblProcode.Visible = True
             ProductCode.Properties.Appearance.BackColor = Color.White
             ProductCode.Properties.ReadOnly = False
-            Units.Properties.Appearance.BackColor = Color.White
-            Units.Properties.ReadOnly = False
-            Units.EditValue = "10"
-            mUnit = 10
+            UnitsMain.Properties.Appearance.BackColor = Color.White
+            UnitsMain.Properties.ReadOnly = False
+            UnitsMain.EditValue = "10"
+            mUnitMain = 10
         ElseIf mIsReadOnly = True Then
             btnOK.Visible = True
             btnOK.Enabled = False
@@ -151,7 +170,9 @@ Public Class frmSN
         ProductCode.EditValue = mProductCode
         ProductName.EditValue = mProductName
         Units.EditValue = mUnit
-
+        UnitsMain.EditValue = mUnitMain
+        UnitName.EditValue = mUnitName
+        UnitMainName.EditValue = mUnitMainName
 
         Call LoadData()
         Call LoadLastSN()
@@ -272,7 +293,7 @@ Public Class frmSN
                 lRunCount = lRunCount & "0"
             Next
             lSNAdd = mSnList.Count
-            Do Until lSNAdd = Units.EditValue
+            Do Until lSNAdd = UnitsMain.EditValue
                 lCode = lstrExam & lLastCount.ToString(lRunCount)
                 If mOrderType = MasterType.StockIn.ToString Then
                     lclsSN = New SnDAO
@@ -324,7 +345,7 @@ Public Class frmSN
             End If
             dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New'", Nothing, False, "")
             For Each dr2 As DataRow In dataSN.Rows
-                If mSnList.Count < Units.EditValue Then
+                If mSnList.Count < UnitsMain.EditValue Then
                     lclsSN = New SnDAO
                     lclsSN.SerialNumberID = 0
                     lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
@@ -343,7 +364,7 @@ Public Class frmSN
     Private Sub SNNo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles SNNo.KeyPress
         Dim lclsSN As SnDAO, lIndex As Long, lIsError As String = ""
         If e.KeyChar = ChrW(Keys.Enter) And ConvertNullToString(SNNo.EditValue) <> "" Then
-            If mSnList.Count > Math.Abs(Units.EditValue) Then
+            If mSnList.Count > Math.Abs(UnitsMain.EditValue) Then
                 MessageBox.Show("รายการครบจำนวน", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 SNNo.SelectAll()
             Else
@@ -364,11 +385,11 @@ Public Class frmSN
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
                         lIsError = "Serial Number ซ้ำ"
                     End If
-                ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue > 0 Then
+                ElseIf mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0 Then
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New','Close'", Nothing) = True Then
                         lIsError = "Serial Number ซ้ำ"
                     End If
-                ElseIf mOrderType = MasterType.UpdateStock.ToString And Units.EditValue < 0 Then  '' คืนสต๊อก
+                ElseIf mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue < 0 Then  '' คืนสต๊อก
                     If lclsSN.CheckSNIsExist(mProductIDs, ConvertNullToString(SNNo.EditValue), "'New'", Nothing) = False Then
                         lIsError = "ไม่พบ Serial Number: " & ConvertNullToString(SNNo.EditValue)
                     End If
@@ -410,7 +431,7 @@ Public Class frmSN
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Dim lSnData As SnDAO
-        If mSnList.Count <> Math.Abs(Units.EditValue) Then
+        If mSnList.Count <> Math.Abs(UnitsMain.EditValue) Then
             MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             SNNo.Focus()
         Else
@@ -426,7 +447,7 @@ Public Class frmSN
                         lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
                         mSnList.Add(lSnData)
                     End If
-                   
+
                 Next
             End If
 
@@ -511,7 +532,7 @@ Public Class frmSN
 
             lfrmSN.ProductCodes = mProductCode
             lfrmSN.ProductNames = mProductName
-            lfrmSN.Unit = Units.EditValue - GridView1.RowCount
+            lfrmSN.Unit = UnitsMain.EditValue - GridView1.RowCount
             lfrmSN.ProductIDs = mProductIDs
             lfrmSN.ShowDialog()
             lSnList = lfrmSN.SnList

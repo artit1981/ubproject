@@ -56,6 +56,10 @@ Partial Class frmSN
         Me.Units = New DevExpress.XtraEditors.SpinEdit()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.btnSelectSN = New DevExpress.XtraEditors.SimpleButton()
+        Me.UnitsMain = New DevExpress.XtraEditors.SpinEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.UnitName = New DevExpress.XtraEditors.TextEdit()
+        Me.UnitMainName = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +73,9 @@ Partial Class frmSN
         CType(Me.StartNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SnLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OrderID
@@ -277,7 +284,7 @@ Partial Class frmSN
         'SNNo
         '
         Me.SNNo.EditValue = ""
-        Me.SNNo.Location = New System.Drawing.Point(152, 99)
+        Me.SNNo.Location = New System.Drawing.Point(152, 112)
         Me.SNNo.Name = "SNNo"
         Me.SNNo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.SNNo.Properties.Appearance.Options.UseFont = True
@@ -310,9 +317,9 @@ Partial Class frmSN
         Me.btnGenID.Appearance.Options.UseFont = True
         Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
         Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnGenID.Location = New System.Drawing.Point(465, 149)
+        Me.btnGenID.Location = New System.Drawing.Point(465, 150)
         Me.btnGenID.Name = "btnGenID"
-        Me.btnGenID.Size = New System.Drawing.Size(88, 28)
+        Me.btnGenID.Size = New System.Drawing.Size(88, 23)
         Me.btnGenID.TabIndex = 5
         Me.btnGenID.Text = "Gen S/N"
         Me.btnGenID.ToolTip = "Auto Gen S/N"
@@ -342,13 +349,13 @@ Partial Class frmSN
         '
         Me.SNType.EditValue = "M"
         Me.SNType.EnterMoveNextControl = True
-        Me.SNType.Location = New System.Drawing.Point(25, 88)
+        Me.SNType.Location = New System.Drawing.Point(25, 115)
         Me.SNType.Name = "SNType"
         Me.SNType.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.SNType.Properties.Appearance.Options.UseBackColor = True
         Me.SNType.Properties.Columns = 1
         Me.SNType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("M", "ระบุ S/N"), New DevExpress.XtraEditors.Controls.RadioGroupItem("A", "สร้าง S/N อัตโนมัติ")})
-        Me.SNType.Size = New System.Drawing.Size(121, 88)
+        Me.SNType.Size = New System.Drawing.Size(121, 55)
         Me.SNType.TabIndex = 323
         '
         'StartNo
@@ -415,9 +422,9 @@ Partial Class frmSN
         Me.btnLoadSN.Appearance.Options.UseFont = True
         Me.btnLoadSN.Image = CType(resources.GetObject("btnLoadSN.Image"), System.Drawing.Image)
         Me.btnLoadSN.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnLoadSN.Location = New System.Drawing.Point(465, 91)
+        Me.btnLoadSN.Location = New System.Drawing.Point(465, 101)
         Me.btnLoadSN.Name = "btnLoadSN"
-        Me.btnLoadSN.Size = New System.Drawing.Size(88, 28)
+        Me.btnLoadSN.Size = New System.Drawing.Size(88, 23)
         Me.btnLoadSN.TabIndex = 337
         Me.btnLoadSN.Text = "Load S/N"
         Me.btnLoadSN.ToolTip = "Auto Gen S/N"
@@ -488,7 +495,7 @@ Partial Class frmSN
         Me.Units.Properties.MaxLength = 50
         Me.Units.Properties.ReadOnly = True
         Me.Units.Properties.ValidateOnEnterKey = True
-        Me.Units.Size = New System.Drawing.Size(125, 20)
+        Me.Units.Size = New System.Drawing.Size(60, 20)
         Me.Units.TabIndex = 328
         Me.Units.TabStop = False
         '
@@ -512,12 +519,71 @@ Partial Class frmSN
         Me.btnSelectSN.Appearance.Options.UseFont = True
         Me.btnSelectSN.Image = CType(resources.GetObject("btnSelectSN.Image"), System.Drawing.Image)
         Me.btnSelectSN.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnSelectSN.Location = New System.Drawing.Point(465, 120)
+        Me.btnSelectSN.Location = New System.Drawing.Point(465, 126)
         Me.btnSelectSN.Name = "btnSelectSN"
-        Me.btnSelectSN.Size = New System.Drawing.Size(88, 28)
+        Me.btnSelectSN.Size = New System.Drawing.Size(88, 23)
         Me.btnSelectSN.TabIndex = 343
         Me.btnSelectSN.Text = "Select S/N"
         Me.btnSelectSN.ToolTip = "Auto Gen S/N"
+        '
+        'UnitsMain
+        '
+        Me.UnitsMain.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UnitsMain.Location = New System.Drawing.Point(151, 53)
+        Me.UnitsMain.Name = "UnitsMain"
+        Me.UnitsMain.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitsMain.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitsMain.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitsMain.Properties.Appearance.Options.UseFont = True
+        Me.UnitsMain.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitsMain.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.UnitsMain.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None
+        Me.UnitsMain.Properties.MaxLength = 50
+        Me.UnitsMain.Properties.ReadOnly = True
+        Me.UnitsMain.Properties.ValidateOnEnterKey = True
+        Me.UnitsMain.Size = New System.Drawing.Size(60, 20)
+        Me.UnitsMain.TabIndex = 344
+        Me.UnitsMain.TabStop = False
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(25, 85)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(25, 13)
+        Me.LabelControl4.TabIndex = 345
+        Me.LabelControl4.Text = "หน่วย"
+        '
+        'UnitName
+        '
+        Me.UnitName.EditValue = ""
+        Me.UnitName.EnterMoveNextControl = True
+        Me.UnitName.Location = New System.Drawing.Point(86, 81)
+        Me.UnitName.Name = "UnitName"
+        Me.UnitName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitName.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitName.Properties.Appearance.Options.UseFont = True
+        Me.UnitName.Properties.MaxLength = 50
+        Me.UnitName.Properties.ReadOnly = True
+        Me.UnitName.Properties.ValidateOnEnterKey = True
+        Me.UnitName.Size = New System.Drawing.Size(60, 20)
+        Me.UnitName.TabIndex = 346
+        '
+        'UnitMainName
+        '
+        Me.UnitMainName.EditValue = ""
+        Me.UnitMainName.EnterMoveNextControl = True
+        Me.UnitMainName.Location = New System.Drawing.Point(151, 81)
+        Me.UnitMainName.Name = "UnitMainName"
+        Me.UnitMainName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitMainName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitMainName.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitMainName.Properties.Appearance.Options.UseFont = True
+        Me.UnitMainName.Properties.MaxLength = 50
+        Me.UnitMainName.Properties.ReadOnly = True
+        Me.UnitMainName.Properties.ValidateOnEnterKey = True
+        Me.UnitMainName.Size = New System.Drawing.Size(60, 20)
+        Me.UnitMainName.TabIndex = 347
         '
         'frmSN
         '
@@ -525,6 +591,10 @@ Partial Class frmSN
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(659, 435)
+        Me.Controls.Add(Me.UnitMainName)
+        Me.Controls.Add(Me.UnitName)
+        Me.Controls.Add(Me.LabelControl4)
+        Me.Controls.Add(Me.UnitsMain)
         Me.Controls.Add(Me.btnSelectSN)
         Me.Controls.Add(Me.btnFind)
         Me.Controls.Add(Me.lblProcode)
@@ -571,6 +641,9 @@ Partial Class frmSN
         CType(Me.StartNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SnLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -610,4 +683,8 @@ Partial Class frmSN
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btnSelectSN As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UnitsMain As DevExpress.XtraEditors.SpinEdit
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Private WithEvents UnitName As DevExpress.XtraEditors.TextEdit
+    Private WithEvents UnitMainName As DevExpress.XtraEditors.TextEdit
 End Class
