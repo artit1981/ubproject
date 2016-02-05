@@ -7,7 +7,7 @@ Public Class ProductDAO
     
     Dim mProductImageS As List(Of FileAttachDAO)
     Dim mProductUnitBuyDAOs As List(Of ProductUnitDAO)
-    Dim mProductUnitSellDAOs As Object
+    Dim mProductUnitSellDAOs As List(Of ProductUnitDAO)
     Dim mProductLocationSDAOs As List(Of ProductLocationSDAO)
     Dim mProductSubstituteDAOs As List(Of ProductListDAO)
     Dim mProductSetDAOs As List(Of ProductListDAO)
@@ -1036,13 +1036,13 @@ Public Class ProductDAO
 
     End Function
 
-    'Private Sub LoadProductUnitBuyDAOS()
+    'Public Sub LoadProductUnitBuyDAOS(ByVal pProductID As Long, ByVal pUnitID As Long)
     '    Dim dataTable As New DataTable()
     '    Dim lDAO As New ProductUnitDAO
     '    Try
     '        dataTable = Nothing
     '        ProductUnitBuyDAOs = New List(Of ProductUnitDAO)
-    '        dataTable = lDAO.GetDataTable(ID, 1)
+    '        dataTable = lDAO.GetDataTable(pProductID, 1, pUnitID)
     '        If dataTable.Rows.Count > 0 Then
     '            For Each dr2 As DataRow In dataTable.Rows
     '                lDAO = New ProductUnitDAO()
@@ -1054,7 +1054,6 @@ Public Class ProductDAO
     '                lDAO.Rate = ConvertNullToZero(dr2("Rate"))
     '                lDAO.IsInActive = dr2("IsInActive")
     '                lDAO.Remark = ConvertNullToString(dr2("Remark"))
-
     '                ProductUnitBuyDAOs.Add(lDAO)
     '            Next
     '        End If
@@ -1066,13 +1065,13 @@ Public Class ProductDAO
     '    End Try
     'End Sub
 
-    'Private Sub LoadProductUnitSellDAOS()
+    'Public Sub LoadProductUnitSellDAOS(ByVal pProductID As Long, ByVal pUnitID As Long)
     '    Dim dataTable As New DataTable()
     '    Dim lDAO As New ProductUnitDAO
     '    Try
     '        dataTable = Nothing
     '        ProductUnitSellDAOs = New List(Of ProductUnitDAO)
-    '        dataTable = lDAO.GetDataTable(ID, 2)
+    '        dataTable = lDAO.GetDataTable(pProductID, 2, pUnitID)
     '        If dataTable.Rows.Count > 0 Then
     '            For Each dr2 As DataRow In dataTable.Rows
     '                lDAO = New ProductUnitDAO()
@@ -1084,7 +1083,6 @@ Public Class ProductDAO
     '                lDAO.Rate = ConvertNullToZero(dr2("Rate"))
     '                lDAO.IsInActive = dr2("IsInActive")
     '                lDAO.Remark = ConvertNullToString(dr2("Remark"))
-
     '                ProductUnitSellDAOs.Add(lDAO)
     '            Next
     '        End If

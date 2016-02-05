@@ -803,7 +803,7 @@ Public Class ucProductLists
                     Else
                         gridView.SetFocusedRowCellValue("UnitID", ConvertNullToZero(dr("UnitID")))
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
-                        gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToString(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
@@ -1056,8 +1056,8 @@ Public Class ucProductLists
                 lfrmSN.ProductCodes = rec.ProductCode
                 lfrmSN.ProductNames = rec.ProductNames
                 lfrmSN.UnitNames = rec.UnitName
-                lfrmSN.Unit = rec.Units
-                lfrmSN.UnitMain = rec.AdjustUnit
+                lfrmSN.Unit = rec.AdjustUnit
+                lfrmSN.UnitMain = rec.Units
                 lfrmSN.IsReadOnly = mIsReaOnly
                 lfrmSN.ProductIDs = rec.ProductID
                 lfrmSN.OrderType = mRefTable
