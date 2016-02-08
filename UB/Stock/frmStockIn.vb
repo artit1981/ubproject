@@ -230,6 +230,7 @@ Public Class frmStockIn
                         End If
                     End If
 
+                    SaveBar.Enabled = (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Or mcls.OrderStatus = EnumStatus.Cancel.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString Or mcls.OrderStatus = EnumStatus.Receive.ToString) And mcls.IsDelete = False
 
                 End If
             End If

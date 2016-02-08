@@ -91,8 +91,8 @@
         With GridView
 
             .Columns("ProductID").Visible = False
-            '.Columns("LocationDTLID").Visible = False
-
+            .Columns("UnitID").Visible = False
+           
             .Columns("ProductCode").Caption = "รหัสสินค้า"
             .Columns("ProductCode").Width = 150
 
@@ -101,10 +101,6 @@
 
             .Columns("UnitName").Caption = "หน่วยสินค้า"
             .Columns("UnitName").Width = 100
-            '.Columns("Price").Caption = "ราคามาตรฐาน"
-            '.Columns("Price").Width = 700
-            '.Columns("Price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-            '.Columns("Price").DisplayFormat.FormatString = "n2"
 
             .Columns("Remark").Caption = "รายละเอียด"
             .Columns("Remark").Width = 200

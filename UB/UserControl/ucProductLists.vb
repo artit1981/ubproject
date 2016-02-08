@@ -793,17 +793,20 @@ Public Class ucProductLists
                             pRec.UnitID = ConvertNullToZero(dr("UnitID"))
                             pRec.UnitName = ConvertNullToString(dr("UnitName"))
                             pRec.RateUnit = ConvertNullToZero(dr("Rate"))
+                            pRec.Units = pRec.AdjustUnit * pRec.RateUnit
                         Else
                             Dim rec = New ProductSub
                             rec.UnitID = ConvertNullToZero(dr("UnitID"))
                             rec.UnitName = ConvertNullToString(dr("UnitName"))
                             rec.RateUnit = ConvertNullToZero(dr("Rate"))
+                            pRec.Units = pRec.AdjustUnit * pRec.RateUnit
                             bindingSource1.Add(rec)
                         End If
                     Else
                         gridView.SetFocusedRowCellValue("UnitID", ConvertNullToZero(dr("UnitID")))
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
                         gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("Units", ConvertNullToZero(dr("AdjustUnit")) * ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
@@ -1026,6 +1029,7 @@ Public Class ucProductLists
             '        End If
             '    End If
             'End If
+            Units = RateUnit * AdjustUnit
             Total = (Units * Price) - (Discount * Units)
 
             'If mIsCheckStock = True And IsSelect = True Then
