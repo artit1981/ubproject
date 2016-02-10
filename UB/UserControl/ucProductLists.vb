@@ -35,6 +35,7 @@ Public Class ucProductLists
     Private mRefTable As String
     Private mCheckType As Long = 0
     Private mOrderID As List(Of Long)
+    Private mIsDelete As Boolean
     Shared mColData As ProColumn
     Shared mIsCheckStock As Boolean
     Shared mIsForCalc As Boolean
@@ -70,6 +71,7 @@ Public Class ucProductLists
             mOrderID = pRefID
             mCheckType = pCheckType
             mStockType = pStockType
+            mIsDelete = pIsDelete
             gridView.OptionsView.ShowFooter = pShowFooter
             mIsLoadFromRef = pIsLoadFromRefOrder
             Call LoadData(pRefID, pRefTable, pIsLoadFromRefOrder, pIsDelete, pCheckType)
@@ -571,7 +573,10 @@ Public Class ucProductLists
 
             End If
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1")
-            gridView.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+            If mIsDelete = False Then
+                gridView.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+            End If
+
         End With
     End Sub
 
