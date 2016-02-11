@@ -884,7 +884,6 @@ Public Class OrderSDAO
                         Else
                             lclsStock.Units = pProductList.AdjustUnit
                         End If
-                        lclsStock.Units = pProductList.Units
                     Else
                         If pIsMainUnitID = True Then
                             If pProductList.Units = pProductList.Units_Old Then
@@ -928,13 +927,26 @@ Public Class OrderSDAO
                     End If
 
                 ElseIf pProductList.ID = 0 Or pProductList.ModeData = DataMode.ModeNew Then
-                    lclsStock.Units = pProductList.Units * -1
-                ElseIf pProductList.ID > 0 Then
-                    If pProductList.Units = pProductList.Units_Old Then
-                        lclsStock.Units = 0
+                    If pIsMainUnitID = True Then
+                        lclsStock.Units = pProductList.Units * -1
                     Else
-                        lclsStock.Units = (pProductList.Units - pProductList.Units_Old) * -1
+                        lclsStock.Units = pProductList.AdjustUnit * -1
                     End If
+                ElseIf pProductList.ID > 0 Then
+                    If pIsMainUnitID = True Then
+                        If pProductList.Units = pProductList.Units_Old Then
+                            lclsStock.Units = 0
+                        Else
+                            lclsStock.Units = (pProductList.Units - pProductList.Units_Old) * -1
+                        End If
+                    Else
+                        If pProductList.AdjustUnit = pProductList.AdjustUnit_Old Then
+                            lclsStock.Units = 0
+                        Else
+                            lclsStock.Units = (pProductList.AdjustUnit - pProductList.AdjustUnit_Old) * -1
+                        End If
+                    End If
+                   
                 End If
 
                 If pIsUpdate = 1 Then  'sell stock sum
