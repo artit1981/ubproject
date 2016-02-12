@@ -674,6 +674,7 @@ Public Class OrderSDAO
                     rec.AdjustUnit_Old = ConvertNullToZero(dr("AdjustUnit"))
                     rec.Units_Old = rec.Units
                     rec.Price = ConvertNullToZero(dr("Price"))
+                    rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))

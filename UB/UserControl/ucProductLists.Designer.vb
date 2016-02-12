@@ -70,9 +70,10 @@ Partial Class ucProductLists
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
-        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PriceMain = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -122,7 +123,7 @@ Partial Class ucProductLists
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -565,6 +566,12 @@ Partial Class ucProductLists
         Me.RateUnit.FieldName = "RateUnit"
         Me.RateUnit.Name = "RateUnit"
         '
+        'IsDelete
+        '
+        Me.IsDelete.Caption = "IsDelete"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
+        '
         'ControlNavigator1
         '
         Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -600,11 +607,11 @@ Partial Class ucProductLists
         Me.btnFind.Text = "เพิ่มสินค้า"
         Me.btnFind.ToolTip = "เพิ่มสินค้า"
         '
-        'IsDelete
+        'PriceMain
         '
-        Me.IsDelete.Caption = "IsDelete"
-        Me.IsDelete.FieldName = "IsDelete"
-        Me.IsDelete.Name = "IsDelete"
+        Me.PriceMain.Caption = "PriceMain"
+        Me.PriceMain.FieldName = "PriceMain"
+        Me.PriceMain.Name = "PriceMain"
         '
         'ucProductLists
         '
@@ -685,5 +692,6 @@ Partial Class ucProductLists
     Friend WithEvents UnitMainID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PriceMain As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class

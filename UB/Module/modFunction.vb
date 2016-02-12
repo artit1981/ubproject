@@ -547,6 +547,7 @@ Module modFunction
                 lclsProSub.ProductCode = lcls.Code
                 lclsProSub.ProductNames = lcls.NameThai
                 lclsProSub.Price = lcls.PriceSale
+                lclsProSub.PriceMain = lcls.PriceSale
                 lclsProSub.Cost = lcls.Cost
                 lclsProSub.Remark = ""
                 lclsProSub.Units = 1
