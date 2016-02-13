@@ -168,6 +168,7 @@ Public Class frmUpdateStock
         Dim rowHandle As Integer
         Dim lFrmEditStock As New frmUpdateStockDTL
         Dim lProductListDAO As ProductListDAO
+        Dim lResult As DialogResult
         Try
 
             If gridView.RowCount = 0 Then Exit Sub
@@ -181,8 +182,10 @@ Public Class frmUpdateStock
             lProductListDAO.UnitName = gridView.GetRowCellValue(rowHandle, "Unit")
             lProductListDAO.Units = gridView.GetRowCellValue(rowHandle, "Units")
             lProductListDAO.IsSN = gridView.GetRowCellValue(rowHandle, "IsSN")
+            lProductListDAO.UnitID = gridView.GetRowCellValue(rowHandle, "UnitID")
             lFrmEditStock.ProductListDAO = lProductListDAO
-            If lFrmEditStock.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            lResult = lFrmEditStock.ShowDialog()
+            If lResult = Windows.Forms.DialogResult.OK Then
                 LoadData()
             End If
 

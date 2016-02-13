@@ -104,15 +104,14 @@ Public Class frmOrderHis
                 SQL = " select Orders.OrderID,Orders.OrderDate,Orders.OrderCode ,Menu.MenuDisplay "
                 SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product.Remark"
-                SQL = SQL & " ,ProductList.Units,ProductList.Price,Product_LocationDTL.IDCode as Location ,Orders.IsDelete,Orders.OrderStatus"
+                SQL = SQL & " ,ProductList.AdjustUnit AS Units,ProductList.Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName ,Orders.IsDelete,Orders.OrderStatus"
                 SQL = SQL & " from Orders"
                 SQL = SQL & " inner join ProductList on Orders.OrderID=ProductList.RefID"
                 SQL = SQL & " inner join Product on Product.ProductID= ProductList.ProductID"
                 SQL = SQL & " inner join Menu on Orders.TableID=Menu.MenuID"
                 SQL = SQL & " inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
-                'SQL = SQL & " left outer join Product_Stock_Log on Product_Stock_Log.OrderID=Orders.OrderID and Product_Stock_Log.ProductID=ProductList.ProductID"
-                'SQL = SQL & " left outer join Product_LocationDTL as LocationDTL2 on LocationDTL2.LocationDTLID=Product_Stock_Log.LocationDTLID"
                 SQL = SQL & " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
                 SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
                 SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
                 If chkShowDelete.Checked = False Then
@@ -244,9 +243,6 @@ Public Class frmOrderHis
           With gridView
              
             .Columns("IsDelete").Visible = False
-            '.Columns("IsCancel").Visible = False
-            '.Columns("OrderID").Visible = False
-
             .Columns("OrderID").Caption = "รหัส"
             .Columns("OrderID").Width = 50
 
@@ -256,13 +252,13 @@ Public Class frmOrderHis
             .Columns("MenuDisplay").Width = 90
             .Columns("OrderDate").Caption = "วันที่"
             .Columns("OrderDate").Width = 50
-            '.Columns("OrderDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+
             .Columns("ProductCode").Caption = "รหัสสินค้า"
             .Columns("ProductCode").Width = 100
             .Columns("ProductName").Caption = "ชื่อสินค้า"
             .Columns("ProductName").Width = 200
             .Columns("Remark").Caption = "รายละเอียดสินค้า"
-            '.Columns("Remark").Width = 150
+
             .Columns("Units").Caption = "จำนวน"
             .Columns("Units").Width = 50
             .Columns("Units").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -271,18 +267,17 @@ Public Class frmOrderHis
             .Columns("IsDelete").Width = 10
             .Columns("Customer").Width = 150
             .Columns("Customer").Caption = "ลูกค้า/เจ้าหนี้"
-            '.Columns("IsDelete").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
-            '.Columns("IsDelete").DisplayFormat.FormatString = "n0"
+           
             .Columns("Price").Caption = "ราคาขาย"
             .Columns("Price").Width = 50
             .Columns("Price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("Price").DisplayFormat.FormatString = "n2"
             .Columns("Location").Width = 100
             .Columns("Location").Caption = "คลังในรายการ"
+            .Columns("UnitName").Width = 100
+            .Columns("UnitName").Caption = "หน่วย"
             .Columns("OrderStatus").Width = 60
             .Columns("OrderStatus").Caption = "สถานะ"
-            '.Columns("Location2").Width = 100
-            '.Columns("Location2").Caption = "คลังตัดสต๊อก"
         End With
     End Sub
 

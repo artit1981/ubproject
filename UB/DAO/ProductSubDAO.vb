@@ -29,7 +29,8 @@
     Private mAdjustUnit As Long = 0
     Private mRateUnit As Decimal = 1
     Private mIsDelete As Integer = 0
-    Dim mAdjustUnit_Old As Long = 0
+    Private mAdjustUnit_Old As Long = 0
+    Private mPriceMain As Decimal = 0
 
     Public Property ProductCode() As String
         Get
@@ -190,7 +191,14 @@
             mPrice = value
         End Set
     End Property
-
+    Public Property PriceMain() As Decimal
+        Get
+            Return mPriceMain
+        End Get
+        Set(ByVal value As Decimal)
+            mPriceMain = value
+        End Set
+    End Property
     Public Property Total() As Decimal
         Get
             Return mTotal

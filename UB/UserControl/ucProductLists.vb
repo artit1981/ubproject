@@ -35,6 +35,7 @@ Public Class ucProductLists
     Private mRefTable As String
     Private mCheckType As Long = 0
     Private mOrderID As List(Of Long)
+    Private mIsDelete As Boolean
     Shared mColData As ProColumn
     Shared mIsCheckStock As Boolean
     Shared mIsForCalc As Boolean
@@ -70,6 +71,7 @@ Public Class ucProductLists
             mOrderID = pRefID
             mCheckType = pCheckType
             mStockType = pStockType
+            mIsDelete = pIsDelete
             gridView.OptionsView.ShowFooter = pShowFooter
             mIsLoadFromRef = pIsLoadFromRefOrder
             Call LoadData(pRefID, pRefTable, pIsLoadFromRefOrder, pIsDelete, pCheckType)
@@ -130,6 +132,7 @@ Public Class ucProductLists
                 rec.AdjustUnit = pPro.AdjustUnit
                 rec.RateUnit = pPro.RateUnit
                 rec.Price = pPro.Price
+                rec.PriceMain = pPro.PriceMain
                 rec.Cost = pPro.Cost
                 rec.Discount = pPro.Discount
                 rec.Total = pPro.Total
@@ -229,6 +232,7 @@ Public Class ucProductLists
                         lDataDAO.AdjustUnit_Old = pProSub.AdjustUnit_Old
                         lDataDAO.KeepMin = pProSub.KeepMin
                         lDataDAO.Price = pProSub.Price
+                        lDataDAO.PriceMain = pProSub.PriceMain
                         lDataDAO.Cost = pProSub.Cost
                         lDataDAO.Discount = pProSub.Discount
                         lDataDAO.Total = pProSub.Total
@@ -259,6 +263,7 @@ Public Class ucProductLists
                         lDataDAO.UnitMainID = pProSub.UnitMainID
                         lDataDAO.AdjustUnit = pProSub.AdjustUnit
                         lDataDAO.RateUnit = pProSub.RateUnit
+                        lDataDAO.PriceMain = pProSub.PriceMain
                         If pProSub.UnitID <> pProSub.UnitMainID Then
                             lDataDAO.Units = pProSub.AdjustUnit * pProSub.RateUnit
                         Else
@@ -477,6 +482,7 @@ Public Class ucProductLists
                     rec.Units = ConvertNullToZero(dr("Units"))
 
                     rec.Price = ConvertNullToZero(dr("Price"))
+                    rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))
@@ -523,6 +529,7 @@ Public Class ucProductLists
             .Columns("ProductID").Visible = False
             .Columns("UnitID").Visible = False
             .Columns("ProductListRefID").Visible = False
+            .Columns("PriceMain").Visible = False
             .Columns("LocationDTLID").Visible = (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID
             .Columns("UnitName").Visible = (mColData And ProColumn.UnitName) = ProColumn.UnitName
             .Columns("Remark").Visible = (mColData And ProColumn.Remark) = ProColumn.Remark
@@ -571,7 +578,10 @@ Public Class ucProductLists
 
             End If
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1")
-            gridView.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+            If mIsDelete = False Then
+                gridView.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+            End If
+
         End With
     End Sub
 
@@ -723,6 +733,7 @@ Public Class ucProductLists
                 Else
                     rec.Cost = lcls.Cost
                 End If
+                rec.PriceMain = rec.Price
                 rec.IsSN = lcls.IsSN
                 rec.Remark = ""
 
@@ -793,17 +804,20 @@ Public Class ucProductLists
                             pRec.UnitID = ConvertNullToZero(dr("UnitID"))
                             pRec.UnitName = ConvertNullToString(dr("UnitName"))
                             pRec.RateUnit = ConvertNullToZero(dr("Rate"))
+                            pRec.Units = pRec.AdjustUnit * pRec.RateUnit
                         Else
                             Dim rec = New ProductSub
                             rec.UnitID = ConvertNullToZero(dr("UnitID"))
                             rec.UnitName = ConvertNullToString(dr("UnitName"))
                             rec.RateUnit = ConvertNullToZero(dr("Rate"))
+                            pRec.Units = pRec.AdjustUnit * pRec.RateUnit
                             bindingSource1.Add(rec)
                         End If
                     Else
                         gridView.SetFocusedRowCellValue("UnitID", ConvertNullToZero(dr("UnitID")))
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
-                        gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToString(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("Units", ConvertNullToZero(dr("AdjustUnit")) * ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
@@ -954,112 +968,35 @@ Public Class ucProductLists
         CalcToForm()
     End Sub
 
-    Public Class ProductSub
-        Inherits ProductSubDAO
-        Implements IDXDataErrorInfo
-
-        Public Sub New()
-            IsSelect = True
-        End Sub
-
-#Region "IDXDataErrorInfo Members"
-        Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-            'If mIsForCalc = False Then
-            '    If (mIsCheckError And ProductID > 0) Then
-            '        If propertyName = "ProductCode" AndAlso String.IsNullOrEmpty(ProductCode) Then
-            '            info.ErrorText = String.Format("กรุณาระบุชื่อสินค้า", propertyName)
-            '            info.ErrorType = ErrorType.Critical
-            '        End If
-            '        If propertyName = "UnitName" AndAlso String.IsNullOrEmpty(UnitName) Then
-            '            info.ErrorText = String.Format("กรุณาระบุหน่วย", propertyName)
-            '            info.ErrorType = ErrorType.Critical
-            '        End If
-            '        'If propertyName = "Units" AndAlso ConvertNullToZero(Units) <= 0 Then
-            '        '    info.ErrorText = String.Format("กรุณาระบุจำนวน", propertyName)
-            '        '    info.ErrorType = ErrorType.Critical
-            '        'End If
-            '        If (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID Then
-            '            If propertyName = "LocationDTLID" AndAlso ConvertNullToZero(LocationDTLID) <= 0 Then
-            '                info.ErrorText = String.Format("กรุณาระบุตำแหน่งเก็บ", propertyName)
-            '                info.ErrorType = ErrorType.Critical
-            '            End If
-            '        End If
-            '    End If
-            'End If
-        End Sub
-
-
-        Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
-            'Dim propertyInfo As New ErrorInfo()
-            'If mIsForCalc = False Then
-            '    If (mIsCheckError And ProductID > 0) Then
-            '        GetPropertyError("ProductCode", propertyInfo)
-
-            '        If propertyInfo.ErrorText = "" Then
-            '            If (mColData And ProColumn.UnitName) = ProColumn.UnitName Then
-            '                GetPropertyError("UnitName", propertyInfo)
-            '            End If
-            '        End If
-
-            '        If propertyInfo.ErrorText = "" Then
-            '            If (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID Then
-            '                GetPropertyError("LocationDTLID", propertyInfo)
-            '            End If
-            '        End If
-            '        'If propertyInfo.ErrorText = "" Then
-            '        '    If (mColData And ProColumn.Units) = ProColumn.Units Then
-            '        '        GetPropertyError("Units", propertyInfo)
-            '        '    End If
-            '        '    'If mIsCheckStock = True And propertyInfo.ErrorText <> "" Then
-            '        '    '    info.ErrorText = CheckStock(ProductID, UnitID, LocationDTLID, Units)
-            '        '    '    info.ErrorType = ErrorType.Critical
-            '        '    '    propertyInfo.ErrorText = info.ErrorText
-            '        '    '    propertyInfo.ErrorType = ErrorType.Critical
-            '        '    'End If
-
-            '        'End If
-
-            '        If propertyInfo.ErrorText <> "" Then
-            '            info.ErrorText = propertyInfo.ErrorText
-            '        Else
-
-            '        End If
-            '    End If
-            'End If
-            Total = (Units * Price) - (Discount * Units)
-
-            'If mIsCheckStock = True And IsSelect = True Then
-            '    info.ErrorText = CheckStock(ProductID, UnitID, LocationDTLID, Units)
-            '    If info.ErrorText <> "" Then info.ErrorType = ErrorType.Warning
-            'End If
-
-        End Sub
-#End Region
-
-    End Class
 
     Private Sub gridView_RowCountChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridView.RowCountChanged
         If gridView.RowCount > 0 Then
             If Not mFormOrder Is Nothing Then
                 Call mFormOrder.Calculation()
             End If
-
         End If
     End Sub
 
     Private Sub RepositoryItemButtonSN_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonSN.ButtonClick
         Dim lfrmSN As New frmSN
         Dim rec As ProductSub = TryCast(gridView.GetFocusedRow, ProductSub)
+        Dim lclsUnit As New UnitDAO
         If Not rec Is Nothing Then
             If rec.ProductID > 0 And rec.IsSN = 1 Then
                 lfrmSN.ProductCodes = rec.ProductCode
                 lfrmSN.ProductNames = rec.ProductNames
-                lfrmSN.Unit = rec.Units
+                lfrmSN.UnitNames = rec.UnitName
+                lfrmSN.Unit = rec.AdjustUnit
+                lfrmSN.UnitMain = rec.Units
                 lfrmSN.IsReadOnly = mIsReaOnly
                 lfrmSN.ProductIDs = rec.ProductID
                 lfrmSN.OrderType = mRefTable
                 lfrmSN.StockType = mStockType
                 lfrmSN.SnList = rec.SNList
+                If lclsUnit.InitailData(rec.UnitMainID, "") Then
+                    lfrmSN.UnitMainNames = lclsUnit.NameThai
+                End If
+
                 lfrmSN.ShowDialog()
                 If mIsReaOnly = False Then
                     rec.SNList = lfrmSN.SnList
@@ -1117,4 +1054,27 @@ Public Class ucProductLists
         Finally
         End Try
     End Sub
+
+
+
+    Public Class ProductSub
+        Inherits ProductSubDAO
+        Implements IDXDataErrorInfo
+
+        Public Sub New()
+            IsSelect = True
+        End Sub
+
+#Region "IDXDataErrorInfo Members"
+        Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+        End Sub
+
+        Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
+            Units = RateUnit * AdjustUnit
+            Price = PriceMain * RateUnit
+            Total = (Units * PriceMain) - (Discount * AdjustUnit)
+        End Sub
+#End Region
+
+    End Class
 End Class

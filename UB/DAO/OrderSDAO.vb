@@ -666,11 +666,15 @@ Public Class OrderSDAO
                     rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                     rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                     rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                    rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
                     rec.Remark = ConvertNullToString(dr("Remark"))
                     rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                     rec.Units = ConvertNullToZero(dr("Units"))
+                    rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                    rec.AdjustUnit_Old = ConvertNullToZero(dr("AdjustUnit"))
                     rec.Units_Old = rec.Units
                     rec.Price = ConvertNullToZero(dr("Price"))
+                    rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))
@@ -754,8 +758,11 @@ Public Class OrderSDAO
 
                     If pProList.SaveData(tr) Then
                         If pProList.IsShow = 1 Then
-                            '*** Main Stock
-                            UpdateStock(tr, pProList, lIsUpdate, True)
+                            If pProList.UnitMainID <> pProList.UnitID Then
+                                '*** Main Stock
+                                UpdateStock(tr, pProList, lIsUpdate, True)
+                            End If
+                          
                             '*** ORG. Stock
                             UpdateStock(tr, pProList, lIsUpdate, False)
 
@@ -842,13 +849,13 @@ Public Class OrderSDAO
                     Else
                         lclsStock.Units = pProductList.AdjustUnit * -1
                     End If
-                ElseIf pProductList.ID = 0 Then
+                ElseIf pProductList.ID = 0 Or pProductList.ModeData = DataMode.ModeNew Then
                     If pIsMainUnitID = True Then
                         lclsStock.Units = pProductList.Units
                     Else
                         lclsStock.Units = pProductList.AdjustUnit
-                    End If 
-                ElseIf pProductList.ID > 0 Then
+                    End If
+                ElseIf pProductList.ID > 0 Or pProductList.ModeData = DataMode.ModeEdit Then
                     'if change location in mode edit
                     If pProductList.LocationDTLID <> pProductList.LocationDTLID_Old Then
                         'Remove unit from old location stock
@@ -878,7 +885,6 @@ Public Class OrderSDAO
                         Else
                             lclsStock.Units = pProductList.AdjustUnit
                         End If
-                        lclsStock.Units = pProductList.Units
                     Else
                         If pIsMainUnitID = True Then
                             If pProductList.Units = pProductList.Units_Old Then
@@ -893,7 +899,7 @@ Public Class OrderSDAO
                                 lclsStock.Units = (pProductList.AdjustUnit - pProductList.AdjustUnit_Old)
                             End If
                         End If
-                      
+
                     End If
                 End If
                 'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
@@ -921,14 +927,27 @@ Public Class OrderSDAO
                         lclsStock.Units = pProductList.AdjustUnit
                     End If
 
-                ElseIf pProductList.ID = 0 Then
-                    lclsStock.Units = pProductList.Units * -1
-                ElseIf pProductList.ID > 0 Then
-                    If pProductList.Units = pProductList.Units_Old Then
-                        lclsStock.Units = 0
+                ElseIf pProductList.ID = 0 Or pProductList.ModeData = DataMode.ModeNew Then
+                    If pIsMainUnitID = True Then
+                        lclsStock.Units = pProductList.Units * -1
                     Else
-                        lclsStock.Units = (pProductList.Units - pProductList.Units_Old) * -1
+                        lclsStock.Units = pProductList.AdjustUnit * -1
                     End If
+                ElseIf pProductList.ID > 0 Then
+                    If pIsMainUnitID = True Then
+                        If pProductList.Units = pProductList.Units_Old Then
+                            lclsStock.Units = 0
+                        Else
+                            lclsStock.Units = (pProductList.Units - pProductList.Units_Old) * -1
+                        End If
+                    Else
+                        If pProductList.AdjustUnit = pProductList.AdjustUnit_Old Then
+                            lclsStock.Units = 0
+                        Else
+                            lclsStock.Units = (pProductList.AdjustUnit - pProductList.AdjustUnit_Old) * -1
+                        End If
+                    End If
+                   
                 End If
 
                 If pIsUpdate = 1 Then  'sell stock sum

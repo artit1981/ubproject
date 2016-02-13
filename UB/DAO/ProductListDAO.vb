@@ -6,6 +6,8 @@ Public Class ProductListDAO
 
 
 
+
+
     Public Function Clone() As ProductListDAO
         Return DirectCast(Me.MemberwiseClone(), ProductListDAO)
     End Function
@@ -42,7 +44,8 @@ Public Class ProductListDAO
     Private mAdjustUnit As Long = 0
     Private mRateUnit As Decimal = 1
     Private mIsDelete As Integer = 0
-    Dim mAdjustUnit_Old As Long = 0
+    Private mAdjustUnit_Old As Long = 0
+    Private mPriceMain As Decimal = 0
 
     Public ReadOnly Property UnitDAO() As MasterDAO
         Get
@@ -161,6 +164,16 @@ Public Class ProductListDAO
         End Get
         Set(ByVal Value As Decimal)
             mPrice = Value
+        End Set
+
+    End Property
+
+    Public Property PriceMain() As Decimal
+        Get
+            Return mPriceMain
+        End Get
+        Set(ByVal Value As Decimal)
+            mPriceMain = Value
         End Set
 
     End Property
@@ -359,8 +372,8 @@ Public Class ProductListDAO
 
         lCheckType = pCheckType
         Try 'ใช้ชื่อสินค้าจาก Table Product
-            SQL = "SELECT  ProductList.ProductID,ProductList.ProductListID AS ID,ProductList.SEQ  , Product.Remark,ProductList.RefID,ProductList.RefTable"
-            SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.Units,ProductList.KeepMin "
+            SQL = "SELECT  ProductList.ProductID,ProductList.ProductListID AS ID,ProductList.SEQ,Product.Remark,ProductList.RefID,ProductList.RefTable"
+            SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
             SQL = SQL & " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
             SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
             SQL = SQL & " FROM ProductList"
@@ -497,8 +510,8 @@ Public Class ProductListDAO
             Select Case mMode
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductListID", "ProductList", tr)
-                    SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,Total,Remark,IsDelete"
-                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,IsShow ,IsMerge ,UnitMainID,AdjustUnit,RateUnit)"
+                    SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,PriceMain,Total,Remark,IsDelete"
+                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,IsShow,IsMerge ,UnitMainID,AdjustUnit,RateUnit)"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"
                     SQL = SQL & " ,  @SEQ"
@@ -510,6 +523,7 @@ Public Class ProductListDAO
                     SQL = SQL & " ,  @Units"
                     SQL = SQL & " ,  @Cost"
                     SQL = SQL & " ,  @Price"
+                    SQL = SQL & " ,  @PriceMain"
                     SQL = SQL & " ,  @Total"
                     SQL = SQL & " ,  @Remark"
                     SQL = SQL & " ,  @IsDelete"
@@ -534,6 +548,7 @@ Public Class ProductListDAO
                     SQL = SQL & " ,Units=@Units"
                     SQL = SQL & " ,Cost=@Cost"
                     SQL = SQL & " ,Price=@Price"
+                    SQL = SQL & " ,PriceMain=@PriceMain"
                     SQL = SQL & " ,Total=@Total"
                     SQL = SQL & " ,ProductID= @ProductID"
                     SQL = SQL & " ,Remark=@Remark"
@@ -563,6 +578,7 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@Total", Total))
             myCommand.Parameters.Add(New SqlParameter("@Cost", Cost))
             myCommand.Parameters.Add(New SqlParameter("@Price", Price))
+            myCommand.Parameters.Add(New SqlParameter("@PriceMain", PriceMain))
             myCommand.Parameters.Add(New SqlParameter("@ProductID", ProductID))
             myCommand.Parameters.Add(New SqlParameter("@Remark", Remark.Trim))
             myCommand.Parameters.Add(New SqlParameter("@ProductName", ProductName))
