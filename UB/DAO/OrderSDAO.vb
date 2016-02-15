@@ -778,7 +778,7 @@ Public Class OrderSDAO
                                     For Each dr2 As DataRow In lSNTable.Rows
                                         lclsSN2 = New SnDAO
                                         lclsSN2.SetStatusBySN(tr, ConvertNullToZero(dr2("ProductID")), ConvertNullToString(dr2("SerialNumberNo")) _
-                                                              , "New", ConvertNullToZero(dr2("SerialNumberID")))
+                                                              , "New", 0)
                                     Next
                                 End If
                                 'Delete

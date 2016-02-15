@@ -964,6 +964,10 @@ Public Class ucProductLists
         RaiseEvent SelectedProduct(mlngProductID)
     End Sub
 
+    Private Sub gridView_FocusedColumnChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs) Handles gridView.FocusedColumnChanged
+        CalcToForm()
+    End Sub
+
     Private Sub gridView_RowUpdated(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.RowObjectEventArgs) Handles gridView.RowUpdated
         CalcToForm()
     End Sub
@@ -1077,4 +1081,6 @@ Public Class ucProductLists
 #End Region
 
     End Class
+
+  
 End Class
