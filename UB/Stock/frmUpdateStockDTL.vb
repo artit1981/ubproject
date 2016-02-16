@@ -15,7 +15,8 @@ Public Class frmUpdateStockDTL
     End Property
 
     Private Sub frmUpdateStockDTL_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If Me.DialogResult <> Windows.Forms.DialogResult.OK Then
+        If Me.DialogResult = Windows.Forms.DialogResult.OK Or Me.DialogResult = Windows.Forms.DialogResult.Cancel Then
+        Else
             e.Cancel = True
         End If
     End Sub
@@ -44,6 +45,7 @@ Public Class frmUpdateStockDTL
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Me.DialogResult = Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
