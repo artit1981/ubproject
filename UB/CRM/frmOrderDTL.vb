@@ -29,7 +29,7 @@ Public Class frmOrderDTL
 
     Private Sub frmOrderDTL_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         IsSave = False
-
+        Me.Text = "Product change"
         Me.Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never

@@ -564,6 +564,7 @@ Public Class ucProductLists
             End If
             If mMode <> DataMode.ModeNew Then
                 .Columns("UnitName").OptionsColumn.ReadOnly = True
+                UnitBtn.Buttons(0).Enabled = False
             End If
             If mIsLoadFromRef Then
                 'Select Case mRefTable
@@ -817,7 +818,7 @@ Public Class ucProductLists
                         gridView.SetFocusedRowCellValue("UnitID", ConvertNullToZero(dr("UnitID")))
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
                         gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
-                        gridView.SetFocusedRowCellValue("Units", ConvertNullToZero(dr("AdjustUnit")) * ConvertNullToZero(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("Units", gridView.GetFocusedRowCellValue("AdjustUnit") * ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
