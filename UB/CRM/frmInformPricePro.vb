@@ -418,32 +418,45 @@ Public Class frmInformPricePro
                             gridView.SetRowCellValue(lRow, "Price1", lCalc)
                         End If
 
+                        'use cost for base
+                        lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price1"))
+
                         If ConvertNullToZero(calcPrice2.EditValue) <> 0 Then
-                            lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price2"))
+                            If rdoCalcType.EditValue = 2 Then
+                                lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price2"))
+                            End If
                             lCalc = lBase * (ConvertNullToZero(calcPrice2.EditValue) / 100)
                             lCalc = Format(ConvertNullToZero(lBase + lCalc), "#,##0.00")
                             gridView.SetRowCellValue(lRow, "Price2", lCalc)
                         End If
                         If ConvertNullToZero(calcPrice3.EditValue) <> 0 Then
-                            lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price3"))
+                            If rdoCalcType.EditValue = 2 Then
+                                lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price3"))
+                            End If
                             lCalc = lBase * (ConvertNullToZero(calcPrice3.EditValue) / 100)
                             lCalc = Format(ConvertNullToZero(lBase + lCalc), "#,##0.00")
                             gridView.SetRowCellValue(lRow, "Price3", lCalc)
                         End If
                         If ConvertNullToZero(calcPrice4.EditValue) <> 0 Then
-                            lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price4"))
+                            If rdoCalcType.EditValue = 2 Then
+                                lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price4"))
+                            End If
                             lCalc = lBase * (ConvertNullToZero(calcPrice4.EditValue) / 100)
                             lCalc = Format(ConvertNullToZero(lBase + lCalc), "#,##0.00")
                             gridView.SetRowCellValue(lRow, "Price4", lCalc)
                         End If
                         If ConvertNullToZero(calcPrice5.EditValue) <> 0 Then
-                            lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price5"))
+                            If rdoCalcType.EditValue = 2 Then
+                                lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price5"))
+                            End If
                             lCalc = lBase * (ConvertNullToZero(calcPrice5.EditValue) / 100)
                             lCalc = Format(ConvertNullToZero(lBase + lCalc), "#,##0.00")
                             gridView.SetRowCellValue(lRow, "Price5", lCalc)
                         End If
                         If ConvertNullToZero(calcPrice6.EditValue) <> 0 Then
-                            lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price6"))
+                            If rdoCalcType.EditValue = 2 Then
+                                lBase = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price6"))
+                            End If
                             lCalc = lBase * (ConvertNullToZero(calcPrice6.EditValue) / 100)
                             lCalc = Format(ConvertNullToZero(lBase + lCalc), "#,##0.00")
                             gridView.SetRowCellValue(lRow, "Price6", lCalc)

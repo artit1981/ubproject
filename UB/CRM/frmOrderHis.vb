@@ -9,26 +9,19 @@ Public Class frmOrderHis
     Inherits iEditForm
 
     Private Const mFormName As String = "frmOrderHis"
-    'Private mcls As New InformPriceDAO
     Private mIsFromLoad As Boolean
-    'Private mMode As DataMode
-    'Private mProductList As New List(Of ProductSubDAO)
-    'Private mOrderType As MasterType
-
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
             SaveBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            ''PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             chkShowDelete.Checked = False
 
             mIsFromLoad = True
             dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -1, Now)
             dtpDateTo.EditValue = Now
-            'LoadData()
             ExportPrivilege()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
@@ -41,7 +34,7 @@ Public Class frmOrderHis
         Try
             mIsFromLoad = True
             MyBase.ClearAllForm(pMode)
-           
+
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
@@ -53,7 +46,7 @@ Public Class frmOrderHis
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
 
         Try
-            
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".Save : " & ex.Message)
             Return False
@@ -114,15 +107,30 @@ Public Class frmOrderHis
                 SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
                 SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
                 SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
+                SQL = SQL & "  AND ProductList.IsShow = 1"
                 If chkShowDelete.Checked = False Then
                     SQL = SQL & "  AND Orders.IsDelete = 0"
                     SQL = SQL & "  AND Orders.IsCancel = 0"
                     SQL = SQL & "  AND ProductList.IsDelete = 0"
                 End If
-                SQL = SQL & "  AND ProductList.IsShow = 1"
 
-                SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
-                'lTimeout = gConnection.Connecti
+                If chkUpdateStock.Checked = True Then
+                    SQL = SQL & "   union all "
+                    SQL = SQL & "  select 0 as OrderID,Product_Stock_Log.LogTime AS OrderDate,'' AS OrderCode ,'UpdateStock' AS MenuDisplay  "
+                    SQL = SQL & "  ,OrderBy AS Customer  ,Product.ProductCode,Product.ProductName,Product.Remark "
+                    SQL = SQL & "  ,Product_Stock_Log.Units AS Units,0 AS Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
+                    SQL = SQL & "  ,0 AS IsDelete,'' AS OrderStatus "
+                    SQL = SQL & "  from(Product_Stock_Log)"
+                    SQL = SQL & "  inner join Product on Product.ProductID= Product_Stock_Log.ProductID "
+                    SQL = SQL & "  inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID "
+                    SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID    "
+                    SQL = SQL & "  WHERE Product_Stock_Log.LogTime between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+                    SQL = SQL & "  and Product_Stock_Log.OrderCode='UpdateStock'"
+                    SQL = SQL & "  ORDER BY  OrderDate "
+                Else
+                    SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
+                End If
+
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
                 If dataTable.Rows.Count > 0 Then
@@ -346,7 +354,7 @@ Public Class frmOrderHis
         CheckShiping.Checked = lCheck
         CheckShipingBuy.Checked = lCheck
         CheckStockIn.Checked = lCheck
-      
+        chkUpdateStock.Checked = lCheck
     End Sub
      
     

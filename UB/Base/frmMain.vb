@@ -822,7 +822,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ApproveStockBar.ItemClick
+    Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs)
         frmUpdateStock.MdiParent = Me
         frmUpdateStock.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)

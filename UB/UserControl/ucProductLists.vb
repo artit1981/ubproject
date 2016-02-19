@@ -447,6 +447,7 @@ Public Class ucProductLists
         Dim dataTable As New DataTable()
         Dim rec As ProductSub
         Try
+
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(ProductSub)
             dataTable = lcls.GetDataTable(pRefID, pRefTable, Nothing, pIsLoadFromRefOrder, "", pIsDelete, pCheckType, True)
@@ -1019,9 +1020,9 @@ Public Class ucProductLists
         Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
         view.GridControl.Focus()
         Dim index As Integer = view.FocusedRowHandle
+        Dim rec As New ProductSub, rec2 As New ProductSub
         Select Case e.Button.Tag
             Case "Insert"
-                Dim rec As New ProductSub
                 bindingSource1.Insert(index, rec)
                 gridControl.DataSource = bindingSource1
                 gridView.RefreshData()
@@ -1038,6 +1039,27 @@ Public Class ucProductLists
                         gridControl.RefreshDataSource()
                     End If
                 End If
+            Case "MoveUp"
+                If index > 0 Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index - 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index - 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+            Case "MoveDown"
+                If index < (bindingSource1.Count - 1) Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index + 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index + 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+
         End Select
     End Sub
 
