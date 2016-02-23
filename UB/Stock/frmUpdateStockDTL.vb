@@ -93,10 +93,11 @@ Public Class frmUpdateStockDTL
 
                     tr.Commit()
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                    Me.DialogResult = Windows.Forms.DialogResult.OK
                     Me.Close()
                 End If
             Else
-                Me.DialogResult = Windows.Forms.DialogResult.Cancel
+                Me.DialogResult = Windows.Forms.DialogResult.None
             End If
         Catch ex As Exception
             tr.Rollback()

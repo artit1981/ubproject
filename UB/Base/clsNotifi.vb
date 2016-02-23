@@ -7,7 +7,7 @@ Public Class clsNotifi
         Hi = 3
     End Enum
     'Private mNotifiList As List(Of clsNotifi)
-    Dim NotifyLevel_ As eNotifyLevel = eNotifyLevel.Low
+    Dim NotifyLevel_ As Integer = eNotifyLevel.Low
     Dim System_ As String = ""
     Dim MenuDisplay_ As String = ""
     Dim ValueDate_ As Date = Now
@@ -30,11 +30,11 @@ Public Class clsNotifi
     End Property
 
 
-    Public Property NotifyLevel() As eNotifyLevel
+    Public Property NotifyLevel() As Integer
         Get
             Return NotifyLevel_
         End Get
-        Set(ByVal value As eNotifyLevel)
+        Set(ByVal value As Integer)
             NotifyLevel_ = value
         End Set
     End Property
@@ -98,42 +98,40 @@ Public Class clsNotifi
     End Property
 #End Region
 #Region "Function"
-    'Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean, ByVal pProCategoryID As Long) As DataTable
-    '    Dim SQL As String, lstrProTypeID As String = ""
-    '    Dim dataTable As New DataTable()
+    Public Function GetNotifiList(ByVal pUserID As Long) As List(Of clsNotifi)
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+        Dim lclsNotifiList As New List(Of clsNotifi)
+        Dim lclsNotifi As clsNotifi
+        Try
+            SQL = "SELECT * "
+            SQL = SQL & " FROM NotifiData  "
+            SQL = SQL & " WHERE IsClose=0 and UserID =" & pUserID
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    lclsNotifi = New clsNotifi
+                    lclsNotifi.IsClose = ConvertNullToString(dr("IsClose"))
+                    lclsNotifi.NotifyLevel = ConvertNullToZero(dr("NotifyLevel"))
+                    lclsNotifi.System = ConvertNullToString(dr("System"))
+                    lclsNotifi.MenuDisplay = ConvertNullToString(dr("MenuDisplay"))
+                    lclsNotifi.ValueDate = dr("ValueDate")
+                    lclsNotifi.RefTable = ConvertNullToString(dr("RefTable"))
+                    lclsNotifi.RefID = ConvertNullToZero(dr("RefID"))
+                    lclsNotifi.UserID = ConvertNullToZero(dr("UserID"))
+                    lclsNotifi.Remark = ConvertNullToString(dr("Remark"))
+                    lclsNotifiList.Add(lclsNotifi)
+                Next
+            End If
 
-    '    Try
-    '        If pProCategoryID > 0 Then
-    '            SQL = "SELECT ProductTypeID"
-    '            SQL = SQL & " FROM ProductCategory  "
-    '            SQL = SQL & " WHERE CategoryID =" & pProCategoryID
-    '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-    '            If dataTable.Rows.Count > 0 Then
-    '                For Each dr As DataRow In dataTable.Rows
-    '                    lstrProTypeID = ConvertNullToString(dr("ProductTypeID"))
-    '                Next
-    '            End If
-    '        End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "clsNotifi.GetNotifiList : " & e.Message)
+        Finally
 
-    '        SQL = "SELECT ProductTypeID AS ID,IDCode,NameThai "
-    '        SQL = SQL & " FROM ProductType  "
-    '        SQL = SQL & " WHERE IsDelete =0   "
-    '        If pID > 0 Then
-    '            SQL = SQL & "  AND ProductTypeID=" & pID
-    '        End If
-    '        If lstrProTypeID <> "" Then
-    '            SQL = SQL & "  AND ProductTypeID in(" & lstrProTypeID & ")"
-    '        End If
-    '        If pOnlyActive = True Then
-    '            SQL = SQL & "  AND IsInActive = 0"
-    '        End If
-    '        SQL = SQL & " ORDER BY IDCode,NameThai"
-    '        dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "ProductTypeDAO.GetDataTable : " & e.Message)
-    '    End Try
-    '    Return dataTable
-    'End Function
+        End Try
+
+        Return lclsNotifiList
+    End Function
 
     Public Function InitialNotifi() As Boolean
         Dim dataTable As New DataTable()
@@ -146,21 +144,38 @@ Public Class clsNotifi
                 For Each dr As DataRow In dataTable.Rows
                     AddDataNotifi(eNotifyLevel.Hi, "อนุมัติเอกสาร", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID"), "")
                 Next
+                Return True
+            Else
+                Return False
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "clsNotifi.GetDataTable : " & e.Message)
         End Try
     End Function
 
+
+    Public Function CloseNotifi(ByVal pUserID As Long, ByVal pRefTable As String, ByVal pRefID As Long) As Boolean
+        Dim SQL As String = ""
+        Try
+
+            SQL = " UPDATE NotifiData SET IsClose=1 ,NotifyLevel,System,MenuDisplay,ValueDate,RefTable,RefID,UserID,Remark)"
+            SQL = SQL & " WHERE UserID=" & gUserID
+            SQL = SQL & " AND RefTable='" & pRefTable & "'"
+            SQL = SQL & " AND RefID=" & pRefID
+            SQL = SQL & " AND IsClose=0"
+            gConnection.executeInsertQuery(SQL, Nothing)
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "clsNotifi.CloseNotifi : " & e.Message)
+        End Try
+    End Function
     Private Sub AddDataNotifi(ByVal pNotifyLevel As eNotifyLevel, ByVal pSystem As String, ByVal pMenuDisplay As String, ByVal pValueDate As Date, ByVal pRefTable As String _
                             , ByVal pRefID As Long, ByVal pRemark As String)
         Dim SQL As String = ""
-        Dim myCommand As SqlCommand
-
         Try
             If IsNotExist(gUserID, pRefID, pRefTable) Then
                 SQL = " INSERT INTO NotifiData  (IsClose,NotifyLevel,System,MenuDisplay,ValueDate,RefTable,RefID,UserID,Remark)"
-                SQL = SQL & " VALUES (0" &
+                SQL = SQL & " VALUES (0"
                 SQL = SQL & " , " & pNotifyLevel
                 SQL = SQL & " ,'" & pSystem & "'"
                 SQL = SQL & " ,'" & pMenuDisplay & "'"
@@ -170,9 +185,7 @@ Public Class clsNotifi
                 SQL = SQL & " , " & gUserID
                 SQL = SQL & " ,'" & pRemark & "'"
                 SQL = SQL & " ) "
-                myCommand = New SqlCommand
-                myCommand.CommandText = SQL
-                gConnection.executeInsertSqlCommand(myCommand, Nothing)
+                gConnection.executeInsertQuery(SQL, Nothing)
 
             End If
         Catch e As Exception
@@ -184,7 +197,7 @@ Public Class clsNotifi
         Dim SQL As String
         Dim dataTable As New DataTable()
         Try
-            SQL = "SELECT *  "
+            SQL = "SELECT RefID  "
             SQL = SQL & " FROM NotifiData"
             SQL = SQL & " where UserID=" & pUserID
             SQL = SQL & " and RefID=" & pRefID

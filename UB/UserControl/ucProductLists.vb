@@ -566,18 +566,15 @@ Public Class ucProductLists
             If mMode <> DataMode.ModeNew Then
                 .Columns("UnitName").OptionsColumn.ReadOnly = True
                 UnitBtn.Buttons(0).Enabled = False
+                .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
+                '.Columns("LocationDTLIDLookUpEdit1").OptionsColumn.ReadOnly = True
+                LocationDTLIDLookUpEdit1.ReadOnly = True
             End If
             If mIsLoadFromRef Then
-                'Select Case mRefTable
-                '    Case MasterType.SellOrders.ToString, MasterType.Borrow.ToString, MasterType.Shiping.ToString, MasterType.Invoice.ToString
-                '        If .Columns("Units").Visible Then .Columns("Units").OptionsColumn.ReadOnly = True
-                'End Select
-
                 .Columns("ProductCode").OptionsColumn.ReadOnly = True
                 If mCheckType <> MasterType.StockIn Then
                     If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
                 End If
-
             End If
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1")
             If mIsDelete = False Then
@@ -596,7 +593,6 @@ Public Class ucProductLists
                 lstrProductCode = ""
             Else
                 lstrProductCode = LoadDataTableProduct(0, pProductCode, pAutoAdd)
-                'If lstrProductCode <> "" Then LoadDataUnit("", True, True)
             End If
 
             If lstrProductCode <> "" Then
@@ -617,8 +613,7 @@ Public Class ucProductLists
                         Else
                             If i > 1 Then pAutoAdd = True
                             lstrProductCode = LoadDataTableProduct(ConvertNullToZero(lfrmFind.GetDataKey(i)), "", pAutoAdd)
-                                'If lstrProductCode <> "" Then LoadDataUnit("", True, True)
-                        End If
+                            End If
                     Next
                     Return lstrProductCode
                     lfrmFind = Nothing
@@ -1104,6 +1099,5 @@ Public Class ucProductLists
 #End Region
 
     End Class
-
-  
+     
 End Class

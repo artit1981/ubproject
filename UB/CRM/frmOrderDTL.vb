@@ -153,6 +153,7 @@ Public Class frmOrderDTL
             ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units"))) Then
                 e.Appearance.BackColor = Color.LightYellow
             End If
+
         End If
     End Sub
 End Class

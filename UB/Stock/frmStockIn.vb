@@ -267,20 +267,21 @@ Public Class frmStockIn
                 lstrErr = lstrErr & DxErrorProvider1.GetError(EmpID) & vbNewLine
             End If
  
-            'If ConvertNullToZero(LocationDTLID.EditValue) = 0 Then
-            '    SetErrorProvider(DxErrorProvider1, LocationDTLID, "กรุณาระบุคลัง")
-            '    lstrErr = lstrErr & "กรุณาระบุคลัง" & vbNewLine
-            'End If
-
-            ''Sum Stock
-            'Dim lclsStock As New ProductStockDAO
-            'If lclsStock.CheckSumStock(Nothing) = False Then
-            '    lstrErr = lstrErr & "กรุณาระบุคลังรวม (หน้า running format)" & vbNewLine
-            'End If
+          
 
             lstrErr = lstrErr & UcProductLists1.IsError
 
-            If lstrErr.Trim <> "" Then
+            If lstrErr.Trim = "PRODUCTCHANGE" Then
+                ShowProgress(False, "")
+                Dim lfrm As New frmOrderDTL
+                lfrm.ProList = mcls.ProductDAOs
+                lfrm.ShowDialog()
+                If lfrm.IsSave = True Then
+                    Return True
+                Else
+                    Return False
+                End If
+            ElseIf lstrErr.Trim <> "" Then
                 ShowProgress(False, "")
                 lstrErr = "พบข้อผิดพลาดกรุณาตรวจสอบ : " & vbNewLine & lstrErr
                 XtraMessageBox.Show(Me, lstrErr, "ตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Error)
