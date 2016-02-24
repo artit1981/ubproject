@@ -65,12 +65,14 @@ Partial Public Class rptPaymentBuy
         Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel24 = New DevExpress.XtraReports.UI.XRLabel()
         Me.TotalDTL = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel33 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel31, Me.XrLabel23, Me.XrLabel22, Me.XrLabel18})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel32, Me.XrLabel31, Me.XrLabel23, Me.XrLabel22, Me.XrLabel18})
         Me.Detail.HeightF = 15.88158!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
@@ -81,10 +83,10 @@ Partial Public Class rptPaymentBuy
         Me.XrLabel31.CanGrow = False
         Me.XrLabel31.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ProductName")})
         Me.XrLabel31.Font = New System.Drawing.Font("Courier New", 9.0!)
-        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(202.0833!, 0.0!)
+        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(172.9166!, 0.0!)
         Me.XrLabel31.Name = "XrLabel31"
         Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel31.SizeF = New System.Drawing.SizeF(160.4167!, 15.23945!)
+        Me.XrLabel31.SizeF = New System.Drawing.SizeF(129.1667!, 15.23946!)
         Me.XrLabel31.StylePriority.UseFont = False
         Me.XrLabel31.Text = "XrLabel31"
         '
@@ -92,10 +94,10 @@ Partial Public Class rptPaymentBuy
         '
         Me.XrLabel23.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Total", "{0:#,##0.00}")})
         Me.XrLabel23.Font = New System.Drawing.Font("Courier New", 9.0!)
-        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(493.75!, 0.0!)
+        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(551.0417!, 0.0!)
         Me.XrLabel23.Name = "XrLabel23"
         Me.XrLabel23.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel23.SizeF = New System.Drawing.SizeF(166.6668!, 15.23946!)
+        Me.XrLabel23.SizeF = New System.Drawing.SizeF(132.2917!, 15.23946!)
         Me.XrLabel23.StylePriority.UseFont = False
         Me.XrLabel23.StylePriority.UseTextAlignment = False
         Me.XrLabel23.Text = "XrLabel23"
@@ -106,10 +108,10 @@ Partial Public Class rptPaymentBuy
         Me.XrLabel22.CanGrow = False
         Me.XrLabel22.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ExpiryDate", "{0:dd/MM/yyyy}")})
         Me.XrLabel22.Font = New System.Drawing.Font("Courier New", 9.0!)
-        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(362.5!, 0.0!)
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(443.75!, 0.0!)
         Me.XrLabel22.Name = "XrLabel22"
         Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel22.SizeF = New System.Drawing.SizeF(131.25!, 15.23946!)
+        Me.XrLabel22.SizeF = New System.Drawing.SizeF(102.0833!, 15.23946!)
         Me.XrLabel22.StylePriority.UseFont = False
         Me.XrLabel22.Text = "XrLabel22"
         '
@@ -121,7 +123,7 @@ Partial Public Class rptPaymentBuy
         Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(21.875!, 0.0!)
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel18.SizeF = New System.Drawing.SizeF(172.9166!, 15.23945!)
+        Me.XrLabel18.SizeF = New System.Drawing.SizeF(144.7916!, 15.23945!)
         Me.XrLabel18.StylePriority.UseFont = False
         Me.XrLabel18.Text = "[ProductCode]"
         '
@@ -164,7 +166,7 @@ Partial Public Class rptPaymentBuy
         '
         'PageHeader
         '
-        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel30, Me.XrLabel21, Me.XrLabel20, Me.XrLabel19, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel14, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.XrLabel5, Me.XrLabel4, Me.XrLabel3, Me.XrLabel2, Me.XrLabel1, Me.XrLine1})
+        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel33, Me.XrLabel30, Me.XrLabel21, Me.XrLabel20, Me.XrLabel19, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel14, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.XrLabel5, Me.XrLabel4, Me.XrLabel3, Me.XrLabel2, Me.XrLabel1, Me.XrLine1})
         Me.PageHeader.HeightF = 214.5833!
         Me.PageHeader.Name = "PageHeader"
         '
@@ -172,10 +174,10 @@ Partial Public Class rptPaymentBuy
         '
         Me.XrLabel30.CanGrow = False
         Me.XrLabel30.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(202.0833!, 182.2083!)
+        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(172.9166!, 182.2083!)
         Me.XrLabel30.Name = "XrLabel30"
         Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel30.SizeF = New System.Drawing.SizeF(160.4167!, 27.16666!)
+        Me.XrLabel30.SizeF = New System.Drawing.SizeF(161.4584!, 27.16666!)
         Me.XrLabel30.StylePriority.UseFont = False
         Me.XrLabel30.StylePriority.UseTextAlignment = False
         Me.XrLabel30.Text = "เลขที่ใบกำกับภาษี/ใบส่งของ"
@@ -210,10 +212,10 @@ Partial Public Class rptPaymentBuy
         '
         Me.XrLabel17.CanGrow = False
         Me.XrLabel17.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(493.75!, 182.2084!)
+        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(551.0417!, 182.2084!)
         Me.XrLabel17.Name = "XrLabel17"
         Me.XrLabel17.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel17.SizeF = New System.Drawing.SizeF(166.6667!, 27.16666!)
+        Me.XrLabel17.SizeF = New System.Drawing.SizeF(132.2916!, 27.16666!)
         Me.XrLabel17.StylePriority.UseFont = False
         Me.XrLabel17.StylePriority.UseTextAlignment = False
         Me.XrLabel17.Text = "จำนวนเงิน"
@@ -223,13 +225,13 @@ Partial Public Class rptPaymentBuy
         '
         Me.XrLabel16.CanGrow = False
         Me.XrLabel16.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(362.5!, 182.2083!)
+        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(443.75!, 182.2083!)
         Me.XrLabel16.Name = "XrLabel16"
         Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel16.SizeF = New System.Drawing.SizeF(111.4583!, 27.16666!)
+        Me.XrLabel16.SizeF = New System.Drawing.SizeF(102.0833!, 27.16666!)
         Me.XrLabel16.StylePriority.UseFont = False
         Me.XrLabel16.StylePriority.UseTextAlignment = False
-        Me.XrLabel16.Text = "ครบกำหนด"
+        Me.XrLabel16.Text = "วันครบกำหนด"
         Me.XrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrLabel15
@@ -239,7 +241,7 @@ Partial Public Class rptPaymentBuy
         Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(21.875!, 182.2084!)
         Me.XrLabel15.Name = "XrLabel15"
         Me.XrLabel15.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel15.SizeF = New System.Drawing.SizeF(172.9166!, 27.16666!)
+        Me.XrLabel15.SizeF = New System.Drawing.SizeF(144.7916!, 27.16666!)
         Me.XrLabel15.StylePriority.UseFont = False
         Me.XrLabel15.StylePriority.UseTextAlignment = False
         Me.XrLabel15.Text = "เลขที่อ้างอิง"
@@ -468,7 +470,7 @@ Partial Public Class rptPaymentBuy
         Me.XrLabel24.LocationFloat = New DevExpress.Utils.PointFloat(468.7501!, 10.00001!)
         Me.XrLabel24.Name = "XrLabel24"
         Me.XrLabel24.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel24.SizeF = New System.Drawing.SizeF(191.6667!, 27.16667!)
+        Me.XrLabel24.SizeF = New System.Drawing.SizeF(214.5833!, 27.16667!)
         Me.XrLabel24.StylePriority.UseFont = False
         Me.XrLabel24.StylePriority.UseTextAlignment = False
         Me.XrLabel24.Text = "XrLabel24"
@@ -480,6 +482,31 @@ Partial Public Class rptPaymentBuy
         Me.TotalDTL.Expression = " [].Sum([Total])"
         Me.TotalDTL.FieldType = DevExpress.XtraReports.UI.FieldType.[Decimal]
         Me.TotalDTL.Name = "TotalDTL"
+        '
+        'XrLabel32
+        '
+        Me.XrLabel32.CanGrow = False
+        Me.XrLabel32.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.OrderDate", "{0:dd/MM/yyyy}")})
+        Me.XrLabel32.Font = New System.Drawing.Font("Courier New", 9.0!)
+        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(331.25!, 0.0!)
+        Me.XrLabel32.Name = "XrLabel32"
+        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel32.SizeF = New System.Drawing.SizeF(107.2917!, 15.23946!)
+        Me.XrLabel32.StylePriority.UseFont = False
+        Me.XrLabel32.Text = "XrLabel32"
+        '
+        'XrLabel33
+        '
+        Me.XrLabel33.CanGrow = False
+        Me.XrLabel33.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel33.LocationFloat = New DevExpress.Utils.PointFloat(336.4583!, 182.2083!)
+        Me.XrLabel33.Name = "XrLabel33"
+        Me.XrLabel33.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel33.SizeF = New System.Drawing.SizeF(107.2917!, 27.16666!)
+        Me.XrLabel33.StylePriority.UseFont = False
+        Me.XrLabel33.StylePriority.UseTextAlignment = False
+        Me.XrLabel33.Text = "วันที่เอกสาร"
+        Me.XrLabel33.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'rptPaymentBuy
         '
@@ -542,4 +569,6 @@ Partial Public Class rptPaymentBuy
     Friend WithEvents XrLabel25 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel31 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel30 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel32 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel33 As DevExpress.XtraReports.UI.XRLabel
 End Class

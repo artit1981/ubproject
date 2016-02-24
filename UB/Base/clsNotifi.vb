@@ -142,7 +142,7 @@ Public Class clsNotifi
             dataTable = lclsApprove.GetDataTable()
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
-                    AddDataNotifi(eNotifyLevel.Hi, "อนุมัติเอกสาร", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID"), "")
+                    AddDataNotifi(eNotifyLevel.Hi, "อนุมัติเอกสาร", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID"), "เอกสารเลขที่ " & dr("OrderCode"))
                 Next
                 Return True
             Else
@@ -158,7 +158,7 @@ Public Class clsNotifi
         Dim SQL As String = ""
         Try
 
-            SQL = " UPDATE NotifiData SET IsClose=1 ,NotifyLevel,System,MenuDisplay,ValueDate,RefTable,RefID,UserID,Remark)"
+            SQL = " UPDATE NotifiData SET IsClose=1  "
             SQL = SQL & " WHERE UserID=" & gUserID
             SQL = SQL & " AND RefTable='" & pRefTable & "'"
             SQL = SQL & " AND RefID=" & pRefID

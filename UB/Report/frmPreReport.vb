@@ -491,15 +491,17 @@ Public Class frmPreReport
                 Dim lTableCheque As DataTable
                 Dim lclsCheque As New ChequeDAO
                 Dim lclsBank As New BankDAO
+                Dim lChequeTotal As Decimal = 0
 
                 lTableCheque = lclsCheque.GetDataTable(pOrderID)
                 For Each pRow As DataRow In lTableCheque.Rows
                     lclsReport.Company = ConvertNullToString(pRow.Item("BankDocType")) & "  " & ConvertNullToString(pRow.Item("ChequeNo"))
-                    lclsBank.InitailData(ConvertNullToString(pRow.Item("BankID")), Nothing)
+                    lclsBank.InitailData(ConvertNullToZero(pRow.Item("BankID")), Nothing)
                     lclsReport.CompanyWeb = lclsBank.NameThai
                     lclsReport.ShipingDate = pRow.Item("ChequeDateDue")
-                    lclsReport.GrandTotal = ConvertNullToString(pRow.Item("ChequePay"))
+                    lChequeTotal = lChequeTotal + ConvertNullToZero(pRow.Item("ChequePay"))
                 Next
+                lclsReport.GrandTotal = lChequeTotal
                 lclsReport.SaveData()
             End If
 

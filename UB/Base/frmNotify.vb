@@ -8,7 +8,7 @@ Public Class frmNotify
             With GridView
                 If .RowCount > 0 Then
                     For lRow = 0 To .RowCount
-                        If .GetRowCellDisplayText(lRow, "IsClose") = 1 Then
+                        If .GetRowCellValue(lRow, "IsClose") = True Then
                             mcls.CloseNotifi(gUserID, ConvertNullToString(.GetRowCellDisplayText(lRow, "RefTable")), ConvertNullToZero(.GetRowCellValue(lRow, "RefID")))
                         End If
                     Next

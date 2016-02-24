@@ -88,6 +88,8 @@ Partial Class frmNotify
         '
         'NotifyLevel
         '
+        Me.NotifyLevel.AppearanceCell.Options.UseTextOptions = True
+        Me.NotifyLevel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.NotifyLevel.ColumnEdit = Me.ImageComboBox1
         Me.NotifyLevel.FieldName = "NotifyLevel"
         Me.NotifyLevel.ImageAlignment = StringAlignment.Center
