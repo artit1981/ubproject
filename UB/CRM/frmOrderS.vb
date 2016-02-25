@@ -964,7 +964,7 @@ Public Class frmOrderS
         Dim lOrderList As New List(Of Long)
         lOrderList.Add(pOrderID)
         Try
-            Dim lIsConfirm As Boolean = True
+            Dim lIsConfirm As Boolean = False
             If pTableID = MasterType.ReduceCredit Or pTableID = MasterType.AddCredit Then
                 lIsConfirm = False
             End If

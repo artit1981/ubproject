@@ -830,8 +830,8 @@ Public Class frmMain
     End Sub
 
     Private Sub ProvinceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProvinceBar.ItemClick
-        Dim lcls As New ProvinceControl
-        ShowDataOnControl(lcls, MasterType.Province)
-        InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
+        'Dim lcls As New ProvinceControl
+        'ShowDataOnControl(lcls, MasterType.Province)
+        'InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
     End Sub
 End Class

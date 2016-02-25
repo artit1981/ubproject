@@ -70,7 +70,7 @@ Public Class frmOrderDTL
             If lProSub.UnitID = lProSub.UnitMainID Then
                 lProSub.Units_Old = pProlist.Units_Old
             Else
-                lProSub.Units_Old = pProlist.AdjustUnit
+                lProSub.Units_Old = pProlist.AdjustUnit_Old
             End If
 
             lProSub.IsShow = pProlist.IsShow
