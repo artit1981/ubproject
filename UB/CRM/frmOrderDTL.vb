@@ -66,10 +66,16 @@ Public Class frmOrderDTL
             lProSub.Cost = pProlist.Cost
             lProSub.Discount = pProlist.Discount
             lProSub.Total = pProlist.Total
-            lProSub.Units_Old = pProlist.Units_Old
+            lProSub.UnitMainID = pProlist.UnitMainID
+            If lProSub.UnitID = lProSub.UnitMainID Then
+                lProSub.Units_Old = pProlist.Units_Old
+            Else
+                lProSub.Units_Old = pProlist.AdjustUnit
+            End If
+
             lProSub.IsShow = pProlist.IsShow
             lProSub.IsMerge = pProlist.IsMerge
-            lProSub.UnitMainID = pProlist.UnitMainID
+
             lProSub.IsDelete = pProlist.IsDelete
             lProSub.IsSN = pProlist.IsSN
             lProSub.SNList = pProlist.SNList

@@ -62,7 +62,7 @@ Public Class ProvinceDAO
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
-                    ID = Int32.Parse(dr("DepartmentID"))
+                    ID = Int32.Parse(dr("ProvinceID"))
                     IsInActive = dr("IsInActive")
                     NameThai = dr("ProvinceName").ToString
                     NameEng = dr("ProvinceNameEng").ToString
@@ -113,9 +113,9 @@ Public Class ProvinceDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT  ProvinceName "
+            SQL = "SELECT ProvinceID AS ID, ProvinceCode, ProvinceName,ProvinceNameEng "
             SQL = SQL & " FROM Province   "
-            SQL = SQL & " ORDER BY ProvinceName"
+            SQL = SQL & " WHERE IsDelete=0 ORDER BY ProvinceName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProvinceDAO.GetDataTable : " & e.Message)

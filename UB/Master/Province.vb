@@ -89,7 +89,7 @@ Public Class frmProvince
         Dim dataTable As New DataTable()
         Try
             ' Create four typed columns in the DataTable.
-            dataTable.Columns.Add("ID", GetType(Integer))
+            dataTable.Columns.Add("ID", GetType(Long))
             dataTable.Columns.Add("Name", GetType(String))
 
             ' Add five rows with those columns filled in the DataTable.

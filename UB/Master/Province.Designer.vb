@@ -27,10 +27,7 @@ Partial Class frmProvince
         Me.txtRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.btnRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.cboGeo = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.cboGeoView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -41,12 +38,14 @@ Partial Class frmProvince
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
+        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.NAME = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboGeo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboGeoView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -144,40 +143,18 @@ Partial Class frmProvince
         Me.cboGeo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboGeo.Properties.NullText = ""
         Me.cboGeo.Properties.ValidateOnEnterKey = True
-        Me.cboGeo.Properties.View = Me.SearchLookUpEdit1View
+        Me.cboGeo.Properties.View = Me.cboGeoView
         Me.cboGeo.Size = New System.Drawing.Size(273, 20)
         Me.cboGeo.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboGeo, "Text")
         '
-        'SearchLookUpEdit1View
+        'cboGeoView
         '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "รหัส"
-        Me.GridColumn4.FieldName = " ID"
-        Me.GridColumn4.Name = "GridColumn4"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "รหัส"
-        Me.GridColumn5.FieldName = "EmpCode"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "ชื่อ - นามสกุล"
-        Me.GridColumn6.FieldName = "NAME"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
+        Me.cboGeoView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.NAME})
+        Me.cboGeoView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.cboGeoView.Name = "cboGeoView"
+        Me.cboGeoView.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.cboGeoView.OptionsView.ShowGroupPanel = False
         '
         'XtraTabControl1
         '
@@ -311,21 +288,35 @@ Partial Class frmProvince
         'FormChangedComponent1
         '
         '
+        'ID
+        '
+        Me.ID.Caption = "GridColumn1"
+        Me.ID.FieldName = "ID"
+        Me.ID.Name = "ID"
+        '
+        'NAME
+        '
+        Me.NAME.Caption = "ภาค"
+        Me.NAME.FieldName = "NAME"
+        Me.NAME.Name = "NAME"
+        Me.NAME.Visible = True
+        Me.NAME.VisibleIndex = 0
+        '
         'frmProvince
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 484)
         Me.Controls.Add(Me.XtraTabControl1)
-        Me.Name = "frmProvince"
-        Me.Text = "frmDepartment"
+        'Me.NAME = "frmProvince"
+        Me.Text = "frmProvince"
         Me.Controls.SetChildIndex(Me.XtraTabControl1, 0)
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboGeo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboGeoView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
@@ -349,10 +340,9 @@ Partial Class frmProvince
     Private WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btnRefresh As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents cboGeo As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents cboGeoView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
+    Friend WithEvents ID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents NAME As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class
