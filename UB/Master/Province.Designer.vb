@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDepartment
+Partial Class frmProvince
     Inherits iEditForm
 
     'Form overrides dispose to clean up the component list.
@@ -20,17 +20,14 @@ Partial Class frmDepartment
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDepartment))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProvince))
         Me.txtNameEng = New DevExpress.XtraEditors.TextEdit()
         Me.txtNameThai = New DevExpress.XtraEditors.TextEdit()
         Me.txtCode = New DevExpress.XtraEditors.TextEdit()
         Me.txtRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.btnRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.cboGeo = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.cboGeoView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -38,24 +35,20 @@ Partial Class frmDepartment
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcNote1 = New UB.ucNote()
-        Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
+        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.NAME = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboGeo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboGeoView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
-        Me.NoteTabPage.SuspendLayout()
-        Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -150,40 +143,18 @@ Partial Class frmDepartment
         Me.cboGeo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboGeo.Properties.NullText = ""
         Me.cboGeo.Properties.ValidateOnEnterKey = True
-        Me.cboGeo.Properties.View = Me.SearchLookUpEdit1View
+        Me.cboGeo.Properties.View = Me.cboGeoView
         Me.cboGeo.Size = New System.Drawing.Size(273, 20)
         Me.cboGeo.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboGeo, "Text")
         '
-        'SearchLookUpEdit1View
+        'cboGeoView
         '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "รหัส"
-        Me.GridColumn4.FieldName = " ID"
-        Me.GridColumn4.Name = "GridColumn4"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "รหัส"
-        Me.GridColumn5.FieldName = "EmpCode"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "ชื่อ - นามสกุล"
-        Me.GridColumn6.FieldName = "NAME"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
+        Me.cboGeoView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.NAME})
+        Me.cboGeoView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.cboGeoView.Name = "cboGeoView"
+        Me.cboGeoView.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.cboGeoView.OptionsView.ShowGroupPanel = False
         '
         'XtraTabControl1
         '
@@ -195,7 +166,7 @@ Partial Class frmDepartment
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.Size = New System.Drawing.Size(816, 447)
         Me.XtraTabControl1.TabIndex = 6
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
         '
         'GeneralTabPage
@@ -230,9 +201,9 @@ Partial Class frmDepartment
         Me.Label10.Location = New System.Drawing.Point(46, 96)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(70, 14)
+        Me.Label10.Size = New System.Drawing.Size(27, 14)
         Me.Label10.TabIndex = 187
-        Me.Label10.Text = "หัวหน้าแผนก"
+        Me.Label10.Text = "ภาค"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
         '
         'Label1
@@ -245,9 +216,9 @@ Partial Class frmDepartment
         Me.Label1.Location = New System.Drawing.Point(46, 69)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label1, True)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 14)
+        Me.Label1.Size = New System.Drawing.Size(41, 14)
         Me.Label1.TabIndex = 148
-        Me.Label1.Text = "ชื่อแผนก"
+        Me.Label1.Text = "จังหวัด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label1, "")
         '
         'Label8
@@ -259,9 +230,9 @@ Partial Class frmDepartment
         Me.Label8.Location = New System.Drawing.Point(46, 129)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label8, True)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(85, 14)
+        Me.Label8.Size = New System.Drawing.Size(76, 14)
         Me.Label8.TabIndex = 109
-        Me.Label8.Text = "ชื่อแผนก (Eng)"
+        Me.Label8.Text = "จังหวัด (Eng)"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label8, "")
         '
         'Label4
@@ -274,9 +245,9 @@ Partial Class frmDepartment
         Me.Label4.Location = New System.Drawing.Point(46, 42)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(55, 14)
+        Me.Label4.Size = New System.Drawing.Size(27, 14)
         Me.Label4.TabIndex = 108
-        Me.Label4.Text = "รหัสแผนก"
+        Me.Label4.Text = "รหัส"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
         '
         'Label5
@@ -292,48 +263,6 @@ Partial Class frmDepartment
         Me.Label5.TabIndex = 107
         Me.Label5.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label5, "")
-        '
-        'NoteTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.NoteTabPage, "")
-        Me.NoteTabPage.Controls.Add(Me.UcNote1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
-        Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(810, 419)
-        Me.NoteTabPage.Text = "บันทึกข้อความ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
-        '
-        'UcNote1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote1, "")
-        Me.UcNote1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcNote1.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
-        Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(810, 419)
-        Me.UcNote1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
-        '
-        'AttachmentTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AttachmentTabPage, "")
-        Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
-        Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(810, 419)
-        Me.AttachmentTabPage.Text = "ไฟล์แนบ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
-        '
-        'UcFileAttach1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcFileAttach1, "")
-        Me.UcFileAttach1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
-        Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(810, 419)
-        Me.UcFileAttach1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
         'AdminTabPage
         '
@@ -359,27 +288,39 @@ Partial Class frmDepartment
         'FormChangedComponent1
         '
         '
-        'frmDepartment
+        'ID
+        '
+        Me.ID.Caption = "GridColumn1"
+        Me.ID.FieldName = "ID"
+        Me.ID.Name = "ID"
+        '
+        'NAME
+        '
+        Me.NAME.Caption = "ภาค"
+        Me.NAME.FieldName = "NAME"
+        Me.NAME.Name = "NAME"
+        Me.NAME.Visible = True
+        Me.NAME.VisibleIndex = 0
+        '
+        'frmProvince
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 484)
         Me.Controls.Add(Me.XtraTabControl1)
-        Me.Name = "frmDepartment"
-        Me.Text = "frmDepartment"
+        'Me.NAME = "frmProvince"
+        Me.Text = "frmProvince"
         Me.Controls.SetChildIndex(Me.XtraTabControl1, 0)
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboGeo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboGeoView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
-        Me.NoteTabPage.ResumeLayout(False)
-        Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -394,19 +335,14 @@ Partial Class frmDepartment
     Private WithEvents Label4 As System.Windows.Forms.Label
     Private WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtRemark As DevExpress.XtraEditors.MemoEdit
-    Friend WithEvents AttachmentTabPage As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents UcFileAttach1 As ucFileAttach
     Friend WithEvents AdminTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents UcAdmin1 As ucAdmin
-    Friend WithEvents NoteTabPage As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents UcNote1 As ucNote
     Private WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btnRefresh As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents cboGeo As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents cboGeoView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
+    Friend WithEvents ID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents NAME As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class

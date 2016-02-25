@@ -66,6 +66,7 @@ Partial Class frmOrderHis
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chkUpdateStock = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatePanel.SuspendLayout()
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,12 +109,14 @@ Partial Class frmOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkUpdateStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatePanel
         '
         Me.DatePanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DatePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DatePanel, "")
         Me.DatePanel.Controls.Add(Me.CheckAll)
         Me.DatePanel.Controls.Add(Me.PanelControl2)
@@ -146,6 +149,7 @@ Partial Class frmOrderHis
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
+        Me.PanelControl2.Controls.Add(Me.chkUpdateStock)
         Me.PanelControl2.Controls.Add(Me.CheckExpose)
         Me.PanelControl2.Controls.Add(Me.CheckReceiptCut)
         Me.PanelControl2.Controls.Add(Me.CheckShipingBuy)
@@ -698,6 +702,19 @@ Partial Class frmOrderHis
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
+        'chkUpdateStock
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkUpdateStock, "CheckedChanged")
+        Me.chkUpdateStock.Location = New System.Drawing.Point(613, 23)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.chkUpdateStock, True)
+        Me.chkUpdateStock.Name = "chkUpdateStock"
+        Me.chkUpdateStock.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.chkUpdateStock.Properties.Appearance.Options.UseForeColor = True
+        Me.chkUpdateStock.Properties.Caption = "Update stock"
+        Me.chkUpdateStock.Size = New System.Drawing.Size(102, 19)
+        Me.chkUpdateStock.TabIndex = 316
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkUpdateStock, "Checked")
+        '
         'frmOrderHis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -755,6 +772,7 @@ Partial Class frmOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkUpdateStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -804,4 +822,5 @@ Partial Class frmOrderHis
     Friend WithEvents CheckInvoice As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckExpose As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents chkUpdateStock As DevExpress.XtraEditors.CheckEdit
 End Class

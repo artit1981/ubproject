@@ -272,7 +272,7 @@ Public Class ucProductLists
                         lDataDAO.SEQ = lRow + 1
 
                         If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
-                            mTotal = mTotal + (lDataDAO.Units * lDataDAO.Price) - (lDataDAO.Discount * lDataDAO.Units)
+                            mTotal = mTotal + (lDataDAO.Units * lDataDAO.PriceMain) - (lDataDAO.Discount * lDataDAO.AdjustUnit)
                         End If
 
                         If pIsCheckError = True And pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
@@ -447,6 +447,7 @@ Public Class ucProductLists
         Dim dataTable As New DataTable()
         Dim rec As ProductSub
         Try
+
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(ProductSub)
             dataTable = lcls.GetDataTable(pRefID, pRefTable, Nothing, pIsLoadFromRefOrder, "", pIsDelete, pCheckType, True)
@@ -564,18 +565,16 @@ Public Class ucProductLists
             End If
             If mMode <> DataMode.ModeNew Then
                 .Columns("UnitName").OptionsColumn.ReadOnly = True
+                UnitBtn.Buttons(0).Enabled = False
+                .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
+                '.Columns("LocationDTLIDLookUpEdit1").OptionsColumn.ReadOnly = True
+                LocationDTLIDLookUpEdit1.ReadOnly = True
             End If
             If mIsLoadFromRef Then
-                'Select Case mRefTable
-                '    Case MasterType.SellOrders.ToString, MasterType.Borrow.ToString, MasterType.Shiping.ToString, MasterType.Invoice.ToString
-                '        If .Columns("Units").Visible Then .Columns("Units").OptionsColumn.ReadOnly = True
-                'End Select
-
                 .Columns("ProductCode").OptionsColumn.ReadOnly = True
                 If mCheckType <> MasterType.StockIn Then
                     If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
                 End If
-
             End If
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1")
             If mIsDelete = False Then
@@ -594,7 +593,6 @@ Public Class ucProductLists
                 lstrProductCode = ""
             Else
                 lstrProductCode = LoadDataTableProduct(0, pProductCode, pAutoAdd)
-                'If lstrProductCode <> "" Then LoadDataUnit("", True, True)
             End If
 
             If lstrProductCode <> "" Then
@@ -615,8 +613,7 @@ Public Class ucProductLists
                         Else
                             If i > 1 Then pAutoAdd = True
                             lstrProductCode = LoadDataTableProduct(ConvertNullToZero(lfrmFind.GetDataKey(i)), "", pAutoAdd)
-                                'If lstrProductCode <> "" Then LoadDataUnit("", True, True)
-                        End If
+                            End If
                     Next
                     Return lstrProductCode
                     lfrmFind = Nothing
@@ -817,7 +814,7 @@ Public Class ucProductLists
                         gridView.SetFocusedRowCellValue("UnitID", ConvertNullToZero(dr("UnitID")))
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
                         gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
-                        gridView.SetFocusedRowCellValue("Units", ConvertNullToZero(dr("AdjustUnit")) * ConvertNullToZero(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("Units", gridView.GetFocusedRowCellValue("AdjustUnit") * ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
@@ -964,6 +961,10 @@ Public Class ucProductLists
         RaiseEvent SelectedProduct(mlngProductID)
     End Sub
 
+    Private Sub gridView_FocusedColumnChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs) Handles gridView.FocusedColumnChanged
+        CalcToForm()
+    End Sub
+
     Private Sub gridView_RowUpdated(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.RowObjectEventArgs) Handles gridView.RowUpdated
         CalcToForm()
     End Sub
@@ -1014,9 +1015,9 @@ Public Class ucProductLists
         Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
         view.GridControl.Focus()
         Dim index As Integer = view.FocusedRowHandle
+        Dim rec As New ProductSub, rec2 As New ProductSub
         Select Case e.Button.Tag
             Case "Insert"
-                Dim rec As New ProductSub
                 bindingSource1.Insert(index, rec)
                 gridControl.DataSource = bindingSource1
                 gridView.RefreshData()
@@ -1033,6 +1034,27 @@ Public Class ucProductLists
                         gridControl.RefreshDataSource()
                     End If
                 End If
+            Case "MoveUp"
+                If index > 0 Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index - 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index - 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+            Case "MoveDown"
+                If index < (bindingSource1.Count - 1) Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index + 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index + 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+
         End Select
     End Sub
 
@@ -1077,4 +1099,5 @@ Public Class ucProductLists
 #End Region
 
     End Class
+     
 End Class

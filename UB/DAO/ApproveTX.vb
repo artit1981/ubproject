@@ -224,7 +224,7 @@ Public Class ApproveTX
             ElseIf gIsApproveOrderUser = True Then
                 SQL = SQL & " AND ApproveType =1   "
             ElseIf gIsApproveLimitUser = True Then
-                SQL = SQL & " ApproveType=2   "
+                SQL = SQL & " AND ApproveType=2   "
             End If
             SQL = SQL & " ORDER BY ApproveTXID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)

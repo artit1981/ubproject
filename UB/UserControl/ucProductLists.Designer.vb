@@ -71,9 +71,9 @@ Partial Class ucProductLists
         Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PriceMain = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
-        Me.PriceMain = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -572,6 +572,12 @@ Partial Class ucProductLists
         Me.IsDelete.FieldName = "IsDelete"
         Me.IsDelete.Name = "IsDelete"
         '
+        'PriceMain
+        '
+        Me.PriceMain.Caption = "PriceMain"
+        Me.PriceMain.FieldName = "PriceMain"
+        Me.PriceMain.Name = "PriceMain"
+        '
         'ControlNavigator1
         '
         Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -584,11 +590,11 @@ Partial Class ucProductLists
         Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
         Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
         Me.ControlNavigator1.Buttons.Remove.Visible = False
-        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, True, "Insert", "Insert")})
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, True, "Insert", "Insert"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 2, True, True, "Move Up", "MoveUp"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 3, True, True, "Move Down", "MoveDown")})
         Me.ControlNavigator1.Location = New System.Drawing.Point(0, 413)
         Me.ControlNavigator1.Name = "ControlNavigator1"
         Me.ControlNavigator1.NavigatableControl = Me.gridControl
-        Me.ControlNavigator1.Size = New System.Drawing.Size(256, 24)
+        Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
         Me.ControlNavigator1.TabIndex = 12
         Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
         '
@@ -606,12 +612,6 @@ Partial Class ucProductLists
         Me.btnFind.TabStop = False
         Me.btnFind.Text = "เพิ่มสินค้า"
         Me.btnFind.ToolTip = "เพิ่มสินค้า"
-        '
-        'PriceMain
-        '
-        Me.PriceMain.Caption = "PriceMain"
-        Me.PriceMain.FieldName = "PriceMain"
-        Me.PriceMain.Name = "PriceMain"
         '
         'ucProductLists
         '

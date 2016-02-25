@@ -823,14 +823,15 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ApproveStockBar.ItemClick
+    Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs)
         frmUpdateStock.MdiParent = Me
         frmUpdateStock.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)
     End Sub
 
     Private Sub ProvinceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProvinceBar.ItemClick
-        ShowMaster(MasterType.Province)
+        Dim lcls As New ProvinceControl
+        ShowDataOnControl(lcls, MasterType.Province)
         InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
     End Sub
 End Class

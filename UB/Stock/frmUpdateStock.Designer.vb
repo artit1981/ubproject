@@ -440,8 +440,6 @@ Partial Class frmUpdateStock
         Me.Hist.MaxWidth = 70
         Me.Hist.MinWidth = 40
         Me.Hist.Name = "Hist"
-        Me.Hist.Visible = True
-        Me.Hist.VisibleIndex = 6
         Me.Hist.Width = 60
         '
         'RepositoryItemButtonHist

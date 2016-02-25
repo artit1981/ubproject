@@ -1206,7 +1206,7 @@ Module modDAO
         End Try
     End Sub
 
-    Public Function CompareUnitToClose(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByRef ptr As SqlTransaction) As RefOrderStatus
+    Public Function CompareUnitToClose(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByValRefToTableIDList As String, ByRef ptr As SqlTransaction) As RefOrderStatus
         Dim SQL As String
         Dim DataTable As DataTable
         Dim pRefFromUnit As Long = 0, pRefToUnit As Long = 0
@@ -1233,6 +1233,11 @@ Module modDAO
         SQL = SQL & "   WHERE p2.IsDelete =0  and p2.IsShow=1"
         SQL = SQL & "   AND p2.RefID =" & pRefOrderID
         SQL = SQL & "   AND p2.RefTable in (" & RefFromTable & "))"
+        SQL = SQL & " AND p1.RefID IN( "
+        SQL = SQL & "   select OrderID from Orders where TableID in (" & ByValRefToTableIDList & " )"
+        SQL = SQL & "   and IsDelete=0  "
+        SQL = SQL & "   and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting')"
+        SQL = SQL & " )"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -1268,7 +1273,7 @@ Module modDAO
             lRefOrderType = lclsRefOrder.GetOrderTypeFromID(pRefOrderID, tr)
 
             If pOrderType = MasterType.StockIn Then 'Ref from PO
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", tr)
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Waiting.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1277,7 +1282,7 @@ Module modDAO
                     lStatus = EnumStatus.Close.ToString
                 End If
             ElseIf pOrderType = MasterType.Invoice And lRefOrderType = MasterType.Borrow Then
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", tr)
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", MasterType.Invoice, tr)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1286,7 +1291,8 @@ Module modDAO
                     lStatus = EnumStatus.Close.ToString
                 End If
             ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Then 'Ref from Sell
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'", tr)
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'" _
+                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping, tr)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1296,7 +1302,7 @@ Module modDAO
                 End If
             ElseIf pOrderType = MasterType.InvoiceBuy Or pOrderType = MasterType.ShipingBuy Then ' ref from PO
                 If pMode = DataMode.ModeDelete Then
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", tr)
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1305,7 +1311,8 @@ Module modDAO
                         lStatus = EnumStatus.Receive.ToString 'PO ที่ทำ stockin หมดแล้ว
                     End If
                 Else
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'", tr)
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'" _
+                                                , MasterType.InvoiceBuy & "," & MasterType.ShipingBuy, tr)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         ''
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1315,7 +1322,8 @@ Module modDAO
                     End If
                 End If
             ElseIf pOrderType = MasterType.Reserve Then 'Ref from QUOTAION
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'", tr)
+                lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
+                                                , MasterType.Reserve & "," & MasterType.SellOrders, tr)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1325,7 +1333,7 @@ Module modDAO
                 End If
             ElseIf pOrderType = MasterType.SellOrders Then
                 If lRefOrderType = MasterType.Reserve Then '  ใบสั่งขายดึง Reserve มาทำ
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'SellOrders'", tr)
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'SellOrders'", MasterType.SellOrders, tr)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Open.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1334,7 +1342,8 @@ Module modDAO
                         lStatus = EnumStatus.Close.ToString 'Reserve ที่ทำ  SellOrders หมดแล้ว
                     End If
                 ElseIf lRefOrderType = MasterType.Quotation Then
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'", tr)
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
+                                                , MasterType.Reserve & "," & MasterType.SellOrders, tr)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Open.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then

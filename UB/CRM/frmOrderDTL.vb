@@ -29,7 +29,7 @@ Public Class frmOrderDTL
 
     Private Sub frmOrderDTL_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         IsSave = False
-
+        Me.Text = "Product change"
         Me.Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
@@ -66,10 +66,16 @@ Public Class frmOrderDTL
             lProSub.Cost = pProlist.Cost
             lProSub.Discount = pProlist.Discount
             lProSub.Total = pProlist.Total
-            lProSub.Units_Old = pProlist.Units_Old
+            lProSub.UnitMainID = pProlist.UnitMainID
+            If lProSub.UnitID = lProSub.UnitMainID Then
+                lProSub.Units_Old = pProlist.Units_Old
+            Else
+                lProSub.Units_Old = pProlist.AdjustUnit
+            End If
+
             lProSub.IsShow = pProlist.IsShow
             lProSub.IsMerge = pProlist.IsMerge
-            lProSub.UnitMainID = pProlist.UnitMainID
+
             lProSub.IsDelete = pProlist.IsDelete
             lProSub.IsSN = pProlist.IsSN
             lProSub.SNList = pProlist.SNList
@@ -153,6 +159,7 @@ Public Class frmOrderDTL
             ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units"))) Then
                 e.Appearance.BackColor = Color.LightYellow
             End If
+
         End If
     End Sub
 End Class

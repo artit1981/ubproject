@@ -30,11 +30,13 @@ Public Class frmBill
                 LayoutbtnShipingMethod.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
             ElseIf mOrderType = MasterType.Receipt Then
                 LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                ChequeTabPage.Text = "รายการรับ"
             ElseIf mOrderType = MasterType.ReceiptCut Then
                 LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 VatTabPage.PageEnabled = False
             ElseIf mOrderType = MasterType.ReceiptBuy Then
                 LayoutControlItem4.Text = "เจ้าหนี้"
+                ChequeTabPage.Text = "รายการจ่าย"
             End If
             Call LoadData(pMode, pID)
 

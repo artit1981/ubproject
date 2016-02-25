@@ -22,8 +22,8 @@ Partial Class frmNotify
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNotify))
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridControl = New DevExpress.XtraGrid.GridControl()
+        Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.IsClose = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.NotifyLevel = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -34,9 +34,10 @@ Partial Class frmNotify
         Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RefID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RefTable = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.UserID = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -48,21 +49,22 @@ Partial Class frmNotify
         Me.ImageCollection1.Images.SetKeyName(1, "Warning.png")
         Me.ImageCollection1.Images.SetKeyName(2, "Errors.png")
         '
-        'GridControl1
+        'GridControl
         '
-        Me.GridControl1.Location = New System.Drawing.Point(0, 0)
-        Me.GridControl1.MainView = Me.GridView1
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ImageComboBox1, Me.RepositoryItemCheckEdit1})
-        Me.GridControl1.Size = New System.Drawing.Size(641, 348)
-        Me.GridControl1.TabIndex = 2
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
+        Me.GridControl.Dock = DockStyle.Fill
+        Me.GridControl.Location = New System.Drawing.Point(0, 0)
+        Me.GridControl.MainView = Me.GridView
+        Me.GridControl.Name = "GridControl"
+        Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ImageComboBox1, Me.RepositoryItemCheckEdit1})
+        Me.GridControl.Size = New System.Drawing.Size(754, 369)
+        Me.GridControl.TabIndex = 2
+        Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
-        'GridView1
+        'GridView
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsClose, Me.NotifyLevel, Me.System, Me.MenuDisplay, Me.ValueDate, Me.Remark, Me.RefID, Me.RefTable})
-        Me.GridView1.GridControl = Me.GridControl1
-        Me.GridView1.Name = "GridView1"
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsClose, Me.NotifyLevel, Me.System, Me.MenuDisplay, Me.ValueDate, Me.Remark, Me.RefID, Me.RefTable, Me.UserID})
+        Me.GridView.GridControl = Me.GridControl
+        Me.GridView.Name = "GridView"
         '
         'IsClose
         '
@@ -86,10 +88,14 @@ Partial Class frmNotify
         '
         'NotifyLevel
         '
+        Me.NotifyLevel.AppearanceCell.Options.UseTextOptions = True
+        Me.NotifyLevel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.NotifyLevel.ColumnEdit = Me.ImageComboBox1
         Me.NotifyLevel.FieldName = "NotifyLevel"
+        Me.NotifyLevel.ImageAlignment = StringAlignment.Center
         Me.NotifyLevel.MaxWidth = 70
         Me.NotifyLevel.Name = "NotifyLevel"
+        Me.NotifyLevel.OptionsColumn.ReadOnly = True
         Me.NotifyLevel.OptionsColumn.ShowCaption = False
         Me.NotifyLevel.Visible = True
         Me.NotifyLevel.VisibleIndex = 1
@@ -99,8 +105,9 @@ Partial Class frmNotify
         '
         Me.ImageComboBox1.AutoHeight = False
         Me.ImageComboBox1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ImageComboBox1.Items.AddRange(New DevExpress.XtraEditors.Controls.ImageComboBoxItem() {New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", CType(1, Short), 0), New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", CType(2, Short), 1), New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", CType(3, Short), 2)})
+        Me.ImageComboBox1.Items.AddRange(New DevExpress.XtraEditors.Controls.ImageComboBoxItem() {New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 1, 0), New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 2, 1), New DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 3, 2)})
         Me.ImageComboBox1.Name = "ImageComboBox1"
+        Me.ImageComboBox1.ReadOnly = True
         Me.ImageComboBox1.SmallImages = Me.ImageCollection1
         '
         'System
@@ -165,24 +172,31 @@ Partial Class frmNotify
         Me.RefTable.FieldName = "RefTable"
         Me.RefTable.Name = "RefTable"
         '
+        'UserID
+        '
+        Me.UserID.Caption = "UserID"
+        Me.UserID.FieldName = "UserID"
+        Me.UserID.Name = "UserID"
+        '
         'frmNotify
         '
-        Me.ClientSize = New System.Drawing.Size(641, 348)
-        Me.Controls.Add(Me.GridControl1)
+        Me.ClientSize = New System.Drawing.Size(754, 369)
+        Me.Controls.Add(Me.GridControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "frmNotify"
         Me.Text = "แจ้งเตือน"
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImageComboBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
-    Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridControl As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents IsClose As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents NotifyLevel As DevExpress.XtraGrid.Columns.GridColumn
@@ -193,4 +207,5 @@ Partial Class frmNotify
     Friend WithEvents Remark As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RefID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RefTable As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents UserID As DevExpress.XtraGrid.Columns.GridColumn
 End Class

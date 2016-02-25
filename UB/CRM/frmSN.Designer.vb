@@ -92,12 +92,15 @@ Partial Class frmSN
         Me.GridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsCustomization.AllowFilter = False
         Me.GridView1.OptionsCustomization.AllowGroup = False
+        Me.GridView1.OptionsFilter.AllowFilterEditor = False
         Me.GridView1.OptionsHint.ShowColumnHeaderHints = False
         Me.GridView1.OptionsHint.ShowFooterHints = False
         Me.GridView1.OptionsMenu.EnableColumnMenu = False
         Me.GridView1.OptionsMenu.EnableFooterMenu = False
         Me.GridView1.OptionsMenu.EnableGroupPanelMenu = False
+        Me.GridView1.OptionsMenu.ShowAutoFilterRowItem = False
         Me.GridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '

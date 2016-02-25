@@ -30,17 +30,8 @@ Module modApprove
     Public Sub SetOrderApproveTX(ByVal pOrderTable As String, ByVal pOrderID As Long, ByVal pOrderType As String, ByVal pApproveType As Long _
                            , ByVal pStatus As String, ByRef tr As SqlTransaction)
         Dim lclsOrder As iOrder = Nothing
-
-
         Try
             lclsOrder = New OrderSDAO
-            'Select Case pOrderTable
-            '    Case "Quotation"
-            '        lclsOrder.TableID = MasterType.Quotation
-            '    Case "Orders"
-            '        lclsOrder.TableID = MasterType.SellOrders
-            'End Select
-
             If Not IsMeetOtherTX(pOrderTable, pOrderID, pApproveType, tr) Then
                 lclsOrder.InitailData(pOrderID, , tr)
                 If lclsOrder.TableID = MasterType.PurchaseOrder Then
@@ -52,13 +43,9 @@ Module modApprove
                 lclsOrder.ModeData = DataMode.ModeEdit
                 lclsOrder.SaveData(tr)
             End If
-
-
-
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modApprove.SaveApproveTX : " & e.Message)
         End Try
-
     End Sub
 
     Public Function IsMeetOtherTX(ByVal pOrderTable As String, ByVal pOrderID As Long, ByVal pApproveType As Long, ByRef tr As SqlTransaction) As Boolean
