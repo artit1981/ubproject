@@ -93,13 +93,13 @@ Partial Class frmNotify
         Me.NotifyLevel.ColumnEdit = Me.ImageComboBox1
         Me.NotifyLevel.FieldName = "NotifyLevel"
         Me.NotifyLevel.ImageAlignment = StringAlignment.Center
-        Me.NotifyLevel.MaxWidth = 70
+        Me.NotifyLevel.MaxWidth = 50
         Me.NotifyLevel.Name = "NotifyLevel"
         Me.NotifyLevel.OptionsColumn.ReadOnly = True
         Me.NotifyLevel.OptionsColumn.ShowCaption = False
         Me.NotifyLevel.Visible = True
         Me.NotifyLevel.VisibleIndex = 1
-        Me.NotifyLevel.Width = 67
+        Me.NotifyLevel.Width = 50
         '
         'ImageComboBox1
         '

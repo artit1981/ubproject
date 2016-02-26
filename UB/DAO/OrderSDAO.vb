@@ -193,7 +193,7 @@ Public Class OrderSDAO
                     End If
 
                     If OrderStatus = EnumStatus.WaitApprove.ToString Then
-                        SaveApproveTX(1, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal, "", OrderStatus, tr)
+                        SaveApproveTX(1, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal, "อนุมัติรายการ", OrderStatus, tr)
                     End If
 
                     '*** Check CheckLimitS
@@ -205,9 +205,12 @@ Public Class OrderSDAO
                     End If
 
                     If lIsCheckOver = True Then
-                        If CheckOverCreditAmount(CustomerID, GrandTotal, tr) Then
+                        Dim lCreditAmount As Decimal = GetCustomerCredit(CustomerID, tr)
+                        If GrandTotal > lCreditAmount Then
                             OrderStatus = EnumStatus.WaitApprove.ToString
-                            SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal, "เกินวงเงิน", OrderStatus, tr)
+                            SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
+                                          , "เกินวงเงิน [" & Format(GrandTotal, "#,##0.00") & " / " & Format(lCreditAmount, "#,##0.00") & "]" _
+                                          , OrderStatus, tr)
                         End If
                     End If
 
@@ -241,7 +244,8 @@ Public Class OrderSDAO
 
             'Initial ALL List
             If ProductDAOs Is Nothing OrElse ProductDAOs.Count = 0 Then
-                BuildProductList(ID, TableName, tr)
+                ProductDAOs = New List(Of ProductListDAO)
+                ProductDAOs = BuildProductList(ID, TableName, tr)
             End If
 
             'Reset id as first day of year
@@ -600,20 +604,20 @@ Public Class OrderSDAO
         Try
           
 
-            SQL = "SELECT Orders.OrderID  FROM OrdersRef,Orders  "
-            SQL = SQL & " WHERE OrdersRef.OrderID=Orders.OrderID and OrdersRef.IsDelete=0  and OrdersRef.RefOrderID=" & ID
-            SQL = SQL & " and Orders.IsDelete=0"
+            'SQL = "SELECT Orders.OrderID  FROM OrdersRef,Orders  "
+            'SQL = SQL & " WHERE OrdersRef.OrderID=Orders.OrderID and OrdersRef.IsDelete=0  and OrdersRef.RefOrderID=" & ID
+            'SQL = SQL & " and Orders.IsDelete=0"
 
-            If TableID = MasterType.Quotation Then
-                SQL = SQL & " and Orders.TableID in(" & MasterType.Reserve & ")"
-            ElseIf TableID = MasterType.Reserve Then
-                SQL = SQL & " and Orders.TableID in(" & MasterType.SellOrders & ")"
-            End If
-            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-            If dataTable.Rows.Count > 0 Then
-                Return True
-            End If
-            'Return False
+            'If TableID = MasterType.Quotation Then
+            '    SQL = SQL & " and Orders.TableID in(" & MasterType.Reserve & ")"
+            'ElseIf TableID = MasterType.Reserve Then
+            '    SQL = SQL & " and Orders.TableID in(" & MasterType.SellOrders & ")"
+            'End If
+            'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            'If dataTable.Rows.Count > 0 Then
+            '    Return True
+            'End If
+            Return False
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductDAO.CheckNotExist : " & e.Message)
@@ -648,13 +652,13 @@ Public Class OrderSDAO
         End Try
     End Function
 
-    Public Sub BuildProductList(ByVal pRefID As Long, ByVal pRefTable As String, ByRef ptr As SqlTransaction)
+    Public Function BuildProductList(ByVal pRefID As Long, ByVal pRefTable As String, ByRef ptr As SqlTransaction) As List(Of ProductListDAO)
         Dim lcls As New ProductListDAO
         Dim dataTable As New DataTable()
         Dim lOrderList As New List(Of Long)
+        Dim lProductDAOs = New List(Of ProductListDAO)
         lOrderList.Add(pRefID)
         Try
-            ProductDAOs = New List(Of ProductListDAO)
             dataTable = lcls.GetDataTable(lOrderList, pRefTable, ptr, False, "", False, 0, True)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -678,7 +682,7 @@ Public Class OrderSDAO
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))
-                    ProductDAOs.Add(rec)
+                    lProductDAOs.Add(rec)
                 Next
             End If
         Catch e As Exception
@@ -687,7 +691,8 @@ Public Class OrderSDAO
             lcls = Nothing
             dataTable = Nothing
         End Try
-    End Sub
+        Return lProductDAOs
+    End Function
 
     Public Sub BuildOrderList(ByVal pBillID As Long, ByRef ptr As SqlTransaction)
         Dim lcls As New OrderSDetailDAO
@@ -767,13 +772,14 @@ Public Class OrderSDAO
                             UpdateStock(tr, pProList, lIsUpdate, False)
 
                             '*** SN
-                            If pProList.ModeData = DataMode.ModeDelete Then
+                            If pProList.ModeData = DataMode.ModeDelete Or pProList.ModeData = DataMode.ModeNotApprove Then
                                 'Re Open status
                                 If TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then
                                     lOrderList = New List(Of Long)
                                     lOrderList.Add(RefID)
 
                                     lclsSN = New SnDAO
+                                    lSNTable = Nothing
                                     lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", tr, False, "")
                                     For Each dr2 As DataRow In lSNTable.Rows
                                         lclsSN2 = New SnDAO
@@ -781,9 +787,11 @@ Public Class OrderSDAO
                                                               , "New", 0)
                                     Next
                                 End If
-                                'Delete
-                                lclsSN2 = New SnDAO
-                                lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                'Delete S/N  
+                                If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
+                                    lclsSN2 = New SnDAO
+                                    lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                End If
                             Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList

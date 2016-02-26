@@ -142,7 +142,8 @@ Public Class clsNotifi
             dataTable = lclsApprove.GetDataTable()
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
-                    AddDataNotifi(eNotifyLevel.Hi, "อนุมัติเอกสาร", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID"), "เอกสารเลขที่ " & dr("OrderCode"))
+                    AddDataNotifi(eNotifyLevel.Hi, "Approve", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID") _
+                                  , "เอกสารเลขที่ " & dr("OrderCode") & " : " & ConvertNullToString(dr("Remark")))
                 Next
                 Return True
             Else

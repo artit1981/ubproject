@@ -65,17 +65,16 @@ Module modApprove
         End Try
     End Function
 
-    Public Function CheckOverCreditAmount(ByVal pCusID As Long, ByVal pTXAmount As Decimal, ByRef ptr As SqlTransaction) As Decimal
-        Dim lclsCreditAmount As Decimal
-        Try
-            lclsCreditAmount = GetCustomerCredit(pCusID, ptr)
+    'Public Function CheckOverCreditAmount(ByVal pCusID As Long, ByVal pTXAmount As Decimal, ByRef pCreditAmount As Decimal, ByRef ptr As SqlTransaction) As Decimal
+    '    Try
+    '        pCreditAmount = GetCustomerCredit(pCusID, ptr)
 
-            Return lclsCreditAmount < pTXAmount
+    '        Return pCreditAmount < pTXAmount
 
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "modApprove.CheckOverCreditAmount : " & e.Message)
-        End Try
-    End Function
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "modApprove.CheckOverCreditAmount : " & e.Message)
+    '    End Try
+    'End Function
 
     Public Function GetCustomerCredit(ByVal pCusID As Long, ByRef ptr As SqlTransaction) As Decimal
         Dim lclsCustomer As iPerson

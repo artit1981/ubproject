@@ -499,6 +499,7 @@ Public Class ProductListDAO
             If mMode = DataMode.ModeNew Then
             ElseIf mMode = DataMode.ModeDelete Then
             ElseIf mMode = DataMode.ModeNotApprove Then
+                Return True
             ElseIf ID <= 0 And ProductID <> 0 Then
                 mMode = DataMode.ModeNew
             ElseIf ID > 0 And ProductID <> 0 Then

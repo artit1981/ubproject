@@ -214,6 +214,9 @@ Public Class frmControls
                 If lID = 0 Then
                     ShowProgress(False, "")
                     XtraMessageBox.Show("ข้อมูลถูกใช้งานอยู่ ไม่สามารถลบได้", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ElseIf lID = 1 Then
+                    ShowProgress(False, "")
+                    XtraMessageBox.Show("Serial Number บางรายการถุก Close แล้ว", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
         Catch ex As Exception
