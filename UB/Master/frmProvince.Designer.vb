@@ -28,6 +28,8 @@ Partial Class frmProvince
         Me.btnRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.cboGeo = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.cboGeoView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.NAME = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -38,8 +40,6 @@ Partial Class frmProvince
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
-        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.NAME = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,7 +57,7 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtNameEng, "TextChanged")
         Me.txtNameEng.EditValue = ""
         Me.txtNameEng.EnterMoveNextControl = True
-        Me.txtNameEng.Location = New System.Drawing.Point(148, 120)
+        Me.txtNameEng.Location = New System.Drawing.Point(148, 73)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtNameEng, True)
         Me.txtNameEng.Name = "txtNameEng"
         Me.txtNameEng.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -65,7 +65,7 @@ Partial Class frmProvince
         Me.txtNameEng.Properties.MaxLength = 50
         Me.txtNameEng.Properties.ValidateOnEnterKey = True
         Me.txtNameEng.Size = New System.Drawing.Size(273, 20)
-        Me.txtNameEng.TabIndex = 3
+        Me.txtNameEng.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtNameEng, "Text")
         '
         'txtNameThai
@@ -73,7 +73,7 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtNameThai, "TextChanged")
         Me.txtNameThai.EditValue = ""
         Me.txtNameThai.EnterMoveNextControl = True
-        Me.txtNameThai.Location = New System.Drawing.Point(148, 66)
+        Me.txtNameThai.Location = New System.Drawing.Point(148, 47)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtNameThai, True)
         Me.txtNameThai.Name = "txtNameThai"
         Me.txtNameThai.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -89,7 +89,7 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtCode, "TextChanged")
         Me.txtCode.EditValue = ""
         Me.txtCode.EnterMoveNextControl = True
-        Me.txtCode.Location = New System.Drawing.Point(148, 39)
+        Me.txtCode.Location = New System.Drawing.Point(148, 309)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtCode, True)
         Me.txtCode.Name = "txtCode"
         Me.txtCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -99,20 +99,21 @@ Partial Class frmProvince
         Me.txtCode.Size = New System.Drawing.Size(155, 20)
         Me.txtCode.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtCode, "Text")
+        Me.txtCode.Visible = False
         '
         'txtRemark
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtRemark, "TextChanged")
         Me.txtRemark.EditValue = ""
         Me.txtRemark.EnterMoveNextControl = True
-        Me.txtRemark.Location = New System.Drawing.Point(148, 147)
+        Me.txtRemark.Location = New System.Drawing.Point(148, 100)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtRemark, True)
         Me.txtRemark.Name = "txtRemark"
         Me.txtRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtRemark.Properties.Appearance.Options.UseFont = True
         Me.txtRemark.Properties.MaxLength = 100
         Me.txtRemark.Size = New System.Drawing.Size(273, 92)
-        Me.txtRemark.TabIndex = 4
+        Me.txtRemark.TabIndex = 3
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtRemark, "Text")
         '
         'btnRefresh
@@ -122,7 +123,7 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefresh, "")
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
         Me.btnRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnRefresh.Location = New System.Drawing.Point(423, 93)
+        Me.btnRefresh.Location = New System.Drawing.Point(423, 283)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefresh, True)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(21, 21)
@@ -130,12 +131,13 @@ Partial Class frmProvince
         Me.btnRefresh.TabStop = False
         Me.btnRefresh.ToolTip = "Refresh"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnRefresh, "")
+        Me.btnRefresh.Visible = False
         '
         'cboGeo
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboGeo, "TextChanged")
         Me.cboGeo.EnterMoveNextControl = True
-        Me.cboGeo.Location = New System.Drawing.Point(148, 93)
+        Me.cboGeo.Location = New System.Drawing.Point(148, 283)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboGeo, True)
         Me.cboGeo.Name = "cboGeo"
         Me.cboGeo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -147,6 +149,7 @@ Partial Class frmProvince
         Me.cboGeo.Size = New System.Drawing.Size(273, 20)
         Me.cboGeo.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboGeo, "Text")
+        Me.cboGeo.Visible = False
         '
         'cboGeoView
         '
@@ -155,6 +158,20 @@ Partial Class frmProvince
         Me.cboGeoView.Name = "cboGeoView"
         Me.cboGeoView.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.cboGeoView.OptionsView.ShowGroupPanel = False
+        '
+        'ID
+        '
+        Me.ID.Caption = "GridColumn1"
+        Me.ID.FieldName = "ID"
+        Me.ID.Name = "ID"
+        '
+        'NAME
+        '
+        Me.NAME.Caption = "ภาค"
+        Me.NAME.FieldName = "NAME"
+        Me.NAME.Name = "NAME"
+        Me.NAME.Visible = True
+        Me.NAME.VisibleIndex = 0
         '
         'XtraTabControl1
         '
@@ -198,13 +215,14 @@ Partial Class frmProvince
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label10, "")
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label10.Location = New System.Drawing.Point(46, 96)
+        Me.Label10.Location = New System.Drawing.Point(46, 286)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(27, 14)
         Me.Label10.TabIndex = 187
         Me.Label10.Text = "ภาค"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
+        Me.Label10.Visible = False
         '
         'Label1
         '
@@ -213,7 +231,7 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label1, "")
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(46, 69)
+        Me.Label1.Location = New System.Drawing.Point(46, 50)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label1, True)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(41, 14)
@@ -227,7 +245,7 @@ Partial Class frmProvince
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label8, "")
         Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.Location = New System.Drawing.Point(46, 129)
+        Me.Label8.Location = New System.Drawing.Point(46, 82)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label8, True)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(76, 14)
@@ -242,13 +260,14 @@ Partial Class frmProvince
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label4, "")
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(46, 42)
+        Me.Label4.Location = New System.Drawing.Point(46, 312)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(27, 14)
         Me.Label4.TabIndex = 108
         Me.Label4.Text = "รหัส"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
+        Me.Label4.Visible = False
         '
         'Label5
         '
@@ -256,7 +275,7 @@ Partial Class frmProvince
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(46, 156)
+        Me.Label5.Location = New System.Drawing.Point(46, 109)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 14)
@@ -287,20 +306,6 @@ Partial Class frmProvince
         '
         'FormChangedComponent1
         '
-        '
-        'ID
-        '
-        Me.ID.Caption = "GridColumn1"
-        Me.ID.FieldName = "ID"
-        Me.ID.Name = "ID"
-        '
-        'NAME
-        '
-        Me.NAME.Caption = "ภาค"
-        Me.NAME.FieldName = "NAME"
-        Me.NAME.Name = "NAME"
-        Me.NAME.Visible = True
-        Me.NAME.VisibleIndex = 0
         '
         'frmProvince
         '

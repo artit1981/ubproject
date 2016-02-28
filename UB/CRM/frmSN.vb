@@ -20,7 +20,8 @@ Public Class frmSN
     Dim mUnitMain As Long
     Dim mUnitName As String
     Dim mUnitMainName As String
-    
+    Dim mIsModeDelete As Boolean = False
+
     Public Property SnList() As List(Of SnDAO)
         Get
             Return mSnList
@@ -71,6 +72,11 @@ Public Class frmSN
         End Set
     End Property
 
+    Public WriteOnly Property IsModeDelete() As Boolean
+        Set(ByVal value As Boolean)
+            mIsModeDelete = value
+        End Set
+    End Property
 
     Public WriteOnly Property IsModePrint() As Boolean
         Set(ByVal value As Boolean)
@@ -163,7 +169,9 @@ Public Class frmSN
 
 
         GridControl1.DataSource = mSnList
-        GridView1.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+        If mIsModeDelete = False Then
+            GridView1.Columns("IsDelete").FilterInfo = New ColumnFilterInfo("[IsDelete]=0")
+        End If
 
         Init()
         InitialCombo()

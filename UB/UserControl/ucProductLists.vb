@@ -251,7 +251,7 @@ Public Class ucProductLists
                             Next
 
                         Else
-                            lDataDAO.LocationDTLID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "LocationDTLID"))
+                            lDataDAO.LocationDTLID = pProSub.LocationDTLID
                         End If
 
                         lDataDAO.Remark = pProSub.Remark
@@ -993,6 +993,7 @@ Public Class ucProductLists
                 lfrmSN.ProductIDs = rec.ProductID
                 lfrmSN.OrderType = mRefTable
                 lfrmSN.StockType = mStockType
+                lfrmSN.IsModeDelete = mIsDelete
                 lfrmSN.SnList = rec.SNList
                 If lclsUnit.InitailData(rec.UnitMainID, "") Then
                     lfrmSN.UnitMainNames = lclsUnit.NameThai

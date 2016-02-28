@@ -94,7 +94,15 @@ Partial Class frmSN
         Me.GridView1.OptionsBehavior.Editable = False
         Me.GridView1.OptionsCustomization.AllowFilter = False
         Me.GridView1.OptionsCustomization.AllowGroup = False
+        Me.GridView1.OptionsFilter.AllowColumnMRUFilterList = False
         Me.GridView1.OptionsFilter.AllowFilterEditor = False
+        Me.GridView1.OptionsFilter.AllowFilterIncrementalSearch = False
+        Me.GridView1.OptionsFilter.AllowMRUFilterList = False
+        Me.GridView1.OptionsFilter.AllowMultiSelectInCheckedFilterPopup = False
+        Me.GridView1.OptionsFilter.FilterEditorUseMenuForOperandsAndOperators = False
+        Me.GridView1.OptionsFilter.ShowAllTableValuesInCheckedFilterPopup = False
+        Me.GridView1.OptionsFind.AllowFindPanel = False
+        Me.GridView1.OptionsFind.ShowFindButton = False
         Me.GridView1.OptionsHint.ShowColumnHeaderHints = False
         Me.GridView1.OptionsHint.ShowFooterHints = False
         Me.GridView1.OptionsMenu.EnableColumnMenu = False
@@ -593,7 +601,7 @@ Partial Class frmSN
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(659, 435)
+        Me.ClientSize = New System.Drawing.Size(647, 435)
         Me.Controls.Add(Me.UnitMainName)
         Me.Controls.Add(Me.UnitName)
         Me.Controls.Add(Me.LabelControl4)

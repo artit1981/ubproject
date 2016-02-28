@@ -26,6 +26,13 @@ Partial Class frmOrderDTL
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOrderDTL))
         Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.IsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -73,6 +80,8 @@ Partial Class frmOrderDTL
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,15 +103,88 @@ Partial Class frmOrderDTL
         Me.PanelControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelControl1.Controls.Add(Me.PanelControl2)
         Me.PanelControl1.Controls.Add(Me.gridControl)
         Me.PanelControl1.Location = New System.Drawing.Point(0, 36)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(932, 394)
+        Me.PanelControl1.Size = New System.Drawing.Size(1016, 394)
         Me.PanelControl1.TabIndex = 0
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.White
+        Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Controls.Add(Me.LabelControl5)
+        Me.PanelControl2.Controls.Add(Me.LabelControl6)
+        Me.PanelControl2.Controls.Add(Me.LabelControl7)
+        Me.PanelControl2.Controls.Add(Me.LabelControl8)
+        Me.PanelControl2.Controls.Add(Me.LabelControl9)
+        Me.PanelControl2.Controls.Add(Me.LabelControl10)
+        Me.PanelControl2.Location = New System.Drawing.Point(3, 360)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(490, 32)
+        Me.PanelControl2.TabIndex = 349
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.LabelControl5.Appearance.ForeColor = System.Drawing.Color.Black
+        Me.LabelControl5.Location = New System.Drawing.Point(324, 8)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl5.TabIndex = 16
+        Me.LabelControl5.Text = "      color       "
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Location = New System.Drawing.Point(390, 8)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl6.TabIndex = 15
+        Me.LabelControl6.Text = "แก้ไขจำนวน"
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Appearance.BackColor = System.Drawing.Color.LightGreen
+        Me.LabelControl7.Appearance.ForeColor = System.Drawing.Color.Black
+        Me.LabelControl7.Location = New System.Drawing.Point(165, 8)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl7.TabIndex = 14
+        Me.LabelControl7.Text = "      color       "
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(231, 8)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(52, 13)
+        Me.LabelControl8.TabIndex = 13
+        Me.LabelControl8.Text = "รายการใหม่"
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.LabelControl9.Appearance.ForeColor = System.Drawing.Color.Red
+        Me.LabelControl9.Location = New System.Drawing.Point(14, 8)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl9.TabIndex = 12
+        Me.LabelControl9.Text = "      color       "
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Location = New System.Drawing.Point(80, 8)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(55, 13)
+        Me.LabelControl10.TabIndex = 11
+        Me.LabelControl10.Text = "รายการที่ลบ"
         '
         'gridControl
         '
-        Me.gridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
@@ -110,7 +192,7 @@ Partial Class frmOrderDTL
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(928, 390)
+        Me.gridControl.Size = New System.Drawing.Size(1014, 356)
         Me.gridControl.TabIndex = 10
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
@@ -133,6 +215,9 @@ Partial Class frmOrderDTL
         Me.gridView.OptionsMenu.EnableFooterMenu = False
         Me.gridView.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.[False]
         Me.gridView.OptionsNavigation.AutoMoveRowFocus = False
+        Me.gridView.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.gridView.OptionsSelection.EnableAppearanceFocusedRow = False
+        Me.gridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.gridView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
@@ -574,7 +659,7 @@ Partial Class frmOrderDTL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(932, 431)
+        Me.ClientSize = New System.Drawing.Size(1016, 431)
         Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -584,6 +669,9 @@ Partial Class frmOrderDTL
         Me.Controls.SetChildIndex(Me.PanelControl1, 0)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SelectCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -647,4 +735,11 @@ Partial Class frmOrderDTL
     Friend WithEvents UnitMainID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
 End Class

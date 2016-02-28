@@ -333,8 +333,17 @@ Public Class OrderControl
         Dim lcls As New OrderSDAO
         lcls.TableID = mOrderType
         Try
-            If lcls.InitailData(pID) Then  ''ถูกใช้งานอยู่ ???
+            If lcls.InitailData(pID) Then
                 If lcls.CheckIsToUse = False Then  ''ถูกใช้งานอยู่ ???
+                    If lcls.TableID = MasterType.StockIn Or (((lcls.TableID = MasterType.ReduceCredit) Or (lcls.TableID = MasterType.AddCredit) _
+                    Or (lcls.TableID = MasterType.ReduceCreditBuy) Or (lcls.TableID = MasterType.AddCreditBuy)) And lcls.StockType = "I") Then
+                        If lcls.CheckSNIsClose(lcls.ID, lcls.TableName, Nothing) Then
+                            pID = 1
+                            Exit Sub
+                        End If
+                    End If
+
+
                     lcls.ID = pID
                     lcls.ModeData = DataMode.ModeDelete
                     If lcls.SaveData() Then
@@ -345,7 +354,7 @@ Public Class OrderControl
                 End If
             End If
         Catch ex As Exception
-            Err.Raise(Err.Number, ex.Source, "OrderControl.mCtlForm_Delete : " & ex.Message)
+            Err.Raise(Err.Number, ex.Source, "OrderControl.mCtlForm_D.elete : " & ex.Message)
         Finally
             lcls = Nothing
         End Try
@@ -441,4 +450,44 @@ Public Class OrderControl
         End Try
     End Sub
 
+
+    'Private Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String) As Boolean
+    '    Dim lSNTable As New DataTable
+    '    Dim lclsOrder As New OrderSDAO
+    '    Dim lProductDAOs As New List(Of ProductListDAO)
+    '    Dim lOrderList As New List(Of Long), lclsSN As New SnDAO
+    '    Dim lstrSNError As String = ""
+    '    Try
+
+    '        lProductDAOs = lclsOrder.BuildProductList(pOrderID, pTableName, Nothing)
+    '        For Each pProList As ProductListDAO In lProductDAOs
+    '            lOrderList = New List(Of Long)
+    '            lOrderList.Add(pOrderID)
+
+    '            lclsSN = New SnDAO
+    '            lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", Nothing, False, "")
+    '            lclsSN = Nothing
+    '            For Each dr2 As DataRow In lSNTable.Rows
+    '                lclsSN = New SnDAO
+    '                If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'New'", Nothing) = False Then
+    '                    If lstrSNError = "" Then
+    '                        lstrSNError = ConvertNullToString(dr2("SerialNumberNo"))
+    '                    Else
+    '                        lstrSNError = lstrSNError & ", " & ConvertNullToString(dr2("SerialNumberNo"))
+    '                    End If
+    '                    Exit For
+    '                End If
+    '            Next
+    '        Next
+    '        If lstrSNError = "" Then
+    '            Return False
+    '        Else
+    '            'XtraMessageBox.Show(Me, "Serial Number บางรายการถุก Close แล้ว" & vbNewLine & lstrSNError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+    '            Return True
+    '        End If
+
+    '    Catch ex As Exception
+    '        Err.Raise(Err.Number, ex.Source, "OrderControl.CheckBeforeDelete : " & ex.Message)
+    '    End Try
+    'End Function
 End Class

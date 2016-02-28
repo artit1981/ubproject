@@ -98,7 +98,11 @@ Public Class frmStockIn
                 Return False
             End If
         Catch ex As Exception
-            Err.Raise(Err.Number, ex.Source, mFormName & ".Save : " & ex.Message)
+            If Err.Number = -1 Then
+                XtraMessageBox.Show("Serial Number บางรายการถุก Close แล้ว ไม่สามารถทำรายการได้", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                Err.Raise(Err.Number, ex.Source, mFormName & ".Save : " & ex.Message)
+            End If
             Return False
         End Try
     End Function
@@ -270,6 +274,7 @@ Public Class frmStockIn
           
 
             lstrErr = lstrErr & UcProductLists1.IsError
+ 
 
             If lstrErr.Trim = "PRODUCTCHANGE" Then
                 ShowProgress(False, "")

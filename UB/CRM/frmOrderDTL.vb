@@ -156,8 +156,16 @@ Public Class frmOrderDTL
                 e.Appearance.ForeColor = Color.Red
             ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("ID"))) = 0 Then
                 e.Appearance.BackColor = Color.LightGreen
-            ElseIf ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units"))) Then
-                e.Appearance.BackColor = Color.LightYellow
+            Else
+                If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("UnitID"))) = ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("UnitMainID"))) Then
+                    If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units"))) Then
+                        e.Appearance.BackColor = Color.LightYellow
+                    End If
+                Else
+                    If ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("Units_Old"))) <> ConvertNullToZero(gridView.GetRowCellValue(e.RowHandle, gridView.Columns("AdjustUnit"))) Then
+                        e.Appearance.BackColor = Color.LightYellow
+                    End If
+                End If
             End If
 
         End If

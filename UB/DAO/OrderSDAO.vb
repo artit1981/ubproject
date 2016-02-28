@@ -206,11 +206,13 @@ Public Class OrderSDAO
 
                     If lIsCheckOver = True Then
                         Dim lCreditAmount As Decimal = GetCustomerCredit(CustomerID, tr)
-                        If GrandTotal > lCreditAmount Then
-                            OrderStatus = EnumStatus.WaitApprove.ToString
-                            SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
-                                          , "เกินวงเงิน [" & Format(GrandTotal, "#,##0.00") & " / " & Format(lCreditAmount, "#,##0.00") & "]" _
-                                          , OrderStatus, tr)
+                        If lCreditAmount > 0 Then
+                            If GrandTotal > lCreditAmount Then
+                                OrderStatus = EnumStatus.WaitApprove.ToString
+                                SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
+                                              , "เกินวงเงิน [" & Format(GrandTotal, "#,##0.00") & " / " & Format(lCreditAmount, "#,##0.00") & "]" _
+                                              , OrderStatus, tr)
+                            End If
                         End If
                     End If
 
@@ -788,10 +790,16 @@ Public Class OrderSDAO
                                     Next
                                 End If
                                 'Delete S/N  
-                                If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
-                                    lclsSN2 = New SnDAO
-                                    lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                If CheckSNIsClose(RefID, TableName, tr) Then
+                                    Err.Raise(-1)
+                                Else
+                                    If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
+                                        lclsSN2 = New SnDAO
+                                        lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                    End If
                                 End If
+
+                               
                             Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList
@@ -1260,4 +1268,43 @@ Public Class OrderSDAO
     End Sub
      
 
+    Public Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String, ByRef ptr As SqlTransaction) As Boolean
+        Dim lSNTable As New DataTable
+        Dim lclsOrder As New OrderSDAO
+        Dim lProductDAOs As New List(Of ProductListDAO)
+        Dim lOrderList As New List(Of Long), lclsSN As New SnDAO
+        Dim lstrSNError As String = ""
+        Try
+
+            lProductDAOs = lclsOrder.BuildProductList(pOrderID, pTableName, ptr)
+            For Each pProList As ProductListDAO In lProductDAOs
+                lOrderList = New List(Of Long)
+                lOrderList.Add(pOrderID)
+
+                lclsSN = New SnDAO
+                lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", ptr, False, "")
+                lclsSN = Nothing
+                For Each dr2 As DataRow In lSNTable.Rows
+                    lclsSN = New SnDAO
+                    If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'New'", ptr) = False Then
+                        If lstrSNError = "" Then
+                            lstrSNError = ConvertNullToString(dr2("SerialNumberNo"))
+                        Else
+                            lstrSNError = lstrSNError & ", " & ConvertNullToString(dr2("SerialNumberNo"))
+                        End If
+                        Exit For
+                    End If
+                Next
+            Next
+            If lstrSNError = "" Then
+                Return False
+            Else
+                'XtraMessageBox.Show(Me, "Serial Number บางรายการถุก Close แล้ว" & vbNewLine & lstrSNError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                Return True
+            End If
+
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "OrderSDAO.CheckBeforeDelete : " & ex.Message)
+        End Try
+    End Function
 End Class

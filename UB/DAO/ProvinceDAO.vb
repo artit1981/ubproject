@@ -153,7 +153,6 @@ Public Class ProvinceDAO
                     SQL = SQL & " GeoID=@GeoID"
                     SQL = SQL & " ,ProvinceCode=@mIDCode"
                     SQL = SQL & " ,ProvinceName=@mNameThai"
-                    SQL = SQL & " ,GeoID=@GeoID"
                     SQL = SQL & " ,ProvinceNameEng=@mNameEng"
                     SQL = SQL & " ,Remark= @mRemark"
                     SQL = SQL & " ,ModifiedBy= @gUserID"
@@ -170,7 +169,7 @@ Public Class ProvinceDAO
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))
             myCommand.Parameters.Add(New SqlParameter("@GeoID", GeoID))
-            myCommand.Parameters.Add(New SqlParameter("@mIDCode", Trim(Code)))
+            myCommand.Parameters.Add(New SqlParameter("@mIDCode", ConvertNullToString(ID)))
             myCommand.Parameters.Add(New SqlParameter("@mNameThai", Trim(NameThai)))
             myCommand.Parameters.Add(New SqlParameter("@mNameEng", Trim(NameEng)))
             myCommand.Parameters.Add(New SqlParameter("@mRemark", Trim(Remark)))

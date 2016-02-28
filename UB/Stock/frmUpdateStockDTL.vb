@@ -122,7 +122,7 @@ Public Class frmUpdateStockDTL
                 If mProductListDAO.IsSN = 1 And mProductListDAO.SNList Is Nothing Then
                     lstrErr = "กรุณาระบุ Serial number" & vbNewLine
                     btnSN.Focus()
-                ElseIf GetUnitForUpdate() <> mProductListDAO.SNList.Count Then
+                ElseIf Math.Abs(GetUnitForUpdate()) <> mProductListDAO.SNList.Count Then
                     lstrErr = "Serial number ไม่ถูกต้อง" & vbNewLine
                     btnSN.Focus()
                 Else
@@ -155,7 +155,8 @@ Public Class frmUpdateStockDTL
         Dim lfrmSN As New frmSN
         Try
                 If Not mProductListDAO Is Nothing Then
-                    lfrmSN.Unit = GetUnitForUpdate()
+                lfrmSN.Unit = GetUnitForUpdate()
+                lfrmSN.UnitMain = GetUnitForUpdate()
                     lfrmSN.ProductCodes = mProductListDAO.ProductCode
                     lfrmSN.ProductNames = mProductListDAO.ProductName
                     lfrmSN.IsModePrint = False

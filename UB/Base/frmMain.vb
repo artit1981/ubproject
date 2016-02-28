@@ -177,10 +177,10 @@ Public Class frmMain
             lblEmp.Caption = gEmpName
             lblCompany.Caption = gCompanyName
 
-            If gUserName = "admin" Then
-                UpdateDatabar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                UpdateDatabar.Enabled = True
-            End If
+            'If gUserName = "admin" Then
+            '    UpdateDatabar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            '    UpdateDatabar.Enabled = True
+            'End If
             Dim mCtlForm = New frmNotify
             With mCtlForm
                 .Text = "ข้อความแจ้งเตือน"
@@ -632,18 +632,6 @@ Public Class frmMain
         InsertActivity(DataMode.ModeOpen, MasterType.ClaimOut, "", Nothing)
     End Sub
 
-    Private Sub UpdateStockBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles UpdateStockBar.ItemClick
-        Try
-            Dim lFormEdit As New frmUpdateStock
-            With lFormEdit
-                .Show()
-                InsertActivity(DataMode.ModeOpen, MasterType.UpdateStock, "", Nothing)
-            End With
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        End Try
-    End Sub
-
     Private Sub BankAccounBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BankAccounBar.ItemClick
         Dim lcls As New BankAccountControl
         ShowDataOnControl(lcls, MasterType.BankAccount)
@@ -709,7 +697,7 @@ Public Class frmMain
         InsertActivity(DataMode.ModeOpen, MasterType.ReportSellAnalyze, "", Nothing)
     End Sub
 
-    Private Sub UpdateDatabar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles UpdateDatabar.ItemClick
+    Private Sub UpdateDatabar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs)
         Try
 
             modUpdateData.MoveStockIn()
@@ -823,15 +811,21 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs)
-        frmUpdateStock.MdiParent = Me
-        frmUpdateStock.Show()
-        InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)
-    End Sub
+    'Private Sub ApproveStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs)
+    '    frmUpdateStock.MdiParent = Me
+    '    frmUpdateStock.Show()
+    '    InsertActivity(DataMode.ModeOpen, MasterType.ApproveStock, "", Nothing)
+    'End Sub
 
     Private Sub ProvinceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProvinceBar.ItemClick
-        'Dim lcls As New ProvinceControl
-        'ShowDataOnControl(lcls, MasterType.Province)
-        'InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
+        Dim lcls As New ProvinceControl
+        ShowDataOnControl(lcls, MasterType.Province)
+        InsertActivity(DataMode.ModeOpen, MasterType.Province, "", Nothing)
+    End Sub
+
+    Private Sub UpdateStockBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles UpdateStockBar.ItemClick
+        frmUpdateStock.MdiParent = Me
+        frmUpdateStock.Show()
+        InsertActivity(DataMode.ModeOpen, MasterType.UpdateStock, "", Nothing)
     End Sub
 End Class
