@@ -973,7 +973,7 @@ Public Class CustomerDAO
                 Return True
             End If
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "ProductDAO.CheckNotExist : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "CustomerDAO.CheckNotExist : " & e.Message)
         Finally
             dataTable = Nothing
         End Try

@@ -25,8 +25,8 @@ Partial Class frmSplash
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplash))
         Me.ApplicationTitle = New System.Windows.Forms.Label()
         Me.DetailsLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        Me.Copyright = New System.Windows.Forms.Label()
         Me.Version = New System.Windows.Forms.Label()
+        Me.Copyright = New System.Windows.Forms.Label()
         Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.DetailsLayoutPanel.SuspendLayout()
         Me.MainLayoutPanel.SuspendLayout()
@@ -50,7 +50,7 @@ Partial Class frmSplash
         Me.DetailsLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DetailsLayoutPanel.BackColor = System.Drawing.Color.Transparent
         Me.DetailsLayoutPanel.ColumnCount = 1
-        Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142.0!))
+        Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
         Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142.0!))
         Me.DetailsLayoutPanel.Controls.Add(Me.Version, 0, 0)
         Me.DetailsLayoutPanel.Controls.Add(Me.Copyright, 0, 1)
@@ -60,17 +60,6 @@ Partial Class frmSplash
         Me.DetailsLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.0!))
         Me.DetailsLayoutPanel.Size = New System.Drawing.Size(247, 79)
         Me.DetailsLayoutPanel.TabIndex = 1
-        '
-        'Copyright
-        '
-        Me.Copyright.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Copyright.BackColor = System.Drawing.Color.Transparent
-        Me.Copyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Copyright.Location = New System.Drawing.Point(3, 39)
-        Me.Copyright.Name = "Copyright"
-        Me.Copyright.Size = New System.Drawing.Size(241, 40)
-        Me.Copyright.TabIndex = 2
-        Me.Copyright.Text = "Copyright"
         '
         'Version
         '
@@ -83,8 +72,20 @@ Partial Class frmSplash
         Me.Version.TabIndex = 1
         Me.Version.Text = "Version {0}.{1:00}"
         '
+        'Copyright
+        '
+        Me.Copyright.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Copyright.BackColor = System.Drawing.Color.Transparent
+        Me.Copyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Copyright.Location = New System.Drawing.Point(3, 39)
+        Me.Copyright.Name = "Copyright"
+        Me.Copyright.Size = New System.Drawing.Size(241, 40)
+        Me.Copyright.TabIndex = 2
+        Me.Copyright.Text = "Copyright"
+        '
         'MainLayoutPanel
         '
+        Me.MainLayoutPanel.BackColor = System.Drawing.Color.Transparent
         Me.MainLayoutPanel.BackgroundImage = CType(resources.GetObject("MainLayoutPanel.BackgroundImage"), System.Drawing.Image)
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.MainLayoutPanel.ColumnCount = 2
@@ -108,7 +109,7 @@ Partial Class frmSplash
         Me.ClientSize = New System.Drawing.Size(496, 303)
         Me.ControlBox = False
         Me.Controls.Add(Me.MainLayoutPanel)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSplash"

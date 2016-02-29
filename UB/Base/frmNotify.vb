@@ -29,7 +29,7 @@ Public Class frmNotify
         Dim lclsNotifi As List(Of clsNotifi)
         Try
             mcls = New clsNotifi
-            mcls.InitialNotifi()
+            'mcls.InitialNotifi()
             lclsNotifi = mcls.GetNotifiList(gUserID)
             GridControl.DataSource = lclsNotifi
 

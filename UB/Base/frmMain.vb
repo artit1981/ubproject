@@ -110,23 +110,14 @@ Public Class frmMain
 
 
     Sub New()
+        frmSplash.Show()
         InitializeComponent()
         Me.InitSkinGallery()
         SetMenuPrivilege()
         ChangeLanguage()
-        'backgroundWorker1 = New System.ComponentModel.BackgroundWorker
-        'backgroundWorker1.WorkerReportsProgress = True
-        'backgroundWorker1.WorkerSupportsCancellation = True
+     
     End Sub
 
-    'Private ReadOnly Property Progress() As frmProgress
-    '    Get
-    '        If Object.Equals(fprogress, Nothing) Then
-    '            fprogress = New frmProgress(Me)
-    '        End If
-    '        Return fprogress
-    '    End Get
-    'End Property
 
     Private Sub InitSkinGallery()
         SkinHelper.InitSkinGallery(rgbiSkins, True)
@@ -145,6 +136,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+
             Select Case gOpenTab
                 Case "SaleRibbonPage"
                     ribbonMain.SelectedPage = SaleRibbonPage
@@ -172,26 +164,28 @@ Public Class frmMain
                 lblVersion.Caption = "Version : " & Application.ProductVersion
             End If
 
-
+            lblDatabase.Caption = gDBServerName & "\" & gDatabaseName
             lblUser.Caption = gUserName
             lblEmp.Caption = gEmpName
             lblCompany.Caption = gCompanyName
 
-            'If gUserName = "admin" Then
-            '    UpdateDatabar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-            '    UpdateDatabar.Enabled = True
-            'End If
-            Dim mCtlForm = New frmNotify
-            With mCtlForm
-                .Text = "ข้อความแจ้งเตือน"
-                .MdiParent = Me
-                .Show()
-            End With
-            'modReport.PrintOrder(1)
-            'modReport.PrintBarCode()
+            Dim lclsNotifi As List(Of clsNotifi)
+            Dim mcls As New clsNotifi
+            mcls.InitialNotifi()
+            lclsNotifi = mcls.GetNotifiList(gUserID)
+            If lclsNotifi.Count > 0 Then
+                Dim mCtlForm = New frmNotify
+                With mCtlForm
+                    .Text = "ข้อความแจ้งเตือน"
+                    .MdiParent = Me
+                    .Show()
+                End With
+            End If
+          
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
+            frmSplash.Hide()
         End Try
 
 
