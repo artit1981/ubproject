@@ -97,6 +97,7 @@ Public Class OrderSDAO
                     RefBillID = ConvertNullToZero(dr("RefBillID"))
                     RefReceiptID = ConvertNullToZero(dr("RefReceiptID"))
                     StockType = ConvertNullToString(dr("StockType"))
+                    CampaignID = ConvertNullToZero(dr("CampaignID"))
                     ID = Int32.Parse(dr("OrderID"))
                     IsInActive = dr("IsInActive")
                     IsDelete = dr("IsDelete")
@@ -314,17 +315,12 @@ Public Class OrderSDAO
             If IsNothing(RefToReserveID) = False Then
                 If RefToReserveID.Count > 0 Then
                     For Each pOrderID As Long In RefToReserveID
-                        If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit Then
-                            UpdateRefReserveStatus(TableID, ID, pOrderID, tr, ModeData)
-                        Else 'Delete
-                            UpdateRefReserveStatus(TableID, ID, pOrderID, tr, ModeData)
-                        End If
+                        UpdateRefReserveStatus(TableID, ID, pOrderID, tr, ModeData)
                     Next
                 End If
 
             End If
-            'End If
-
+           
             InsertActivity(ModeData, TableID, Code, tr)
             If ptr Is Nothing Then tr.Commit()
 
@@ -495,6 +491,29 @@ Public Class OrderSDAO
     End Function
 
 
+    Public Function GetDataTableForCampaign(ByVal pCampaignID As Long) As DataTable
+        Dim SQL As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = " SELECT Orders.OrderID,Orders.CustomerID,Orders.OrderCode,Product.ProductName "
+            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL = SQL & " ,SUM((ProductList.PriceMain-ProductList.Cost) * ProductList.RateUnit) AS TotalGain,SUM(ProductList.Total) AS TotalAmount"
+            SQL = SQL & " FROM Orders  "
+            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL = SQL & " LEFT OUTER JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  "
+            SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
+            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL = SQL & " and Orders.CampaignID =" & pCampaignID
+            SQL = SQL & "  AND Orders.OrderStatus Not In ('NotApprove','Cancel') "
+            SQL = SQL & " group by Orders.OrderID,Orders.CustomerID,Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName "
+            SQL = SQL & " ORDER BY Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName"
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForCampaign : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
 
     Public Overrides Function GetToRefOrderCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
         Dim SQL As String = "", lstrCode As String = ""
@@ -1000,7 +1019,7 @@ Public Class OrderSDAO
                     Sql &= " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
                     Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
                     Sql &= " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
-                    Sql &= " ,QuotationRemarkID,IsNotPass)"
+                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID)"
                     Sql &= " VALUES ( " & ID
                     Sql &= " , " & TableID
                     Sql &= " , '" & Trim(Code) & "'"
@@ -1056,6 +1075,7 @@ Public Class OrderSDAO
                     Sql &= " ,  " & IIf(IsEditVat = True, 1, 0)
                     Sql &= " ,  " & ConvertNullToZero(QuotationRemarkID)
                     Sql &= " ,  " & IIf(IsNotPass = True, 1, 0)
+                    Sql &= " ,  " & ConvertNullToZero(CampaignID)
                     Sql &= " ) "
 
                 Case DataMode.ModeEdit
@@ -1113,6 +1133,7 @@ Public Class OrderSDAO
                     Sql &= " ,Institute='" & ConvertNullToString(Institute) & "'"
                     Sql &= " ,StockType='" & ConvertNullToString(StockType) & "'"
                     Sql &= " ,QuotationRemarkID=" & ConvertNullToZero(QuotationRemarkID)
+                    Sql &= " ,CampaignID=" & ConvertNullToZero(CampaignID)
                     Sql &= " WHERE OrderID=" & ID
                 Case DataMode.ModeDelete
                     Sql = " UPDATE Orders SET IsDelete=1 "

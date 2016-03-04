@@ -69,7 +69,7 @@ Public Class frmInformPrice
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
-            mcls.ProductDAOs = GetDAOs()
+            mcls.InformPriceDAOs = GetDAOs()
             If Verify() = True Then
                 Return mcls.SaveData()
             Else

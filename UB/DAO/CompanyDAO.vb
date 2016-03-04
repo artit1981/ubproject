@@ -30,6 +30,11 @@ Public Class CompanyDAO
     Dim mBranch As String
     Dim mBankAccount As String = ""
     Dim mBankAccount2 As String = ""
+    Dim mCheckLimitInvoice As Integer
+    Dim mCheckLimitShiping As Integer
+    Dim mIsApproveInvoice As Integer
+    Dim mIsApproveShiping As Integer
+    Dim mIsApproveBorrow As Integer
 
 
     Public ReadOnly Property TableName() As String
@@ -141,6 +146,22 @@ Public Class CompanyDAO
             mCheckLimitReserve = value
         End Set
     End Property
+    Public Property CheckLimitInvoice() As Integer
+        Get
+            Return mCheckLimitInvoice
+        End Get
+        Set(ByVal value As Integer)
+            mCheckLimitInvoice = value
+        End Set
+    End Property
+    Public Property CheckLimitShiping() As Integer
+        Get
+            Return mCheckLimitShiping
+        End Get
+        Set(ByVal value As Integer)
+            mCheckLimitShiping = value
+        End Set
+    End Property
     Public Property CheckLimitSellOrder() As Integer
         Get
             Return mCheckLimitSellOrder
@@ -189,6 +210,31 @@ Public Class CompanyDAO
             mIsApproveBuyOrder = value
         End Set
     End Property
+    Public Property IsApproveInvoice() As Integer
+        Get
+            Return mIsApproveInvoice
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveInvoice = value
+        End Set
+    End Property
+    Public Property IsApproveShiping() As Integer
+        Get
+            Return mIsApproveShiping
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveShiping = value
+        End Set
+    End Property
+    Public Property IsApproveBorrow() As Integer
+        Get
+            Return mIsApproveBorrow
+        End Get
+        Set(ByVal value As Integer)
+            mIsApproveBorrow = value
+        End Set
+    End Property
+
     Public Property BankAccount() As String
         Get
             Return mBankAccount

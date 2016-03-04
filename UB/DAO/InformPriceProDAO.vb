@@ -44,9 +44,10 @@ Public Class InformPriceProDAO
         Dim dataTable As New DataTable()
         Try
 
-            SQL = SQL & " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Product.Price1,Product.Price2 "
+            SQL = SQL & " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Cost.Cost,Product.Price1,Product.Price2 "
             SQL = SQL & " ,Product.Price3,Product.Price4,Product.Price5,Product.Price6 ,Product.Remark as ProductRemark "
             SQL = SQL & " FROM Product "
+            SQL = SQL & " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
             SQL = SQL & " WHERE Product.IsDelete =0 "
             If pProGroupID > 0 Then
                 SQL = SQL & " AND Product.ProductGroupID =" & pProGroupID

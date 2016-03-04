@@ -34,6 +34,7 @@ Partial Class frmInformPricePro
         Me.cboStatus = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.rdoCalcType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnReset = New DevExpress.XtraEditors.SimpleButton()
         Me.btnCalc = New DevExpress.XtraEditors.SimpleButton()
@@ -83,7 +84,7 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.rdoCalcType = New DevExpress.XtraEditors.RadioGroup()
+        Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -96,6 +97,7 @@ Partial Class frmInformPricePro
         CType(Me.cboStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPrice6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPrice5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,7 +122,6 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -336,6 +337,18 @@ Partial Class frmInformPricePro
         Me.PanelControl1.Size = New System.Drawing.Size(1174, 31)
         Me.PanelControl1.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl1, "")
+        '
+        'rdoCalcType
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.rdoCalcType, "")
+        Me.rdoCalcType.EditValue = CType(1, Short)
+        Me.rdoCalcType.Location = New System.Drawing.Point(110, 4)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.rdoCalcType, True)
+        Me.rdoCalcType.Name = "rdoCalcType"
+        Me.rdoCalcType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(1, Short), "คำนวณจาก Cost"), New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(2, Short), "คำนวณปกติ")})
+        Me.rdoCalcType.Size = New System.Drawing.Size(267, 22)
+        Me.rdoCalcType.TabIndex = 323
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.rdoCalcType, "")
         '
         'Label2
         '
@@ -606,7 +619,7 @@ Partial Class frmInformPricePro
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Cost, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", Me.Price1, "")})
         Me.gridView.Name = "gridView"
@@ -657,7 +670,7 @@ Partial Class frmInformPricePro
         '
         'ProductCode
         '
-        Me.ProductCode.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ProductCode.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
         Me.ProductCode.AppearanceCell.Options.UseBackColor = True
         Me.ProductCode.AppearanceHeader.Options.UseTextOptions = True
         Me.ProductCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
@@ -674,7 +687,7 @@ Partial Class frmInformPricePro
         '
         'ProductName
         '
-        Me.ProductName.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ProductName.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
         Me.ProductName.AppearanceCell.Options.UseBackColor = True
         Me.ProductName.AppearanceHeader.Options.UseTextOptions = True
         Me.ProductName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
@@ -697,7 +710,7 @@ Partial Class frmInformPricePro
         '
         'ProductRemark
         '
-        Me.ProductRemark.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ProductRemark.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
         Me.ProductRemark.AppearanceCell.Options.UseBackColor = True
         Me.ProductRemark.AppearanceHeader.Options.UseTextOptions = True
         Me.ProductRemark.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
@@ -728,7 +741,7 @@ Partial Class frmInformPricePro
         Me.PriceStandard.MinWidth = 65
         Me.PriceStandard.Name = "PriceStandard"
         Me.PriceStandard.Visible = True
-        Me.PriceStandard.VisibleIndex = 4
+        Me.PriceStandard.VisibleIndex = 5
         Me.PriceStandard.Width = 65
         '
         'Price1
@@ -748,7 +761,7 @@ Partial Class frmInformPricePro
         Me.Price1.Name = "Price1"
         Me.Price1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:#,##0 .00; ( #,##0.00 ); """"""""}")})
         Me.Price1.Visible = True
-        Me.Price1.VisibleIndex = 5
+        Me.Price1.VisibleIndex = 6
         Me.Price1.Width = 65
         '
         'Price2
@@ -767,7 +780,7 @@ Partial Class frmInformPricePro
         Me.Price2.MinWidth = 65
         Me.Price2.Name = "Price2"
         Me.Price2.Visible = True
-        Me.Price2.VisibleIndex = 6
+        Me.Price2.VisibleIndex = 7
         Me.Price2.Width = 65
         '
         'Price3
@@ -786,7 +799,7 @@ Partial Class frmInformPricePro
         Me.Price3.MinWidth = 65
         Me.Price3.Name = "Price3"
         Me.Price3.Visible = True
-        Me.Price3.VisibleIndex = 7
+        Me.Price3.VisibleIndex = 8
         Me.Price3.Width = 65
         '
         'Price4
@@ -805,7 +818,7 @@ Partial Class frmInformPricePro
         Me.Price4.MinWidth = 65
         Me.Price4.Name = "Price4"
         Me.Price4.Visible = True
-        Me.Price4.VisibleIndex = 8
+        Me.Price4.VisibleIndex = 9
         Me.Price4.Width = 65
         '
         'Price5
@@ -824,7 +837,7 @@ Partial Class frmInformPricePro
         Me.Price5.MinWidth = 65
         Me.Price5.Name = "Price5"
         Me.Price5.Visible = True
-        Me.Price5.VisibleIndex = 9
+        Me.Price5.VisibleIndex = 10
         Me.Price5.Width = 65
         '
         'Price6
@@ -843,7 +856,7 @@ Partial Class frmInformPricePro
         Me.Price6.MinWidth = 65
         Me.Price6.Name = "Price6"
         Me.Price6.Visible = True
-        Me.Price6.VisibleIndex = 10
+        Me.Price6.VisibleIndex = 11
         Me.Price6.Width = 65
         '
         'Image
@@ -856,7 +869,7 @@ Partial Class frmInformPricePro
         Me.Image.MinWidth = 30
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 11
+        Me.Image.VisibleIndex = 12
         Me.Image.Width = 38
         '
         'btnImage
@@ -1122,17 +1135,25 @@ Partial Class frmInformPricePro
         'FormChangedComponent1
         '
         '
-        'rdoCalcType
+        'Cost
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.rdoCalcType, "")
-        Me.rdoCalcType.EditValue = CType(1, Short)
-        Me.rdoCalcType.Location = New System.Drawing.Point(110, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.rdoCalcType, True)
-        Me.rdoCalcType.Name = "rdoCalcType"
-        Me.rdoCalcType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(1, Short), "คำนวณจาก Cost"), New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(2, Short), "คำนวณปกติ")})
-        Me.rdoCalcType.Size = New System.Drawing.Size(267, 22)
-        Me.rdoCalcType.TabIndex = 323
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.rdoCalcType, "")
+        Me.Cost.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.Cost.AppearanceCell.Options.UseBackColor = True
+        Me.Cost.AppearanceCell.Options.UseTextOptions = True
+        Me.Cost.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Cost.AppearanceHeader.Options.UseTextOptions = True
+        Me.Cost.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Cost.Caption = "ต้นทุนจริง"
+        Me.Cost.DisplayFormat.FormatString = "n2"
+        Me.Cost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Cost.FieldName = "Cost"
+        Me.Cost.MaxWidth = 65
+        Me.Cost.MinWidth = 65
+        Me.Cost.Name = "Cost"
+        Me.Cost.OptionsColumn.ReadOnly = True
+        Me.Cost.Visible = True
+        Me.Cost.VisibleIndex = 4
+        Me.Cost.Width = 65
         '
         'frmInformPricePro
         '
@@ -1159,6 +1180,7 @@ Partial Class frmInformPricePro
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPrice6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPrice5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1184,7 +1206,6 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1252,4 +1273,5 @@ Partial Class frmInformPricePro
     Friend WithEvents btnImage As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Private WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents rdoCalcType As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents Cost As DevExpress.XtraGrid.Columns.GridColumn
 End Class

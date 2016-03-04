@@ -7,6 +7,16 @@ Public Class frmCampaign
     Inherits iEditForm
     Private Const mFormName As String = "frmCampaign"
     Dim mcls As New CampaignDAO
+    Dim mCampaignDtlList As List(Of CampaignDetail)
+
+    Public Property CampaignDtlList() As List(Of CampaignDetail)
+        Get
+            Return mCampaignDtlList
+        End Get
+        Set(ByVal value As List(Of CampaignDetail))
+            mCampaignDtlList = value
+        End Set
+    End Property
 
 
 #Region "Overrides"
@@ -62,17 +72,14 @@ Public Class frmCampaign
             mcls.CpTypeCont3_2 = CpTypeCont3_2.EditValue
             mcls.CampaignType = CampaignType.EditValue
             mcls.EvaluateBy = EvaluateBy.EditValue
+            mcls.EvaluateTarget = EvaluateTarget.EditValue
             mcls.CampaignStatus = CampaignStatus.EditValue
-
             mcls.StartDate = StartDate.EditValue
             mcls.ExpireDate = ExpireDate.EditValue
-             
             mcls.Remark = Remark.Text.Trim
-
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
-
             mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, False, "", pMode, "")
             mcls.ProductAddDAOs = UcProductLists2.GetDAOs(False, True, False, Nothing, False, 0, False, "", pMode, "")
             mcls.EmployeeList = UcEmployee1.GetDAOs()
@@ -101,9 +108,9 @@ Public Class frmCampaign
         MyBase.CheckFormChanged()
     End Sub
 
-    Private Sub CampaignType_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles CampaignType.SelectedIndexChanged
-        InitialCondition(CampaignType.EditValue)
-    End Sub
+    'Private Sub CampaignType_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles CampaignType.SelectedIndexChanged
+    '    InitialCondition(CampaignType.EditValue)
+    'End Sub
 
 
 #End Region
@@ -127,8 +134,9 @@ Public Class frmCampaign
                     CpTypeCont3_1.EditValue = mcls.CpTypeCont3_1
                     CpTypeCont3_2.EditValue = mcls.CpTypeCont3_2
                     CampaignType.EditValue = mcls.CampaignType
-                    InitialCondition(mcls.CampaignType)
+                    'InitialCondition(mcls.CampaignType)
                     EvaluateBy.EditValue = mcls.EvaluateBy
+                    EvaluateTarget.EditValue = mcls.EvaluateTarget
                     CampaignStatus.EditValue = mcls.CampaignStatus
                     StatusDesc.EditValue = mcls.StatusDesc
                     StartDate.EditValue = mcls.StartDate
@@ -158,6 +166,7 @@ Public Class frmCampaign
                                        , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, 0, "")
             UcEmployee1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
             UcCustomer1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
+            UcCampaignDTL1.ShowControl(mCampaignDtlList)
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
@@ -196,28 +205,28 @@ Public Class frmCampaign
 
 
 
-    Private Sub InitialCondition(ByVal pCampaihnType As Integer)
-        Try
-            CpTypeCont1.Visible = False
-            CpTypeCont2.Visible = False
-            CpTypeCont3_1.Visible = False
-            CpTypeCont3_2.Visible = False
-            ProductAddTabPage.PageEnabled = False
+    'Private Sub InitialCondition(ByVal pCampaihnType As Integer)
+    '    Try
+    '        CpTypeCont1.Visible = False
+    '        CpTypeCont2.Visible = False
+    '        CpTypeCont3_1.Visible = False
+    '        CpTypeCont3_2.Visible = False
+    '        ProductAddTabPage.PageEnabled = False
 
-            Select Case pCampaihnType
-                Case 1 : CpTypeCont1.Visible = True
-                Case 2 : CpTypeCont2.Visible = True
-                Case 3
-                    CpTypeCont3_1.Visible = True
-                    CpTypeCont3_2.Visible = True
-                Case 4
-                    ProductAddTabPage.PageEnabled = True
-            End Select
+    '        Select Case pCampaihnType
+    '            Case 1 : CpTypeCont1.Visible = True
+    '            Case 2 : CpTypeCont2.Visible = True
+    '            Case 3
+    '                CpTypeCont3_1.Visible = True
+    '                CpTypeCont3_2.Visible = True
+    '            Case 4
+    '                ProductAddTabPage.PageEnabled = True
+    '        End Select
 
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".InitialCondition : " & e.Message)
-        End Try
-    End Sub
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mFormName & ".InitialCondition : " & e.Message)
+    '    End Try
+    'End Sub
 
 #End Region
       

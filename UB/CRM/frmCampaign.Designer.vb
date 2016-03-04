@@ -23,6 +23,9 @@ Partial Class frmCampaign
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.EvaluateTarget = New DevExpress.XtraEditors.CalcEdit()
+        Me.CpTypeCont3_2 = New DevExpress.XtraEditors.SpinEdit()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -52,25 +55,28 @@ Partial Class frmCampaign
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Remark = New DevExpress.XtraEditors.MemoEdit()
+        Me.MinimumUnit = New DevExpress.XtraEditors.SpinEdit()
         Me.EmployeeTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcEmployee1 = New UB.ucEmployee()
         Me.CustomerTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcCustomer1 = New UB.ucCustomer()
         Me.ProductTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcProductLists1 = New UB.ucProductLists()
+        Me.ProductAddTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcProductLists2 = New UB.ucProductLists()
         Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcNote1 = New UB.ucNote()
         Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
-        Me.MinimumUnit = New DevExpress.XtraEditors.SpinEdit()
-        Me.CpTypeCont3_2 = New DevExpress.XtraEditors.SpinEdit()
-        Me.ProductAddTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcProductLists2 = New UB.ucProductLists()
+        Me.ActivityTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcCampaignDTL1 = New UB.ucCampaignDTL()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
+        CType(Me.EvaluateTarget.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CpTypeCont3_2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CpTypeCont3_1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CpTypeCont2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CpTypeCont1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,15 +92,15 @@ Partial Class frmCampaign
         CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MinimumUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.EmployeeTabPage.SuspendLayout()
         Me.CustomerTabPage.SuspendLayout()
         Me.ProductTabPage.SuspendLayout()
+        Me.ProductAddTabPage.SuspendLayout()
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
-        CType(Me.MinimumUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CpTypeCont3_2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ProductAddTabPage.SuspendLayout()
+        Me.ActivityTabPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -111,7 +117,7 @@ Partial Class frmCampaign
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.Size = New System.Drawing.Size(919, 658)
         Me.XtraTabControl1.TabIndex = 5
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.EmployeeTabPage, Me.CustomerTabPage, Me.ProductTabPage, Me.ProductAddTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.EmployeeTabPage, Me.CustomerTabPage, Me.ProductTabPage, Me.ProductAddTabPage, Me.ActivityTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
         '
         'GeneralTabPage
@@ -120,6 +126,8 @@ Partial Class frmCampaign
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.Label13)
+        Me.GeneralTabPage.Controls.Add(Me.EvaluateTarget)
         Me.GeneralTabPage.Controls.Add(Me.CpTypeCont3_2)
         Me.GeneralTabPage.Controls.Add(Me.Label12)
         Me.GeneralTabPage.Controls.Add(Me.Label9)
@@ -156,6 +164,65 @@ Partial Class frmCampaign
         Me.GeneralTabPage.Size = New System.Drawing.Size(913, 630)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label13, "")
+        Me.Label13.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label13.Location = New System.Drawing.Point(343, 316)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label13, True)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(98, 14)
+        Me.Label13.TabIndex = 257
+        Me.Label13.Text = "เป้าหมายการวัดผล"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label13, "")
+        '
+        'EvaluateTarget
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.EvaluateTarget, "TextChanged")
+        Me.EvaluateTarget.EnterMoveNextControl = True
+        Me.EvaluateTarget.Location = New System.Drawing.Point(340, 333)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.EvaluateTarget, True)
+        Me.EvaluateTarget.Name = "EvaluateTarget"
+        Me.EvaluateTarget.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EvaluateTarget.Properties.Appearance.Options.UseFont = True
+        Me.EvaluateTarget.Properties.Appearance.Options.UseTextOptions = True
+        Me.EvaluateTarget.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.EvaluateTarget.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.EvaluateTarget.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.EvaluateTarget.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.EvaluateTarget.Properties.Mask.EditMask = "n"
+        Me.EvaluateTarget.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.EvaluateTarget.Properties.Precision = 2
+        Me.EvaluateTarget.Size = New System.Drawing.Size(143, 20)
+        Me.EvaluateTarget.TabIndex = 256
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.EvaluateTarget, "Text")
+        '
+        'CpTypeCont3_2
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CpTypeCont3_2, "TextChanged")
+        Me.CpTypeCont3_2.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.CpTypeCont3_2.Location = New System.Drawing.Point(684, 241)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CpTypeCont3_2, True)
+        Me.CpTypeCont3_2.Name = "CpTypeCont3_2"
+        Me.CpTypeCont3_2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CpTypeCont3_2.Properties.Appearance.Options.UseFont = True
+        Me.CpTypeCont3_2.Properties.Appearance.Options.UseTextOptions = True
+        Me.CpTypeCont3_2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.CpTypeCont3_2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.CpTypeCont3_2.Properties.DisplayFormat.FormatString = "n2"
+        Me.CpTypeCont3_2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CpTypeCont3_2.Properties.EditFormat.FormatString = "n2"
+        Me.CpTypeCont3_2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.CpTypeCont3_2.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.CpTypeCont3_2.Properties.Mask.EditMask = "n2"
+        Me.CpTypeCont3_2.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.CpTypeCont3_2.Properties.MaxValue = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.CpTypeCont3_2.Size = New System.Drawing.Size(70, 20)
+        Me.CpTypeCont3_2.TabIndex = 253
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CpTypeCont3_2, "Text")
         '
         'Label12
         '
@@ -622,6 +689,27 @@ Partial Class frmCampaign
         Me.Remark.TabIndex = 10
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Remark, "Text")
         '
+        'MinimumUnit
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.MinimumUnit, "TextChanged")
+        Me.MinimumUnit.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.MinimumUnit.Location = New System.Drawing.Point(183, 126)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.MinimumUnit, True)
+        Me.MinimumUnit.Name = "MinimumUnit"
+        Me.MinimumUnit.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MinimumUnit.Properties.Appearance.Options.UseFont = True
+        Me.MinimumUnit.Properties.Appearance.Options.UseTextOptions = True
+        Me.MinimumUnit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.MinimumUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.MinimumUnit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.MinimumUnit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.MinimumUnit.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.MinimumUnit.Properties.Mask.EditMask = "n"
+        Me.MinimumUnit.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.MinimumUnit.Size = New System.Drawing.Size(212, 20)
+        Me.MinimumUnit.TabIndex = 254
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.MinimumUnit, "Text")
+        '
         'EmployeeTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.EmployeeTabPage, "")
@@ -685,6 +773,27 @@ Partial Class frmCampaign
         Me.UcProductLists1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
+        'ProductAddTabPage
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ProductAddTabPage, "")
+        Me.ProductAddTabPage.Controls.Add(Me.UcProductLists2)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductAddTabPage, True)
+        Me.ProductAddTabPage.Name = "ProductAddTabPage"
+        Me.ProductAddTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.ProductAddTabPage.Text = "สินค้าแถม"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductAddTabPage, "")
+        '
+        'UcProductLists2
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcProductLists2, "")
+        Me.UcProductLists2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcProductLists2.Location = New System.Drawing.Point(0, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists2, True)
+        Me.UcProductLists2.Name = "UcProductLists2"
+        Me.UcProductLists2.Size = New System.Drawing.Size(913, 630)
+        Me.UcProductLists2.TabIndex = 1
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists2, "")
+        '
         'NoteTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.NoteTabPage, "")
@@ -747,70 +856,25 @@ Partial Class frmCampaign
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
-        'MinimumUnit
+        'ActivityTabPage
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.MinimumUnit, "TextChanged")
-        Me.MinimumUnit.Location = New System.Drawing.Point(183, 126)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.MinimumUnit, True)
-        Me.MinimumUnit.Name = "MinimumUnit"
-        Me.MinimumUnit.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MinimumUnit.Properties.Appearance.Options.UseFont = True
-        Me.MinimumUnit.Properties.Appearance.Options.UseTextOptions = True
-        Me.MinimumUnit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.MinimumUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.MinimumUnit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.MinimumUnit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.MinimumUnit.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
-        Me.MinimumUnit.Properties.Mask.EditMask = "n"
-        Me.MinimumUnit.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.MinimumUnit.Size = New System.Drawing.Size(212, 20)
-        Me.MinimumUnit.TabIndex = 254
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.MinimumUnit, "Text")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ActivityTabPage, "")
+        Me.ActivityTabPage.Controls.Add(Me.UcCampaignDTL1)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ActivityTabPage, True)
+        Me.ActivityTabPage.Name = "ActivityTabPage"
+        Me.ActivityTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.ActivityTabPage.Text = "Activity"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ActivityTabPage, "")
         '
-        'CpTypeCont3_2
+        'UcCampaignDTL1
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CpTypeCont3_2, "TextChanged")
-        Me.CpTypeCont3_2.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.CpTypeCont3_2.Location = New System.Drawing.Point(684, 241)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CpTypeCont3_2, True)
-        Me.CpTypeCont3_2.Name = "CpTypeCont3_2"
-        Me.CpTypeCont3_2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CpTypeCont3_2.Properties.Appearance.Options.UseFont = True
-        Me.CpTypeCont3_2.Properties.Appearance.Options.UseTextOptions = True
-        Me.CpTypeCont3_2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.CpTypeCont3_2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.CpTypeCont3_2.Properties.DisplayFormat.FormatString = "n2"
-        Me.CpTypeCont3_2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.CpTypeCont3_2.Properties.EditFormat.FormatString = "n2"
-        Me.CpTypeCont3_2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.CpTypeCont3_2.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
-        Me.CpTypeCont3_2.Properties.Mask.EditMask = "n2"
-        Me.CpTypeCont3_2.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.CpTypeCont3_2.Properties.MaxValue = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.CpTypeCont3_2.Size = New System.Drawing.Size(70, 20)
-        Me.CpTypeCont3_2.TabIndex = 253
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CpTypeCont3_2, "Text")
-        '
-        'ProductAddTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ProductAddTabPage, "")
-        Me.ProductAddTabPage.Controls.Add(Me.UcProductLists2)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductAddTabPage, True)
-        Me.ProductAddTabPage.Name = "ProductAddTabPage"
-        Me.ProductAddTabPage.Size = New System.Drawing.Size(913, 630)
-        Me.ProductAddTabPage.Text = "สินค้าแถม"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductAddTabPage, "")
-        '
-        'UcProductLists2
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcProductLists2, "")
-        Me.UcProductLists2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcProductLists2.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists2, True)
-        Me.UcProductLists2.Name = "UcProductLists2"
-        Me.UcProductLists2.Size = New System.Drawing.Size(913, 630)
-        Me.UcProductLists2.TabIndex = 1
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists2, "")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcCampaignDTL1, "")
+        Me.UcCampaignDTL1.Location = New System.Drawing.Point(11, 3)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCampaignDTL1, True)
+        Me.UcCampaignDTL1.Name = "UcCampaignDTL1"
+        Me.UcCampaignDTL1.Size = New System.Drawing.Size(848, 298)
+        Me.UcCampaignDTL1.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCampaignDTL1, "")
         '
         'frmCampaign
         '
@@ -825,6 +889,8 @@ Partial Class frmCampaign
         Me.XtraTabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
+        CType(Me.EvaluateTarget.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CpTypeCont3_2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CpTypeCont3_1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CpTypeCont2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CpTypeCont1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -840,15 +906,15 @@ Partial Class frmCampaign
         CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MinimumUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.EmployeeTabPage.ResumeLayout(False)
         Me.CustomerTabPage.ResumeLayout(False)
         Me.ProductTabPage.ResumeLayout(False)
+        Me.ProductAddTabPage.ResumeLayout(False)
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
-        CType(Me.MinimumUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CpTypeCont3_2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ProductAddTabPage.ResumeLayout(False)
+        Me.ActivityTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -901,4 +967,8 @@ Partial Class frmCampaign
     Friend WithEvents CpTypeCont3_2 As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents ProductAddTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents UcProductLists2 As UB.ucProductLists
+    Private WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents EvaluateTarget As DevExpress.XtraEditors.CalcEdit
+    Friend WithEvents ActivityTabPage As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents UcCampaignDTL1 As UB.ucCampaignDTL
 End Class

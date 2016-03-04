@@ -4,10 +4,6 @@ Imports System.Data.SqlClient
 
 Public Class ProductListDAO
 
-
-
-
-
     Public Function Clone() As ProductListDAO
         Return DirectCast(Me.MemberwiseClone(), ProductListDAO)
     End Function

@@ -21,6 +21,7 @@ Public Class CampaignDAO
     Dim mCpTypeCont3_1 As Decimal = 0
     Dim mCpTypeCont3_2 As Decimal = 0
     Dim mProductAddDAOs As List(Of ProductListDAO)
+    Dim mEvaluateTarget As Decimal = 0
 
 
     Public Overrides ReadOnly Property TableName() As String
@@ -125,6 +126,14 @@ Public Class CampaignDAO
             mEvaluateBy = value
         End Set
     End Property
+    Public Property EvaluateTarget() As Decimal
+        Get
+            Return mEvaluateTarget
+        End Get
+        Set(ByVal value As Decimal)
+            mEvaluateTarget = value
+        End Set
+    End Property
     Public Property CampaignStatus() As Integer
         Get
             Return mCampaignStatus
@@ -227,6 +236,7 @@ Public Class CampaignDAO
                     CpTypeCont3_2 = ConvertNullToZero(dr("CpTypeCont3_2"))
                     CampaignType = ConvertNullToZero(dr("CampaignType"))
                     EvaluateBy = ConvertNullToZero(dr("EvaluateBy"))
+                    EvaluateTarget = ConvertNullToZero(dr("EvaluateTarget"))
                     CampaignStatus = ConvertNullToZero(dr("CampaignStatus"))
                     StatusDesc = ConvertNullToString(dr("StatusDesc"))
                     If IsDBNull(dr("StartDate")) Then
@@ -302,16 +312,18 @@ Public Class CampaignDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT Campaign.CampaignID AS ID,Campaign.Subject  "
+            SQL = "SELECT CampaignID,Subject  "
             SQL = SQL & "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
-            SQL = SQL & " ,Campaign.Remark,Campaign.ModifiedTime"
+            SQL = SQL & " ,case when EvaluateBy=1 then 'จำนวนลูกค้า'  when EvaluateBy=2 then 'ยอดขาย' else 'กำไร' end  EvaluateBy"
+            SQL = SQL & " ,Budget,EvaluateTarget,IsDelete"
             SQL = SQL & " FROM Campaign  "
-            SQL = SQL & " WHERE Campaign.IsDelete =0   "
+            SQL = SQL & " WHERE 0=0   "
             If pID > 0 Then
                 SQL = SQL & "  AND Campaign.CampaignID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Campaign.IsInActive = 0"
+                SQL = SQL & " AND Campaign.IsDelete =0   "
+                SQL = SQL & " AND Campaign.IsInActive = 0"
             End If
             
             SQL = SQL & " ORDER BY Campaign.CampaignID"
@@ -321,7 +333,37 @@ Public Class CampaignDAO
         End Try
         Return dataTable
     End Function
-     
+
+
+    Public Function GetDataTableCombo(ByVal pID As Long, ByVal pOnlyActive As Boolean, ByVal pStartDate As Date, ByVal pExpireDate As Date, ByVal pLoadAll As Boolean) As DataTable
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = "SELECT Campaign.CampaignID AS ID,Campaign.Subject  "
+            SQL = SQL & "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
+            SQL = SQL & " FROM Campaign  "
+            SQL = SQL & " WHERE Campaign.IsDelete =0   "
+            If pID > 0 Then
+                SQL = SQL & "  AND Campaign.CampaignID=" & pID
+            End If
+            If pOnlyActive = True And pLoadAll = False Then
+                SQL = SQL & "  AND Campaign.IsInActive = 0"
+            End If
+            If pLoadAll = False Then
+                SQL = SQL & "  AND Campaign.StartDate <= '" & formatSQLDate(pStartDate) & "'"
+                SQL = SQL & "  AND Campaign.ExpireDate >= '" & formatSQLDate(pExpireDate) & "'"
+            End If
+        
+
+            SQL = SQL & " ORDER BY Campaign.CampaignID"
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "CampaignDAO.GetDataTableCombo : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
 
     Public Overrides Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean
         Dim SQL As String
@@ -338,7 +380,7 @@ Public Class CampaignDAO
                     EmpID = gEmpID
                     ID = GenNewID("CampaignID", "Campaign", tr)
                     SQL = " INSERT INTO Campaign (CampaignID,Subject,Budget,MinimumAmount,StartDate ,ExpireDate "
-                    SQL = SQL & " ,CampaignType ,EvaluateBy , CampaignStatus,StatusDesc , Remark "
+                    SQL = SQL & " ,CampaignType ,EvaluateBy,EvaluateTarget , CampaignStatus,StatusDesc , Remark "
                     SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,MinimumUnit,CpTypeCont1,CpTypeCont2,CpTypeCont3_1,CpTypeCont3_2 "
                     SQL = SQL & " )"
                     SQL = SQL & " VALUES ( @IDs"
@@ -349,6 +391,7 @@ Public Class CampaignDAO
                     SQL = SQL & " ,  @ExpireDate"
                     SQL = SQL & " ,  @CampaignType"
                     SQL = SQL & " ,  @EvaluateBy "
+                    SQL = SQL & " ,  @EvaluateTarget "
                     SQL = SQL & " ,  @CampaignStatus "
                     SQL = SQL & " ,  @StatusDesc "
                     SQL = SQL & " ,  @Remark "
@@ -376,6 +419,7 @@ Public Class CampaignDAO
                     SQL = SQL & " , ExpireDate=@ExpireDate "
                     SQL = SQL & " , CampaignType=@CampaignType "
                     SQL = SQL & " , EvaluateBy=@EvaluateBy "
+                    SQL = SQL & " , EvaluateTarget=@EvaluateTarget "
                     SQL = SQL & " , CampaignStatus=@CampaignStatus "
                     SQL = SQL & " , StatusDesc=@StatusDesc "
                     SQL = SQL & " , Remark=@Remark "
@@ -404,6 +448,7 @@ Public Class CampaignDAO
             myCommand.Parameters.Add(New SqlParameter("@ExpireDate", formatSQLDate(ExpireDate)))
             myCommand.Parameters.Add(New SqlParameter("@CampaignType", ConvertNullToZero(CampaignType)))
             myCommand.Parameters.Add(New SqlParameter("@EvaluateBy", ConvertNullToZero(EvaluateBy)))
+            myCommand.Parameters.Add(New SqlParameter("@EvaluateTarget", ConvertNullToZero(EvaluateTarget)))
             myCommand.Parameters.Add(New SqlParameter("@CampaignStatus", ConvertNullToZero(CampaignStatus)))
             myCommand.Parameters.Add(New SqlParameter("@StatusDesc", ConvertNullToString(StatusDesc)))
             myCommand.Parameters.Add(New SqlParameter("@Remark", ConvertNullToString(Remark)))
@@ -466,23 +511,24 @@ Public Class CampaignDAO
 
     End Function
 
-    Public Function CheckIsToUse() As String ''ถูกใช้งานอยู่ ???
-
-        'Dim SQL As String
-        'Dim dataTable As New DataTable()
+    Public Function CheckIsToUse() As Boolean ''ไม่ถูกใช้งานอยู่ ???
+        Dim SQL As String
+        Dim dataTable As New DataTable()
 
         Try
-            'SQL = "SELECT LeadID  FROM Lead"
-            'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
-            'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
-            'End If
-            'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-            'Return dataTable.Rows.Count > 0
+            SQL = "SELECT CampaignID  FROM Orders"
+            SQL = SQL & " WHERE IsDelete =0  "
+            SQL = SQL & " and CampaignID=" & ID
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            If dataTable.Rows.Count > 0 Then
+                Return True
+            End If
+
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "CampaignDAO.CheckNotExist : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "CampaignDAO.CheckIsToUse : " & e.Message)
+        Finally
+            dataTable = Nothing
         End Try
-        Return False
     End Function
 
      

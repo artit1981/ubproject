@@ -386,6 +386,7 @@ Public Class frmOrderS
             mcls.Institute = ConvertNullToString(Institute.EditValue)
             mcls.StockType = StockType.EditValue
             mcls.QuotationRemarkID = ConvertNullToZero(QuotationRemark.EditValue)
+            mcls.CampaignID = ConvertNullToZero(Campaign.EditValue)
             If TaxCanYes.Checked = True Then
                 mcls.TaxCanYes = "Y"
             Else
@@ -765,6 +766,10 @@ Public Class frmOrderS
 
     End Sub
 
+    Private Sub btnCampaign_Click(sender As Object, e As System.EventArgs) Handles btnCampaign.Click
+        SetComboCampaign(True)
+    End Sub
+
 #End Region
 
 #Region "Private"
@@ -1122,6 +1127,7 @@ Public Class frmOrderS
             SetCurrency()
             SetComboShipingRuleID()
             SetComboQuoRemarkID()
+            SetComboCampaign(mMode = DataMode.ModeEdit)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try
@@ -1229,6 +1235,7 @@ Public Class frmOrderS
                     InvoiceSuplierID.EditValue = mcls.InvoiceSuplierID
                     Institute.EditValue = mcls.Institute
                     QuotationRemark.EditValue = mcls.QuotationRemarkID
+                    Campaign.EditValue = mcls.CampaignID
                     If mcls.TaxCanYes = "Y" Then
                         TaxCanYes.Checked = True
                     Else
@@ -1643,6 +1650,16 @@ Public Class frmOrderS
 #End Region
 
 #Region "Set combo"
+    Private Sub SetComboCampaign(ByVal pLoadAll As Boolean)
+        Try
+
+            SetSearchLookCampaign(Campaign, OrderDate.EditValue, OrderDate.EditValue, pLoadAll)
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCampaign : " & e.Message)
+        End Try
+    End Sub
+
     Private Sub SetComboCustomer()
         Try
             If mOrderType = MasterType.Asset Then
@@ -1915,4 +1932,6 @@ Public Class frmOrderS
             End If
         End If
     End Sub
+
+  
 End Class

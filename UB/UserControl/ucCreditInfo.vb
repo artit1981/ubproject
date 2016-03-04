@@ -42,10 +42,7 @@
             lcls = Nothing
         End Try
     End Function
-
-    Private Sub IsHoldButget_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'IsHoldButget.EditValue = False
-    End Sub
+     
 
 
     Private Sub btnRefreshTerritory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefreshTerritory.Click

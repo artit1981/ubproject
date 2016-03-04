@@ -25,6 +25,14 @@ Partial Class frmOrderS
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.Campaign = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.CampaignID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Subject = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.StartDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.btnCampaign = New DevExpress.XtraEditors.SimpleButton()
         Me.chkNotPass = New DevExpress.XtraEditors.CheckEdit()
         Me.btnQuotationRemark = New DevExpress.XtraEditors.SimpleButton()
         Me.QuotationRemark = New DevExpress.XtraEditors.LookUpEdit()
@@ -171,6 +179,8 @@ Partial Class frmOrderS
         Me.LayoutbtnQuotationRemark = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem15 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutNotPass = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutCampaign = New DevExpress.XtraLayout.LayoutControlItem()
         Me.PledgeTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcPledge1 = New UB.ucPledge()
         Me.TaxTabPage = New DevExpress.XtraTab.XtraTabPage()
@@ -229,6 +239,8 @@ Partial Class frmOrderS
         Me.GeneralTabPage.SuspendLayout()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.Campaign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkNotPass.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.QuotationRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkIsEditVat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -355,6 +367,8 @@ Partial Class frmOrderS
         CType(Me.LayoutbtnQuotationRemark, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutNotPass, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutCampaign, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PledgeTabPage.SuspendLayout()
         Me.TaxTabPage.SuspendLayout()
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -428,6 +442,8 @@ Partial Class frmOrderS
         Me.LayoutControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.LayoutControl1, "")
+        Me.LayoutControl1.Controls.Add(Me.Campaign)
+        Me.LayoutControl1.Controls.Add(Me.btnCampaign)
         Me.LayoutControl1.Controls.Add(Me.chkNotPass)
         Me.LayoutControl1.Controls.Add(Me.btnQuotationRemark)
         Me.LayoutControl1.Controls.Add(Me.QuotationRemark)
@@ -489,6 +505,103 @@ Partial Class frmOrderS
         Me.LayoutControl1.TabIndex = 9
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
+        '
+        'Campaign
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Campaign, "TextChanged")
+        Me.Campaign.EnterMoveNextControl = True
+        Me.Campaign.Location = New System.Drawing.Point(117, 274)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Campaign, True)
+        Me.Campaign.Name = "Campaign"
+        Me.Campaign.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Campaign.Properties.Appearance.Options.UseFont = True
+        Me.Campaign.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.Campaign.Properties.NullText = ""
+        Me.Campaign.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
+        Me.Campaign.Properties.View = Me.GridView2
+        Me.Campaign.Size = New System.Drawing.Size(308, 20)
+        Me.Campaign.StyleController = Me.LayoutControl1
+        Me.Campaign.TabIndex = 9
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Campaign, "Text")
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CampaignID, Me.Subject, Me.StartDate, Me.GridColumn9, Me.GridColumn10})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ColumnAutoWidth = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        Me.GridView2.OptionsView.ShowViewCaption = True
+        '
+        'CampaignID
+        '
+        Me.CampaignID.Caption = "รหัส"
+        Me.CampaignID.FieldName = "CampaignID"
+        Me.CampaignID.Name = "CampaignID"
+        '
+        'Subject
+        '
+        Me.Subject.Caption = "ชื่อโปรโมชั่น"
+        Me.Subject.FieldName = "Subject"
+        Me.Subject.MaxWidth = 200
+        Me.Subject.MinWidth = 150
+        Me.Subject.Name = "Subject"
+        Me.Subject.Visible = True
+        Me.Subject.VisibleIndex = 0
+        Me.Subject.Width = 150
+        '
+        'StartDate
+        '
+        Me.StartDate.Caption = "วันที่เริ่มต้น"
+        Me.StartDate.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.StartDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.StartDate.FieldName = "StartDate"
+        Me.StartDate.MaxWidth = 80
+        Me.StartDate.MinWidth = 50
+        Me.StartDate.Name = "StartDate"
+        Me.StartDate.Visible = True
+        Me.StartDate.VisibleIndex = 1
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "วันที่สิ้นสุด"
+        Me.GridColumn9.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.GridColumn9.FieldName = "ExpireDate"
+        Me.GridColumn9.MaxWidth = 80
+        Me.GridColumn9.MinWidth = 50
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 2
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "สถานะ"
+        Me.GridColumn10.FieldName = "CampaignStatus"
+        Me.GridColumn10.MaxWidth = 100
+        Me.GridColumn10.MinWidth = 85
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 3
+        Me.GridColumn10.Width = 85
+        '
+        'btnCampaign
+        '
+        Me.btnCampaign.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnCampaign.Appearance.Options.UseFont = True
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCampaign, "")
+        Me.btnCampaign.Image = CType(resources.GetObject("btnCampaign.Image"), System.Drawing.Image)
+        Me.btnCampaign.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCampaign.Location = New System.Drawing.Point(431, 276)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCampaign, True)
+        Me.btnCampaign.Name = "btnCampaign"
+        Me.btnCampaign.Size = New System.Drawing.Size(26, 22)
+        Me.btnCampaign.StyleController = Me.LayoutControl1
+        Me.btnCampaign.TabIndex = 318
+        Me.btnCampaign.TabStop = False
+        Me.btnCampaign.ToolTip = "Refresh"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnCampaign, "")
         '
         'chkNotPass
         '
@@ -1635,7 +1748,7 @@ Partial Class frmOrderS
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.c, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutControlItem1, Me.LayoutRefPO, Me.EmptySpaceItem11, Me.EmptySpaceItem13, Me.EmptySpaceItem14, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.EmptySpaceItem15, Me.LayoutNotPass})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.c, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutControlItem1, Me.LayoutRefPO, Me.EmptySpaceItem11, Me.EmptySpaceItem13, Me.EmptySpaceItem14, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.EmptySpaceItem15, Me.LayoutNotPass, Me.LayoutControlItem3, Me.LayoutCampaign})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(915, 809)
@@ -1735,11 +1848,11 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
         Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 262)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 286)
         Me.EmptySpaceItem4.MaxSize = New System.Drawing.Size(417, 12)
         Me.EmptySpaceItem4.MinSize = New System.Drawing.Size(417, 12)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(417, 70)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(417, 46)
         Me.EmptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem4.Text = "EmptySpaceItem4"
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
@@ -2081,9 +2194,9 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(419, 264)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(419, 290)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(30, 68)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(30, 42)
         Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -2600,6 +2713,34 @@ Partial Class frmOrderS
         Me.LayoutNotPass.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutNotPass.TextToControlDistance = 0
         Me.LayoutNotPass.TextVisible = False
+        '
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.btnCampaign
+        Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(419, 264)
+        Me.LayoutControlItem3.MaxSize = New System.Drawing.Size(30, 26)
+        Me.LayoutControlItem3.MinSize = New System.Drawing.Size(30, 26)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(30, 26)
+        Me.LayoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutControlItem3.Text = "LayoutControlItem3"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem3.TextToControlDistance = 0
+        Me.LayoutControlItem3.TextVisible = False
+        '
+        'LayoutCampaign
+        '
+        Me.LayoutCampaign.Control = Me.Campaign
+        Me.LayoutCampaign.CustomizationFormText = "Campaign"
+        Me.LayoutCampaign.Location = New System.Drawing.Point(0, 262)
+        Me.LayoutCampaign.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutCampaign.MinSize = New System.Drawing.Size(159, 24)
+        Me.LayoutCampaign.Name = "LayoutCampaign"
+        Me.LayoutCampaign.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutCampaign.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutCampaign.Text = "Campaign"
+        Me.LayoutCampaign.TextSize = New System.Drawing.Size(102, 13)
         '
         'PledgeTabPage
         '
@@ -3344,6 +3485,8 @@ Partial Class frmOrderS
         Me.GeneralTabPage.ResumeLayout(False)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.Campaign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkNotPass.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.QuotationRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkIsEditVat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3470,6 +3613,8 @@ Partial Class frmOrderS
         CType(Me.LayoutbtnQuotationRemark, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutNotPass, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutCampaign, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PledgeTabPage.ResumeLayout(False)
         Me.TaxTabPage.ResumeLayout(False)
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3712,4 +3857,14 @@ Partial Class frmOrderS
     Friend WithEvents EmptySpaceItem15 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents chkNotPass As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LayoutNotPass As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents btnCampaign As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents Campaign As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents CampaignID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Subject As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents StartDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LayoutCampaign As DevExpress.XtraLayout.LayoutControlItem
 End Class

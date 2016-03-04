@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Public Class InformPriceDAO
     Inherits iDAO
     Dim mPriceSale As Decimal
-    Private mProductDAOs As List(Of InformPriceSubDAO)
+    Private mInformPriceDAOs As List(Of InformPriceSubDAO)
     Private mProductTable As DataTable
 
     Public ReadOnly Property TableName() As String
@@ -27,9 +27,9 @@ Public Class InformPriceDAO
         End Get
     End Property
 
-    Public WriteOnly Property ProductDAOs() As List(Of InformPriceSubDAO)
+    Public WriteOnly Property InformPriceDAOs() As List(Of InformPriceSubDAO)
         Set(ByVal Value As List(Of InformPriceSubDAO))
-            mProductDAOs = Value
+            mInformPriceDAOs = Value
         End Set
     End Property
 
@@ -227,11 +227,11 @@ Public Class InformPriceDAO
 
         SQL = ""
         Try
-            If mProductDAOs.Count > 0 Then
+            If mInformPriceDAOs.Count > 0 Then
                 tr = gConnection.Connection.BeginTransaction
                 Select Case ModeData
                     Case DataMode.ModeNew, DataMode.ModeEdit
-                        For Each rec As InformPriceSubDAO In mProductDAOs
+                        For Each rec As InformPriceSubDAO In mInformPriceDAOs
                             If ConvertNullToZero(rec.ProductID) > 0 Then
                                 If ConvertNullToZero(rec.InformPriceID) = 0 Then
                                     SQL = " INSERT INTO " & TableName & " (CustomerID,ProductID,PriceInform,CostAdjust"
@@ -281,7 +281,7 @@ Public Class InformPriceDAO
                                 '    myCommand.CommandText = SQL
                                 '    gConnection.executeInsertSqlCommand(myCommand, tr)
                                 'End If
-                            
+
                             End If
                         Next
 
@@ -349,7 +349,7 @@ Public Class InformPriceDAO
     End Function
 
     Public Sub New()
-        mProductDAOs = Nothing
+        mInformPriceDAOs = Nothing
         mPriceSale = 0
     End Sub
 End Class

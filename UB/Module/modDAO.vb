@@ -660,13 +660,31 @@ Module modDAO
             pCombo.Properties.ValueMember = "ID"
             pCombo.EditValue = DBNull.Value
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "modDAO.SetComboCustomer : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "modDAO.SetSearchLookCustomer : " & e.Message)
         Finally
             lcls = Nothing
             dataTable = Nothing
         End Try
     End Sub
 
+
+    Public Sub SetSearchLookCampaign(ByVal pCombo As DevExpress.XtraEditors.SearchLookUpEdit, ByVal pStartDate As Date, ByVal pExpireDate As Date, ByVal pLoadAll As Boolean)
+        Dim lcls As New CampaignDAO
+        Dim dataTable As New DataTable()
+        Try
+            lcls.TableID = MasterType.Accounts
+            dataTable = lcls.GetDataTableCombo(0, True, pStartDate, pExpireDate, pLoadAll)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "Subject"
+            pCombo.Properties.ValueMember = "CampaignID"
+            pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetSearchLookCampaign : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
 
     Public Sub SetSearchLookOpportunity(ByVal pCombo As DevExpress.XtraEditors.SearchLookUpEdit, ByVal pCustomerID As Long, ByVal pEffectDate As Date)
         Dim lcls As New OpportunityDAO

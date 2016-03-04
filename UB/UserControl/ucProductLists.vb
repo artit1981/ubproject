@@ -758,6 +758,7 @@ Public Class ucProductLists
                 rec.IsShow = 1
                 rec.IsMerge = 0
                 rec.IsDelete = 0
+                rec.Price = rec.PriceMain * rec.RateUnit
                 If llIndex = 0 Then
                     bindingSource1.Add(rec)
 
@@ -802,12 +803,14 @@ Public Class ucProductLists
                             pRec.UnitName = ConvertNullToString(dr("UnitName"))
                             pRec.RateUnit = ConvertNullToZero(dr("Rate"))
                             pRec.Units = pRec.AdjustUnit * pRec.RateUnit
+                            pRec.Price = pRec.PriceMain * pRec.RateUnit
                         Else
                             Dim rec = New ProductSub
                             rec.UnitID = ConvertNullToZero(dr("UnitID"))
                             rec.UnitName = ConvertNullToString(dr("UnitName"))
                             rec.RateUnit = ConvertNullToZero(dr("Rate"))
                             pRec.Units = pRec.AdjustUnit * pRec.RateUnit
+                            pRec.Price = pRec.PriceMain * pRec.RateUnit
                             bindingSource1.Add(rec)
                         End If
                     Else
@@ -815,6 +818,7 @@ Public Class ucProductLists
                         gridView.SetFocusedRowCellValue("UnitName", ConvertNullToString(dr("UnitName")))
                         gridView.SetFocusedRowCellValue("RateUnit", ConvertNullToZero(dr("Rate")))
                         gridView.SetFocusedRowCellValue("Units", gridView.GetFocusedRowCellValue("AdjustUnit") * ConvertNullToZero(dr("Rate")))
+                        gridView.SetFocusedRowCellValue("Price", gridView.GetFocusedRowCellValue("PriceMain") * ConvertNullToZero(dr("Rate")))
                     End If
 
                     Return ConvertNullToString(dr("UnitName"))
@@ -1094,8 +1098,8 @@ Public Class ucProductLists
 
         Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
             Units = RateUnit * AdjustUnit
-            Price = PriceMain * RateUnit
-            Total = (Units * PriceMain) - (Discount * AdjustUnit)
+            'Price = PriceMain * RateUnit
+            Total = (AdjustUnit * Price) - (Discount * AdjustUnit)
         End Sub
 #End Region
 

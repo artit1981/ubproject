@@ -84,6 +84,7 @@ Public Class iOrder
     Dim mIsEditVat As Boolean = False
     Dim mQuotationRemarkID As Long = 0
     Dim mIsNotPass As Boolean = False
+    Dim mCampaignID As Long = 0
 
     Public Overridable ReadOnly Property TableName() As String
         Get
@@ -754,6 +755,16 @@ Public Class iOrder
             mStockType = value
         End Set
     End Property
+
+    Public Property CampaignID() As Long
+        Get
+            Return mCampaignID
+        End Get
+        Set(ByVal value As Long)
+            mCampaignID = value
+        End Set
+    End Property
+
     Public Sub New()
         mIDs = 0
         mCode = ""
@@ -823,6 +834,7 @@ Public Class iOrder
         mRefOrderIDs = 0
         mStockType = ""
         mIsEditVat = False
+        mCampaignID = 0
     End Sub
 
 #End Region
