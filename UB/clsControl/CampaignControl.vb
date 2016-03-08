@@ -65,8 +65,8 @@ Public Class CampaignControl
             Else
                 lIsActiveOnly = True
             End If
-
-            bindingSource1.Clear()
+            bindingSource1 = Nothing
+            bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(CampaignSub)
             dataTable = lcls.GetDataTable(0, lIsActiveOnly)
 

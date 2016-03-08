@@ -85,9 +85,9 @@ Partial Class frmControlCampaign
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnDetail = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -649,6 +649,8 @@ Partial Class frmControlCampaign
         Me.GridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridView.OptionsBehavior.Editable = False
         Me.GridView.OptionsBehavior.ReadOnly = True
+        Me.GridView.OptionsDetail.EnableMasterViewMode = False
+        Me.GridView.OptionsDetail.ShowDetailTabs = False
         Me.GridView.OptionsLayout.Columns.AddNewColumns = False
         Me.GridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.GridView.OptionsView.ShowViewCaption = True
@@ -793,8 +795,6 @@ Partial Class frmControlCampaign
         Me.GridColumn9.MaxWidth = 60
         Me.GridColumn9.MinWidth = 50
         Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 9
         Me.GridColumn9.Width = 50
         '
         'btnDetail
@@ -804,6 +804,12 @@ Partial Class frmControlCampaign
         Me.btnDetail.Name = "btnDetail"
         Me.btnDetail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "GridColumn12"
+        Me.GridColumn12.FieldName = "IsDelete"
+        Me.GridColumn12.Name = "GridColumn12"
+        '
         'Timer1
         '
         Me.Timer1.Enabled = True
@@ -812,12 +818,6 @@ Partial Class frmControlCampaign
         'GridView1
         '
         Me.GridView1.Name = "GridView1"
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "GridColumn12"
-        Me.GridColumn12.FieldName = "IsDelete"
-        Me.GridColumn12.Name = "GridColumn12"
         '
         'frmControlCampaign
         '

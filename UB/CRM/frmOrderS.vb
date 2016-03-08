@@ -107,6 +107,9 @@ Public Class frmOrderS
             chkNotPass.Visible = False
             LayoutNotPass.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
+            LayoutCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutbtnCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
             mFormName = mOrderType.ToString
             Select Case mOrderType
                 Case MasterType.Quotation
@@ -214,6 +217,11 @@ Public Class frmOrderS
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    If mOrderType = MasterType.Invoice Then
+                        LayoutCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                        LayoutbtnCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    End If
+
                 Case MasterType.InvoiceBuy
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
@@ -767,7 +775,7 @@ Public Class frmOrderS
     End Sub
 
     Private Sub btnCampaign_Click(sender As Object, e As System.EventArgs) Handles btnCampaign.Click
-        SetComboCampaign(True)
+        SetComboCampaign(False)
     End Sub
 
 #End Region
@@ -1128,6 +1136,7 @@ Public Class frmOrderS
             SetComboShipingRuleID()
             SetComboQuoRemarkID()
             SetComboCampaign(mMode = DataMode.ModeEdit)
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try

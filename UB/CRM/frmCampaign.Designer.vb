@@ -64,14 +64,14 @@ Partial Class frmCampaign
         Me.UcProductLists1 = New UB.ucProductLists()
         Me.ProductAddTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcProductLists2 = New UB.ucProductLists()
+        Me.ActivityTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcCampaignDTL1 = New UB.ucCampaignDTL()
         Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcNote1 = New UB.ucNote()
         Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
-        Me.ActivityTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcCampaignDTL1 = New UB.ucCampaignDTL()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -97,10 +97,10 @@ Partial Class frmCampaign
         Me.CustomerTabPage.SuspendLayout()
         Me.ProductTabPage.SuspendLayout()
         Me.ProductAddTabPage.SuspendLayout()
+        Me.ActivityTabPage.SuspendLayout()
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
-        Me.ActivityTabPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -115,7 +115,7 @@ Partial Class frmCampaign
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(919, 658)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(919, 574)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.EmployeeTabPage, Me.CustomerTabPage, Me.ProductTabPage, Me.ProductAddTabPage, Me.ActivityTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -161,7 +161,7 @@ Partial Class frmCampaign
         Me.GeneralTabPage.Controls.Add(Me.MinimumUnit)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(913, 546)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -716,7 +716,7 @@ Partial Class frmCampaign
         Me.EmployeeTabPage.Controls.Add(Me.UcEmployee1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.EmployeeTabPage, True)
         Me.EmployeeTabPage.Name = "EmployeeTabPage"
-        Me.EmployeeTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.EmployeeTabPage.Size = New System.Drawing.Size(913, 546)
         Me.EmployeeTabPage.Text = "พนักงาน"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.EmployeeTabPage, "")
         '
@@ -727,7 +727,7 @@ Partial Class frmCampaign
         Me.UcEmployee1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcEmployee1, True)
         Me.UcEmployee1.Name = "UcEmployee1"
-        Me.UcEmployee1.Size = New System.Drawing.Size(913, 630)
+        Me.UcEmployee1.Size = New System.Drawing.Size(913, 546)
         Me.UcEmployee1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcEmployee1, "")
         '
@@ -737,7 +737,7 @@ Partial Class frmCampaign
         Me.CustomerTabPage.Controls.Add(Me.UcCustomer1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CustomerTabPage, True)
         Me.CustomerTabPage.Name = "CustomerTabPage"
-        Me.CustomerTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.CustomerTabPage.Size = New System.Drawing.Size(913, 546)
         Me.CustomerTabPage.Text = "กลุ่มเป้าหมาย"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CustomerTabPage, "")
         '
@@ -748,7 +748,7 @@ Partial Class frmCampaign
         Me.UcCustomer1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCustomer1, True)
         Me.UcCustomer1.Name = "UcCustomer1"
-        Me.UcCustomer1.Size = New System.Drawing.Size(913, 630)
+        Me.UcCustomer1.Size = New System.Drawing.Size(913, 546)
         Me.UcCustomer1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCustomer1, "")
         '
@@ -758,7 +758,7 @@ Partial Class frmCampaign
         Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductTabPage, True)
         Me.ProductTabPage.Name = "ProductTabPage"
-        Me.ProductTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.ProductTabPage.Size = New System.Drawing.Size(913, 546)
         Me.ProductTabPage.Text = "สินค้า"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductTabPage, "")
         '
@@ -769,7 +769,7 @@ Partial Class frmCampaign
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists1, True)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(913, 630)
+        Me.UcProductLists1.Size = New System.Drawing.Size(913, 546)
         Me.UcProductLists1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
@@ -779,7 +779,7 @@ Partial Class frmCampaign
         Me.ProductAddTabPage.Controls.Add(Me.UcProductLists2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductAddTabPage, True)
         Me.ProductAddTabPage.Name = "ProductAddTabPage"
-        Me.ProductAddTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.ProductAddTabPage.Size = New System.Drawing.Size(913, 546)
         Me.ProductAddTabPage.Text = "สินค้าแถม"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductAddTabPage, "")
         '
@@ -790,9 +790,32 @@ Partial Class frmCampaign
         Me.UcProductLists2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists2, True)
         Me.UcProductLists2.Name = "UcProductLists2"
-        Me.UcProductLists2.Size = New System.Drawing.Size(913, 630)
+        Me.UcProductLists2.Size = New System.Drawing.Size(913, 546)
         Me.UcProductLists2.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists2, "")
+        '
+        'ActivityTabPage
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ActivityTabPage, "")
+        Me.ActivityTabPage.Controls.Add(Me.UcCampaignDTL1)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ActivityTabPage, True)
+        Me.ActivityTabPage.Name = "ActivityTabPage"
+        Me.ActivityTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.ActivityTabPage.Text = "Activity"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ActivityTabPage, "")
+        '
+        'UcCampaignDTL1
+        '
+        Me.UcCampaignDTL1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcCampaignDTL1, "")
+        Me.UcCampaignDTL1.Location = New System.Drawing.Point(3, 3)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCampaignDTL1, True)
+        Me.UcCampaignDTL1.Name = "UcCampaignDTL1"
+        Me.UcCampaignDTL1.Size = New System.Drawing.Size(907, 540)
+        Me.UcCampaignDTL1.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCampaignDTL1, "")
         '
         'NoteTabPage
         '
@@ -856,31 +879,11 @@ Partial Class frmCampaign
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
-        'ActivityTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ActivityTabPage, "")
-        Me.ActivityTabPage.Controls.Add(Me.UcCampaignDTL1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ActivityTabPage, True)
-        Me.ActivityTabPage.Name = "ActivityTabPage"
-        Me.ActivityTabPage.Size = New System.Drawing.Size(913, 630)
-        Me.ActivityTabPage.Text = "Activity"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ActivityTabPage, "")
-        '
-        'UcCampaignDTL1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcCampaignDTL1, "")
-        Me.UcCampaignDTL1.Location = New System.Drawing.Point(11, 3)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCampaignDTL1, True)
-        Me.UcCampaignDTL1.Name = "UcCampaignDTL1"
-        Me.UcCampaignDTL1.Size = New System.Drawing.Size(848, 298)
-        Me.UcCampaignDTL1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCampaignDTL1, "")
-        '
         'frmCampaign
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(919, 695)
+        Me.ClientSize = New System.Drawing.Size(919, 611)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Name = "frmCampaign"
         Me.Text = "frmOpportunity"
@@ -911,10 +914,10 @@ Partial Class frmCampaign
         Me.CustomerTabPage.ResumeLayout(False)
         Me.ProductTabPage.ResumeLayout(False)
         Me.ProductAddTabPage.ResumeLayout(False)
+        Me.ActivityTabPage.ResumeLayout(False)
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
-        Me.ActivityTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
