@@ -62,6 +62,7 @@ Public Class frmCompany
             mcls.CheckLimitSellOrder = ConvertNullToZero(CheckLimitSellOrder.Checked)
             mcls.CheckLimitInvoice = ConvertNullToZero(CheckLimitInvoice.Checked)
             mcls.CheckLimitShiping = ConvertNullToZero(CheckLimitShiping.Checked)
+            mcls.UnderLimit = ConvertNullToZero(UnderLimit.EditValue)
             mcls.IsApproveQua = ConvertNullToZero(IsApproveQua.Checked)
             mcls.IsApproveReserve = ConvertNullToZero(IsApproveReserve.Checked)
             mcls.IsApproveSellOrder = ConvertNullToZero(IsApproveSellOrder.Checked)
@@ -80,7 +81,9 @@ Public Class frmCompany
             mcls.BankAccount = ConvertNullToString(BankAccount.EditValue)
             mcls.BankAccount2 = ConvertNullToString(BankAccount2.EditValue)
             If Verify() = True Then
-                Return mcls.SaveData()
+                mcls.SaveData()
+                VerifyCompany()
+                Return True
             Else
                 ShowProgress(False, "")
                 XtraMessageBox.Show(Me, "พบข้อผิดพลาดกรุณาตรวจสอบ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -157,6 +160,13 @@ Public Class frmCompany
                     IsApproveSellOrder.Checked = mcls.IsApproveSellOrder
                     IsApproveOffer.Checked = mcls.IsApproveOffer
                     IsApproveBuyOrder.Checked = mcls.IsApproveBuyOrder
+                    IsApproveInvoice.Checked = mcls.IsApproveInvoice
+                    IsApproveShiping.Checked = mcls.IsApproveShiping
+                    IsApproveBorrow.Checked = mcls.IsApproveBorrow
+                    CheckLimitInvoice.Checked = mcls.CheckLimitInvoice
+                    CheckLimitShiping.Checked = mcls.CheckLimitShiping
+                    UnderLimit.EditValue = mcls.UnderLimit
+
                     UcAddress1.InitailData(mcls.AddressS, lclsProvince.GetDataTable())
                     If mcls.IsMainCompany = 1 Then
                         IsMainCompanyYes.Checked = True
@@ -215,7 +225,7 @@ Public Class frmCompany
     End Function
 
    Private Sub IsMainCompanyYes_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles IsMainCompanyYes.CheckedChanged
-        Branch.Enabled = IsMainCompanyYes.Checked = False
+        Branch.Enabled = IsMainCompanyYes.Checked = False = 0
         Branch.TabStop = IsMainCompanyYes.Checked = False
     End Sub
 

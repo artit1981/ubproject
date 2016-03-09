@@ -187,6 +187,12 @@ Public Class OrderSDAO
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveBuyOrder And TableID = MasterType.PurchaseOrder Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
+                    ElseIf gIsApproveInvoice And TableID = MasterType.Invoice Then
+                        OrderStatus = EnumStatus.WaitApprove.ToString
+                    ElseIf gIsApproveShiping And TableID = MasterType.Shiping Then
+                        OrderStatus = EnumStatus.WaitApprove.ToString
+                    ElseIf gIsApproveBorrow And TableID = MasterType.Borrow Then
+                        OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf TableID = MasterType.PurchaseOrder Then
                         OrderStatus = EnumStatus.Waiting.ToString
                     Else
@@ -205,15 +211,38 @@ Public Class OrderSDAO
                         lIsCheckOver = True
                     End If
 
+                    Dim lIsHoldBudget As Boolean
                     If lIsCheckOver = True Then
-                        Dim lCreditAmount As Decimal = GetCustomerCredit(CustomerID, tr)
-                        If lCreditAmount > 0 Then
+                        Dim lCreditAmount As Decimal = GetCustomerCredit(CustomerID, tr, lIsHoldBudget)
+                        If lIsHoldBudget = True Then
+                            OrderStatus = EnumStatus.WaitApprove.ToString
+                            SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
+                                          , "ระงับวงเงิน" _
+                                          , OrderStatus, tr)
+                        ElseIf lCreditAmount > 0 Then
                             If GrandTotal > lCreditAmount Then
                                 OrderStatus = EnumStatus.WaitApprove.ToString
                                 SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
                                               , "เกินวงเงิน [" & Format(GrandTotal, "#,##0.00") & " / " & Format(lCreditAmount, "#,##0.00") & "]" _
                                               , OrderStatus, tr)
                             End If
+                        End If
+                    End If
+
+                    '*** Check Under LimitS amount
+                    lIsCheckOver = False
+                    If gIsCheckLimitInvoice = True And TableID = MasterType.Invoice Then
+                        lIsCheckOver = True
+                    ElseIf gIsCheckLimitShiping = True And TableID = MasterType.Shiping Then
+                        lIsCheckOver = True
+                    End If
+
+                    If lIsCheckOver = True Then
+                        If GrandTotal < gUnderLimit Then
+                            OrderStatus = EnumStatus.WaitApprove.ToString
+                            SaveApproveTX(2, DataMode.ModeNew, ID, lTableNameThai, TableName, Code, OrderDate, GrandTotal _
+                                          , "เกณฑ์ขั้นต่ำ [" & Format(GrandTotal, "#,##0.00") & " / " & Format(gUnderLimit, "#,##0.00") & "]" _
+                                          , OrderStatus, tr)
                         End If
                     End If
 

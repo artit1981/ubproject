@@ -220,11 +220,7 @@ Public Class frmFindReserve
             Dim lPrice As Decimal = 0
             If mProductSubList.Count > 0 Then
                 For Each pProSub In mProductSubList
-                    lPrice = LoadLowerPrice(pProSub.ProductID, False)
-                    If lPrice > 0 Then
-                        pProSub.Price = LoadLowerPrice(pProSub.ProductID, False)
-                    End If
-
+                    lPrice = LoadlastPrice(pProSub.ProductID, False)
                 Next
             End If
 
@@ -354,13 +350,13 @@ Public Class frmFindReserve
         End Try
     End Sub
 
-
-
-    Private Function LoadLowerPrice(ByVal pProID As Long, ByVal pIsSetText As Boolean) As Decimal
+    Private Function LoadlastPrice(ByVal pProID As Long, ByVal pIsSetText As Boolean) As Decimal
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
-        Dim lLastPrice As Decimal = 0, lLowPrice As Decimal = 0
+        Dim lLastPrice As Decimal = 0
         Try
+            Dim lCusID As Long = ConvertNullToZero(cboCustomerID.EditValue)
+
             If pIsSetText = True Then
                 txtSupLast.Text = ""
                 txtDateLast.Text = ""
@@ -381,27 +377,6 @@ Public Class frmFindReserve
             End If
 
             If pProID > 0 And mFormLoad = False Then
-
-                SQL = "SELECT top 1  Orders.OrderID AS ID, Orders.OrderCode ,Orders.OrderDate ,ProductList.Price,ProductList.Units "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " FROM Orders  "
-                SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
-                SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-                SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
-                SQL = SQL & "  AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
-                SQL = SQL & " ORDER BY Orders.OrderID desc "
-                dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-                If dataTable.Rows.Count > 0 Then
-                    For Each dr As DataRow In dataTable.Rows
-                        txtSupLast.Text = ConvertNullToString(dr("Customer"))
-                        txtDateLast.Text = Format(dr("OrderDate"), "dd/MM/yy")
-                        txtPriceLast.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
-                        txtQtyLast.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
-                        lLastPrice = ConvertNullToZero(dr("Price"))
-                    Next
-                End If
-
                 SQL = "SELECT top 3  Orders.OrderDate ,ProductList.Price,ProductList.Units "
                 SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 SQL = SQL & " FROM Orders  "
@@ -410,12 +385,12 @@ Public Class frmFindReserve
                 SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
                 SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
                 SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
-                If pIsSetText = False Then
-                    SQL = SQL & " and Orders.CustomerID =" & ConvertNullToZero(cboCustomerID.EditValue)
+                If lCusID > 0 Then
+                    SQL = SQL & " and Orders.CustomerID =" & lCusID
                 End If
                 SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
                 SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
-                SQL = SQL & " ORDER BY ProductList.Price   "
+                SQL = SQL & " ORDER BY Orders.OrderID desc "
                 dataTable = New DataTable()
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
                 Dim i As Integer = 1
@@ -428,6 +403,7 @@ Public Class frmFindReserve
                                     txtDateLow1.Text = Format(dr("OrderDate"), "dd/MM/yy")
                                     txtPriceLow1.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
                                     txtQtyLow1.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+                                    lLastPrice = ConvertNullToZero(dr("Price"))
                                 Case 2
                                     txtSupPrice2.Text = ConvertNullToString(dr("Customer"))
                                     txtDateLow2.Text = Format(dr("OrderDate"), "dd/MM/yy")
@@ -440,28 +416,139 @@ Public Class frmFindReserve
                                     txtQtyLow3.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
                             End Select
                             i = i + 1
-                        Else 'If pIsSetText = True Then
-                            lLowPrice = ConvertNullToZero(dr("Price"))  '**Return Lower Price
+                        Else
+                            lLastPrice = ConvertNullToZero(dr("Price"))
+                            Exit For
                         End If
                     Next
                 End If
             End If
-            If lLowPrice > 0 Then
-                Return lLowPrice
-            Else
+            If lLastPrice > 0 Then
                 Return lLastPrice
+            Else 'Find inform price
+                If lCusID > 0 Then
+                    Dim lclsInformBuy As New InformPriceBuyDAO
+                    If lclsInformBuy.InitailData(lCusID, pProID) Then
+                        Return lclsInformBuy.PriceBuy
+                    End If
+                Else
+                    Return 0
+                End If
             End If
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".LoadLowerPrice : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mFormName & ".LoadLastPrice : " & e.Message)
         Finally
 
         End Try
     End Function
 
 
+    'Private Function LoadLowerPrice(ByVal pProID As Long, ByVal pIsSetText As Boolean) As Decimal
+    '    Dim SQL As String = ""
+    '    Dim dataTable As New DataTable()
+    '    Dim lLastPrice As Decimal = 0, lLowPrice As Decimal = 0
+    '    Try
+    '        If pIsSetText = True Then
+    '            txtSupLast.Text = ""
+    '            txtDateLast.Text = ""
+    '            txtPriceLast.Text = ""
+    '            txtQtyLast.Text = ""
+    '            txtSupPrice1.Text = ""
+    '            txtDateLow1.Text = ""
+    '            txtPriceLow1.Text = ""
+    '            txtQtyLow1.Text = ""
+    '            txtSupPrice2.Text = ""
+    '            txtDateLow2.Text = ""
+    '            txtPriceLow2.Text = ""
+    '            txtQtyLow2.Text = ""
+    '            txtSupPrice3.Text = ""
+    '            txtDateLow3.Text = ""
+    '            txtPriceLow3.Text = ""
+    '            txtQtyLow3.Text = ""
+    '        End If
+
+    '        If pProID > 0 And mFormLoad = False Then
+
+    '            SQL = "SELECT top 1  Orders.OrderID AS ID, Orders.OrderCode ,Orders.OrderDate ,ProductList.Price,ProductList.Units "
+    '            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+    '            SQL = SQL & " FROM Orders  "
+    '            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+    '            SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+    '            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+    '            SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
+    '            SQL = SQL & "  AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+    '            SQL = SQL & " ORDER BY Orders.OrderID desc "
+    '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+    '            If dataTable.Rows.Count > 0 Then
+    '                For Each dr As DataRow In dataTable.Rows
+    '                    txtSupLast.Text = ConvertNullToString(dr("Customer"))
+    '                    txtDateLast.Text = Format(dr("OrderDate"), "dd/MM/yy")
+    '                    txtPriceLast.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
+    '                    txtQtyLast.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+    '                    lLastPrice = ConvertNullToZero(dr("Price"))
+    '                Next
+    '            End If
+
+    '            SQL = "SELECT top 3  Orders.OrderDate ,ProductList.Price,ProductList.Units "
+    '            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+    '            SQL = SQL & " FROM Orders  "
+    '            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+    '            SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+    '            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+    '            SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
+    '            SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+    '            If pIsSetText = False Then
+    '                SQL = SQL & " and Orders.CustomerID =" & ConvertNullToZero(cboCustomerID.EditValue)
+    '            End If
+    '            SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
+    '            SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
+    '            SQL = SQL & " ORDER BY ProductList.Price   "
+    '            dataTable = New DataTable()
+    '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+    '            Dim i As Integer = 1
+    '            If dataTable.Rows.Count > 0 Then
+    '                For Each dr As DataRow In dataTable.Rows
+    '                    If pIsSetText = True Then
+    '                        Select Case i
+    '                            Case 1
+    '                                txtSupPrice1.Text = ConvertNullToString(dr("Customer"))
+    '                                txtDateLow1.Text = Format(dr("OrderDate"), "dd/MM/yy")
+    '                                txtPriceLow1.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
+    '                                txtQtyLow1.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+    '                            Case 2
+    '                                txtSupPrice2.Text = ConvertNullToString(dr("Customer"))
+    '                                txtDateLow2.Text = Format(dr("OrderDate"), "dd/MM/yy")
+    '                                txtPriceLow2.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
+    '                                txtQtyLow2.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+    '                            Case 3
+    '                                txtSupPrice3.Text = ConvertNullToString(dr("Customer"))
+    '                                txtDateLow3.Text = Format(dr("OrderDate"), "dd/MM/yy")
+    '                                txtPriceLow3.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
+    '                                txtQtyLow3.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+    '                        End Select
+    '                        i = i + 1
+    '                    Else 'If pIsSetText = True Then
+    '                        lLowPrice = ConvertNullToZero(dr("Price"))  '**Return Lower Price
+    '                    End If
+    '                Next
+    '            End If
+    '        End If
+    '        If lLowPrice > 0 Then
+    '            Return lLowPrice
+    '        Else
+    '            Return lLastPrice
+    '        End If
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mFormName & ".LoadLowerPrice : " & e.Message)
+    '    Finally
+
+    '    End Try
+    'End Function
+
+
     Private Sub UcProductLists1_SelectedProduct(ByRef pProID As Long) Handles UcProductLists1.SelectedProduct
         Try
-            LoadLowerPrice(pProID, True)
+            LoadlastPrice(pProID, True)
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally

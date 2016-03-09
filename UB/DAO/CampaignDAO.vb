@@ -340,7 +340,7 @@ Public Class CampaignDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT Campaign.CampaignID AS ID,Campaign.Subject  "
+            SQL = "SELECT Campaign.CampaignID,Campaign.Subject  "
             SQL = SQL & "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
             SQL = SQL & " FROM Campaign  "
             SQL = SQL & " WHERE Campaign.IsDelete =0   "

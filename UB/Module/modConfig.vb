@@ -14,9 +14,14 @@ Module modConfig
     Public gIsApproveSellOrder As Boolean
     Public gIsApproveOffer As Boolean
     Public gIsApproveBuyOrder As Boolean
+    Public gIsApproveInvoice As Boolean
+    Public gIsApproveShiping As Boolean
+    Public gIsApproveBorrow As Boolean
     Public gIsCheckLimitReserve As Boolean
     Public gIsCheckLimitSellOrder As Boolean
+    Public gIsCheckLimitInvoice As Boolean
+    Public gIsCheckLimitShiping As Boolean
     Public gViewLevel As eViewLevel
     Public gLimitAmount As Double
- 
+    Public gUnderLimit As Double
 End Module

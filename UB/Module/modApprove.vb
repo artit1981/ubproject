@@ -65,25 +65,64 @@ Module modApprove
         End Try
     End Function
 
-    'Public Function CheckOverCreditAmount(ByVal pCusID As Long, ByVal pTXAmount As Decimal, ByRef pCreditAmount As Decimal, ByRef ptr As SqlTransaction) As Decimal
-    '    Try
-    '        pCreditAmount = GetCustomerCredit(pCusID, ptr)
+    Public Function VerifyCompany() As Boolean
+        VerifyCompany = False
+        Try
+            Dim lcls As New CompanyDAO
+            If lcls.InitailData(gCompanyID) Then
+                gIsCheckLimitReserve = lcls.CheckLimitReserve
+                gIsCheckLimitSellOrder = lcls.CheckLimitSellOrder
+                gIsCheckLimitInvoice = lcls.CheckLimitInvoice
+                gIsCheckLimitShiping = lcls.CheckLimitShiping
+                gIsApproveQua = lcls.IsApproveQua
+                gIsApproveReserve = lcls.IsApproveReserve
+                gIsApproveSellOrder = lcls.IsApproveSellOrder
+                gIsApproveOffer = lcls.IsApproveOffer
+                gIsApproveBuyOrder = lcls.IsApproveBuyOrder
+                gIsApproveInvoice = lcls.IsApproveInvoice
+                gIsApproveShiping = lcls.IsApproveShiping
+                gIsApproveBorrow = lcls.IsApproveBorrow
+                gUnderLimit = lcls.UnderLimit
+                gCompanyName = lcls.CompanyName
+                Return True
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modApprove.VerifyCompany : " & e.Message)
+        End Try
+    End Function
 
-    '        Return pCreditAmount < pTXAmount
 
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "modApprove.CheckOverCreditAmount : " & e.Message)
-    '    End Try
-    'End Function
+    Public Function VerifyApproveUser() As Boolean
+        Dim dataTable As New DataTable()
+        Try
+            Dim lcls As New ApproveUserDTLDAO()
+            dataTable = lcls.GetDataTable(1, gEmpID, True)
+            gIsApproveOrderUser = dataTable.Rows.Count > 0
 
-    Public Function GetCustomerCredit(ByVal pCusID As Long, ByRef ptr As SqlTransaction) As Decimal
-        Dim lclsCustomer As iPerson
+            dataTable = lcls.GetDataTable(2, gEmpID, True)
+            If dataTable.Rows.Count > 0 Then
+                gIsApproveLimitUser = True
+                gLimitAmount = ConvertNullToZero(dataTable.Rows(0).Item("ApproveAmount"))
+            Else
+                gIsApproveLimitUser = False
+                gLimitAmount = 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modApprove.VerifyApproveUser : " & e.Message)
+        End Try
+        Return True
+    End Function
+
+    Public Function GetCustomerCredit(ByVal pCusID As Long, ByRef ptr As SqlTransaction, ByRef pIsHoldBudget As Boolean) As Decimal
+        Dim lclsCustomer As CustomerDAO
         Try
 
             lclsCustomer = New CustomerDAO
             lclsCustomer.InitailData(pCusID, "", ptr)
 
             If lclsCustomer.CreditGroupID > 0 Then
+                pIsHoldBudget = (lclsCustomer.IsHoldButget = 1)
                 Dim lclsCreditGroup As New CreditGroupDAO
                 If lclsCreditGroup.InitailData(lclsCustomer.CreditGroupID, ptr) Then
                     Return lclsCreditGroup.CreditAmount

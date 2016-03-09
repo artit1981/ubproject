@@ -30,11 +30,12 @@ Public Class CompanyDAO
     Dim mBranch As String
     Dim mBankAccount As String = ""
     Dim mBankAccount2 As String = ""
-    Dim mCheckLimitInvoice As Integer
-    Dim mCheckLimitShiping As Integer
-    Dim mIsApproveInvoice As Integer
-    Dim mIsApproveShiping As Integer
-    Dim mIsApproveBorrow As Integer
+    Dim mCheckLimitInvoice As Integer = 0
+    Dim mCheckLimitShiping As Integer = 0
+    Dim mIsApproveInvoice As Integer = 0
+    Dim mIsApproveShiping As Integer = 0
+    Dim mIsApproveBorrow As Integer = 0
+    Dim mUnderLimit As Decimal = 0
 
 
     Public ReadOnly Property TableName() As String
@@ -152,6 +153,14 @@ Public Class CompanyDAO
         End Get
         Set(ByVal value As Integer)
             mCheckLimitInvoice = value
+        End Set
+    End Property
+    Public Property UnderLimit() As Decimal
+        Get
+            Return mUnderLimit
+        End Get
+        Set(ByVal value As Decimal)
+            mUnderLimit = value
         End Set
     End Property
     Public Property CheckLimitShiping() As Integer
@@ -446,6 +455,7 @@ Public Class CompanyDAO
                     SQL = SQL & " ,CommitteeNum,CommitteeName,HistoryID,AddressID,CheckLimitReserve,CheckLimitSellOrder,IsApproveQua "
                     SQL = SQL & " ,IsApproveReserve,IsApproveSellOrder,IsApproveOffer,IsApproveBuyOrder"
                     SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,IsMainCompany,Branch,BankAccount,BankAccount2   "
+                    SQL = SQL & " ,CheckLimitInvoice,CheckLimitShiping,UnderLimit,IsApproveInvoice,IsApproveShiping,IsApproveBorrow"
                     SQL = SQL & " )"
                     SQL = SQL & " VALUES ( @mIDs"
                     SQL = SQL & " ,  @CompanyName"
@@ -479,6 +489,12 @@ Public Class CompanyDAO
                     SQL = SQL & " ,  @Branch"
                     SQL = SQL & " ,  @BankAccount"
                     SQL = SQL & " ,  @BankAccount2"
+                    SQL = SQL & " ,  @CheckLimitInvoice"
+                    SQL = SQL & " ,  @CheckLimitShiping"
+                    SQL = SQL & " ,  @UnderLimit"
+                    SQL = SQL & " ,  @IsApproveInvoice"
+                    SQL = SQL & " ,  @IsApproveShiping"
+                    SQL = SQL & " ,  @IsApproveBorrow"
                     SQL = SQL & " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Company SET "
@@ -508,6 +524,12 @@ Public Class CompanyDAO
                     SQL = SQL & " ,  Branch=@Branch "
                     SQL = SQL & " ,  BankAccount=@BankAccount "
                     SQL = SQL & " ,  BankAccount2=@BankAccount2 "
+                    SQL = SQL & " ,  CheckLimitInvoice=@CheckLimitInvoice"
+                    SQL = SQL & " ,  CheckLimitShiping=@CheckLimitShiping"
+                    SQL = SQL & " ,  UnderLimit=@UnderLimit"
+                    SQL = SQL & " ,  IsApproveInvoice=@IsApproveInvoice"
+                    SQL = SQL & " ,  IsApproveShiping=@IsApproveShiping"
+                    SQL = SQL & " ,  IsApproveBorrow=@IsApproveBorrow"
                     SQL = SQL & " WHERE CompanyID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Company SET IsDelete=@IsDelete "
@@ -541,6 +563,12 @@ Public Class CompanyDAO
             myCommand.Parameters.Add(New SqlParameter("@IsApproveOffer", ConvertNullToZero(IsApproveOffer)))
             myCommand.Parameters.Add(New SqlParameter("@IsApproveBuyOrder", ConvertNullToZero(IsApproveBuyOrder)))
             myCommand.Parameters.Add(New SqlParameter("@IsApproveSellOrder", ConvertNullToZero(IsApproveSellOrder)))
+            myCommand.Parameters.Add(New SqlParameter("@CheckLimitInvoice", ConvertNullToZero(CheckLimitInvoice)))
+            myCommand.Parameters.Add(New SqlParameter("@CheckLimitShiping", ConvertNullToZero(CheckLimitShiping)))
+            myCommand.Parameters.Add(New SqlParameter("@UnderLimit", ConvertNullToZero(UnderLimit)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveInvoice", ConvertNullToZero(IsApproveInvoice)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveShiping", ConvertNullToZero(IsApproveShiping)))
+            myCommand.Parameters.Add(New SqlParameter("@IsApproveBorrow", ConvertNullToZero(IsApproveBorrow)))
             myCommand.Parameters.Add(New SqlParameter("@IsMainCompany", ConvertNullToZero(IsMainCompany)))
             myCommand.Parameters.Add(New SqlParameter("@Branch", ConvertNullToString(Branch)))
             myCommand.Parameters.Add(New SqlParameter("@BankAccount", ConvertNullToString(BankAccount)))

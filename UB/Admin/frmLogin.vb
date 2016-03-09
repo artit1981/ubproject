@@ -105,48 +105,8 @@ Public Class frmLogin
         End Try
     End Function
 
-    Private Function VerifyCompany() As Boolean
-        VerifyCompany = False
-        Try
-            Dim lcls As New CompanyDAO
-            If lcls.InitailData(gCompanyID) Then
-                gIsCheckLimitReserve = lcls.CheckLimitReserve
-                gIsCheckLimitSellOrder = lcls.CheckLimitSellOrder
-                gIsApproveQua = lcls.IsApproveQua
-                gIsApproveReserve = lcls.IsApproveReserve
-                gIsApproveSellOrder = lcls.IsApproveSellOrder
-                gIsApproveOffer = lcls.IsApproveOffer
-                gIsApproveBuyOrder = lcls.IsApproveBuyOrder
-                gCompanyName = lcls.CompanyName
-                VerifyCompany = True
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "frmLogin.VerifyCompany : " & e.Message)
-        End Try
-    End Function
 
 
-    Public Function VerifyApproveUser() As Boolean
-        Dim dataTable As New DataTable()
-        Try
-            Dim lcls As New ApproveUserDTLDAO()
-            dataTable = lcls.GetDataTable(1, gEmpID, True)
-            gIsApproveOrderUser = dataTable.Rows.Count > 0
-
-            dataTable = lcls.GetDataTable(2, gEmpID, True)
-            If dataTable.Rows.Count > 0 Then
-                gIsApproveLimitUser = True
-                gLimitAmount = ConvertNullToZero(dataTable.Rows(0).Item("ApproveAmount"))
-            Else
-                gIsApproveLimitUser = False
-                gLimitAmount = 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "frmLogin.VerifyApproveUser : " & e.Message)
-        End Try
-        Return True
-    End Function
 
     Private Sub UpdateConfiger()
         gDBServerName = DBServerName.Text

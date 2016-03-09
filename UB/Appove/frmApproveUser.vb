@@ -56,7 +56,9 @@ Public Class frmApproveUser
             mcls.ApproveUsersDAOs1 = UcApproveUser1.GetDAOs
             mcls.ApproveUsersDAOs2 = UcApproveUser2.GetDAOs
             If Verify() = True Then
-                Return mcls.SaveData()
+                mcls.SaveData()
+                VerifyApproveUser()
+                Return True
             Else
                 ShowProgress(False, "")
                 XtraMessageBox.Show(Me, "พบข้อผิดพลาดกรุณาตรวจสอบ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -272,7 +272,7 @@ Public Class ucProductLists
                         lDataDAO.SEQ = lRow + 1
 
                         If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
-                            mTotal = mTotal + (lDataDAO.Units * lDataDAO.PriceMain) - (lDataDAO.Discount * lDataDAO.AdjustUnit)
+                            mTotal = mTotal + (lDataDAO.AdjustUnit * lDataDAO.Price) - (lDataDAO.Discount * lDataDAO.AdjustUnit)
                         End If
 
                         If pIsCheckError = True And pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
