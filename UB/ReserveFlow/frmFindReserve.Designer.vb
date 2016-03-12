@@ -621,7 +621,7 @@ Partial Class frmFindReserve
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 313)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(760, 163)
+        Me.UcProductLists1.Size = New System.Drawing.Size(760, 198)
         Me.UcProductLists1.TabIndex = 22
         '
         'PanelControl1
@@ -649,15 +649,15 @@ Partial Class frmFindReserve
         Me.PanelControl1.Controls.Add(Me.LabelControl3)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Location = New System.Drawing.Point(765, 313)
+        Me.PanelControl1.Location = New System.Drawing.Point(765, 340)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(321, 143)
+        Me.PanelControl1.Size = New System.Drawing.Size(321, 111)
         Me.PanelControl1.TabIndex = 129
         '
         'txtQtyLow3
         '
         Me.txtQtyLow3.EditValue = "0"
-        Me.txtQtyLow3.Location = New System.Drawing.Point(267, 110)
+        Me.txtQtyLow3.Location = New System.Drawing.Point(267, 76)
         Me.txtQtyLow3.Name = "txtQtyLow3"
         Me.txtQtyLow3.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtQtyLow3.Properties.Appearance.Options.UseBackColor = True
@@ -672,7 +672,7 @@ Partial Class frmFindReserve
         'txtPriceLow3
         '
         Me.txtPriceLow3.EditValue = "0.0"
-        Me.txtPriceLow3.Location = New System.Drawing.Point(207, 110)
+        Me.txtPriceLow3.Location = New System.Drawing.Point(207, 76)
         Me.txtPriceLow3.Name = "txtPriceLow3"
         Me.txtPriceLow3.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtPriceLow3.Properties.Appearance.Options.UseBackColor = True
@@ -687,7 +687,7 @@ Partial Class frmFindReserve
         'txtDateLow3
         '
         Me.txtDateLow3.EditValue = ""
-        Me.txtDateLow3.Location = New System.Drawing.Point(151, 110)
+        Me.txtDateLow3.Location = New System.Drawing.Point(151, 76)
         Me.txtDateLow3.Name = "txtDateLow3"
         Me.txtDateLow3.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtDateLow3.Properties.Appearance.Options.UseBackColor = True
@@ -700,7 +700,7 @@ Partial Class frmFindReserve
         'txtSupPrice3
         '
         Me.txtSupPrice3.EditValue = ""
-        Me.txtSupPrice3.Location = New System.Drawing.Point(5, 110)
+        Me.txtSupPrice3.Location = New System.Drawing.Point(5, 76)
         Me.txtSupPrice3.Name = "txtSupPrice3"
         Me.txtSupPrice3.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtSupPrice3.Properties.Appearance.Options.UseBackColor = True
@@ -713,7 +713,7 @@ Partial Class frmFindReserve
         'txtQtyLow2
         '
         Me.txtQtyLow2.EditValue = "0"
-        Me.txtQtyLow2.Location = New System.Drawing.Point(267, 94)
+        Me.txtQtyLow2.Location = New System.Drawing.Point(267, 60)
         Me.txtQtyLow2.Name = "txtQtyLow2"
         Me.txtQtyLow2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtQtyLow2.Properties.Appearance.Options.UseBackColor = True
@@ -728,7 +728,7 @@ Partial Class frmFindReserve
         'txtPriceLow2
         '
         Me.txtPriceLow2.EditValue = "0.0"
-        Me.txtPriceLow2.Location = New System.Drawing.Point(207, 94)
+        Me.txtPriceLow2.Location = New System.Drawing.Point(207, 60)
         Me.txtPriceLow2.Name = "txtPriceLow2"
         Me.txtPriceLow2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtPriceLow2.Properties.Appearance.Options.UseBackColor = True
@@ -743,7 +743,7 @@ Partial Class frmFindReserve
         'txtDateLow2
         '
         Me.txtDateLow2.EditValue = ""
-        Me.txtDateLow2.Location = New System.Drawing.Point(151, 94)
+        Me.txtDateLow2.Location = New System.Drawing.Point(151, 60)
         Me.txtDateLow2.Name = "txtDateLow2"
         Me.txtDateLow2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtDateLow2.Properties.Appearance.Options.UseBackColor = True
@@ -756,7 +756,7 @@ Partial Class frmFindReserve
         'txtSupPrice2
         '
         Me.txtSupPrice2.EditValue = ""
-        Me.txtSupPrice2.Location = New System.Drawing.Point(5, 94)
+        Me.txtSupPrice2.Location = New System.Drawing.Point(5, 60)
         Me.txtSupPrice2.Name = "txtSupPrice2"
         Me.txtSupPrice2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtSupPrice2.Properties.Appearance.Options.UseBackColor = True
@@ -769,7 +769,7 @@ Partial Class frmFindReserve
         'txtQtyLow1
         '
         Me.txtQtyLow1.EditValue = "0"
-        Me.txtQtyLow1.Location = New System.Drawing.Point(267, 77)
+        Me.txtQtyLow1.Location = New System.Drawing.Point(267, 43)
         Me.txtQtyLow1.Name = "txtQtyLow1"
         Me.txtQtyLow1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtQtyLow1.Properties.Appearance.Options.UseBackColor = True
@@ -784,7 +784,7 @@ Partial Class frmFindReserve
         'txtPriceLow1
         '
         Me.txtPriceLow1.EditValue = "0.0"
-        Me.txtPriceLow1.Location = New System.Drawing.Point(207, 77)
+        Me.txtPriceLow1.Location = New System.Drawing.Point(207, 43)
         Me.txtPriceLow1.Name = "txtPriceLow1"
         Me.txtPriceLow1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtPriceLow1.Properties.Appearance.Options.UseBackColor = True
@@ -799,7 +799,7 @@ Partial Class frmFindReserve
         'txtDateLow1
         '
         Me.txtDateLow1.EditValue = ""
-        Me.txtDateLow1.Location = New System.Drawing.Point(151, 77)
+        Me.txtDateLow1.Location = New System.Drawing.Point(151, 43)
         Me.txtDateLow1.Name = "txtDateLow1"
         Me.txtDateLow1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtDateLow1.Properties.Appearance.Options.UseBackColor = True
@@ -812,7 +812,7 @@ Partial Class frmFindReserve
         'txtSupPrice1
         '
         Me.txtSupPrice1.EditValue = ""
-        Me.txtSupPrice1.Location = New System.Drawing.Point(5, 77)
+        Me.txtSupPrice1.Location = New System.Drawing.Point(5, 43)
         Me.txtSupPrice1.Name = "txtSupPrice1"
         Me.txtSupPrice1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtSupPrice1.Properties.Appearance.Options.UseBackColor = True
@@ -825,7 +825,7 @@ Partial Class frmFindReserve
         'txtQtyLast
         '
         Me.txtQtyLast.EditValue = "0"
-        Me.txtQtyLast.Location = New System.Drawing.Point(267, 38)
+        Me.txtQtyLast.Location = New System.Drawing.Point(267, 134)
         Me.txtQtyLast.Name = "txtQtyLast"
         Me.txtQtyLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtQtyLast.Properties.Appearance.Options.UseBackColor = True
@@ -836,11 +836,12 @@ Partial Class frmFindReserve
         Me.txtQtyLast.Size = New System.Drawing.Size(44, 18)
         Me.txtQtyLast.TabIndex = 138
         Me.txtQtyLast.TabStop = False
+        Me.txtQtyLast.Visible = False
         '
         'txtPriceLast
         '
         Me.txtPriceLast.EditValue = "0.0"
-        Me.txtPriceLast.Location = New System.Drawing.Point(207, 38)
+        Me.txtPriceLast.Location = New System.Drawing.Point(207, 134)
         Me.txtPriceLast.Name = "txtPriceLast"
         Me.txtPriceLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtPriceLast.Properties.Appearance.Options.UseBackColor = True
@@ -851,11 +852,12 @@ Partial Class frmFindReserve
         Me.txtPriceLast.Size = New System.Drawing.Size(61, 18)
         Me.txtPriceLast.TabIndex = 137
         Me.txtPriceLast.TabStop = False
+        Me.txtPriceLast.Visible = False
         '
         'txtDateLast
         '
         Me.txtDateLast.EditValue = ""
-        Me.txtDateLast.Location = New System.Drawing.Point(151, 38)
+        Me.txtDateLast.Location = New System.Drawing.Point(151, 134)
         Me.txtDateLast.Name = "txtDateLast"
         Me.txtDateLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtDateLast.Properties.Appearance.Options.UseBackColor = True
@@ -864,11 +866,12 @@ Partial Class frmFindReserve
         Me.txtDateLast.Size = New System.Drawing.Size(57, 18)
         Me.txtDateLast.TabIndex = 136
         Me.txtDateLast.TabStop = False
+        Me.txtDateLast.Visible = False
         '
         'txtSupLast
         '
         Me.txtSupLast.EditValue = ""
-        Me.txtSupLast.Location = New System.Drawing.Point(5, 38)
+        Me.txtSupLast.Location = New System.Drawing.Point(5, 134)
         Me.txtSupLast.Name = "txtSupLast"
         Me.txtSupLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtSupLast.Properties.Appearance.Options.UseBackColor = True
@@ -877,15 +880,17 @@ Partial Class frmFindReserve
         Me.txtSupLast.Size = New System.Drawing.Size(146, 18)
         Me.txtSupLast.TabIndex = 135
         Me.txtSupLast.TabStop = False
+        Me.txtSupLast.Visible = False
         '
         'LabelControl7
         '
         Me.LabelControl7.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LabelControl7.Location = New System.Drawing.Point(5, 62)
+        Me.LabelControl7.Location = New System.Drawing.Point(16, 136)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(101, 13)
         Me.LabelControl7.TabIndex = 134
         Me.LabelControl7.Text = "ราคาซื้อ 3 ลำดับต่ำสุด"
+        Me.LabelControl7.Visible = False
         '
         'LabelControl5
         '
@@ -936,7 +941,7 @@ Partial Class frmFindReserve
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1088, 479)
+        Me.ClientSize = New System.Drawing.Size(1088, 514)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.UcProductLists1)
         Me.Controls.Add(Me.GridControl)

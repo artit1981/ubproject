@@ -322,6 +322,12 @@ Public Class CompanyDAO
                     IsApproveSellOrder = ConvertNullToZero(dr("IsApproveSellOrder"))
                     IsApproveOffer = ConvertNullToZero(dr("IsApproveOffer"))
                     IsApproveBuyOrder = ConvertNullToZero(dr("IsApproveBuyOrder"))
+                    UnderLimit = ConvertNullToZero(dr("UnderLimit"))
+                    IsApproveInvoice = ConvertNullToZero(dr("IsApproveInvoice"))
+                    IsApproveShiping = ConvertNullToZero(dr("IsApproveShiping"))
+                    IsApproveBorrow = ConvertNullToZero(dr("IsApproveBorrow"))
+                    CheckLimitInvoice = ConvertNullToZero(dr("CheckLimitInvoice"))
+                    CheckLimitShiping = ConvertNullToZero(dr("CheckLimitShiping"))
                     BankAccount = ConvertNullToString(dr("BankAccount"))
                     BankAccount2 = ConvertNullToString(dr("BankAccount2"))
                     'Person

@@ -9,7 +9,7 @@ Public Class CustomerDAO
     Dim mEmpID As Long
     Dim mclsEmployee As EmployeeDAO
     Dim mContactRole As String
-    Dim mIsHoldButget As Boolean
+    Dim mIsHoldButget As Integer
     Dim mCurrencyID As Long
     Dim mLeadID As Long
     Dim mCompanyTypeID As Long
@@ -420,7 +420,7 @@ Public Class CustomerDAO
                     EstimatedBudjet = ConvertNullToZero(dr("EstimatedBudjet"))
                     IndustryTypeID = ConvertNullToZero(dr("IndustryTypeID"))
                     BusinessTypeID = ConvertNullToZero(dr("BusinessTypeID"))
-                    IsHoldButget = dr("IsHoldButget")
+                    IsHoldButget = ConvertNullToZero(dr("IsHoldButget"))
                     CreditAmount = ConvertNullToZero(dr("CreditAmount"))
                     BuyingTimeFrame = ConvertNullToZero(dr("BuyingTimeFrame"))
                     TerritoryID = ConvertNullToZero(dr("TerritoryID"))

@@ -56,6 +56,7 @@ Partial Class frmInformPricePro
         Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.ProductRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceStandard = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -84,7 +85,6 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -135,7 +135,7 @@ Partial Class frmInformPricePro
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1201, 505)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1241, 505)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -154,7 +154,7 @@ Partial Class frmInformPricePro
         Me.GeneralTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1195, 477)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1235, 477)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -166,7 +166,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label3, "")
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(821, 37)
+        Me.Label3.Location = New System.Drawing.Point(856, 100)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label3, True)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(154, 14)
@@ -187,7 +187,7 @@ Partial Class frmInformPricePro
         Me.PanelControl2.Controls.Add(Me.CheckShowInfo)
         Me.PanelControl2.Controls.Add(Me.cboStatus)
         Me.PanelControl2.Controls.Add(Me.Label4)
-        Me.PanelControl2.Location = New System.Drawing.Point(1054, 60)
+        Me.PanelControl2.Location = New System.Drawing.Point(1094, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(130, 54)
@@ -334,7 +334,7 @@ Partial Class frmInformPricePro
         Me.PanelControl1.Location = New System.Drawing.Point(10, 120)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl1, True)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1174, 31)
+        Me.PanelControl1.Size = New System.Drawing.Size(1214, 31)
         Me.PanelControl1.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl1, "")
         '
@@ -357,7 +357,7 @@ Partial Class frmInformPricePro
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label2, "")
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.Location = New System.Drawing.Point(683, 9)
+        Me.Label2.Location = New System.Drawing.Point(684, 9)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label2, True)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(19, 14)
@@ -373,7 +373,7 @@ Partial Class frmInformPricePro
         Me.btnReset.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnReset, "")
         Me.btnReset.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnReset.Location = New System.Drawing.Point(532, 5)
+        Me.btnReset.Location = New System.Drawing.Point(533, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnReset, True)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(63, 21)
@@ -391,7 +391,7 @@ Partial Class frmInformPricePro
         Me.btnCalc.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCalc, "")
         Me.btnCalc.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnCalc.Location = New System.Drawing.Point(614, 5)
+        Me.btnCalc.Location = New System.Drawing.Point(615, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCalc, True)
         Me.btnCalc.Name = "btnCalc"
         Me.btnCalc.Size = New System.Drawing.Size(63, 21)
@@ -417,7 +417,7 @@ Partial Class frmInformPricePro
         Me.calcPrice6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice6, "TextChanged")
         Me.calcPrice6.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice6.Location = New System.Drawing.Point(1104, 6)
+        Me.calcPrice6.Location = New System.Drawing.Point(1107, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice6, True)
         Me.calcPrice6.Name = "calcPrice6"
         Me.calcPrice6.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -442,7 +442,7 @@ Partial Class frmInformPricePro
         Me.calcPrice5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice5, "TextChanged")
         Me.calcPrice5.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice5.Location = New System.Drawing.Point(1039, 6)
+        Me.calcPrice5.Location = New System.Drawing.Point(1042, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice5, True)
         Me.calcPrice5.Name = "calcPrice5"
         Me.calcPrice5.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -467,7 +467,7 @@ Partial Class frmInformPricePro
         Me.calcPrice4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice4, "TextChanged")
         Me.calcPrice4.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice4.Location = New System.Drawing.Point(974, 6)
+        Me.calcPrice4.Location = New System.Drawing.Point(977, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice4, True)
         Me.calcPrice4.Name = "calcPrice4"
         Me.calcPrice4.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -492,7 +492,7 @@ Partial Class frmInformPricePro
         Me.calcPrice3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice3, "TextChanged")
         Me.calcPrice3.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice3.Location = New System.Drawing.Point(909, 6)
+        Me.calcPrice3.Location = New System.Drawing.Point(912, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice3, True)
         Me.calcPrice3.Name = "calcPrice3"
         Me.calcPrice3.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -517,7 +517,7 @@ Partial Class frmInformPricePro
         Me.calcPrice2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice2, "TextChanged")
         Me.calcPrice2.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice2.Location = New System.Drawing.Point(846, 6)
+        Me.calcPrice2.Location = New System.Drawing.Point(849, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice2, True)
         Me.calcPrice2.Name = "calcPrice2"
         Me.calcPrice2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -542,7 +542,7 @@ Partial Class frmInformPricePro
         Me.calcPrice1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice1, "TextChanged")
         Me.calcPrice1.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice1.Location = New System.Drawing.Point(781, 6)
+        Me.calcPrice1.Location = New System.Drawing.Point(784, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice1, True)
         Me.calcPrice1.Name = "calcPrice1"
         Me.calcPrice1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -567,7 +567,7 @@ Partial Class frmInformPricePro
         Me.calcPriceStandard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPriceStandard, "TextChanged")
         Me.calcPriceStandard.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPriceStandard.Location = New System.Drawing.Point(716, 6)
+        Me.calcPriceStandard.Location = New System.Drawing.Point(719, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPriceStandard, True)
         Me.calcPriceStandard.Name = "calcPriceStandard"
         Me.calcPriceStandard.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -612,7 +612,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1, Me.RepositoryItemMemoEdit1, Me.RepositoryItemCheckEdit1, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(1174, 313)
+        Me.gridControl.Size = New System.Drawing.Size(1214, 313)
         Me.gridControl.TabIndex = 290
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
@@ -724,6 +724,26 @@ Partial Class frmInformPricePro
         Me.ProductRemark.Visible = True
         Me.ProductRemark.VisibleIndex = 3
         Me.ProductRemark.Width = 178
+        '
+        'Cost
+        '
+        Me.Cost.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.Cost.AppearanceCell.Options.UseBackColor = True
+        Me.Cost.AppearanceCell.Options.UseTextOptions = True
+        Me.Cost.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Cost.AppearanceHeader.Options.UseTextOptions = True
+        Me.Cost.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Cost.Caption = "ต้นทุนจริง"
+        Me.Cost.DisplayFormat.FormatString = "n2"
+        Me.Cost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Cost.FieldName = "Cost"
+        Me.Cost.MaxWidth = 65
+        Me.Cost.MinWidth = 65
+        Me.Cost.Name = "Cost"
+        Me.Cost.OptionsColumn.ReadOnly = True
+        Me.Cost.Visible = True
+        Me.Cost.VisibleIndex = 4
+        Me.Cost.Width = 65
         '
         'PriceStandard
         '
@@ -1135,31 +1155,11 @@ Partial Class frmInformPricePro
         'FormChangedComponent1
         '
         '
-        'Cost
-        '
-        Me.Cost.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
-        Me.Cost.AppearanceCell.Options.UseBackColor = True
-        Me.Cost.AppearanceCell.Options.UseTextOptions = True
-        Me.Cost.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.Cost.AppearanceHeader.Options.UseTextOptions = True
-        Me.Cost.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Cost.Caption = "ต้นทุนจริง"
-        Me.Cost.DisplayFormat.FormatString = "n2"
-        Me.Cost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Cost.FieldName = "Cost"
-        Me.Cost.MaxWidth = 65
-        Me.Cost.MinWidth = 65
-        Me.Cost.Name = "Cost"
-        Me.Cost.OptionsColumn.ReadOnly = True
-        Me.Cost.Visible = True
-        Me.Cost.VisibleIndex = 4
-        Me.Cost.Width = 65
-        '
         'frmInformPricePro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1201, 542)
+        Me.ClientSize = New System.Drawing.Size(1241, 542)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Name = "frmInformPricePro"
         Me.Text = "แจ้งราคา"

@@ -271,6 +271,13 @@ Module modGlobal
                 ConvertNullToZero = 0
             ElseIf Not IsNumeric(pField) Then
                 ConvertNullToZero = 0
+            ElseIf VarType(pField) = vbBoolean Then
+                If pField = True Then
+                    ConvertNullToZero = 1
+                Else
+                    ConvertNullToZero = 0
+                End If
+
             Else
                 ConvertNullToZero = pField
             End If

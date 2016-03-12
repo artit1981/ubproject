@@ -120,9 +120,9 @@ Module modApprove
 
             lclsCustomer = New CustomerDAO
             lclsCustomer.InitailData(pCusID, "", ptr)
-
+            pIsHoldBudget = (lclsCustomer.IsHoldButget = 1)
             If lclsCustomer.CreditGroupID > 0 Then
-                pIsHoldBudget = (lclsCustomer.IsHoldButget = 1)
+
                 Dim lclsCreditGroup As New CreditGroupDAO
                 If lclsCreditGroup.InitailData(lclsCustomer.CreditGroupID, ptr) Then
                     Return lclsCreditGroup.CreditAmount

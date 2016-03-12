@@ -221,6 +221,7 @@ Public Class frmFindReserve
             If mProductSubList.Count > 0 Then
                 For Each pProSub In mProductSubList
                     lPrice = LoadlastPrice(pProSub.ProductID, False)
+                    pProSub.Price = lPrice
                 Next
             End If
 
@@ -377,7 +378,7 @@ Public Class frmFindReserve
             End If
 
             If pProID > 0 And mFormLoad = False Then
-                SQL = "SELECT top 3  Orders.OrderDate ,ProductList.Price,ProductList.Units "
+                SQL = "SELECT top 3  Orders.OrderDate ,ProductList.PriceMain AS Price,ProductList.Units "
                 SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 SQL = SQL & " FROM Orders  "
                 SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
@@ -388,8 +389,8 @@ Public Class frmFindReserve
                 If lCusID > 0 Then
                     SQL = SQL & " and Orders.CustomerID =" & lCusID
                 End If
-                SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
-                SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
+                'SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
+                'SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
                 SQL = SQL & " ORDER BY Orders.OrderID desc "
                 dataTable = New DataTable()
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
