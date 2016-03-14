@@ -380,53 +380,53 @@ Public Class ProductListDAO
                 SQL = SQL & " and ProductList.IsDelete =0   "
             End If
 
-            'If pRefTable <> "" Then
-            '    SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
+            If pRefTable <> "" Then
+                '    SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
 
-            '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.PurchaseOrder Then ' And pCheckPO = True Then 'ดูว่า PO โดนรับสินค้าโดย Stockin ไหม
-            '        SQL = SQL & " AND ProductList.ProductListID in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0 )"
-            '    End If
-            '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
-            '    End If
-            '    If pRefTable = "Quotation" And (lCheckType = MasterType.Reserve Or lCheckType = MasterType.SellOrders) Then
-            '        'And pCheckQou = True Then 'ดูว่า Quotation ต้องไม่เคยโดนรับสินค้าโดย Reserve ,SellOrders
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') and p2.ProductListRefID > 0)"
-            '    End If
-            '    If pRefTable = "Reserve" And lCheckType = MasterType.SellOrders Then
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in( 'SellOrders') and p2.ProductListRefID > 0)"
-            '    End If
-            '    If pRefTable = "SellOrders" And (lCheckType = MasterType.Borrow Or lCheckType = MasterType.Invoice Or lCheckType = MasterType.Shiping) Then
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in( 'Borrow', 'Invoice', 'Shiping') and p2.ProductListRefID > 0)"
-            '    End If
-            '    If pRefTable = "PurchaseOrder" And (lCheckType = MasterType.InvoiceBuy Or lCheckType = MasterType.ShipingBuy) Then
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in( 'InvoiceBuy', 'ShipingBuy' ) and p2.ProductListRefID > 0)"
-            '    End If
-            '    If pRefTable = "Borrow" And lCheckType = MasterType.Invoice Then
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in( 'Invoice') and p2.ProductListRefID > 0)"
-            '    End If
+                '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.PurchaseOrder Then ' And pCheckPO = True Then 'ดูว่า PO โดนรับสินค้าโดย Stockin ไหม
+                '        SQL = SQL & " AND ProductList.ProductListID in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0 )"
+                '    End If
+                '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
+                '    End If
+                '    If pRefTable = "Quotation" And (lCheckType = MasterType.Reserve Or lCheckType = MasterType.SellOrders) Then
+                '        'And pCheckQou = True Then 'ดูว่า Quotation ต้องไม่เคยโดนรับสินค้าโดย Reserve ,SellOrders
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') and p2.ProductListRefID > 0)"
+                '    End If
+                '    If pRefTable = "Reserve" And lCheckType = MasterType.SellOrders Then
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable in( 'SellOrders') and p2.ProductListRefID > 0)"
+                '    End If
+                '    If pRefTable = "SellOrders" And (lCheckType = MasterType.Borrow Or lCheckType = MasterType.Invoice Or lCheckType = MasterType.Shiping) Then
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable in( 'Borrow', 'Invoice', 'Shiping') and p2.ProductListRefID > 0)"
+                '    End If
+                '    If pRefTable = "PurchaseOrder" And (lCheckType = MasterType.InvoiceBuy Or lCheckType = MasterType.ShipingBuy) Then
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable in( 'InvoiceBuy', 'ShipingBuy' ) and p2.ProductListRefID > 0)"
+                '    End If
+                '    If pRefTable = "Borrow" And lCheckType = MasterType.Invoice Then
+                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '        SQL = SQL & "   AND p2.RefTable in( 'Invoice') and p2.ProductListRefID > 0)"
+                '    End If
 
-            '    If lCheckType = MasterType.MakePO Then
-            '        ' 'ดูว่า Reserve ต้องไม่เคยโดนรับสินค้าโดย PurchaseOrder,CancelPO
-            '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-            '        SQL = SQL & "   AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
-            '    End If
-            'End If
+                If lCheckType = MasterType.MakePO Then
+                    ' 'ดูว่า Reserve ต้องไม่เคยโดนรับสินค้าโดย PurchaseOrder,CancelPO
+                    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                    SQL = SQL & "   WHERE p2.IsDelete =0  "
+                    SQL = SQL & "   AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
+                End If
+            End If
             If pExcludeProListID <> "" Then
                 SQL = SQL & " AND ProductList.ProductListID not in(" & pExcludeProListID & ")"
             End If

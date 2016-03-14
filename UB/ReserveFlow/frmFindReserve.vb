@@ -130,13 +130,14 @@ Public Class frmFindReserve
 
     Private Sub GetProList()
         Dim lProductSubList As New List(Of ProductListDAO)
-        Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer
+        Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
         Try
             mProductSubList = New List(Of ProductSubDAO)
             lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
             For Each pProLIst As ProductListDAO In lProductSubList
                 llngProID = pProLIst.ProductID
-                lIndex = mProductSubList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1)
+                lUnitID = pProLIst.UnitID
+                lIndex = mProductSubList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
                 If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Then
                     rec = New ProductSubDAO
                     rec.IsSelect = True
@@ -155,6 +156,7 @@ Public Class frmFindReserve
                     rec.KeepMin = pProLIst.KeepMin
                     rec.Units = pProLIst.Units
                     rec.Price = pProLIst.Price
+                    rec.PriceMain = pProLIst.PriceMain
                     rec.Cost = pProLIst.Cost
                     rec.Discount = pProLIst.Discount
                     rec.Total = pProLIst.Total
@@ -191,6 +193,7 @@ Public Class frmFindReserve
                             rec.KeepMin = pProLIst.KeepMin
                             rec.Units = pProLIst.Units
                             rec.Price = pProLIst.Price
+                            rec.PriceMain = pProLIst.PriceMain
                             rec.Cost = pProLIst.Cost
                             rec.Discount = pProLIst.Discount
                             rec.Total = pProLIst.Total
@@ -205,6 +208,7 @@ Public Class frmFindReserve
                     End If
                     If lIsGroupDupProduct = 2 Then
                         mProductSubList.Item(lIndex).Units = mProductSubList.Item(lIndex).Units + pProLIst.Units
+                        mProductSubList.Item(lIndex).AdjustUnit = mProductSubList.Item(lIndex).AdjustUnit + pProLIst.AdjustUnit
                         mProductSubList.Item(lIndex).Discount = mProductSubList.Item(lIndex).Discount + pProLIst.Discount
                         mProductSubList.Item(lIndex).Total = mProductSubList.Item(lIndex).Total + pProLIst.Total
                         For Each pSN As SnDAO In pProLIst.SNList
@@ -325,6 +329,7 @@ Public Class frmFindReserve
                         rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                         rec.Units = ConvertNullToZero(dr("Units"))
                         rec.Price = ConvertNullToZero(dr("Price"))
+                        rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                         rec.Cost = ConvertNullToZero(dr("Cost"))
                         rec.Discount = ConvertNullToZero(dr("Discount"))
                         rec.Total = ConvertNullToZero(dr("Total"))
