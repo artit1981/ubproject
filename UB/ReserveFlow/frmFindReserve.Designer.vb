@@ -158,7 +158,7 @@ Partial Class frmFindReserve
         Me.btnCancelPO.TabIndex = 298
         Me.btnCancelPO.TabStop = False
         Me.btnCancelPO.Text = "ยกเลิกสั่งซื้อ"
-        Me.btnCancelPO.ToolTip = "ทำใบเสนอราคา"
+        Me.btnCancelPO.ToolTip = "ยกเลิกสั่งซื้อ"
         '
         'cboCustomerID
         '
@@ -288,7 +288,7 @@ Partial Class frmFindReserve
         Me.btnMakeOrder.TabIndex = 294
         Me.btnMakeOrder.TabStop = False
         Me.btnMakeOrder.Text = "ทำใบสั่งซื้อ"
-        Me.btnMakeOrder.ToolTip = "ทำใบเสนอราคา"
+        Me.btnMakeOrder.ToolTip = "ทำใบสั่งซื้อ"
         '
         'btnFind
         '
