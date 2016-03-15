@@ -337,7 +337,7 @@ Public Class OrderControl
                 If lcls.CheckIsToUse = False Then  ''ถูกใช้งานอยู่ ???
                     If lcls.TableID = MasterType.StockIn Or (((lcls.TableID = MasterType.ReduceCredit) Or (lcls.TableID = MasterType.AddCredit) _
                     Or (lcls.TableID = MasterType.ReduceCreditBuy) Or (lcls.TableID = MasterType.AddCreditBuy)) And lcls.StockType = "I") Then
-                        If lcls.CheckSNIsClose(lcls.ID, lcls.TableName, Nothing) Then
+                        If lcls.CheckSNIsClose(lcls.ID, lcls.TableName, Nothing, Nothing) Then
                             pID = 1
                             Exit Sub
                         End If

@@ -1199,7 +1199,7 @@ Public Class frmOrderS
 
                         End Select
 
-                        PrintBar2.Enabled = (mcls.IsDelete = False) Or (mcls.OrderStatus <> EnumStatus.WaitApprove.ToString)
+                        PrintBar2.Enabled = (mcls.IsDelete = False) And (mcls.OrderStatus <> EnumStatus.WaitApprove.ToString)
 
 
                         'Ref order

@@ -839,7 +839,7 @@ Public Class OrderSDAO
                                 End If
                                 'Delete S/N  
                                 If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
-                                    If CheckSNIsClose(RefID, TableName, tr) Then
+                                    If CheckSNIsClose(RefID, TableName, tr, pProList) Then
                                         Err.Raise(-1)
                                     End If
 
@@ -1317,25 +1317,44 @@ Public Class OrderSDAO
     End Sub
      
 
-    Public Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String, ByRef ptr As SqlTransaction) As Boolean
+    Public Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String, ByRef ptr As SqlTransaction, pProductDAOs As ProductListDAO) As Boolean
         Dim lSNTable As New DataTable
         Dim lclsOrder As New OrderSDAO
         Dim lProductDAOs As New List(Of ProductListDAO)
         Dim lOrderList As New List(Of Long), lclsSN As New SnDAO
         Dim lstrSNError As String = ""
         Try
+            If pProductDAOs Is Nothing Then
+                lProductDAOs = lclsOrder.BuildProductList(pOrderID, pTableName, ptr)
+                For Each pProList As ProductListDAO In lProductDAOs
+                    lOrderList = New List(Of Long)
+                    lOrderList.Add(pOrderID)
 
-            lProductDAOs = lclsOrder.BuildProductList(pOrderID, pTableName, ptr)
-            For Each pProList As ProductListDAO In lProductDAOs
+                    lclsSN = New SnDAO
+                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", ptr, False, "")
+                    lclsSN = Nothing
+                    For Each dr2 As DataRow In lSNTable.Rows
+                        lclsSN = New SnDAO
+                        If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'Close'", ptr) = False Then
+                            If lstrSNError = "" Then
+                                lstrSNError = ConvertNullToString(dr2("SerialNumberNo"))
+                            Else
+                                lstrSNError = lstrSNError & ", " & ConvertNullToString(dr2("SerialNumberNo"))
+                            End If
+                            Exit For
+                        End If
+                    Next
+                Next
+            Else
                 lOrderList = New List(Of Long)
                 lOrderList.Add(pOrderID)
 
                 lclsSN = New SnDAO
-                lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", ptr, False, "")
+                lSNTable = lclsSN.GetDataTable(lOrderList, pProductDAOs.ID, pProductDAOs.ProductID, "", ptr, False, "")
                 lclsSN = Nothing
                 For Each dr2 As DataRow In lSNTable.Rows
                     lclsSN = New SnDAO
-                    If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'Close'", ptr) = False Then
+                    If lclsSN.CheckSNIsExist(pProductDAOs.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'Close'", ptr) = False Then
                         If lstrSNError = "" Then
                             lstrSNError = ConvertNullToString(dr2("SerialNumberNo"))
                         Else
@@ -1344,7 +1363,9 @@ Public Class OrderSDAO
                         Exit For
                     End If
                 Next
-            Next
+            End If
+
+        
             If lstrSNError = "" Then
                 Return False
             Else

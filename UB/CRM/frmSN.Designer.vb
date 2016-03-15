@@ -348,7 +348,7 @@ Partial Class frmSN
         Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
         Me.ControlNavigator1.Buttons.Remove.Visible = False
         Me.ControlNavigator1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003
-        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(8, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(9, 1, True, False, "", Nothing)})
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(8, 0, True, True, "Remove", "Remove")})
         Me.ControlNavigator1.Location = New System.Drawing.Point(3, 411)
         Me.ControlNavigator1.Name = "ControlNavigator1"
         Me.ControlNavigator1.NavigatableControl = Me.GridControl1

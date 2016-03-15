@@ -594,7 +594,7 @@ Public Class frmSN
 
         If rowHandle < 0 Then Exit Sub
         lStatus = ConvertNullToString(GridView1.GetRowCellValue(rowHandle, "Status"))
-        ControlNavigator1.Buttons.CustomButtons.Item(1).Enabled = Not (lStatus = EnumStatus.Close.ToString)
+        ControlNavigator1.Buttons.CustomButtons(0).Enabled = Not (lStatus = EnumStatus.Close.ToString)
     End Sub
 
     Private Sub ControlNavigator1_ButtonClick(sender As Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
@@ -603,17 +603,22 @@ Public Class frmSN
         Dim index As Integer = view.FocusedRowHandle
         Select Case e.Button.Tag
             Case "Remove"
-                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                    If ConvertNullToZero(GridView1.GetRowCellValue(index, "SerialNumberID")) = 0 Then
-                        GridView1.DeleteSelectedRows()
-                        GridView1.RefreshData()
-                        GridControl1.RefreshDataSource()
-                    Else
-                        GridView1.SetRowCellValue(index, "IsDelete", 1)
-                        GridView1.RefreshData()
-                        GridControl1.RefreshDataSource()
+                If ConvertNullToString(GridView1.GetRowCellValue(index, "Status")) = "Close" Then
+                    XtraMessageBox.Show("Serial Number Close แล้ว ไม่สามารถทำรายการได้", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                        If ConvertNullToZero(GridView1.GetRowCellValue(index, "SerialNumberID")) = 0 Then
+                            GridView1.DeleteSelectedRows()
+                            GridView1.RefreshData()
+                            GridControl1.RefreshDataSource()
+                        Else
+                            GridView1.SetRowCellValue(index, "IsDelete", 1)
+                            GridView1.RefreshData()
+                            GridControl1.RefreshDataSource()
+                        End If
                     End If
                 End If
+               
         End Select
     End Sub
 End Class
