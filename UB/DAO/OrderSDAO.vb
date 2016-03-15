@@ -838,15 +838,14 @@ Public Class OrderSDAO
                                     Next
                                 End If
                                 'Delete S/N  
-                                If CheckSNIsClose(RefID, TableName, tr) Then
-                                    Err.Raise(-1)
-                                Else
-                                    If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
-                                        lclsSN2 = New SnDAO
-                                        lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                If TableName = MasterType.StockIn.ToString Or (lIsUpdate = 3 And StockType = "I") Then
+                                    If CheckSNIsClose(RefID, TableName, tr) Then
+                                        Err.Raise(-1)
                                     End If
-                                End If
 
+                                    lclsSN2 = New SnDAO
+                                    lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
+                                End If
                                
                             Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
@@ -1336,7 +1335,7 @@ Public Class OrderSDAO
                 lclsSN = Nothing
                 For Each dr2 As DataRow In lSNTable.Rows
                     lclsSN = New SnDAO
-                    If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'New'", ptr) = False Then
+                    If lclsSN.CheckSNIsExist(pProList.ProductID, ConvertNullToString(dr2("SerialNumberNo")), "'Close'", ptr) = False Then
                         If lstrSNError = "" Then
                             lstrSNError = ConvertNullToString(dr2("SerialNumberNo"))
                         Else

@@ -1297,7 +1297,7 @@ Module modDAO
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
                     lStatus = EnumStatus.Waiting.ToString
                 Else
-                    lStatus = EnumStatus.Close.ToString
+                    lStatus = EnumStatus.Receive.ToString
                 End If
             ElseIf pOrderType = MasterType.Invoice And lRefOrderType = MasterType.Borrow Then
                 lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", MasterType.Invoice, tr)

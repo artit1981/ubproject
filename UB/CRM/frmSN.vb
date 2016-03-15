@@ -438,35 +438,65 @@ Public Class frmSN
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
-        Dim lSnData As SnDAO
-        If mSnList.Count <> Math.Abs(UnitsMain.EditValue) Then
+        Dim lSnData As SnDAO, lSNCount As Long = 0
+
+        'If mSnList.Count <> Math.Abs(UnitsMain.EditValue) Then
+        '    MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    SNNo.Focus()
+        'Else
+        'If GridView1.RowCount > 0 Then
+        '    mSnList = Nothing
+        '    mSnList = New List(Of SnDAO)
+        '    For lRow = 0 To GridView1.RowCount
+        '        If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
+        '            lSnData = New SnDAO
+        '            lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
+        '            lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+        '            lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
+        '            lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
+        '            mSnList.Add(lSnData)
+        '            If lSnData.IsDelete = 0 Then
+        '                lSNCount = lSNCount + 1
+        '            End If
+        '        End If
+
+        '    Next
+        'End If
+        GridView1.ClearColumnsFilter()
+        If GridView1.RowCount > 0 Then
+            mSnList = Nothing
+            mSnList = New List(Of SnDAO)
+            For lRow = 0 To GridView1.RowCount
+                If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
+                    lSnData = New SnDAO
+                    lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
+                    lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+                    lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
+                    lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
+                    mSnList.Add(lSnData)
+                    If lSnData.IsDelete = 0 Then
+                        lSNCount = lSNCount + 1
+                    End If
+                End If
+
+            Next
+        End If
+
+
+        If lSNCount <> Math.Abs(UnitsMain.EditValue) Then
             MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             SNNo.Focus()
-        Else
-            If GridView1.RowCount > 0 Then
-                mSnList = Nothing
-                mSnList = New List(Of SnDAO)
-                For lRow = 0 To GridView1.RowCount
-                    If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
-                        lSnData = New SnDAO
-                        lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
-                        lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
-                        lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
-                        lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
-                        mSnList.Add(lSnData)
-                    End If
-
-                Next
-            End If
-
-            If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Then
-                If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                    modReport.PrintBarCode(ProductName.EditValue, mSnList)
-                End If
-            End If
-
-            Me.Close()
+            Exit Sub
         End If
+
+        If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Then
+            If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                modReport.PrintBarCode(ProductName.EditValue, mSnList)
+            End If
+        End If
+
+        Me.Close()
+        'End If
     End Sub
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click

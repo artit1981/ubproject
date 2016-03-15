@@ -197,7 +197,7 @@ Public Class ucProductLists
         Dim lProductListFail As ProductListDAO
         Dim lUnitDiff As Long
         Dim lSnIDList As String = "" ' กันกรณีขายสินค้าเดี่ยวกันใน 1 บิล จะตัด SN ซ้ำเพราะ DB ยังไม่ Commit
-        Dim lIsChangeProduct As Boolean = False
+        Dim lIsChangeProduct As Boolean = False, lSNCount As Long = 0
 
         pProListStockFail = New List(Of ProductListDAO)
         Try
@@ -220,6 +220,7 @@ Public Class ucProductLists
                 lRow = 0
                 For Each pProSub As ProductSubDAO In bindingSource1
                     If pProSub.ProductID <> 0 And pProSub.IsSelect = True Then
+                        lSNCount = 0
                         lDataDAO = New ProductListDAO
                         lDataDAO.ID = pProSub.ID
                         lDataDAO.ProductID = pProSub.ProductID
@@ -288,14 +289,22 @@ Public Class ucProductLists
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุตำแหน่งเก็บ"
                             End If
 
+                            'Count SN list exclude delete
+                            If IsNothing(lDataDAO.SNList) = False Then
+                                For Each pRow As SnDAO In lDataDAO.SNList
+                                    If pRow.IsDelete = 0 Then
+                                        lSNCount = lSNCount + 1
+                                    End If
+                                Next
+                            End If
                             If lDataDAO.IsSN = 1 And (pRefTable = MasterType.StockIn.ToString Or pRefTable = MasterType.UpdateStock.ToString _
                                                 Or (lIsCheckCreditType = True And mStockType = "I")) Then
                                 If IsNothing(lDataDAO.SNList) Then
                                     mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
-                                ElseIf lDataDAO.SNList.Count = 0 Then
+                                ElseIf lSNCount = 0 Then
                                     mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
                                 ElseIf lDataDAO.SNList.Count > 0 Then
-                                    If lDataDAO.SNList.Count <> Math.Abs(lDataDAO.Units) Then
+                                    If lSNCount <> Math.Abs(lDataDAO.Units) Then
                                         mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
                                     End If
                                 End If
@@ -309,7 +318,7 @@ Public Class ucProductLists
                                 End If
                                 dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "'New'", Nothing, False, lSnIDList)
                                 For Each dr2 As DataRow In dataSN.Rows
-                                    If lDataDAO.SNList.Count < lDataDAO.Units Then
+                                    If lSNCount < lDataDAO.Units Then
                                         If CheckSN(lDataDAO.SNList, ConvertNullToString(dr2("SerialNumberNo"))) <> "" Then
                                             mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" _
                                                 & ConvertNullToString(dr2("SerialNumberNo")) & "]"
@@ -319,6 +328,7 @@ Public Class ucProductLists
                                         lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
                                         lclsSN.Status = "None"
                                         lDataDAO.SNList.Add(lclsSN)
+                                        lSNCount = lSNCount + 1
                                         If lSnIDList = "" Then
                                             lSnIDList = ConvertNullToZero(dr2("SerialNumberID"))
                                         Else
@@ -328,11 +338,11 @@ Public Class ucProductLists
                                         Exit For
                                     End If
                                 Next
-                                If lDataDAO.SNList.Count <> lDataDAO.Units Then
+                                If lSNCount <> lDataDAO.Units Then
                                     mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
                                 Else
                                     For Each pSN In lDataDAO.SNList
-                                        If pSN.SerialNumberID = 0 Or pMode = DataMode.ModeNew Then
+                                        If (pSN.SerialNumberID = 0 Or pMode = DataMode.ModeNew) And pSN.IsDelete = 0 Then
                                             lclsSN = New SnDAO
                                             If lclsSN.CheckSNIsExist(lDataDAO.ProductID, pSN.SerialNumberNo, "'New'", Nothing) = False Then
                                                 mIsError = mIsError & vbNewLine & "SN " & pSN.SerialNumberNo & " โดน Close ไปแล้ว"
@@ -564,8 +574,14 @@ Public Class ucProductLists
                 .Columns("ProductNames").OptionsColumn.ReadOnly = True
             End If
             If mMode <> DataMode.ModeNew Then
-                .Columns("UnitName").OptionsColumn.ReadOnly = True
-                UnitBtn.Buttons(0).Enabled = False
+                Select Case mRefTable
+                    Case MasterType.Quotation.ToString, MasterType.Reserve.ToString
+                        ''nothing
+                    Case Else
+                        .Columns("UnitName").OptionsColumn.ReadOnly = True
+                        UnitBtn.Buttons(0).Enabled = False
+                End Select
+                
                 .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
                 '.Columns("LocationDTLIDLookUpEdit1").OptionsColumn.ReadOnly = True
                 LocationDTLIDLookUpEdit1.ReadOnly = True

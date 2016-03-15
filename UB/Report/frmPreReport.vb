@@ -305,7 +305,7 @@ Public Class frmPreReport
 
                     lclsTmpProList.ProductNameExt = ""
                     lclsTmpProList.UnitCode = ConvertNullToString(pRow.Item("UnitName"))
-                    lclsTmpProList.Units = ConvertNullToZero(pRow.Item("Units"))
+                    lclsTmpProList.Units = ConvertNullToZero(pRow.Item("AdjustUnit"))
                     lclsTmpProList.Cost = ConvertNullToZero(pRow.Item("Cost"))
                     lclsTmpProList.Price = ConvertNullToZero(pRow.Item("Price"))
                     lclsTmpProList.Discount = ConvertNullToZero(pRow.Item("Discount"))
@@ -763,31 +763,33 @@ Public Class frmPreReport
             'PictureEdit1.Image = bdf.Draw("149A-12345", 20)
 
             For Each pBarcode As SnDAO In mBarCodeList
-                lSN = pBarcode.SerialNumberNo
-                SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText6,TaxImage  )"
-                SQL = SQL & " VALUES (@UserID "
-                SQL = SQL & ",@SEQ "
-                SQL = SQL & " ,@TaxText1"
-                SQL = SQL & " ,@TaxText6 "
-                SQL = SQL & " ,@TaxImage) "
-                myCommand = New SqlCommand
-                myCommand.CommandText = SQL
-                myCommand.Parameters.Add(New SqlParameter("@UserID", gUserID))
-                myCommand.Parameters.Add(New SqlParameter("@SEQ", lSEQ))
-                myCommand.Parameters.Add(New SqlParameter("@TaxText1", ConvertNullToString(lSN)))
-                myCommand.Parameters.Add(New SqlParameter("@TaxText6", ConvertNullToString(mProName)))
-                'myCommand.Parameters.Add(New SqlParameter("@TaxImage", bdf.Draw(ConvertNullToString(lSN), 20)))
-                Dim ms = New MemoryStream()
-                'bdf.Draw(ConvertNullToString(lSN), 40, 10).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp) ' Use appropriate format here
+                If pBarcode.IsDelete = 0 Then
+                    lSN = pBarcode.SerialNumberNo
+                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText6,TaxImage  )"
+                    SQL = SQL & " VALUES (@UserID "
+                    SQL = SQL & ",@SEQ "
+                    SQL = SQL & " ,@TaxText1"
+                    SQL = SQL & " ,@TaxText6 "
+                    SQL = SQL & " ,@TaxImage) "
+                    myCommand = New SqlCommand
+                    myCommand.CommandText = SQL
+                    myCommand.Parameters.Add(New SqlParameter("@UserID", gUserID))
+                    myCommand.Parameters.Add(New SqlParameter("@SEQ", lSEQ))
+                    myCommand.Parameters.Add(New SqlParameter("@TaxText1", ConvertNullToString(lSN)))
+                    myCommand.Parameters.Add(New SqlParameter("@TaxText6", ConvertNullToString(mProName)))
+                    'myCommand.Parameters.Add(New SqlParameter("@TaxImage", bdf.Draw(ConvertNullToString(lSN), 20)))
+                    Dim ms = New MemoryStream()
+                    'bdf.Draw(ConvertNullToString(lSN), 40, 10).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp) ' Use appropriate format here
 
-                Dim lImage As Image = bdf.Draw(ConvertNullToString(lSN), 50, 20)
-                lImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png)
-                Dim bytes = ms.ToArray()
-                myCommand.Parameters.Add(New SqlParameter("@TaxImage", bytes))
-                gConnection.executeInsertSqlCommand(myCommand, Nothing)
-                lSEQ = lSEQ + 1
+                    Dim lImage As Image = bdf.Draw(ConvertNullToString(lSN), 50, 20)
+                    lImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png)
+                    Dim bytes = ms.ToArray()
+                    myCommand.Parameters.Add(New SqlParameter("@TaxImage", bytes))
+                    gConnection.executeInsertSqlCommand(myCommand, Nothing)
+                    lSEQ = lSEQ + 1
 
-                PictureEdit1.Image = lImage
+                    PictureEdit1.Image = lImage
+                End If
             Next
             mReport = report
             ExecuteReportBarCode()

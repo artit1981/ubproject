@@ -978,7 +978,7 @@ Public Class frmOrderS
         Dim rec As New ProductSubDAO, lIndex As Long
         Dim dataTable As New DataTable()
 
-        Dim llngProID As Long
+        Dim llngProID As Long, llngUnitID As Long
         Dim lOrderList As New List(Of Long)
         lOrderList.Add(pOrderID)
         Try
@@ -991,7 +991,8 @@ Public Class frmOrderS
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
                     llngProID = ConvertNullToZero(dr("ProductID"))
-                    lIndex = mProductList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1)
+                    llngUnitID = ConvertNullToZero(dr("UnitID"))
+                    lIndex = mProductList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = llngUnitID)
                     If lIndex < 0 Or mIsGroupDupProduct = 1 Or ConvertNullToZero(dr("IsShow")) = 0 Then
                         rec = New ProductSubDAO
                         rec.IsSelect = True
@@ -1070,6 +1071,7 @@ Public Class frmOrderS
                     End If
                     If mIsGroupDupProduct = 2 Then
                             mProductList.Item(lIndex).Units = mProductList.Item(lIndex).Units + ConvertNullToZero(dr("Units"))
+                            mProductList.Item(lIndex).AdjustUnit = mProductList.Item(lIndex).AdjustUnit + ConvertNullToZero(dr("AdjustUnit"))
                             mProductList.Item(lIndex).Discount = mProductList.Item(lIndex).Discount + ConvertNullToZero(dr("Discount"))
                             mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + ConvertNullToZero(dr("Total"))
                             If ConvertNullToZero(dr("IsSN")) = 1 Then
@@ -1196,7 +1198,9 @@ Public Class frmOrderS
                                                    Or mcls.OrderStatus = EnumStatus.Receive.ToString Or mcls.OrderStatus = EnumStatus.WaitApprove.ToString) And mcls.IsDelete = False
 
                         End Select
-                        PrintBar2.Enabled = (mcls.IsDelete = False)
+
+                        PrintBar2.Enabled = (mcls.IsDelete = False) Or (mcls.OrderStatus <> EnumStatus.WaitApprove.ToString)
+
 
                         'Ref order
                         txtRefOrder.Text = mcls.GetToRefOrderCode(pID, Nothing)
