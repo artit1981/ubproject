@@ -114,22 +114,22 @@ Public Class frmOrderHis
                     SQL = SQL & "  AND ProductList.IsDelete = 0"
                 End If
 
-                If chkUpdateStock.Checked = True Then
-                    SQL = SQL & "   union all "
-                    SQL = SQL & "  select 0 as OrderID,Product_Stock_Log.LogTime AS OrderDate,'' AS OrderCode ,'UpdateStock' AS MenuDisplay  "
-                    SQL = SQL & "  ,OrderBy AS Customer  ,Product.ProductCode,Product.ProductName,Product.Remark "
-                    SQL = SQL & "  ,Product_Stock_Log.Units AS Units,0 AS Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
-                    SQL = SQL & "  ,0 AS IsDelete,'' AS OrderStatus "
-                    SQL = SQL & "  from(Product_Stock_Log)"
-                    SQL = SQL & "  inner join Product on Product.ProductID= Product_Stock_Log.ProductID "
-                    SQL = SQL & "  inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID "
-                    SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID    "
-                    SQL = SQL & "  WHERE Product_Stock_Log.LogTime between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-                    SQL = SQL & "  and Product_Stock_Log.OrderCode='UpdateStock'"
-                    SQL = SQL & "  ORDER BY  OrderDate "
-                Else
-                    SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
-                End If
+                'If chkUpdateStock.Checked = True Then
+                '    SQL = SQL & "   union all "
+                '    SQL = SQL & "  select 0 as OrderID,Product_Stock_Log.LogTime AS OrderDate,'' AS OrderCode ,'UpdateStock' AS MenuDisplay  "
+                '    SQL = SQL & "  ,OrderBy AS Customer  ,Product.ProductCode,Product.ProductName,Product.Remark "
+                '    SQL = SQL & "  ,Product_Stock_Log.Units AS Units,0 AS Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
+                '    SQL = SQL & "  ,0 AS IsDelete,'' AS OrderStatus "
+                '    SQL = SQL & "  from Product_Stock_Log"
+                '    SQL = SQL & "  inner join Product on Product.ProductID= Product_Stock_Log.ProductID "
+                '    SQL = SQL & "  inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID "
+                '    SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID    "
+                '    SQL = SQL & "  WHERE Product_Stock_Log.LogTime between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+                '    SQL = SQL & "  and Product_Stock_Log.OrderCode='UpdateStock'"
+                '    SQL = SQL & "  ORDER BY  OrderDate "
+                'Else
+                SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
+                'End If
 
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
@@ -143,7 +143,7 @@ Public Class frmOrderHis
                 End If
             End If
 
-      
+
 
 
         Catch ex As Exception

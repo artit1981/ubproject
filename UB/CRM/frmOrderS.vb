@@ -1628,6 +1628,7 @@ Public Class frmOrderS
                 lcls.ID = pProID.ID
                 lcls.LocationDTLID = pProID.LocationDTLID
                 lcls.Price = pProID.Price
+                lcls.PriceMain = pProID.PriceMain
                 lcls.ProductCode = pProID.ProductCode
                 lcls.ProductID = pProID.ProductID
                 lcls.ProductNameExt = pProID.ProductNameExt
@@ -1636,9 +1637,13 @@ Public Class frmOrderS
                 lcls.SEQ = pProID.SEQ
                 lcls.Total = pProID.Total
                 lcls.UnitID = pProID.UnitID
+                lcls.UnitMainID = pProID.UnitMainID
                 lcls.UnitName = pProID.UnitName
                 lcls.Units = pProID.Units
+                lcls.RateUnit = pProID.RateUnit
+                lcls.AdjustUnit = pProID.AdjustUnit
                 lcls.Units_Old = pProID.Units_Old
+                lcls.AdjustUnit_Old = pProID.AdjustUnit_Old
                 lProductList.Add(lcls)
             Next
 

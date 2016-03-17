@@ -381,7 +381,7 @@ Public Class ProductListDAO
             End If
 
             If pRefTable <> "" Then
-                '    SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
+                SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
 
                 '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.PurchaseOrder Then ' And pCheckPO = True Then 'ดูว่า PO โดนรับสินค้าโดย Stockin ไหม
                 '        SQL = SQL & " AND ProductList.ProductListID in( select p2.ProductListRefID from ProductList p2 "

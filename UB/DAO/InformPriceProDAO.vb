@@ -44,8 +44,10 @@ Public Class InformPriceProDAO
         Dim dataTable As New DataTable()
         Try
 
-            SQL = SQL & " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Cost.Cost,Product.Price1,Product.Price2 "
-            SQL = SQL & " ,Product.Price3,Product.Price4,Product.Price5,Product.Price6 ,Product.Remark as ProductRemark "
+            SQL = SQL & " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName"
+            SQL = SQL & " ,MAX(Product.PriceStandard) AS PriceStandard,MAX(Cost.Cost) AS Cost,MAX(Product.Price1) AS Price1"
+            SQL = SQL & " ,MAX(Product.Price2) AS Price2 ,MAX(Product.Price3) AS Price3,MAX(Product.Price4) AS Price4"
+            SQL = SQL & " ,MAX(Product.Price5) AS Price5 ,MAX(Product.Price6) AS Price6,Product.Remark as ProductRemark "
             SQL = SQL & " FROM Product "
             SQL = SQL & " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
             SQL = SQL & " WHERE Product.IsDelete =0 "
@@ -61,6 +63,7 @@ Public Class InformPriceProDAO
             If pProBandID > 0 Then
                 SQL = SQL & " AND Product.ProductBrandID =" & pProBandID
             End If
+            SQL = SQL & " GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark "
             SQL = SQL & " ORDER BY ProductCode,ProductName"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)

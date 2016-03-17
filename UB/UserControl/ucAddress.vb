@@ -107,7 +107,7 @@ Public Class ucAddress
         Try
             If pProvinceTable.Rows.Count > 0 Then
                 For Each pRow As DataRow In pProvinceTable.Rows
-                    Province.Properties.Items.Add(pRow.Item(0))
+                    Province.Properties.Items.Add(pRow.Item("ProvinceName"))
                 Next
                 'Province.Properties.ValueMember = "ProvinceName"
                 'Province.Properties.DisplayMember = "ProvinceName"

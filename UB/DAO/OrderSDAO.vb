@@ -729,6 +729,7 @@ Public Class OrderSDAO
                     rec.Units_Old = rec.Units
                     rec.Price = ConvertNullToZero(dr("Price"))
                     rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                    rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))
@@ -1300,7 +1301,7 @@ Public Class OrderSDAO
                     If ProductDAOs Is Nothing Then
                     ElseIf ProductDAOs.Count > 0 Then
                         For Each ProductList As ProductListDAO In ProductDAOs
-                            If ProductList.IsShow = 1 Then
+                            If ProductList.IsShow = 1 And ProductList.IsDelete = 0 Then
                                 lclsCost.ModeData = ModeData
                                 lclsCost.SaveData(ProductList.ProductID, ProductCostDAO.CostTypes.Average, ProductList.Price, ProductList.ID, ptr)
                             End If
