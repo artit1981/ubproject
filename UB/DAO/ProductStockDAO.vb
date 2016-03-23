@@ -256,8 +256,7 @@ Public Class ProductStockDAO
 
         Try
             SQL = " select a.ProductID,b.ProductCode,b.ProductName"
-            SQL &= " ,c.NameThai as Location,d.CodeThai as Unit"
-            SQL &= " ,a.Units,a.LocationDTLID,a.UnitID ,b.IsSN"
+            SQL &= " ,c.NameThai as Location,d.CodeThai as Unit,a.Units,a.LocationDTLID,a.UnitID ,b.IsSN"
             SQL &= " from Product_Stock a"
             SQL &= " left outer join Product b on a.ProductID=b.ProductID"
             SQL &= " left outer join Product_LocationDTL c on a.LocationDTLID=c.LocationDTLID"

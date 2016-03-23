@@ -137,7 +137,7 @@ Public Class ucProductUnit
             Else
                 Dim lfrmFind As New frmFindData
                 lfrmFind.LookFor = pUnitCode
-                lfrmFind.Execute(MasterType.UnitBar, 0)
+                lfrmFind.Execute(MasterType.UnitBar, 0, 2)
 
                 If ConvertNullToZero(lfrmFind.LookFor) = 0 Then
                     Return ""

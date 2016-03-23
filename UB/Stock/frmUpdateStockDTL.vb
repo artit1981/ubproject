@@ -5,8 +5,8 @@ Imports System.Data.SqlClient
 
 Public Class frmUpdateStockDTL
     Private mIsFromLoad As Boolean
-    Dim mProductListDAO As ProductListDAO
-
+    Private mProductListDAO As ProductListDAO
+    Private mUnitMainID As Long
 
     Public WriteOnly Property ProductListDAO() As ProductListDAO
         Set(ByVal value As ProductListDAO)
@@ -29,11 +29,31 @@ Public Class frmUpdateStockDTL
             ProductName.EditValue = mProductListDAO.ProductName
             Units.EditValue = mProductListDAO.Units
             txtUnitName.EditValue = mProductListDAO.UnitName
-            'Location
+
             Dim lclsLocation As New LocationDTLDAO
             If lclsLocation.InitailData(mProductListDAO.LocationDTLID) Then
                 txtLocation.EditValue = lclsLocation.NameThai
             End If
+
+            Dim lclsProduct As New ProductDAO
+            lclsProduct.InitailData(mProductListDAO.ProductID, "", "", "")
+            mUnitMainID = lclsProduct.UnitMainID
+
+            Dim lclsUnit As New UnitDAO
+            lclsUnit.InitailData(mUnitMainID, "")
+            UnitMainName.EditValue = lclsUnit.NameThai
+
+            Dim lcls As New ProductUnitDAO
+            Dim dataTable As New DataTable()
+            UnitRate.EditValue = 0
+            dataTable = lcls.GetDataTable(mProductListDAO.ProductID, 1, mProductListDAO.UnitID, "")
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    UnitRate.EditValue = ConvertNullToZero(dr("Rate"))
+                    Exit For
+                Next
+            End If
+            UnitsMain.EditValue = Units.EditValue * UnitRate.EditValue
 
             btnSN.Enabled = (mProductListDAO.IsSN = 1)
 
@@ -58,7 +78,8 @@ Public Class frmUpdateStockDTL
                 If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                     tr = gConnection.Connection.BeginTransaction
 
-                    lUnits = GetUnitForUpdate()
+                    'Unit adjust
+                    lUnits = Units.EditValue
 
                     lclsStock = New ProductStockDAO
                     lclsStock.ProductID = mProductListDAO.ProductID
@@ -77,9 +98,30 @@ Public Class frmUpdateStockDTL
                         lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
                     End If
 
+                    'Main Unit
+                    lUnits = UnitsMain.EditValue
+
+                    lclsStock = New ProductStockDAO
+                    lclsStock.ProductID = mProductListDAO.ProductID
+                    lclsStock.UnitID = mUnitMainID
+                    lclsStock.LocationDTLID = mProductListDAO.LocationDTLID
+                    lclsStock.Cost = mProductListDAO.Cost
+                    lclsStock.Units = lUnits
+
+                    'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                    lclsClone = New ProductStockDAO
+                    lclsClone = lclsStock.Clone
+                    lclsClone.SaveData(tr, False, False, 0, MasterType.UpdateStock.ToString)
+
+                    'Sum Stock
+                    If IsSumStock.CheckState = CheckState.Checked Then
+                        lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
+                    End If
+
+                    '-------------------------
                     'SN
                     For Each pclsSN In mProductListDAO.SNList
-                        If lUnits < 0 Then
+                        If UnitsMain.EditValue < 0 Then
                             pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
                         Else
                             pclsSN.Status = "New"
@@ -122,14 +164,14 @@ Public Class frmUpdateStockDTL
                 If mProductListDAO.IsSN = 1 And mProductListDAO.SNList Is Nothing Then
                     lstrErr = "กรุณาระบุ Serial number" & vbNewLine
                     btnSN.Focus()
-                ElseIf Math.Abs(GetUnitForUpdate()) <> mProductListDAO.SNList.Count Then
+                ElseIf Math.Abs(UnitsMain.EditValue) <> mProductListDAO.SNList.Count Then
                     lstrErr = "Serial number ไม่ถูกต้อง" & vbNewLine
                     btnSN.Focus()
                 Else
                     For Each pclsSN In mProductListDAO.SNList
-                        If GetUnitForUpdate() > 0 And pclsSN.CheckSNIsExist(mProductListDAO.ProductID, ConvertNullToString(pclsSN.SerialNumberNo), "'New','Close'", Nothing) = True Then
+                        If UnitsMain.EditValue > 0 And pclsSN.CheckSNIsExist(mProductListDAO.ProductID, ConvertNullToString(pclsSN.SerialNumberNo), "'New','Close'", Nothing) = True Then
                             lstrErr = "Serial number ซ้ำ :" & pclsSN.SerialNumberNo & vbNewLine
-                        ElseIf GetUnitForUpdate() < 0 And pclsSN.CheckSNIsExist(mProductListDAO.ProductID, ConvertNullToString(pclsSN.SerialNumberNo), "'New'", Nothing) = False Then
+                        ElseIf UnitsMain.EditValue < 0 And pclsSN.CheckSNIsExist(mProductListDAO.ProductID, ConvertNullToString(pclsSN.SerialNumberNo), "'New'", Nothing) = False Then
                             lstrErr = "ไม่พบ Serial number :" & pclsSN.SerialNumberNo & vbNewLine
                         End If
                     Next
@@ -155,17 +197,17 @@ Public Class frmUpdateStockDTL
         Dim lfrmSN As New frmSN
         Try
                 If Not mProductListDAO Is Nothing Then
-                lfrmSN.Unit = GetUnitForUpdate()
-                lfrmSN.UnitMain = GetUnitForUpdate()
-                    lfrmSN.ProductCodes = mProductListDAO.ProductCode
-                    lfrmSN.ProductNames = mProductListDAO.ProductName
-                    lfrmSN.IsModePrint = False
-                    lfrmSN.IsReadOnly = False
-                    lfrmSN.ProductIDs = mProductListDAO.ProductID
-                    lfrmSN.OrderType = MasterType.UpdateStock.ToString
-                    lfrmSN.StockType = ""
-                    lfrmSN.SnList = mProductListDAO.SNList
-                    lfrmSN.ShowDialog()
+                lfrmSN.Unit = Units.EditValue
+                lfrmSN.UnitMain = UnitsMain.EditValue
+                lfrmSN.ProductCodes = mProductListDAO.ProductCode
+                lfrmSN.ProductNames = mProductListDAO.ProductName
+                lfrmSN.IsModePrint = False
+                lfrmSN.IsReadOnly = False
+                lfrmSN.ProductIDs = mProductListDAO.ProductID
+                lfrmSN.OrderType = MasterType.UpdateStock.ToString
+                lfrmSN.StockType = ""
+                lfrmSN.SnList = mProductListDAO.SNList
+                lfrmSN.ShowDialog()
                 mProductListDAO.SNList = lfrmSN.SnList
             End If
         Catch ex As Exception
@@ -173,16 +215,20 @@ Public Class frmUpdateStockDTL
         End Try
     End Sub
 
-    Private Function GetUnitForUpdate() As Long
-        Dim lstrErr As String = ""
-        Try
-            If mProductListDAO Is Nothing Then
-                Return 0
-            Else
-                Return SpinUnit.EditValue
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "frmUpdateStockDTL.GetUnitForUpdate : " & e.Message)
-        End Try
-    End Function
+    'Private Function GetUnitForUpdate() As Long
+    '    Dim lstrErr As String = ""
+    '    Try
+    '        If mProductListDAO Is Nothing Then
+    '            Return 0
+    '        Else
+    '            Return SpinUnit.EditValue
+    '        End If
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "frmUpdateStockDTL.GetUnitForUpdate : " & e.Message)
+    '    End Try
+    'End Function
+
+    Private Sub Units_EditValueChanged(sender As Object, e As System.EventArgs) Handles Units.EditValueChanged
+        UnitsMain.EditValue = Units.EditValue * UnitRate.EditValue
+    End Sub
 End Class

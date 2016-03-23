@@ -1246,8 +1246,8 @@ Module modDAO
         SQL = SQL & " FROM ProductList p1"
         SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1"
         SQL = SQL & " AND p1.RefTable in (" & pRefToTable & " )"
-        SQL = SQL & " AND p1.ProductListRefID in ( "
-        SQL = SQL & "   select p2.ProductListID from ProductList p2 "
+        SQL = SQL & " AND p1.ProductID in ( "
+        SQL = SQL & "   select p2.ProductID from ProductList p2 "
         SQL = SQL & "   WHERE p2.IsDelete =0  and p2.IsShow=1"
         SQL = SQL & "   AND p2.RefID =" & pRefOrderID
         SQL = SQL & "   AND p2.RefTable in (" & RefFromTable & "))"
@@ -1412,8 +1412,8 @@ Module modDAO
             SQL = SQL & " WHERE p1.IsDelete =0  "
             SQL = SQL & " AND p1.RefTable in ('Reserve' )"
             SQL = SQL & " AND p1.RefID =" & pRefOrderID
-            SQL = SQL & " AND p1.ProductListID not in ( "
-            SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
+            SQL = SQL & " AND p1.ProductID not in ( "
+            SQL = SQL & "   select p2.ProductID from ProductList p2 "
             SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
             SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
             DataTable = gConnection.executeSelectQuery(SQL, tr)

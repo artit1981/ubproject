@@ -139,7 +139,7 @@ Public Class ucContactRole
             Else
                 Dim lfrmFind As New frmFindData
                 lfrmFind.LookFor = pName
-                lfrmFind.Execute(MasterType.Contacts, 0)
+                lfrmFind.Execute(MasterType.Contacts, 0, 0)
 
                 If ConvertNullToZero(lfrmFind.LookFor) = 0 Then
                     Return ""

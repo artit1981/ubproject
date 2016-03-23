@@ -142,10 +142,21 @@ Public Class frmSN
                     btnSelectSN.Visible = True
                     'LoadSN()
                 Case MasterType.UpdateStock.ToString
-                    btnLoadSN.Visible = False
-                    btnGenID.Enabled = False
-                    SNType.Enabled = False
-                    btnSelectSN.Visible = False
+                    If UnitsMain.EditValue > 0 Then
+                        btnLoadSN.Visible = False
+                        btnGenID.Enabled = True
+                        SNType.Enabled = True
+                        btnSelectSN.Visible = False
+                    Else
+                        btnLoadSN.Visible = True
+                        SNType.Enabled = False
+                        btnGenID.Enabled = False
+                        btnSelectSN.Visible = True
+                    End If
+                    'btnLoadSN.Visible = False
+                    'btnGenID.Enabled = False
+                    'SNType.Enabled = False
+                    'btnSelectSN.Visible = False
                 Case MasterType.ReduceCredit.ToString, MasterType.ReduceCreditBuy.ToString, MasterType.AddCreditBuy.ToString, MasterType.AddCredit.ToString
                     If mStockType = "O" Then 'ตัด
                         btnLoadSN.Visible = False
@@ -303,7 +314,7 @@ Public Class frmSN
             lSNAdd = mSnList.Count
             Do Until lSNAdd = UnitsMain.EditValue
                 lCode = lstrExam & lLastCount.ToString(lRunCount)
-                If mOrderType = MasterType.StockIn.ToString Then
+                If mOrderType = MasterType.StockIn.ToString Or (mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0) Then
                     lclsSN = New SnDAO
                     If lclsSN.CheckSNIsExist(mProductIDs, lCode, "'New','Close'", Nothing) = True Then
                         MessageBox.Show("Serial Number ซ้ำ :" & lCode, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -489,7 +500,7 @@ Public Class frmSN
             Exit Sub
         End If
 
-        If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Then
+        If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Or (mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0) Then
             If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                 modReport.PrintBarCode(ProductName.EditValue, mSnList)
             End If

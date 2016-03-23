@@ -668,8 +668,9 @@ Public Class ucProductLists
             If lstrUnitName <> "" Then
                 Return lstrUnitName
             ElseIf pFindFromProid = False Then
+                Dim llngBuyOrSell = IIf(mIsUsePriceSell = True, 2, 1)
                 lfrmFind.LookFor = pUnitName
-                lfrmFind.Execute(MasterType.UnitBar, lProductID)
+                lfrmFind.Execute(MasterType.UnitBar, lProductID, llngBuyOrSell)
 
                 If ConvertNullToZero(lfrmFind.LookFor) = 0 Then
                     Return ""

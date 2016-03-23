@@ -15,7 +15,7 @@ Public Class frmFindData
         End Set
     End Property
 
-    Public Sub Execute(ByRef pLookFor As Integer, ByVal pProductID As Long)
+    Public Sub Execute(ByRef pLookFor As Integer, ByVal pProductID As Long, ByVal pBuyOrSell As Integer)
         'pProductID Use for filter UOM
         Try
             mType = pLookFor
@@ -23,7 +23,7 @@ Public Class frmFindData
             Select Case mType
                 Case MasterType.UnitBar
                     If pProductID > 0 Then
-                        LoadDataUOM(pProductID)
+                        LoadDataUOM(pProductID, pBuyOrSell)
                     Else
                         LoadDataUnit()
                     End If
@@ -70,11 +70,11 @@ Public Class frmFindData
     End Sub
 
 
-    Private Sub LoadDataUOM(ByVal pProductID As Long)
+    Private Sub LoadDataUOM(ByVal pProductID As Long, ByVal lBuyOrSell As Integer)
         Dim lcls As New ProductUnitDAO
         Dim dataTable As New DataTable()
         Try
-            dataTable = lcls.GetDataTable(pProductID, 2, 0, "")
+            dataTable = lcls.GetDataTable(pProductID, lBuyOrSell, 0, "")
             If dataTable.Rows.Count > 0 Then
                 GridControl.DataSource = dataTable
                 GridView.ViewCaption = "หน่วยนับ"
@@ -98,7 +98,7 @@ Public Class frmFindData
             Else
                 GridControl.DataSource = Nothing
             End If
-          
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmFindData.LoadDataUOM : " & e.Message)
         Finally

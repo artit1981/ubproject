@@ -206,7 +206,7 @@ Public Class ucApproveUser
             Else
                 Dim lfrmFind As New frmFindData
                 lfrmFind.LookFor = pEmpName
-                lfrmFind.Execute(MasterType.Employee, 0)
+                lfrmFind.Execute(MasterType.Employee, 0, 0)
 
                 If ConvertNullToZero(lfrmFind.LookFor) = 0 Then
                     Return ""
