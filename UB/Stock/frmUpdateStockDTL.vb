@@ -25,6 +25,9 @@ Public Class frmUpdateStockDTL
     Private Sub frmUpdateStockDTL_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mIsFromLoad = True
         Try
+            UnitRate.EditValue = 1
+            SpinUnit.EditValue = 1
+
             ProductCode.EditValue = mProductListDAO.ProductCode
             ProductName.EditValue = mProductListDAO.ProductName
             Units.EditValue = mProductListDAO.Units
@@ -36,7 +39,7 @@ Public Class frmUpdateStockDTL
             End If
 
             Dim lclsProduct As New ProductDAO
-            lclsProduct.InitailData(mProductListDAO.ProductID, "", "", "")
+            lclsProduct.InitailData(mProductListDAO.ProductID, 0, "", "")
             mUnitMainID = lclsProduct.UnitMainID
 
             Dim lclsUnit As New UnitDAO
@@ -45,7 +48,7 @@ Public Class frmUpdateStockDTL
 
             Dim lcls As New ProductUnitDAO
             Dim dataTable As New DataTable()
-            UnitRate.EditValue = 0
+
             dataTable = lcls.GetDataTable(mProductListDAO.ProductID, 1, mProductListDAO.UnitID, "")
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -53,7 +56,7 @@ Public Class frmUpdateStockDTL
                     Exit For
                 Next
             End If
-            UnitsMain.EditValue = Units.EditValue * UnitRate.EditValue
+            UnitsMain.EditValue = SpinUnit.EditValue * UnitRate.EditValue
 
             btnSN.Enabled = (mProductListDAO.IsSN = 1)
 
@@ -79,7 +82,7 @@ Public Class frmUpdateStockDTL
                     tr = gConnection.Connection.BeginTransaction
 
                     'Unit adjust
-                    lUnits = Units.EditValue
+                    lUnits = SpinUnit.EditValue
 
                     lclsStock = New ProductStockDAO
                     lclsStock.ProductID = mProductListDAO.ProductID
@@ -98,30 +101,32 @@ Public Class frmUpdateStockDTL
                         lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
                     End If
 
-                    'Main Unit
-                    lUnits = UnitsMain.EditValue
+                    If mProductListDAO.UnitID <> mUnitMainID Then
+                        'Main Unit
+                        lUnits = UnitsMain.EditValue
 
-                    lclsStock = New ProductStockDAO
-                    lclsStock.ProductID = mProductListDAO.ProductID
-                    lclsStock.UnitID = mUnitMainID
-                    lclsStock.LocationDTLID = mProductListDAO.LocationDTLID
-                    lclsStock.Cost = mProductListDAO.Cost
-                    lclsStock.Units = lUnits
+                        lclsStock = New ProductStockDAO
+                        lclsStock.ProductID = mProductListDAO.ProductID
+                        lclsStock.UnitID = mUnitMainID
+                        lclsStock.LocationDTLID = mProductListDAO.LocationDTLID
+                        lclsStock.Cost = mProductListDAO.Cost
+                        lclsStock.Units = lUnits
 
-                    'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
-                    lclsClone = New ProductStockDAO
-                    lclsClone = lclsStock.Clone
-                    lclsClone.SaveData(tr, False, False, 0, MasterType.UpdateStock.ToString)
+                        'Update #01 with clone class 'ป้องการค่าโดนเปลี่ยนจึง clone ไปใช้
+                        lclsClone = New ProductStockDAO
+                        lclsClone = lclsStock.Clone
+                        lclsClone.SaveData(tr, False, False, 0, MasterType.UpdateStock.ToString)
 
-                    'Sum Stock
-                    If IsSumStock.CheckState = CheckState.Checked Then
-                        lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
+                        'Sum Stock
+                        If IsSumStock.CheckState = CheckState.Checked Then
+                            lclsStock.SaveData(tr, True, False, 0, MasterType.UpdateStock.ToString)
+                        End If
                     End If
 
                     '-------------------------
                     'SN
                     For Each pclsSN In mProductListDAO.SNList
-                        If UnitsMain.EditValue < 0 Then
+                        If lUnits < 0 Then
                             pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
                         Else
                             pclsSN.Status = "New"
@@ -201,6 +206,8 @@ Public Class frmUpdateStockDTL
                 lfrmSN.UnitMain = UnitsMain.EditValue
                 lfrmSN.ProductCodes = mProductListDAO.ProductCode
                 lfrmSN.ProductNames = mProductListDAO.ProductName
+                lfrmSN.UnitNames = txtUnitName.EditValue
+                lfrmSN.UnitMainNames = UnitMainName.EditValue
                 lfrmSN.IsModePrint = False
                 lfrmSN.IsReadOnly = False
                 lfrmSN.ProductIDs = mProductListDAO.ProductID
@@ -228,7 +235,7 @@ Public Class frmUpdateStockDTL
     '    End Try
     'End Function
 
-    Private Sub Units_EditValueChanged(sender As Object, e As System.EventArgs) Handles Units.EditValueChanged
-        UnitsMain.EditValue = Units.EditValue * UnitRate.EditValue
+    Private Sub SpinUnit_EditValueChanged(sender As Object, e As System.EventArgs) Handles SpinUnit.EditValueChanged
+        UnitsMain.EditValue = SpinUnit.EditValue * UnitRate.EditValue
     End Sub
 End Class

@@ -630,6 +630,8 @@ Public Class ProductDAO
                                     PriceSale = Price5
                                 Case 6
                                     PriceSale = Price6
+                                Case Else
+                                    PriceSale = PriceStandard
                             End Select
                         End If
 
@@ -654,6 +656,8 @@ Public Class ProductDAO
                                     PriceBuy = Price1
                                 Case 6
                                     PriceBuy = Price1
+                                Case Else
+                                    PriceSale = PriceStandard
                             End Select
                         End If
                         lclsInform = Nothing

@@ -21,7 +21,7 @@ Public Class ucProductUnit
         Dim lDataDAO As ProductUnitDAO
         Dim info As New ErrorInfo()
         Dim lclProduct As New ProductDAO
-        Dim lPreRate As Decimal = 0
+        Dim lUnitRate As Decimal = 0, lUnitID As Long = 0
         Try
             mDataDAOs = New List(Of ProductUnitDAO)
             mIsError = ""
@@ -36,6 +36,15 @@ Public Class ucProductUnit
                         lDataDAO.IsInActive = gridView.GetRowCellValue(lRow, "IsInActive")
                         lDataDAO.Remark = gridView.GetRowCellDisplayText(lRow, "Remark")
                         mDataDAOs.Add(lDataDAO)
+                        If lUnitRate = 0 Then 'Firt record
+                            lUnitRate = lDataDAO.Rate
+                            lUnitID = lDataDAO.UnitID
+                        Else ' Find min rate
+                            If lUnitRate > lDataDAO.Rate Then
+                                lUnitRate = lDataDAO.Rate
+                                lUnitID = lDataDAO.UnitID
+                            End If
+                        End If
                         'If pUnitMainID = lDataDAO.UnitID Then
                         '    mIsError = "ไม่สามารถระบุหน่วยนับหลักได้"
                         'End If
@@ -49,8 +58,7 @@ Public Class ucProductUnit
                         '    End If
                         'End If
 
-                        lPreRate = lDataDAO.Rate
-
+                      
 
                         If mIsError = "" Then
                             TryCast(gridView.GetRow(lRow), MyRecord).GetError(info)
@@ -59,6 +67,13 @@ Public Class ucProductUnit
 
                     End If
                 Next
+                If mIsError = "" Then
+                    If pUnitMainID <> lUnitID Then
+                        mIsError = "หน่วยนับเล็กสุด ต้องเป็นหน่วยนับหลักเท่านั้น"
+                    End If
+                End If
+
+
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucProductUnit.GetDAOs : " & e.Message)

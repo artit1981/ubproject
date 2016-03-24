@@ -20,8 +20,8 @@ Partial Class frmUpdateStock
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdateStock))
-        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject4 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.btnProductType = New DevExpress.XtraEditors.SimpleButton()
         Me.ProductTypeID = New DevExpress.XtraEditors.LookUpEdit()
@@ -434,12 +434,14 @@ Partial Class frmUpdateStock
         '
         Me.Hist.AppearanceHeader.Options.UseTextOptions = True
         Me.Hist.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Hist.Caption = "Hist."
+        Me.Hist.Caption = "Log"
         Me.Hist.ColumnEdit = Me.RepositoryItemButtonHist
         Me.Hist.FieldName = "Hist"
         Me.Hist.MaxWidth = 70
         Me.Hist.MinWidth = 40
         Me.Hist.Name = "Hist"
+        Me.Hist.Visible = True
+        Me.Hist.VisibleIndex = 6
         Me.Hist.Width = 60
         '
         'RepositoryItemButtonHist
@@ -539,7 +541,7 @@ Partial Class frmUpdateStock
         'ProductNameBtn
         '
         Me.ProductNameBtn.AutoHeight = False
-        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, True)})
+        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject3, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, True)})
         Me.ProductNameBtn.Name = "ProductNameBtn"
         '
         'TotalEdit
@@ -553,7 +555,7 @@ Partial Class frmUpdateStock
         Me.btnImage.Appearance.Image = CType(resources.GetObject("btnImage.Appearance.Image"), System.Drawing.Image)
         Me.btnImage.Appearance.Options.UseImage = True
         Me.btnImage.AutoHeight = False
-        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("btnImage.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("btnImage.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject4, "", Nothing, Nothing, True)})
         Me.btnImage.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
         Me.btnImage.Name = "btnImage"
         Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor

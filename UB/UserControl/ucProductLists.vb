@@ -267,8 +267,12 @@ Public Class ucProductLists
                         lDataDAO.PriceMain = pProSub.PriceMain
                         If pProSub.UnitID <> pProSub.UnitMainID Then
                             lDataDAO.Units = pProSub.AdjustUnit * pProSub.RateUnit
+                            If (lDataDAO.PriceMain * lDataDAO.RateUnit) <> lDataDAO.Price Then 'To adjust price
+                                lDataDAO.PriceMain = lDataDAO.Price / lDataDAO.RateUnit
+                            End If
                         Else
                             lDataDAO.Units = pProSub.AdjustUnit
+                            lDataDAO.PriceMain = lDataDAO.Price 'for if adjust price
                         End If
                         lDataDAO.SEQ = lRow + 1
 
@@ -1111,6 +1115,7 @@ Public Class ucProductLists
 
 #Region "IDXDataErrorInfo Members"
         Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+
         End Sub
 
         Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError

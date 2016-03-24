@@ -197,7 +197,31 @@ Public Class frmUpdateStock
 
     Private Sub RepositoryItemButtonHist_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonHist.ButtonClick
         Try
- 
+            Dim rowHandle As Integer
+            Dim lFrmEditStock As New frmUpdateStockLog
+            Dim lProductListDAO As ProductListDAO
+
+            Try
+
+                If gridView.RowCount = 0 Then Exit Sub
+                rowHandle = (TryCast(gridControl.MainView, ColumnView)).FocusedRowHandle
+                If rowHandle < 0 Then Exit Sub
+                lProductListDAO = New ProductListDAO
+                lProductListDAO.ProductID = gridView.GetRowCellValue(rowHandle, "ProductID")
+                lProductListDAO.ProductCode = gridView.GetRowCellValue(rowHandle, "ProductCode")
+                lProductListDAO.ProductName = gridView.GetRowCellValue(rowHandle, "ProductName")
+                lProductListDAO.LocationDTLID = gridView.GetRowCellValue(rowHandle, "LocationDTLID")
+                lProductListDAO.UnitName = gridView.GetRowCellValue(rowHandle, "Unit")
+                lProductListDAO.Units = gridView.GetRowCellValue(rowHandle, "Units")
+                lProductListDAO.IsSN = gridView.GetRowCellValue(rowHandle, "IsSN")
+                lProductListDAO.UnitID = gridView.GetRowCellValue(rowHandle, "UnitID")
+                lFrmEditStock.ProductListDAO = lProductListDAO
+                lFrmEditStock.ShowDialog()
+                
+
+            Catch ex As Exception
+                ShowErrorMsg(False, ex.Message)
+            End Try
 
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)

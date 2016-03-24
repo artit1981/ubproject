@@ -226,6 +226,11 @@ Public Class frmFindReserve
                 For Each pProSub In mProductSubList
                     lPrice = LoadlastPrice(pProSub.ProductID, False)
                     pProSub.Price = lPrice
+                    If pProSub.UnitID <> pProSub.UnitMainID Then
+                        pProSub.PriceMain = lPrice / pProSub.RateUnit
+                    Else
+                        pProSub.PriceMain = lPrice
+                    End If
                 Next
             End If
 
@@ -383,8 +388,8 @@ Public Class frmFindReserve
             End If
 
             If pProID > 0 And mFormLoad = False Then
-                SQL = "SELECT top 3  Orders.OrderDate ,ProductList.PriceMain AS Price,ProductList.Units "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL = "SELECT top 3  Orders.OrderDate ,CASE WHEN ProductList.UnitID=ProductList.UnitMainID THEN ProductList.Price ELSE ProductList.Price/ProductList.RateUnit END Price "
+                SQL = SQL & " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 SQL = SQL & " FROM Orders  "
                 SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
                 SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "

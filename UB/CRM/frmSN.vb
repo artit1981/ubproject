@@ -142,21 +142,17 @@ Public Class frmSN
                     btnSelectSN.Visible = True
                     'LoadSN()
                 Case MasterType.UpdateStock.ToString
-                    If UnitsMain.EditValue > 0 Then
+                    If mUnitMain > 0 Then
                         btnLoadSN.Visible = False
                         btnGenID.Enabled = True
                         SNType.Enabled = True
                         btnSelectSN.Visible = False
                     Else
-                        btnLoadSN.Visible = True
+                        btnLoadSN.Visible = False
                         SNType.Enabled = False
                         btnGenID.Enabled = False
                         btnSelectSN.Visible = True
                     End If
-                    'btnLoadSN.Visible = False
-                    'btnGenID.Enabled = False
-                    'SNType.Enabled = False
-                    'btnSelectSN.Visible = False
                 Case MasterType.ReduceCredit.ToString, MasterType.ReduceCreditBuy.ToString, MasterType.AddCreditBuy.ToString, MasterType.AddCredit.ToString
                     If mStockType = "O" Then 'ตัด
                         btnLoadSN.Visible = False

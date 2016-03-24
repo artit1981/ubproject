@@ -447,7 +447,7 @@ Public Class frmOrderS
                 '    If XtraMessageBox.Show(Me, "ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                 '        modReport.PrintOrder(mcls.ID)
                 '    End If
-                If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = EnumStatus.WaitApprove.ToString) Then
+                If (mcls.OrderStatus = EnumStatus.WaitApprove.ToString) Then
                     'ShowProgress(False, "")
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     'If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
@@ -462,6 +462,9 @@ Public Class frmOrderS
                             If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                                 modReport.PrintReportOrder(mOrderType, mcls.ID)
                             End If
+                        Case Else
+                            XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                            ShowProgress(False, "")
                     End Select
                 End If
                 Return True
