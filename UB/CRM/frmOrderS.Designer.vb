@@ -408,7 +408,7 @@ Partial Class frmOrderS
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1087, 558)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1087, 613)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.PledgeTabPage, Me.TaxTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -425,7 +425,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
         Me.GeneralTabPage.ScrollBarSmallChange = 50
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1081, 530)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1081, 585)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -489,9 +489,9 @@ Partial Class frmOrderS
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LayoutControl1, True)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(734, 63, 280, 604)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(285, 50, 280, 604)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(1081, 530)
+        Me.LayoutControl1.Size = New System.Drawing.Size(1081, 585)
         Me.LayoutControl1.TabIndex = 9
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
@@ -500,7 +500,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Campaign, "TextChanged")
         Me.Campaign.EnterMoveNextControl = True
-        Me.Campaign.Location = New System.Drawing.Point(117, 217)
+        Me.Campaign.Location = New System.Drawing.Point(117, 274)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Campaign, True)
         Me.Campaign.Name = "Campaign"
         Me.Campaign.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -583,7 +583,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCampaign, "")
         Me.btnCampaign.Image = CType(resources.GetObject("btnCampaign.Image"), System.Drawing.Image)
         Me.btnCampaign.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCampaign.Location = New System.Drawing.Point(431, 219)
+        Me.btnCampaign.Location = New System.Drawing.Point(431, 276)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCampaign, True)
         Me.btnCampaign.Name = "btnCampaign"
         Me.btnCampaign.Size = New System.Drawing.Size(26, 22)
@@ -597,7 +597,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkNotPass, "CheckedChanged")
         Me.chkNotPass.EnterMoveNextControl = True
-        Me.chkNotPass.Location = New System.Drawing.Point(12, 122)
+        Me.chkNotPass.Location = New System.Drawing.Point(12, 179)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkNotPass, True)
         Me.chkNotPass.Name = "chkNotPass"
         Me.chkNotPass.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -616,7 +616,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnQuotationRemark, "")
         Me.btnQuotationRemark.Image = CType(resources.GetObject("btnQuotationRemark.Image"), System.Drawing.Image)
         Me.btnQuotationRemark.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnQuotationRemark.Location = New System.Drawing.Point(431, 193)
+        Me.btnQuotationRemark.Location = New System.Drawing.Point(431, 250)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnQuotationRemark, True)
         Me.btnQuotationRemark.Name = "btnQuotationRemark"
         Me.btnQuotationRemark.Size = New System.Drawing.Size(26, 22)
@@ -630,7 +630,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.QuotationRemark, "TextChanged")
         Me.QuotationRemark.EnterMoveNextControl = True
-        Me.QuotationRemark.Location = New System.Drawing.Point(117, 193)
+        Me.QuotationRemark.Location = New System.Drawing.Point(117, 250)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.QuotationRemark, True)
         Me.QuotationRemark.Name = "QuotationRemark"
         Me.QuotationRemark.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -652,7 +652,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkIsEditVat, "CheckedChanged")
         Me.chkIsEditVat.EnterMoveNextControl = True
-        Me.chkIsEditVat.Location = New System.Drawing.Point(592, 508)
+        Me.chkIsEditVat.Location = New System.Drawing.Point(592, 575)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkIsEditVat, True)
         Me.chkIsEditVat.Name = "chkIsEditVat"
         Me.chkIsEditVat.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -668,7 +668,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtRefPO, "TextChanged")
         Me.txtRefPO.EnterMoveNextControl = True
-        Me.txtRefPO.Location = New System.Drawing.Point(568, 200)
+        Me.txtRefPO.Location = New System.Drawing.Point(568, 257)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtRefPO, True)
         Me.txtRefPO.Name = "txtRefPO"
         Me.txtRefPO.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -688,7 +688,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.StockType, "")
         Me.StockType.EditValue = "N"
         Me.StockType.EnterMoveNextControl = True
-        Me.StockType.Location = New System.Drawing.Point(568, 248)
+        Me.StockType.Location = New System.Drawing.Point(568, 305)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.StockType, True)
         Me.StockType.Name = "StockType"
         Me.StockType.Properties.Columns = 3
@@ -703,7 +703,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Institute, "TextChanged")
         Me.Institute.EditValue = ""
         Me.Institute.EnterMoveNextControl = True
-        Me.Institute.Location = New System.Drawing.Point(117, 3)
+        Me.Institute.Location = New System.Drawing.Point(117, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Institute, True)
         Me.Institute.Name = "Institute"
         Me.Institute.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -719,7 +719,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.InvoiceSuplierID, "TextChanged")
         Me.InvoiceSuplierID.EnterMoveNextControl = True
-        Me.InvoiceSuplierID.Location = New System.Drawing.Point(568, 3)
+        Me.InvoiceSuplierID.Location = New System.Drawing.Point(568, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.InvoiceSuplierID, True)
         Me.InvoiceSuplierID.Name = "InvoiceSuplierID"
         Me.InvoiceSuplierID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -735,7 +735,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GrandTotal, "TextChanged")
         Me.GrandTotal.EnterMoveNextControl = True
-        Me.GrandTotal.Location = New System.Drawing.Point(697, 556)
+        Me.GrandTotal.Location = New System.Drawing.Point(697, 623)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GrandTotal, True)
         Me.GrandTotal.Name = "GrandTotal"
         Me.GrandTotal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -759,7 +759,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalTax, "TextChanged")
         Me.TotalTax.EnterMoveNextControl = True
-        Me.TotalTax.Location = New System.Drawing.Point(697, 532)
+        Me.TotalTax.Location = New System.Drawing.Point(697, 599)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalTax, True)
         Me.TotalTax.Name = "TotalTax"
         Me.TotalTax.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -783,7 +783,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ShipingRuleID, "TextChanged")
         Me.ShipingRuleID.EnterMoveNextControl = True
-        Me.ShipingRuleID.Location = New System.Drawing.Point(117, 169)
+        Me.ShipingRuleID.Location = New System.Drawing.Point(117, 226)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ShipingRuleID, True)
         Me.ShipingRuleID.Name = "ShipingRuleID"
         Me.ShipingRuleID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -808,7 +808,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingRuleID, "")
         Me.btnShipingRuleID.Image = CType(resources.GetObject("btnShipingRuleID.Image"), System.Drawing.Image)
         Me.btnShipingRuleID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingRuleID.Location = New System.Drawing.Point(431, 169)
+        Me.btnShipingRuleID.Location = New System.Drawing.Point(431, 226)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingRuleID, True)
         Me.btnShipingRuleID.Name = "btnShipingRuleID"
         Me.btnShipingRuleID.Size = New System.Drawing.Size(26, 20)
@@ -822,7 +822,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PledgeTotal, "TextChanged")
         Me.PledgeTotal.EnterMoveNextControl = True
-        Me.PledgeTotal.Location = New System.Drawing.Point(424, 458)
+        Me.PledgeTotal.Location = New System.Drawing.Point(424, 525)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTotal, True)
         Me.PledgeTotal.Name = "PledgeTotal"
         Me.PledgeTotal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -846,7 +846,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalAfterPledge, "TextChanged")
         Me.TotalAfterPledge.EnterMoveNextControl = True
-        Me.TotalAfterPledge.Location = New System.Drawing.Point(697, 458)
+        Me.TotalAfterPledge.Location = New System.Drawing.Point(697, 525)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalAfterPledge, True)
         Me.TotalAfterPledge.Name = "TotalAfterPledge"
         Me.TotalAfterPledge.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -870,7 +870,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CreditBalance, "TextChanged")
         Me.CreditBalance.EnterMoveNextControl = True
-        Me.CreditBalance.Location = New System.Drawing.Point(568, -21)
+        Me.CreditBalance.Location = New System.Drawing.Point(568, 36)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CreditBalance, True)
         Me.CreditBalance.Name = "CreditBalance"
         Me.CreditBalance.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -895,7 +895,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PayType, "")
         Me.PayType.EditValue = "CREDIT"
         Me.PayType.EnterMoveNextControl = True
-        Me.PayType.Location = New System.Drawing.Point(568, 75)
+        Me.PayType.Location = New System.Drawing.Point(568, 132)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PayType, True)
         Me.PayType.Name = "PayType"
         Me.PayType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("CASH", "เงินสด"), New DevExpress.XtraEditors.Controls.RadioGroupItem("CREDIT", "เงินเชื่อ")})
@@ -908,7 +908,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CancelRemark, "TextChanged")
         Me.CancelRemark.EnterMoveNextControl = True
-        Me.CancelRemark.Location = New System.Drawing.Point(120, 99)
+        Me.CancelRemark.Location = New System.Drawing.Point(120, 156)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CancelRemark, True)
         Me.CancelRemark.Name = "CancelRemark"
         Me.CancelRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -926,7 +926,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefOrder, "")
         Me.btnRefOrder.Image = CType(resources.GetObject("btnRefOrder.Image"), System.Drawing.Image)
         Me.btnRefOrder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnRefOrder.Location = New System.Drawing.Point(877, 177)
+        Me.btnRefOrder.Location = New System.Drawing.Point(877, 234)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefOrder, True)
         Me.btnRefOrder.Name = "btnRefOrder"
         Me.btnRefOrder.Size = New System.Drawing.Size(26, 22)
@@ -940,7 +940,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ShipingBy, "TextChanged")
         Me.ShipingBy.EnterMoveNextControl = True
-        Me.ShipingBy.Location = New System.Drawing.Point(568, 224)
+        Me.ShipingBy.Location = New System.Drawing.Point(568, 281)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ShipingBy, True)
         Me.ShipingBy.Name = "ShipingBy"
         Me.ShipingBy.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -965,7 +965,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingBy, "")
         Me.btnShipingBy.Image = CType(resources.GetObject("btnShipingBy.Image"), System.Drawing.Image)
         Me.btnShipingBy.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingBy.Location = New System.Drawing.Point(877, 224)
+        Me.btnShipingBy.Location = New System.Drawing.Point(877, 281)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingBy, True)
         Me.btnShipingBy.Name = "btnShipingBy"
         Me.btnShipingBy.Size = New System.Drawing.Size(26, 22)
@@ -982,7 +982,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingMethod, "")
         Me.btnShipingMethod.Image = CType(resources.GetObject("btnShipingMethod.Image"), System.Drawing.Image)
         Me.btnShipingMethod.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingMethod.Location = New System.Drawing.Point(431, 145)
+        Me.btnShipingMethod.Location = New System.Drawing.Point(431, 202)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingMethod, True)
         Me.btnShipingMethod.Name = "btnShipingMethod"
         Me.btnShipingMethod.Size = New System.Drawing.Size(26, 20)
@@ -996,7 +996,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ShipingMethod, "TextChanged")
         Me.ShipingMethod.EnterMoveNextControl = True
-        Me.ShipingMethod.Location = New System.Drawing.Point(117, 145)
+        Me.ShipingMethod.Location = New System.Drawing.Point(117, 202)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ShipingMethod, True)
         Me.ShipingMethod.Name = "ShipingMethod"
         Me.ShipingMethod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1018,7 +1018,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.IsCancel, "CheckedChanged")
         Me.IsCancel.EnterMoveNextControl = True
-        Me.IsCancel.Location = New System.Drawing.Point(12, 99)
+        Me.IsCancel.Location = New System.Drawing.Point(12, 156)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.IsCancel, True)
         Me.IsCancel.Name = "IsCancel"
         Me.IsCancel.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1034,7 +1034,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PO, "TextChanged")
         Me.PO.EnterMoveNextControl = True
-        Me.PO.Location = New System.Drawing.Point(568, 152)
+        Me.PO.Location = New System.Drawing.Point(568, 209)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PO, True)
         Me.PO.Name = "PO"
         Me.PO.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -1051,7 +1051,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ShipingDate, "TextChanged")
         Me.ShipingDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.ShipingDate.EnterMoveNextControl = True
-        Me.ShipingDate.Location = New System.Drawing.Point(568, 51)
+        Me.ShipingDate.Location = New System.Drawing.Point(568, 108)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ShipingDate, True)
         Me.ShipingDate.Name = "ShipingDate"
         Me.ShipingDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1073,7 +1073,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtRefOrder, "TextChanged")
         Me.txtRefOrder.EnterMoveNextControl = True
-        Me.txtRefOrder.Location = New System.Drawing.Point(568, 176)
+        Me.txtRefOrder.Location = New System.Drawing.Point(568, 233)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtRefOrder, True)
         Me.txtRefOrder.Name = "txtRefOrder"
         Me.txtRefOrder.Properties.Appearance.BackColor = System.Drawing.Color.White
@@ -1091,10 +1091,10 @@ Partial Class frmOrderS
         '
         Me.UcProductLists1.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcProductLists1, "")
-        Me.UcProductLists1.Location = New System.Drawing.Point(12, 287)
+        Me.UcProductLists1.Location = New System.Drawing.Point(12, 344)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists1, True)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(891, 140)
+        Me.UcProductLists1.Size = New System.Drawing.Size(891, 150)
         Me.UcProductLists1.TabIndex = 19
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
@@ -1105,7 +1105,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshCurrency, "")
         Me.btnRefreshCurrency.Image = CType(resources.GetObject("btnRefreshCurrency.Image"), System.Drawing.Image)
         Me.btnRefreshCurrency.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnRefreshCurrency.Location = New System.Drawing.Point(288, 556)
+        Me.btnRefreshCurrency.Location = New System.Drawing.Point(288, 623)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshCurrency, True)
         Me.btnRefreshCurrency.Name = "btnRefreshCurrency"
         Me.btnRefreshCurrency.Size = New System.Drawing.Size(26, 22)
@@ -1119,7 +1119,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Exchange, "TextChanged")
         Me.Exchange.EnterMoveNextControl = True
-        Me.Exchange.Location = New System.Drawing.Point(423, 556)
+        Me.Exchange.Location = New System.Drawing.Point(423, 623)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Exchange, True)
         Me.Exchange.Name = "Exchange"
         Me.Exchange.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1144,7 +1144,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCustomerID, "")
         Me.btnCustomerID.Image = CType(resources.GetObject("btnCustomerID.Image"), System.Drawing.Image)
         Me.btnCustomerID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCustomerID.Location = New System.Drawing.Point(431, -19)
+        Me.btnCustomerID.Location = New System.Drawing.Point(431, 38)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCustomerID, True)
         Me.btnCustomerID.Name = "btnCustomerID"
         Me.btnCustomerID.Size = New System.Drawing.Size(26, 20)
@@ -1158,7 +1158,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CreditRuleID, "TextChanged")
         Me.CreditRuleID.EnterMoveNextControl = True
-        Me.CreditRuleID.Location = New System.Drawing.Point(117, 27)
+        Me.CreditRuleID.Location = New System.Drawing.Point(117, 84)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CreditRuleID, True)
         Me.CreditRuleID.Name = "CreditRuleID"
         Me.CreditRuleID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1184,7 +1184,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.OrderCode, "TextChanged")
         Me.OrderCode.EnterMoveNextControl = True
-        Me.OrderCode.Location = New System.Drawing.Point(117, -45)
+        Me.OrderCode.Location = New System.Drawing.Point(117, 12)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.OrderCode, True)
         Me.OrderCode.Name = "OrderCode"
         Me.OrderCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -1200,7 +1200,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CustomerID, "TextChanged")
         Me.CustomerID.EnterMoveNextControl = True
-        Me.CustomerID.Location = New System.Drawing.Point(117, -21)
+        Me.CustomerID.Location = New System.Drawing.Point(117, 36)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CustomerID, True)
         Me.CustomerID.Name = "CustomerID"
         Me.CustomerID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1310,7 +1310,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboCurrency, "TextChanged")
         Me.cboCurrency.EditValue = CType(0, Short)
         Me.cboCurrency.EnterMoveNextControl = True
-        Me.cboCurrency.Location = New System.Drawing.Point(117, 556)
+        Me.cboCurrency.Location = New System.Drawing.Point(117, 623)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboCurrency, True)
         Me.cboCurrency.Name = "cboCurrency"
         Me.cboCurrency.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1338,7 +1338,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnGenID, "")
         Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
         Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnGenID.Location = New System.Drawing.Point(431, -45)
+        Me.btnGenID.Location = New System.Drawing.Point(431, 12)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnGenID, True)
         Me.btnGenID.Name = "btnGenID"
         Me.btnGenID.Size = New System.Drawing.Size(26, 22)
@@ -1352,7 +1352,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatPercen, "TextChanged")
         Me.VatPercen.EnterMoveNextControl = True
-        Me.VatPercen.Location = New System.Drawing.Point(423, 508)
+        Me.VatPercen.Location = New System.Drawing.Point(423, 575)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatPercen, True)
         Me.VatPercen.Name = "VatPercen"
         Me.VatPercen.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1376,7 +1376,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatAmount, "TextChanged")
         Me.VatAmount.EnterMoveNextControl = True
-        Me.VatAmount.Location = New System.Drawing.Point(720, 508)
+        Me.VatAmount.Location = New System.Drawing.Point(720, 575)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatAmount, True)
         Me.VatAmount.Name = "VatAmount"
         Me.VatAmount.Properties.Appearance.BackColor = System.Drawing.Color.White
@@ -1399,7 +1399,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.SendBy, "TextChanged")
         Me.SendBy.EnterMoveNextControl = True
-        Me.SendBy.Location = New System.Drawing.Point(568, 128)
+        Me.SendBy.Location = New System.Drawing.Point(568, 185)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.SendBy, True)
         Me.SendBy.Name = "SendBy"
         Me.SendBy.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -1421,7 +1421,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCreditRuleID, "")
         Me.btnCreditRuleID.Image = CType(resources.GetObject("btnCreditRuleID.Image"), System.Drawing.Image)
         Me.btnCreditRuleID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCreditRuleID.Location = New System.Drawing.Point(431, 25)
+        Me.btnCreditRuleID.Location = New System.Drawing.Point(431, 82)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCreditRuleID, True)
         Me.btnCreditRuleID.Name = "btnCreditRuleID"
         Me.btnCreditRuleID.Size = New System.Drawing.Size(26, 22)
@@ -1436,7 +1436,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.OrderDate, "TextChanged")
         Me.OrderDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.OrderDate.EnterMoveNextControl = True
-        Me.OrderDate.Location = New System.Drawing.Point(568, -45)
+        Me.OrderDate.Location = New System.Drawing.Point(568, 12)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.OrderDate, True)
         Me.OrderDate.Name = "OrderDate"
         Me.OrderDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1458,7 +1458,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatTypeID, "TextChanged")
         Me.VatTypeID.EnterMoveNextControl = True
-        Me.VatTypeID.Location = New System.Drawing.Point(117, 508)
+        Me.VatTypeID.Location = New System.Drawing.Point(117, 575)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTypeID, True)
         Me.VatTypeID.Name = "VatTypeID"
         Me.VatTypeID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1484,7 +1484,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.QuotationDays, "TextChanged")
         Me.QuotationDays.EnterMoveNextControl = True
-        Me.QuotationDays.Location = New System.Drawing.Point(568, 104)
+        Me.QuotationDays.Location = New System.Drawing.Point(568, 161)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.QuotationDays, True)
         Me.QuotationDays.Name = "QuotationDays"
         Me.QuotationDays.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1507,7 +1507,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnEmpID, "")
         Me.btnEmpID.Image = CType(resources.GetObject("btnEmpID.Image"), System.Drawing.Image)
         Me.btnEmpID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnEmpID.Location = New System.Drawing.Point(431, 51)
+        Me.btnEmpID.Location = New System.Drawing.Point(431, 108)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnEmpID, True)
         Me.btnEmpID.Name = "btnEmpID"
         Me.btnEmpID.Size = New System.Drawing.Size(26, 22)
@@ -1521,7 +1521,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalAfterDis, "TextChanged")
         Me.TotalAfterDis.EnterMoveNextControl = True
-        Me.TotalAfterDis.Location = New System.Drawing.Point(697, 483)
+        Me.TotalAfterDis.Location = New System.Drawing.Point(697, 550)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalAfterDis, True)
         Me.TotalAfterDis.Name = "TotalAfterDis"
         Me.TotalAfterDis.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1545,7 +1545,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.EmpID, "TextChanged")
         Me.EmpID.EnterMoveNextControl = True
-        Me.EmpID.Location = New System.Drawing.Point(117, 51)
+        Me.EmpID.Location = New System.Drawing.Point(117, 108)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.EmpID, True)
         Me.EmpID.Name = "EmpID"
         Me.EmpID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1593,7 +1593,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ExpireDate, "TextChanged")
         Me.ExpireDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.ExpireDate.EnterMoveNextControl = True
-        Me.ExpireDate.Location = New System.Drawing.Point(568, 27)
+        Me.ExpireDate.Location = New System.Drawing.Point(568, 84)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ExpireDate, True)
         Me.ExpireDate.Name = "ExpireDate"
         Me.ExpireDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1618,7 +1618,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnVatTypeID, "")
         Me.btnVatTypeID.Image = CType(resources.GetObject("btnVatTypeID.Image"), System.Drawing.Image)
         Me.btnVatTypeID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnVatTypeID.Location = New System.Drawing.Point(288, 508)
+        Me.btnVatTypeID.Location = New System.Drawing.Point(288, 575)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnVatTypeID, True)
         Me.btnVatTypeID.Name = "btnVatTypeID"
         Me.btnVatTypeID.Size = New System.Drawing.Size(26, 22)
@@ -1632,7 +1632,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountAmount, "TextChanged")
         Me.DiscountAmount.EnterMoveNextControl = True
-        Me.DiscountAmount.Location = New System.Drawing.Point(423, 483)
+        Me.DiscountAmount.Location = New System.Drawing.Point(423, 550)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountAmount, True)
         Me.DiscountAmount.Name = "DiscountAmount"
         Me.DiscountAmount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1654,7 +1654,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.OrderStatus, "TextChanged")
         Me.OrderStatus.EnterMoveNextControl = True
-        Me.OrderStatus.Location = New System.Drawing.Point(117, 75)
+        Me.OrderStatus.Location = New System.Drawing.Point(117, 132)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.OrderStatus, True)
         Me.OrderStatus.Name = "OrderStatus"
         Me.OrderStatus.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -1674,7 +1674,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Total, "TextChanged")
         Me.Total.EnterMoveNextControl = True
-        Me.Total.Location = New System.Drawing.Point(697, 433)
+        Me.Total.Location = New System.Drawing.Point(697, 500)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Total, True)
         Me.Total.Name = "Total"
         Me.Total.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1698,7 +1698,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountPercen, "TextChanged")
         Me.DiscountPercen.EnterMoveNextControl = True
-        Me.DiscountPercen.Location = New System.Drawing.Point(117, 483)
+        Me.DiscountPercen.Location = New System.Drawing.Point(117, 550)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountPercen, True)
         Me.DiscountPercen.Name = "DiscountPercen"
         Me.DiscountPercen.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1722,9 +1722,9 @@ Partial Class frmOrderS
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.c, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutRefPO, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.LayoutNotPass, Me.LayoutbtnCampaign, Me.LayoutCampaign, Me.SplitterItem1})
-        Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, -57)
+        Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1064, 647)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1064, 657)
         Me.LayoutControlGroup1.Text = "Root"
         Me.LayoutControlGroup1.TextVisible = False
         '
@@ -1920,10 +1920,9 @@ Partial Class frmOrderS
         Me.LayoutControlItem16.Control = Me.UcProductLists1
         Me.LayoutControlItem16.CustomizationFormText = " "
         Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 332)
-        Me.LayoutControlItem16.MaxSize = New System.Drawing.Size(0, 144)
-        Me.LayoutControlItem16.MinSize = New System.Drawing.Size(24, 144)
+        Me.LayoutControlItem16.MinSize = New System.Drawing.Size(604, 154)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(895, 144)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(895, 154)
         Me.LayoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem16.Text = " "
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
@@ -1934,7 +1933,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem17.Control = Me.Total
         Me.LayoutControlItem17.CustomizationFormText = "ยอดรวม"
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(580, 478)
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(580, 488)
         Me.LayoutControlItem17.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem17.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem17.Name = "LayoutControlItem17"
@@ -1947,7 +1946,7 @@ Partial Class frmOrderS
         '
         Me.SimpleSeparator4.AllowHotTrack = False
         Me.SimpleSeparator4.CustomizationFormText = "SimpleSeparator4"
-        Me.SimpleSeparator4.Location = New System.Drawing.Point(0, 476)
+        Me.SimpleSeparator4.Location = New System.Drawing.Point(0, 486)
         Me.SimpleSeparator4.Name = "SimpleSeparator4"
         Me.SimpleSeparator4.Size = New System.Drawing.Size(895, 2)
         Me.SimpleSeparator4.Text = "SimpleSeparator4"
@@ -1956,7 +1955,7 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
         Me.EmptySpaceItem5.CustomizationFormText = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 478)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 488)
         Me.EmptySpaceItem5.MaxSize = New System.Drawing.Size(0, 25)
         Me.EmptySpaceItem5.MinSize = New System.Drawing.Size(104, 25)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
@@ -1969,7 +1968,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem18.Control = Me.DiscountPercen
         Me.LayoutControlItem18.CustomizationFormText = "ส่วนลด %"
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 528)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 538)
         Me.LayoutControlItem18.MaxSize = New System.Drawing.Size(276, 25)
         Me.LayoutControlItem18.MinSize = New System.Drawing.Size(276, 25)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
@@ -1982,7 +1981,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem19.Control = Me.DiscountAmount
         Me.LayoutControlItem19.CustomizationFormText = "ส่วนลด"
-        Me.LayoutControlItem19.Location = New System.Drawing.Point(306, 528)
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(306, 538)
         Me.LayoutControlItem19.MaxSize = New System.Drawing.Size(274, 25)
         Me.LayoutControlItem19.MinSize = New System.Drawing.Size(274, 25)
         Me.LayoutControlItem19.Name = "LayoutControlItem19"
@@ -1995,7 +1994,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem20.Control = Me.TotalAfterDis
         Me.LayoutControlItem20.CustomizationFormText = "ยอดหลังหักส่วนลด"
-        Me.LayoutControlItem20.Location = New System.Drawing.Point(580, 528)
+        Me.LayoutControlItem20.Location = New System.Drawing.Point(580, 538)
         Me.LayoutControlItem20.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem20.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem20.Name = "LayoutControlItem20"
@@ -2010,7 +2009,7 @@ Partial Class frmOrderS
         Me.LayoutControlItem21.AppearanceItemCaption.Options.UseForeColor = True
         Me.LayoutControlItem21.Control = Me.VatTypeID
         Me.LayoutControlItem21.CustomizationFormText = "รูปแบบภาษี *"
-        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 553)
+        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 563)
         Me.LayoutControlItem21.MaxSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem21.MinSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem21.Name = "LayoutControlItem21"
@@ -2023,7 +2022,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem22.Control = Me.btnVatTypeID
         Me.LayoutControlItem22.CustomizationFormText = "LayoutControlItem22"
-        Me.LayoutControlItem22.Location = New System.Drawing.Point(276, 553)
+        Me.LayoutControlItem22.Location = New System.Drawing.Point(276, 563)
         Me.LayoutControlItem22.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem22.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem22.Name = "LayoutControlItem22"
@@ -2038,7 +2037,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem23.Control = Me.VatPercen
         Me.LayoutControlItem23.CustomizationFormText = "อัตรา %"
-        Me.LayoutControlItem23.Location = New System.Drawing.Point(306, 553)
+        Me.LayoutControlItem23.Location = New System.Drawing.Point(306, 563)
         Me.LayoutControlItem23.MaxSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem23.MinSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem23.Name = "LayoutControlItem23"
@@ -2051,7 +2050,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem24.Control = Me.VatAmount
         Me.LayoutControlItem24.CustomizationFormText = "ยอดภาษี"
-        Me.LayoutControlItem24.Location = New System.Drawing.Point(603, 553)
+        Me.LayoutControlItem24.Location = New System.Drawing.Point(603, 563)
         Me.LayoutControlItem24.Name = "LayoutControlItem24"
         Me.LayoutControlItem24.Size = New System.Drawing.Size(292, 24)
         Me.LayoutControlItem24.Text = "ยอดภาษี"
@@ -2061,7 +2060,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem25.Control = Me.cboCurrency
         Me.LayoutControlItem25.CustomizationFormText = "สกุลเงิน"
-        Me.LayoutControlItem25.Location = New System.Drawing.Point(0, 601)
+        Me.LayoutControlItem25.Location = New System.Drawing.Point(0, 611)
         Me.LayoutControlItem25.MaxSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem25.MinSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem25.Name = "LayoutControlItem25"
@@ -2074,7 +2073,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem26.Control = Me.btnRefreshCurrency
         Me.LayoutControlItem26.CustomizationFormText = "LayoutControlItem26"
-        Me.LayoutControlItem26.Location = New System.Drawing.Point(276, 601)
+        Me.LayoutControlItem26.Location = New System.Drawing.Point(276, 611)
         Me.LayoutControlItem26.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem26.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem26.Name = "LayoutControlItem26"
@@ -2089,7 +2088,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem27.Control = Me.Exchange
         Me.LayoutControlItem27.CustomizationFormText = "อัตราแลกเปลี่ยน"
-        Me.LayoutControlItem27.Location = New System.Drawing.Point(306, 601)
+        Me.LayoutControlItem27.Location = New System.Drawing.Point(306, 611)
         Me.LayoutControlItem27.MaxSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem27.MinSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem27.Name = "LayoutControlItem27"
@@ -2102,7 +2101,7 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
         Me.EmptySpaceItem6.CustomizationFormText = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(276, 528)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(276, 538)
         Me.EmptySpaceItem6.MaxSize = New System.Drawing.Size(30, 25)
         Me.EmptySpaceItem6.MinSize = New System.Drawing.Size(30, 25)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
@@ -2392,7 +2391,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge1.AllowHotTrack = False
         Me.LayoutPledge1.CustomizationFormText = "LayoutPledge1"
-        Me.LayoutPledge1.Location = New System.Drawing.Point(0, 503)
+        Me.LayoutPledge1.Location = New System.Drawing.Point(0, 513)
         Me.LayoutPledge1.MaxSize = New System.Drawing.Size(307, 25)
         Me.LayoutPledge1.MinSize = New System.Drawing.Size(307, 25)
         Me.LayoutPledge1.Name = "LayoutPledge1"
@@ -2405,7 +2404,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge4.Control = Me.TotalAfterPledge
         Me.LayoutPledge4.CustomizationFormText = "LayoutPledge4"
-        Me.LayoutPledge4.Location = New System.Drawing.Point(580, 503)
+        Me.LayoutPledge4.Location = New System.Drawing.Point(580, 513)
         Me.LayoutPledge4.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutPledge4.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutPledge4.Name = "LayoutPledge4"
@@ -2418,7 +2417,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge3.Control = Me.PledgeTotal
         Me.LayoutPledge3.CustomizationFormText = "LayoutPledge3"
-        Me.LayoutPledge3.Location = New System.Drawing.Point(307, 503)
+        Me.LayoutPledge3.Location = New System.Drawing.Point(307, 513)
         Me.LayoutPledge3.MaxSize = New System.Drawing.Size(273, 25)
         Me.LayoutPledge3.MinSize = New System.Drawing.Size(273, 25)
         Me.LayoutPledge3.Name = "LayoutPledge3"
@@ -2481,7 +2480,7 @@ Partial Class frmOrderS
         '
         Me.LayoutTotalTax.Control = Me.TotalTax
         Me.LayoutTotalTax.CustomizationFormText = "หักภาษี"
-        Me.LayoutTotalTax.Location = New System.Drawing.Point(580, 577)
+        Me.LayoutTotalTax.Location = New System.Drawing.Point(580, 587)
         Me.LayoutTotalTax.MaxSize = New System.Drawing.Size(315, 24)
         Me.LayoutTotalTax.MinSize = New System.Drawing.Size(315, 24)
         Me.LayoutTotalTax.Name = "LayoutTotalTax"
@@ -2494,7 +2493,7 @@ Partial Class frmOrderS
         '
         Me.LayoutGrandTotal.Control = Me.GrandTotal
         Me.LayoutGrandTotal.CustomizationFormText = "ยอดรวมทั้งสิ้น"
-        Me.LayoutGrandTotal.Location = New System.Drawing.Point(580, 601)
+        Me.LayoutGrandTotal.Location = New System.Drawing.Point(580, 611)
         Me.LayoutGrandTotal.MaxSize = New System.Drawing.Size(315, 26)
         Me.LayoutGrandTotal.MinSize = New System.Drawing.Size(315, 26)
         Me.LayoutGrandTotal.Name = "LayoutGrandTotal"
@@ -2596,7 +2595,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem2.Control = Me.chkIsEditVat
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(580, 553)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(580, 563)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(23, 24)
         Me.LayoutControlItem2.Text = "LayoutControlItem2"
@@ -2672,7 +2671,7 @@ Partial Class frmOrderS
         Me.SplitterItem1.CustomizationFormText = "SplitterItem1"
         Me.SplitterItem1.Location = New System.Drawing.Point(895, 0)
         Me.SplitterItem1.Name = "SplitterItem1"
-        Me.SplitterItem1.Size = New System.Drawing.Size(149, 627)
+        Me.SplitterItem1.Size = New System.Drawing.Size(149, 637)
         '
         'PledgeTabPage
         '
@@ -2680,7 +2679,7 @@ Partial Class frmOrderS
         Me.PledgeTabPage.Controls.Add(Me.UcPledge1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTabPage, True)
         Me.PledgeTabPage.Name = "PledgeTabPage"
-        Me.PledgeTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.PledgeTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.PledgeTabPage.Text = "รายการมัดจำ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PledgeTabPage, "")
         '
@@ -2691,7 +2690,7 @@ Partial Class frmOrderS
         Me.UcPledge1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcPledge1, True)
         Me.UcPledge1.Name = "UcPledge1"
-        Me.UcPledge1.Size = New System.Drawing.Size(1081, 583)
+        Me.UcPledge1.Size = New System.Drawing.Size(1081, 530)
         Me.UcPledge1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcPledge1, "")
         '
@@ -2702,7 +2701,7 @@ Partial Class frmOrderS
         Me.TaxTabPage.Controls.Add(Me.TaxGroup1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxTabPage, True)
         Me.TaxTabPage.Name = "TaxTabPage"
-        Me.TaxTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.TaxTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.TaxTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxTabPage, "")
         '
@@ -3276,7 +3275,7 @@ Partial Class frmOrderS
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -3300,7 +3299,7 @@ Partial Class frmOrderS
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.NoteTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -3311,7 +3310,7 @@ Partial Class frmOrderS
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(1081, 583)
+        Me.UcNote1.Size = New System.Drawing.Size(1081, 530)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -3321,7 +3320,7 @@ Partial Class frmOrderS
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -3332,7 +3331,7 @@ Partial Class frmOrderS
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(1081, 583)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(1081, 530)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -3342,7 +3341,7 @@ Partial Class frmOrderS
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(1081, 583)
+        Me.AdminTabPage.Size = New System.Drawing.Size(1081, 530)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -3408,7 +3407,7 @@ Partial Class frmOrderS
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1087, 595)
+        Me.ClientSize = New System.Drawing.Size(1087, 650)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Name = "frmOrderS"
         Me.Text = "frmQuotation"

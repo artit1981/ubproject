@@ -6,39 +6,19 @@ Public Class frmFindReserve
 
 #Region "Property"
     Private Const mFormName As String = "frmFindReserve"
-    'Private mCustomerID As Long
     Private mOrderDate As Date
-    'Private mSubOrderList As List(Of SubOrder)
     Private mProductSubList As List(Of ProductSubDAO)
-    'Private mOrderType As MasterType
     Private bindingOrder As BindingSource
     Private mIsAccept As Boolean = False
     Private mFormLoad As Boolean
-    'Private mdtCus As DataTable
     Private mOrderIDList As List(Of Long)
-
+  
     Public ReadOnly Property IsAccept() As Boolean
         Get
             Return mIsAccept
         End Get
     End Property
-    'Public ReadOnly Property GetSubOrderList() As List(Of SubOrder)
-    '    Get
-    '        Return mSubOrderList
-    '    End Get
-    'End Property
 
-    'Public WriteOnly Property OrderType() As Long
-    '    Set(ByVal value As Long)
-    '        mOrderType = value
-
-    '    End Set
-    'End Property
-    'Public WriteOnly Property CustomerID() As Long
-    '    Set(ByVal value As Long)
-    '        mCustomerID = value
-    '    End Set
-    'End Property
     Public WriteOnly Property OrderDate() As Date
         Set(ByVal value As Date)
             mOrderDate = value
@@ -131,7 +111,9 @@ Public Class frmFindReserve
     Private Sub GetProList()
         Dim lProductSubList As New List(Of ProductListDAO)
         Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
+        Dim lRefOrderID As Long
         Try
+            mOrderIDList = New List(Of Long)
             mProductSubList = New List(Of ProductSubDAO)
             lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
             For Each pProLIst As ProductListDAO In lProductSubList
@@ -168,6 +150,10 @@ Public Class frmFindReserve
                     rec.RateUnit = pProLIst.RateUnit
                     rec.IsMerge = 0
                     mProductSubList.Add(rec)
+                    lRefOrderID = pProLIst.RefID
+                    If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
+                        mOrderIDList.Add(lRefOrderID)
+                    End If
                 Else
                     If lIsGroupDupProduct = 0 Then
                         If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
@@ -204,6 +190,10 @@ Public Class frmFindReserve
                             rec.IsShow = 1
                             rec.IsMerge = 0
                             mProductSubList.Add(rec)
+                            lRefOrderID = pProLIst.RefID
+                            If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
+                                mOrderIDList.Add(lRefOrderID)
+                            End If
                         End If
                     End If
                     If lIsGroupDupProduct = 2 Then
@@ -216,6 +206,11 @@ Public Class frmFindReserve
                         Next
 
                         mProductSubList.Item(lIndex).IsMerge = 1
+
+                        lRefOrderID = pProLIst.RefID
+                        If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
+                            mOrderIDList.Add(lRefOrderID)
+                        End If
                     End If
                 End If
             Next
@@ -322,6 +317,7 @@ Public Class frmFindReserve
                         rec.ID = dr("ID")
                         rec.ProductListRefID = dr("ID")
                         rec.SEQ = ConvertNullToZero(dr("SEQ"))
+                        rec.RefOrderID = ConvertNullToZero(dr("RefID"))
                         rec.ProductID = ConvertNullToZero(dr("ProductID"))
                         rec.ProductCode = ConvertNullToString(dr("ProductCode"))
                         rec.ProductNames = ConvertNullToString(dr("ProductName"))

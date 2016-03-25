@@ -31,6 +31,16 @@
     Private mIsDelete As Integer = 0
     Private mAdjustUnit_Old As Long = 0
     Private mPriceMain As Decimal = 0
+    Private mRefOrderID As Long = 0
+
+    Public Property RefOrderID() As Long
+        Get
+            Return mRefOrderID
+        End Get
+        Set(ByVal Value As Long)
+            mRefOrderID = Value
+        End Set
+    End Property
 
     Public Property ProductCode() As String
         Get
@@ -139,7 +149,7 @@
             mSEQ = value
         End Set
     End Property
-
+ 
     Public Property ID() As Long
         Get
             Return mIDs
@@ -148,7 +158,6 @@
             mIDs = value
         End Set
     End Property
-
 
     Public Property KeepMin() As Long
         Get

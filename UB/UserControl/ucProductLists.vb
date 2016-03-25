@@ -116,6 +116,7 @@ Public Class ucProductLists
                 rec = New ProductSub
                 rec.IsSelect = pPro.IsSelect
                 rec.ID = pPro.ID
+                rec.RefOrderID = pPro.RefOrderID
                 rec.SEQ = pPro.SEQ
                 rec.ProductID = pPro.ProductID
                 rec.ProductCode = pPro.ProductCode
@@ -223,6 +224,7 @@ Public Class ucProductLists
                         lSNCount = 0
                         lDataDAO = New ProductListDAO
                         lDataDAO.ID = pProSub.ID
+                        lDataDAO.RefID = pProSub.RefOrderID
                         lDataDAO.ProductID = pProSub.ProductID
                         lDataDAO.ProductCode = pProSub.ProductCode
                         lDataDAO.ProductName = pProSub.ProductNames
