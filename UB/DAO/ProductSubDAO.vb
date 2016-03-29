@@ -32,6 +32,8 @@
     Private mAdjustUnit_Old As Long = 0
     Private mPriceMain As Decimal = 0
     Private mRefOrderID As Long = 0
+    Private mProductListRefID2 As Long = 0
+    Private mProductListRefID3 As Long = 0
 
     Public Property RefOrderID() As Long
         Get
@@ -236,7 +238,23 @@
             mProductListRefID = Value
         End Set
     End Property
-    
+
+    Public Property ProductListRefID2() As Long
+        Get
+            Return mProductListRefID2
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID2 = Value
+        End Set
+    End Property
+    Public Property ProductListRefID3() As Long
+        Get
+            Return mProductListRefID3
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID3 = Value
+        End Set
+    End Property
     Public Property ModePro() As Integer
         Get
             Return mMode

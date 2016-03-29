@@ -42,6 +42,8 @@ Public Class ProductListDAO
     Private mIsDelete As Integer = 0
     Private mAdjustUnit_Old As Long = 0
     Private mPriceMain As Decimal = 0
+    Private mProductListRefID2 As Long = 0
+    Private mProductListRefID3 As Long = 0
 
     Public ReadOnly Property UnitDAO() As MasterDAO
         Get
@@ -284,6 +286,22 @@ Public Class ProductListDAO
         End Set
     End Property
 
+    Public Property ProductListRefID2() As Long
+        Get
+            Return mProductListRefID2
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID2 = Value
+        End Set
+    End Property
+    Public Property ProductListRefID3() As Long
+        Get
+            Return mProductListRefID3
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID3 = Value
+        End Set
+    End Property
     Public Property SNList() As List(Of SnDAO)
         Get
             Return mSNList
@@ -508,7 +526,7 @@ Public Class ProductListDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductListID", "ProductList", tr)
                     SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,PriceMain,Total,Remark,IsDelete"
-                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,IsShow,IsMerge ,UnitMainID,AdjustUnit,RateUnit)"
+                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,ProductListRefID2,ProductListRefID3,IsShow,IsMerge ,UnitMainID,AdjustUnit,RateUnit)"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"
                     SQL = SQL & " ,  @SEQ"
@@ -530,6 +548,8 @@ Public Class ProductListDAO
                     SQL = SQL & " ,  0"
                     SQL = SQL & " ,  @LocationDTLID"
                     SQL = SQL & " ,  @ProductListRefID"
+                    SQL = SQL & " ,  @ProductListRefID2"
+                    SQL = SQL & " ,  @ProductListRefID3"
                     SQL = SQL & " ,  @IsShow"
                     SQL = SQL & " ,  @IsMerge"
                     SQL = SQL & " ,  @UnitMainID"
@@ -584,6 +604,8 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@UnitMainID", UnitMainID))
             myCommand.Parameters.Add(New SqlParameter("@LocationDTLID", LocationDTLID))
             myCommand.Parameters.Add(New SqlParameter("@ProductListRefID", ProductListRefID))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListRefID2", ProductListRefID2))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListRefID3", ProductListRefID3))
             myCommand.Parameters.Add(New SqlParameter("@IsShow", IsShow))
             myCommand.Parameters.Add(New SqlParameter("@IsMerge", IsMerge))
             myCommand.Parameters.Add(New SqlParameter("@AdjustUnit", AdjustUnit))

@@ -149,6 +149,8 @@ Public Class frmFindReserve
                     rec.AdjustUnit = pProLIst.AdjustUnit
                     rec.RateUnit = pProLIst.RateUnit
                     rec.IsMerge = 0
+                    rec.ProductListRefID2 = 0
+                    rec.ProductListRefID3 = 0
                     mProductSubList.Add(rec)
                     lRefOrderID = pProLIst.RefID
                     If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
@@ -189,6 +191,8 @@ Public Class frmFindReserve
                             rec.ModePro = DataMode.ModeNew
                             rec.IsShow = 1
                             rec.IsMerge = 0
+                            rec.ProductListRefID2 = 0
+                            rec.ProductListRefID3 = 0
                             mProductSubList.Add(rec)
                             lRefOrderID = pProLIst.RefID
                             If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
@@ -206,7 +210,11 @@ Public Class frmFindReserve
                         Next
 
                         mProductSubList.Item(lIndex).IsMerge = 1
-
+                        If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
+                            mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID
+                        Else
+                            mProductSubList.Item(lIndex).ProductListRefID3 = pProLIst.ID
+                        End If
                         lRefOrderID = pProLIst.RefID
                         If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
                             mOrderIDList.Add(lRefOrderID)
