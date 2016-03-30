@@ -231,19 +231,28 @@ Module modFunction
         CheckStock = ""
         Try
             Dim lcls As New ProductStockDAO
+            Dim lclsProduct As New ProductDAO
+            Dim lclsLocat As New LocationDTLDAO
+            Dim lclsUnit As New UnitDAO
             pDiffUnit = 0
+
+            lclsProduct.InitailData(pProID, 0, "", "", Nothing)
+            lclsLocat.InitailData(pLocationDtlID)
+            lclsUnit.InitailData(pUnitID, "")
 
             lcls.ProductID = pProID
             lcls.LocationDTLID = pLocationDtlID
             lcls.UnitID = pUnitID
+
             If lcls.IsExist_Initial(Nothing, lIsStockSum) Then
                 pDiffUnit = pUnits - lcls.UnitsStock
                 If pUnits > lcls.UnitsStock Then
-                    Return "จำนวนสินค้าในสต๊อกมีไม่เพียงพอ"
+
+                    Return "จำนวนสินค้าในสต๊อกมีไม่เพียงพอ : " & lclsProduct.Code & "[คลัง :" & lclsLocat.IDCode & " หน่วย :" & lclsUnit.Code & " ]"
                 End If
             Else
                 pDiffUnit = pUnits
-                Return "ไม่พบสินค้าในสต๊อก"
+                Return "ไม่พบสินค้าในสต๊อก" & lclsProduct.Code & " [คลัง :" & lclsLocat.IDCode & " หน่วย :" & lclsUnit.Code & " ]"
             End If
 
         Catch e As Exception

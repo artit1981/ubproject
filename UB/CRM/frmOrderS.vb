@@ -429,7 +429,7 @@ Public Class frmOrderS
             'Stock fail to Reserve
             If lProListStockFail.Count > 0 Then
                 ShowProgress(False, "")
-                If XtraMessageBox.Show(Me, "สินค้าในสต๊อกไม่เพียงพอ ต้องการทำรายการใบสั่งจองหรือไม่", "สต๊อกหมด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "สินค้าในสต๊อกไม่เพียงพอ ต้องการทำรายการใบสั่งจองหรือไม่" & vbNewLine & UcProductLists1.IsError, "สต๊อกหมด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                     MakeReserve(lProListStockFail)
                 End If
                 Return False

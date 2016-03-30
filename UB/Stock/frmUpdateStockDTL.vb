@@ -202,7 +202,7 @@ Public Class frmUpdateStockDTL
         Dim lfrmSN As New frmSN
         Try
                 If Not mProductListDAO Is Nothing Then
-                lfrmSN.Unit = Units.EditValue
+                lfrmSN.Unit = SpinUnit.EditValue
                 lfrmSN.UnitMain = UnitsMain.EditValue
                 lfrmSN.ProductCodes = mProductListDAO.ProductCode
                 lfrmSN.ProductNames = mProductListDAO.ProductName
