@@ -81,6 +81,7 @@ Public Class OrderSDAO
                     QuotationDays = ConvertNullToZero(dr("QuotationDays"))
                     PO = ConvertNullToString(dr("PO"))
                     OrderStatus = ConvertNullToString(dr("OrderStatus"))
+                    OrderStatus2 = ConvertNullToString(dr("OrderStatus2"))
                     CancelRemark = ConvertNullToString(dr("CancelRemark"))
                     IsCancel = dr("IsCancel")
                     Total = ConvertNullToZero(dr("Total"))
@@ -259,9 +260,15 @@ Public Class OrderSDAO
                         PayTotal = 0
                     End If
 
-                    If IsCancel = True Then
-                        OrderStatus = EnumStatus.Cancel.ToString
-                    End If
+                    'If IsCancel = True Then
+                    '    OrderStatus = EnumStatus.Cancel.ToString
+                    'End If
+                    'If IsCancel = True And IsChangeCancel = True Then
+                    '    OrderStatus2 = OrderStatus
+                    '    OrderStatus = EnumStatus.Cancel.ToString
+                    'ElseIf IsCancel = False And IsChangeCancel = True Then
+                    '    OrderStatus = OrderStatus2
+                    'End If
 
                     If TableID = MasterType.Reserve Then
                         MakePOStatus = EnumStatus.Ordering.ToString
@@ -269,7 +276,23 @@ Public Class OrderSDAO
                         MakePOStatus = ""
                     End If
 
+                Case DataMode.ModeEdit
+                  
             End Select
+
+            If IsCancel = True And IsChangeCancel = True Then
+                OrderStatus2 = OrderStatus
+                OrderStatus = EnumStatus.Cancel.ToString
+            ElseIf IsCancel = False And IsChangeCancel = True Then
+                If OrderStatus2 = "" Then
+                    OrderStatus = "Open"
+                ElseIf OrderStatus2 = "Cancel" Then
+                    OrderStatus = "Open"
+                Else
+                    OrderStatus = OrderStatus2
+                End If
+
+            End If
 
             'Insert data to order table
             Call InsertOrder(tr)
@@ -1041,7 +1064,7 @@ Public Class OrderSDAO
         Try
             Select Case ModeData
                 Case DataMode.ModeNew
-                    Sql = " INSERT INTO Orders  (OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus"
+                    Sql = " INSERT INTO Orders  (OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
                     Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal"
                     Sql &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
                     Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType"
@@ -1060,6 +1083,7 @@ Public Class OrderSDAO
                     Sql &= " , " & ConvertNullToZero(CreditRuleID)
                     Sql &= " , " & ConvertNullToZero(VatTypeID)
                     Sql &= " , '" & ConvertNullToString(OrderStatus) & "'"
+                    Sql &= " , '" & ConvertNullToString(OrderStatus2) & "'"
                     Sql &= " , " & IIf(IsCancel = True, 1, 0)
                     Sql &= " , '" & ConvertNullToString(CancelRemark) & "'"
                     Sql &= " ,  " & ConvertNullToZero(Total)
@@ -1119,6 +1143,7 @@ Public Class OrderSDAO
                     Sql &= " , VatTypeID=" & ConvertNullToZero(VatTypeID)
                     Sql &= " , PO='" & ConvertNullToString(PO) & "'"
                     Sql &= " , OrderStatus='" & ConvertNullToString(OrderStatus) & "'"
+                    Sql &= " , OrderStatus2='" & ConvertNullToString(OrderStatus2) & "'"
                     Sql &= " , IsCancel=" & IIf(IsCancel = True, 1, 0)
                     Sql &= " , CancelRemark='" & ConvertNullToString(CancelRemark) & "'"
                     Sql &= " , Total=" & ConvertNullToZero(Total)

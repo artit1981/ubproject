@@ -205,10 +205,12 @@ Public Class frmFindReserve
                         mProductSubList.Item(lIndex).AdjustUnit = mProductSubList.Item(lIndex).AdjustUnit + pProLIst.AdjustUnit
                         mProductSubList.Item(lIndex).Discount = mProductSubList.Item(lIndex).Discount + pProLIst.Discount
                         mProductSubList.Item(lIndex).Total = mProductSubList.Item(lIndex).Total + pProLIst.Total
-                        For Each pSN As SnDAO In pProLIst.SNList
-                            mProductSubList.Item(lIndex).SNList.Add(pSN)
-                        Next
-
+                        If IsNothing(pProLIst.SNList) = False Then
+                            For Each pSN As SnDAO In pProLIst.SNList
+                                mProductSubList.Item(lIndex).SNList.Add(pSN)
+                            Next
+                        End If
+                       
                         mProductSubList.Item(lIndex).IsMerge = 1
                         If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID

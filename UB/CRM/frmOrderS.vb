@@ -375,6 +375,11 @@ Public Class frmOrderS
             mcls.ShipingByID = ConvertNullToZero(ShipingBy.GetColumnValue("ID"))
             mcls.ShipingRuleID = ConvertNullToZero(ShipingRuleID.GetColumnValue("ID"))
             mcls.CancelRemark = CancelRemark.EditValue
+            If mcls.IsCancel = False And IsCancel.CheckState = CheckState.Checked Then
+                mcls.IsChangeCancel = True
+            ElseIf mcls.IsCancel = True And IsCancel.CheckState = CheckState.Unchecked Then
+                mcls.IsChangeCancel = True
+            End If
             mcls.IsCancel = IsCancel.EditValue
             mcls.IsEditVat = chkIsEditVat.EditValue
             mcls.PledgeTotal = ConvertNullToZero(PledgeTotal.EditValue)

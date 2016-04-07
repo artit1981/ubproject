@@ -85,6 +85,8 @@ Public Class iOrder
     Dim mQuotationRemarkID As Long = 0
     Dim mIsNotPass As Boolean = False
     Dim mCampaignID As Long = 0
+    Dim mOrderStatus2 As String = ""
+    Dim mIsChangeCancel As Boolean = False
 
     Public Overridable ReadOnly Property TableName() As String
         Get
@@ -330,7 +332,22 @@ Public Class iOrder
             mOrderStatus = value
         End Set
     End Property
-
+    Public Property OrderStatus2() As String
+        Get
+            Return mOrderStatus2
+        End Get
+        Set(ByVal value As String)
+            mOrderStatus2 = value
+        End Set
+    End Property
+    Public Property IsChangeCancel() As Boolean
+        Get
+            Return mIsChangeCancel
+        End Get
+        Set(ByVal value As Boolean)
+            mIsChangeCancel = value
+        End Set
+    End Property
     Public Property MakePOStatus() As String
         Get
             Return mMakePOStatus

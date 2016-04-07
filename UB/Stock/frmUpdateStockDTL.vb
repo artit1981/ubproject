@@ -125,18 +125,21 @@ Public Class frmUpdateStockDTL
 
                     '-------------------------
                     'SN
-                    For Each pclsSN In mProductListDAO.SNList
-                        If lUnits < 0 Then
-                            pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
-                        Else
-                            pclsSN.Status = "New"
-                            pclsSN.SerialNumberID = 0 ''New
-                            pclsSN.OrderID = 0
-                            pclsSN.ProductListID = 0
-                            pclsSN.ProductID = mProductListDAO.ProductID
-                            pclsSN.SaveData(tr, DataMode.ModeNew)
-                        End If
-                    Next
+                    If IsNothing(mProductListDAO.SNList) = False Then
+                        For Each pclsSN In mProductListDAO.SNList
+                            If lUnits < 0 Then
+                                pclsSN.SetStatusBySN(tr, mProductListDAO.ProductID, pclsSN.SerialNumberNo, "None", 0)
+                            Else
+                                pclsSN.Status = "New"
+                                pclsSN.SerialNumberID = 0 ''New
+                                pclsSN.OrderID = 0
+                                pclsSN.ProductListID = 0
+                                pclsSN.ProductID = mProductListDAO.ProductID
+                                pclsSN.SaveData(tr, DataMode.ModeNew)
+                            End If
+                        Next
+                    End If
+
 
                     tr.Commit()
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)

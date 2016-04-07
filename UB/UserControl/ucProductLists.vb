@@ -376,6 +376,7 @@ Public Class ucProductLists
                                 If info.ErrorText <> "" Then
                                     lProductListFail = lDataDAO
                                     lProductListFail.Units = lUnitDiff
+                                    lProductListFail.AdjustUnit = lUnitDiff
                                     pProListStockFail.Add(lProductListFail)
                                     info.ErrorType = ErrorType.Critical
                                     mIsError = info.ErrorText
