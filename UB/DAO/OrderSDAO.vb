@@ -437,7 +437,7 @@ Public Class OrderSDAO
             End If
             SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
 
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime,case when Cheque.ChequeID > 1 then 1 else 0 end ChequeID"
+            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime,Cheque.ChequeID as ChequeID"
             SQL = SQL & " FROM Orders  "
             SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
             SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
