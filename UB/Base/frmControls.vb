@@ -104,12 +104,13 @@ Public Class frmControls
             mRowFocus = 0
             mIsFromLoad = True
             CheckShowInfo.Checked = False
+            chkShowDelete.Checked = False
             DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
             InitFindCondition()
-            mIsFromLoad = False
+
             mLoadTimer = 0
             dtpDateTo.EditValue = DateAdd(DateInterval.Day, 7, GetCurrentDate(Nothing))
-            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -3, GetCurrentDate(Nothing))
+            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -2, GetCurrentDate(Nothing))
 
             'If DatePanel.Visible = True Then
 
@@ -147,7 +148,7 @@ Public Class frmControls
 
             '    'AddHandler GridView.CustomDrawRowPreview, AddressOf gridView_CustomDrawRowPreview
             'End If
-         
+            mIsFromLoad = False
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -420,17 +421,17 @@ Public Class frmControls
 
     End Sub
 
-    Private Sub dtpDateFrom_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpDateFrom.Click
-        If DatePanel.Visible = True Then
-            RaiseEvent ReLoad()
-        End If
-    End Sub
+    'Private Sub dtpDateFrom_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpDateFrom.Click
+    '    If DatePanel.Visible = True Then
+    '        RaiseEvent ReLoad()
+    '    End If
+    'End Sub
 
-    Private Sub dtpDateTo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpDateTo.Click
-        If DatePanel.Visible = True Then
-            RaiseEvent ReLoad()
-        End If
-    End Sub
+    'Private Sub dtpDateTo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtpDateTo.Click
+    '    If DatePanel.Visible = True Then
+    '        RaiseEvent ReLoad()
+    '    End If
+    'End Sub
 
     Private Sub GridView_RowStyle(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GridView.RowStyle
 
@@ -470,4 +471,16 @@ Public Class frmControls
         End Try
 
     End Sub
+
+    'Private Sub dtpDateFrom_EditValueChanged(sender As Object, e As System.EventArgs) Handles dtpDateFrom.EditValueChanged
+    '    If DatePanel.Visible = True And mIsFromLoad = False Then
+    '        RaiseEvent ReLoad()
+    '    End If
+    'End Sub
+
+    'Private Sub dtpDateTo_EditValueChanged(sender As Object, e As System.EventArgs) Handles dtpDateTo.EditValueChanged
+    '    If DatePanel.Visible = True And mIsFromLoad = False Then
+    '        RaiseEvent ReLoad()
+    '    End If
+    'End Sub
 End Class
