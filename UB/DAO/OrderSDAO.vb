@@ -437,7 +437,8 @@ Public Class OrderSDAO
             End If
             SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
 
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime,Cheque.ChequeID as ChequeID"
+            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime "
+            SQL = SQL & " ,(select max(ChequeID) from Cheque where Cheque.RefOrderID=Orders.OrderID and Cheque.IsDelete=0 ) as ChequeID"
             SQL = SQL & " FROM Orders  "
             SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
             SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
@@ -449,7 +450,6 @@ Public Class OrderSDAO
                 SQL = SQL & " LEFT OUTER JOIN Orders AS RefOrder ON Orders.OrderStatus in('Close','Receive') and RefOrder.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and RefOrder.IsDelete=0  "
             End If
             SQL = SQL & " LEFT OUTER JOIN Orders AS PO ON PO.OrderID=(select max(RefOrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.OrderID=Orders.OrderID  ) and PO.IsDelete=0  "
-            SQL = SQL & " LEFT OUTER JOIN Cheque ON Cheque.RefOrderID=Orders.OrderID and Cheque.IsDelete=0  "
             SQL = SQL & " WHERE Orders.TableID =" & TableID
             If pID > 0 Then
                 SQL = SQL & "  AND Orders.OrderID=" & pID

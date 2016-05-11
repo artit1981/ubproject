@@ -282,7 +282,7 @@ Partial Public Class rptReceipt
         'XrLabel14
         '
         Me.XrLabel14.CanGrow = False
-        Me.XrLabel14.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel14.Font = New System.Drawing.Font("Cordia New", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(54.16667!, 79.79164!)
         Me.XrLabel14.Name = "XrLabel14"
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
