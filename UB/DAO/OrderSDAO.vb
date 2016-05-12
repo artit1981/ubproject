@@ -543,6 +543,41 @@ Public Class OrderSDAO
     End Function
 
 
+
+    Public Function GetDataTableForDebtAnalyst(ByVal pAsOfDate As Date, ByVal pFromDate As Date, ByVal pToDate As Date _
+                                               , ByVal pCusList As String, ByVal pOrderType As String) As DataTable
+        Dim SQL As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = " SELECT Orders.OrderID,Orders.OrderCode,Orders.OrderDate,Orders.ExpireDate,Orders.GrandTotal"
+            SQL = SQL & " case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
+            SQL = SQL & " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' end as OrderType"
+            SQL = SQL & " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
+            SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
+            SQL = SQL & " ,Orders.RefReceiptID AS ReceiptID"
+            SQL = SQL & " "
+
+            SQL = SQL & " FROM Orders  "
+            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            'SQL = SQL & " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+
+            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL = SQL & " and Orders.TableID in(" & pOrderType & ")"
+            SQL = SQL & "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
+            SQL = SQL & "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
+            SQL = SQL & " AND Orders.CustomerID in(" & pCusList & ")"
+            SQL = SQL & " ORDER BY Customer.CustomerCode,Orders.OrderDate"
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForDebtAnalyst : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
+
     Public Function GetDataTableForCampaign(ByVal pCampaignID As Long) As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
@@ -566,6 +601,7 @@ Public Class OrderSDAO
         End Try
         Return dataTable
     End Function
+
 
     Public Overrides Function GetToRefOrderCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
         Dim SQL As String = "", lstrCode As String = ""
@@ -675,7 +711,7 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
 
         Try
-          
+
 
             'SQL = "SELECT Orders.OrderID  FROM OrdersRef,Orders  "
             'SQL = SQL & " WHERE OrdersRef.OrderID=Orders.OrderID and OrdersRef.IsDelete=0  and OrdersRef.RefOrderID=" & ID
@@ -801,7 +837,7 @@ Public Class OrderSDAO
         End Try
     End Sub
 
-    Public Sub SaveProductList(ByRef ProductList As List(Of ProductListDAO), ByVal ModeData As Long, ByVal RefID As Long, ByVal TableName As String , ByRef tr As SqlTransaction)
+    Public Sub SaveProductList(ByRef ProductList As List(Of ProductListDAO), ByVal ModeData As Long, ByVal RefID As Long, ByVal TableName As String, ByRef tr As SqlTransaction)
         Dim lSEQ As Long = 1 ', lstrStayIDList As String = ""
         Dim lclsSN2 As SnDAO
         Dim lSNTable As DataTable
@@ -841,7 +877,7 @@ Public Class OrderSDAO
                                 '*** Main Stock
                                 UpdateStock(tr, pProList, lIsUpdate, True)
                             End If
-                          
+
                             '*** ORG. Stock
                             UpdateStock(tr, pProList, lIsUpdate, False)
 
@@ -870,7 +906,7 @@ Public Class OrderSDAO
                                     lclsSN2 = New SnDAO
                                     lclsSN2.DeleteFromModeDelete(tr, RefID, pProList.ID)
                                 End If
-                               
+
                             Else 'New ,Edit
                                 If IsNothing(pProList.SNList) = False Then
                                     For Each pclsSN As SnDAO In pProList.SNList
@@ -1034,7 +1070,7 @@ Public Class OrderSDAO
                             lclsStock.Units = (pProductList.AdjustUnit - pProductList.AdjustUnit_Old) * -1
                         End If
                     End If
-                   
+
                 End If
 
                 If pIsUpdate = 1 Then  'sell stock sum
@@ -1317,7 +1353,7 @@ Public Class OrderSDAO
 
         End Try
     End Sub
-     
+
     Private Sub UpdateCost(ByRef ptr As SqlTransaction)
         Try
             If ModeData = DataMode.ModeNew Then
@@ -1341,7 +1377,7 @@ Public Class OrderSDAO
 
         End Try
     End Sub
-     
+
 
     Public Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String, ByRef ptr As SqlTransaction, pProductDAOs As ProductListDAO) As Boolean
         Dim lSNTable As New DataTable
@@ -1391,7 +1427,7 @@ Public Class OrderSDAO
                 Next
             End If
 
-        
+
             If lstrSNError = "" Then
                 Return False
             Else

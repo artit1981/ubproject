@@ -17,43 +17,17 @@ Public Class frmDebtAnalystReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
+            'Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
             'thisMonth = thisMonth.AddMonths(-1)
-            Me.DateFrom.EditValue = thisMonth.AddMonths(-1)
-            Me.DateTo.EditValue = thisMonth.AddDays(-1)
-            VatType.EditValue = "E"
+            Me.DateFrom.EditValue = DateTime.Today
+            Me.DateTo.EditValue = DateTime.Today
+            Me.DateAsOf.EditValue = DateTime.Today
             chkSelectAll.Checked = True
 
             SetComboCustomer()
-            SetComboProductType("", ProductTypeID)
-            SetComboProductBrand("", ProductBrandID)
-            SetComboProduct()
+            
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
-        End Try
-
-    End Sub
-
-    Private Sub SetComboEmployee()
-        Dim dataTable As New DataTable()
-        Dim lcls As New EmployeeDAO
-
-        lblEmp.Text = "พนักงานขาย"
-        VatType.Enabled = True
-        Try
-            dataTable = lcls.GetDataTable(0, True)
-            Employee.DataSource = dataTable
-            Employee.DisplayMember = "NAME"
-            Employee.ValueMember = "ID"
-
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Employee.SetItemChecked(i, True)
-            Next i
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
-        Finally
-            dataTable = Nothing
         End Try
 
     End Sub
@@ -61,101 +35,50 @@ Public Class frmDebtAnalystReport
     Private Sub SetComboCustomer()
         Dim dataTable As New DataTable()
         Dim lcls As New CustomerDAO
-
-        lblEmp.Text = "ลูกค้า"
-        VatType.Enabled = False
+       
         Try
-            lcls.TableID = MasterType.Accounts
+            If ReportType.EditValue = 1 Then
+                lcls.TableID = MasterType.Accounts
+            Else
+                lcls.TableID = MasterType.Agency
+            End If
+
             dataTable = lcls.GetDataTableForCombo(True, False, False)
-            Employee.DataSource = dataTable
-            Employee.DisplayMember = "CusName"
-            Employee.ValueMember = "ID"
+            lsCustomer.DataSource = dataTable
+            lsCustomer.DisplayMember = "CusName"
+            lsCustomer.ValueMember = "ID"
 
             For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Employee.SetItemChecked(i, True)
+                lsCustomer.SetItemChecked(i, True)
             Next i
 
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCustomer : " & e.Message)
         Finally
             dataTable = Nothing
         End Try
 
     End Sub
 
-
-    Private Sub SetComboProduct()
-        Dim dataTable As New DataTable()
-        Dim lcls As New ProductDAO
-        Dim lSQL As String = "", sQN As String = "0"
-
-        Try
-            'ProductType
-            For Each item As Object In ProductTypeID.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
-                End If
-            Next
-            lSQL = " and Product.ProductTypeID in (" & sQN & ")"
-
-
-
-            'ProductBrand
-            sQN = "0"
-            For Each item As Object In ProductBrandID.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
-                End If
-            Next
-            lSQL = " and Product.ProductBrandID in (" & sQN & ")"
-
-            'Product
-            dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
-            Product.DataSource = dataTable
-            Product.DisplayMember = "ProductName"
-            Product.ValueMember = "ID"
-
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Product.SetItemChecked(i, True)
-            Next i
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
-        Finally
-            dataTable = Nothing
-        End Try
-
-    End Sub
 
     Private Sub PrintReport()
         Dim report As New XtraReport
         Dim lclsReport As New TmpOrderDAO
+        Dim lAsOfDate As Date, lExpireDate As Date
+
         Try
-
-
+            lAsOfDate = DateAsOf.EditValue
             'Set company header
             BuildCompanyAddress(lclsReport)
-
+            report = New rptDebtAnalyst
             Select Case ReportType.EditValue
                 Case 1
-                    lclsReport.Header1 = "รายงานวิเคราะห์การขายแยกตามลูกค้า"
-                    report = New rptSellByCus
+                    lclsReport.Header1 = "รายงานวิเคราะห์อายุลูกหนี้(แบบแจกแจง)"
                 Case 2
-                    report = New rptCommission
-                    If VatType.EditValue = "E" Then
-                        lclsReport.Header1 = "รายงานค่าคอมมิชชัน (คำนวณจากมูลค่าสินค้าไม่รวม Vat)"
-                    Else
-                        lclsReport.Header1 = "รายงานค่าคอมมิชชัน (คำนวณจากมูลค่าสินค้ารวม Vat)"
-                    End If
+                    lclsReport.Header1 = "รายงานวิเคราะห์อายุเจ้าหนี้(แบบแจกแจง)"
             End Select
 
-            lclsReport.Header2 = "วันที่ " & Format(DateFrom.EditValue, "dd MMMM yyyy") & " ถึง " & Format(DateTo.EditValue, "dd MMMM yyyy")
+            lclsReport.Header2 = "วันที่แยกอายุหนี้ " & Format(DateAsOf.EditValue, "dd MMMM yyyy") & " รายการจากวันที่ " & Format(DateFrom.EditValue, "dd MMMM yyyy") & " ถึง " & Format(DateTo.EditValue, "dd MMMM yyyy")
             lclsReport.Header3 = ""
             lclsReport.SaveData()
 
@@ -163,58 +86,53 @@ Public Class frmDebtAnalystReport
             Dim myCommand As SqlCommand
             Dim i As Integer = 1
             Dim SQL As String
-            Dim lCommissionAMT As Decimal = 0
 
             'Build Order List
             Dim lOrderTypeList As String = ""
-            lOrderTypeList = "( 0"
-            If chkInvoice.Checked = True Then
+            lOrderTypeList = " 0"
+            If chkInvoice.Checked = True And ReportType.EditValue = 1 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.Invoice
+            ElseIf chkInvoice.Checked = True And ReportType.EditValue = 2 Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Invoice
             End If
-            If chkShiping.Checked = True Then
+
+            If chkShiping.Checked = True And ReportType.EditValue = 1 Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Shiping
+            ElseIf chkShiping.Checked = True And ReportType.EditValue = 2 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.ShipingBuy
             End If
-            lOrderTypeList = lOrderTypeList & ")"
+
+            If chkAddCre.Checked = True And ReportType.EditValue = 1 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.AddCredit
+            ElseIf chkAddCre.Checked = True And ReportType.EditValue = 2 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.AddCreditBuy
+            End If
+
+            If chkRedue.Checked = True And ReportType.EditValue = 1 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.ReduceCredit
+            ElseIf chkRedue.Checked = True And ReportType.EditValue = 2 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.ReduceCreditBuy
+            End If
+
+            If chkBorrow.Checked = True And ReportType.EditValue = 1 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.Borrow
+            End If
 
             'Build Employee List
-            Dim lEmployeeList As String = "0"
-            For Each item As Object In Employee.CheckedItems
+            Dim lCusList As String = "0"
+            For Each item As Object In lsCustomer.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
-                If lEmployeeList = "" Then
-                    lEmployeeList = ConvertNullToString(row(0))
+                If lCusList = "" Then
+                    lCusList = ConvertNullToString(row(0))
                 Else
-                    lEmployeeList = lEmployeeList & "," & ConvertNullToString(row(0))
+                    lCusList = lCusList & "," & ConvertNullToString(row(0))
                 End If
             Next
 
-            SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Orders.GrandTotal, Orders.TableID"
-            SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  "
-            SQL = SQL & " WHERE Orders.IsDelete =0   "
-            SQL = SQL & " and Orders.OrderDate between '" & formatSQLDate(DateFrom.EditValue) & "'"
-            SQL = SQL & "                      and '" & formatSQLDate(DateTo.EditValue) & "'"
-            SQL = SQL & " and Orders.IsInActive = 0"
-            SQL = SQL & " and Orders.TableID in " & lOrderTypeList
-            Select Case ReportType.EditValue
-                Case 1
-                    SQL = SQL & " and Customer.CustomerID in (" & lEmployeeList & ")"
-                Case 2
-                    SQL = SQL & " and Customer.EmpID in (" & lEmployeeList & ")"
-            End Select
-            Select Case ReportType.EditValue
-                Case 1
-                    SQL = SQL & " ORDER BY Customer.Title,Customer.Firstname,Orders.OrderDate ,Orders.OrderCode"
-                Case 2
-                    SQL = SQL & " ORDER BY Employee.Title,Employee.Firstname,Orders.OrderDate ,Orders.OrderCode"
-            End Select
+            Dim lclsOrder As New OrderSDAO
+            Dim lPayAmount As Decimal = 0, lNotPayAmount As Decimal = 0, lDayPast As Long = 0
 
-
-
-            lTableOrder = gConnection.executeSelectQuery(SQL, Nothing)
+            lTableOrder = lclsOrder.GetDataTableForDebtAnalyst(DateAsOf.EditValue, DateFrom.EditValue, DateTo.EditValue, lCusList, lOrderTypeList)
             If lTableOrder.Rows.Count > 0 Then
                 'Clear Tmp
                 SQL = " DELETE FROM TmpTax WHERE UserID=" & gUserID
@@ -223,31 +141,70 @@ Public Class frmDebtAnalystReport
                 gConnection.executeInsertSqlCommand(myCommand, Nothing)
 
                 For Each pRow As DataRow In lTableOrder.Rows
-                    lCommissionAMT = 0
-                    If VatType.EditValue = "E" Then
-                        lCommissionAMT = (ConvertNullToZero(pRow.Item("GrandTotal")) - ConvertNullToZero(pRow.Item("VatAmount"))) * (ConvertNullToZero(pRow.Item("Commission")) / 100)
+                    lExpireDate = pRow.Item("ExpireDate")
+                    lPayAmount = 0
+                    lNotPayAmount = 0
+                    If ConvertNullToZero(pRow.Item("ReceiptID")) > 0 Then
+                        lPayAmount = CalcPayAmount(pRow.Item("ReceiptID"))
+                        If ConvertNullToZero(pRow.Item("GrandTotal")) <= lPayAmount Then
+                            lNotPayAmount = 0
+                        Else
+                            lNotPayAmount = ConvertNullToZero(pRow.Item("GrandTotal")) - lPayAmount
+                        End If
                     Else
-                        lCommissionAMT = ConvertNullToZero(pRow.Item("GrandTotal")) * (ConvertNullToZero(pRow.Item("Commission")) / 100)
+                        lNotPayAmount = ConvertNullToZero(pRow.Item("GrandTotal"))
                     End If
 
-                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxDate1,TaxText2,TaxText3,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7  "
-                    SQL = SQL & "  )"
+                    lDayPast = DateDiff(DateInterval.Day, lExpireDate, lAsOfDate)
+
+                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxDate1,TaxText5,TaxText6,TaxTotal1,TaxDate2,TaxTotal2"
+                    SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"
                     SQL = SQL & " VALUES ( " & gUserID
                     SQL = SQL & " ," & i                                                                    'SEQ
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("EmployeeName")) & "'"                'TaxText1
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("EmpCode")) & "'"                     'TaxText1
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Employee")) & "'"                    'TaxText2
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("CustomerCode")) & "'"                'TaxText3
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText4
                     SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1
-                    If ConvertNullToString(pRow.Item("InvoiceSuplierID")) <> "" Then
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("InvoiceSuplierID")) & "'"        'TaxText2
-                    Else
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"               'TaxText2
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"                   'TaxText5
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderType")) & "'"                   'TaxText6
+                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal1
+                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("ExpireDate")) & "'"                        'TaxDate2
+                    'ยังไม่ครบกำหนด
+                    If lDayPast <= 0 Then
+                        SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                      'TaxTotal2 
+                    Else : SQL = SQL & " ,0"
                     End If
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText3
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("Total"))                               'TaxTotal2
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("DiscountAmount"))                      'TaxTotal3
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("VatAmount"))                           'TaxTotal4
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal5
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("Commission"))                          'TaxTotal6
-                    SQL = SQL & " , " & lCommissionAMT                                                      'TaxTotal7
+                    'ยอดคงค้าง                     
+                    SQL = SQL & " , " & lNotPayAmount                                                       'TaxTotal3 
+                    '1M
+                    If lDayPast > 0 And lDayPast <= 30 Then
+                        SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal4 
+                    Else : SQL = SQL & " ,0"
+                    End If
+                    '2M
+                    If lDayPast > 30 And lDayPast <= 60 Then
+                        SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal5 
+                    Else : SQL = SQL & " ,0"
+                    End If
+                    '3M
+                    If lDayPast > 60 And lDayPast <= 90 Then
+                        SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal6 
+                    Else : SQL = SQL & " ,0"
+                    End If
+                    '4M
+                    If lDayPast > 90 And lDayPast <= 120 Then
+                        SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal7 
+                    Else : SQL = SQL & " ,0"
+                    End If
+                    '>4M
+                    If lDayPast > 120 Then
+                        SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal8 
+                    Else : SQL = SQL & " ,0"
+                    End If
+
+                    SQL = SQL & " , " & lDayPast                                                            'TaxTotal9
+
                     SQL = SQL & " ) "
                     myCommand = New SqlCommand
                     myCommand.CommandText = SQL
@@ -268,36 +225,39 @@ Public Class frmDebtAnalystReport
         End Try
     End Sub
 
+    Private Function CalcPayAmount(ByVal pReceiptID As Long) As Decimal
+        Dim dataTable As New DataTable()
+        Dim lcls As New ChequeDAO
+        CalcPayAmount = 0
+        Try
+            lcls = New ChequeDAO
+            dataTable = lcls.GetDataTable(pReceiptID)
+            If dataTable.Rows.Count > 0 Then
+                For Each pRow As DataRow In dataTable.Rows
+                    CalcPayAmount = CalcPayAmount + ConvertNullToZero(pRow.Item("ChequePay"))
+                Next
+            End If
+
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".CalcPayAmount : " & e.Message)
+        Finally
+            dataTable = Nothing
+        End Try
+    End Function
+
     Private Sub ReportType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ReportType.SelectedIndexChanged
-        Select Case ReportType.EditValue
-            Case 1
-                SetComboCustomer()
-            Case 2
-                SetComboEmployee()
-        End Select
+        SetComboCustomer()
     End Sub
 
     Private Sub chkSelectAll_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
         If chkSelectAll.CheckState = CheckState.Checked Then
-            Employee.CheckAll()
+            lsCustomer.CheckAll()
         Else
-            Employee.UnCheckAll()
+            lsCustomer.UnCheckAll()
         End If
 
     End Sub
 
-    Private Sub chkSelectAllPro_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAllPro.CheckedChanged
-        If chkSelectAllPro.CheckState = CheckState.Checked Then
-            Product.CheckAll()
-        Else
-            Product.UnCheckAll()
-        End If
-    End Sub
-
-    Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
-        SetComboProduct()
-    End Sub
-    Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
-        SetComboProduct()
-    End Sub
+   
 End Class
