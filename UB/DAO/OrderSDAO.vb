@@ -551,8 +551,8 @@ Public Class OrderSDAO
 
         Try
             SQL = " SELECT Orders.OrderID,Orders.OrderCode,Orders.OrderDate,Orders.ExpireDate,Orders.GrandTotal"
-            SQL = SQL & " case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
-            SQL = SQL & " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' end as OrderType"
+            SQL = SQL & " ,case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
+            SQL = SQL & " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' "
             SQL = SQL & " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
             SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"

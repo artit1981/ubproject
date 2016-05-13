@@ -157,7 +157,7 @@ Public Class frmDebtAnalystReport
 
                     lDayPast = DateDiff(DateInterval.Day, lExpireDate, lAsOfDate)
 
-                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxDate1,TaxText5,TaxText6,TaxTotal1,TaxDate2,TaxTotal2"
+                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxText5,TaxText6,TaxTotal1,TaxDate1,TaxDate2,TaxTotal2"
                     SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"
                     SQL = SQL & " VALUES ( " & gUserID
                     SQL = SQL & " ," & i                                                                    'SEQ
@@ -165,11 +165,12 @@ Public Class frmDebtAnalystReport
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Employee")) & "'"                    'TaxText2
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("CustomerCode")) & "'"                'TaxText3
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText4
-                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"                   'TaxText5
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderType")) & "'"                   'TaxText6
                     SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal1
+                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1                        
                     SQL = SQL & " ,'" & formatSQLDate(pRow.Item("ExpireDate")) & "'"                        'TaxDate2
+
                     'ยังไม่ครบกำหนด
                     If lDayPast <= 0 Then
                         SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                      'TaxTotal2 
