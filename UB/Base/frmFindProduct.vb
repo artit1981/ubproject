@@ -56,6 +56,7 @@ Public Class frmFindProduct
                     rec.ProductID = dr("ID")
                     rec.ProductCode = ConvertNullToString(dr("ProductCode"))
                     rec.ProductName = ConvertNullToString(dr("ProductName"))
+                    rec.ProductRemark = ConvertNullToString(dr("Remark"))
                     rec.PriceStandard = ConvertNullToZero(dr("Price"))
                     bindingSource1.Add(rec)
                 Next

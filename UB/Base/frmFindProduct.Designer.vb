@@ -38,6 +38,7 @@ Partial Class frmFindProduct
         Me.btnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.CheckAll = New DevExpress.XtraEditors.CheckEdit()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.ProductRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,7 +61,7 @@ Partial Class frmFindProduct
         '
         'GridView
         '
-        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.PriceStandard, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4})
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.PriceStandard, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -87,6 +88,7 @@ Partial Class frmFindProduct
         Me.IsSelect.Name = "IsSelect"
         Me.IsSelect.Visible = True
         Me.IsSelect.VisibleIndex = 0
+        Me.IsSelect.Width = 52
         '
         'RepositoryItemCheckEdit1
         '
@@ -99,12 +101,12 @@ Partial Class frmFindProduct
         Me.ProductCode.Caption = "รหัสสินค้า"
         Me.ProductCode.FieldName = "ProductCode"
         Me.ProductCode.MaxWidth = 200
-        Me.ProductCode.MinWidth = 200
+        Me.ProductCode.MinWidth = 150
         Me.ProductCode.Name = "ProductCode"
         Me.ProductCode.OptionsColumn.AllowEdit = False
         Me.ProductCode.Visible = True
         Me.ProductCode.VisibleIndex = 1
-        Me.ProductCode.Width = 200
+        Me.ProductCode.Width = 150
         '
         'ProductName
         '
@@ -116,7 +118,7 @@ Partial Class frmFindProduct
         Me.ProductName.OptionsColumn.AllowEdit = False
         Me.ProductName.Visible = True
         Me.ProductName.VisibleIndex = 2
-        Me.ProductName.Width = 500
+        Me.ProductName.Width = 312
         '
         'PriceStandard
         '
@@ -129,8 +131,8 @@ Partial Class frmFindProduct
         Me.PriceStandard.Name = "PriceStandard"
         Me.PriceStandard.OptionsColumn.AllowEdit = False
         Me.PriceStandard.Visible = True
-        Me.PriceStandard.VisibleIndex = 3
-        Me.PriceStandard.Width = 200
+        Me.PriceStandard.VisibleIndex = 4
+        Me.PriceStandard.Width = 105
         '
         'GridColumn1
         '
@@ -193,6 +195,16 @@ Partial Class frmFindProduct
         Me.Label5.TabIndex = 302
         Me.Label5.Text = "Select All"
         '
+        'ProductRemark
+        '
+        Me.ProductRemark.Caption = "รายละเอียด"
+        Me.ProductRemark.FieldName = "ProductRemark"
+        Me.ProductRemark.MinWidth = 200
+        Me.ProductRemark.Name = "ProductRemark"
+        Me.ProductRemark.Visible = True
+        Me.ProductRemark.VisibleIndex = 3
+        Me.ProductRemark.Width = 221
+        '
         'frmFindProduct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -234,4 +246,5 @@ Partial Class frmFindProduct
     Friend WithEvents btnOK As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents CheckAll As DevExpress.XtraEditors.CheckEdit
     Private WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents ProductRemark As DevExpress.XtraGrid.Columns.GridColumn
 End Class
