@@ -124,7 +124,7 @@ Public Class frmLogin
 
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         NavBarGroup1.Expanded = False
-        txtPassword.Text = "bay25829"
+        'txtPassword.Text = "bay25829"
         If gLastLogin = "" Then
         Else
             txtLogin.Text = gLastLogin

@@ -31,8 +31,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>89</ApplicationRevision>
-    <ApplicationVersion>1.0.0.89</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.1.02</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -237,6 +237,12 @@
     <Compile Include="Base\ChequeStatus.vb" />
     <Compile Include="Base\ChequeStep.vb" />
     <Compile Include="Base\clsNotifi.vb" />
+    <Compile Include="Base\frmControlCampaign.Designer.vb">
+      <DependentUpon>frmControlCampaign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmControlCampaign.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmFindCustomer.Designer.vb">
       <DependentUpon>frmFindCustomer.vb</DependentUpon>
     </Compile>
@@ -354,11 +360,18 @@
     <Compile Include="clsControl\ProductCategoryControl.vb" />
     <Compile Include="clsControl\ProductControl.vb" />
     <Compile Include="clsControl\ProductTypeControl.vb" />
+    <Compile Include="clsControl\ProvinceControl.vb" />
     <Compile Include="clsControl\RunnignFormatControl.vb" />
     <Compile Include="clsControl\TerritoryControl.vb" />
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
+    <Compile Include="CRM\frmOrderDTL.Designer.vb">
+      <DependentUpon>frmOrderDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmOrderDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmSellOrderHis.Designer.vb">
       <DependentUpon>frmSellOrderHis.vb</DependentUpon>
     </Compile>
@@ -553,6 +566,8 @@
     <Compile Include="DAO\BankAccountDAO.vb" />
     <Compile Include="DAO\BankDAO.vb" />
     <Compile Include="DAO\BankDocTypeDAO.vb" />
+    <Compile Include="DAO\CampaignDetail.vb" />
+    <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="DAO\ChequeDAO.vb" />
     <Compile Include="DAO\CompanyDAO.vb" />
     <Compile Include="DAO\CampaignDAO.vb" />
@@ -685,6 +700,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Master\MasterControl.vb" />
+    <Compile Include="Master\frmProvince.Designer.vb">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmProvince.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module\modApprove.vb" />
     <Compile Include="Module\modConfig.vb" />
     <Compile Include="Module\modDAO.vb" />
@@ -715,6 +736,12 @@
     <Compile Include="Base\frmPreExport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.Designer.vb">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\rptDealSellNot.Designer.vb">
       <DependentUpon>rptDealSellNot.vb</DependentUpon>
     </Compile>
@@ -737,6 +764,12 @@
       <DependentUpon>rptDealSell.vb</DependentUpon>
     </Compile>
     <Compile Include="Report\rptDealSell.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.Designer.vb">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptPaymentBuy.Designer.vb">
@@ -886,12 +919,6 @@
     <Compile Include="ReserveFlow\frmFindReserve.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stock\frmApproveStock.Designer.vb">
-      <DependentUpon>frmApproveStock.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Stock\frmApproveStock.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Stock\frmCheckStock.Designer.vb">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </Compile>
@@ -904,6 +931,24 @@
     <Compile Include="Stock\frmStockIn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Stock\frmUpdateStock.Designer.vb">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.Designer.vb">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.Designer.vb">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TmpOrders.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -914,6 +959,12 @@
     </Compile>
     <Compile Include="Base\frmFindEmployee.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucCampaignDTL.Designer.vb">
+      <DependentUpon>ucCampaignDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucCampaignDTL.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControl\ucCustomer.Designer.vb">
       <DependentUpon>ucCustomer.vb</DependentUpon>
@@ -1071,6 +1122,9 @@
     <EmbeddedResource Include="Appove\frmApproveUser.resx">
       <DependentUpon>frmApproveUser.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmControlCampaign.resx">
+      <DependentUpon>frmControlCampaign.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmFindCustomer.resx">
       <DependentUpon>frmFindCustomer.vb</DependentUpon>
     </EmbeddedResource>
@@ -1113,6 +1167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmOrderDTL.resx">
+      <DependentUpon>frmOrderDTL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmSellOrderHis.resx">
       <DependentUpon>frmSellOrderHis.vb</DependentUpon>
@@ -1246,6 +1303,9 @@
     <EmbeddedResource Include="Master\frmVatType.resx">
       <DependentUpon>frmVatType.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmProvince.resx">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -1255,6 +1315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmPreExport.resx">
       <DependentUpon>frmPreExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDealSellNot.resx">
       <DependentUpon>rptDealSellNot.vb</DependentUpon>
@@ -1267,6 +1330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDealSell.resx">
       <DependentUpon>rptDealSell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDebtAnalyst.resx">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPaymentBuy.resx">
       <DependentUpon>rptPaymentBuy.vb</DependentUpon>
@@ -1341,9 +1407,6 @@
     <EmbeddedResource Include="ReserveFlow\frmFindReserve.resx">
       <DependentUpon>frmFindReserve.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\frmApproveStock.resx">
-      <DependentUpon>frmApproveStock.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Stock\frmCheckStock.resx">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </EmbeddedResource>
@@ -1352,6 +1415,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmFindEmployee.resx">
       <DependentUpon>frmFindEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStock.resx">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockDTL.resx">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockLog.resx">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucCampaignDTL.resx">
+      <DependentUpon>ucCampaignDTL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucCustomer.resx">
       <DependentUpon>ucCustomer.vb</DependentUpon>
@@ -1588,6 +1663,16 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="DevExpress.XtraCharts.v12.2.Extensions">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraCharts.v12.2.UI">
       <Visible>False</Visible>
       <Group>
       </Group>

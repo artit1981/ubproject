@@ -157,7 +157,7 @@ Public Class frmDebtAnalystReport
                     If lNotPayAmount > 0 Then
 
 
-                        lDayPast = DateDiff(DateInterval.Day, lExpireDate, lAsOfDate)
+                        lDayPast = DateDiff(DateInterval.Day, lAsOfDate, lExpireDate)
 
                         SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxText5,TaxText6,TaxTotal1,TaxDate1,TaxDate2,TaxTotal2"
                         SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"

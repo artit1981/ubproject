@@ -27,23 +27,22 @@ Partial Public Class rptDebtAnalyst
         Dim XrSummary6 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary7 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary8 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary9 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary10 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary11 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary12 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary13 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary14 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary15 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary16 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary17 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary18 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary19 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary20 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary21 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrSummary22 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary15 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary13 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary10 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary9 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary12 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary11 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary23 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary22 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Dim XrSummary24 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
-        Dim XrGroupSortingSummary1 As DevExpress.XtraReports.UI.XRGroupSortingSummary = New DevExpress.XtraReports.UI.XRGroupSortingSummary()
+        Dim XrSummary21 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary18 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary17 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary20 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
+        Dim XrSummary19 As DevExpress.XtraReports.UI.XRSummary = New DevExpress.XtraReports.UI.XRSummary()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.XrLabel42 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel41 = New DevExpress.XtraReports.UI.XRLabel()
@@ -101,40 +100,40 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel66 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel34 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel69 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine3 = New DevExpress.XtraReports.UI.XRLine()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
-        Me.XrLine6 = New DevExpress.XtraReports.UI.XRLine()
+        Me.GroupHeader2 = New DevExpress.XtraReports.UI.GroupHeaderBand()
+        Me.GroupHeader3 = New DevExpress.XtraReports.UI.GroupHeaderBand()
+        Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLabel30 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel31 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine3 = New DevExpress.XtraReports.UI.XRLine()
         Me.GroupFooter1 = New DevExpress.XtraReports.UI.GroupFooterBand()
-        Me.XrLabel54 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel53 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel52 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel51 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel49 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel48 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel44 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.GroupHeader2 = New DevExpress.XtraReports.UI.GroupHeaderBand()
-        Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel30 = New DevExpress.XtraReports.UI.XRLabel()
         Me.GroupFooter2 = New DevExpress.XtraReports.UI.GroupFooterBand()
-        Me.XrLabel62 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel61 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel63 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel65 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel64 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel60 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel56 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.GroupFooter3 = New DevExpress.XtraReports.UI.GroupFooterBand()
+        Me.XrLabel38 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel39 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel44 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel45 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel46 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel48 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel49 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel51 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel52 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel53 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel54 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel55 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel56 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel57 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel58 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel59 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine4 = New DevExpress.XtraReports.UI.XRLine()
-        Me.GroupFooter3 = New DevExpress.XtraReports.UI.GroupFooterBand()
-        Me.GroupHeader3 = New DevExpress.XtraReports.UI.GroupHeaderBand()
+        Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLine6 = New DevExpress.XtraReports.UI.XRLine()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -144,7 +143,7 @@ Partial Public Class rptDebtAnalyst
         Me.Detail.HeightF = 23.0!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.Detail.SortFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText2", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
+        Me.Detail.SortFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxDate1", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrLabel42
@@ -327,15 +326,14 @@ Partial Public Class rptDebtAnalyst
         '
         'TopMargin
         '
-        Me.TopMargin.HeightF = 32.0!
+        Me.TopMargin.HeightF = 25.75!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'BottomMargin
         '
-        Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo2, Me.XrLabel37})
-        Me.BottomMargin.HeightF = 35.0!
+        Me.BottomMargin.HeightF = 26.39478!
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -343,7 +341,7 @@ Partial Public Class rptDebtAnalyst
         'XrPageInfo2
         '
         Me.XrPageInfo2.Format = "{0:dd/MM/yyyy HH:mm}"
-        Me.XrPageInfo2.LocationFloat = New DevExpress.Utils.PointFloat(979.8086!, 0.0!)
+        Me.XrPageInfo2.LocationFloat = New DevExpress.Utils.PointFloat(991.2671!, 34.12914!)
         Me.XrPageInfo2.Name = "XrPageInfo2"
         Me.XrPageInfo2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrPageInfo2.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime
@@ -353,7 +351,7 @@ Partial Public Class rptDebtAnalyst
         '
         Me.XrLabel37.CanGrow = False
         Me.XrLabel37.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel37.LocationFloat = New DevExpress.Utils.PointFloat(918.3503!, 0.0!)
+        Me.XrLabel37.LocationFloat = New DevExpress.Utils.PointFloat(929.8087!, 34.12914!)
         Me.XrLabel37.Name = "XrLabel37"
         Me.XrLabel37.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel37.SizeF = New System.Drawing.SizeF(61.45831!, 25.57923!)
@@ -702,7 +700,7 @@ Partial Public Class rptDebtAnalyst
         '
         Me.XrCrossBandBox1.BorderWidth = 1
         Me.XrCrossBandBox1.EndBand = Me.ReportFooter
-        Me.XrCrossBandBox1.EndPointFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrCrossBandBox1.EndPointFloat = New DevExpress.Utils.PointFloat(0.0!, 2.0!)
         Me.XrCrossBandBox1.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 90.19267!)
         Me.XrCrossBandBox1.Name = "XrCrossBandBox1"
         Me.XrCrossBandBox1.StartBand = Me.PageHeader
@@ -711,7 +709,8 @@ Partial Public Class rptDebtAnalyst
         '
         'ReportFooter
         '
-        Me.ReportFooter.HeightF = 2.0!
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel37, Me.XrPageInfo2})
+        Me.ReportFooter.HeightF = 65.54171!
         Me.ReportFooter.Name = "ReportFooter"
         '
         'XrLabel72
@@ -719,7 +718,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel72.CanGrow = False
         Me.XrLabel72.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal5")})
         Me.XrLabel72.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel72.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 2.000046!)
+        Me.XrLabel72.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 10.00001!)
         Me.XrLabel72.Name = "XrLabel72"
         Me.XrLabel72.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel72.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
@@ -736,7 +735,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel71.CanGrow = False
         Me.XrLabel71.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal4")})
         Me.XrLabel71.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel71.LocationFloat = New DevExpress.Utils.PointFloat(668.5403!, 2.000046!)
+        Me.XrLabel71.LocationFloat = New DevExpress.Utils.PointFloat(668.5403!, 10.00001!)
         Me.XrLabel71.Name = "XrLabel71"
         Me.XrLabel71.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel71.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
@@ -753,7 +752,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel73.CanGrow = False
         Me.XrLabel73.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal6")})
         Me.XrLabel73.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel73.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 2.000046!)
+        Me.XrLabel73.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 10.00001!)
         Me.XrLabel73.Name = "XrLabel73"
         Me.XrLabel73.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel73.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
@@ -770,7 +769,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel75.CanGrow = False
         Me.XrLabel75.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal8")})
         Me.XrLabel75.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel75.LocationFloat = New DevExpress.Utils.PointFloat(960.2076!, 2.000046!)
+        Me.XrLabel75.LocationFloat = New DevExpress.Utils.PointFloat(960.2076!, 10.00001!)
         Me.XrLabel75.Name = "XrLabel75"
         Me.XrLabel75.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel75.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
@@ -787,7 +786,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel74.CanGrow = False
         Me.XrLabel74.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal7")})
         Me.XrLabel74.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel74.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 2.000046!)
+        Me.XrLabel74.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 10.00001!)
         Me.XrLabel74.Name = "XrLabel74"
         Me.XrLabel74.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel74.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
@@ -804,7 +803,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel70.CanGrow = False
         Me.XrLabel70.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal3")})
         Me.XrLabel70.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel70.LocationFloat = New DevExpress.Utils.PointFloat(589.3734!, 2.000046!)
+        Me.XrLabel70.LocationFloat = New DevExpress.Utils.PointFloat(589.3734!, 10.00001!)
         Me.XrLabel70.Name = "XrLabel70"
         Me.XrLabel70.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel70.SizeF = New System.Drawing.SizeF(79.16687!, 25.57923!)
@@ -819,11 +818,11 @@ Partial Public Class rptDebtAnalyst
         'XrLabel66
         '
         Me.XrLabel66.CanGrow = False
-        Me.XrLabel66.Font = New System.Drawing.Font("Angsana New", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel66.LocationFloat = New DevExpress.Utils.PointFloat(52.45727!, 2.000046!)
+        Me.XrLabel66.Font = New System.Drawing.Font("Angsana New", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel66.LocationFloat = New DevExpress.Utils.PointFloat(52.4573!, 10.0!)
         Me.XrLabel66.Name = "XrLabel66"
         Me.XrLabel66.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel66.SizeF = New System.Drawing.SizeF(58.04469!, 25.57923!)
+        Me.XrLabel66.SizeF = New System.Drawing.SizeF(109.6866!, 25.57923!)
         Me.XrLabel66.StylePriority.UseFont = False
         Me.XrLabel66.StylePriority.UseTextAlignment = False
         Me.XrLabel66.Text = "รวมทั้งสิ้น"
@@ -834,7 +833,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel34.CanGrow = False
         Me.XrLabel34.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal1")})
         Me.XrLabel34.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel34.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 2.000046!)
+        Me.XrLabel34.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 10.00001!)
         Me.XrLabel34.Name = "XrLabel34"
         Me.XrLabel34.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel34.SizeF = New System.Drawing.SizeF(93.75003!, 25.57923!)
@@ -851,7 +850,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel69.CanGrow = False
         Me.XrLabel69.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal2")})
         Me.XrLabel69.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel69.LocationFloat = New DevExpress.Utils.PointFloat(492.4982!, 2.000046!)
+        Me.XrLabel69.LocationFloat = New DevExpress.Utils.PointFloat(492.4982!, 10.00001!)
         Me.XrLabel69.Name = "XrLabel69"
         Me.XrLabel69.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel69.SizeF = New System.Drawing.SizeF(96.87515!, 25.57923!)
@@ -863,12 +862,6 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel69.Text = "XrLabel48"
         Me.XrLabel69.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrLine3
-        '
-        Me.XrLine3.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
-        Me.XrLine3.Name = "XrLine3"
-        Me.XrLine3.SizeF = New System.Drawing.SizeF(1110.458!, 2.000046!)
-        '
         'PageFooter
         '
         Me.PageFooter.Expanded = False
@@ -877,428 +870,440 @@ Partial Public Class rptDebtAnalyst
         '
         'GroupHeader1
         '
-        Me.GroupHeader1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine6, Me.XrLabel31, Me.XrLabel32})
+        Me.GroupHeader1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine3, Me.XrLabel32, Me.XrLabel31})
         Me.GroupHeader1.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText3", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
-        Me.GroupHeader1.HeightF = 25.46584!
+        Me.GroupHeader1.HeightF = 28.125!
         Me.GroupHeader1.Name = "GroupHeader1"
         '
-        'XrLine6
+        'GroupHeader2
         '
-        Me.XrLine6.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
-        Me.XrLine6.Name = "XrLine6"
-        Me.XrLine6.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
+        Me.GroupHeader2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel30, Me.XrLine2, Me.XrLabel7})
+        Me.GroupHeader2.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText1", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
+        Me.GroupHeader2.HeightF = 28.125!
+        Me.GroupHeader2.Level = 1
+        Me.GroupHeader2.Name = "GroupHeader2"
         '
-        'XrLabel31
+        'GroupHeader3
         '
-        Me.XrLabel31.CanGrow = False
-        Me.XrLabel31.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText3", "{0}")})
-        Me.XrLabel31.Font = New System.Drawing.Font("Angsana New", 14.0!)
-        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(1.95516!, 0.0!)
-        Me.XrLabel31.Name = "XrLabel31"
-        Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel31.SizeF = New System.Drawing.SizeF(108.5468!, 23.0!)
-        Me.XrLabel31.StylePriority.UseFont = False
-        Me.XrLabel31.Text = "XrLabel31"
-        '
-        'XrLabel32
-        '
-        Me.XrLabel32.CanGrow = False
-        Me.XrLabel32.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText4", "{0}")})
-        Me.XrLabel32.Font = New System.Drawing.Font("Angsana New", 14.0!)
-        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(146.9604!, 0.0!)
-        Me.XrLabel32.Name = "XrLabel32"
-        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel32.SizeF = New System.Drawing.SizeF(565.8384!, 23.0!)
-        Me.XrLabel32.StylePriority.UseFont = False
-        Me.XrLabel32.Text = "XrLabel32"
+        Me.GroupHeader3.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("UserID", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
+        Me.GroupHeader3.HeightF = 0.0!
+        Me.GroupHeader3.Level = 2
+        Me.GroupHeader3.Name = "GroupHeader3"
         '
         'XrLabel7
         '
         Me.XrLabel7.CanGrow = False
-        Me.XrLabel7.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText1", "{0}")})
-        Me.XrLabel7.Font = New System.Drawing.Font("Angsana New", 14.0!)
-        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(1.95516!, 0.0!)
+        Me.XrLabel7.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText1")})
+        Me.XrLabel7.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(10.00001!, 0.0!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel7.SizeF = New System.Drawing.SizeF(108.5468!, 23.0!)
+        Me.XrLabel7.SizeF = New System.Drawing.SizeF(121.3354!, 22.99999!)
         Me.XrLabel7.StylePriority.UseFont = False
+        Me.XrLabel7.StylePriority.UseTextAlignment = False
         Me.XrLabel7.Text = "XrLabel7"
-        '
-        'GroupFooter1
-        '
-        Me.GroupFooter1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel54, Me.XrLabel53, Me.XrLabel52, Me.XrLabel51, Me.XrLabel50, Me.XrLabel49, Me.XrLabel48, Me.XrLabel44, Me.XrLine2, Me.XrLabel47})
-        Me.GroupFooter1.HeightF = 30.7876!
-        Me.GroupFooter1.Name = "GroupFooter1"
-        '
-        'XrLabel54
-        '
-        Me.XrLabel54.CanGrow = False
-        Me.XrLabel54.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal8")})
-        Me.XrLabel54.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel54.LocationFloat = New DevExpress.Utils.PointFloat(960.2075!, 2.000014!)
-        Me.XrLabel54.Name = "XrLabel54"
-        Me.XrLabel54.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel54.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel54.StylePriority.UseFont = False
-        Me.XrLabel54.StylePriority.UseTextAlignment = False
-        XrSummary9.FormatString = "{0:n2}"
-        XrSummary9.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel54.Summary = XrSummary9
-        Me.XrLabel54.Text = "XrLabel54"
-        Me.XrLabel54.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel53
-        '
-        Me.XrLabel53.CanGrow = False
-        Me.XrLabel53.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal7")})
-        Me.XrLabel53.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 2.000014!)
-        Me.XrLabel53.Name = "XrLabel53"
-        Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel53.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel53.StylePriority.UseFont = False
-        Me.XrLabel53.StylePriority.UseTextAlignment = False
-        XrSummary10.FormatString = "{0:n2}"
-        XrSummary10.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel53.Summary = XrSummary10
-        Me.XrLabel53.Text = "XrLabel53"
-        Me.XrLabel53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel52
-        '
-        Me.XrLabel52.CanGrow = False
-        Me.XrLabel52.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal6")})
-        Me.XrLabel52.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 2.000014!)
-        Me.XrLabel52.Name = "XrLabel52"
-        Me.XrLabel52.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel52.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel52.StylePriority.UseFont = False
-        Me.XrLabel52.StylePriority.UseTextAlignment = False
-        XrSummary11.FormatString = "{0:n2}"
-        XrSummary11.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel52.Summary = XrSummary11
-        Me.XrLabel52.Text = "XrLabel52"
-        Me.XrLabel52.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel51
-        '
-        Me.XrLabel51.CanGrow = False
-        Me.XrLabel51.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal5")})
-        Me.XrLabel51.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 2.000014!)
-        Me.XrLabel51.Name = "XrLabel51"
-        Me.XrLabel51.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel51.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel51.StylePriority.UseFont = False
-        Me.XrLabel51.StylePriority.UseTextAlignment = False
-        XrSummary12.FormatString = "{0:n2}"
-        XrSummary12.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel51.Summary = XrSummary12
-        Me.XrLabel51.Text = "XrLabel51"
-        Me.XrLabel51.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel50
-        '
-        Me.XrLabel50.CanGrow = False
-        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal4")})
-        Me.XrLabel50.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(668.5403!, 2.000014!)
-        Me.XrLabel50.Name = "XrLabel50"
-        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel50.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel50.StylePriority.UseFont = False
-        Me.XrLabel50.StylePriority.UseTextAlignment = False
-        XrSummary13.FormatString = "{0:n2}"
-        XrSummary13.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel50.Summary = XrSummary13
-        Me.XrLabel50.Text = "XrLabel50"
-        Me.XrLabel50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel49
-        '
-        Me.XrLabel49.CanGrow = False
-        Me.XrLabel49.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal3")})
-        Me.XrLabel49.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel49.LocationFloat = New DevExpress.Utils.PointFloat(589.3734!, 2.000014!)
-        Me.XrLabel49.Name = "XrLabel49"
-        Me.XrLabel49.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel49.SizeF = New System.Drawing.SizeF(79.16687!, 25.57923!)
-        Me.XrLabel49.StylePriority.UseFont = False
-        Me.XrLabel49.StylePriority.UseTextAlignment = False
-        XrSummary14.FormatString = "{0:n2}"
-        XrSummary14.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel49.Summary = XrSummary14
-        Me.XrLabel49.Text = "XrLabel49"
-        Me.XrLabel49.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel48
-        '
-        Me.XrLabel48.CanGrow = False
-        Me.XrLabel48.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal2")})
-        Me.XrLabel48.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel48.LocationFloat = New DevExpress.Utils.PointFloat(492.4983!, 2.000014!)
-        Me.XrLabel48.Name = "XrLabel48"
-        Me.XrLabel48.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel48.SizeF = New System.Drawing.SizeF(96.87515!, 25.57923!)
-        Me.XrLabel48.StylePriority.UseFont = False
-        Me.XrLabel48.StylePriority.UseTextAlignment = False
-        XrSummary15.FormatString = "{0:n2}"
-        XrSummary15.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel48.Summary = XrSummary15
-        Me.XrLabel48.Text = "XrLabel48"
-        Me.XrLabel48.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'XrLabel44
-        '
-        Me.XrLabel44.CanGrow = False
-        Me.XrLabel44.Font = New System.Drawing.Font("Angsana New", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel44.LocationFloat = New DevExpress.Utils.PointFloat(71.20727!, 2.000014!)
-        Me.XrLabel44.Name = "XrLabel44"
-        Me.XrLabel44.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel44.SizeF = New System.Drawing.SizeF(39.29469!, 25.57923!)
-        Me.XrLabel44.StylePriority.UseFont = False
-        Me.XrLabel44.StylePriority.UseTextAlignment = False
-        Me.XrLabel44.Text = "รวม"
-        Me.XrLabel44.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrLine2
         '
         Me.XrLine2.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
         Me.XrLine2.Name = "XrLine2"
-        Me.XrLine2.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
-        '
-        'XrLabel47
-        '
-        Me.XrLabel47.CanGrow = False
-        Me.XrLabel47.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal1")})
-        Me.XrLabel47.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 2.000014!)
-        Me.XrLabel47.Name = "XrLabel47"
-        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel47.SizeF = New System.Drawing.SizeF(93.75003!, 25.57923!)
-        Me.XrLabel47.StylePriority.UseFont = False
-        Me.XrLabel47.StylePriority.UseTextAlignment = False
-        XrSummary16.FormatString = "{0:n2}"
-        XrSummary16.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel47.Summary = XrSummary16
-        Me.XrLabel47.Text = "XrLabel47"
-        Me.XrLabel47.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        '
-        'GroupHeader2
-        '
-        Me.GroupHeader2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine5, Me.XrLabel30, Me.XrLabel7})
-        Me.GroupHeader2.Font = New System.Drawing.Font("Angsana New", 14.0!)
-        Me.GroupHeader2.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText1", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
-        Me.GroupHeader2.HeightF = 25.0!
-        Me.GroupHeader2.Name = "GroupHeader2"
-        Me.GroupHeader2.StylePriority.UseFont = False
-        '
-        'XrLine5
-        '
-        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
-        Me.XrLine5.Name = "XrLine5"
-        Me.XrLine5.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
+        Me.XrLine2.SizeF = New System.Drawing.SizeF(1109.417!, 2.083328!)
         '
         'XrLabel30
         '
         Me.XrLabel30.CanGrow = False
-        Me.XrLabel30.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText2", "{0}")})
-        Me.XrLabel30.Font = New System.Drawing.Font("Angsana New", 14.0!)
-        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(146.9604!, 0.0!)
+        Me.XrLabel30.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText2")})
+        Me.XrLabel30.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(131.3354!, 0.0!)
         Me.XrLabel30.Name = "XrLabel30"
         Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel30.SizeF = New System.Drawing.SizeF(565.8384!, 23.0!)
+        Me.XrLabel30.SizeF = New System.Drawing.SizeF(537.2048!, 22.99999!)
         Me.XrLabel30.StylePriority.UseFont = False
+        Me.XrLabel30.StylePriority.UseTextAlignment = False
         Me.XrLabel30.Text = "XrLabel30"
+        Me.XrLabel30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel31
+        '
+        Me.XrLabel31.CanGrow = False
+        Me.XrLabel31.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText3")})
+        Me.XrLabel31.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(10.00001!, 0.0!)
+        Me.XrLabel31.Name = "XrLabel31"
+        Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel31.SizeF = New System.Drawing.SizeF(121.3354!, 22.99999!)
+        Me.XrLabel31.StylePriority.UseFont = False
+        Me.XrLabel31.StylePriority.UseTextAlignment = False
+        Me.XrLabel31.Text = "XrLabel31"
+        Me.XrLabel31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel32
+        '
+        Me.XrLabel32.CanGrow = False
+        Me.XrLabel32.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxText4")})
+        Me.XrLabel32.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(131.3353!, 0.0!)
+        Me.XrLabel32.Name = "XrLabel32"
+        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel32.SizeF = New System.Drawing.SizeF(537.2048!, 22.99999!)
+        Me.XrLabel32.StylePriority.UseFont = False
+        Me.XrLabel32.StylePriority.UseTextAlignment = False
+        Me.XrLabel32.Text = "XrLabel32"
+        Me.XrLabel32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLine3
+        '
+        Me.XrLine3.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrLine3.Name = "XrLine3"
+        Me.XrLine3.SizeF = New System.Drawing.SizeF(1109.417!, 2.083328!)
+        '
+        'GroupFooter1
+        '
+        Me.GroupFooter1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine4, Me.XrLabel48, Me.XrLabel47, Me.XrLabel50, Me.XrLabel49, Me.XrLabel46, Me.XrLabel39, Me.XrLabel38, Me.XrLabel45, Me.XrLabel44})
+        Me.GroupFooter1.HeightF = 32.29167!
+        Me.GroupFooter1.Name = "GroupFooter1"
         '
         'GroupFooter2
         '
-        Me.GroupFooter2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel62, Me.XrLabel61, Me.XrLabel63, Me.XrLabel65, Me.XrLabel64, Me.XrLabel60, Me.XrLabel56, Me.XrLabel55, Me.XrLabel59, Me.XrLine4})
-        Me.GroupFooter2.HeightF = 29.16667!
+        Me.GroupFooter2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel57, Me.XrLabel56, Me.XrLabel59, Me.XrLabel58, Me.XrLabel55, Me.XrLabel52, Me.XrLabel51, Me.XrLabel54, Me.XrLabel53, Me.XrLine5})
+        Me.GroupFooter2.HeightF = 31.92654!
+        Me.GroupFooter2.Level = 1
         Me.GroupFooter2.Name = "GroupFooter2"
         '
-        'XrLabel62
+        'GroupFooter3
         '
-        Me.XrLabel62.CanGrow = False
-        Me.XrLabel62.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal5")})
-        Me.XrLabel62.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel62.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 2.000014!)
-        Me.XrLabel62.Name = "XrLabel62"
-        Me.XrLabel62.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel62.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel62.StylePriority.UseFont = False
-        Me.XrLabel62.StylePriority.UseTextAlignment = False
-        XrSummary17.FormatString = "{0:n2}"
-        XrSummary17.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel62.Summary = XrSummary17
-        Me.XrLabel62.Text = "XrLabel51"
-        Me.XrLabel62.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.GroupFooter3.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel34, Me.XrLabel72, Me.XrLabel66, Me.XrLabel70, Me.XrLabel74, Me.XrLabel75, Me.XrLabel73, Me.XrLabel71, Me.XrLabel69, Me.XrLine6})
+        Me.GroupFooter3.HeightF = 41.66667!
+        Me.GroupFooter3.Level = 2
+        Me.GroupFooter3.Name = "GroupFooter3"
         '
-        'XrLabel61
+        'XrLabel38
         '
-        Me.XrLabel61.CanGrow = False
-        Me.XrLabel61.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal4")})
-        Me.XrLabel61.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel61.LocationFloat = New DevExpress.Utils.PointFloat(668.5403!, 2.000014!)
-        Me.XrLabel61.Name = "XrLabel61"
-        Me.XrLabel61.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel61.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel61.StylePriority.UseFont = False
-        Me.XrLabel61.StylePriority.UseTextAlignment = False
-        XrSummary18.FormatString = "{0:n2}"
-        XrSummary18.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel61.Summary = XrSummary18
-        Me.XrLabel61.Text = "XrLabel50"
-        Me.XrLabel61.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.XrLabel38.CanGrow = False
+        Me.XrLabel38.Font = New System.Drawing.Font("Angsana New", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel38.LocationFloat = New DevExpress.Utils.PointFloat(52.45727!, 0.0!)
+        Me.XrLabel38.Name = "XrLabel38"
+        Me.XrLabel38.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel38.SizeF = New System.Drawing.SizeF(58.04469!, 25.57923!)
+        Me.XrLabel38.StylePriority.UseFont = False
+        Me.XrLabel38.StylePriority.UseTextAlignment = False
+        Me.XrLabel38.Text = "รวม"
+        Me.XrLabel38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel63
+        'XrLabel39
         '
-        Me.XrLabel63.CanGrow = False
-        Me.XrLabel63.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal6")})
-        Me.XrLabel63.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel63.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 2.000014!)
-        Me.XrLabel63.Name = "XrLabel63"
-        Me.XrLabel63.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel63.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel63.StylePriority.UseFont = False
-        Me.XrLabel63.StylePriority.UseTextAlignment = False
-        XrSummary19.FormatString = "{0:n2}"
-        XrSummary19.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel63.Summary = XrSummary19
-        Me.XrLabel63.Text = "XrLabel52"
-        Me.XrLabel63.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.XrLabel39.CanGrow = False
+        Me.XrLabel39.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal5")})
+        Me.XrLabel39.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel39.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 0.0!)
+        Me.XrLabel39.Name = "XrLabel39"
+        Me.XrLabel39.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel39.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel39.StylePriority.UseFont = False
+        Me.XrLabel39.StylePriority.UseTextAlignment = False
+        XrSummary14.FormatString = "{0:n2}"
+        XrSummary14.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel39.Summary = XrSummary14
+        Me.XrLabel39.Text = "XrLabel51"
+        Me.XrLabel39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrLabel65
+        'XrLabel44
         '
-        Me.XrLabel65.CanGrow = False
-        Me.XrLabel65.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal8")})
-        Me.XrLabel65.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel65.LocationFloat = New DevExpress.Utils.PointFloat(960.2076!, 2.000014!)
-        Me.XrLabel65.Name = "XrLabel65"
-        Me.XrLabel65.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel65.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel65.StylePriority.UseFont = False
-        Me.XrLabel65.StylePriority.UseTextAlignment = False
-        XrSummary20.FormatString = "{0:n2}"
-        XrSummary20.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel65.Summary = XrSummary20
-        Me.XrLabel65.Text = "XrLabel54"
-        Me.XrLabel65.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.XrLabel44.CanGrow = False
+        Me.XrLabel44.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal1")})
+        Me.XrLabel44.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel44.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 0.0!)
+        Me.XrLabel44.Name = "XrLabel44"
+        Me.XrLabel44.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel44.SizeF = New System.Drawing.SizeF(93.75003!, 25.57923!)
+        Me.XrLabel44.StylePriority.UseFont = False
+        Me.XrLabel44.StylePriority.UseTextAlignment = False
+        XrSummary16.FormatString = "{0:n2}"
+        XrSummary16.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel44.Summary = XrSummary16
+        Me.XrLabel44.Text = "XrLabel47"
+        Me.XrLabel44.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrLabel64
+        'XrLabel45
         '
-        Me.XrLabel64.CanGrow = False
-        Me.XrLabel64.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal7")})
-        Me.XrLabel64.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel64.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 2.000014!)
-        Me.XrLabel64.Name = "XrLabel64"
-        Me.XrLabel64.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel64.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
-        Me.XrLabel64.StylePriority.UseFont = False
-        Me.XrLabel64.StylePriority.UseTextAlignment = False
-        XrSummary21.FormatString = "{0:n2}"
-        XrSummary21.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel64.Summary = XrSummary21
-        Me.XrLabel64.Text = "XrLabel53"
-        Me.XrLabel64.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.XrLabel45.CanGrow = False
+        Me.XrLabel45.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal3")})
+        Me.XrLabel45.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(589.3734!, 0.0!)
+        Me.XrLabel45.Name = "XrLabel45"
+        Me.XrLabel45.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel45.SizeF = New System.Drawing.SizeF(79.16687!, 25.57923!)
+        Me.XrLabel45.StylePriority.UseFont = False
+        Me.XrLabel45.StylePriority.UseTextAlignment = False
+        XrSummary15.FormatString = "{0:n2}"
+        XrSummary15.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel45.Summary = XrSummary15
+        Me.XrLabel45.Text = "XrLabel49"
+        Me.XrLabel45.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrLabel60
+        'XrLabel46
         '
-        Me.XrLabel60.CanGrow = False
-        Me.XrLabel60.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal3")})
-        Me.XrLabel60.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel60.LocationFloat = New DevExpress.Utils.PointFloat(589.3734!, 2.000014!)
-        Me.XrLabel60.Name = "XrLabel60"
-        Me.XrLabel60.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel60.SizeF = New System.Drawing.SizeF(79.16687!, 25.57923!)
-        Me.XrLabel60.StylePriority.UseFont = False
-        Me.XrLabel60.StylePriority.UseTextAlignment = False
+        Me.XrLabel46.CanGrow = False
+        Me.XrLabel46.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal7")})
+        Me.XrLabel46.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel46.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 0.0!)
+        Me.XrLabel46.Name = "XrLabel46"
+        Me.XrLabel46.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel46.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel46.StylePriority.UseFont = False
+        Me.XrLabel46.StylePriority.UseTextAlignment = False
+        XrSummary13.FormatString = "{0:n2}"
+        XrSummary13.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel46.Summary = XrSummary13
+        Me.XrLabel46.Text = "XrLabel53"
+        Me.XrLabel46.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel47
+        '
+        Me.XrLabel47.CanGrow = False
+        Me.XrLabel47.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal8")})
+        Me.XrLabel47.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(960.2076!, 0.0!)
+        Me.XrLabel47.Name = "XrLabel47"
+        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel47.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel47.StylePriority.UseFont = False
+        Me.XrLabel47.StylePriority.UseTextAlignment = False
+        XrSummary10.FormatString = "{0:n2}"
+        XrSummary10.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel47.Summary = XrSummary10
+        Me.XrLabel47.Text = "XrLabel54"
+        Me.XrLabel47.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel48
+        '
+        Me.XrLabel48.CanGrow = False
+        Me.XrLabel48.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal6")})
+        Me.XrLabel48.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel48.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 0.0!)
+        Me.XrLabel48.Name = "XrLabel48"
+        Me.XrLabel48.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel48.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel48.StylePriority.UseFont = False
+        Me.XrLabel48.StylePriority.UseTextAlignment = False
+        XrSummary9.FormatString = "{0:n2}"
+        XrSummary9.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel48.Summary = XrSummary9
+        Me.XrLabel48.Text = "XrLabel52"
+        Me.XrLabel48.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel49
+        '
+        Me.XrLabel49.CanGrow = False
+        Me.XrLabel49.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal4")})
+        Me.XrLabel49.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel49.LocationFloat = New DevExpress.Utils.PointFloat(668.5403!, 0.0!)
+        Me.XrLabel49.Name = "XrLabel49"
+        Me.XrLabel49.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel49.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel49.StylePriority.UseFont = False
+        Me.XrLabel49.StylePriority.UseTextAlignment = False
+        XrSummary12.FormatString = "{0:n2}"
+        XrSummary12.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel49.Summary = XrSummary12
+        Me.XrLabel49.Text = "XrLabel50"
+        Me.XrLabel49.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel50
+        '
+        Me.XrLabel50.CanGrow = False
+        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal2")})
+        Me.XrLabel50.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(492.4981!, 0.0!)
+        Me.XrLabel50.Name = "XrLabel50"
+        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel50.SizeF = New System.Drawing.SizeF(96.87515!, 25.57923!)
+        Me.XrLabel50.StylePriority.UseFont = False
+        Me.XrLabel50.StylePriority.UseTextAlignment = False
+        XrSummary11.FormatString = "{0:n2}"
+        XrSummary11.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel50.Summary = XrSummary11
+        Me.XrLabel50.Text = "XrLabel48"
+        Me.XrLabel50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel51
+        '
+        Me.XrLabel51.CanGrow = False
+        Me.XrLabel51.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal1")})
+        Me.XrLabel51.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 2.083326!)
+        Me.XrLabel51.Name = "XrLabel51"
+        Me.XrLabel51.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel51.SizeF = New System.Drawing.SizeF(93.75003!, 25.57923!)
+        Me.XrLabel51.StylePriority.UseFont = False
+        Me.XrLabel51.StylePriority.UseTextAlignment = False
+        XrSummary23.FormatString = "{0:n2}"
+        XrSummary23.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel51.Summary = XrSummary23
+        Me.XrLabel51.Text = "XrLabel47"
+        Me.XrLabel51.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel52
+        '
+        Me.XrLabel52.CanGrow = False
+        Me.XrLabel52.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal3")})
+        Me.XrLabel52.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(589.3735!, 2.083326!)
+        Me.XrLabel52.Name = "XrLabel52"
+        Me.XrLabel52.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel52.SizeF = New System.Drawing.SizeF(79.16687!, 25.57923!)
+        Me.XrLabel52.StylePriority.UseFont = False
+        Me.XrLabel52.StylePriority.UseTextAlignment = False
         XrSummary22.FormatString = "{0:n2}"
         XrSummary22.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel60.Summary = XrSummary22
-        Me.XrLabel60.Text = "XrLabel49"
-        Me.XrLabel60.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.XrLabel52.Summary = XrSummary22
+        Me.XrLabel52.Text = "XrLabel49"
+        Me.XrLabel52.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrLabel56
+        'XrLabel53
         '
-        Me.XrLabel56.CanGrow = False
-        Me.XrLabel56.Font = New System.Drawing.Font("Angsana New", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel56.LocationFloat = New DevExpress.Utils.PointFloat(71.20727!, 2.000014!)
-        Me.XrLabel56.Name = "XrLabel56"
-        Me.XrLabel56.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel56.SizeF = New System.Drawing.SizeF(39.29469!, 25.57923!)
-        Me.XrLabel56.StylePriority.UseFont = False
-        Me.XrLabel56.StylePriority.UseTextAlignment = False
-        Me.XrLabel56.Text = "รวม"
-        Me.XrLabel56.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel53.CanGrow = False
+        Me.XrLabel53.Font = New System.Drawing.Font("Angsana New", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(52.4573!, 2.083326!)
+        Me.XrLabel53.Name = "XrLabel53"
+        Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel53.SizeF = New System.Drawing.SizeF(58.04469!, 25.57923!)
+        Me.XrLabel53.StylePriority.UseFont = False
+        Me.XrLabel53.StylePriority.UseTextAlignment = False
+        Me.XrLabel53.Text = "รวม"
+        Me.XrLabel53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel54
+        '
+        Me.XrLabel54.CanGrow = False
+        Me.XrLabel54.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal5")})
+        Me.XrLabel54.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel54.LocationFloat = New DevExpress.Utils.PointFloat(741.4571!, 2.083326!)
+        Me.XrLabel54.Name = "XrLabel54"
+        Me.XrLabel54.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel54.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel54.StylePriority.UseFont = False
+        Me.XrLabel54.StylePriority.UseTextAlignment = False
+        XrSummary24.FormatString = "{0:n2}"
+        XrSummary24.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel54.Summary = XrSummary24
+        Me.XrLabel54.Text = "XrLabel51"
+        Me.XrLabel54.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
         'XrLabel55
         '
         Me.XrLabel55.CanGrow = False
-        Me.XrLabel55.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal1")})
+        Me.XrLabel55.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal7")})
         Me.XrLabel55.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(324.0369!, 2.000014!)
+        Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(887.2907!, 2.083326!)
         Me.XrLabel55.Name = "XrLabel55"
         Me.XrLabel55.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel55.SizeF = New System.Drawing.SizeF(93.75003!, 25.57923!)
+        Me.XrLabel55.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
         Me.XrLabel55.StylePriority.UseFont = False
         Me.XrLabel55.StylePriority.UseTextAlignment = False
-        XrSummary23.FormatString = "{0:n2}"
-        XrSummary23.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel55.Summary = XrSummary23
-        Me.XrLabel55.Text = "XrLabel47"
+        XrSummary21.FormatString = "{0:n2}"
+        XrSummary21.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel55.Summary = XrSummary21
+        Me.XrLabel55.Text = "XrLabel53"
         Me.XrLabel55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel56
+        '
+        Me.XrLabel56.CanGrow = False
+        Me.XrLabel56.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal4")})
+        Me.XrLabel56.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel56.LocationFloat = New DevExpress.Utils.PointFloat(668.5404!, 2.083326!)
+        Me.XrLabel56.Name = "XrLabel56"
+        Me.XrLabel56.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel56.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel56.StylePriority.UseFont = False
+        Me.XrLabel56.StylePriority.UseTextAlignment = False
+        XrSummary18.FormatString = "{0:n2}"
+        XrSummary18.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel56.Summary = XrSummary18
+        Me.XrLabel56.Text = "XrLabel50"
+        Me.XrLabel56.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel57
+        '
+        Me.XrLabel57.CanGrow = False
+        Me.XrLabel57.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal2")})
+        Me.XrLabel57.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel57.LocationFloat = New DevExpress.Utils.PointFloat(492.4981!, 2.083326!)
+        Me.XrLabel57.Name = "XrLabel57"
+        Me.XrLabel57.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel57.SizeF = New System.Drawing.SizeF(96.87515!, 25.57923!)
+        Me.XrLabel57.StylePriority.UseFont = False
+        Me.XrLabel57.StylePriority.UseTextAlignment = False
+        XrSummary17.FormatString = "{0:n2}"
+        XrSummary17.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel57.Summary = XrSummary17
+        Me.XrLabel57.Text = "XrLabel48"
+        Me.XrLabel57.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        '
+        'XrLabel58
+        '
+        Me.XrLabel58.CanGrow = False
+        Me.XrLabel58.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal8")})
+        Me.XrLabel58.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel58.LocationFloat = New DevExpress.Utils.PointFloat(960.2076!, 2.083326!)
+        Me.XrLabel58.Name = "XrLabel58"
+        Me.XrLabel58.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel58.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
+        Me.XrLabel58.StylePriority.UseFont = False
+        Me.XrLabel58.StylePriority.UseTextAlignment = False
+        XrSummary20.FormatString = "{0:n2}"
+        XrSummary20.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel58.Summary = XrSummary20
+        Me.XrLabel58.Text = "XrLabel54"
+        Me.XrLabel58.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
         'XrLabel59
         '
         Me.XrLabel59.CanGrow = False
-        Me.XrLabel59.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal2")})
+        Me.XrLabel59.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpTax.TaxTotal6")})
         Me.XrLabel59.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(492.4982!, 2.000014!)
+        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(814.3739!, 2.083326!)
         Me.XrLabel59.Name = "XrLabel59"
         Me.XrLabel59.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel59.SizeF = New System.Drawing.SizeF(96.87515!, 25.57923!)
+        Me.XrLabel59.SizeF = New System.Drawing.SizeF(72.91681!, 25.57923!)
         Me.XrLabel59.StylePriority.UseFont = False
         Me.XrLabel59.StylePriority.UseTextAlignment = False
-        XrSummary24.FormatString = "{0:n2}"
-        XrSummary24.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
-        Me.XrLabel59.Summary = XrSummary24
-        Me.XrLabel59.Text = "XrLabel48"
+        XrSummary19.FormatString = "{0:n2}"
+        XrSummary19.Running = DevExpress.XtraReports.UI.SummaryRunning.Group
+        Me.XrLabel59.Summary = XrSummary19
+        Me.XrLabel59.Text = "XrLabel52"
         Me.XrLabel59.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
         'XrLine4
         '
         Me.XrLine4.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
         Me.XrLine4.Name = "XrLine4"
-        Me.XrLine4.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
+        Me.XrLine4.SizeF = New System.Drawing.SizeF(1109.417!, 2.083328!)
         '
-        'GroupFooter3
+        'XrLine5
         '
-        Me.GroupFooter3.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine3, Me.XrLabel66, Me.XrLabel69, Me.XrLabel34, Me.XrLabel70, Me.XrLabel74, Me.XrLabel75, Me.XrLabel73, Me.XrLabel71, Me.XrLabel72})
-        Me.GroupFooter3.HeightF = 35.41667!
-        Me.GroupFooter3.Name = "GroupFooter3"
+        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrLine5.Name = "XrLine5"
+        Me.XrLine5.SizeF = New System.Drawing.SizeF(1109.417!, 2.083328!)
         '
-        'GroupHeader3
+        'XrLine6
         '
-        Me.GroupHeader3.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("UserID", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
-        Me.GroupHeader3.HeightF = 0.0!
-        Me.GroupHeader3.Name = "GroupHeader3"
-        XrGroupSortingSummary1.Enabled = True
-        XrGroupSortingSummary1.FieldName = "UserID"
-        XrGroupSortingSummary1.Function = DevExpress.XtraReports.UI.SortingSummaryFunction.Count
-        Me.GroupHeader3.SortingSummary = XrGroupSortingSummary1
+        Me.XrLine6.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrLine6.Name = "XrLine6"
+        Me.XrLine6.SizeF = New System.Drawing.SizeF(1109.417!, 2.083328!)
         '
         'rptDebtAnalyst
         '
-        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.GroupHeader1, Me.GroupFooter1, Me.ReportFooter, Me.GroupHeader2, Me.GroupFooter2, Me.GroupFooter3, Me.GroupHeader3})
+        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.GroupHeader1, Me.GroupHeader2, Me.GroupHeader3, Me.GroupFooter1, Me.GroupFooter2, Me.GroupFooter3})
         Me.CrossBandControls.AddRange(New DevExpress.XtraReports.UI.XRCrossBandControl() {Me.XrCrossBandBox1})
         Me.DataAdapter = Me.TmpOrdersTableAdapter
         Me.DataMember = "TmpTax"
         Me.DataSource = Me.TmpOrders1
         Me.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Landscape = True
-        Me.Margins = New System.Drawing.Printing.Margins(30, 24, 32, 35)
+        Me.Margins = New System.Drawing.Printing.Margins(30, 24, 26, 26)
         Me.PageHeight = 827
         Me.PageWidth = 1169
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
@@ -1322,20 +1327,15 @@ Partial Public Class rptDebtAnalyst
     Friend WithEvents XrCrossBandBox1 As DevExpress.XtraReports.UI.XRCrossBandBox
     Friend WithEvents XrLabel6 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents PageFooter As DevExpress.XtraReports.UI.PageFooterBand
-    Friend WithEvents GroupHeader1 As DevExpress.XtraReports.UI.GroupHeaderBand
     Friend WithEvents XrLabel10 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel16 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel18 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel21 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents GroupFooter1 As DevExpress.XtraReports.UI.GroupFooterBand
     Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
     Friend WithEvents XrLine1 As DevExpress.XtraReports.UI.XRLine
-    Friend WithEvents XrLine3 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel12 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLine2 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel20 As DevExpress.XtraReports.UI.XRLabel
@@ -1350,10 +1350,6 @@ Partial Public Class rptDebtAnalyst
     Friend WithEvents XrLabel25 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel24 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel29 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents GroupHeader2 As DevExpress.XtraReports.UI.GroupHeaderBand
-    Friend WithEvents XrLabel31 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel32 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel30 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel33 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel35 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel36 As DevExpress.XtraReports.UI.XRLabel
@@ -1364,9 +1360,6 @@ Partial Public Class rptDebtAnalyst
     Friend WithEvents XrLabel41 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel42 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel43 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel44 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents GroupFooter2 As DevExpress.XtraReports.UI.GroupFooterBand
-    Friend WithEvents XrLabel47 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel72 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel71 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel73 As DevExpress.XtraReports.UI.XRLabel
@@ -1376,27 +1369,39 @@ Partial Public Class rptDebtAnalyst
     Friend WithEvents XrLabel66 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel34 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel69 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel54 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel53 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel52 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel51 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel50 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel49 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel48 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel62 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel61 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel63 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel65 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel64 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel60 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel56 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel55 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel59 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLine4 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrLabel37 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrPageInfo2 As DevExpress.XtraReports.UI.XRPageInfo
-    Friend WithEvents GroupFooter3 As DevExpress.XtraReports.UI.GroupFooterBand
+    Friend WithEvents GroupHeader1 As DevExpress.XtraReports.UI.GroupHeaderBand
+    Friend WithEvents GroupHeader2 As DevExpress.XtraReports.UI.GroupHeaderBand
     Friend WithEvents GroupHeader3 As DevExpress.XtraReports.UI.GroupHeaderBand
-    Friend WithEvents XrLine6 As DevExpress.XtraReports.UI.XRLine
+    Friend WithEvents XrLine3 As DevExpress.XtraReports.UI.XRLine
+    Friend WithEvents XrLabel32 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel31 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel30 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLine2 As DevExpress.XtraReports.UI.XRLine
+    Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents GroupFooter1 As DevExpress.XtraReports.UI.GroupFooterBand
+    Friend WithEvents XrLabel48 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel47 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel50 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel49 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel46 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel39 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel38 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel45 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel44 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents GroupFooter2 As DevExpress.XtraReports.UI.GroupFooterBand
+    Friend WithEvents XrLabel57 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel56 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel59 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel58 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel55 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel52 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel51 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel54 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel53 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents GroupFooter3 As DevExpress.XtraReports.UI.GroupFooterBand
+    Friend WithEvents XrLine4 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrLine5 As DevExpress.XtraReports.UI.XRLine
+    Friend WithEvents XrLine6 As DevExpress.XtraReports.UI.XRLine
 End Class
