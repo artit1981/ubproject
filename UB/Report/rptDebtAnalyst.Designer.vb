@@ -104,6 +104,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLine3 = New DevExpress.XtraReports.UI.XRLine()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
+        Me.XrLine6 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel31 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
@@ -119,6 +120,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
         Me.GroupHeader2 = New DevExpress.XtraReports.UI.GroupHeaderBand()
+        Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel30 = New DevExpress.XtraReports.UI.XRLabel()
         Me.GroupFooter2 = New DevExpress.XtraReports.UI.GroupFooterBand()
         Me.XrLabel62 = New DevExpress.XtraReports.UI.XRLabel()
@@ -133,8 +135,6 @@ Partial Public Class rptDebtAnalyst
         Me.XrLine4 = New DevExpress.XtraReports.UI.XRLine()
         Me.GroupFooter3 = New DevExpress.XtraReports.UI.GroupFooterBand()
         Me.GroupHeader3 = New DevExpress.XtraReports.UI.GroupHeaderBand()
-        Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLine6 = New DevExpress.XtraReports.UI.XRLine()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -702,7 +702,7 @@ Partial Public Class rptDebtAnalyst
         '
         Me.XrCrossBandBox1.BorderWidth = 1
         Me.XrCrossBandBox1.EndBand = Me.ReportFooter
-        Me.XrCrossBandBox1.EndPointFloat = New DevExpress.Utils.PointFloat(0.0!, 3.125!)
+        Me.XrCrossBandBox1.EndPointFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
         Me.XrCrossBandBox1.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 90.19267!)
         Me.XrCrossBandBox1.Name = "XrCrossBandBox1"
         Me.XrCrossBandBox1.StartBand = Me.PageHeader
@@ -711,7 +711,7 @@ Partial Public Class rptDebtAnalyst
         '
         'ReportFooter
         '
-        Me.ReportFooter.HeightF = 9.912045!
+        Me.ReportFooter.HeightF = 2.0!
         Me.ReportFooter.Name = "ReportFooter"
         '
         'XrLabel72
@@ -872,7 +872,7 @@ Partial Public Class rptDebtAnalyst
         'PageFooter
         '
         Me.PageFooter.Expanded = False
-        Me.PageFooter.HeightF = 0.0!
+        Me.PageFooter.HeightF = 2.0!
         Me.PageFooter.Name = "PageFooter"
         '
         'GroupHeader1
@@ -881,6 +881,12 @@ Partial Public Class rptDebtAnalyst
         Me.GroupHeader1.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText3", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
         Me.GroupHeader1.HeightF = 25.46584!
         Me.GroupHeader1.Name = "GroupHeader1"
+        '
+        'XrLine6
+        '
+        Me.XrLine6.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrLine6.Name = "XrLine6"
+        Me.XrLine6.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
         '
         'XrLabel31
         '
@@ -902,7 +908,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(146.9604!, 0.0!)
         Me.XrLabel32.Name = "XrLabel32"
         Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel32.SizeF = New System.Drawing.SizeF(210.6301!, 23.0!)
+        Me.XrLabel32.SizeF = New System.Drawing.SizeF(565.8384!, 23.0!)
         Me.XrLabel32.StylePriority.UseFont = False
         Me.XrLabel32.Text = "XrLabel32"
         '
@@ -1085,9 +1091,14 @@ Partial Public Class rptDebtAnalyst
         Me.GroupHeader2.Font = New System.Drawing.Font("Angsana New", 14.0!)
         Me.GroupHeader2.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("TaxText1", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
         Me.GroupHeader2.HeightF = 25.0!
-        Me.GroupHeader2.Level = 1
         Me.GroupHeader2.Name = "GroupHeader2"
         Me.GroupHeader2.StylePriority.UseFont = False
+        '
+        'XrLine5
+        '
+        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
+        Me.XrLine5.Name = "XrLine5"
+        Me.XrLine5.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
         '
         'XrLabel30
         '
@@ -1097,7 +1108,7 @@ Partial Public Class rptDebtAnalyst
         Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(146.9604!, 0.0!)
         Me.XrLabel30.Name = "XrLabel30"
         Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel30.SizeF = New System.Drawing.SizeF(210.6301!, 23.0!)
+        Me.XrLabel30.SizeF = New System.Drawing.SizeF(565.8384!, 23.0!)
         Me.XrLabel30.StylePriority.UseFont = False
         Me.XrLabel30.Text = "XrLabel30"
         '
@@ -1105,7 +1116,6 @@ Partial Public Class rptDebtAnalyst
         '
         Me.GroupFooter2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel62, Me.XrLabel61, Me.XrLabel63, Me.XrLabel65, Me.XrLabel64, Me.XrLabel60, Me.XrLabel56, Me.XrLabel55, Me.XrLabel59, Me.XrLine4})
         Me.GroupFooter2.HeightF = 29.16667!
-        Me.GroupFooter2.Level = 1
         Me.GroupFooter2.Name = "GroupFooter2"
         '
         'XrLabel62
@@ -1267,31 +1277,17 @@ Partial Public Class rptDebtAnalyst
         '
         Me.GroupFooter3.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine3, Me.XrLabel66, Me.XrLabel69, Me.XrLabel34, Me.XrLabel70, Me.XrLabel74, Me.XrLabel75, Me.XrLabel73, Me.XrLabel71, Me.XrLabel72})
         Me.GroupFooter3.HeightF = 35.41667!
-        Me.GroupFooter3.Level = 2
         Me.GroupFooter3.Name = "GroupFooter3"
         '
         'GroupHeader3
         '
         Me.GroupHeader3.GroupFields.AddRange(New DevExpress.XtraReports.UI.GroupField() {New DevExpress.XtraReports.UI.GroupField("UserID", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)})
         Me.GroupHeader3.HeightF = 0.0!
-        Me.GroupHeader3.Level = 2
         Me.GroupHeader3.Name = "GroupHeader3"
         XrGroupSortingSummary1.Enabled = True
         XrGroupSortingSummary1.FieldName = "UserID"
         XrGroupSortingSummary1.Function = DevExpress.XtraReports.UI.SortingSummaryFunction.Count
         Me.GroupHeader3.SortingSummary = XrGroupSortingSummary1
-        '
-        'XrLine5
-        '
-        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
-        Me.XrLine5.Name = "XrLine5"
-        Me.XrLine5.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
-        '
-        'XrLine6
-        '
-        Me.XrLine6.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 0.0!)
-        Me.XrLine6.Name = "XrLine6"
-        Me.XrLine6.SizeF = New System.Drawing.SizeF(1110.458!, 2.0!)
         '
         'rptDebtAnalyst
         '

@@ -157,7 +157,7 @@ Public Class frmDebtAnalystReport
                     If lNotPayAmount > 0 Then
 
 
-                        lDayPast = DateDiff(DateInterval.Day, lAsOfDate, lExpireDate)
+                        lDayPast = DateDiff(DateInterval.Day, lExpireDate, lAsOfDate)
 
                         SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxText5,TaxText6,TaxTotal1,TaxDate1,TaxDate2,TaxTotal2"
                         SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"
@@ -178,38 +178,47 @@ Public Class frmDebtAnalystReport
                             SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                      'TaxTotal2 
                         Else : SQL = SQL & " ,0"
                         End If
-                        'ยอดคงค้าง                     
-                        SQL = SQL & " , " & lNotPayAmount                                                       'TaxTotal3 
+                        'ยอดคงค้าง      
+                        If lDayPast < 0 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal3 
+                        Else
+                            SQL = SQL & " ,0 "
+                        End If
 
-                        lDayPast = Math.Abs(lDayPast)
+                        'lDayPast = Math.Abs(lDayPast)
                         '1M
-                        If lDayPast > 0 And lDayPast <= 30 Then
+                        If lDayPast < 0 And lDayPast >= -30 Then
                             SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal4 
                         Else : SQL = SQL & " ,0"
                         End If
                         '2M
-                        If lDayPast > 30 And lDayPast <= 60 Then
+                        If lDayPast < -30 And lDayPast >= -60 Then
                             SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal5 
                         Else : SQL = SQL & " ,0"
                         End If
                         '3M
-                        If lDayPast > 60 And lDayPast <= 90 Then
+                        If lDayPast < -60 And lDayPast >= -90 Then
                             SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal6 
                         Else : SQL = SQL & " ,0"
                         End If
                         '4M
-                        If lDayPast > 90 And lDayPast <= 120 Then
+                        If lDayPast < -90 And lDayPast >= -120 Then
                             SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal7 
                         Else : SQL = SQL & " ,0"
                         End If
                         '>4M
-                        If lDayPast > 120 Then
+                        If lDayPast < -120 Then
                             SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal8 
                         Else : SQL = SQL & " ,0"
                         End If
 
-                        SQL = SQL & " , " & lDayPast                                                            'TaxTotal9
+                        If lDayPast < 0 Then
+                            SQL = SQL & " , " & Math.Abs(lDayPast)                                              'TaxTotal9
 
+                        Else
+                            SQL = SQL & " ,Null"
+                        End If
+ 
                         SQL = SQL & " ) "
                         myCommand = New SqlCommand
                         myCommand.CommandText = SQL
