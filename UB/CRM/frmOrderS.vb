@@ -988,6 +988,7 @@ Public Class frmOrderS
 
         Dim llngProID As Long, llngUnitID As Long
         Dim lOrderList As New List(Of Long)
+        Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
         lOrderList.Add(pOrderID)
         Try
             Dim lIsConfirm As Boolean = False
