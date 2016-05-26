@@ -31,8 +31,13 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
+<<<<<<< HEAD
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.1.01</ApplicationVersion>
+=======
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.1.02</ApplicationVersion>
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -366,6 +371,7 @@
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
+<<<<<<< HEAD
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="Master\frmProvince.Designer.vb">
@@ -398,6 +404,8 @@
     <Compile Include="Stock\frmUpdateStockDTL.vb">
       <SubType>Form</SubType>
     </Compile>
+=======
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <Compile Include="CRM\frmOrderDTL.Designer.vb">
       <DependentUpon>frmOrderDTL.vb</DependentUpon>
     </Compile>
@@ -598,6 +606,8 @@
     <Compile Include="DAO\BankAccountDAO.vb" />
     <Compile Include="DAO\BankDAO.vb" />
     <Compile Include="DAO\BankDocTypeDAO.vb" />
+    <Compile Include="DAO\CampaignDetail.vb" />
+    <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="DAO\ChequeDAO.vb" />
     <Compile Include="DAO\CompanyDAO.vb" />
     <Compile Include="DAO\CampaignDAO.vb" />
@@ -730,6 +740,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Master\MasterControl.vb" />
+    <Compile Include="Master\frmProvince.Designer.vb">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmProvince.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module\modApprove.vb" />
     <Compile Include="Module\modConfig.vb" />
     <Compile Include="Module\modDAO.vb" />
@@ -760,6 +776,12 @@
     <Compile Include="Base\frmPreExport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.Designer.vb">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\rptDealSellNot.Designer.vb">
       <DependentUpon>rptDealSellNot.vb</DependentUpon>
     </Compile>
@@ -782,6 +804,12 @@
       <DependentUpon>rptDealSell.vb</DependentUpon>
     </Compile>
     <Compile Include="Report\rptDealSell.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.Designer.vb">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptPaymentBuy.Designer.vb">
@@ -931,12 +959,15 @@
     <Compile Include="ReserveFlow\frmFindReserve.vb">
       <SubType>Form</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Stock\frmUpdateStock.Designer.vb">
       <DependentUpon>frmUpdateStock.vb</DependentUpon>
     </Compile>
     <Compile Include="Stock\frmUpdateStock.vb">
       <SubType>Form</SubType>
     </Compile>
+=======
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <Compile Include="Stock\frmCheckStock.Designer.vb">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </Compile>
@@ -947,6 +978,24 @@
       <DependentUpon>frmStockIn.vb</DependentUpon>
     </Compile>
     <Compile Include="Stock\frmStockIn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStock.Designer.vb">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.Designer.vb">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.Designer.vb">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TmpOrders.Designer.vb">
@@ -1124,7 +1173,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmControlCampaign.resx">
       <DependentUpon>frmControlCampaign.vb</DependentUpon>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
+=======
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmFindCustomer.resx">
       <DependentUpon>frmFindCustomer.vb</DependentUpon>
@@ -1169,6 +1221,7 @@
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Master\frmProvince.resx">
       <DependentUpon>frmProvince.vb</DependentUpon>
     </EmbeddedResource>
@@ -1184,6 +1237,8 @@
     <EmbeddedResource Include="Stock\frmUpdateStockDTL.resx">
       <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <EmbeddedResource Include="CRM\frmOrderDTL.resx">
       <DependentUpon>frmOrderDTL.vb</DependentUpon>
     </EmbeddedResource>
@@ -1319,6 +1374,9 @@
     <EmbeddedResource Include="Master\frmVatType.resx">
       <DependentUpon>frmVatType.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmProvince.resx">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -1328,6 +1386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmPreExport.resx">
       <DependentUpon>frmPreExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDealSellNot.resx">
       <DependentUpon>rptDealSellNot.vb</DependentUpon>
@@ -1340,6 +1401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDealSell.resx">
       <DependentUpon>rptDealSell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDebtAnalyst.resx">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPaymentBuy.resx">
       <DependentUpon>rptPaymentBuy.vb</DependentUpon>
@@ -1414,9 +1478,12 @@
     <EmbeddedResource Include="ReserveFlow\frmFindReserve.resx">
       <DependentUpon>frmFindReserve.vb</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Stock\frmUpdateStock.resx">
       <DependentUpon>frmUpdateStock.vb</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <EmbeddedResource Include="Stock\frmCheckStock.resx">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </EmbeddedResource>
@@ -1426,6 +1493,18 @@
     <EmbeddedResource Include="Base\frmFindEmployee.resx">
       <DependentUpon>frmFindEmployee.vb</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="Stock\frmUpdateStock.resx">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockDTL.resx">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockLog.resx">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> 9246cbfbc3cce2121894a86960ab0743773eb88a
     <EmbeddedResource Include="UserControl\ucCampaignDTL.resx">
       <DependentUpon>ucCampaignDTL.vb</DependentUpon>
     </EmbeddedResource>
