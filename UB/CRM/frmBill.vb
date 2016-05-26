@@ -80,6 +80,7 @@ Public Class frmBill
     End Sub
 
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
+        Dim lChequePayAmt As Decimal = 0
         XtraTabControl1.SelectedTabPage = GeneralTabPage
         Try
             Calculation()
@@ -112,24 +113,25 @@ Public Class frmBill
             mcls.TaxSection = ConvertNullToString(TaxSection.EditValue)
             mcls.TaxType = ConvertNullToString(TaxType.EditValue)
             mcls.TaxTotal = ConvertNullToZero(TotalTax.EditValue)
-            mcls.ChequeDAOs = UcCheque1.GetDAOs()
+            mcls.ChequeDAOs = UcCheque1.GetDAOs(lChequePayAmt)
             mcls.TaxOrderDAOs = GetTaxOrderList()
-            If Verify() = True Then
+            If Verify(lChequePayAmt) = True Then
                 Call mcls.SaveData()
-                ShowProgress(False, "")
-                If mOrderType = MasterType.ReceiptCut Then
-                    XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "บันทึก", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     ShowProgress(False, "")
-                Else
-                    If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                        modReport.PrintReportOrder(mOrderType, mcls.ID)
+                    If mOrderType = MasterType.ReceiptCut Then
+                        XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "บันทึก", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                        ShowProgress(False, "")
+                    Else
+                        If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                            modReport.PrintReportOrder(mOrderType, mcls.ID)
+                        End If
                     End If
-                End If
-              
-                PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                'PrintChequeBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
 
-                Return True
+                    PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                    'PrintChequeBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+
+                    Return True
+               
             Else
                 ShowProgress(False, "")
                 XtraMessageBox.Show(Me, "พบข้อผิดพลาดกรุณาตรวจสอบ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -387,7 +389,7 @@ Public Class frmBill
         End Try
     End Function
 
-    Private Function Verify() As Boolean
+    Private Function Verify(ByVal pChequeAmt As Decimal) As Boolean
         Dim lTotal As Decimal = 0
         Dim lstrErr As String = ""
         Try
@@ -421,14 +423,17 @@ Public Class frmBill
                 XtraMessageBox.Show(Me, lstrErr, "ตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return False
             Else
+                If pChequeAmt > 0 Then
+                    If pChequeAmt < mcls.GrandTotal Then
+                        If XtraMessageBox.Show(Me, "ยอดชำระ ต่ำกว่ายอดรวม ยืนยันการทำรายการหรือไม่ ?", "ตรวจสอบ", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                            Return True
+                        Else
+                            Return False
+                        End If
+                    End If
+                End If
                 Return True
             End If
-
-            'If DxErrorProvider1.HasErrors = False Then
-            '    If UcOrderList1.IsError = True Then
-            '        Return False
-            '    End If
-            'End If
             Return DxErrorProvider1.HasErrors = False
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".Verify : " & e.Message)
@@ -701,5 +706,5 @@ Public Class frmBill
 #End Region
 
    
-
+     
 End Class

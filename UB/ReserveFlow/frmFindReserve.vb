@@ -346,7 +346,7 @@ Public Class frmFindReserve
                         rec.Total = ConvertNullToZero(dr("Total"))
                         rec.IsShow = ConvertNullToZero(dr("IsShow"))
                         rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
-                        rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                        rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
                         rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
                         rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
                         rec.ModePro = DataMode.ModeEdit

@@ -61,7 +61,7 @@ Public Class frmChequeStatus
         Dim lDataDAOs = New List(Of ChequeDAO)
         Try
 
-            lDataDAOs = UcCheque1.GetDAOs
+            lDataDAOs = UcCheque1.GetDAOs(0)
             For Each pSubCheque As ChequeDAO In lDataDAOs
                 If pSubCheque.ChequeStatus <> "N" Then
                     lSuccessTX = lSuccessTX + 1

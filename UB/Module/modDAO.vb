@@ -1413,7 +1413,7 @@ Module modDAO
         Dim SQL As String, lTableNameThai As String = "", lStatus As String = ""
         Dim tr As SqlTransaction = Nothing
         Dim DataTable As DataTable
-        Dim lCount As Long = 0
+        Dim lCount As Long = 0, lRefStatus As RefOrderStatus = 0
         SQL = ""
         Try
             If ptr Is Nothing Then
@@ -1421,37 +1421,22 @@ Module modDAO
             Else
                 tr = ptr
             End If
+            lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'PurchaseOrder','CancelPO'" _
+                                               , MasterType.PurchaseOrder & "," & MasterType.CancelPO, tr)
 
-            SQL = "SELECT p1.*  "
-            SQL = SQL & " FROM ProductList p1"
-            SQL = SQL & " WHERE p1.IsDelete =0  "
-            SQL = SQL & " AND p1.RefTable in ('Reserve' )"
-            SQL = SQL & " AND p1.RefID =" & pRefOrderID
-            SQL = SQL & " AND p1.ProductListID not in ( "
-            SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
-            SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-            SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
-            SQL = SQL & " AND p1.ProductListID not in ( "
-            SQL = SQL & "   select p2.ProductListRefID2 from ProductList p2 "
-            SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-            SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
-            SQL = SQL & " AND p1.ProductListID not in ( "
-            SQL = SQL & "   select p2.ProductListRefID3 from ProductList p2 "
-            SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
-            SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
-            DataTable = gConnection.executeSelectQuery(SQL, tr)
-            If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
-                lStatus = EnumStatus.Ordered.ToString
-            Else
+            If lRefStatus = RefOrderStatus.NotToRef Then
                 lStatus = EnumStatus.Ordering.ToString
-            End If
+            ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                lStatus = EnumStatus.Ordering.ToString
+            Else
+                lStatus = EnumStatus.Ordered.ToString
+            End If          
 
             If pOrderType = MasterType.PurchaseOrder Or pOrderType = MasterType.CancelPO Then
                 SQL = " UPDATE Orders SET "
                 SQL = SQL & " MakePOStatus='" & lStatus & "'"
                 SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
                 gConnection.executeInsertQuery(SQL, tr)
-
             End If
 
             If pMode = DataMode.ModeNew Then

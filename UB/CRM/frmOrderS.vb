@@ -988,7 +988,9 @@ Public Class frmOrderS
 
         Dim llngProID As Long, llngUnitID As Long
         Dim lOrderList As New List(Of Long)
-        Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
+        Dim lIsSell As Boolean
+
+        lIsSell = CheckIsSell(mOrderType)
         lOrderList.Add(pOrderID)
         Try
             Dim lIsConfirm As Boolean = False
@@ -1015,7 +1017,11 @@ Public Class frmOrderS
                         rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                         rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                         rec.UnitID = ConvertNullToZero(dr("UnitID"))
-                        rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                        If lIsSell = True Then
+                            rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDSell"))
+                        Else
+                            rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                        End If
                         rec.UnitName = ConvertNullToString(dr("UnitName"))
                         rec.Remark = ConvertNullToString(dr("Remark"))
                         rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
@@ -1057,7 +1063,11 @@ Public Class frmOrderS
                                 rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                                 rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                                 rec.UnitID = ConvertNullToZero(dr("UnitID"))
-                                rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
+                                If lIsSell = True Then
+                                    rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDSell"))
+                                Else
+                                    rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                                End If
                                 rec.UnitName = ConvertNullToString(dr("UnitName"))
                                 rec.Remark = ConvertNullToString(dr("Remark"))
                                 rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
@@ -1281,6 +1291,13 @@ Public Class frmOrderS
             InitialCusTaxInfo(ConvertNullToZero(CustomerID.EditValue), Nothing)
             UcPledge1.ShowControl(mcls.ID, False)
             CancelRemark.Properties.ReadOnly = (IsCancel.EditValue = False)
+
+            'Total panel
+            Dim lUnits As Long = 0
+            If mMode = DataMode.ModeEdit Then
+                lUnits = UcProductLists1.GetDAOs(False, True, mOrderType = MasterType.SellOrders, Nothing, True, 0, False, "", 0, mcls.StockType).Count
+            End If
+            InitialTotalPanel(lUnits)
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
@@ -1444,10 +1461,10 @@ Public Class frmOrderS
     Friend Sub Calculation()
         Dim lTotal As Decimal = 0
         Dim lVatAmt As Decimal = 0
-
+        Dim lUnits As Long = 0
         Try
             If mIsFromLoad = False Then
-                UcProductLists1.GetDAOs(False, True, mOrderType = MasterType.SellOrders, Nothing, True, 0, False, "", 0, mcls.StockType)
+                lUnits = UcProductLists1.GetDAOs(False, True, mOrderType = MasterType.SellOrders, Nothing, True, 0, False, "", 0, mcls.StockType).Count
                 Total.EditValue = UcProductLists1.Totals
 
                 UcPledge1.GetDAOs()
@@ -1460,14 +1477,12 @@ Public Class frmOrderS
                     TotalTax.EditValue = 0
                     VatAmount.EditValue = 0
                 Else
-                    'DiscountAmount.EditValue = Total.EditValue * (DiscountPercen.EditValue / 100)
-
-                    Select Case mVatType
+                     Select Case mVatType
                         Case "E"
                             TotalAfterPledge.EditValue = Total.EditValue - PledgeTotal.EditValue
                             TotalAfterDis.EditValue = TotalAfterPledge.EditValue - DiscountAmount.EditValue
                             lVatAmt = TotalAfterDis.EditValue * (VatPercen.EditValue / 100)
-                          
+
                         Case "I"
                             lTotal = Total.EditValue * (100 / (100 + VatPercen.EditValue))
                             Total.EditValue = lTotal
@@ -1484,13 +1499,29 @@ Public Class frmOrderS
                         VatAmount.EditValue = lVatAmt
                     End If
 
-                GrandTotal.EditValue = TotalAfterDis.EditValue + VatAmount.EditValue
-                TotalTax.EditValue = mTaxOrderTotal
-                GrandTotal.EditValue = (GrandTotal.EditValue - TotalTax.EditValue) * ConvertNullToZero(Exchange.EditValue)
-            End If
+                    GrandTotal.EditValue = TotalAfterDis.EditValue + VatAmount.EditValue
+                    TotalTax.EditValue = mTaxOrderTotal
+                    GrandTotal.EditValue = (GrandTotal.EditValue - TotalTax.EditValue) * ConvertNullToZero(Exchange.EditValue)
+                    InitialTotalPanel(lUnits)
+                End If
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".Calculation : " & e.Message)
+        Finally
+        End Try
+    End Sub
+
+
+    Private Sub InitialTotalPanel(ByVal pUnits As Long)
+        Try
+            txtUnits.EditValue = FormatNumber(pUnits, 0)
+            txtTotal.EditValue = FormatNumber(Total.EditValue, 2)
+            txtPledge.EditValue = FormatNumber(PledgeTotal.EditValue, 2)
+            txtDiscount.EditValue = FormatNumber(DiscountAmount.EditValue, 2)
+            txtVat.EditValue = FormatNumber(VatAmount.EditValue, 2)
+            txtGrandTotal.EditValue = FormatNumber(GrandTotal.EditValue, 2)
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, mFormName & ".InitialTotalPanel : " & ex.Message)
         Finally
         End Try
     End Sub

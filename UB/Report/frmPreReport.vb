@@ -653,7 +653,7 @@ Public Class frmPreReport
             report = New rptCheque
             lclsReport.SaveData()
 
-            Dim lclsProList As New ChequeDAO
+            Dim lclsCheque As New ChequeDAO
             Dim lTableProList As DataTable
             Dim SQL As String, lstrBank As String = ""
             Dim myCommand As SqlCommand
@@ -666,7 +666,7 @@ Public Class frmPreReport
             gConnection.executeInsertSqlCommand(myCommand, Nothing)
 
             If mChequeID > 0 Then
-                lTableProList = lclsProList.GetDataTable(-1, 0, , , , mChequeID)
+                lTableProList = lclsCheque.GetDataTable(-1, 0, , , , mChequeID)
                 For Each pRow As DataRow In lTableProList.Rows
 
                     If lclsBank.InitailData(ConvertNullToZero(pRow.Item("BankID")), Nothing) Then

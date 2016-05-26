@@ -37,21 +37,13 @@ Public Class ucCheque
         End Try
     End Sub
 
-    Public Function GetDAOs() As List(Of ChequeDAO)
-
-        'Dim lRow As Long
+    Public Function GetDAOs(ByRef pChequeTotal As Decimal) As List(Of ChequeDAO)
         Try
+            pChequeTotal = 0
+            For Each pCheque As ChequeDAO In mChequeList
+                pChequeTotal = pChequeTotal + pCheque.ChequePay
+            Next
             Return mChequeList
-            'mChequeList = New List(Of ChequeDAO)
-
-            'If Not bindingSource1 Is Nothing > 0 Then
-            '    lRow = 0
-            '    For Each pProSub As ChequeDAO In bindingSource1
-            '        If pProSub.ChequeNo.Trim <> "" Then
-            '            mChequeList.Add(pProSub)
-            '        End If
-            '    Next
-            'End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucCheque.GetDAOs : " & e.Message)
         Finally

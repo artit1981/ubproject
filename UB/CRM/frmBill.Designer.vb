@@ -491,7 +491,7 @@ Partial Class frmBill
         'UcOrderList1
         '
         Me.UcOrderList1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcOrderList1, "")
         Me.UcOrderList1.Location = New System.Drawing.Point(12, 168)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcOrderList1, True)
@@ -1242,7 +1242,7 @@ Partial Class frmBill
         'TaxGroup
         '
         Me.TaxGroup.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TaxGroup.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TaxGroup.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TaxGroup, "")
@@ -1274,7 +1274,7 @@ Partial Class frmBill
         'GridTaxOrder
         '
         Me.GridTaxOrder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GridTaxOrder, "")
         Me.GridTaxOrder.Location = New System.Drawing.Point(26, 196)
         Me.GridTaxOrder.MainView = Me.GridView2

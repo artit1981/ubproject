@@ -390,7 +390,7 @@ Public Class ProductListDAO
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
             SQL = SQL & " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
             SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
-            SQL = SQL & " ,UnitMainID,UnitMainIDBuy"
+            SQL = SQL & " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy"
             SQL = SQL & " FROM ProductList"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
