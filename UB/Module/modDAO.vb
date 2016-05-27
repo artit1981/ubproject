@@ -1224,7 +1224,7 @@ Module modDAO
         End Try
     End Sub
 
-    Public Function CompareUnitToClose(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByValRefToTableIDList As String, ByRef ptr As SqlTransaction) As RefOrderStatus
+    Public Function CompareUnitToClose(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByValRefToTableIDList As String, ByRef ptr As SqlTransaction, ByRef pUnitSameRef As Long) As RefOrderStatus
         Dim SQL As String
         Dim DataTable As DataTable
         Dim pRefFromUnit As Long = 0, pRefToUnit As Long = 0
@@ -1278,9 +1278,11 @@ Module modDAO
             Exit For
         Next
 
+        pUnitSameRef = pUnitSameRef + pRefFromUnit
+
         If pRefToUnit = 0 Then                  'not to ref
             Return RefOrderStatus.NotToRef
-        ElseIf pRefFromUnit > pRefToUnit Then   'ref some line,unit
+        ElseIf pUnitSameRef > pRefToUnit Then   'ref some line,unit
             Return RefOrderStatus.RefSome
         Else                                    'ref all
             Return RefOrderStatus.RefAll
@@ -1289,11 +1291,11 @@ Module modDAO
      
 
     'UpdateRefOrderStatus ***** ก่อนเช็คจำนวนรวม
-    Public Sub UpdateRefOrderStatus(ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pRefOrderID As Long, ByVal pStatus As String, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
+    Public Sub UpdateRefOrderStatus(ByVal pRefToOrderID As List(Of Long), ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pStatus As String, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
         Dim SQL As String, lTableNameThai As String = "", lStatus As String = ""
         Dim tr As SqlTransaction = Nothing
         Dim lRefOrderType As MasterType, lCount As Long = 0
-        Dim lRefStatus As RefOrderStatus = 0
+        Dim lRefStatus As RefOrderStatus = 0, pUnitSameRef As Long = 0
         SQL = ""
         Try
             If ptr Is Nothing Then
@@ -1302,81 +1304,64 @@ Module modDAO
                 tr = ptr
             End If
 
-            Dim lclsRefOrder As New OrderSDAO
-            lRefOrderType = lclsRefOrder.GetOrderTypeFromID(pRefOrderID, tr)
+            For Each pRefOrderID As Long In pRefToOrderID
 
-            If pOrderType = MasterType.StockIn Then 'Ref from PO
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr)
-                If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Waiting.ToString
-                ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                    lStatus = EnumStatus.Waiting.ToString
-                Else
-                    lStatus = EnumStatus.Receive.ToString
-                End If
-            ElseIf pOrderType = MasterType.Invoice And lRefOrderType = MasterType.Borrow Then
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", MasterType.Invoice, tr)
-                If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Open.ToString
-                ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                    lStatus = EnumStatus.Waiting.ToString
-                Else
-                    lStatus = EnumStatus.Close.ToString
-                End If
-            ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Then 'Ref from Sell
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'" _
-                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping, tr)
-                If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Open.ToString
-                ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                    lStatus = EnumStatus.Waiting.ToString
-                Else
-                    lStatus = EnumStatus.Close.ToString
-                End If
-            ElseIf pOrderType = MasterType.InvoiceBuy Or pOrderType = MasterType.ShipingBuy Then ' ref from PO
-                If pMode = DataMode.ModeDelete Then
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr)
+
+                Dim lclsRefOrder As New OrderSDAO
+                lRefOrderType = lclsRefOrder.GetOrderTypeFromID(pRefOrderID, tr)
+
+                If pOrderType = MasterType.StockIn Then 'Ref from PO
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr, pUnitSameRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
-                        lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
+                        lStatus = EnumStatus.Waiting.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                        lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
+                        lStatus = EnumStatus.Waiting.ToString
                     Else
-                        lStatus = EnumStatus.Receive.ToString 'PO ที่ทำ stockin หมดแล้ว
+                        lStatus = EnumStatus.Receive.ToString
                     End If
-                Else
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'" _
-                                                , MasterType.InvoiceBuy & "," & MasterType.ShipingBuy, tr)
-                    If lRefStatus = RefOrderStatus.NotToRef Then
-                        ''
-                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                        ''
-                    Else
-                        lStatus = EnumStatus.Close.ToString 'PO ที่ทำ InvoiceBuy หมดแล้ว
-                    End If
-                End If
-            ElseIf pOrderType = MasterType.Reserve Then 'Ref from QUOTAION
-                lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
-                                                , MasterType.Reserve & "," & MasterType.SellOrders, tr)
-                If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Open.ToString
-                ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                    lStatus = EnumStatus.Waiting.ToString
-                Else
-                    lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
-                End If
-            ElseIf pOrderType = MasterType.SellOrders Then
-                If lRefOrderType = MasterType.Reserve Then '  ใบสั่งขายดึง Reserve มาทำ
-                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'SellOrders'", MasterType.SellOrders, tr)
+                ElseIf pOrderType = MasterType.Invoice And lRefOrderType = MasterType.Borrow Then
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'Borrow'", "'Invoice'", MasterType.Invoice, tr, pUnitSameRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Open.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
                         lStatus = EnumStatus.Waiting.ToString
                     Else
-                        lStatus = EnumStatus.Close.ToString 'Reserve ที่ทำ  SellOrders หมดแล้ว
+                        lStatus = EnumStatus.Close.ToString
                     End If
-                ElseIf lRefOrderType = MasterType.Quotation Then
+                ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Then 'Ref from Sell
+                    lRefStatus = CompareUnitToClose(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'" _
+                                                    , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping, tr, pUnitSameRef)
+                    If lRefStatus = RefOrderStatus.NotToRef Then
+                        lStatus = EnumStatus.Open.ToString
+                    ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                        lStatus = EnumStatus.Waiting.ToString
+                    Else
+                        lStatus = EnumStatus.Close.ToString
+                    End If
+                ElseIf pOrderType = MasterType.InvoiceBuy Or pOrderType = MasterType.ShipingBuy Then ' ref from PO
+                    If pMode = DataMode.ModeDelete Then
+                        lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr, pUnitSameRef)
+                        If lRefStatus = RefOrderStatus.NotToRef Then
+                            lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
+                        ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                            lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
+                        Else
+                            lStatus = EnumStatus.Receive.ToString 'PO ที่ทำ stockin หมดแล้ว
+                        End If
+                    Else
+                        lRefStatus = CompareUnitToClose(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'" _
+                                                    , MasterType.InvoiceBuy & "," & MasterType.ShipingBuy, tr, pUnitSameRef)
+                        If lRefStatus = RefOrderStatus.NotToRef Then
+                            ''
+                        ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                            ''
+                        Else
+                            lStatus = EnumStatus.Close.ToString 'PO ที่ทำ InvoiceBuy หมดแล้ว
+                        End If
+                    End If
+                ElseIf pOrderType = MasterType.Reserve Then 'Ref from QUOTAION
                     lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
-                                                , MasterType.Reserve & "," & MasterType.SellOrders, tr)
+                                                    , MasterType.Reserve & "," & MasterType.SellOrders, tr, pUnitSameRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Open.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1384,24 +1369,45 @@ Module modDAO
                     Else
                         lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
                     End If
+                ElseIf pOrderType = MasterType.SellOrders Then
+                    If lRefOrderType = MasterType.Reserve Then '  ใบสั่งขายดึง Reserve มาทำ
+                        lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'SellOrders'", MasterType.SellOrders, tr, pUnitSameRef)
+                        If lRefStatus = RefOrderStatus.NotToRef Then
+                            lStatus = EnumStatus.Open.ToString
+                        ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                            lStatus = EnumStatus.Waiting.ToString
+                        Else
+                            lStatus = EnumStatus.Close.ToString 'Reserve ที่ทำ  SellOrders หมดแล้ว
+                        End If
+                    ElseIf lRefOrderType = MasterType.Quotation Then
+                        lRefStatus = CompareUnitToClose(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
+                                                    , MasterType.Reserve & "," & MasterType.SellOrders, tr, pUnitSameRef)
+                        If lRefStatus = RefOrderStatus.NotToRef Then
+                            lStatus = EnumStatus.Open.ToString
+                        ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                            lStatus = EnumStatus.Waiting.ToString
+                        Else
+                            lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
+                        End If
+                    End If
+                Else ''อื่นๆ
+                    lStatus = ConvertNullToString(pStatus)
                 End If
-            Else ''อื่นๆ
-                lStatus = ConvertNullToString(pStatus)
-            End If
 
-            If lStatus <> "" Then
-                SQL = " UPDATE Orders SET "
-                SQL = SQL & " OrderStatus='" & lStatus & "'"
-                SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                gConnection.executeInsertQuery(SQL, tr)
-            End If
-            If pMode = DataMode.ModeNew Then
-                SQL = " Insert into OrdersRef (OrderID,RefOrderID,IsDelete) values( " & pParentOrderID & "," & pRefOrderID & ",0)"
-                gConnection.executeInsertQuery(SQL, tr)
-            ElseIf pMode = DataMode.ModeDelete Then
-                SQL = " delete from OrdersRef where OrderID=" & pParentOrderID & " and RefOrderID=" & pRefOrderID
-                gConnection.executeInsertQuery(SQL, tr)
-            End If
+                If lStatus <> "" Then
+                    SQL = " UPDATE Orders SET "
+                    SQL = SQL & " OrderStatus='" & lStatus & "'"
+                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
+                    gConnection.executeInsertQuery(SQL, tr)
+                End If
+                If pMode = DataMode.ModeNew Then
+                    SQL = " Insert into OrdersRef (OrderID,RefOrderID,IsDelete) values( " & pParentOrderID & "," & pRefOrderID & ",0)"
+                    gConnection.executeInsertQuery(SQL, tr)
+                ElseIf pMode = DataMode.ModeDelete Then
+                    SQL = " delete from OrdersRef where OrderID=" & pParentOrderID & " and RefOrderID=" & pRefOrderID
+                    gConnection.executeInsertQuery(SQL, tr)
+                End If
+            Next
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.UpdateRefOrderStatus : " & e.Message)
         Finally
@@ -1409,11 +1415,10 @@ Module modDAO
         End Try
     End Sub
 
-    Public Sub UpdateRefReserveStatus(ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pRefOrderID As Long, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
+    Public Sub UpdateRefReserveStatus(ByVal pRefToReserveID As List(Of Long), ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
         Dim SQL As String, lTableNameThai As String = "", lStatus As String = ""
         Dim tr As SqlTransaction = Nothing
-        Dim DataTable As DataTable
-        Dim lCount As Long = 0, lRefStatus As RefOrderStatus = 0
+        Dim lCount As Long = 0, lRefStatus As RefOrderStatus = 0, pUnitSameRef As Long = 0
         SQL = ""
         Try
             If ptr Is Nothing Then
@@ -1421,37 +1426,100 @@ Module modDAO
             Else
                 tr = ptr
             End If
-            lRefStatus = CompareUnitToClose(pRefOrderID, "'Reserve'", "'PurchaseOrder','CancelPO'" _
-                                               , MasterType.PurchaseOrder & "," & MasterType.CancelPO, tr)
+            For Each pOrderID As Long In pRefToReserveID
 
-            If lRefStatus = RefOrderStatus.NotToRef Then
-                lStatus = EnumStatus.Ordering.ToString
-            ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                lStatus = EnumStatus.Ordering.ToString
-            Else
-                lStatus = EnumStatus.Ordered.ToString
-            End If          
 
-            If pOrderType = MasterType.PurchaseOrder Or pOrderType = MasterType.CancelPO Then
-                SQL = " UPDATE Orders SET "
-                SQL = SQL & " MakePOStatus='" & lStatus & "'"
-                SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
-                gConnection.executeInsertQuery(SQL, tr)
-            End If
+                lRefStatus = CompareUnitToClose(pOrderID, "'Reserve'", "'PurchaseOrder','CancelPO'" _
+                                                   , MasterType.PurchaseOrder & "," & MasterType.CancelPO, tr, pUnitSameRef)
 
-            If pMode = DataMode.ModeNew Then
-                SQL = " Insert into OrdersRef (OrderID,RefOrderID,RefReserveID,IsDelete) values( " & pParentOrderID & ",0," & pRefOrderID & ",0)"
-                gConnection.executeInsertQuery(SQL, tr)
-            ElseIf pMode = DataMode.ModeDelete Then
-                SQL = " delete from OrdersRef where OrderID=" & pParentOrderID & " and RefReserveID=" & pRefOrderID
-                gConnection.executeInsertQuery(SQL, tr)
-            End If
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = EnumStatus.Ordering.ToString
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = EnumStatus.Ordering.ToString
+                Else
+                    lStatus = EnumStatus.Ordered.ToString
+                End If
+
+                If pOrderType = MasterType.PurchaseOrder Or pOrderType = MasterType.CancelPO Then
+                    SQL = " UPDATE Orders SET "
+                    SQL = SQL & " MakePOStatus='" & lStatus & "'"
+                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pOrderID)
+                    gConnection.executeInsertQuery(SQL, tr)
+                End If
+
+                If pMode = DataMode.ModeNew Then
+                    SQL = " Insert into OrdersRef (OrderID,RefOrderID,RefReserveID,IsDelete) values( " & pParentOrderID & ",0," & pOrderID & ",0)"
+                    gConnection.executeInsertQuery(SQL, tr)
+                ElseIf pMode = DataMode.ModeDelete Then
+                    SQL = " delete from OrdersRef where OrderID=" & pParentOrderID & " and RefReserveID=" & pOrderID
+                    gConnection.executeInsertQuery(SQL, tr)
+                End If
+            Next
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.UpdateRefReserveStatus : " & e.Message)
         Finally
             'lcls = Nothing
         End Try
     End Sub
+
+    'Public Sub UpdateRefReserveStatus(ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pRefOrderID As Long, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
+    '    Dim SQL As String, lTableNameThai As String = "", lStatus As String = ""
+    '    Dim tr As SqlTransaction = Nothing
+    '    Dim DataTable As DataTable
+    '    Dim lCount As Long = 0
+    '    SQL = ""
+    '    Try
+    '        If ptr Is Nothing Then
+    '            tr = gConnection.Connection.BeginTransaction
+    '        Else
+    '            tr = ptr
+    '        End If
+
+    '        SQL = "SELECT p1.*  "
+    '        SQL = SQL & " FROM ProductList p1"
+    '        SQL = SQL & " WHERE p1.IsDelete =0  "
+    '        SQL = SQL & " AND p1.RefTable in ('Reserve' )"
+    '        SQL = SQL & " AND p1.RefID =" & pRefOrderID
+    '        SQL = SQL & " AND p1.ProductListID not in ( "
+    '        SQL = SQL & "   select p2.ProductListRefID from ProductList p2 "
+    '        SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
+    '        SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
+    '        SQL = SQL & " AND p1.ProductListID not in ( "
+    '        SQL = SQL & "   select p2.ProductListRefID2 from ProductList p2 "
+    '        SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
+    '        SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
+    '        SQL = SQL & " AND p1.ProductListID not in ( "
+    '        SQL = SQL & "   select p2.ProductListRefID3 from ProductList p2 "
+    '        SQL = SQL & "   WHERE p2.IsDelete =0  and p2.ProductListRefID>0"
+    '        SQL = SQL & "   AND p2.RefTable in ('PurchaseOrder','CancelPO') )"
+    '        DataTable = gConnection.executeSelectQuery(SQL, tr)
+    '        If IsNothing(DataTable) OrElse DataTable.Rows.Count = 0 Then
+    '            lStatus = EnumStatus.Ordered.ToString
+    '        Else
+    '            lStatus = EnumStatus.Ordering.ToString
+    '        End If
+
+    '        If pOrderType = MasterType.PurchaseOrder Or pOrderType = MasterType.CancelPO Then
+    '            SQL = " UPDATE Orders SET "
+    '            SQL = SQL & " MakePOStatus='" & lStatus & "'"
+    '            SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
+    '            gConnection.executeInsertQuery(SQL, tr)
+
+    '        End If
+
+    '        If pMode = DataMode.ModeNew Then
+    '            SQL = " Insert into OrdersRef (OrderID,RefOrderID,RefReserveID,IsDelete) values( " & pParentOrderID & ",0," & pRefOrderID & ",0)"
+    '            gConnection.executeInsertQuery(SQL, tr)
+    '        ElseIf pMode = DataMode.ModeDelete Then
+    '            SQL = " delete from OrdersRef where OrderID=" & pParentOrderID & " and RefReserveID=" & pRefOrderID
+    '            gConnection.executeInsertQuery(SQL, tr)
+    '        End If
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "modDAO.UpdateRefReserveStatus : " & e.Message)
+    '    Finally
+    '        'lcls = Nothing
+    '    End Try
+    'End Sub
     Public Sub UpdateOrderByBill(ByVal RefBillID As Long, ByVal OrderID As Long, ByRef tr As SqlTransaction)
         Dim lcls As New OrderSDAO
         Try

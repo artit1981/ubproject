@@ -344,21 +344,27 @@ Public Class OrderSDAO
                 Select Case TableID
                     Case MasterType.SellOrders, MasterType.Invoice, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy
                         If RefToOrderID.Count > 0 Then
+
+                            If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
+                                UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Close.ToString, tr, ModeData)
+
+                            Else 'Delete,NotApprove
+                                UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Open.ToString, tr, DataMode.ModeDelete)
+
+                            End If
+
+
                             For Each pOrderID As Long In RefToOrderID
                                 If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, EnumStatus.Close.ToString, tr, ModeData)
                                     SetFlagProductList(ProductDAOs, True, pOrderID, tr)
                                 Else 'Delete,NotApprove
-                                    UpdateRefOrderStatus(TableID, ID, pOrderID, EnumStatus.Open.ToString, tr, DataMode.ModeDelete)
                                     SetFlagProductList(ProductDAOs, False, pOrderID, tr)
                                 End If
                             Next
                         End If
                     Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset, MasterType.Claim, MasterType.Expose
                         If RefToOrderID.Count > 0 Then
-                            For Each pOrderID As Long In RefToOrderID
-                                UpdateRefOrderStatus(TableID, ID, pOrderID, "", tr, ModeData)
-                            Next
+                            UpdateRefOrderStatus(RefToOrderID, TableID, ID, "", tr, ModeData)
                         End If
                 End Select
             End If
@@ -366,9 +372,7 @@ Public Class OrderSDAO
             'Make PO
             If IsNothing(RefToReserveID) = False Then
                 If RefToReserveID.Count > 0 Then
-                    For Each pOrderID As Long In RefToReserveID
-                        UpdateRefReserveStatus(TableID, ID, pOrderID, tr, ModeData)
-                    Next
+                    UpdateRefReserveStatus(RefToReserveID, TableID, ID, tr, ModeData)
                 End If
 
             End If
@@ -432,7 +436,7 @@ Public Class OrderSDAO
             If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Then
                 SQL = SQL & ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
-            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Then
+            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy Then
                 SQL = SQL & ",Orders.InvoiceSuplierID "
             End If
             SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"

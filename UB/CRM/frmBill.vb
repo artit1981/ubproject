@@ -368,10 +368,6 @@ Public Class frmBill
                     TaxType.EditValue = mcls.TaxType
                     TotalTax.EditValue = mcls.TaxTotal
                     ContactName.EditValue = mcls.CustomerDAO.AddressS.ContactName
-                    'If mOrderType = MasterType.Receipt Then
-                    '    PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                    '    PrintChequeBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                    'End If
                 End If
             End If
             LoadTaxOrder(pID)

@@ -189,7 +189,7 @@ Public Class OrderControl
                     .Columns("PO").Caption = "PO"
                     .Columns("PO").Width = 100
                     .Columns("PO").MaxWidth = 120
-                Case MasterType.InvoiceBuy, MasterType.ShipingBuy, MasterType.ReduceCreditBuy
+                Case MasterType.InvoiceBuy, MasterType.ShipingBuy, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.ReduceCredit, MasterType.AddCreditBuy
                     .Columns("InvoiceSuplierID").Caption = "เลขที่ใบกำกับภาษีเจ้าหนี้"
                     .Columns("InvoiceSuplierID").Width = 100
                     .Columns("InvoiceSuplierID").MaxWidth = 120

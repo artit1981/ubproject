@@ -200,7 +200,33 @@
         3rPPUtgnzgGaJ07A/4vwG+kJPnf+VB1pAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="DockManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>217, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>33</value>
   </metadata>
+  <data name="btnCalc.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7O
+        HOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAAsMAAALDAE/QCLIAAADxUlEQVRYR7WXXWwMURSAN0Ei
+        XvzH/xOvgoh4s978dGdmV7vUzs7uItY2dHdnpq22bJZSEo2kQdrVohSNN9oS8dKIhnigRbwgqBdERPzE
+        f7jOuXu3Zmfubqe7nOTL3r3n3HPu3HPPnTsOu+JWaqeKfn2TKKudgl8blBT1HfBTUNTvoqy/gfZtUdFb
+        JL9a6gonJ7BhxYsUrFos+PULgqz/kBSd2EJWP0qKdlQKafOYm9GLFIxNEhS9nRvALrL6FSaSCIfD45hb
+        eyIq2hJ44udcpwUgytotsbx6NnOfX9yK6oQn/8RzVAyiog4JfnUBC8MXd1Bf+j+CZ8BVXRusmsnCZUvZ
+        FnWKJGsveAP/JVAx153O5FgW9q+A8ozZOMPDa/vIg6sNXF2B6CxsWqC+l3OMhvk8eJDC0xUCprlsU+V0
+        Fp5OoJdnmOFfTwCBQ6uRBvfINXOh47fZAJc9E9gMLx39hzeToeMBLjdAZ7aHM+IV3Qvw9FGLErh3ZQ83
+        ODJweY/F/npTiBsc6TsUsthTZH2lA3b+JZ5ydVmYrPJspmQCZ/6jLp+9GZ49Ag/f4LBz4mUmwNMVBTw8
+        lp8l/2buXU6Sgd4kV1cMUA0PcAJcpRFcwlzLWBRw8NmawH+DTWDEFIyWxIFmsruxmaszQlOQaxPKiQOk
+        4lQbKQ3XDfdhO9LRTuRd+7NszTx5MkAePb7L1WVBN2GOMoycTJGaGxdJvPs8DYzEe87Tvm3trRZ7IzWJ
+        RlKdyD9Jil/bCynQKnlKMRAn0UtnaUC1p4vEe7toO3qxkwihmMUel731VCel5eRpSuZ/rnTg3cOBNxVB
+        Vn9ZDTTI0Q4SZ5NAYt1niQv6UGe2x2UfGrrPhZcOyP9Lr9c7hr4PoKPbbICUhmtJrOdc1gTWhXda7BBc
+        9qOpNi78dGj7aHAUl6wvMxsYc46BEWzjnlgHEzPbu3xRUrJhO6W+oYnU7W0a/o+6LHu4Nbs2atNY+LTA
+        67HDaBTpaKMBMee47Ai2sS9yIpXt0MTIVVAVZ2H/SomvdrKxJDdU7yZbU0cMOddoG/u8oMt2mE3eKvDr
+        fcO5Nwt+hKQ/KtJLumZ9BQwybjiN9gk+axUYwbGWZQdglZ8K5dEZLBxfxIC+Aow/mAcXj/rMHaiaz8Lk
+        F49fXYSz5TsaPXAT7vfI8VnMvT3xendOhFOyFRwU/K6AWv8CPuq513C7IvnUhbAaXfgVzAvCA2zfw29z
+        SUCdw9wUL1gl4FTBcoWv5TuCrL3Fz3O4132D/tfwtDfh9xic725nMDmeDRtBHI4/rok8AYqc2ggAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
 </root>

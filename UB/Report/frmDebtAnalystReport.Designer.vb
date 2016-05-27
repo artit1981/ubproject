@@ -175,6 +175,8 @@ Partial Class frmDebtAnalystReport
         'lsCustomer
         '
         Me.lsCustomer.CheckOnClick = True
+        Me.lsCustomer.HotTrackItems = True
+        Me.lsCustomer.IncrementalSearch = True
         Me.lsCustomer.Location = New System.Drawing.Point(137, 225)
         Me.lsCustomer.Name = "lsCustomer"
         Me.lsCustomer.Size = New System.Drawing.Size(377, 171)

@@ -153,6 +153,8 @@ Public Class frmOrderS
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutInvoiceSuplierID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutInvoiceSuplierID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 Case MasterType.Shiping
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
@@ -2001,4 +2003,12 @@ Public Class frmOrderS
     End Sub
 
   
+    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs)
+        CalcEdit1.ShowPopup()
+        CalcEdit1.Focus()
+    End Sub
+
+    Private Sub PanelControl2_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs) Handles PanelControl2.Paint
+
+    End Sub
 End Class
