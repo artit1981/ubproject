@@ -703,4 +703,24 @@ Public Class frmBill
 
    
      
+    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
+        CalcEdit1.ShowPopup()
+        CalcEdit1.Focus()
+    End Sub
+
+
+    Private Sub InitialTotalPanel(ByVal pUnits As Long)
+        Try
+            txtUnits.EditValue = FormatNumber(pUnits, 0)
+            txtTotal.EditValue = FormatNumber(Total.EditValue, 2)
+            txtPledge.EditValue = FormatNumber(PledgeTotal.EditValue, 2)
+            txtDiscount.EditValue = FormatNumber(DiscountAmount.EditValue, 2)
+            txtVat.EditValue = FormatNumber(TotalTax.EditValue, 2)
+            txtGrandTotal.EditValue = FormatNumber(GrandTotal.EditValue, 2)
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, mFormName & ".InitialTotalPanel : " & ex.Message)
+        Finally
+        End Try
+    End Sub
+
 End Class

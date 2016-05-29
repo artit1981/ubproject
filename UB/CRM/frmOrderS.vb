@@ -2003,12 +2003,9 @@ Public Class frmOrderS
     End Sub
 
   
-    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs)
+    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
         CalcEdit1.ShowPopup()
         CalcEdit1.Focus()
     End Sub
-
-    Private Sub PanelControl2_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs) Handles PanelControl2.Paint
-
-    End Sub
+ 
 End Class
