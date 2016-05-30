@@ -425,6 +425,7 @@ Public Class OrderSDAO
             End If
             If TableID = MasterType.Reserve Then
                 SQL = SQL & " ,Orders.MakePOStatus "
+                SQL = SQL & " ,PO2.OrderCode AS POCode "
             End If
             If TableID = MasterType.Quotation Then
                 SQL = SQL & ",RefOrder.OrderCode AS RefCode  "
@@ -453,7 +454,11 @@ Public Class OrderSDAO
             If TableID = MasterType.Quotation Then
                 SQL = SQL & " LEFT OUTER JOIN Orders AS RefOrder ON Orders.OrderStatus in('Close','Receive') and RefOrder.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and RefOrder.IsDelete=0  "
             End If
+            If TableID = MasterType.Reserve Then
+                SQL = SQL & " LEFT OUTER JOIN Orders AS PO2 ON PO2.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefReserveID=Orders.OrderID  ) and PO2.IsDelete=0 and PO2.TableID=" & MasterType.PurchaseOrder
+            End If
             SQL = SQL & " LEFT OUTER JOIN Orders AS PO ON PO.OrderID=(select max(RefOrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.OrderID=Orders.OrderID  ) and PO.IsDelete=0  "
+
             SQL = SQL & " WHERE Orders.TableID =" & TableID
             If pID > 0 Then
                 SQL = SQL & "  AND Orders.OrderID=" & pID

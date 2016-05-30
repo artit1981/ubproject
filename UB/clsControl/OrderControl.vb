@@ -223,6 +223,9 @@ Public Class OrderControl
                 .Columns("MakePOStatus").Caption = "สร้างใบสั่งซื้อ"
                 .Columns("MakePOStatus").Width = 80
                 .Columns("MakePOStatus").MaxWidth = 80
+                .Columns("POCode").Caption = "เลขใบสั่งซื้อ"
+                .Columns("POCode").Width = 100
+                .Columns("POCode").MaxWidth = 120
             End If
             .Columns("IsDelete").Visible = False
             .Columns("IsCancel").Visible = False

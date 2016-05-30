@@ -713,7 +713,7 @@ Public Class frmBill
         Try
             txtUnits.EditValue = FormatNumber(pUnits, 0)
             txtTotal.EditValue = FormatNumber(Total.EditValue, 2)
-            txtPledge.EditValue = FormatNumber(PledgeTotal.EditValue, 2)
+            'txtPledge.EditValue = FormatNumber(PledgeTotal.EditValue, 2)
             txtDiscount.EditValue = FormatNumber(DiscountAmount.EditValue, 2)
             txtVat.EditValue = FormatNumber(TotalTax.EditValue, 2)
             txtGrandTotal.EditValue = FormatNumber(GrandTotal.EditValue, 2)

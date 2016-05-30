@@ -70,12 +70,12 @@ Public Class frmFindReserve
 
             SQL = " AND Orders.OrderDate Between '" & formatSQLDate(DateFrom.EditValue) & "' AND '" & formatSQLDate(DateTo.EditValue) & "'"
             SQL &= " AND Orders.MakePOStatus='Ordering' "
-            SQL &= " AND Orders.OrderID in ( "
-            SQL &= "       select RefID from ProductList where RefTable='Reserve'  and IsDelete =0"
-            SQL &= "            AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-            SQL &= "            WHERE p2.IsDelete =0  "
-            SQL &= "            AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
-            SQL &= "   )     "
+            'SQL &= " AND Orders.OrderID in ( "
+            'SQL &= "       select RefID from ProductList where RefTable='Reserve'  and IsDelete =0"
+            'SQL &= "            AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+            'SQL &= "            WHERE p2.IsDelete =0  "
+            'SQL &= "            AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
+            'SQL &= "   )     "
 
             lcls.TableID = MasterType.Reserve
             dataTable = lcls.GetDataTableForCombo(MasterType.Reserve, MasterType.Reserve, 0, DateTo.EditValue, False, SQL)
@@ -294,7 +294,7 @@ Public Class frmFindReserve
         Dim dataTable As New DataTable()
         Dim lProList As New List(Of ProductSubDAO)
         Dim rec As New ProductSubDAO, lIndex As Long = 0, lToSelect As Boolean = False
-        Dim lSnIndex As Long = 0
+        Dim lSnIndex As Long = 0, lRefStatus As RefOrderStatus = 0
 
         Try
             mOrderIDList = New List(Of Long)
@@ -322,6 +322,9 @@ Public Class frmFindReserve
                 dataTable = lcls.GetDataTable(mOrderIDList, "Reserve", Nothing, False, "", False, MasterType.MakePO, True)
                 If dataTable.Rows.Count > 0 Then
                     For Each dr As DataRow In dataTable.Rows
+                        'lRefStatus = CompareUnitToClose(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
+                        '                         , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, 0, dr("ID"))
+                        'If lRefStatus = RefOrderStatus.NotToRef Or lRefStatus = RefOrderStatus.RefSome Then
                         rec = New ProductSubDAO
                         rec.IsSelect = False
                         rec.ID = dr("ID")
@@ -352,8 +355,9 @@ Public Class frmFindReserve
                         rec.ModePro = DataMode.ModeEdit
                         'Load S/N
                         rec.IsSN = ConvertNullToZero(dr("IsSN"))
-                      
+
                         lProList.Add(rec)
+                        'End If
                     Next
                 End If
             End If

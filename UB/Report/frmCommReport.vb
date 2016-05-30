@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 
 Public Class frmCommReport
     Inherits iReport
-    Private Const mFormName As String = "frmTaxReport"
+    Private Const mFormName As String = "frmCommReport"
 
     Protected Overrides Sub Print()
         Try
@@ -46,10 +46,10 @@ Public Class frmCommReport
             Employee.DisplayMember = "NAME"
             Employee.ValueMember = "ID"
 
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Employee.SetItemChecked(i, True)
-            Next i
-
+            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
+            '    Employee.SetItemChecked(i, True)
+            'Next i
+            Employee.CheckAll()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
         Finally
@@ -71,10 +71,10 @@ Public Class frmCommReport
             Employee.DisplayMember = "CusName"
             Employee.ValueMember = "ID"
 
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Employee.SetItemChecked(i, True)
-            Next i
-
+            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
+            '    Employee.SetItemChecked(i, True)
+            'Next i
+            Employee.CheckAll()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
         Finally
@@ -121,10 +121,10 @@ Public Class frmCommReport
             Product.DisplayMember = "ProductName"
             Product.ValueMember = "ID"
 
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                Product.SetItemChecked(i, True)
-            Next i
-
+            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
+            '    Product.SetItemChecked(i, True)
+            'Next i
+            Product.CheckAll()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
         Finally

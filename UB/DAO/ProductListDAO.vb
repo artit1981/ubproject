@@ -439,12 +439,12 @@ Public Class ProductListDAO
                 '        SQL = SQL & "   AND p2.RefTable in( 'Invoice') and p2.ProductListRefID > 0)"
                 '    End If
 
-                If lCheckType = MasterType.MakePO Then
-                    ' 'ดูว่า Reserve ต้องไม่เคยโดนรับสินค้าโดย PurchaseOrder,CancelPO
-                    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  "
-                    SQL = SQL & "   AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
-                End If
+                'If lCheckType = MasterType.MakePO Then
+                '    ' 'ดูว่า Reserve ต้องไม่เคยโดนรับสินค้าโดย PurchaseOrder,CancelPO
+                '    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                '    SQL = SQL & "   WHERE p2.IsDelete =0  "
+                '    SQL = SQL & "   AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
+                'End If
             End If
             If pExcludeProListID <> "" Then
                 SQL = SQL & " AND ProductList.ProductListID not in(" & pExcludeProListID & ")"
