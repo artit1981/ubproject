@@ -374,6 +374,12 @@
     <Compile Include="Master\frmProvince.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\frmStockReport.Designer.vb">
+      <DependentUpon>frmStockReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmStockReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\rptDebtAnalyst.Designer.vb">
       <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </Compile>
@@ -385,6 +391,12 @@
     </Compile>
     <Compile Include="Report\frmDebtAnalystReport.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptStockReport.Designer.vb">
+      <DependentUpon>rptStockReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptStockReport.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Stock\frmUpdateStockLog.Designer.vb">
       <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
@@ -1172,11 +1184,17 @@
     <EmbeddedResource Include="Master\frmProvince.resx">
       <DependentUpon>frmProvince.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmStockReport.resx">
+      <DependentUpon>frmStockReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDebtAnalyst.resx">
       <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
       <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptStockReport.resx">
+      <DependentUpon>rptStockReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\frmUpdateStockLog.resx">
       <DependentUpon>frmUpdateStockLog.vb</DependentUpon>

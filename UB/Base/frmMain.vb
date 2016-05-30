@@ -828,4 +828,10 @@ Public Class frmMain
         frmDebtAnalystReport.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ReportDebtAnalyst, "", Nothing)
     End Sub
+
+    Private Sub StockReportBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles StockReportBar.ItemClick
+        frmStockReport.MdiParent = Me
+        frmStockReport.Show()
+        InsertActivity(DataMode.ModeOpen, MasterType.ReportStock, "", Nothing)
+    End Sub
 End Class

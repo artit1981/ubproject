@@ -23,11 +23,13 @@ Public Class frmCommReport
             Me.DateTo.EditValue = thisMonth.AddDays(-1)
             VatType.EditValue = "E"
             chkSelectAll.Checked = True
-
+            'chkSelectAllPro.Checked = True
             SetComboCustomer()
-            SetComboProductType("", ProductTypeID)
-            SetComboProductBrand("", ProductBrandID)
-            SetComboProduct()
+            'SetComboProductType("", ProductTypeID)
+            'SetComboProductBrand("", ProductBrandID)
+            'ProductTypeID.CheckAll()
+            'ProductBrandID.CheckAll()
+            'SetComboProduct()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
         End Try
@@ -84,54 +86,60 @@ Public Class frmCommReport
     End Sub
 
 
-    Private Sub SetComboProduct()
-        Dim dataTable As New DataTable()
-        Dim lcls As New ProductDAO
-        Dim lSQL As String = "", sQN As String = "0"
+    'Private Sub SetComboProduct()
+    '    Dim dataTable As New DataTable()
+    '    Dim lcls As New ProductDAO
+    '    Dim lSQL As String = "", sQN As String = ""
 
-        Try
-            'ProductType
-            For Each item As Object In ProductTypeID.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
-                End If
-            Next
-            lSQL = " and Product.ProductTypeID in (" & sQN & ")"
+    '    Try
+    '        'ProductType
+    '        For Each item As Object In ProductTypeID.CheckedItems
+    '            Dim row As DataRowView = CType(item, DataRowView)
+    '            If sQN = "" Then
+    '                sQN = ConvertNullToString(row(0))
+    '            Else
+    '                sQN = sQN & "," & ConvertNullToZero(row(0))
+    '            End If
+    '        Next
+    '        If sQN <> "" Then
+    '            lSQL = " and Product.ProductTypeID in (" & sQN & ")"
+    '        End If
 
-           
 
-            'ProductBrand
-            sQN = "0"
-            For Each item As Object In ProductBrandID.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
-                End If
-            Next
-            lSQL = " and Product.ProductBrandID in (" & sQN & ")"
 
-            'Product
-            dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
-            Product.DataSource = dataTable
-            Product.DisplayMember = "ProductName"
-            Product.ValueMember = "ID"
 
-            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
-            '    Product.SetItemChecked(i, True)
-            'Next i
-            Product.CheckAll()
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
-        Finally
-            dataTable = Nothing
-        End Try
+    '        'ProductBrand
+    '        sQN = ""
+    '        For Each item As Object In ProductBrandID.CheckedItems
+    '            Dim row As DataRowView = CType(item, DataRowView)
+    '            If sQN = "" Then
+    '                sQN = ConvertNullToString(row(0))
+    '            Else
+    '                sQN = sQN & "," & ConvertNullToZero(row(0))
+    '            End If
+    '        Next
+    '        If sQN <> "" Then
+    '            lSQL = lSQL & " and Product.ProductBrandID in (" & sQN & ")"
+    '        End If
 
-    End Sub
+
+    '        'Product
+    '        dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
+    '        Product.DataSource = dataTable
+    '        Product.DisplayMember = "ProductName"
+    '        Product.ValueMember = "ID"
+
+    '        'For i As Integer = 0 To dataTable.DefaultView.Count - 1
+    '        '    Product.SetItemChecked(i, True)
+    '        'Next i
+    '        Product.CheckAll()
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
+    '    Finally
+    '        dataTable = Nothing
+    '    End Try
+
+    'End Sub
 
     Private Sub PrintReport()
         Dim report As New XtraReport
@@ -181,9 +189,9 @@ Public Class frmCommReport
             For Each item As Object In Employee.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
                 If lEmployeeList = "" Then
-                    lEmployeeList = ConvertNullToString(row(0))
+                    lEmployeeList = ConvertNullToZero(row(0))
                 Else
-                    lEmployeeList = lEmployeeList & "," & ConvertNullToString(row(0))
+                    lEmployeeList = lEmployeeList & "," & ConvertNullToZero(row(0))
                 End If
             Next
             
@@ -286,18 +294,26 @@ Public Class frmCommReport
 
     End Sub
 
-    Private Sub chkSelectAllPro_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAllPro.CheckedChanged
-        If chkSelectAllPro.CheckState = CheckState.Checked Then
-            Product.CheckAll()
-        Else
-            Product.UnCheckAll()
-        End If
-    End Sub
+    'Private Sub chkSelectAllPro_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAllPro.CheckedChanged
+    '    If chkSelectAllPro.CheckState = CheckState.Checked Then
+    '        Product.CheckAll()
+    '    Else
+    '        Product.UnCheckAll()
+    '    End If
+    'End Sub
 
-    Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
-        SetComboProduct()
-    End Sub
-    Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
-        SetComboProduct()
-    End Sub
+    'Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
+    '    SetComboProduct()
+    'End Sub
+    'Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
+    '    SetComboProduct()
+    'End Sub
+
+    'Private Sub ProductBrandID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductBrandID.LostFocus
+    '    SetComboProduct()
+    'End Sub
+
+    'Private Sub ProductTypeID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductTypeID.LostFocus
+    '    SetComboProduct()
+    'End Sub
 End Class

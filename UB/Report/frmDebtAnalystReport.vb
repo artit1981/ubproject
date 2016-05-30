@@ -48,9 +48,9 @@ Public Class frmDebtAnalystReport
             lsCustomer.DisplayMember = "CusName"
             lsCustomer.ValueMember = "ID"
 
-            For i As Integer = 0 To dataTable.DefaultView.Count - 1
-                lsCustomer.SetItemChecked(i, True)
-            Next i
+            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
+            '    lsCustomer.SetItemChecked(i, True)
+            'Next i
             lsCustomer.CheckAll()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCustomer : " & e.Message)

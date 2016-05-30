@@ -106,6 +106,7 @@ Module modGlobal
         ApproveStock = 97
         Province = 98
         ReportDebtAnalyst = 99
+        ReportStock = 100
     End Enum
 
     Public Enum DataMode

@@ -69,6 +69,8 @@ Partial Class frmStockReport
         '
         'Product
         '
+        Me.Product.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Product.Location = New System.Drawing.Point(133, 232)
         Me.Product.Name = "Product"
         Me.Product.Size = New System.Drawing.Size(377, 292)
@@ -135,7 +137,7 @@ Partial Class frmStockReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1112, 742)
+        Me.ClientSize = New System.Drawing.Size(1112, 535)
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)

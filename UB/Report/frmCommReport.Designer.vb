@@ -21,14 +21,6 @@ Partial Class frmCommReport
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCommReport))
         Me.DateFrom = New DevExpress.XtraEditors.DateEdit()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.chkSelectAllPro = New DevExpress.XtraEditors.CheckEdit()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Product = New DevExpress.XtraEditors.CheckedListBoxControl()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ProductBrandID = New DevExpress.XtraEditors.CheckedListBoxControl()
-        Me.ProductTypeID = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkSelectAll = New DevExpress.XtraEditors.CheckEdit()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -45,10 +37,6 @@ Partial Class frmCommReport
         Me.Label36 = New System.Windows.Forms.Label()
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.chkSelectAllPro.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Product, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,79 +65,6 @@ Partial Class frmCommReport
         Me.DateFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Size = New System.Drawing.Size(149, 20)
         Me.DateFrom.TabIndex = 4
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label9.Location = New System.Drawing.Point(528, 509)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(113, 14)
-        Me.Label9.TabIndex = 208
-        Me.Label9.Text = "Select /Unselect All"
-        '
-        'chkSelectAllPro
-        '
-        Me.chkSelectAllPro.Location = New System.Drawing.Point(529, 526)
-        Me.chkSelectAllPro.Name = "chkSelectAllPro"
-        Me.chkSelectAllPro.Properties.Caption = ""
-        Me.chkSelectAllPro.Size = New System.Drawing.Size(48, 19)
-        Me.chkSelectAllPro.TabIndex = 207
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.Location = New System.Drawing.Point(22, 509)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(34, 14)
-        Me.Label8.TabIndex = 206
-        Me.Label8.Text = "สินค้า"
-        '
-        'Product
-        '
-        Me.Product.Location = New System.Drawing.Point(137, 509)
-        Me.Product.Name = "Product"
-        Me.Product.Size = New System.Drawing.Size(377, 140)
-        Me.Product.TabIndex = 205
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label6.Location = New System.Drawing.Point(330, 382)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(56, 14)
-        Me.Label6.TabIndex = 204
-        Me.Label6.Text = "ยี่ห้อสินค้า"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label7.Location = New System.Drawing.Point(134, 382)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 14)
-        Me.Label7.TabIndex = 203
-        Me.Label7.Text = "ประเภทสินค้า"
-        '
-        'ProductBrandID
-        '
-        Me.ProductBrandID.Location = New System.Drawing.Point(333, 399)
-        Me.ProductBrandID.Name = "ProductBrandID"
-        Me.ProductBrandID.Size = New System.Drawing.Size(181, 104)
-        Me.ProductBrandID.TabIndex = 202
-        '
-        'ProductTypeID
-        '
-        Me.ProductTypeID.Location = New System.Drawing.Point(137, 399)
-        Me.ProductTypeID.Name = "ProductTypeID"
-        Me.ProductTypeID.Size = New System.Drawing.Size(181, 104)
-        Me.ProductTypeID.TabIndex = 201
         '
         'Label5
         '
@@ -263,10 +178,12 @@ Partial Class frmCommReport
         '
         'Employee
         '
+        Me.Employee.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Employee.CheckOnClick = True
-        Me.Employee.Location = New System.Drawing.Point(137, 223)
+        Me.Employee.Location = New System.Drawing.Point(137, 224)
         Me.Employee.Name = "Employee"
-        Me.Employee.Size = New System.Drawing.Size(377, 148)
+        Me.Employee.Size = New System.Drawing.Size(377, 242)
         Me.Employee.TabIndex = 189
         '
         'Label1
@@ -305,21 +222,13 @@ Partial Class frmCommReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1112, 742)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.chkSelectAllPro)
+        Me.ClientSize = New System.Drawing.Size(1112, 478)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.DateFrom)
-        Me.Controls.Add(Me.Product)
         Me.Controls.Add(Me.Label36)
-        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.VatType)
-        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ProductBrandID)
         Me.Controls.Add(Me.Employee)
-        Me.Controls.Add(Me.ProductTypeID)
         Me.Controls.Add(Me.lblEmp)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
@@ -341,26 +250,14 @@ Partial Class frmCommReport
         Me.Controls.SetChildIndex(Me.Label3, 0)
         Me.Controls.SetChildIndex(Me.Label5, 0)
         Me.Controls.SetChildIndex(Me.lblEmp, 0)
-        Me.Controls.SetChildIndex(Me.ProductTypeID, 0)
         Me.Controls.SetChildIndex(Me.Employee, 0)
-        Me.Controls.SetChildIndex(Me.ProductBrandID, 0)
         Me.Controls.SetChildIndex(Me.Label1, 0)
-        Me.Controls.SetChildIndex(Me.Label7, 0)
         Me.Controls.SetChildIndex(Me.VatType, 0)
-        Me.Controls.SetChildIndex(Me.Label6, 0)
         Me.Controls.SetChildIndex(Me.Label36, 0)
-        Me.Controls.SetChildIndex(Me.Product, 0)
         Me.Controls.SetChildIndex(Me.DateFrom, 0)
-        Me.Controls.SetChildIndex(Me.Label8, 0)
         Me.Controls.SetChildIndex(Me.Label2, 0)
-        Me.Controls.SetChildIndex(Me.chkSelectAllPro, 0)
-        Me.Controls.SetChildIndex(Me.Label9, 0)
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.chkSelectAllPro.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Product, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -388,13 +285,5 @@ Partial Class frmCommReport
     Private WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents chkSelectAll As DevExpress.XtraEditors.CheckEdit
     Private WithEvents Label5 As System.Windows.Forms.Label
-    Private WithEvents Label6 As System.Windows.Forms.Label
-    Private WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents ProductBrandID As DevExpress.XtraEditors.CheckedListBoxControl
-    Friend WithEvents ProductTypeID As DevExpress.XtraEditors.CheckedListBoxControl
-    Private WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents chkSelectAllPro As DevExpress.XtraEditors.CheckEdit
-    Private WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Product As DevExpress.XtraEditors.CheckedListBoxControl
 
 End Class

@@ -146,7 +146,6 @@ Partial Class frmBill
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.CalcEdit1 = New DevExpress.XtraEditors.CalcEdit()
         Me.btnCalc = New DevExpress.XtraEditors.SimpleButton()
@@ -168,6 +167,7 @@ Partial Class frmBill
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtUnits = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -261,7 +261,6 @@ Partial Class frmBill
         Me.DockPanel1_Container.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.CalcEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -277,6 +276,7 @@ Partial Class frmBill
         CType(Me.txtTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -290,7 +290,7 @@ Partial Class frmBill
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(867, 517)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1158, 517)
         Me.XtraTabControl1.TabIndex = 10
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.VatTabPage, Me.ChequeTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -304,7 +304,7 @@ Partial Class frmBill
         Me.GeneralTabPage.Controls.Add(Me.LayoutControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(861, 489)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1152, 489)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -1280,7 +1280,7 @@ Partial Class frmBill
         Me.VatTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTabPage, True)
         Me.VatTabPage.Name = "VatTabPage"
-        Me.VatTabPage.Size = New System.Drawing.Size(833, 489)
+        Me.VatTabPage.Size = New System.Drawing.Size(861, 489)
         Me.VatTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.VatTabPage, "")
         '
@@ -1887,7 +1887,7 @@ Partial Class frmBill
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(833, 489)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(861, 489)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -1913,7 +1913,7 @@ Partial Class frmBill
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(833, 489)
+        Me.NoteTabPage.Size = New System.Drawing.Size(861, 489)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1924,7 +1924,7 @@ Partial Class frmBill
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(833, 489)
+        Me.UcNote1.Size = New System.Drawing.Size(861, 489)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1934,7 +1934,7 @@ Partial Class frmBill
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(833, 489)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(861, 489)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1945,7 +1945,7 @@ Partial Class frmBill
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(833, 489)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(861, 489)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1955,7 +1955,7 @@ Partial Class frmBill
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(833, 489)
+        Me.AdminTabPage.Size = New System.Drawing.Size(861, 489)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -1982,9 +1982,12 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DockPanel1, True)
         Me.DockPanel1.Name = "DockPanel1"
         Me.DockPanel1.OriginalSize = New System.Drawing.Size(291, 200)
+        Me.DockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right
+        Me.DockPanel1.SavedIndex = 0
         Me.DockPanel1.Size = New System.Drawing.Size(291, 517)
         Me.DockPanel1.Text = "Order Information"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DockPanel1, "")
+        Me.DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
         '
         'DockPanel1_Container
         '
@@ -2008,12 +2011,6 @@ Partial Class frmBill
         Me.PanelControl1.Size = New System.Drawing.Size(283, 490)
         Me.PanelControl1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl1, "")
-        '
-        'DockManager1
-        '
-        Me.DockManager1.Form = Me
-        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
-        Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
         'PanelControl2
         '
@@ -2358,16 +2355,20 @@ Partial Class frmBill
         Me.LabelControl1.Text = "จำนวนรายการ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LabelControl1, "")
         '
+        'DockManager1
+        '
+        Me.DockManager1.Form = Me
+        Me.DockManager1.HiddenPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
+        Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
+        '
         'frmBill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1158, 554)
         Me.Controls.Add(Me.XtraTabControl1)
-        Me.Controls.Add(Me.DockPanel1)
         Me.Name = "frmBill"
         Me.Text = "frmBill"
-        Me.Controls.SetChildIndex(Me.DockPanel1, 0)
         Me.Controls.SetChildIndex(Me.XtraTabControl1, 0)
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
@@ -2464,7 +2465,6 @@ Partial Class frmBill
         Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
-        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.CalcEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2486,6 +2486,7 @@ Partial Class frmBill
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

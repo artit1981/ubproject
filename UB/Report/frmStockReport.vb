@@ -20,7 +20,12 @@ Public Class frmStockReport
             ReportType.EditValue = "A"
             SetComboProductType("", ProductTypeID)
             SetComboProductBrand("", ProductBrandID)
+
+            ProductTypeID.CheckAll()
+            ProductBrandID.CheckAll()
             SetComboProduct()
+
+            chkSelectAllPro.Checked = True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
         End Try
@@ -30,7 +35,7 @@ Public Class frmStockReport
     Private Sub SetComboProduct()
         Dim dataTable As New DataTable()
         Dim lcls As New ProductDAO
-        Dim lSQL As String = "", sQN As String = "0"
+        Dim lSQL As String = "", sQN As String = ""
 
         Try
             'ProductType
@@ -39,31 +44,38 @@ Public Class frmStockReport
                 If sQN = "" Then
                     sQN = ConvertNullToString(row(0))
                 Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
+                    sQN = sQN & "," & ConvertNullToZero(row(0))
                 End If
             Next
-            lSQL = " and Product.ProductTypeID in (" & sQN & ")"
+            If sQN <> "" Then
+                lSQL = " and Product.ProductTypeID in (" & sQN & ") "
+            End If
+
 
 
 
             'ProductBrand
-            sQN = "0"
+            sQN = ""
             For Each item As Object In ProductBrandID.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
                 If sQN = "" Then
                     sQN = ConvertNullToString(row(0))
                 Else
-                    sQN = sQN & "," & ConvertNullToString(row(0))
+                    sQN = sQN & "," & ConvertNullToZero(row(0))
                 End If
             Next
-            lSQL = " and Product.ProductBrandID in (" & sQN & ")"
+            If sQN <> "" Then
+                lSQL = lSQL & " and Product.ProductBrandID in (" & sQN & ") "
+            End If
+
 
             'Product
+            dataTable = Nothing
             dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
             Product.DataSource = dataTable
             Product.DisplayMember = "ProductName"
             Product.ValueMember = "ID"
-
+            'Product.Refresh()
             'For i As Integer = 0 To dataTable.DefaultView.Count - 1
             '    Product.SetItemChecked(i, True)
             'Next i
@@ -96,13 +108,13 @@ Public Class frmStockReport
 
 
             'Build Product List
-            Dim lProductList As String = "0"
+            Dim lProductList As String = ""
             For Each item As Object In Product.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
                 If lProductList = "" Then
-                    lProductList = ConvertNullToString(row(0))
+                    lProductList = ConvertNullToZero(row("ID"))
                 Else
-                    lProductList = lProductList & "," & ConvertNullToString(row(0))
+                    lProductList = lProductList & "," & ConvertNullToZero(row("ID"))
                 End If
             Next
 
@@ -111,8 +123,8 @@ Public Class frmStockReport
             gConnection.executeInsertQuery(SQL, Nothing)
 
             SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxTotal1,TaxText1,TaxText2,TaxText3,TaxText4,TaxTotal2,TaxTotal3 )"
-            SQL = SQL & " VALUES ( " & gUserID
-            SQL = " ,0,select a.ProductID,b.ProductCode,b.ProductName"
+            SQL &= " VALUES ( " & gUserID
+            SQL &= " ,0,select a.ProductID,b.ProductCode,b.ProductName"
             SQL &= " ,c.NameThai as Location,d.CodeThai as Unit,a.Units "
             If ReportType.EditValue = "A" Then
                 SQL &= ",Cost.Cost AS Price1"
@@ -125,7 +137,7 @@ Public Class frmStockReport
             SQL &= " left outer join Product_Unit d on a.UnitID=d.UnitID"
             SQL &= " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
             SQL &= " where  1=1 "
-            If chkSelectAllPro.CheckState = CheckState.Unchecked And lProductList <> "0" Then
+            If lProductList <> "" Then
                 SQL = SQL & " and a.ProductID in(" & lProductList & ")"
             End If
             SQL = SQL & " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
@@ -158,10 +170,18 @@ Public Class frmStockReport
         End If
     End Sub
 
-    Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
+    Private Sub ProductBrandID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductBrandID.LostFocus
         SetComboProduct()
     End Sub
-    Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
+
+    Private Sub ProductTypeID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductTypeID.LostFocus
         SetComboProduct()
     End Sub
+
+    'Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
+    '    SetComboProduct()
+    'End Sub
+    'Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
+    '    SetComboProduct()
+    'End Sub
 End Class
