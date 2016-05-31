@@ -123,25 +123,21 @@ Public Class frmStockReport
             gConnection.executeInsertQuery(SQL, Nothing)
 
             SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxTotal1,TaxText1,TaxText2,TaxText3,TaxText4,TaxTotal2,TaxTotal3 )"
-            SQL &= " VALUES ( " & gUserID
-            SQL &= " ,0,select a.ProductID,b.ProductCode,b.ProductName"
-            SQL &= " ,c.NameThai as Location,d.CodeThai as Unit,a.Units "
+            SQL &= " select " & gUserID & ",0,a.ProductID,b.ProductCode,left(b.ProductName,100),c.NameThai,d.CodeThai ,a.Units "
             If ReportType.EditValue = "A" Then
-                SQL &= ",Cost.Cost AS Price1"
+                SQL &= ",Cost.Cost"
             Else
-                SQL &= ",Product.Price1 AS Price1"
+                SQL &= ",b.Price1"
             End If
             SQL &= " from Product_Stock a"
             SQL &= " left outer join Product b on a.ProductID=b.ProductID"
             SQL &= " left outer join Product_LocationDTL c on a.LocationDTLID=c.LocationDTLID"
             SQL &= " left outer join Product_Unit d on a.UnitID=d.UnitID"
-            SQL &= " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
+            SQL &= " left outer join Product_CostAVG Cost on Cost.ProductID=a.ProductID and Cost.IsDelete=0"
             SQL &= " where  1=1 "
             If lProductList <> "" Then
                 SQL = SQL & " and a.ProductID in(" & lProductList & ")"
             End If
-            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
-            SQL = SQL & " ) "
             gConnection.executeInsertQuery(SQL, Nothing)
 
 

@@ -788,6 +788,58 @@ Public Class frmOrderS
         SetComboCampaign(False)
     End Sub
 
+    Private Sub Exchange_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Exchange.EditValueChanged
+        Calculation()
+    End Sub
+
+
+
+    Private Sub VatAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles VatAmount.LostFocus
+        If mIsFromLoad = False Then
+
+            Calculation()
+
+        End If
+    End Sub
+
+
+    Private Sub chkIsEditVat_CheckedChanged(sender As Object, e As System.EventArgs) Handles chkIsEditVat.CheckedChanged
+        If mIsFromLoad = False Then
+            InitialIsEditVat(chkIsEditVat.CheckState = CheckState.Checked)
+        End If
+    End Sub
+
+    Private Sub btnQuotationRemark_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQuotationRemark.Click
+        Try
+            ShowProgress(True, "Loading...")
+            SetComboQuoRemarkID()
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+            ShowProgress(False, "")
+        End Try
+    End Sub
+
+    Private Sub chkNotPass_CheckedChanged(sender As Object, e As System.EventArgs) Handles chkNotPass.CheckedChanged
+        If (IsCancel.EditValue = True) Or (chkNotPass.EditValue = True) Then
+            CancelRemark.Properties.ReadOnly = False
+        Else
+            CancelRemark.Properties.ReadOnly = True
+        End If
+    End Sub
+
+
+    Private Sub QuotationDays_EditValueChanged(sender As Object, e As System.EventArgs) Handles QuotationDays.EditValueChanged
+        CalcExpireDate()
+    End Sub
+
+  
+
+
+    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
+        CalcEdit1.ShowPopup()
+        CalcEdit1.Focus()
+    End Sub
 #End Region
 
 #Region "Private"
@@ -1716,6 +1768,17 @@ Public Class frmOrderS
             ShowProgress(False, "")
         End Try
     End Sub
+
+    Private Sub CalcExpireDate()
+        Dim lQuotationDay As Long = ConvertNullToZero(QuotationDays.EditValue)
+        If mIsFromLoad = False And mOrderType = MasterType.Quotation Then
+            If lQuotationDay > 0 Then
+                ExpireDate.EditValue = DateAdd(DateInterval.Day, lQuotationDay - 1, OrderDate.EditValue)
+            Else
+                ExpireDate.EditValue = GetCurrentDate(Nothing)
+            End If
+        End If
+    End Sub
 #End Region
 
 #Region "Set combo"
@@ -1937,12 +2000,6 @@ Public Class frmOrderS
     End Sub
 #End Region
 
-
-     
-    Private Sub Exchange_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Exchange.EditValueChanged
-        Calculation()
-    End Sub
-
     Public Sub New()
 
         ' This call is required by the designer.
@@ -1951,61 +2008,7 @@ Public Class frmOrderS
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-
-    Private Sub VatAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles VatAmount.LostFocus
-        If mIsFromLoad = False Then
-         
-                Calculation()
-
-        End If
-    End Sub
- 
-
-    Private Sub chkIsEditVat_CheckedChanged(sender As Object, e As System.EventArgs) Handles chkIsEditVat.CheckedChanged
-        If mIsFromLoad = False Then
-            InitialIsEditVat(chkIsEditVat.CheckState = CheckState.Checked)
-        End If
-    End Sub
- 
-    Private Sub btnQuotationRemark_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQuotationRemark.Click
-        Try
-            ShowProgress(True, "Loading...")
-            SetComboQuoRemarkID()
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
-
-    Private Sub chkNotPass_CheckedChanged(sender As Object, e As System.EventArgs) Handles chkNotPass.CheckedChanged
-        If (IsCancel.EditValue = True) Or (chkNotPass.EditValue = True) Then
-            CancelRemark.Properties.ReadOnly = False
-        Else
-            CancelRemark.Properties.ReadOnly = True
-        End If
-    End Sub
-
-    
-    Private Sub QuotationDays_EditValueChanged(sender As Object, e As System.EventArgs) Handles QuotationDays.EditValueChanged
-        CalcExpireDate()
-    End Sub
-
-    Private Sub CalcExpireDate()
-        Dim lQuotationDay As Long = ConvertNullToZero(QuotationDays.EditValue)
-        If mIsFromLoad = False And mOrderType = MasterType.Quotation Then
-            If lQuotationDay > 0 Then
-                ExpireDate.EditValue = DateAdd(DateInterval.Day, lQuotationDay - 1, OrderDate.EditValue)
-            Else
-                ExpireDate.EditValue = GetCurrentDate(Nothing)
-            End If
-        End If
-    End Sub
-
+     
   
-    Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
-        CalcEdit1.ShowPopup()
-        CalcEdit1.Focus()
-    End Sub
  
 End Class

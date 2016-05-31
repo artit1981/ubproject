@@ -226,16 +226,16 @@ Public Class ChequeDAO
 
         Try
             SQL = "SELECT  ChequeID as ID,RefOrderID,BankDocType,CashType,ChequeOwnerTH,ChequeOwnerEN, BankID,BankAccountID "
-            SQL = SQL & " ,ChequeNo,ChequeDate,ChequeBalance,ChequePay,BankBranch,ChequeType,ChequeStep ,ChequeStatus,Remark  "
+            SQL = SQL & " ,ChequeNo,ChequeDate,ChequeBalance,ChequePay,BankBranch,ChequeType,ChequeStep ,ChequeStatus,Cheque.Remark  "
             SQL = SQL & " ,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,ChequeOwnerTH,Orders.GrandTotal"
             SQL = SQL & " FROM Cheque"
             SQL = SQL & " LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 and Orders.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL = SQL & " WHERE Cheque.IsDelete =0   "
             If pChequeID > 0 Then
-                SQL = SQL & " AND ChequeID =" & pChequeID
+                SQL = SQL & " AND Cheque.ChequeID =" & pChequeID
             End If
             If pRefOrderID >= 0 Then
-                SQL = SQL & " AND RefOrderID =" & pRefOrderID
+                SQL = SQL & " AND Cheque.RefOrderID =" & pRefOrderID
             End If
             If pBankID > 0 Then
                 SQL = SQL & " AND BankID =" & pBankID
