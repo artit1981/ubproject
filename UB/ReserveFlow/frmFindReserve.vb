@@ -294,7 +294,7 @@ Public Class frmFindReserve
         Dim dataTable As New DataTable()
         Dim lProList As New List(Of ProductSubDAO)
         Dim rec As New ProductSubDAO, lIndex As Long = 0, lToSelect As Boolean = False
-        Dim lSnIndex As Long = 0, lRefStatus As RefOrderStatus = 0
+        Dim lSnIndex As Long = 0, lNotRefUnit As Long = 0, lEachUnit As Long = 0
 
         Try
             mOrderIDList = New List(Of Long)
@@ -322,44 +322,56 @@ Public Class frmFindReserve
                 dataTable = lcls.GetDataTable(mOrderIDList, "Reserve", Nothing, False, "", False, MasterType.MakePO, True)
                 If dataTable.Rows.Count > 0 Then
                     For Each dr As DataRow In dataTable.Rows
-                        'lRefStatus = CompareUnitToClose(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
-                        '                         , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, 0, dr("ID"))
-                        'If lRefStatus = RefOrderStatus.NotToRef Or lRefStatus = RefOrderStatus.RefSome Then
-                        rec = New ProductSubDAO
-                        rec.IsSelect = False
-                        rec.ID = dr("ID")
-                        rec.ProductListRefID = dr("ID")
-                        rec.SEQ = ConvertNullToZero(dr("SEQ"))
-                        rec.RefOrderID = ConvertNullToZero(dr("RefID"))
-                        rec.ProductID = ConvertNullToZero(dr("ProductID"))
-                        rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                        rec.ProductNames = ConvertNullToString(dr("ProductName"))
-                        rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
-                        rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                        rec.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID"))
-                        rec.UnitID = ConvertNullToZero(dr("UnitID"))
-                        rec.UnitName = ConvertNullToString(dr("UnitName"))
-                        rec.Remark = ConvertNullToString(dr("Remark"))
-                        rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
-                        rec.Units = ConvertNullToZero(dr("Units"))
-                        rec.Price = ConvertNullToZero(dr("Price"))
-                        rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
-                        rec.Cost = ConvertNullToZero(dr("Cost"))
-                        rec.Discount = ConvertNullToZero(dr("Discount"))
-                        rec.Total = ConvertNullToZero(dr("Total"))
-                        rec.IsShow = ConvertNullToZero(dr("IsShow"))
-                        rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
-                        rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
-                        rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
-                        rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
-                        rec.ModePro = DataMode.ModeEdit
-                        'Load S/N
-                        rec.IsSN = ConvertNullToZero(dr("IsSN"))
+                        lEachUnit = 0
+                        lNotRefUnit = 0
+                        lNotRefUnit = GetUnitNotClose(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
+                                                  , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, dr("ProductID"), dr("ID"))
+                        If lNotRefUnit > 0 Then
+                            rec = New ProductSubDAO
+                            rec.IsSelect = False
+                            rec.ID = dr("ID")
+                            rec.ProductListRefID = dr("ID")
+                            rec.SEQ = ConvertNullToZero(dr("SEQ"))
+                            rec.RefOrderID = ConvertNullToZero(dr("RefID"))
+                            rec.ProductID = ConvertNullToZero(dr("ProductID"))
+                            rec.ProductCode = ConvertNullToString(dr("ProductCode"))
+                            rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                            rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
+                            rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                            rec.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID"))
+                            rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                            rec.UnitName = ConvertNullToString(dr("UnitName"))
+                            rec.Remark = ConvertNullToString(dr("Remark"))
+                            rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
+                            rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                            rec.Cost = ConvertNullToZero(dr("Cost"))
+                            rec.Discount = ConvertNullToZero(dr("Discount"))
+                            rec.IsShow = ConvertNullToZero(dr("IsShow"))
+                            rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
+                            rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                            rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                            rec.ModePro = DataMode.ModeEdit
+                            'Load S/N
+                            rec.IsSN = ConvertNullToZero(dr("IsSN"))
 
-                        lProList.Add(rec)
-                        'End If
+                            ''ถูกดึงไปแล้วบางส่วน
+                            lEachUnit = ConvertNullToZero(dr("Units")) - lNotRefUnit
+                            If lEachUnit > 0 Then
+                                rec.Units = lEachUnit * rec.RateUnit
+                                rec.AdjustUnit = lEachUnit
+                                rec.Price = rec.PriceMain * lEachUnit
+                                rec.Total = (rec.AdjustUnit * rec.Price) - (rec.AdjustUnit * rec.Discount)
+                            Else
+                                rec.Units = ConvertNullToZero(dr("Units"))
+                                rec.Price = ConvertNullToZero(dr("Price"))
+                                rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                                rec.Total = ConvertNullToZero(dr("Total"))
+                            End If
+                            '     Total = (AdjustUnit * Price) - (Discount * AdjustUnit)
+                            lProList.Add(rec)
+                        End If
                     Next
-                End If
+            End If
             End If
 
             Dim lColData As ProColumn = ProColumn.IsSelect + ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.Remark
