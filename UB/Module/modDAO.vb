@@ -1292,12 +1292,12 @@ Module modDAO
             pRefToUnit = ConvertNullToZero(pRow("Units"))
             Exit For
         Next
-
+        pRefToUnit = pRefToUnit + pUnitSameRef
+        'pUnitSameRef = pUnitSameRef + pRefFromUnit
         pUnitSameRef = pUnitSameRef + pRefFromUnit
-
         If pRefToUnit = 0 Then                  'not to ref
             Return RefOrderStatus.NotToRef
-        ElseIf pUnitSameRef > pRefToUnit Then   'ref some line,unit
+        ElseIf pRefFromUnit > pRefToUnit Then   'ref some line,unit
             Return RefOrderStatus.RefSome
         Else                                    'ref all
             Return RefOrderStatus.RefAll
