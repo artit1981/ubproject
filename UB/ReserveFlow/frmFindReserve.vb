@@ -355,8 +355,8 @@ Public Class frmFindReserve
                             rec.IsSN = ConvertNullToZero(dr("IsSN"))
 
                             ''ถูกดึงไปแล้วบางส่วน
-                            lEachUnit = ConvertNullToZero(dr("Units")) - lNotRefUnit
-                            If lEachUnit > 0 Then
+                            lEachUnit = lNotRefUnit
+                            If lEachUnit < ConvertNullToZero(dr("Units")) Then
                                 rec.Units = lEachUnit * rec.RateUnit
                                 rec.AdjustUnit = lEachUnit
                                 rec.Price = rec.PriceMain * lEachUnit

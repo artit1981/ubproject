@@ -1259,7 +1259,6 @@ Module modDAO
         End If
         SQL = SQL & "       AND p2.RefID =" & pRefOrderID
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & "))"
-       
         SQL = SQL & "      OR "
         SQL = SQL & "       p1.ProductListRefID2 in ( "
         SQL = SQL & "       select p2.ProductListID from ProductList p2 "
@@ -1269,7 +1268,6 @@ Module modDAO
         End If
         SQL = SQL & "       AND p2.RefID =" & pRefOrderID
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & "))"
-      
         SQL = SQL & "      OR "
         SQL = SQL & "       p1.ProductListRefID3 in ( "
         SQL = SQL & "       select p2.ProductListID from ProductList p2 "
@@ -1279,8 +1277,7 @@ Module modDAO
         End If
         SQL = SQL & "       AND p2.RefID =" & pRefOrderID
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & "))"
-        
-        SQL = SQL & "     )"
+         SQL = SQL & "     )"
         SQL = SQL & " AND p1.RefID IN( "
         SQL = SQL & "   select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
         SQL = SQL & "   and IsDelete=0  "
@@ -1292,9 +1289,9 @@ Module modDAO
             pRefToUnit = ConvertNullToZero(pRow("Units"))
             Exit For
         Next
-        pRefToUnit = pRefToUnit + pUnitSameRef
+        'pRefToUnit = pRefToUnit + pUnitSameRef
         'pUnitSameRef = pUnitSameRef + pRefFromUnit
-        pUnitSameRef = pUnitSameRef + pRefFromUnit
+        'pUnitSameRef = pUnitSameRef + pRefFromUnit
         If pRefToUnit = 0 Then                  'not to ref
             Return RefOrderStatus.NotToRef
         ElseIf pRefFromUnit > pRefToUnit Then   'ref some line,unit
