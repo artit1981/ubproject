@@ -1090,6 +1090,8 @@ Public Class frmOrderS
                         rec.IsShow = ConvertNullToZero(dr("IsShow"))
                         rec.ProductListRefID2 = 0
                         rec.ProductListRefID3 = 0
+                        rec.ProductListUnitRef2 = 0
+                        rec.ProductListUnitRef3 = 0
                     If rec.IsSN = 1 Then
                         rec.SNList = New List(Of SnDAO)
                         For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
@@ -1138,6 +1140,8 @@ Public Class frmOrderS
                                 rec.IsMerge = 0
                                 rec.ProductListRefID2 = 0
                                 rec.ProductListRefID3 = 0
+                                rec.ProductListUnitRef2 = 0
+                                rec.ProductListUnitRef3 = 0
                                 If rec.IsSN = 1 Then
                                     rec.SNList = New List(Of SnDAO)
                                     For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
@@ -1159,8 +1163,10 @@ Public Class frmOrderS
                             End If
                             If mProductList.Item(lIndex).ProductListRefID2 = 0 Then
                                 mProductList.Item(lIndex).ProductListRefID2 = ConvertNullToZero(dr("ID"))
+                                mProductList.Item(lIndex).ProductListUnitRef2 = ConvertNullToZero(dr("Units"))
                             Else
                                 mProductList.Item(lIndex).ProductListRefID3 = ConvertNullToZero(dr("ID"))
+                                mProductList.Item(lIndex).ProductListUnitRef3 = ConvertNullToZero(dr("Units"))
                             End If
                             mProductList.Item(lIndex).IsMerge = 1
                     End If

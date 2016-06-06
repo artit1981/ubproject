@@ -127,6 +127,8 @@ Public Class ucProductLists
                 rec.ProductListRefID = pPro.ID
                 rec.ProductListRefID2 = pPro.ProductListRefID2
                 rec.ProductListRefID3 = pPro.ProductListRefID3
+                rec.ProductListUnitRef2 = pPro.ProductListUnitRef2
+                rec.ProductListUnitRef3 = pPro.ProductListUnitRef3
                 rec.UnitID = pPro.UnitID
                 rec.UnitName = pPro.UnitName
                 rec.Remark = pPro.Remark
@@ -245,6 +247,8 @@ Public Class ucProductLists
                         lDataDAO.ProductListRefID = pProSub.ProductListRefID
                         lDataDAO.ProductListRefID2 = pProSub.ProductListRefID2
                         lDataDAO.ProductListRefID3 = pProSub.ProductListRefID3
+                        lDataDAO.ProductListUnitRef2 = pProSub.ProductListUnitRef2
+                        lDataDAO.ProductListUnitRef3 = pProSub.ProductListUnitRef3
                         If pLocationDtlID > 0 Then
                             lDataDAO.LocationDTLID = pLocationDtlID
                         ElseIf pIsSetLocation = True Then
