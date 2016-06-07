@@ -388,9 +388,6 @@ Public Class OrderSDAO
         End Try
     End Function
 
-  
-
-
     Public Function GetDataTable(ByVal pTableID As Long, ByVal pID As Long, ByVal pOnlyActive As Boolean, Optional ByVal pOtherCondition As String = "") As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
@@ -551,8 +548,6 @@ Public Class OrderSDAO
         Return dataTable
     End Function
 
-
-
     Public Function GetDataTableForDebtAnalyst(ByVal pAsOfDate As Date, ByVal pFromDate As Date, ByVal pToDate As Date _
                                                , ByVal pCusList As String, ByVal pOrderType As String) As DataTable
         Dim SQL As String = ""
@@ -586,7 +581,6 @@ Public Class OrderSDAO
         Return dataTable
     End Function
 
-
     Public Function GetDataTableForCampaign(ByVal pCampaignID As Long) As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
@@ -610,7 +604,6 @@ Public Class OrderSDAO
         End Try
         Return dataTable
     End Function
-
 
     Public Overrides Function GetToRefOrderCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
         Dim SQL As String = "", lstrCode As String = ""
@@ -672,28 +665,6 @@ Public Class OrderSDAO
         Return lstrCode
     End Function
 
-    Public Function GetOrderTypeFromID(ByVal pOrderID As Long, ByRef tr As SqlTransaction) As Long
-        Dim SQL As String = "", lstrCode As String = ""
-        Dim dataTable As New DataTable()
-
-        Try
-            GetOrderTypeFromID = 0
-
-            SQL = "SELECT TableID  "
-            SQL = SQL & " FROM  Orders  "
-            SQL = SQL & " WHERE Orders.OrderID=" & pOrderID
-            dataTable = gConnection.executeSelectQuery(SQL, tr)
-
-            If dataTable.Rows.Count > 0 Then
-                For Each dr As DataRow In dataTable.Rows
-                    Return ConvertNullToZero(dr("TableID"))
-                Next
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetOrderTypeFromID : " & e.Message)
-        End Try
-
-    End Function
 
     Public Overrides Function CheckExist() As Boolean
         Dim SQL As String

@@ -428,11 +428,11 @@ Public Class ProductListDAO
                 '        SQL = SQL & "   WHERE p2.IsDelete =0  "
                 '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0 )"
                 '    End If
-                '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
-                '    End If
+                If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
+                    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                    SQL = SQL & "   WHERE p2.IsDelete =0  "
+                    SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
+                End If
                 '    If pRefTable = "Quotation" And (lCheckType = MasterType.Reserve Or lCheckType = MasterType.SellOrders) Then
                 '        'And pCheckQou = True Then 'ดูว่า Quotation ต้องไม่เคยโดนรับสินค้าโดย Reserve ,SellOrders
                 '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "

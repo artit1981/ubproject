@@ -947,9 +947,12 @@ Public Class ucProductLists
                     e.Value = lValue
                 End If
             End If
-
+        ElseIf gridView.FocusedColumn.FieldName = "AdjustUnit" Then
+            If ConvertNullToZero(gridView.GetFocusedRowCellValue("IsMerge")) = 1 Then
+                e.Valid = False
+                e.ErrorText = "กรณีรวมรายการสินค้า ไม่สามารถแก้ไขจำนวนได้"
+            End If
         End If
-
     End Sub
 
 
@@ -990,7 +993,7 @@ Public Class ucProductLists
         If rowHandle < 0 Then Exit Sub
         mlngProductID = ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "ProductID"))
         'If ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "IsMerge")) = 1 Then
-        '    ControlNavigator1.Buttons.Remove.Enabled = False
+
         'Else
         '    ControlNavigator1.Buttons.Remove.Enabled = True
         'End If

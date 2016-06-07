@@ -760,4 +760,29 @@ Module modFunction
         End Try
 
     End Function
+
+#Region "Orders"
+
+    Public Function GetOrderTypeFromID(ByVal pOrderID As Long, ByRef tr As SqlTransaction) As Long
+        Dim SQL As String = "", lstrCode As String = ""
+        Dim dataTable As New DataTable()
+        Try
+            GetOrderTypeFromID = 0
+            SQL = "SELECT TableID  "
+            SQL = SQL & " FROM  Orders  "
+            SQL = SQL & " WHERE Orders.OrderID=" & pOrderID
+            dataTable = gConnection.executeSelectQuery(SQL, tr)
+
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    Return ConvertNullToZero(dr("TableID"))
+                Next
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modFunction.GetOrderTypeFromID : " & e.Message)
+        End Try
+
+    End Function
+#End Region
+
 End Module

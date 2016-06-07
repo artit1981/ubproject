@@ -330,8 +330,9 @@ Public Class frmFindReserve
                     For Each dr As DataRow In dataTable.Rows
                         lEachUnit = 0
                         lNotRefUnit = 0
-                        lNotRefUnit = GetUnitNotClose(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
-                                                  , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, dr("ProductID"), dr("ID"))
+
+                        Call GetUnitNotRef(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
+                                                  , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, dr("ID"), dr("ProductID"), lNotRefUnit)
                         If lNotRefUnit > 0 Then
                             rec = New ProductSubDAO
                             rec.IsSelect = False
@@ -363,17 +364,15 @@ Public Class frmFindReserve
                             ''ถูกดึงไปแล้วบางส่วน
                             lEachUnit = lNotRefUnit
                             If lEachUnit < ConvertNullToZero(dr("Units")) Then
-                                rec.Units = lEachUnit * rec.RateUnit
-                                rec.AdjustUnit = lEachUnit
-                                rec.Price = rec.PriceMain * lEachUnit
+                                rec.Units = lEachUnit
+                                rec.AdjustUnit = lEachUnit / rec.RateUnit
                                 rec.Total = (rec.AdjustUnit * rec.Price) - (rec.AdjustUnit * rec.Discount)
                             Else
                                 rec.Units = ConvertNullToZero(dr("Units"))
-                                rec.Price = ConvertNullToZero(dr("Price"))
                                 rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
                                 rec.Total = ConvertNullToZero(dr("Total"))
                             End If
-                            '     Total = (AdjustUnit * Price) - (Discount * AdjustUnit)
+
                             lProList.Add(rec)
                         End If
                     Next
