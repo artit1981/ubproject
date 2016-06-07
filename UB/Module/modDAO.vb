@@ -1225,7 +1225,7 @@ Module modDAO
     End Sub
 
     Public Function GetUnitNotRef(ByVal pRefOrderID As Long, RefFromTable As String, ByVal pRefToTable As String, ByVal RefToTableIDList As String _
-                                       , ByRef ptr As SqlTransaction, ByVal pProlistID As Long, ByVal pProductID As Long, ByVal pNotRefUnit As Long) As RefOrderStatus
+                                       , ByRef ptr As SqlTransaction, ByVal pProlistID As Long, ByVal pProductID As Long, ByRef pNotRefUnit As Long) As RefOrderStatus
         Dim SQL As String
         Dim DataTable As DataTable
         Dim pRefFromUnit As Long = 0, pRefToUnit As Long = 0
@@ -1264,7 +1264,7 @@ Module modDAO
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
 
         SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting')"
+        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -1287,7 +1287,7 @@ Module modDAO
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
 
         SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting')"
+        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -1310,7 +1310,7 @@ Module modDAO
         SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
 
         SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting')"
+        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows

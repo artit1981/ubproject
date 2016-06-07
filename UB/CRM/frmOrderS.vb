@@ -1146,6 +1146,7 @@ Public Class frmOrderS
                                     rec.Remark = ConvertNullToString(dr("Remark"))
                                     rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                                     rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                                    rec.Price = ConvertNullToZero(dr("Price"))
                                     rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                                     rec.Cost = ConvertNullToZero(dr("Cost"))
                                     rec.Discount = ConvertNullToZero(dr("Discount"))

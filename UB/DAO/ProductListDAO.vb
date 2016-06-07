@@ -548,7 +548,7 @@ Public Class ProductListDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductListID", "ProductList", tr)
                     SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,PriceMain,Total,Remark,IsDelete"
-                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,ProductListRefID2,ProductListRefID3,IsShow,IsMerge )"
+                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,ProductListRefID2,ProductListRefID3,IsShow,IsMerge  "
                     SQL = SQL & " ,UnitMainID,AdjustUnit,RateUnit,ProductListUnitRef2,ProductListUnitRef3)"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"

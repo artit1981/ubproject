@@ -111,7 +111,7 @@ Public Class frmFindReserve
     Private Sub GetProList()
         Dim lProductSubList As New List(Of ProductListDAO)
         Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
-        Dim lRefOrderID As Long
+        Dim lRefOrderID As Long, lMergeCount As Integer = 0
         Try
             mOrderIDList = New List(Of Long)
             mProductSubList = New List(Of ProductSubDAO)
@@ -120,7 +120,7 @@ Public Class frmFindReserve
                 llngProID = pProLIst.ProductID
                 lUnitID = pProLIst.UnitID
                 lIndex = mProductSubList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
-                If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Then
+                If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Or lMergeCount > 3 Then
                     rec = New ProductSubDAO
                     rec.IsSelect = True
                     rec.ID = pProLIst.ID
@@ -214,7 +214,7 @@ Public Class frmFindReserve
                                 mProductSubList.Item(lIndex).SNList.Add(pSN)
                             Next
                         End If
-                       
+
                         mProductSubList.Item(lIndex).IsMerge = 1
                         If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID
@@ -227,6 +227,8 @@ Public Class frmFindReserve
                         If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
                             mOrderIDList.Add(lRefOrderID)
                         End If
+
+                        lMergeCount = lMergeCount + 1
                     End If
                 End If
             Next
@@ -351,6 +353,7 @@ Public Class frmFindReserve
                             rec.Remark = ConvertNullToString(dr("Remark"))
                             rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                             rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                            rec.Price = ConvertNullToZero(dr("Price"))
                             rec.Cost = ConvertNullToZero(dr("Cost"))
                             rec.Discount = ConvertNullToZero(dr("Discount"))
                             rec.IsShow = ConvertNullToZero(dr("IsShow"))
