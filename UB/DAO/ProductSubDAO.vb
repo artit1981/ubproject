@@ -36,6 +36,7 @@
     Private mProductListRefID3 As Long = 0
     Dim mProductListUnitRef2 As Long = 0
     Dim mProductListUnitRef3 As Long = 0
+    Dim mProductListUnitRef1 As Long = 0
 
     Public Property RefOrderID() As Long
         Get
@@ -258,7 +259,14 @@
         End Set
     End Property
 
-
+    Public Property ProductListUnitRef1() As Long
+        Get
+            Return mProductListUnitRef1
+        End Get
+        Set(ByVal Value As Long)
+            mProductListUnitRef1 = Value
+        End Set
+    End Property
     Public Property ProductListUnitRef2() As Long
         Get
             Return mProductListUnitRef2

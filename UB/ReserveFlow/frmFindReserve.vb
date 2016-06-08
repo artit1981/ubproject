@@ -111,22 +111,23 @@ Public Class frmFindReserve
     Private Sub GetProList()
         Dim lProductSubList As New List(Of ProductListDAO)
         Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
-        Dim lRefOrderID As Long, lMergeCount As Integer = 0
+        Dim lRefOrderID As Long, lCanNotMerge As Boolean = False
         Try
             mOrderIDList = New List(Of Long)
             mProductSubList = New List(Of ProductSubDAO)
             lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
+            lProductSubList.Sort(Function(x, y) x.RefID.CompareTo(y.RefID))
+
             For Each pProLIst As ProductListDAO In lProductSubList
                 llngProID = pProLIst.ProductID
                 lUnitID = pProLIst.UnitID
                 lIndex = mProductSubList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
-                If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Or lMergeCount > 3 Then
+                If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Or lCanNotMerge = True Then
                     rec = New ProductSubDAO
                     rec.IsSelect = True
                     rec.ID = pProLIst.ID
                     rec.SEQ = 0
                     rec.IsSN = pProLIst.IsSN
-                    rec.ProductListRefID = pProLIst.ID
                     rec.ProductID = pProLIst.ProductID
                     rec.ProductCode = pProLIst.ProductCode
                     rec.ProductNames = pProLIst.ProductName
@@ -149,8 +150,10 @@ Public Class frmFindReserve
                     rec.AdjustUnit = pProLIst.AdjustUnit
                     rec.RateUnit = pProLIst.RateUnit
                     rec.IsMerge = 0
+                    rec.ProductListRefID = pProLIst.ID
                     rec.ProductListRefID2 = 0
                     rec.ProductListRefID3 = 0
+                    rec.ProductListUnitRef1 = pProLIst.Units
                     rec.ProductListUnitRef2 = 0
                     rec.ProductListUnitRef3 = 0
                     mProductSubList.Add(rec)
@@ -167,8 +170,6 @@ Public Class frmFindReserve
                             rec = New ProductSubDAO
                             rec.IsSelect = True
                             rec.ID = pProLIst.ID
-                            rec.ProductListRefID = pProLIst.ID
-                            rec.ProductListRefID = pProLIst.ID
                             rec.SEQ = 0
                             rec.IsSN = pProLIst.IsSN
                             rec.SNList = pProLIst.SNList
@@ -193,8 +194,10 @@ Public Class frmFindReserve
                             rec.ModePro = DataMode.ModeNew
                             rec.IsShow = 1
                             rec.IsMerge = 0
+                            rec.ProductListRefID = pProLIst.ID
                             rec.ProductListRefID2 = 0
                             rec.ProductListRefID3 = 0
+                            rec.ProductListUnitRef1 = pProLIst.Units
                             rec.ProductListUnitRef2 = 0
                             rec.ProductListUnitRef3 = 0
                             mProductSubList.Add(rec)
@@ -222,13 +225,13 @@ Public Class frmFindReserve
                         Else
                             mProductSubList.Item(lIndex).ProductListRefID3 = pProLIst.ID
                             mProductSubList.Item(lIndex).ProductListUnitRef3 = pProLIst.Units
+                            lCanNotMerge = True   'Ref slot full
                         End If
                         lRefOrderID = pProLIst.RefID
                         If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
                             mOrderIDList.Add(lRefOrderID)
                         End If
-
-                        lMergeCount = lMergeCount + 1
+                         
                     End If
                 End If
             Next

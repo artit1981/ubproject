@@ -1042,7 +1042,7 @@ Public Class frmOrderS
         Dim llngProID As Long, llngUnitID As Long
         Dim lOrderList As New List(Of Long)
         Dim lIsSell As Boolean, lNotRefUnits As Long = 0
-        Dim lCalcUnit As Long, lCalcAdjustUnit As Long, lCalcTotal As Long
+        Dim lCalcUnit As Long, lCalcAdjustUnit As Long, lCalcTotal As Long, lCanNotMerge As Boolean = False
 
         lIsSell = CheckIsSell(mOrderType)
         lOrderList.Add(pOrderID)
@@ -1073,7 +1073,7 @@ Public Class frmOrderS
 
                         lIndex = mProductList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = llngUnitID)
 
-                        If lIndex < 0 Or mIsGroupDupProduct = 1 Or ConvertNullToZero(dr("IsShow")) = 0 Then
+                        If lIndex < 0 Or mIsGroupDupProduct = 1 Or ConvertNullToZero(dr("IsShow")) = 0 Or lCanNotMerge = True Then
                             rec = New ProductSubDAO
                             rec.IsSelect = True
                             rec.ID = ConvertNullToZero(dr("ID"))
@@ -1105,9 +1105,10 @@ Public Class frmOrderS
                             rec.Units = lCalcUnit
                             rec.AdjustUnit = lCalcAdjustUnit
                             rec.Total = lCalcTotal
-
+                            rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                             rec.ProductListRefID2 = 0
                             rec.ProductListRefID3 = 0
+                            rec.ProductListUnitRef1 = lCalcUnit
                             rec.ProductListUnitRef2 = 0
                             rec.ProductListUnitRef3 = 0
                             If rec.IsSN = 1 Then
@@ -1158,8 +1159,10 @@ Public Class frmOrderS
                                     rec.ModePro = DataMode.ModeNew
                                     rec.IsShow = 1
                                     rec.IsMerge = 0
+                                    rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                                     rec.ProductListRefID2 = 0
                                     rec.ProductListRefID3 = 0
+                                    rec.ProductListUnitRef1 = lCalcUnit
                                     rec.ProductListUnitRef2 = 0
                                     rec.ProductListUnitRef3 = 0
                                     If rec.IsSN = 1 Then
@@ -1174,7 +1177,6 @@ Public Class frmOrderS
                             If mIsGroupDupProduct = 2 Then
                                 mProductList.Item(lIndex).Units = mProductList.Item(lIndex).Units + lCalcUnit
                                 mProductList.Item(lIndex).AdjustUnit = mProductList.Item(lIndex).AdjustUnit + lCalcAdjustUnit
-                                'mProductList.Item(lIndex).Discount = mProductList.Item(lIndex).Discount + ConvertNullToZero(dr("Discount"))
                                 mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + lCalcTotal
 
                                 If ConvertNullToZero(dr("IsSN")) = 1 Then
@@ -1188,6 +1190,7 @@ Public Class frmOrderS
                                 Else
                                     mProductList.Item(lIndex).ProductListRefID3 = ConvertNullToZero(dr("ID"))
                                     mProductList.Item(lIndex).ProductListUnitRef3 = ConvertNullToZero(dr("Units"))
+                                    lCanNotMerge = True   'Ref slot full
                                 End If
                                 mProductList.Item(lIndex).IsMerge = 1
                             End If

@@ -1249,7 +1249,7 @@ Module modDAO
             Exit For
         Next
 
-        SQL = "SELECT Sum(p1.Units) as Units  "
+        SQL = "SELECT Sum(p1.ProductListUnitRef1) as Units  "
         SQL = SQL & " FROM ProductList p1"
         SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
         SQL = SQL & " AND  p1.ProductListRefID in ( "
