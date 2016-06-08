@@ -1058,7 +1058,7 @@ Public Class frmOrderS
                     llngProID = ConvertNullToZero(dr("ProductID"))
                     llngUnitID = ConvertNullToZero(dr("UnitID"))
 
-                    Call GetRefOrderStatus(pOrderID, pTableID.ToString, mcls.ID, dr("ID"), llngProID, Nothing, mMode, lNotRefUnits)
+                    Call GetRefOrderStatus(pOrderID, mOrderType, mcls.ID, dr("ID"), llngProID, Nothing, mMode, lNotRefUnits)
 
                     If lNotRefUnits > 0 Then
                         If lNotRefUnits < ConvertNullToZero(dr("Units")) Then

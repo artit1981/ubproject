@@ -1340,11 +1340,11 @@ Module modDAO
 
         SQL = ""
         Try
-            If ptr Is Nothing Then
-                tr = gConnection.Connection.BeginTransaction
-            Else
-                tr = ptr
-            End If
+            'If ptr Is Nothing Then
+            '    tr = gConnection.Connection.BeginTransaction
+            'Else
+            tr = ptr
+            'End If
 
             lRefOrderType = GetOrderTypeFromID(pRefOrderID, tr)
 

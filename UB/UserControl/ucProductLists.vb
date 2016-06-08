@@ -248,7 +248,7 @@ Public Class ucProductLists
                         lDataDAO.ProductListRefID = pProSub.ProductListRefID
                         lDataDAO.ProductListRefID2 = pProSub.ProductListRefID2
                         lDataDAO.ProductListRefID3 = pProSub.ProductListRefID3
-                        lDataDAO.ProductListUnitRef1 = pProSub.ProductListUnitRef1
+
                         lDataDAO.ProductListUnitRef2 = pProSub.ProductListUnitRef2
                         lDataDAO.ProductListUnitRef3 = pProSub.ProductListUnitRef3
                         If pLocationDtlID > 0 Then
@@ -286,6 +286,15 @@ Public Class ucProductLists
                             lDataDAO.Units = pProSub.AdjustUnit
                             lDataDAO.PriceMain = lDataDAO.Price 'for if adjust price
                         End If
+                        If pProSub.ProductListRefID > 0 Then
+                            If pRefTable = MasterType.PurchaseOrder.ToString Then
+                                lDataDAO.ProductListUnitRef1 = pProSub.ProductListUnitRef1
+                            Else
+                                lDataDAO.ProductListUnitRef1 = lDataDAO.Units
+                            End If
+                        Else                            lDataDAO.ProductListUnitRef1 = 0
+                        End If
+                     
                         lDataDAO.SEQ = lRow + 1
 
                         If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
