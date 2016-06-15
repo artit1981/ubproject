@@ -8,7 +8,7 @@ Public Class NoteDAO
     Private mRefID As Long
     Private mRefTable As String
     Private mDescription As String
-    Private mDescriptionORG As String
+    Private mSEQ As Integer
     Private mCreateBy As String
     Private mCreateTime As DateTime
 
@@ -24,12 +24,12 @@ Public Class NoteDAO
         End Set
     End Property
 
-    Public Property DescriptionORG() As String
+    Public Property SEQ() As Integer
         Get
-            Return mDescriptionORG
+            Return mSEQ
         End Get
-        Set(ByVal value As String)
-            mDescriptionORG = value
+        Set(ByVal value As Integer)
+            mSEQ = value
         End Set
 
     End Property
@@ -97,12 +97,12 @@ Public Class NoteDAO
 
         Try
             SQL = "SELECT  A.Description,A.Description AS DescriptionORG ,B.USERNAME AS CreateBy "
-            SQL = SQL & " ,A.CreateTime ,A.NoteID AS ID  ,A.RefID ,A.RefTable "
+            SQL = SQL & " ,A.CreateTime ,A.NoteID AS ID  ,A.RefID ,A.RefTable,A.SEQ ,2 AS ModeData"
             SQL = SQL & " FROM Note A "
             SQL = SQL & " LEFT OUTER JOIN Admin_User B ON A.CreateBy=B.UserID "
             SQL = SQL & " WHERE RefTable = '" & pTable & "' "
             SQL = SQL & " AND RefID =" & pRefID
-            SQL = SQL & " ORDER BY NoteID"
+            SQL = SQL & " ORDER BY A.SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "NoteDAO.GetDataTable : " & e.Message)
@@ -120,10 +120,10 @@ Public Class NoteDAO
             ElseIf mMode = DataMode.ModeDelete Then
             ElseIf ID <= 0 And Description <> "" Then
                 mMode = DataMode.ModeNew
-            ElseIf Description.Trim <> DescriptionORG.Trim Then
-                mMode = DataMode.ModeEdit
+                'ElseIf Description.Trim <> DescriptionORG.Trim Then
+                '    mMode = DataMode.ModeEdit
             Else  'not chang
-                mMode = DataMode.ModeNone
+                mMode = DataMode.ModeEdit
             End If
 
             Select Case mMode
@@ -143,6 +143,7 @@ Public Class NoteDAO
                     SQL = SQL & " Description=@mDescription"
                     SQL = SQL & " ,CreateBy= @gUserID"
                     SQL = SQL & " ,CreateTime=@CreateTime"
+                    SQL = SQL & " ,SEQ=@SEQ"
                     SQL = SQL & " WHERE NoteID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " DELETE FROM Note  "
@@ -159,6 +160,7 @@ Public Class NoteDAO
             myCommand.Parameters.Add(New SqlParameter("@mDescription", Description))
             myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
             myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
+            myCommand.Parameters.Add(New SqlParameter("@SEQ", mSEQ))
             gConnection.executeInsertSqlCommand(myCommand, tr)
             Return True
         Catch e As Exception
@@ -192,7 +194,7 @@ Public Class NoteDAO
         mRefID = 0
         mRefTable = ""
         mDescription = ""
-        mDescriptionORG = ""
+        mSEQ = 0
         mCreateBy = ""
         mCreateTime = Now
     End Sub

@@ -329,6 +329,7 @@ Public Class frmOrderS
                     ClearForm(UcAdmin1)
                     UcFileAttach1.ClearControl()
                     UcNote1.ClearControl()
+                    UcNote2.ClearControl()
                     UcProductLists1.ClearControl()
                     UcPledge1.ClearControl()
                     'OrderCode.Properties.ReadOnly = False
@@ -409,6 +410,7 @@ Public Class frmOrderS
             End If
             mcls.IsNotPass = chkNotPass.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
+            mcls.NoteProductDAOs = UcNote2.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.IsMakePO = mIsMakePO
 
@@ -1371,6 +1373,7 @@ Public Class frmOrderS
             End If
             InitialIsEditVat(mcls.IsEditVat)
             UcNote1.ShowControl(mcls.TableName, pID)
+            UcNote2.ShowControl(mcls.TableName & "_PRO", pID)  'Product Remark
             ShowProductList(mMode)
             LoadTaxOrder(pID)
             InitialCusTaxInfo(ConvertNullToZero(CustomerID.EditValue), Nothing)
@@ -1477,6 +1480,7 @@ Public Class frmOrderS
 
                 UcProductLists1.ShowControl(mMode, lOrderList, mclsConvert.TableName, GetColData, False, True, Me, True, mcls.TableName, False, False, 0, mcls.StockType)
                 UcNote1.ShowControl(mclsConvert.TableName, mclsConvert.ID)
+                UcNote2.ShowControl(mclsConvert.TableName & "_PRO", mclsConvert.ID)
                 InitialRefOrder(pID, "", False)
             End If
         Catch ex As Exception

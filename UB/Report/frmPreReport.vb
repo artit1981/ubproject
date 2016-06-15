@@ -72,7 +72,6 @@ Public Class frmPreReport
         Dim lclsContactPerson As New CustomerDAO
 
         Try
-
             BuildCompanyAddress(lclsReport)
             If lclsOrder.InitailData(pOrderID) Then
                 Select Case mOrderType
@@ -122,7 +121,6 @@ Public Class frmPreReport
                     Else
                         lclsReport.AddressShip = ""
                     End If
-
                 End If
 
                 If mOrderType = MasterType.Quotation Then
@@ -131,14 +129,12 @@ Public Class frmPreReport
                     lclsReport.ExpireDate = lclsOrder.ExpireDate
                 End If
 
-
                 If lclsOrder.CreditRuleID > 0 Then
                     If lclsCreditRole.InitailData(lclsOrder.CreditRuleID, "") Then
                         lclsReport.CreditRule = lclsCreditRole.NameThai
                         If mOrderType = MasterType.Quotation And lclsCreditRole.CreditDay > 0 Then
                             lclsReport.ExpireDate = DateAdd(DateInterval.Day, lclsCreditRole.CreditDay, lclsOrder.OrderDate)
                         End If
-
                     Else
                         lclsReport.CreditRule = ""
                     End If
@@ -146,16 +142,13 @@ Public Class frmPreReport
                     lclsReport.CreditRule = ""
                 End If
 
-              
                 lclsReport.CustomerCode = lclsOrder.CustomerDAO.Code
                 If lclsOrder.CustomerDAO.FirstName <> "" Then
                     lclsReport.CustomerName = lclsOrder.CustomerDAO.Title & lclsOrder.CustomerDAO.FirstName & "  " & lclsOrder.CustomerDAO.LastName
                 Else
-                    'lclsReport.Company = lclsOrder.CustomerDAO.CompanyName
                     lclsReport.CustomerName = lclsOrder.CustomerDAO.CompanyName
                 End If
                 lclsReport.Institute = lclsOrder.Institute
-
 
                 'ShipingMethodID
                 If lclsOrder.ShipingMethodID > 0 Then
@@ -177,7 +170,6 @@ Public Class frmPreReport
                         lclsReport.ContactPerson = lclsOrder.CustomerDAO.AddressS.ContactName
                     End If
                 End If
-               
 
                 'CompanyType
                 If lclsOrder.CustomerDAO.CompanyTypeID > 0 Then
@@ -209,7 +201,6 @@ Public Class frmPreReport
                             End If
                         Next
                     End If
-
                     lclsReport.DiscountAmount = lTotal
                 Else
                     lclsReport.DiscountAmount = lclsOrder.DiscountAmount
@@ -239,12 +230,7 @@ Public Class frmPreReport
                 Else
                     lclsReport.OrderCode = lclsOrder.Code
                 End If
-
                 lclsReport.OrderDate = lclsOrder.OrderDate
-              
-
-
-
                 lclsReport.SendBy = lclsOrder.SendBy
                 lclsShipingMethod.InitailData(lclsOrder.ShipingMethodID, MasterType.ShipingMethod)
                 lclsReport.ShipingMethod = lclsShipingMethod.NameThai
@@ -253,11 +239,9 @@ Public Class frmPreReport
                 lclsReport.Total = lclsOrder.Total
                 lclsReport.VatAmount = lclsOrder.VatAmount
                 lclsReport.VatPercen = lclsOrder.VatPercen
-
                 lclsReport.DiscountPercen = lclsOrder.DiscountPercen
                 lclsReport.GrandTotal = lclsOrder.GrandTotal
                 lclsReport.GrandTotalSTR = ChangeToThaibathWord(lclsOrder.GrandTotal.ToString)
-
                 If mOrderType = MasterType.Quotation Then
                     If lclsOrder.QuotationRemarkID > 0 Then
                         lclsMaster = New MasterDAO
@@ -266,94 +250,15 @@ Public Class frmPreReport
                     Else
                         lclsReport.Remark = ""
                     End If
-                  
                 Else
-
                     lclsReport.Remark = lclsOrder.Remark
                 End If
 
                 lclsReport.SaveData()
 
-
-                Dim lclsProList As New ProductListDAO
-                Dim lclsTmpProList As New TmpProductList
-                Dim lTableProList As DataTable
-                Dim lIsSeqDup As Boolean, lSEQ As Long = 1
-                Dim lOrderList As New List(Of Long)
-                Dim lSN As SnDAO, lSNTable As DataTable, lSnCodeList As String = ""
-
-                lOrderList.Add(pOrderID)
-
-                lTableProList = lclsProList.GetDataTable(lOrderList, mOrderType.ToString, Nothing, False, "", False, 0, False)
-                lIsSeqDup = lclsProList.CheckSeqDup(pOrderID, mOrderType.ToString, Nothing, False)
-
-                lclsTmpProList.ClearTemp()
-                For Each pRow As DataRow In lTableProList.Rows
-                    If lIsSeqDup Then
-                        lclsTmpProList.SEQ = lSEQ
-                    Else
-                        lclsTmpProList.SEQ = pRow.Item("SEQ")
-                    End If
-
-                    lclsTmpProList.ProductID = pRow.Item("ProductID")
-                    lclsTmpProList.ProductCode = ConvertNullToString(pRow.Item("ProductCode"))
-                    If ConvertNullToString(pRow.Item("ProductNameExt")) <> "" Then
-                        lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("ProductNameExt"))
-                    Else
-                        lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("ProductName"))
-                    End If
-
-                    lclsTmpProList.ProductNameExt = ""
-                    lclsTmpProList.UnitCode = ConvertNullToString(pRow.Item("UnitName"))
-                    lclsTmpProList.Units = ConvertNullToZero(pRow.Item("AdjustUnit"))
-                    lclsTmpProList.Cost = ConvertNullToZero(pRow.Item("Cost"))
-                    lclsTmpProList.Price = ConvertNullToZero(pRow.Item("Price"))
-                    lclsTmpProList.Discount = ConvertNullToZero(pRow.Item("Discount"))
-                    lclsTmpProList.Total = ConvertNullToZero(pRow.Item("ToTal"))
-                    lclsTmpProList.Remark = ConvertNullToString(pRow.Item("Remark"))
-                    Select Case mOrderType
-                        Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
-                            lSnCodeList = ""
-                            lSN = New SnDAO
-                            lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
-                            For Each pRowSn As DataRow In lSNTable.Rows
-                                If lSnCodeList = "" Then
-                                    lSnCodeList = ConvertNullToString(pRowSn.Item("SerialNumberNo"))
-                                Else
-                                    lSnCodeList = lSnCodeList & "," & ConvertNullToString(pRowSn.Item("SerialNumberNo"))
-                                End If
-                            Next
-
-                            Select Case mOrderType
-                                Case MasterType.SellOrders
-                                    If Len(lclsTmpProList.ProductName) > 25 Then
-                                        lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 25)
-                                    End If
-                                Case MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
-                                    If Len(lclsTmpProList.ProductName) > 40 Then
-                                        lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 40)
-                                    End If
-                                Case MasterType.PurchaseOrder
-                                    If Len(lclsTmpProList.ProductName) > 120 Then
-                                        lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 120)
-                                    End If
-
-                                Case Else
-                                    If Len(lclsTmpProList.ProductName) > 60 Then
-                                        lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 60)
-                                    End If
-                            End Select
-                            If lSnCodeList <> "" Then
-                                lclsTmpProList.ProductName = lclsTmpProList.ProductName & "(" & lSnCodeList & ")"
-                            End If
-
-                    End Select
-
-                    lclsTmpProList.SaveData()
-                    lSEQ = lSEQ + 1
-                Next
-                'lclsTmpProList.SaveNull(10 - lTableProList.Rows.Count)
-
+                Dim lSEQ As Long = 0
+                Call InitialProductLine(pOrderID, lSEQ)
+                Call InitialProductRemark(pOrderID, lSEQ)
                 mReport = report
                 ExecuteReport()
             End If
@@ -364,7 +269,116 @@ Public Class frmPreReport
         End Try
     End Sub
 
+    Private Sub InitialProductLine(ByVal pOrderID As Long, ByRef pSEQ As Long)
+        Try
 
+            Dim lclsProList As New ProductListDAO
+            Dim lclsTmpProList As New TmpProductList
+            Dim lTableProList As DataTable
+            Dim lIsSeqDup As Boolean, lSEQ As Long = 1
+            Dim lOrderList As New List(Of Long)
+            Dim lSN As SnDAO, lSNTable As DataTable, lSnCodeList As String = ""
+
+            lOrderList.Add(pOrderID)
+
+            lTableProList = lclsProList.GetDataTable(lOrderList, mOrderType.ToString, Nothing, False, "", False, 0, False)
+            lIsSeqDup = lclsProList.CheckSeqDup(pOrderID, mOrderType.ToString, Nothing, False)
+
+            lclsTmpProList.ClearTemp()
+            For Each pRow As DataRow In lTableProList.Rows
+
+                lclsTmpProList = New TmpProductList
+
+                If lIsSeqDup Then
+                    lclsTmpProList.SEQ = lSEQ
+                Else
+                    lclsTmpProList.SEQ = pRow.Item("SEQ")
+                End If
+
+                lclsTmpProList.ProductID = pRow.Item("ProductID")
+                lclsTmpProList.ProductCode = ConvertNullToString(pRow.Item("ProductCode"))
+                If ConvertNullToString(pRow.Item("ProductNameExt")) <> "" Then
+                    lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("ProductNameExt"))
+                Else
+                    lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("ProductName"))
+                End If
+
+                lclsTmpProList.ProductNameExt = ""
+                lclsTmpProList.UnitCode = ConvertNullToString(pRow.Item("UnitName"))
+                lclsTmpProList.Units = ConvertNullToZero(pRow.Item("AdjustUnit"))
+                lclsTmpProList.Cost = ConvertNullToZero(pRow.Item("Cost"))
+                lclsTmpProList.Price = ConvertNullToZero(pRow.Item("Price"))
+                lclsTmpProList.Discount = ConvertNullToZero(pRow.Item("Discount"))
+                lclsTmpProList.Total = ConvertNullToZero(pRow.Item("ToTal"))
+                lclsTmpProList.Remark = ConvertNullToString(pRow.Item("Remark"))
+                Select Case mOrderType
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                        lSnCodeList = ""
+                        lSN = New SnDAO
+                        lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
+                        For Each pRowSn As DataRow In lSNTable.Rows
+                            If lSnCodeList = "" Then
+                                lSnCodeList = ConvertNullToString(pRowSn.Item("SerialNumberNo"))
+                            Else
+                                lSnCodeList = lSnCodeList & "," & ConvertNullToString(pRowSn.Item("SerialNumberNo"))
+                            End If
+                        Next
+
+                        Select Case mOrderType
+                            Case MasterType.SellOrders
+                                If Len(lclsTmpProList.ProductName) > 25 Then
+                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 25)
+                                End If
+                            Case MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                                If Len(lclsTmpProList.ProductName) > 40 Then
+                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 40)
+                                End If
+                            Case MasterType.PurchaseOrder
+                                If Len(lclsTmpProList.ProductName) > 120 Then
+                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 120)
+                                End If
+
+                            Case Else
+                                If Len(lclsTmpProList.ProductName) > 60 Then
+                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 60)
+                                End If
+                        End Select
+                        If lSnCodeList <> "" Then
+                            lclsTmpProList.ProductName = lclsTmpProList.ProductName & "(" & lSnCodeList & ")"
+                        End If
+
+                End Select
+
+                lclsTmpProList.SaveData()
+                lSEQ = lSEQ + 1
+            Next
+
+            pSEQ = lSEQ
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "modReport.InitialProductLine : " & ex.Message)
+        End Try
+    End Sub
+
+
+    Private Sub InitialProductRemark(ByVal pOrderID As Long, ByVal pSEQ As Long)
+        Try
+            Dim lclsNote As New NoteDAO
+            Dim lTableNote As DataTable
+            Dim lclsTmpProList As New TmpProductList
+
+            lTableNote = lclsNote.GetDataTable(mOrderType.ToString & "_PRO", pOrderID)
+            For Each pRow As DataRow In lTableNote.Rows
+                lclsTmpProList.SEQ = pSEQ
+                lclsTmpProList.ProductID = 0
+                lclsTmpProList.ProductCode = ""
+                lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("Description"))
+                lclsTmpProList.SaveData()
+                pSEQ = pSEQ + 1
+            Next
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "modReport.InitialProductRemark : " & ex.Message)
+        End Try
+    End Sub
 
     Private Sub PrintBill(ByVal pOrderID As Long)
         Dim report As New XtraReport
@@ -799,8 +813,7 @@ Public Class frmPreReport
         End Try
     End Sub
 
-
-
+#Region "Comment"
     'Private Function GenBarcode(ByVal pText As String) As Image
     '    Dim settings As BarcodeSettings
     '    settings = New BarcodeSettings()
@@ -903,6 +916,7 @@ Public Class frmPreReport
     '    Finally
     '    End Try
     'End Sub
+#End Region
 
     Private Sub InitialCondition()
         Dim lclsOrder As New OrderSDAO

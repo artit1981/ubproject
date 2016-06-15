@@ -312,6 +312,7 @@ Public Class OrderSDAO
             Call UpdateBillReceipt(tr)
             Call SaveBalance(tr)
             Call SaveNote(NoteDAOs, ModeData, ID, TableName, tr)
+            Call SaveNote(NoteProductDAOs, ModeData, ID, TableName & "_PRO", tr)  'Product remark
             Call SaveAttachFile(FileAttachs, ModeData, ID, TableName, tr)
             Call SavePledge(PledgeDAOs, ModeData, ID, tr)
             Call SaveCheque(ChequeDAOs, ModeData, ID, tr)

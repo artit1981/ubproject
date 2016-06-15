@@ -256,6 +256,7 @@ Partial Class frmOrderS
         Me.LayoutPO2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem12 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.UcNote2 = New UB.ucNote()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -264,6 +265,7 @@ Partial Class frmOrderS
         CType(Me.XtraTabControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl2.SuspendLayout()
         Me.XtraTabPage1.SuspendLayout()
+        Me.XtraTabPage2.SuspendLayout()
         CType(Me.Campaign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkNotPass.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -566,7 +568,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabPage1, True)
         Me.XtraTabPage1.Name = "XtraTabPage1"
         Me.XtraTabPage1.Size = New System.Drawing.Size(885, 143)
-        Me.XtraTabPage1.Text = "XtraTabPage1"
+        Me.XtraTabPage1.Text = "สินค้า"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage1, "")
         '
         'UcProductLists1
@@ -584,10 +586,11 @@ Partial Class frmOrderS
         'XtraTabPage2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabPage2, "")
+        Me.XtraTabPage2.Controls.Add(Me.UcNote2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabPage2, True)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 116)
-        Me.XtraTabPage2.Text = "XtraTabPage2"
+        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 143)
+        Me.XtraTabPage2.Text = "หมายเหตุ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage2, "")
         '
         'Campaign
@@ -2752,7 +2755,7 @@ Partial Class frmOrderS
         Me.PledgeTabPage.Controls.Add(Me.UcPledge1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTabPage, True)
         Me.PledgeTabPage.Name = "PledgeTabPage"
-        Me.PledgeTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.PledgeTabPage.Size = New System.Drawing.Size(921, 668)
         Me.PledgeTabPage.Text = "รายการมัดจำ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PledgeTabPage, "")
         '
@@ -2763,7 +2766,7 @@ Partial Class frmOrderS
         Me.UcPledge1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcPledge1, True)
         Me.UcPledge1.Name = "UcPledge1"
-        Me.UcPledge1.Size = New System.Drawing.Size(921, 651)
+        Me.UcPledge1.Size = New System.Drawing.Size(921, 668)
         Me.UcPledge1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcPledge1, "")
         '
@@ -2774,7 +2777,7 @@ Partial Class frmOrderS
         Me.TaxTabPage.Controls.Add(Me.TaxGroup1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxTabPage, True)
         Me.TaxTabPage.Name = "TaxTabPage"
-        Me.TaxTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.TaxTabPage.Size = New System.Drawing.Size(921, 668)
         Me.TaxTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxTabPage, "")
         '
@@ -3348,7 +3351,7 @@ Partial Class frmOrderS
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(921, 668)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -3372,7 +3375,7 @@ Partial Class frmOrderS
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.NoteTabPage.Size = New System.Drawing.Size(921, 668)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -3383,7 +3386,7 @@ Partial Class frmOrderS
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(921, 651)
+        Me.UcNote1.Size = New System.Drawing.Size(921, 668)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -3393,7 +3396,7 @@ Partial Class frmOrderS
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(921, 668)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -3404,7 +3407,7 @@ Partial Class frmOrderS
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(921, 651)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(921, 668)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -3414,7 +3417,7 @@ Partial Class frmOrderS
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(921, 651)
+        Me.AdminTabPage.Size = New System.Drawing.Size(921, 668)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -3868,6 +3871,17 @@ Partial Class frmOrderS
         Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
+        'UcNote2
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote2, "")
+        Me.UcNote2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcNote2.Location = New System.Drawing.Point(0, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote2, True)
+        Me.UcNote2.Name = "UcNote2"
+        Me.UcNote2.Size = New System.Drawing.Size(885, 143)
+        Me.UcNote2.TabIndex = 1
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote2, "")
+        '
         'frmOrderS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3888,6 +3902,7 @@ Partial Class frmOrderS
         CType(Me.XtraTabControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl2.ResumeLayout(False)
         Me.XtraTabPage1.ResumeLayout(False)
+        Me.XtraTabPage2.ResumeLayout(False)
         CType(Me.Campaign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkNotPass.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4312,4 +4327,5 @@ Partial Class frmOrderS
     Friend WithEvents UcProductLists1 As UB.ucProductLists
     Friend WithEvents XtraTabPage2 As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents LayoutControlProduct As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents UcNote2 As UB.ucNote
 End Class

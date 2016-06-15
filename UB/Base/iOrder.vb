@@ -56,37 +56,38 @@ Public Class iOrder
     Private mPledgeTotal As Double
     Private mRefReceiptID As Long
     Private mCurrencyID As Long
-    Dim mExchangeRate As Long
-    Dim mTaxCanYes As String
-    Dim mTaxCondition As String
-    Dim mTaxMonthYear As Date
-    Dim mTaxNumber As String
-    Dim mTaxRemark As String
-    Dim mTaxTaxSection As String
-    Dim mTaxType As String
-    Dim mChequeDAOs As List(Of ChequeDAO)
-    Dim mShipingRuleID As Long
-    Dim mTaxOrderDAOs As List(Of TaxOrderDAO)
-    Dim mTaxTotal As Double
-    Dim mImportTXID As Long
-    Dim mCustomerID_Old As Long
-    Dim mLocationDTLID As Long
-    Dim mclsOrder_Old As OrderSDAO
-    Dim mInvoiceSuplierID As String
-    Dim mInstitute As String
-    Dim mIsDelete As Boolean
-    Dim mRefOrderIDs As Long
-    Dim mStockType As String
-    Dim mIsSumStock As Boolean
-    Dim mIsMakePO As Boolean = False
-    Dim mRefToReserveID As List(Of Long)
-    Dim mMakePOStatus As String = ""
-    Dim mIsEditVat As Boolean = False
-    Dim mQuotationRemarkID As Long = 0
-    Dim mIsNotPass As Boolean = False
-    Dim mCampaignID As Long = 0
-    Dim mOrderStatus2 As String = ""
-    Dim mIsChangeCancel As Boolean = False
+    Private mExchangeRate As Long
+    Private mTaxCanYes As String
+    Private mTaxCondition As String
+    Private mTaxMonthYear As Date
+    Private mTaxNumber As String
+    Private mTaxRemark As String
+    Private mTaxTaxSection As String
+    Private mTaxType As String
+    Private mChequeDAOs As List(Of ChequeDAO)
+    Private mShipingRuleID As Long
+    Private mTaxOrderDAOs As List(Of TaxOrderDAO)
+    Private mTaxTotal As Double
+    Private mImportTXID As Long
+    Private mCustomerID_Old As Long
+    Private mLocationDTLID As Long
+    Private mclsOrder_Old As OrderSDAO
+    Private mInvoiceSuplierID As String
+    Private mInstitute As String
+    Private mIsDelete As Boolean
+    Private mRefOrderIDs As Long
+    Private mStockType As String
+    Private mIsSumStock As Boolean
+    Private mIsMakePO As Boolean = False
+    Private mRefToReserveID As List(Of Long)
+    Private mMakePOStatus As String = ""
+    Private mIsEditVat As Boolean = False
+    Private mQuotationRemarkID As Long = 0
+    Private mIsNotPass As Boolean = False
+    Private mCampaignID As Long = 0
+    Private mOrderStatus2 As String = ""
+    Private mIsChangeCancel As Boolean = False
+    Private mNoteProductDAOs As List(Of NoteDAO)
 
     Public Overridable ReadOnly Property TableName() As String
         Get
@@ -482,6 +483,15 @@ Public Class iOrder
         End Set
     End Property
 
+
+    Public Property NoteProductDAOs() As List(Of NoteDAO)
+        Get
+            Return mNoteProductDAOs
+        End Get
+        Set(ByVal Value As List(Of NoteDAO))
+            mNoteProductDAOs = Value
+        End Set
+    End Property
 
     Public Property FileAttachs() As List(Of FileAttachDAO)
         Get
