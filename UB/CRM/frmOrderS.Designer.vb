@@ -29,6 +29,7 @@ Partial Class frmOrderS
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
         Me.UcProductLists1 = New UB.ucProductLists()
         Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcNote2 = New UB.ucNote()
         Me.Campaign = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.CampaignID = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -256,7 +257,6 @@ Partial Class frmOrderS
         Me.LayoutPO2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem12 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
-        Me.UcNote2 = New UB.ucNote()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -542,7 +542,7 @@ Partial Class frmOrderS
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LayoutControl1, True)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(894, 42, 280, 604)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(445, 42, 280, 604)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
         Me.LayoutControl1.Size = New System.Drawing.Size(921, 668)
         Me.LayoutControl1.TabIndex = 9
@@ -553,6 +553,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl2, "")
         Me.XtraTabControl2.Location = New System.Drawing.Point(12, 336)
+        Me.XtraTabControl2.MinimumSize = New System.Drawing.Size(0, 50)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl2, True)
         Me.XtraTabControl2.Name = "XtraTabControl2"
         Me.XtraTabControl2.SelectedTabPage = Me.XtraTabPage1
@@ -592,6 +593,17 @@ Partial Class frmOrderS
         Me.XtraTabPage2.Size = New System.Drawing.Size(885, 143)
         Me.XtraTabPage2.Text = "หมายเหตุ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage2, "")
+        '
+        'UcNote2
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote2, "")
+        Me.UcNote2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcNote2.Location = New System.Drawing.Point(0, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote2, True)
+        Me.UcNote2.Name = "UcNote2"
+        Me.UcNote2.Size = New System.Drawing.Size(885, 143)
+        Me.UcNote2.TabIndex = 1
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote2, "")
         '
         'Campaign
         '
@@ -2740,7 +2752,7 @@ Partial Class frmOrderS
         Me.LayoutControlProduct.Control = Me.XtraTabControl2
         Me.LayoutControlProduct.CustomizationFormText = "LayoutControlProduct"
         Me.LayoutControlProduct.Location = New System.Drawing.Point(0, 324)
-        Me.LayoutControlProduct.MinSize = New System.Drawing.Size(104, 24)
+        Me.LayoutControlProduct.MinSize = New System.Drawing.Size(104, 150)
         Me.LayoutControlProduct.Name = "LayoutControlProduct"
         Me.LayoutControlProduct.Size = New System.Drawing.Size(895, 175)
         Me.LayoutControlProduct.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
@@ -3870,17 +3882,6 @@ Partial Class frmOrderS
         Me.DockManager1.Form = Me
         Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
-        '
-        'UcNote2
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote2, "")
-        Me.UcNote2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcNote2.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote2, True)
-        Me.UcNote2.Name = "UcNote2"
-        Me.UcNote2.Size = New System.Drawing.Size(885, 143)
-        Me.UcNote2.TabIndex = 1
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote2, "")
         '
         'frmOrderS
         '

@@ -433,7 +433,7 @@ Public Class frmOrderS
             Else
                 lIsCheckStock = False
             End If
-             
+
             mcls.ProductDAOs = UcProductLists1.GetDAOs(lIsCheckStock, True, mOrderType = MasterType.SellOrders, lProListStockFail, False, 0, True, mOrderType.ToString, pMode, mcls.StockType)
             'Stock fail to Reserve
             If lProListStockFail.Count > 0 Then
@@ -445,7 +445,7 @@ Public Class frmOrderS
             End If
 
             mcls.PledgeDAOs = UcPledge1.GetDAOs()
-           
+
 
             'mcls.TaxOrderDAOs = GetTaxOrderList()
             If Verify() = True Then
@@ -646,7 +646,7 @@ Public Class frmOrderS
         End Try
 
     End Sub
- 
+
     Private Sub IsCancel_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IsCancel.CheckedChanged
         If (IsCancel.EditValue = True) Or (chkNotPass.EditValue = True) Then
             CancelRemark.Properties.ReadOnly = False
@@ -718,7 +718,7 @@ Public Class frmOrderS
             End If
         End If
     End Sub
- 
+
 
     Private Sub btnRefreshCurrency_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefreshCurrency.Click
         SetLookUpCurrency(cboCurrency)
@@ -835,7 +835,7 @@ Public Class frmOrderS
         CalcExpireDate()
     End Sub
 
-  
+
 
 
     Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
@@ -947,7 +947,7 @@ Public Class frmOrderS
 
 
     Private Function InitialRefReserve(ByVal pRefOrderID As Long, ByVal pRefOrderCode As String, ByVal pInitProduct As Boolean) As Boolean
-           Dim lcls As OrderSDAO
+        Dim lcls As OrderSDAO
         Try
             If (pRefOrderID > 0 Or pRefOrderCode.Trim <> "") Then
                 lcls = New OrderSDAO
@@ -959,7 +959,7 @@ Public Class frmOrderS
                     Else
                         txtRefPO.Text = txtRefPO.Text & ", " & lcls.Code
                     End If
-                   
+
                     Return True
                 Else
                     Return False
@@ -1428,7 +1428,7 @@ Public Class frmOrderS
         Try
             Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
             Dim lColData As ProColumn = GetColData()
-           
+
             gCustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcProductLists1.ShowControlByDataSource(pMode, pSource, lColData, False, Me, mOrderType.ToString, lBuyOrSell, pOrderID, True, mIsMakePO, mcls.StockType)
             Calculation()
@@ -1509,12 +1509,12 @@ Public Class frmOrderS
                 End If
             End If
 
- 
+
             If ConvertNullToZero(VatTypeID.EditValue) = 0 Then
                 SetErrorProvider(DxErrorProvider1, VatTypeID, "กรุณาระบุรูปแบบภาษี")
                 lstrErr = lstrErr & DxErrorProvider1.GetError(VatTypeID) & vbNewLine
             End If
- 
+
             'Sum Stock
             If mOrderType = MasterType.SellOrders Then
                 Dim lclsStock As New ProductStockDAO
@@ -1522,7 +1522,7 @@ Public Class frmOrderS
                     lstrErr = lstrErr & "กรุณาระบุคลังรวม (หน้า running format)" & vbNewLine
                 End If
             End If
-           
+
             lstrErr = lstrErr & UcProductLists1.IsError
             If lstrErr.Trim = "PRODUCTCHANGE" Then
                 ShowProgress(False, "")
@@ -1566,7 +1566,7 @@ Public Class frmOrderS
                     TotalTax.EditValue = 0
                     VatAmount.EditValue = 0
                 Else
-                     Select Case mVatType
+                    Select Case mVatType
                         Case "E"
                             TotalAfterPledge.EditValue = Total.EditValue - PledgeTotal.EditValue
                             TotalAfterDis.EditValue = TotalAfterPledge.EditValue - DiscountAmount.EditValue
@@ -1669,7 +1669,7 @@ Public Class frmOrderS
                     ExpireDate.EditValue = OrderDate.EditValue
                 End If
             End If
-           
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".InitialCreditRule : " & ex.Message)
         Finally
@@ -1692,7 +1692,7 @@ Public Class frmOrderS
                     SendBy.EditValue = lcls.SendBy
                     EmpID.EditValue = lcls.EmpID
                     cboCurrency.EditValue = lcls.CurrencyID
-                  
+
                     lclsCredit = New CreditBalanceDAO
                     lclsCredit.InitailCreditBalance(plngCustomerID)
                     CreditBalance.EditValue = lclsCredit.CreditAmount

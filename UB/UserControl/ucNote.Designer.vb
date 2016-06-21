@@ -30,6 +30,8 @@ Partial Class ucNote
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ModeData = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.repositoryItemLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.repositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
@@ -63,7 +65,7 @@ Partial Class ucNote
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.SEQ, Me.ModeData})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -138,6 +140,18 @@ Partial Class ucNote
         Me.GridColumn7.FieldName = "DescriptionORG"
         Me.GridColumn7.Name = "GridColumn7"
         '
+        'SEQ
+        '
+        Me.SEQ.Caption = "GridColumn8"
+        Me.SEQ.FieldName = "SEQ"
+        Me.SEQ.Name = "SEQ"
+        '
+        'ModeData
+        '
+        Me.ModeData.Caption = "GridColumn8"
+        Me.ModeData.FieldName = "ModeData"
+        Me.ModeData.Name = "ModeData"
+        '
         'repositoryItemLookUpEdit1
         '
         Me.repositoryItemLookUpEdit1.AutoHeight = False
@@ -198,6 +212,7 @@ Partial Class ucNote
         Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
         Me.ControlNavigator1.TabIndex = 13
         Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
+        Me.ControlNavigator1.Visible = False
         '
         'ucNote
         '
@@ -232,5 +247,7 @@ Partial Class ucNote
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
+    Friend WithEvents SEQ As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ModeData As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class

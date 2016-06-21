@@ -612,9 +612,9 @@ Public Class ProductListDAO
                     SQL = SQL & " ,LocationDTLID=@LocationDTLID"
                     SQL = SQL & " ,AdjustUnit=@AdjustUnit"
                     SQL = SQL & " ,RateUnit=@RateUnit"
-                    SQL = SQL & " ,ProductListUnitRef1=@ProductListUnitRef1"
-                    SQL = SQL & " ,ProductListUnitRef2=@ProductListUnitRef2"
-                    SQL = SQL & " ,ProductListUnitRef3=@ProductListUnitRef3"
+                    'SQL = SQL & " ,ProductListUnitRef1=@ProductListUnitRef1"
+                    'SQL = SQL & " ,ProductListUnitRef2=@ProductListUnitRef2"
+                    'SQL = SQL & " ,ProductListUnitRef3=@ProductListUnitRef3"
                     SQL = SQL & " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "

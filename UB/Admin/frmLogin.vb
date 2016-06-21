@@ -137,7 +137,7 @@ Public Class frmLogin
             Me.Text = "Login : V." & ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
         Else
             Me.Text = "Login : V." & Application.ProductVersion
-            txtPassword.Text = "bay25829"
+            'txtPassword.Text = "bay25829"
         End If
 
         frmSplash.Hide()
