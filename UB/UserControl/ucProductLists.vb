@@ -1152,4 +1152,7 @@ Public Class ucProductLists
 
     End Class
      
+    Private Sub gridView_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles gridView.InitNewRow
+
+    End Sub
 End Class

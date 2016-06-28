@@ -8,7 +8,6 @@ Public Class ucNote
     Private bindingSource1 As BindingSource
 
     Public Function GetNoteDAOs() As List(Of NoteDAO)
-        Dim lRow As Long, lSEQ As Integer = 1
         Dim lNoteDAO As NoteDAO
         Try
             mNoteDAOs = New List(Of NoteDAO)
@@ -19,9 +18,8 @@ Public Class ucNote
                         lNoteDAO = New NoteDAO
                         lNoteDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
                         lNoteDAO.Description = gridView.GetRowCellDisplayText(lRow, "Description")
-                        lNoteDAO.SEQ = lSEQ
+                        lNoteDAO.SEQ = gridView.GetRowCellDisplayText(lRow, "SEQ")
                         mNoteDAOs.Add(lNoteDAO)
-                        lSEQ = lSEQ + 1
                     End If
                 Next
             End If
@@ -62,9 +60,23 @@ Public Class ucNote
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(NoteDAO)
 
-
             dataTable = lcls.GetDataTable(pRefTable, pRefID)
-            bindingSource1.DataSource = dataTable
+            lcls = Nothing
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    lcls = New NoteDAO
+                    lcls.ID = ConvertNullToZero(dr("ID"))
+                    lcls.SEQ = ConvertNullToZero(dr("SEQ"))
+                    lcls.Description = ConvertNullToString(dr("Description"))
+                    lcls.CreateBy = ConvertNullToString(dr("CreateBy"))
+                    lcls.CreateTime = dr("CreateTime")
+                    lcls.RefID = ConvertNullToZero(dr("RefID"))
+                    lcls.RefTable = ConvertNullToString(dr("RefTable"))
+                    lcls.ModeData = ConvertNullToZero(dr("ModeData"))
+                    bindingSource1.Add(lcls)
+                Next
+            End If
+             
             gridControl.DataSource = bindingSource1
             Call GridStyle()
         Catch e As Exception
@@ -90,13 +102,63 @@ Public Class ucNote
             .Columns("ID").Visible = False
             .Columns("RefID").Visible = False
             .Columns("RefTable").Visible = False
-            .Columns("SEQ").Visible = False
+            '.Columns("SEQ").Visible = False
             .Columns("ModeData").Visible = False
 
             .Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
         End With
 
     End Sub
+
+    Private Sub gridView_FocusedColumnChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs) Handles gridView.FocusedColumnChanged
+       ReGenSEQ
+    End Sub
+
+    Private Sub gridView_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles gridView.CellValueChanged
+        If e.Column.FieldName <> "SEQ" Then
+           ReGenSEQ
+        End If
+    End Sub
+
+  
+
+    'Private Sub gridView_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles gridView.FocusedRowChanged
+    '    If e.FocusedRowHandle >= 0 Then
+    '        gridView.SetFocusedRowCellValue("SEQ", e.FocusedRowHandle + 1)
+    '    Else
+    '        gridView.SetFocusedRowCellValue("SEQ", 1)
+    '    End If
+
+    'End Sub
+
+    'Private Sub gridView_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles gridView.InitNewRow
+    '    If e.RowHandle >= 0 Then
+    '        gridView.SetRowCellValue(e.RowHandle, "SEQ", e.RowHandle + 1)
+    '    Else
+    '        gridView.SetRowCellValue(e.RowHandle, "SEQ", 1)
+    '    End If
+
+    'End Sub
+
+    Private Sub ReGenSEQ()
+        Try
+            If gridView.RowCount > 0 Then
+                For lRow = 0 To gridView.RowCount
+                    gridView.SetRowCellValue(lRow, "SEQ", lRow + 1)
+                Next
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "ucNote.ReGenSEQ : " & e.Message)
+        Finally
+        End Try
+
+    End Sub
+
+    Private Sub gridView_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles gridView.FocusedRowChanged
+        ReGenSEQ()
+    End Sub
+ 
+ 
 
     Private Sub gridView_ValidatingEditor(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs) Handles gridView.ValidatingEditor
         Dim reply As Object() = Nothing
@@ -156,5 +218,9 @@ Public Class ucNote
                 End If
 
         End Select
+    End Sub
+
+    Private Sub gridView_LostFocus(sender As Object, e As System.EventArgs) Handles gridView.LostFocus
+        ReGenSEQ()
     End Sub
 End Class

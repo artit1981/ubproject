@@ -22,12 +22,15 @@ Public Class frmOrderS
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
+            DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
+
             mMode = pMode
             mOrderType = pOrderType
             If mOrderType = MasterType.MakePO Then 'Convert for make po
                 mIsMakePO = True
                 mOrderType = MasterType.PurchaseOrder
                 mProductList = ProductList
+
             ElseIf mOrderType = MasterType.CancelPO Then 'Convert for make po
                 mIsMakePO = True
                 mOrderType = MasterType.CancelPO
