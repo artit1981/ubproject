@@ -111,9 +111,12 @@ Public Class frmLogin
     Private Sub UpdateConfiger()
         gDBServerName = DBServerName.Text
         gDatabaseName = DatabaseName.Text
-
+        gDBUser = txtDBUser.Text
+        gDBPass = txtDBPass.Text
         AppConfigFileSettings.UpdateAppSettings("DBServerName", gDBServerName)
         AppConfigFileSettings.UpdateAppSettings("DatabaseName", gDatabaseName)
+        AppConfigFileSettings.UpdateAppSettings("DatabaseUserID", gDBUser)
+        AppConfigFileSettings.UpdateAppSettings("DatabasePwd", gDBPass)
         AppConfigFileSettings.LoadAppSettings()
         gConString = "server=" & gDBServerName & ";database=" & gDatabaseName & ";uid=" & gDBUser & ";pwd=" & gDBPass & ";application name=BS stress utility"
     End Sub
@@ -133,6 +136,9 @@ Public Class frmLogin
 
         DBServerName.Text = gDBServerName
         DatabaseName.Text = gDatabaseName
+        txtDBUser.Text = gDBUser
+        txtDBPass.Text = gDBPass
+
         If (ApplicationDeployment.IsNetworkDeployed) Then
             Me.Text = "Login : V." & ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
         Else

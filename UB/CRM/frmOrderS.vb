@@ -22,7 +22,7 @@ Public Class frmOrderS
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
-            DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
+            'DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
 
             mMode = pMode
             mOrderType = pOrderType
@@ -1063,7 +1063,7 @@ Public Class frmOrderS
                     llngProID = ConvertNullToZero(dr("ProductID"))
                     llngUnitID = ConvertNullToZero(dr("UnitID"))
 
-                    Call GetRefOrderStatus(pOrderID, mOrderType, mcls.ID, dr("ID"), llngProID, Nothing, mMode, lNotRefUnits)
+                    Call GetRefOrderStatus(pOrderID, mOrderType, mcls.ID, dr("ID"), llngProID, Nothing, mMode, lNotRefUnits, ConvertNullToZero(dr("Units")))
 
                     If lNotRefUnits > 0 Then
                         If lNotRefUnits < ConvertNullToZero(dr("Units")) Then

@@ -292,7 +292,8 @@ Public Class ucProductLists
                             Else
                                 lDataDAO.ProductListUnitRef1 = lDataDAO.Units
                             End If
-                        Else                            lDataDAO.ProductListUnitRef1 = 0
+                        Else
+                            lDataDAO.ProductListUnitRef1 = 0
                         End If
                      
                         lDataDAO.SEQ = lRow + 1
@@ -532,18 +533,23 @@ Public Class ucProductLists
                     rec.IsDelete = ConvertNullToZero(dr("IsDelete"))
                     'Load S/N
                     rec.IsSN = ConvertNullToZero(dr("IsSN"))
-                    dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
                     rec.SNList = New List(Of SnDAO)
-                    For Each dr2 As DataRow In dataSN.Rows
-                        lclsSN = New SnDAO
-                        lclsSN.SerialNumberID = ConvertNullToZero(dr2("SerialNumberID"))
-                        lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
-                        lclsSN.Status = ConvertNullToString(dr2("Status"))
-                        lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
-                        lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
-                        lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
-                        rec.SNList.Add(lclsSN)
-                    Next
+
+                    '*** Stock in not ref sn
+                    If pCheckType <> MasterType.StockIn Then
+                        dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
+                        For Each dr2 As DataRow In dataSN.Rows
+                            lclsSN = New SnDAO
+                            lclsSN.SerialNumberID = ConvertNullToZero(dr2("SerialNumberID"))
+                            lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
+                            lclsSN.Status = ConvertNullToString(dr2("Status"))
+                            lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
+                            lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
+                            lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
+                            rec.SNList.Add(lclsSN)
+                        Next
+                    End If
+
                     bindingSource1.Add(rec)
                 Next
             End If

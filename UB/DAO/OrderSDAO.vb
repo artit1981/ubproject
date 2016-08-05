@@ -435,7 +435,8 @@ Public Class OrderSDAO
             If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Then
                 SQL = SQL & ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
-            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy Then
+            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy _
+                Or TableID = MasterType.AddCredit Or TableID = MasterType.ReduceCredit Then
                 SQL = SQL & ",Orders.InvoiceSuplierID "
             End If
             SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"

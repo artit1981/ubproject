@@ -68,7 +68,7 @@ Public Class frmCommReport
         VatType.Enabled = False
         Try
             lcls.TableID = MasterType.Accounts
-            dataTable = lcls.GetDataTableForCombo(True, False, False)
+            dataTable = lcls.GetDataTableForCombo(True, True, False)
             Employee.DataSource = dataTable
             Employee.DisplayMember = "CusName"
             Employee.ValueMember = "ID"
