@@ -5,6 +5,7 @@ Public Class OrderSDAO
 
 #Region "Property"
     Private mTableID As MasterType
+  
     Public Overrides ReadOnly Property TableName() As String
         Get
             mTableID = TableID
@@ -12,8 +13,11 @@ Public Class OrderSDAO
             'Return "Orders"
         End Get
     End Property
-
 #End Region
+
+    Private Sub Clone()
+        ClsClone = DirectCast(Me.MemberwiseClone(), OrderSDAO)
+    End Sub
 
     Public Overrides Function InitailData(ByVal pID As Long, Optional ByVal pOrderCode As String = "", Optional ByVal tr As SqlTransaction = Nothing) As Boolean
         Dim SQL As String
@@ -125,6 +129,8 @@ Public Class OrderSDAO
                     End If
                     FileAttachs = LoadFileAttach(ID, TableName, tr)
 
+                    '*** Clone class
+                    Call Clone()
                     Return True
                     Exit For
                 Next
@@ -260,16 +266,6 @@ Public Class OrderSDAO
                         PayTotal = 0
                     End If
 
-                    'If IsCancel = True Then
-                    '    OrderStatus = EnumStatus.Cancel.ToString
-                    'End If
-                    'If IsCancel = True And IsChangeCancel = True Then
-                    '    OrderStatus2 = OrderStatus
-                    '    OrderStatus = EnumStatus.Cancel.ToString
-                    'ElseIf IsCancel = False And IsChangeCancel = True Then
-                    '    OrderStatus = OrderStatus2
-                    'End If
-
                     If TableID = MasterType.Reserve Then
                         MakePOStatus = EnumStatus.Ordering.ToString
                     Else
@@ -277,7 +273,14 @@ Public Class OrderSDAO
                     End If
 
                 Case DataMode.ModeEdit
-                  
+                    Select Case TableID
+                        Case MasterType.InvoiceBuy, MasterType.ShipingBuy
+                            'if change cash to credit
+                            If ClsClone.PayType = "CASH" And PayType = "CREDIT" Then
+                                OrderStatus = EnumStatus.Open.ToString
+                                PayTotal = 0
+                            End If
+                    End Select
             End Select
 
             If IsCancel = True And IsChangeCancel = True Then
@@ -435,7 +438,8 @@ Public Class OrderSDAO
             If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Then
                 SQL = SQL & ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
-            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy Then
+            If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy _
+                Or TableID = MasterType.AddCredit Or TableID = MasterType.ReduceCredit Then
                 SQL = SQL & ",Orders.InvoiceSuplierID "
             End If
             SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
@@ -1246,7 +1250,7 @@ Public Class OrderSDAO
                 End If
             ElseIf ModeData = DataMode.ModeEdit Then
                 Dim clsBalance As CreditBalanceDAO
-                If CustomerID <> Order_Old(ptr).CustomerID Then
+                If CustomerID <> ClsClone.CustomerID Then
                     'Add CreditBalance
                     If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
                         clsBalance = New CreditBalanceDAO
@@ -1254,7 +1258,7 @@ Public Class OrderSDAO
                         clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal, "")
                         'Old Cus
                         clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(ptr, Order_Old(ptr).CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
+                        clsBalance.AddBalanc(ptr, ClsClone.CustomerID, ID, OrderDate, GrandTotal * -1, "Cancel Order")
                     End If
                     'Dis CreditBalance
                     If TableID = MasterType.Receipt And PayType = "CASH" Then
@@ -1262,19 +1266,19 @@ Public Class OrderSDAO
                         clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal * -1, "")
                         'Old Cus
                         clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(ptr, Order_Old(ptr).CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
+                        clsBalance.AddBalanc(ptr, ClsClone.CustomerID, ID, OrderDate, GrandTotal * 1, "Cancel Order")
                     End If
-                ElseIf Order_Old(ptr).GrandTotal <> GrandTotal Then
+                ElseIf ClsClone.GrandTotal <> GrandTotal Then
                     'Add CreditBalance
                     If TableID = MasterType.SellOrders And PayType = "CREDIT" Then
                         clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal - Order_Old(ptr).GrandTotal, "Edit Order")
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, GrandTotal - ClsClone.GrandTotal, "Edit Order")
                     End If
 
                     'Dis CreditBalance
                     If TableID = MasterType.Receipt And PayType = "CASH" Then
                         clsBalance = New CreditBalanceDAO
-                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, (GrandTotal - Order_Old(ptr).GrandTotal) * -1, "Edit Order")
+                        clsBalance.AddBalanc(ptr, CustomerID, ID, OrderDate, (GrandTotal - ClsClone.GrandTotal) * -1, "Edit Order")
                     End If
                 End If
             End If

@@ -1332,7 +1332,7 @@ Module modDAO
      
      
     Public Function GetRefOrderStatus(ByVal pRefOrderID As Long, ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pProListID As Long, ByVal pProID As Long _
-                                    , ByRef ptr As SqlTransaction, ByVal pMode As DataMode, ByRef pUnitNotRef As Long) As String
+                                    , ByRef ptr As SqlTransaction, ByVal pMode As DataMode, ByRef pUnitNotRef As Long, ByVal pOrderUnit As Long) As String
         Dim SQL As String, lStatus As String = ""
         Dim tr As SqlTransaction = Nothing
         Dim lRefOrderType As MasterType
@@ -1419,7 +1419,7 @@ Module modDAO
                     End If
                 ElseIf lRefOrderType = MasterType.Quotation Then
                     lRefStatus = GetUnitNotRef(pRefOrderID, "'Quotation'", "'Reserve','SellOrders'" _
-                                                , MasterType.Reserve & "," & MasterType.SellOrders, tr, pProListID, pProID, pUnitNotRef)
+                                                 , MasterType.Reserve & "," & MasterType.SellOrders, tr, pProListID, pProID, pUnitNotRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
                         lStatus = EnumStatus.Open.ToString
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -1428,7 +1428,19 @@ Module modDAO
                         lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
                     End If
                 End If
+            ElseIf pOrderType = MasterType.ReduceCreditBuy Or pOrderType = MasterType.AddCreditBuy Then
+                lRefStatus = GetUnitNotRef(pRefOrderID, "'ShipingBuy','InvoiceBuy'", "'ReduceCreditBuy','AddCreditBuy'" _
+                                                , MasterType.ReduceCreditBuy & "," & MasterType.AddCreditBuy, tr, pProListID, pProID, pUnitNotRef)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = EnumStatus.Open.ToString
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = EnumStatus.Waiting.ToString
+                Else
+                    lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
+                End If
             Else ''อื่นๆ
+                lStatus = EnumStatus.Open.ToString
+                pUnitNotRef = pOrderUnit  'Return all unit
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.GetRefOrderStatus : " & e.Message)
@@ -1455,7 +1467,7 @@ Module modDAO
             End If
 
             For Each pRefOrderID As Long In pRefToOrderID
-                lStatus = GetRefOrderStatus(pRefOrderID, pOrderType, pParentOrderID, 0, 0, tr, pMode, 0)
+                lStatus = GetRefOrderStatus(pRefOrderID, pOrderType, pParentOrderID, 0, 0, tr, pMode, 0, 0)
                 If lStatus = "" Then
                     lStatus = ConvertNullToString(pStatus)
                 End If

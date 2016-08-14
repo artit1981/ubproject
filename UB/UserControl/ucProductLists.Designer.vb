@@ -113,11 +113,11 @@ Partial Class ucProductLists
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.Location = New System.Drawing.Point(0, 3)
+        Me.gridControl.Location = New System.Drawing.Point(0, 26)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(1075, 410)
+        Me.gridControl.Size = New System.Drawing.Size(1075, 387)
         Me.gridControl.TabIndex = 9
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
@@ -605,14 +605,13 @@ Partial Class ucProductLists
         Me.btnFind.Appearance.Options.UseImage = True
         Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
         Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnFind.Location = New System.Drawing.Point(3, 26)
+        Me.btnFind.Location = New System.Drawing.Point(3, 1)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(102, 24)
         Me.btnFind.TabIndex = 249
         Me.btnFind.TabStop = False
         Me.btnFind.Text = "เพิ่มสินค้า"
         Me.btnFind.ToolTip = "เพิ่มสินค้า"
-        Me.btnFind.Visible = False
         '
         'ucProductLists
         '

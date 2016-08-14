@@ -24,8 +24,7 @@ Public Class frmStockReport
             ProductTypeID.CheckAll()
             ProductBrandID.CheckAll()
             SetComboProduct()
-
-            chkSelectAllPro.Checked = True
+ 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
         End Try
@@ -72,15 +71,8 @@ Public Class frmStockReport
             'Product
             dataTable = Nothing
             dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
-            Product.DataSource = dataTable
-            Product.DisplayMember = "ProductName"
-            Product.ValueMember = "ID"
-            'Product.Refresh()
-            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
-            '    Product.SetItemChecked(i, True)
-            'Next i
-            Product.CheckAll()
-
+            UcMoverItem1.ShowControl(dataTable, "ID", "ProductName")
+            
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
         Finally
@@ -108,15 +100,7 @@ Public Class frmStockReport
 
 
             'Build Product List
-            Dim lProductList As String = ""
-            For Each item As Object In Product.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If lProductList = "" Then
-                    lProductList = ConvertNullToZero(row("ID"))
-                Else
-                    lProductList = lProductList & "," & ConvertNullToZero(row("ID"))
-                End If
-            Next
+            Dim lProductList As String = UcMoverItem1.GetSelectItem
 
             'Clear Tmp
             SQL = " DELETE FROM TmpTax WHERE UserID=" & gUserID
@@ -157,14 +141,7 @@ Public Class frmStockReport
         End Try
     End Sub
 
-
-    Private Sub chkSelectAllPro_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAllPro.CheckedChanged
-        If chkSelectAllPro.CheckState = CheckState.Checked Then
-            Product.CheckAll()
-        Else
-            Product.UnCheckAll()
-        End If
-    End Sub
+ 
 
     Private Sub ProductBrandID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductBrandID.LostFocus
         SetComboProduct()
@@ -173,11 +150,5 @@ Public Class frmStockReport
     Private Sub ProductTypeID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductTypeID.LostFocus
         SetComboProduct()
     End Sub
-
-    'Private Sub ProductBrandID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductBrandID.SelectedValueChanged
-    '    SetComboProduct()
-    'End Sub
-    'Private Sub ProductTypeID_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductTypeID.SelectedValueChanged
-    '    SetComboProduct()
-    'End Sub
+ 
 End Class

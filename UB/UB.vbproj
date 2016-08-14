@@ -18,7 +18,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\artit-dell\DeployUB\</PublishUrl>
+    <PublishUrl>\\artit-gunt\Setup\Deploy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,8 +31,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>1.0.1.05</ApplicationVersion>
+    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationVersion>1.0.1.08</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1068,6 +1068,12 @@
     <Compile Include="UserControl\ucLocationDTL.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\ucMoverItem.Designer.vb">
+      <DependentUpon>ucMoverItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucMoverItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\ucNote.Designer.vb">
       <DependentUpon>ucNote.vb</DependentUpon>
     </Compile>
@@ -1171,6 +1177,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmSplash.resx">
       <DependentUpon>frmSplash.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmViewImage.resx">
       <DependentUpon>frmViewImage.vb</DependentUpon>
@@ -1488,6 +1495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucLocationDTL.resx">
       <DependentUpon>ucLocationDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucMoverItem.resx">
+      <DependentUpon>ucMoverItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucNote.resx">
       <DependentUpon>ucNote.vb</DependentUpon>

@@ -17,15 +17,11 @@ Public Class frmDebtAnalystReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            'Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
-            'thisMonth = thisMonth.AddMonths(-1)
             Me.DateFrom.EditValue = DateTime.Today
             Me.DateTo.EditValue = DateTime.Today
             Me.DateAsOf.EditValue = DateTime.Today
-            chkSelectAll.Checked = True
-
             SetComboCustomer()
-            
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
         End Try
@@ -44,28 +40,18 @@ Public Class frmDebtAnalystReport
             End If
 
             dataTable = lcls.GetDataTableForCombo(True, False, False)
-            lsCustomer.DataSource = dataTable
-            lsCustomer.DisplayMember = "CusName"
-            lsCustomer.ValueMember = "ID"
-
-            'For i As Integer = 0 To dataTable.DefaultView.Count - 1
-            '    lsCustomer.SetItemChecked(i, True)
-            'Next i
-            lsCustomer.CheckAll()
+            UcMoverItem1.ShowControl(dataTable, "ID", "CusName")
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCustomer : " & e.Message)
         Finally
             dataTable = Nothing
         End Try
-
     End Sub
-
 
     Private Sub PrintReport()
         Dim report As New XtraReport
         Dim lclsReport As New TmpOrderDAO
         Dim lAsOfDate As Date, lExpireDate As Date
-
         Try
             lAsOfDate = DateAsOf.EditValue
             'Set company header
@@ -119,15 +105,7 @@ Public Class frmDebtAnalystReport
             End If
 
             'Build Employee List
-            Dim lCusList As String = "0"
-            For Each item As Object In lsCustomer.CheckedItems
-                Dim row As DataRowView = CType(item, DataRowView)
-                If lCusList = "" Then
-                    lCusList = ConvertNullToString(row(0))
-                Else
-                    lCusList = lCusList & "," & ConvertNullToString(row(0))
-                End If
-            Next
+            Dim lCusList As String = UcMoverItem1.GetSelectItem
 
             Dim lIsPay As Boolean = False
             Dim lclsOrder As New OrderSDAO
@@ -160,86 +138,77 @@ Public Class frmDebtAnalystReport
                     Else
                         lNotPayAmount = ConvertNullToZero(pRow.Item("GrandTotal"))
                     End If
-                        If lNotPayAmount > 0 Then
+                    If lNotPayAmount > 0 Then
+                        lDayPast = DateDiff(DateInterval.Day, lAsOfDate, lExpireDate)
 
-
-                            lDayPast = DateDiff(DateInterval.Day, lAsOfDate, lExpireDate)
-
-                            SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxText5,TaxText6,TaxTotal1,TaxDate1,TaxDate2,TaxTotal2"
-                            SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"
-                            SQL = SQL & " VALUES ( " & gUserID
-                            SQL = SQL & " ," & i                                                                    'SEQ
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("EmpCode")) & "'"                     'TaxText1
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Employee")) & "'"                    'TaxText2
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("CustomerCode")) & "'"                'TaxText3
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText4
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"                   'TaxText5
-                            SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderType")) & "'"                   'TaxText6
-                            SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal1
-                            SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1                        
-                            SQL = SQL & " ,'" & formatSQLDate(pRow.Item("ExpireDate")) & "'"                        'TaxDate2
-
-                            'ยังไม่ครบกำหนด
-                            If lDayPast > 0 Then
-                                SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                      'TaxTotal2 
-                            Else : SQL = SQL & " ,0"
-                            End If
-                            'ยอดคงค้าง      
-                            If lDayPast < 0 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal3 
-                            Else
-                                SQL = SQL & " ,0 "
-                            End If
-
-                            'lDayPast = Math.Abs(lDayPast)
-                            '1M
-                            If lDayPast < 0 And lDayPast >= -30 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal4 
-                            Else : SQL = SQL & " ,0"
-                            End If
-                            '2M
-                            If lDayPast < -30 And lDayPast >= -60 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal5 
-                            Else : SQL = SQL & " ,0"
-                            End If
-                            '3M
-                            If lDayPast < -60 And lDayPast >= -90 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal6 
-                            Else : SQL = SQL & " ,0"
-                            End If
-                            '4M
-                            If lDayPast < -90 And lDayPast >= -120 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal7 
-                            Else : SQL = SQL & " ,0"
-                            End If
-                            '>4M
-                            If lDayPast < -120 Then
-                                SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal8 
-                            Else : SQL = SQL & " ,0"
-                            End If
-
-                            If lDayPast < 0 Then
-                                SQL = SQL & " , " & Math.Abs(lDayPast)                                              'TaxTotal9
-
-                            Else
-                                SQL = SQL & " ,Null"
-                            End If
-
-                            SQL = SQL & " ) "
-                            myCommand = New SqlCommand
-                            myCommand.CommandText = SQL
-                            gConnection.executeInsertSqlCommand(myCommand, Nothing)
-
-                            i = i + 1
+                        SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxText3,TaxText4,TaxText5,TaxText6,TaxTotal1,TaxDate1,TaxDate2,TaxTotal2"
+                        SQL = SQL & " ,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9   )"
+                        SQL = SQL & " VALUES ( " & gUserID
+                        SQL = SQL & " ," & i                                                                    'SEQ
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("EmpCode")) & "'"                     'TaxText1
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Employee")) & "'"                    'TaxText2
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("CustomerCode")) & "'"                'TaxText3
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText4
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"                   'TaxText5
+                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderType")) & "'"                   'TaxText6
+                        SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal1
+                        SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1                        
+                        SQL = SQL & " ,'" & formatSQLDate(pRow.Item("ExpireDate")) & "'"                        'TaxDate2
+                        'ยังไม่ครบกำหนด
+                        If lDayPast > 0 Then
+                            SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                      'TaxTotal2 
+                        Else : SQL = SQL & " ,0"
                         End If
-                Next
+                        'ยอดคงค้าง      
+                        If lDayPast < 0 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal3 
+                        Else
+                            SQL = SQL & " ,0 "
+                        End If
+                        '1M
+                        If lDayPast < 0 And lDayPast >= -30 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal4 
+                        Else : SQL = SQL & " ,0"
+                        End If
+                        '2M
+                        If lDayPast < -30 And lDayPast >= -60 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal5 
+                        Else : SQL = SQL & " ,0"
+                        End If
+                        '3M
+                        If lDayPast < -60 And lDayPast >= -90 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal6 
+                        Else : SQL = SQL & " ,0"
+                        End If
+                        '4M
+                        If lDayPast < -90 And lDayPast >= -120 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal7 
+                        Else : SQL = SQL & " ,0"
+                        End If
+                        '>4M
+                        If lDayPast < -120 Then
+                            SQL = SQL & " , " & lNotPayAmount                                                   'TaxTotal8 
+                        Else : SQL = SQL & " ,0"
+                        End If
+                        If lDayPast < 0 Then
+                            SQL = SQL & " , " & Math.Abs(lDayPast)                                              'TaxTotal9
 
+                        Else
+                            SQL = SQL & " ,Null"
+                        End If
+                        SQL = SQL & " ) "
+                        myCommand = New SqlCommand
+                        myCommand.CommandText = SQL
+                        gConnection.executeInsertSqlCommand(myCommand, Nothing)
+
+                        i = i + 1
+                    End If
+                Next
                 ExecuteReportComm(report)
             Else
                 ShowProgress(False, "")
                 XtraMessageBox.Show(Me, "ไม่พบรายการ", "รายงาน", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             End If
-
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".PrintReport : " & ex.Message)
         Finally
@@ -276,15 +245,5 @@ Public Class frmDebtAnalystReport
     Private Sub ReportType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ReportType.SelectedIndexChanged
         SetComboCustomer()
     End Sub
-
-    Private Sub chkSelectAll_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        If chkSelectAll.CheckState = CheckState.Checked Then
-            lsCustomer.CheckAll()
-        Else
-            lsCustomer.UnCheckAll()
-        End If
-
-    End Sub
-
    
 End Class

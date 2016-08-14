@@ -71,7 +71,7 @@ Public Class iOrder
     Private mImportTXID As Long
     Private mCustomerID_Old As Long
     Private mLocationDTLID As Long
-    Private mclsOrder_Old As OrderSDAO
+    Private mClsClone As OrderSDAO
     Private mInvoiceSuplierID As String
     Private mInstitute As String
     Private mIsDelete As Boolean
@@ -747,14 +747,23 @@ Public Class iOrder
         End Set
     End Property
 
-    Public ReadOnly Property Order_Old(ByVal ptr As SqlTransaction) As OrderSDAO
+    'Public ReadOnly Property Order_Old(ByVal ptr As SqlTransaction) As OrderSDAO
+    '    Get
+    '        If mclsOrder_Old Is Nothing Then
+    '            mclsOrder_Old = New OrderSDAO
+    '            mclsOrder_Old.InitailData(ID, , ptr)
+    '        End If
+    '        Return mclsOrder_Old
+    '    End Get
+    'End Property
+    Public Property ClsClone() As OrderSDAO
         Get
-            If mclsOrder_Old Is Nothing Then
-                mclsOrder_Old = New OrderSDAO
-                mclsOrder_Old.InitailData(ID, , ptr)
-            End If
-            Return mclsOrder_Old
+            Return mClsClone
+
         End Get
+        Set(value As OrderSDAO)
+            mClsClone = value
+        End Set
     End Property
 
     Public Property InvoiceSuplierID() As String
@@ -855,7 +864,7 @@ Public Class iOrder
         mImportTXID = 0
         mCustomerID_Old = 0
         mLocationDTLID = 0
-        mclsOrder_Old = Nothing
+        mClsClone = Nothing
         mInvoiceSuplierID = ""
         mInstitute = ""
         mRefOrderIDs = 0
@@ -867,7 +876,7 @@ Public Class iOrder
 #End Region
 
     Public Overridable Function InitailData(ByVal pID As Long, Optional ByVal pName As String = "", Optional ByVal tr As SqlTransaction = Nothing) As Boolean
-    
+
     End Function
 
     Public Overridable Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean

@@ -108,11 +108,14 @@ Public Class frmFindOrder
             Else
                 .Columns("CusName").Visible = False
             End If
-            If mOrderType = MasterType.ReceiptBuy Then
-                .Columns("InvoiceSuplierID").Visible = True
-            Else
-                .Columns("InvoiceSuplierID").Visible = False
-            End If
+            Select Case mOrderType
+                Case MasterType.ReceiptBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy
+                    .Columns("InvoiceSuplierID").Visible = True
+                Case Else
+                    .Columns("InvoiceSuplierID").Visible = False
+            End Select
+
+           
         End With
        
     End Sub

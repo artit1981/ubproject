@@ -23,14 +23,13 @@ Partial Class ucNote
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucNote))
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ModeData = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.repositoryItemLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
@@ -65,7 +64,7 @@ Partial Class ucNote
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.SEQ, Me.ModeData})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.SEQ, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.ModeData})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -76,13 +75,26 @@ Partial Class ucNote
         Me.gridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
+        'SEQ
+        '
+        Me.SEQ.AppearanceCell.Options.UseTextOptions = True
+        Me.SEQ.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.SEQ.AppearanceHeader.Options.UseTextOptions = True
+        Me.SEQ.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.SEQ.Caption = "ลำดับ"
+        Me.SEQ.FieldName = "SEQ"
+        Me.SEQ.Name = "SEQ"
+        Me.SEQ.OptionsColumn.ReadOnly = True
+        Me.SEQ.Visible = True
+        Me.SEQ.VisibleIndex = 0
+        '
         'GridColumn1
         '
         Me.GridColumn1.Caption = "ข้อความ"
         Me.GridColumn1.FieldName = "Description"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.VisibleIndex = 1
         Me.GridColumn1.Width = 451
         '
         'GridColumn2
@@ -97,7 +109,7 @@ Partial Class ucNote
         Me.GridColumn2.OptionsColumn.AllowEdit = False
         Me.GridColumn2.OptionsColumn.TabStop = False
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.VisibleIndex = 2
         Me.GridColumn2.Width = 100
         '
         'GridColumn3
@@ -113,7 +125,7 @@ Partial Class ucNote
         Me.GridColumn3.OptionsColumn.AllowEdit = False
         Me.GridColumn3.OptionsColumn.TabStop = False
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GridColumn3.VisibleIndex = 3
         Me.GridColumn3.Width = 150
         '
         'GridColumn4
@@ -133,18 +145,6 @@ Partial Class ucNote
         Me.GridColumn6.Caption = "GridColumn6"
         Me.GridColumn6.FieldName = "RefTable"
         Me.GridColumn6.Name = "GridColumn6"
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "GridColumn7"
-        Me.GridColumn7.FieldName = "DescriptionORG"
-        Me.GridColumn7.Name = "GridColumn7"
-        '
-        'SEQ
-        '
-        Me.SEQ.Caption = "GridColumn8"
-        Me.SEQ.FieldName = "SEQ"
-        Me.SEQ.Name = "SEQ"
         '
         'ModeData
         '
@@ -212,7 +212,6 @@ Partial Class ucNote
         Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
         Me.ControlNavigator1.TabIndex = 13
         Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
-        Me.ControlNavigator1.Visible = False
         '
         'ucNote
         '
@@ -244,7 +243,6 @@ Partial Class ucNote
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
     Friend WithEvents SEQ As DevExpress.XtraGrid.Columns.GridColumn

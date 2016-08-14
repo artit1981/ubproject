@@ -208,67 +208,67 @@ Public Class OpportunityDAO
             If pName.Trim <> "" Then
                 SQL = SQL & " and OppName='" & pName.Trim & "'"
             End If
-                SQL = SQL & " ORDER BY OppName"
-                dataTable = gConnection.executeSelectQuery(SQL, tr)
-                If dataTable.Rows.Count > 0 Then
-                    For Each dr As DataRow In dataTable.Rows
+            SQL = SQL & " ORDER BY OppName"
+            dataTable = gConnection.executeSelectQuery(SQL, tr)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
 
-                        Subject = dr("OppName").ToString
-                        CustomerID = ConvertNullToZero(dr("CustomerID"))
-                        OpportunityTypeID = ConvertNullToZero(dr("OpportunityTypeID"))
-                        OpportunityStageID = ConvertNullToZero(dr("OpportunityStageID"))
-                        CampaignID = ConvertNullToZero(dr("CampaignID"))
-                        If IsDBNull(dr("OppStartDate")) Then
-                            OppStartDate = GetCurrentDate(tr)
-                        Else
-                            OppStartDate = dr("OppStartDate")
-                        End If
-                        If IsDBNull(dr("OppExpireDate")) Then
-                            OppExpireDate = GetCurrentDate(tr)
-                        Else
-                            OppExpireDate = dr("OppExpireDate")
-                        End If
-                        EstimateRevenue = ConvertNullToZero(dr("EstimateRevenue"))
-                        ExpectRevenue = ConvertNullToZero(dr("ExpectRevenue"))
-                        IsSysRevenue = dr("IsSysRevenue")
-                        SourceID = ConvertNullToZero(dr("SourceID"))
-                        Remark = ConvertNullToString(dr("Remark"))
-                        IsClose = dr("IsClose")
-                        If IsDBNull(dr("CloseDate")) Then
-                            CloseDate = GetCurrentDate(tr)
-                        Else
-                            CloseDate = dr("CloseDate")
-                        End If
-                        EmpID = ConvertNullToZero(dr("EmpID"))
+                    Subject = dr("OppName").ToString
+                    CustomerID = ConvertNullToZero(dr("CustomerID"))
+                    OpportunityTypeID = ConvertNullToZero(dr("OpportunityTypeID"))
+                    OpportunityStageID = ConvertNullToZero(dr("OpportunityStageID"))
+                    CampaignID = ConvertNullToZero(dr("CampaignID"))
+                    If IsDBNull(dr("OppStartDate")) Then
+                        OppStartDate = GetCurrentDate(tr)
+                    Else
+                        OppStartDate = dr("OppStartDate")
+                    End If
+                    If IsDBNull(dr("OppExpireDate")) Then
+                        OppExpireDate = GetCurrentDate(tr)
+                    Else
+                        OppExpireDate = dr("OppExpireDate")
+                    End If
+                    EstimateRevenue = ConvertNullToZero(dr("EstimateRevenue"))
+                    ExpectRevenue = ConvertNullToZero(dr("ExpectRevenue"))
+                    IsSysRevenue = dr("IsSysRevenue")
+                    SourceID = ConvertNullToZero(dr("SourceID"))
+                    Remark = ConvertNullToString(dr("Remark"))
+                    IsClose = dr("IsClose")
+                    If IsDBNull(dr("CloseDate")) Then
+                        CloseDate = GetCurrentDate(tr)
+                    Else
+                        CloseDate = dr("CloseDate")
+                    End If
+                    EmpID = ConvertNullToZero(dr("EmpID"))
 
-                        'Person
-                        ID = Int32.Parse(dr("OppID"))
-                        IsInActive = dr("IsInActive")
+                    'Person
+                    ID = Int32.Parse(dr("OppID"))
+                    IsInActive = dr("IsInActive")
 
-                        CreateTime = ConvertNullToDateTime(dr("CreateTime"))
-                        ModifiedTime = ConvertNullToDateTime(dr("ModifiedTime"))
-                        If lUserDAO.InitailData(True, ConvertNullToZero(dr("CreateBy")), "", tr) Then
-                            CreateBy = lUserDAO.UserName
+                    CreateTime = ConvertNullToDateTime(dr("CreateTime"))
+                    ModifiedTime = ConvertNullToDateTime(dr("ModifiedTime"))
+                    If lUserDAO.InitailData(True, ConvertNullToZero(dr("CreateBy")), "", tr) Then
+                        CreateBy = lUserDAO.UserName
+                    Else
+                        CreateBy = ""
+                    End If
+
+                    If ConvertNullToZero(dr("CreateBy")) = ConvertNullToZero(dr("ModifiedBy")) Then
+                        ModifiedBy = CreateBy
+                    Else
+                        If lUserDAO.InitailData(True, ConvertNullToZero(dr("ModifiedBy")), "", tr) Then
+                            ModifiedBy = lUserDAO.UserName
                         Else
-                            CreateBy = ""
+                            ModifiedBy = ""
                         End If
+                    End If
+                    'Load FileAttach
+                    FileAttachs = LoadFileAttach(ID, TableName, tr)
 
-                        If ConvertNullToZero(dr("CreateBy")) = ConvertNullToZero(dr("ModifiedBy")) Then
-                            ModifiedBy = CreateBy
-                        Else
-                            If lUserDAO.InitailData(True, ConvertNullToZero(dr("ModifiedBy")), "", tr) Then
-                                ModifiedBy = lUserDAO.UserName
-                            Else
-                                ModifiedBy = ""
-                            End If
-                        End If
-                        'Load FileAttach
-                        FileAttachs = LoadFileAttach(ID, TableName, tr)
-
-                        Return True
-                        Exit For
-                    Next
-                End If
+                    Return True
+                    Exit For
+                Next
+            End If
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OpportunityDAO.InitailData : " & e.Message)

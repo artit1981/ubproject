@@ -322,7 +322,7 @@ Public Class frmBill
                 TaxNumber.EditValue = AutoGenCode(MasterType.TaxNumber)
                 EmpID.EditValue = gEmpID
             ElseIf pMode = DataMode.ModeEdit Then
-                If mcls.InitailData(pID) Then
+                If mcls.InitailData(pID, , ) Then
 
                     OrderCode.EditValue = mcls.Code
                     OrderDate.EditValue = mcls.OrderDate

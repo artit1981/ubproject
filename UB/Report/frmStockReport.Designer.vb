@@ -20,41 +20,18 @@ Partial Class frmStockReport
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmStockReport))
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.chkSelectAllPro = New DevExpress.XtraEditors.CheckEdit()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Product = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ProductBrandID = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.ProductTypeID = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.ReportType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label4 = New System.Windows.Forms.Label()
-        CType(Me.chkSelectAllPro.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Product, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.UcMoverItem1 = New UB.ucMoverItem()
         CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label9.Location = New System.Drawing.Point(524, 232)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(113, 14)
-        Me.Label9.TabIndex = 208
-        Me.Label9.Text = "Select /Unselect All"
-        '
-        'chkSelectAllPro
-        '
-        Me.chkSelectAllPro.Location = New System.Drawing.Point(525, 249)
-        Me.chkSelectAllPro.Name = "chkSelectAllPro"
-        Me.chkSelectAllPro.Properties.Caption = ""
-        Me.chkSelectAllPro.Size = New System.Drawing.Size(48, 19)
-        Me.chkSelectAllPro.TabIndex = 207
         '
         'Label8
         '
@@ -66,15 +43,6 @@ Partial Class frmStockReport
         Me.Label8.Size = New System.Drawing.Size(34, 14)
         Me.Label8.TabIndex = 206
         Me.Label8.Text = "สินค้า"
-        '
-        'Product
-        '
-        Me.Product.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Product.Location = New System.Drawing.Point(133, 232)
-        Me.Product.Name = "Product"
-        Me.Product.Size = New System.Drawing.Size(377, 292)
-        Me.Product.TabIndex = 205
         '
         'Label6
         '
@@ -133,17 +101,24 @@ Partial Class frmStockReport
         Me.Label4.TabIndex = 210
         Me.Label4.Text = "ใช้ราคา"
         '
+        'UcMoverItem1
+        '
+        Me.UcMoverItem1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.UcMoverItem1.Location = New System.Drawing.Point(133, 241)
+        Me.UcMoverItem1.Name = "UcMoverItem1"
+        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 199)
+        Me.UcMoverItem1.TabIndex = 215
+        '
         'frmStockReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1112, 535)
+        Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.chkSelectAllPro)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Product)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.ProductBrandID)
@@ -155,14 +130,10 @@ Partial Class frmStockReport
         Me.Controls.SetChildIndex(Me.ProductBrandID, 0)
         Me.Controls.SetChildIndex(Me.Label7, 0)
         Me.Controls.SetChildIndex(Me.Label6, 0)
-        Me.Controls.SetChildIndex(Me.Product, 0)
         Me.Controls.SetChildIndex(Me.Label8, 0)
-        Me.Controls.SetChildIndex(Me.chkSelectAllPro, 0)
-        Me.Controls.SetChildIndex(Me.Label9, 0)
         Me.Controls.SetChildIndex(Me.Label4, 0)
         Me.Controls.SetChildIndex(Me.ReportType, 0)
-        CType(Me.chkSelectAllPro.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Product, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
         CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -174,11 +145,9 @@ Partial Class frmStockReport
     Private WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents ProductBrandID As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents ProductTypeID As DevExpress.XtraEditors.CheckedListBoxControl
-    Private WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents chkSelectAllPro As DevExpress.XtraEditors.CheckEdit
     Private WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Product As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents ReportType As DevExpress.XtraEditors.RadioGroup
     Private WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents UcMoverItem1 As UB.ucMoverItem
 
 End Class
