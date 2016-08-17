@@ -934,8 +934,7 @@ Public Class frmOrderS
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.PurchaseOrder)
 
                 End Select
-                'ElseIf pRefOrderID > 0 And mIsMakePO = True And mOrderType = MasterType.PurchaseOrder Then
-                '    InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Reserve)
+
             ElseIf pRefOrderID = 0 And pRefOrderCode.Trim = "" And mIsFromLoad = False Then
                 txtRefOrder.Text = ""
                 If pInitProduct Then
@@ -1027,6 +1026,9 @@ Public Class frmOrderS
                     If pInitProduct Then
                         gCustomerID = ConvertNullToZero(CustomerID.EditValue)
                         LoadProList(plngOrderID, pOrderType)
+                        If mMode = DataMode.ModeNew Then
+                            UcNote2.ShowControl(mcls.TableName & "_PRO", plngOrderID, mRefOrderID.Count > 0)  'Product Remark
+                        End If
                     End If
                     Return True
                 Else

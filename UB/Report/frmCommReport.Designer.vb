@@ -21,8 +21,6 @@ Partial Class frmCommReport
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCommReport))
         Me.DateFrom = New DevExpress.XtraEditors.DateEdit()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.chkSelectAll = New DevExpress.XtraEditors.CheckEdit()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ReportType = New DevExpress.XtraEditors.RadioGroup()
         Me.chkInvoice = New DevExpress.XtraEditors.CheckEdit()
@@ -31,19 +29,17 @@ Partial Class frmCommReport
         Me.DateTo = New DevExpress.XtraEditors.DateEdit()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblEmp = New System.Windows.Forms.Label()
-        Me.Employee = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.VatType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label36 = New System.Windows.Forms.Label()
+        Me.UcMoverItem1 = New UB.ucMoverItem()
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Employee, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -66,25 +62,6 @@ Partial Class frmCommReport
         Me.DateFrom.Size = New System.Drawing.Size(149, 20)
         Me.DateFrom.TabIndex = 4
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(528, 224)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(113, 14)
-        Me.Label5.TabIndex = 200
-        Me.Label5.Text = "Select /Unselect All"
-        '
-        'chkSelectAll
-        '
-        Me.chkSelectAll.Location = New System.Drawing.Point(528, 241)
-        Me.chkSelectAll.Name = "chkSelectAll"
-        Me.chkSelectAll.Properties.Caption = ""
-        Me.chkSelectAll.Size = New System.Drawing.Size(48, 19)
-        Me.chkSelectAll.TabIndex = 199
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -103,7 +80,7 @@ Partial Class frmCommReport
         Me.ReportType.Location = New System.Drawing.Point(137, 43)
         Me.ReportType.Name = "ReportType"
         Me.ReportType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "วิเคราะห์ยอดขายแยกตามลูกค้า"), New DevExpress.XtraEditors.Controls.RadioGroupItem(2, "วิเคราะห์ยอดขายแยกตามพนักงานขาย")})
-        Me.ReportType.Size = New System.Drawing.Size(377, 66)
+        Me.ReportType.Size = New System.Drawing.Size(331, 66)
         Me.ReportType.TabIndex = 197
         '
         'chkInvoice
@@ -176,16 +153,6 @@ Partial Class frmCommReport
         Me.lblEmp.TabIndex = 190
         Me.lblEmp.Text = "พนักงานขาย"
         '
-        'Employee
-        '
-        Me.Employee.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Employee.CheckOnClick = True
-        Me.Employee.Location = New System.Drawing.Point(137, 224)
-        Me.Employee.Name = "Employee"
-        Me.Employee.Size = New System.Drawing.Size(377, 242)
-        Me.Employee.TabIndex = 189
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -204,7 +171,7 @@ Partial Class frmCommReport
         Me.VatType.Location = New System.Drawing.Point(137, 178)
         Me.VatType.Name = "VatType"
         Me.VatType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("E", "ยอดขายไม่รวม Vat"), New DevExpress.XtraEditors.Controls.RadioGroupItem("I", "ยอดขายรวม Vat")})
-        Me.VatType.Size = New System.Drawing.Size(377, 26)
+        Me.VatType.Size = New System.Drawing.Size(500, 26)
         Me.VatType.TabIndex = 172
         '
         'Label36
@@ -218,21 +185,28 @@ Partial Class frmCommReport
         Me.Label36.TabIndex = 171
         Me.Label36.Text = "รายงานวันที่"
         '
+        'UcMoverItem1
+        '
+        Me.UcMoverItem1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.UcMoverItem1.Location = New System.Drawing.Point(137, 210)
+        Me.UcMoverItem1.Name = "UcMoverItem1"
+        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 218)
+        Me.UcMoverItem1.TabIndex = 199
+        '
         'frmCommReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1112, 478)
+        Me.ClientSize = New System.Drawing.Size(1112, 434)
+        Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DateFrom)
         Me.Controls.Add(Me.Label36)
         Me.Controls.Add(Me.VatType)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Employee)
         Me.Controls.Add(Me.lblEmp)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.chkSelectAll)
         Me.Controls.Add(Me.DateTo)
         Me.Controls.Add(Me.chkShiping)
         Me.Controls.Add(Me.ReportType)
@@ -246,25 +220,21 @@ Partial Class frmCommReport
         Me.Controls.SetChildIndex(Me.ReportType, 0)
         Me.Controls.SetChildIndex(Me.chkShiping, 0)
         Me.Controls.SetChildIndex(Me.DateTo, 0)
-        Me.Controls.SetChildIndex(Me.chkSelectAll, 0)
         Me.Controls.SetChildIndex(Me.Label3, 0)
-        Me.Controls.SetChildIndex(Me.Label5, 0)
         Me.Controls.SetChildIndex(Me.lblEmp, 0)
-        Me.Controls.SetChildIndex(Me.Employee, 0)
         Me.Controls.SetChildIndex(Me.Label1, 0)
         Me.Controls.SetChildIndex(Me.VatType, 0)
         Me.Controls.SetChildIndex(Me.Label36, 0)
         Me.Controls.SetChildIndex(Me.DateFrom, 0)
         Me.Controls.SetChildIndex(Me.Label2, 0)
+        Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Employee, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -276,14 +246,12 @@ Partial Class frmCommReport
     Private WithEvents Label1 As System.Windows.Forms.Label
     Private WithEvents Label3 As System.Windows.Forms.Label
     Private WithEvents lblEmp As System.Windows.Forms.Label
-    Friend WithEvents Employee As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents DateTo As DevExpress.XtraEditors.DateEdit
     Friend WithEvents chkInvoice As DevExpress.XtraEditors.CheckEdit
     Private WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents chkShiping As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents ReportType As DevExpress.XtraEditors.RadioGroup
     Private WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents chkSelectAll As DevExpress.XtraEditors.CheckEdit
-    Private WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents UcMoverItem1 As UB.ucMoverItem
 
 End Class

@@ -33,9 +33,9 @@ Public Class ucNote
         Return mNoteDAOs
     End Function
 
-    Public Function ShowControl(ByVal pRefTable As String, ByVal pRefID As Long) As Boolean
+    Public Function ShowControl(ByVal pRefTable As String, ByVal pRefID As Long, Optional ByVal pIsAppend As Boolean = False) As Boolean
         Try
-            Call LoadData(pRefTable, pRefID)
+            Call LoadData(pRefTable, pRefID, pIsAppend)
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucNote.ShowControl : " & e.Message)
@@ -45,20 +45,22 @@ Public Class ucNote
 
     Public Sub ClearControl()
         Try
-            Call LoadData("", 0)
+            Call LoadData("", 0, False)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucNote.ClearAll : " & e.Message)
         End Try
     End Sub
 
 
-    Private Sub LoadData(ByVal pRefTable As String, ByVal pRefID As Long)
+    Private Sub LoadData(ByVal pRefTable As String, ByVal pRefID As Long, ByVal pIsAppend As Boolean)
         Dim lcls As New NoteDAO
         Dim dataTable As New DataTable()
 
         Try
-            bindingSource1 = New BindingSource
-            bindingSource1.DataSource = GetType(NoteDAO)
+            If pIsAppend = False Or bindingSource1 Is Nothing Then
+                bindingSource1 = New BindingSource
+                bindingSource1.DataSource = GetType(NoteDAO)
+            End If
 
             dataTable = lcls.GetDataTable(pRefTable, pRefID)
             lcls = Nothing
@@ -76,7 +78,7 @@ Public Class ucNote
                     bindingSource1.Add(lcls)
                 Next
             End If
-             
+
             gridControl.DataSource = bindingSource1
             Call GridStyle()
         Catch e As Exception

@@ -249,9 +249,9 @@ Public Class CampaignDAO
                     Else
                         ExpireDate = dr("ExpireDate")
                     End If
-                     
+
                     Remark = ConvertNullToString(dr("Remark"))
-                     
+
                     IsInActive = dr("IsInActive")
                     CreateTime = ConvertNullToDateTime(dr("CreateTime"))
                     ModifiedTime = ConvertNullToDateTime(dr("ModifiedTime"))
