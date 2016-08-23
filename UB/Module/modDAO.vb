@@ -1117,6 +1117,8 @@ Module modDAO
                     Note.RefTable = TableName
                     If ModeData = DataMode.ModeDelete Then
                         Note.ModeData = DataMode.ModeDelete
+                    ElseIf ModeData = DataMode.ModeNew Then
+                        Note.ModeData = DataMode.ModeNew
                     End If
                     Note.SaveData(tr)
                 Next

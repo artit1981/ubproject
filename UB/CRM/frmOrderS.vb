@@ -1027,7 +1027,7 @@ Public Class frmOrderS
                         gCustomerID = ConvertNullToZero(CustomerID.EditValue)
                         LoadProList(plngOrderID, pOrderType)
                         If mMode = DataMode.ModeNew Then
-                            UcNote2.ShowControl(mcls.TableName & "_PRO", plngOrderID, mRefOrderID.Count > 0)  'Product Remark
+                            UcNote2.ShowControl(lcls.TableName & "_PRO", plngOrderID, mRefOrderID.Count > 0)  'Product Remark
                         End If
                     End If
                     Return True
