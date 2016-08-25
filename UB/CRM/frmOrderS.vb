@@ -57,7 +57,7 @@ Public Class frmOrderS
             LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutShipingDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
@@ -139,7 +139,7 @@ Public Class frmOrderS
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -152,7 +152,7 @@ Public Class frmOrderS
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -208,14 +208,14 @@ Public Class frmOrderS
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 Case MasterType.Invoice, MasterType.Borrow
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -264,7 +264,7 @@ Public Class frmOrderS
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    c.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutCreditBalance.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never

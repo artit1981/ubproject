@@ -143,7 +143,7 @@ Partial Class frmOrderS
         Me.LayoutControlRefOrder2 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutQuotationDays2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutShipingDate2 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.c = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutPO_2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutExpireDate2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutSendBy2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutOrderStatus2 = New DevExpress.XtraLayout.EmptySpaceItem()
@@ -354,7 +354,7 @@ Partial Class frmOrderS
         CType(Me.LayoutControlRefOrder2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutQuotationDays2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutShipingDate2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.c, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutPO_2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutExpireDate2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutSendBy2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutOrderStatus2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -542,7 +542,7 @@ Partial Class frmOrderS
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LayoutControl1, True)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(445, 42, 280, 604)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(143, 42, 280, 604)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
         Me.LayoutControl1.Size = New System.Drawing.Size(921, 668)
         Me.LayoutControl1.TabIndex = 9
@@ -1819,7 +1819,7 @@ Partial Class frmOrderS
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.c, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutRefPO, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.LayoutNotPass, Me.LayoutbtnCampaign, Me.LayoutCampaign, Me.SplitterItem1, Me.LayoutControlProduct})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.LayoutPO_2, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutRefPO, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.LayoutNotPass, Me.LayoutbtnCampaign, Me.LayoutCampaign, Me.SplitterItem1, Me.LayoutControlProduct})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(921, 668)
@@ -2322,18 +2322,18 @@ Partial Class frmOrderS
         Me.LayoutShipingDate2.Text = "3"
         Me.LayoutShipingDate2.TextSize = New System.Drawing.Size(0, 0)
         '
-        'c
+        'LayoutPO_2
         '
-        Me.c.AllowHotTrack = False
-        Me.c.CustomizationFormText = "LayoutPO2"
-        Me.c.Location = New System.Drawing.Point(865, 200)
-        Me.c.MaxSize = New System.Drawing.Size(30, 22)
-        Me.c.MinSize = New System.Drawing.Size(30, 22)
-        Me.c.Name = "c"
-        Me.c.Size = New System.Drawing.Size(30, 22)
-        Me.c.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.c.Text = "6"
-        Me.c.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutPO_2.AllowHotTrack = False
+        Me.LayoutPO_2.CustomizationFormText = "LayoutPO2"
+        Me.LayoutPO_2.Location = New System.Drawing.Point(865, 200)
+        Me.LayoutPO_2.MaxSize = New System.Drawing.Size(30, 22)
+        Me.LayoutPO_2.MinSize = New System.Drawing.Size(30, 22)
+        Me.LayoutPO_2.Name = "LayoutPO_2"
+        Me.LayoutPO_2.Size = New System.Drawing.Size(30, 22)
+        Me.LayoutPO_2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutPO_2.Text = "6"
+        Me.LayoutPO_2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutExpireDate2
         '
@@ -3992,7 +3992,7 @@ Partial Class frmOrderS
         CType(Me.LayoutControlRefOrder2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutQuotationDays2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutShipingDate2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.c, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutPO_2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutExpireDate2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutSendBy2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutOrderStatus2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4200,7 +4200,7 @@ Partial Class frmOrderS
     Friend WithEvents LayoutControlRefOrder2 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutQuotationDays2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutShipingDate2 As DevExpress.XtraLayout.EmptySpaceItem
-    Friend WithEvents c As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents LayoutPO_2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutExpireDate2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutSendBy2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutOrderStatus2 As DevExpress.XtraLayout.EmptySpaceItem
