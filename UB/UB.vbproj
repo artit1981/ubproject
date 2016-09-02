@@ -1086,6 +1086,12 @@
     <Compile Include="UserControl\ucOrderList.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\ucOrderLog.Designer.vb">
+      <DependentUpon>ucOrderLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucOrderLog.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\ucPledge.Designer.vb">
       <DependentUpon>ucPledge.vb</DependentUpon>
     </Compile>
@@ -1504,6 +1510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucOrderList.resx">
       <DependentUpon>ucOrderList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucOrderLog.resx">
+      <DependentUpon>ucOrderLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucPledge.resx">
       <DependentUpon>ucPledge.vb</DependentUpon>

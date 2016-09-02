@@ -826,9 +826,10 @@ Public Class OrderSDAO
         Dim lSEQ As Long = 1 ', lstrStayIDList As String = ""
         Dim lclsSN2 As SnDAO
         Dim lSNTable As DataTable
-        Dim lOrderList As New List(Of Long) ', lSNInList As String = ""
-        Dim lIsUpdate As Integer = 0  ' 0=no, 1=sum, 2=second
+        Dim lOrderList As New List(Of Long)
+        Dim lIsUpdate As Integer = 0
         Dim lclsSN As SnDAO
+        Dim lLogTime As Date
         Try
             'Condition for Up Stock
             lIsUpdate = CheckIsUseStock(TableID, RefToOrderID, StockType, tr)
@@ -838,6 +839,7 @@ Public Class OrderSDAO
             ElseIf ProductList.Count = 0 Then
 
             Else
+                lLogTime = GetCurrentDate(tr)
                 For Each pProList As ProductListDAO In ProductList
                     pProList.RefID = RefID
                     pProList.RefTable = TableName
@@ -856,7 +858,7 @@ Public Class OrderSDAO
                         pProList.IsConfirm = 0
                     End If
 
-                    If pProList.SaveData(tr) Then
+                    If pProList.SaveData(tr, lLogTime) Then
                         If pProList.IsShow = 1 Then
                             If pProList.UnitMainID <> pProList.UnitID Then
                                 '*** Main Stock
@@ -1216,7 +1218,11 @@ Public Class OrderSDAO
                     Sql &= " ,ModifiedTime='" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
                     Sql &= " WHERE OrderID=" & ID
             End Select
+
             gConnection.executeInsertQuery(Sql, ptr)
+
+            'Keep data detail log
+            InsertOrderLog(ptr)
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrder : " & e.Message)
@@ -1225,6 +1231,27 @@ Public Class OrderSDAO
         End Try
     End Sub
 
+    Private Sub InsertOrderLog(ByRef ptr As SqlTransaction)
+        Dim Sql As String = ""
+        Try
+            Sql = " INSERT INTO OrdersLog  (LogTime,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
+            Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
+            Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
+            Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
+            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID)"
+            Sql &= " SELECT '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
+            Sql &= " ,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
+            Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
+            Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
+            Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
+            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID"
+            Sql &= " FROM Orders"""
+            Sql &= " WHERE OrderID=" & ID
+            gConnection.executeInsertQuery(Sql, ptr)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrderLog : " & e.Message)
+        End Try
+    End Sub
 
     Private Sub SaveBalance(ByRef ptr As SqlTransaction)
         Try

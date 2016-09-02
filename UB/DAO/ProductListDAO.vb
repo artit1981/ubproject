@@ -433,50 +433,11 @@ Public Class ProductListDAO
 
             If pRefTable <> "" Then
                 SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
-
-                '    If pRefTable = "PurchaseOrder" And lCheckType = MasterType.PurchaseOrder Then ' And pCheckPO = True Then 'ดูว่า PO โดนรับสินค้าโดย Stockin ไหม
-                '        SQL = SQL & " AND ProductList.ProductListID in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0 )"
-                '    End If
                 If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
                     SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
                     SQL = SQL & "   WHERE p2.IsDelete =0  "
                     SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
                 End If
-                '    If pRefTable = "Quotation" And (lCheckType = MasterType.Reserve Or lCheckType = MasterType.SellOrders) Then
-                '        'And pCheckQou = True Then 'ดูว่า Quotation ต้องไม่เคยโดนรับสินค้าโดย Reserve ,SellOrders
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable in('Reserve','SellOrders') and p2.ProductListRefID > 0)"
-                '    End If
-                '    If pRefTable = "Reserve" And lCheckType = MasterType.SellOrders Then
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable in( 'SellOrders') and p2.ProductListRefID > 0)"
-                '    End If
-                '    If pRefTable = "SellOrders" And (lCheckType = MasterType.Borrow Or lCheckType = MasterType.Invoice Or lCheckType = MasterType.Shiping) Then
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable in( 'Borrow', 'Invoice', 'Shiping') and p2.ProductListRefID > 0)"
-                '    End If
-                '    If pRefTable = "PurchaseOrder" And (lCheckType = MasterType.InvoiceBuy Or lCheckType = MasterType.ShipingBuy) Then
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable in( 'InvoiceBuy', 'ShipingBuy' ) and p2.ProductListRefID > 0)"
-                '    End If
-                '    If pRefTable = "Borrow" And lCheckType = MasterType.Invoice Then
-                '        SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '        SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '        SQL = SQL & "   AND p2.RefTable in( 'Invoice') and p2.ProductListRefID > 0)"
-                '    End If
-
-                'If lCheckType = MasterType.MakePO Then
-                '    ' 'ดูว่า Reserve ต้องไม่เคยโดนรับสินค้าโดย PurchaseOrder,CancelPO
-                '    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                '    SQL = SQL & "   WHERE p2.IsDelete =0  "
-                '    SQL = SQL & "   AND p2.RefTable in('PurchaseOrder','CancelPO' ) and p2.ProductListRefID > 0)"
-                'End If
             End If
             If pExcludeProListID <> "" Then
                 SQL = SQL & " AND ProductList.ProductListID not in(" & pExcludeProListID & ")"
@@ -537,7 +498,7 @@ Public Class ProductListDAO
 
     End Function
 
-    Public Function SaveData(ByVal tr As SqlTransaction) As Boolean
+    Public Function SaveData(ByVal tr As SqlTransaction, ByVal pLogTime As Date) As Boolean
         Dim SQL As String
         Dim myCommand As SqlCommand
 
@@ -612,9 +573,6 @@ Public Class ProductListDAO
                     SQL = SQL & " ,LocationDTLID=@LocationDTLID"
                     SQL = SQL & " ,AdjustUnit=@AdjustUnit"
                     SQL = SQL & " ,RateUnit=@RateUnit"
-                    'SQL = SQL & " ,ProductListUnitRef1=@ProductListUnitRef1"
-                    'SQL = SQL & " ,ProductListUnitRef2=@ProductListUnitRef2"
-                    'SQL = SQL & " ,ProductListUnitRef3=@ProductListUnitRef3"
                     SQL = SQL & " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
@@ -660,12 +618,36 @@ Public Class ProductListDAO
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 1))
             End Select
             gConnection.executeInsertSqlCommand(myCommand, tr)
+
+            'Keep data detail log
+            InsertLog(tr, pLogTime)
+
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductListDAO.SaveData : " & e.Message)
             Return False
         End Try
     End Function
+
+    Private Sub InsertLog(ByRef ptr As SqlTransaction, ByVal pLogTime As Date)
+        Dim Sql As String = ""
+        Try
+            Sql = " INSERT INTO ProductListLog  (LogTime,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
+            Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID "
+            Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
+            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1  )"
+            Sql &= " SELECT '" & formatSQLDateTime(pLogTime) & "'"
+            Sql &= " ,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
+            Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID"
+            Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
+            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1"
+            Sql &= " FROM ProductList"""
+            Sql &= " WHERE ProductListID=" & ID
+            gConnection.executeInsertQuery(Sql, ptr)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "ProductListDAO.InsertLog : " & e.Message)
+        End Try
+    End Sub
 
 
     Public Function SaveToConfirm(ByVal pRefID As Long, ByVal pProductListID As Long, ByVal pIsConfirm As Boolean, ByVal tr As SqlTransaction) As Boolean
