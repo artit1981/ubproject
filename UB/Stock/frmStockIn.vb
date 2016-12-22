@@ -357,7 +357,7 @@ Public Class frmStockIn
         End Try
     End Sub
 
-    Private Function ShowProductListBySource(ByVal pMode As Integer, ByVal pSource As List(Of ProductSubDAO)) As Boolean
+    Private Function ShowProductListBySource(ByVal pMode As Integer, ByVal pSource As List(Of ProductListDAO)) As Boolean
         Try
             gCustomerID = 0
             Dim lOrderList As New List(Of Long)

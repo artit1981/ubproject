@@ -1027,14 +1027,13 @@ Partial Class frmInformPriceBuy
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceInform As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Friend WithEvents Price1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceStandard As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Price2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Price3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents bindingSource1 As System.Windows.Forms.BindingSource
     Friend WithEvents IsSelect As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Unit As DevExpress.XtraGrid.Columns.GridColumn

@@ -592,7 +592,7 @@ Partial Class frmSellOrderHis
 
     End Sub
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents bindingSource1 As System.Windows.Forms.BindingSource
     Friend WithEvents DatePanel As DevExpress.XtraEditors.PanelControl
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton

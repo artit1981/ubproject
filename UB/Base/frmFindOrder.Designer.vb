@@ -100,7 +100,6 @@ Partial Class frmFindOrder
         Me.CheckProduct.Properties.Caption = "ค้นหารายการสินค้า"
         Me.CheckProduct.Size = New System.Drawing.Size(147, 19)
         Me.CheckProduct.TabIndex = 249
-        Me.CheckProduct.Visible = False
         '
         'btnOK
         '
@@ -231,12 +230,11 @@ Partial Class frmFindOrder
         'TabControl1
         '
         Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Location = New System.Drawing.Point(1, 101)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedTabPage = Me.OrderTabPage
-        Me.TabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[False]
         Me.TabControl1.Size = New System.Drawing.Size(926, 370)
         Me.TabControl1.TabIndex = 248
         Me.TabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.OrderTabPage, Me.ProductTabPage})
@@ -245,7 +243,7 @@ Partial Class frmFindOrder
         '
         Me.OrderTabPage.Controls.Add(Me.GridControl)
         Me.OrderTabPage.Name = "OrderTabPage"
-        Me.OrderTabPage.Size = New System.Drawing.Size(920, 364)
+        Me.OrderTabPage.Size = New System.Drawing.Size(920, 342)
         Me.OrderTabPage.Text = "Orders"
         '
         'GridControl
@@ -255,7 +253,7 @@ Partial Class frmFindOrder
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
         Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.IsSelectCheckEdit, Me.RepositoryItemCalcEdit1, Me.btnOrderCode})
-        Me.GridControl.Size = New System.Drawing.Size(920, 364)
+        Me.GridControl.Size = New System.Drawing.Size(920, 342)
         Me.GridControl.TabIndex = 20
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -498,7 +496,7 @@ Partial Class frmFindOrder
         '
         Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
         Me.ProductTabPage.Name = "ProductTabPage"
-        Me.ProductTabPage.Size = New System.Drawing.Size(920, 364)
+        Me.ProductTabPage.Size = New System.Drawing.Size(920, 342)
         Me.ProductTabPage.Text = "Products"
         '
         'UcProductLists1
@@ -506,7 +504,7 @@ Partial Class frmFindOrder
         Me.UcProductLists1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(920, 364)
+        Me.UcProductLists1.Size = New System.Drawing.Size(920, 342)
         Me.UcProductLists1.TabIndex = 0
         '
         'frmFindOrder

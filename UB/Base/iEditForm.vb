@@ -10,7 +10,7 @@ Partial Public Class iEditForm
     Private mIDs As Long
     Private mclsConvert As iOrder
     Private mOrderType As MasterType
-    Private mProductList As List(Of ProductSubDAO)
+    Private mProductList As List(Of ProductListDAO)
     Private mRefOrderIDList As List(Of Long) = Nothing
 
 #Region "Property"
@@ -63,11 +63,11 @@ Partial Public Class iEditForm
         End Set
     End Property
 
-    Public Property ProductList() As List(Of ProductSubDAO)
+    Public Property ProductList() As List(Of ProductListDAO)
         Get
             Return mProductList
         End Get
-        Set(ByVal value As List(Of ProductSubDAO))
+        Set(ByVal value As List(Of ProductListDAO))
             mProductList = value
         End Set
     End Property

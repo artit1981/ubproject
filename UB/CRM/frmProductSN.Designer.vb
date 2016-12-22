@@ -561,7 +561,7 @@ Partial Class frmProductSN
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GeneralTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
@@ -578,7 +578,6 @@ Partial Class frmProductSN
     Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView

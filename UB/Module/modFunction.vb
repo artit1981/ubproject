@@ -545,16 +545,16 @@ Module modFunction
         End Try
     End Function
 
-    Public Function InitialProductForAdd(ByVal pProID As Long, ByVal pCusID As Long, ByVal pOrderType As MasterType) As ProductSubDAO
+    Public Function InitialProductForAdd(ByVal pProID As Long, ByVal pCusID As Long, ByVal pOrderType As MasterType) As ProductListDAO
         Dim lcls As New ProductDAO
-        Dim lclsProSub As New ProductSubDAO
+        Dim lclsProSub As New ProductListDAO
         Try
             If lcls.InitailData(pProID, pCusID, "", "") Then
-                lclsProSub = New ProductSubDAO
+                lclsProSub = New ProductListDAO
                 lclsProSub.IsSelect = True
                 lclsProSub.ProductID = lcls.ID
                 lclsProSub.ProductCode = lcls.Code
-                lclsProSub.ProductNames = lcls.NameThai
+                lclsProSub.ProductName = lcls.NameThai
                 lclsProSub.Price = lcls.PriceSale
                 lclsProSub.PriceMain = lcls.PriceSale
                 lclsProSub.Cost = lcls.Cost

@@ -12,7 +12,7 @@ Public Class frmSellOrderHis
     'Private mcls As New InformPriceDAO
     Private mIsFromLoad As Boolean
     'Private mMode As DataMode
-    'Private mProductList As New List(Of ProductSubDAO)
+    'Private mProductList As New List(Of ProductListDAO)
     'Private mOrderType As MasterType
 
 #Region "Overrides"

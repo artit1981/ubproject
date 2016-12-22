@@ -1211,7 +1211,7 @@ Partial Class frmInformPricePro
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents bindingSource1 As System.Windows.Forms.BindingSource
     Friend WithEvents GeneralTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
@@ -1230,7 +1230,6 @@ Partial Class frmInformPricePro
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsSelect As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceStandard As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Price1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Price2 As DevExpress.XtraGrid.Columns.GridColumn

@@ -7,12 +7,12 @@ Public Class frmFindReserve
 #Region "Property"
     Private Const mFormName As String = "frmFindReserve"
     Private mOrderDate As Date
-    Private mProductSubList As List(Of ProductSubDAO)
+    Private mProductSubList As List(Of ProductListDAO)
     Private bindingOrder As BindingSource
     Private mIsAccept As Boolean = False
     Private mFormLoad As Boolean
     Private mOrderIDList As List(Of Long)
-  
+
     Public ReadOnly Property IsAccept() As Boolean
         Get
             Return mIsAccept
@@ -110,27 +110,27 @@ Public Class frmFindReserve
 
     Private Sub GetProList()
         Dim lProductSubList As New List(Of ProductListDAO)
-        Dim rec As New ProductSubDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
+        Dim rec As New ProductListDAO, lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
         Dim lRefOrderID As Long, lCanNotMerge As Boolean = False
         Try
             mOrderIDList = New List(Of Long)
-            mProductSubList = New List(Of ProductSubDAO)
+            mProductSubList = New List(Of ProductListDAO)
             lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
             lProductSubList.Sort(Function(x, y) x.RefID.CompareTo(y.RefID))
 
             For Each pProLIst As ProductListDAO In lProductSubList
                 llngProID = pProLIst.ProductID
                 lUnitID = pProLIst.UnitID
-                lIndex = mProductSubList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
+                lIndex = mProductSubList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
                 If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Or lCanNotMerge = True Then
-                    rec = New ProductSubDAO
+                    rec = New ProductListDAO
                     rec.IsSelect = True
                     rec.ID = pProLIst.ID
                     rec.SEQ = 0
                     rec.IsSN = pProLIst.IsSN
                     rec.ProductID = pProLIst.ProductID
                     rec.ProductCode = pProLIst.ProductCode
-                    rec.ProductNames = pProLIst.ProductName
+                    rec.ProductName = pProLIst.ProductName
                     rec.ProductNameExt = pProLIst.ProductNameExt
                     rec.LocationDTLID = pProLIst.LocationDTLID
                     rec.UnitID = pProLIst.UnitID
@@ -167,7 +167,7 @@ Public Class frmFindReserve
                             lIsGroupDupProduct = 2
                         Else
                             lIsGroupDupProduct = 1
-                            rec = New ProductSubDAO
+                            rec = New ProductListDAO
                             rec.IsSelect = True
                             rec.ID = pProLIst.ID
                             rec.SEQ = 0
@@ -175,7 +175,7 @@ Public Class frmFindReserve
                             rec.SNList = pProLIst.SNList
                             rec.ProductID = pProLIst.ProductID
                             rec.ProductCode = pProLIst.ProductCode
-                            rec.ProductNames = pProLIst.ProductName
+                            rec.ProductName = pProLIst.ProductName
                             rec.ProductNameExt = pProLIst.ProductNameExt
                             rec.LocationDTLID = pProLIst.LocationDTLID
                             rec.UnitID = pProLIst.UnitID
@@ -231,7 +231,7 @@ Public Class frmFindReserve
                         If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
                             mOrderIDList.Add(lRefOrderID)
                         End If
-                         
+
                     End If
                 End If
             Next
@@ -251,7 +251,7 @@ Public Class frmFindReserve
             End If
 
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".GetOrderDAOs : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mFormName & ".GetProList : " & e.Message)
         Finally
 
         End Try
@@ -260,7 +260,7 @@ Public Class frmFindReserve
 
 #End Region
 
-   
+
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         Try
             LoadOrderByCondition()
@@ -283,14 +283,14 @@ Public Class frmFindReserve
         DateTo.EditValue = Now
         Me.Text = "สร้างใบสั่งซื้อ"
 
-    
+
         SetSearchLookAgency(cboCustomerID)
         LoadOrderByCondition()
         mFormLoad = False
     End Sub
 
     Private Sub GridView_CellValueChanging(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GridView.CellValueChanging
-       
+
         If e.Column.FieldName = "IsSelect" Then
             ShowProgress(True, "Loading...")
             LoadProListData(e.RowHandle, e.Value)
@@ -303,14 +303,14 @@ Public Class frmFindReserve
         Dim lcls As New ProductListDAO
         'Dim lclsSN As New SnDAO, dataSN As New DataTable()
         Dim dataTable As New DataTable()
-        Dim lProList As New List(Of ProductSubDAO)
-        Dim rec As New ProductSubDAO, lIndex As Long = 0, lToSelect As Boolean = False
+        Dim lProList As New List(Of ProductListDAO)
+        Dim rec As New ProductListDAO, lIndex As Long = 0, lToSelect As Boolean = False
         Dim lSnIndex As Long = 0, lNotRefUnit As Long = 0, lEachUnit As Long = 0
 
         Try
             mOrderIDList = New List(Of Long)
 
-            If Not bindingOrder Is Nothing > 0 Then
+            If Not bindingOrder Is Nothing Then
                 'mdtCus.Rows.Clear()
                 For Each pOrder As SubOrder In bindingOrder
                     lToSelect = False ''Reset
@@ -339,15 +339,15 @@ Public Class frmFindReserve
                         Call GetUnitNotRef(dr("RefID"), "'Reserve'", "'PurchaseOrder','CancelPO'" _
                                                   , MasterType.PurchaseOrder & "," & MasterType.CancelPO, Nothing, dr("ID"), dr("ProductID"), lNotRefUnit)
                         If lNotRefUnit > 0 Then
-                            rec = New ProductSubDAO
+                            rec = New ProductListDAO
                             rec.IsSelect = False
                             rec.ID = dr("ID")
                             rec.ProductListRefID = dr("ID")
                             rec.SEQ = ConvertNullToZero(dr("SEQ"))
-                            rec.RefOrderID = ConvertNullToZero(dr("RefID"))
+                            rec.RefID = ConvertNullToZero(dr("RefID"))
                             rec.ProductID = ConvertNullToZero(dr("ProductID"))
                             rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                            rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                            rec.ProductName = ConvertNullToString(dr("ProductName"))
                             rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                             rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                             rec.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID"))
@@ -382,7 +382,7 @@ Public Class frmFindReserve
                             lProList.Add(rec)
                         End If
                     Next
-            End If
+                End If
             End If
 
             Dim lColData As ProColumn = ProColumn.IsSelect + ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.Remark

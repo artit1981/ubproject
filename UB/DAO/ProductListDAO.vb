@@ -3,14 +3,11 @@ Option Explicit On
 Imports System.Data.SqlClient
 
 Public Class ProductListDAO
-
-
-
-  
     Public Function Clone() As ProductListDAO
         Return DirectCast(Me.MemberwiseClone(), ProductListDAO)
     End Function
 #Region "Property"
+    Private mIsSelect As Boolean
     Private mMode As DataMode
     Private mIDs As Long
     Private mSEQ As Long
@@ -50,6 +47,26 @@ Public Class ProductListDAO
     Private mProductListUnitRef2 As Long = 0
     Private mProductListUnitRef3 As Long = 0
     Private mProductListUnitRef1 As Long = 0
+    Private mRefOrderCode As String = ""
+
+
+    Public Property IsSelect() As Boolean
+        Get
+            Return mIsSelect
+        End Get
+        Set(ByVal Value As Boolean)
+            mIsSelect = Value
+        End Set
+    End Property
+
+    Public Property ModePro() As Integer
+        Get
+            Return mMode
+        End Get
+        Set(ByVal value As Integer)
+            mMode = value
+        End Set
+    End Property
 
     Public ReadOnly Property UnitDAO() As MasterDAO
         Get
@@ -71,7 +88,6 @@ Public Class ProductListDAO
 
     End Property
 
-
     Public Property ProductCode() As String
         Get
             Return mProductCode
@@ -80,7 +96,6 @@ Public Class ProductListDAO
             mProductCode = value
         End Set
     End Property
-
 
     Public Property ProductName() As String
         Get
@@ -91,7 +106,6 @@ Public Class ProductListDAO
         End Set
     End Property
 
-
     Public Property ProductNameExt() As String
         Get
             Return mProductNameExt
@@ -101,9 +115,6 @@ Public Class ProductListDAO
         End Set
     End Property
 
-
-
-
     Public Property UnitName() As String
         Get
             Return mUnitName
@@ -112,7 +123,6 @@ Public Class ProductListDAO
             mUnitName = value
         End Set
     End Property
-
 
     Public Property LocationDTLID() As Long
         Get
@@ -150,7 +160,6 @@ Public Class ProductListDAO
         End Set
 
     End Property
-
 
     Public Property Cost() As Decimal
         Get
@@ -274,6 +283,7 @@ Public Class ProductListDAO
         End Set
 
     End Property
+
     Public Property Units_Old() As Long
         Get
             Return mUnits_Old
@@ -406,6 +416,15 @@ Public Class ProductListDAO
         End Get
         Set(ByVal Value As Integer)
             mIsDelete = Value
+        End Set
+    End Property
+
+    Public Property RefOrderCode() As String
+        Get
+            Return mRefOrderCode
+        End Get
+        Set(ByVal value As String)
+            mRefOrderCode = value
         End Set
     End Property
 #End Region

@@ -18,6 +18,7 @@ Public Enum ProColumn
     Cost = 128
     IsSelect = 256
     KeepMin = 512
+    RefOrderCode = 1024
 End Enum
 
 Public Class ucProductLists
@@ -88,7 +89,7 @@ Public Class ucProductLists
         End Try
     End Function
 
-    Public Function ShowControlByDataSource(ByVal pMode As Long, ByVal pProList As List(Of ProductSubDAO), ByVal pColumnData As ProColumn, ByVal pIsReaOnly As Boolean _
+    Public Function ShowControlByDataSource(ByVal pMode As Long, ByVal pProList As List(Of ProductListDAO), ByVal pColumnData As ProColumn, ByVal pIsReaOnly As Boolean _
                                             , ByVal pFormOrder As frmOrderS, ByVal pRefTable As String, ByVal pIsUsePriceSell As Boolean _
                                              , ByVal pOrderID As List(Of Long), ByVal pIsLoadFromRefOrder As Boolean, ByVal pIsMakePO As Boolean, ByVal pStockType As String) As Boolean
         Dim rec As ProductSub
@@ -112,15 +113,16 @@ Public Class ucProductLists
             mStockType = pStockType
 
             'Copy to BindingSource
-            For Each pPro As ProductSubDAO In pProList
+            For Each pPro As ProductListDAO In pProList
                 rec = New ProductSub
                 rec.IsSelect = pPro.IsSelect
                 rec.ID = pPro.ID
-                rec.RefOrderID = pPro.RefOrderID
+                rec.RefID = pPro.RefID
+                rec.RefOrderCode = pPro.RefOrderCode
                 rec.SEQ = pPro.SEQ
                 rec.ProductID = pPro.ProductID
                 rec.ProductCode = pPro.ProductCode
-                rec.ProductNames = pPro.ProductNames
+                rec.ProductName = pPro.ProductName
                 rec.ProductNameExt = pPro.ProductNameExt
                 rec.LocationDTLID = pPro.LocationDTLID
                 rec.LocationDTLID_Old = pPro.LocationDTLID
@@ -224,15 +226,15 @@ Public Class ucProductLists
 
             If Not bindingSource1 Is Nothing > 0 Then
                 lRow = 0
-                For Each pProSub As ProductSubDAO In bindingSource1
+                For Each pProSub As ProductListDAO In bindingSource1
                     If pProSub.ProductID <> 0 And pProSub.IsSelect = True Then
                         lSNCount = 0
                         lDataDAO = New ProductListDAO
                         lDataDAO.ID = pProSub.ID
-                        lDataDAO.RefID = pProSub.RefOrderID
+                        lDataDAO.RefID = pProSub.RefID
                         lDataDAO.ProductID = pProSub.ProductID
                         lDataDAO.ProductCode = pProSub.ProductCode
-                        lDataDAO.ProductName = pProSub.ProductNames
+                        lDataDAO.ProductName = pProSub.ProductName
                         lDataDAO.ProductNameExt = pProSub.ProductNameExt
                         lDataDAO.UnitID = pProSub.UnitID
                         lDataDAO.UnitName = pProSub.UnitName
@@ -295,7 +297,7 @@ Public Class ucProductLists
                         Else
                             lDataDAO.ProductListUnitRef1 = 0
                         End If
-                     
+
                         lDataDAO.SEQ = lRow + 1
 
                         If pProSub.IsShow = 1 And pProSub.IsDelete = 0 Then
@@ -433,27 +435,23 @@ Public Class ucProductLists
 
 
     Private Function CheckSN(ByVal pSNList As List(Of SnDAO), ByVal pSNNo As String) As String
-        
         CheckSN = ""
         Try
-
             For Each pSN As SnDAO In pSNList
                 If pSNNo = pSN.SerialNumberNo Then
                     Return pSNNo
                 End If
             Next
-
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucProductLists.CheckSN : " & e.Message)
         End Try
     End Function
 
-
-    Public Function GetProSubDAOs() As List(Of ProductSubDAO)
-        Dim lProSubList = New List(Of ProductSubDAO)
+    Public Function GetProSubDAOs() As List(Of ProductListDAO)
+        Dim lProSubList = New List(Of ProductListDAO)
         Try
             If Not bindingSource1 Is Nothing > 0 Then
-                For Each pProSub As ProductSubDAO In bindingSource1
+                For Each pProSub As ProductListDAO In bindingSource1
                     If pProSub.ProductID <> 0 And pProSub.IsSelect = True And pProSub.IsDelete = 0 Then
                         lProSubList.Add(pProSub)
                     End If
@@ -484,7 +482,6 @@ Public Class ucProductLists
         Dim dataTable As New DataTable()
         Dim rec As ProductSub
         Try
-
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(ProductSub)
             dataTable = lcls.GetDataTable(pRefID, pRefTable, Nothing, pIsLoadFromRefOrder, "", pIsDelete, pCheckType, True)
@@ -509,7 +506,7 @@ Public Class ucProductLists
                     rec.SEQ = ConvertNullToZero(dr("SEQ"))
                     rec.ProductID = ConvertNullToZero(dr("ProductID"))
                     rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                    rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                    rec.ProductName = ConvertNullToString(dr("ProductName"))
                     rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                     rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                     rec.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID"))
@@ -564,7 +561,6 @@ Public Class ucProductLists
         End Try
     End Sub
 
-
     Private Sub GridStyle()
         With gridView
             .Columns("ID").Visible = False
@@ -577,6 +573,7 @@ Public Class ucProductLists
             .Columns("UnitName").Visible = (mColData And ProColumn.UnitName) = ProColumn.UnitName
             .Columns("Remark").Visible = (mColData And ProColumn.Remark) = ProColumn.Remark
             .Columns("KeepMin").Visible = (mColData And ProColumn.KeepMin) = ProColumn.KeepMin
+            .Columns("RefOrderCode").Visible = (mColData And ProColumn.RefOrderCode) = ProColumn.RefOrderCode
             If (mColData And ProColumn.Units) = ProColumn.Units Then
                 .Columns("AdjustUnit").Visible = True
                 .Columns("SN").Visible = True
@@ -603,7 +600,7 @@ Public Class ucProductLists
                 If .Columns("Total").Visible Then .Columns("Total").OptionsColumn.ReadOnly = True
                 If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
                 .Columns("ProductCode").OptionsColumn.ReadOnly = True
-                .Columns("ProductNames").OptionsColumn.ReadOnly = True
+                .Columns("ProductName").OptionsColumn.ReadOnly = True
             End If
             If mMode <> DataMode.ModeNew Then
                 Select Case mRefTable
@@ -613,7 +610,7 @@ Public Class ucProductLists
                         .Columns("UnitName").OptionsColumn.ReadOnly = True
                         UnitBtn.Buttons(0).Enabled = False
                 End Select
-                
+
                 .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
                 '.Columns("LocationDTLIDLookUpEdit1").OptionsColumn.ReadOnly = True
                 LocationDTLIDLookUpEdit1.ReadOnly = True
@@ -737,7 +734,6 @@ Public Class ucProductLists
         End Try
     End Sub
 
-
     Private Function LoadDataTableProduct(ByVal pllngID As Long, ByVal pProCode As String, ByVal pAutoAdd As Boolean) As String
         Dim lcls As New ProductDAO
         Dim lclsUnit As New ProductUnitDAO
@@ -765,7 +761,7 @@ Public Class ucProductLists
                 mlngProductID = lcls.ID
                 rec.ProductID = lcls.ID
                 rec.ProductCode = lcls.Code
-                rec.ProductNames = lcls.NameThai
+                rec.ProductName = lcls.NameThai
                 rec.ProductNameExt = ""
                 If mIsUsePriceSell = True Then
                     rec.UnitMainID = lcls.UnitMainID
@@ -1041,7 +1037,7 @@ Public Class ucProductLists
         If Not rec Is Nothing Then
             If rec.ProductID > 0 And rec.IsSN = 1 Then
                 lfrmSN.ProductCodes = rec.ProductCode
-                lfrmSN.ProductNames = rec.ProductNames
+                lfrmSN.ProductNames = rec.ProductName
                 lfrmSN.UnitNames = rec.UnitName
                 lfrmSN.Unit = rec.AdjustUnit
                 lfrmSN.UnitMain = rec.Units
@@ -1137,7 +1133,7 @@ Public Class ucProductLists
 
 
     Public Class ProductSub
-        Inherits ProductSubDAO
+        Inherits ProductListDAO
         Implements IDXDataErrorInfo
 
         Public Sub New()

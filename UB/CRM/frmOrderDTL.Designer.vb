@@ -41,7 +41,7 @@ Partial Class frmOrderDTL
         Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.ProductNames = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductNameBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.LocationDTLID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
@@ -198,7 +198,7 @@ Partial Class frmOrderDTL
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units_Old, Me.AdjustUnit, Me.Units, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units_Old, Me.AdjustUnit, Me.Units, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete})
         Me.gridView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
@@ -274,19 +274,19 @@ Partial Class frmOrderDTL
         Me.ProductBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.ProductBtn.Name = "ProductBtn"
         '
-        'ProductNames
+        'ProductName
         '
-        Me.ProductNames.AppearanceHeader.Options.UseTextOptions = True
-        Me.ProductNames.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.ProductNames.Caption = "ชื่อสินค้า"
-        Me.ProductNames.ColumnEdit = Me.ProductNameBtn
-        Me.ProductNames.FieldName = "ProductNames"
-        Me.ProductNames.MinWidth = 140
-        Me.ProductNames.Name = "ProductNames"
-        Me.ProductNames.OptionsColumn.ReadOnly = True
-        Me.ProductNames.Visible = True
-        Me.ProductNames.VisibleIndex = 2
-        Me.ProductNames.Width = 140
+        Me.ProductName.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductName.Caption = "ชื่อสินค้า"
+        Me.ProductName.ColumnEdit = Me.ProductNameBtn
+        Me.ProductName.FieldName = "ProductName"
+        Me.ProductName.MinWidth = 140
+        Me.ProductName.Name = "ProductName"
+        Me.ProductName.OptionsColumn.ReadOnly = True
+        Me.ProductName.Visible = True
+        Me.ProductName.VisibleIndex = 2
+        Me.ProductName.Width = 140
         '
         'ProductNameBtn
         '
@@ -698,7 +698,7 @@ Partial Class frmOrderDTL
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductNameBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents LocationDTLID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LocationDTLIDLookUpEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit

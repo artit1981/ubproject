@@ -1311,7 +1311,7 @@ Partial Class frmInformPrice
     Friend WithEvents UcFileAttach1 As ucFileAttach
     Friend WithEvents UcAdmin1 As ucAdmin
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents bindingSource1 As System.Windows.Forms.BindingSource
     Friend WithEvents GeneralTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
@@ -1330,7 +1330,7 @@ Partial Class frmInformPrice
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsSelect As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
+
     Friend WithEvents Unit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceInform As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit

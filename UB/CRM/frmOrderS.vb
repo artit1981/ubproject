@@ -16,7 +16,7 @@ Public Class frmOrderS
     Private mOrderType As MasterType
     Private mTaxOrderTotal As Double
     Private mCustomerID As Long
-    Private mProductList As List(Of ProductSubDAO)
+    Private mProductList As List(Of ProductListDAO)
     Private mIsGroupDupProduct As Integer = 0 '0 none ,1=yes,2=no
     Private mIsMakePO As Boolean = False
 #Region "Overrides"
@@ -295,10 +295,6 @@ Public Class frmOrderS
                     LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    'LayoutAgencyID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    'LayoutbtnAgencyID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    'LayoutCustomerID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    'LayoutbtnCustomerID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutCreditBalance.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutCreditBalance2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -851,8 +847,7 @@ Public Class frmOrderS
     Private Sub ShowFindOrder()
         Dim lfrm As New frmFindOrder
         Dim lSubOrderList As New List(Of SubOrder)
-        Dim bindingSource1 As New BindingSource
-        Dim lOrderList As New List(Of Long)
+        Dim lOrderList As New List(Of Long), lIsInitProduct As Boolean
         lOrderList.Add(mcls.ID)
 
         Try
@@ -867,26 +862,30 @@ Public Class frmOrderS
                 lfrm.ShowDialog()
                 If lfrm.IsAccept Then
                     If lfrm.IsGetByProduct = True Then
-                        ShowProductListBySource(mMode, lfrm.GetProductSubList, lOrderList)
+                        lIsInitProduct = False
+                        mProductList = lfrm.GetProductSubList
                     Else
-                        lSubOrderList = lfrm.GetSubOrderList
-                        If Not lSubOrderList Is Nothing Then
-                            If lSubOrderList.Count > 0 Then
-                                'Initial new list
-                                mProductList = New List(Of ProductSubDAO)
-                                mIsGroupDupProduct = 0
-                                txtRefOrder.Text = ""
-                                mRefOrderID = New List(Of Long)
+                        lIsInitProduct = True
+                        mProductList = New List(Of ProductListDAO)
+                    End If
 
-                                For Each rec As SubOrder In lSubOrderList
-                                    mRefOrderID.Add(rec.OrderID)
-                                    InitialRefOrder(rec.OrderID, "", True)
-                                Next
-                                ShowProductListBySource(mMode, mProductList, mRefOrderID)
-                                Calculation()
-                            End If
+
+                    lSubOrderList = lfrm.GetSubOrderList
+                    If Not lSubOrderList Is Nothing Then
+                        If lSubOrderList.Count > 0 Then
+                            mIsGroupDupProduct = 0
+                            txtRefOrder.Text = ""
+                            mRefOrderID = New List(Of Long)
+
+                            For Each rec As SubOrder In lSubOrderList
+                                mRefOrderID.Add(rec.OrderID)
+                                InitialRefOrder(rec.OrderID, "", lIsInitProduct)
+                            Next
+                            ShowProductListBySource(mMode, mProductList, mRefOrderID)
+                            'Calculation()
                         End If
                     End If
+
                 End If
             End If
         Catch ex As Exception
@@ -1044,7 +1043,7 @@ Public Class frmOrderS
 
     Private Function LoadProList(ByVal pOrderID As Long, ByVal pTableID As MasterType) As Boolean
         Dim lcls As New ProductListDAO
-        Dim rec As New ProductSubDAO, lIndex As Long
+        Dim rec As New ProductListDAO, lIndex As Long
         Dim dataTable As New DataTable()
         Dim llngProID As Long, llngUnitID As Long
         Dim lOrderList As New List(Of Long)
@@ -1078,18 +1077,18 @@ Public Class frmOrderS
                             lCalcTotal = ConvertNullToZero(dr("Total"))
                         End If
 
-                        lIndex = mProductList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = llngUnitID)
+                        lIndex = mProductList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = llngUnitID)
 
                         If lIndex < 0 Or mIsGroupDupProduct = 1 Or ConvertNullToZero(dr("IsShow")) = 0 Or lCanNotMerge = True Then
-                            rec = New ProductSubDAO
+                            rec = New ProductListDAO
                             rec.IsSelect = True
                             rec.ID = ConvertNullToZero(dr("ID"))
                             rec.SEQ = 0
                             rec.IsSN = ConvertNullToZero(dr("IsSN"))
-                            rec.RefOrderID = ConvertNullToZero(dr("RefID"))
+                            rec.RefID = ConvertNullToZero(dr("RefID"))
                             rec.ProductID = ConvertNullToZero(dr("ProductID"))
                             rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                            rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                            rec.ProductName = ConvertNullToString(dr("ProductName"))
                             rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                             rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                             rec.UnitID = ConvertNullToZero(dr("UnitID"))
@@ -1133,15 +1132,15 @@ Public Class frmOrderS
                                     mIsGroupDupProduct = 2
                                 Else
                                     mIsGroupDupProduct = 1
-                                    rec = New ProductSubDAO
+                                    rec = New ProductListDAO
                                     rec.IsSelect = True
                                     rec.IsSN = ConvertNullToZero(dr("IsSN"))
                                     rec.SEQ = 0
                                     rec.ID = ConvertNullToZero(dr("ID"))
-                                    rec.RefOrderID = ConvertNullToZero(dr("RefID"))
+                                    rec.RefID = ConvertNullToZero(dr("RefID"))
                                     rec.ProductID = ConvertNullToZero(dr("ProductID"))
                                     rec.ProductCode = ConvertNullToString(dr("ProductCode"))
-                                    rec.ProductNames = ConvertNullToString(dr("ProductName"))
+                                    rec.ProductName = ConvertNullToString(dr("ProductName"))
                                     rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
                                     rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
                                     rec.UnitID = ConvertNullToZero(dr("UnitID"))
@@ -1429,7 +1428,7 @@ Public Class frmOrderS
         End Try
     End Function
 
-    Private Function ShowProductListBySource(ByVal pMode As Integer, ByVal pSource As List(Of ProductSubDAO), ByRef pOrderID As List(Of Long)) As Boolean
+    Private Function ShowProductListBySource(ByVal pMode As Integer, ByVal pSource As List(Of ProductListDAO), ByRef pOrderID As List(Of Long)) As Boolean
         Try
             Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
             Dim lColData As ProColumn = GetColData()
@@ -1759,13 +1758,13 @@ Public Class frmOrderS
     End Function
 
     Private Sub MakeReserve(ByVal pProList As List(Of ProductListDAO))
-        Dim lcls As ProductSubDAO
-        Dim lProductList As New List(Of ProductSubDAO)
+        Dim lcls As ProductListDAO
+        Dim lProductList As New List(Of ProductListDAO)
         Try
             ShowProgress(True, "Loading...")
 
             For Each pProID As ProductListDAO In pProList
-                lcls = New ProductSubDAO
+                lcls = New ProductListDAO
                 lcls.IsSelect = True
                 lcls.Cost = pProID.Cost
                 lcls.ID = pProID.ID
@@ -1775,7 +1774,7 @@ Public Class frmOrderS
                 lcls.ProductCode = pProID.ProductCode
                 lcls.ProductID = pProID.ProductID
                 lcls.ProductNameExt = pProID.ProductNameExt
-                lcls.ProductNames = pProID.ProductName
+                lcls.ProductName = pProID.ProductName
                 lcls.Remark = pProID.Remark
                 lcls.SEQ = pProID.SEQ
                 lcls.Total = pProID.Total

@@ -12,7 +12,7 @@ Public Class frmInformPricePro
     Private mcls As New InformPriceProDAO
     Private mIsFromLoad As Boolean
     Private mMode As DataMode
-    Private mProductList As New List(Of ProductSubDAO)
+    Private mProductList As New List(Of ProductListDAO)
     Private mIDs As Long
     Private mIsOnLoad As Boolean = False
 #Region "Overrides"

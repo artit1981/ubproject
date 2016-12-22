@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.XtraEditors.Controls
+Imports DevExpress.XtraEditors
 
 Public Class frmFindOrder
 
@@ -8,7 +9,7 @@ Public Class frmFindOrder
     Private mOrderDate As Date
     Private Const mFormName As String = "frmFindOrder"
     Private mSubOrderList As List(Of SubOrder)
-    Private mProductSubList As List(Of ProductSubDAO)
+    Private mProductSubList As List(Of ProductListDAO)
     Private mOrderType As MasterType
     Private bindingOrder As BindingSource
     Dim mIsAccept As Boolean = False
@@ -24,7 +25,7 @@ Public Class frmFindOrder
             Return mSubOrderList
         End Get
     End Property
-    Public ReadOnly Property GetProductSubList() As List(Of ProductSubDAO)
+    Public ReadOnly Property GetProductSubList() As List(Of ProductListDAO)
         Get
             Return mProductSubList
         End Get
@@ -56,7 +57,7 @@ Public Class frmFindOrder
             mFindCreditOnly = value
         End Set
     End Property
- 
+
 #End Region
 
 #Region "Load All Order"
@@ -66,17 +67,17 @@ Public Class frmFindOrder
             bindingOrder = New BindingSource
 
             Select Case cboOrderType.EditValue
-               
+
                 Case MasterType.Opportunity
                     LoadOpp()
                 Case Else
                     LoadOrder(cboOrderType.EditValue)
-               
+
             End Select
             gCustomerID = mCustomerID
 
-            gridView.OptionsView.ShowFooter = False
-            gridControl.DataSource = bindingOrder
+            GridView.OptionsView.ShowFooter = False
+            GridControl.DataSource = bindingOrder
             GridStyle()
 
             'If CheckProduct.CheckState = CheckState.Checked Then
@@ -115,13 +116,10 @@ Public Class frmFindOrder
                     .Columns("InvoiceSuplierID").Visible = False
             End Select
 
-           
+
         End With
-       
+
     End Sub
-
-
-
 
     Private Function LoadOrder(ByVal pOrderType As MasterType) As Boolean
         Dim lcls As New OrderSDAO
@@ -129,7 +127,6 @@ Public Class frmFindOrder
         Dim SQL As String
         Dim rec As SubOrder, lIsOpen As Boolean = True
         Try
-             
             SQL = " AND Orders.OrderDate Between '" & formatSQLDate(DateFrom.EditValue) & "' AND '" & formatSQLDate(DateTo.EditValue) & "'"
             If mOrderType = MasterType.Bill Then
                 SQL &= " AND Orders.RefBillID=0 "
@@ -144,7 +141,7 @@ Public Class frmFindOrder
                 Case MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.ReduceCredit, MasterType.ReduceCreditBuy
                     lIsOpen = False
             End Select
-           
+
             lcls.TableID = pOrderType
             dataTable = lcls.GetDataTableForCombo(mOrderType, pOrderType, mCustomerID, DateTo.EditValue, lIsOpen, SQL)
             If dataTable.Rows.Count > 0 Then
@@ -215,7 +212,6 @@ Public Class frmFindOrder
         End Try
     End Function
 
-
     Private Sub GetOrderDAOs(ByVal pMultiSelect As Boolean)
         Dim lRow As Long
         Dim lDataDAO As SubOrder
@@ -267,10 +263,85 @@ Public Class frmFindOrder
         End Try
     End Sub
 
+
+    Private Sub GetProList()
+        Dim lProductSubList As New List(Of ProductListDAO)
+        Dim lIndex As Long, llngProID As Long, lIsGroupDupProduct As Integer, lUnitID As Long
+        Dim lRefOrder As SubOrder, lCanNotMerge As Boolean = False
+        Try
+            mSubOrderList = New List(Of SubOrder)
+            mProductSubList = New List(Of ProductListDAO)
+            lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
+            lProductSubList.Sort(Function(x, y) x.RefID.CompareTo(y.RefID))
+
+            For Each pProLIst As ProductListDAO In lProductSubList
+                llngProID = pProLIst.ProductID
+                lUnitID = pProLIst.UnitID
+                lIndex = mProductSubList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
+                If lIndex < 0 Or lIsGroupDupProduct = 1 Or pProLIst.IsShow = 0 Or lCanNotMerge = True Then
+                    lRefOrder = New SubOrder
+                    lRefOrder.OrderID = pProLIst.RefID
+                    mProductSubList.Add(pProLIst)
+                    If mSubOrderList.FindIndex(Function(m As SubOrder) m.OrderID = lRefOrder.OrderID) < 0 Then
+                        mSubOrderList.Add(lRefOrder)
+                    End If
+                Else
+                    If lIsGroupDupProduct = 0 Then
+                        If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                            lIsGroupDupProduct = 2
+                        Else
+                            lIsGroupDupProduct = 1
+
+                            lRefOrder = New SubOrder
+                            lRefOrder.OrderID = pProLIst.RefID
+                            mProductSubList.Add(pProLIst)
+                            If mSubOrderList.FindIndex(Function(m As SubOrder) m.OrderID = lRefOrder.OrderID) < 0 Then
+                                mSubOrderList.Add(lRefOrder)
+                            End If
+                        End If
+                    End If
+                    If lIsGroupDupProduct = 2 Then
+                        mProductSubList.Item(lIndex).Units = mProductSubList.Item(lIndex).Units + pProLIst.Units
+                        mProductSubList.Item(lIndex).AdjustUnit = mProductSubList.Item(lIndex).AdjustUnit + pProLIst.AdjustUnit
+                        mProductSubList.Item(lIndex).Discount = mProductSubList.Item(lIndex).Discount + pProLIst.Discount
+                        mProductSubList.Item(lIndex).Total = mProductSubList.Item(lIndex).Total + pProLIst.Total
+                        If IsNothing(pProLIst.SNList) = False Then
+                            For Each pSN As SnDAO In pProLIst.SNList
+                                mProductSubList.Item(lIndex).SNList.Add(pSN)
+                            Next
+                        End If
+
+                        mProductSubList.Item(lIndex).IsMerge = 1
+                        If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
+                            mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef2 = pProLIst.Units
+                        Else
+                            mProductSubList.Item(lIndex).ProductListRefID3 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef3 = pProLIst.Units
+                            lCanNotMerge = True   'Ref slot full
+                        End If
+                        lRefOrder = New SubOrder
+                        lRefOrder.OrderID = pProLIst.RefID
+                        mProductSubList.Add(pProLIst)
+                        If mSubOrderList.FindIndex(Function(m As SubOrder) m.OrderID = lRefOrder.OrderID) < 0 Then
+                            mSubOrderList.Add(lRefOrder)
+                        End If
+
+                    End If
+                End If
+            Next
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".GetProList : " & e.Message)
+        Finally
+
+        End Try
+    End Sub
+
     Private Sub GetOrder(ByVal pMultiSelect As Boolean)
         Try
             If CheckProduct.CheckState = CheckState.Checked Then
-                mProductSubList = UcProductLists1.GetProSubDAOs
+                GetProList()
             Else
                 GetOrderDAOs(pMultiSelect)
             End If
@@ -310,7 +381,16 @@ Public Class frmFindOrder
 
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         Try
-            LoadOrderByCondition()
+            If CheckProduct.CheckState = CheckState.Checked Then
+                ShowProgress(True, "")
+                LoadOrderByCondition()
+                LoadProListData(cboOrderType.EditValue)
+                ShowProgress(False, "")
+            Else
+                LoadOrderByCondition()
+            End If
+
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -344,19 +424,12 @@ Public Class frmFindOrder
             Case MasterType.Reserve              '***** ถ้ามีเพิ่มการดึงรายการแก้ UpdateRefOrderStatus ด้วย
                 cList.Add(New OrderType("ใบเสนอราคา", MasterType.Quotation))
                 cboOrderType.EditValue = MasterType.Quotation
-                'Case MasterType.Bill
-                '    cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
-                '    cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
-                '    cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
-                '    cList.Add(New OrderType("บันทึกลดหนี้", MasterType.ReduceCredit))
-                '    cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.AddCredit, MasterType.ReduceCredit
                 cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
                 cList.Add(New OrderType("ใบส่งของ (ขาย)", MasterType.Shiping))
                 cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.Receipt, MasterType.Bill
-                'cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
                 cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
                 cList.Add(New OrderType("บันทึกเพิ่มหนี้", MasterType.AddCredit))
@@ -383,10 +456,6 @@ Public Class frmFindOrder
                 cList.Add(New OrderType("ตั้งลูกหนี้", MasterType.AddCreditBuy))
                 cList.Add(New OrderType("บันทึกค่าใช้จ่ายอื่นๆ", MasterType.Asset))
                 cboOrderType.EditValue = MasterType.InvoiceBuy
-                'Case MasterType.ReduceCredit
-                '    cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
-                '    cList.Add(New OrderType("ใบส่งของ (ขาย)", MasterType.Shiping))
-                '    cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.ReduceCreditBuy, MasterType.AddCreditBuy
                 cList.Add(New OrderType("ใบกำกับภาษี (ซื้อ)", MasterType.InvoiceBuy))
                 cList.Add(New OrderType("ใบส่งของ (ซื้อ", MasterType.ShipingBuy))
@@ -404,19 +473,99 @@ Public Class frmFindOrder
 
         LoadOrderByCondition()
     End Sub
- 
+
     Private Sub CheckProduct_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckProduct.CheckedChanged
         If CheckProduct.CheckState = CheckState.Checked Then
-            'LoadProList()
+            ShowProgress(True, "")
+            LoadProListData(cboOrderType.EditValue)
             TabControl1.SelectedTabPage = ProductTabPage
+            ShowProgress(False, "")
         Else
             TabControl1.SelectedTabPage = OrderTabPage
         End If
     End Sub
-     
-    Private Sub GridControl_Click(sender As System.Object, e As System.EventArgs) Handles GridControl.Click
 
+
+    Private Sub LoadProListData(ByVal pOrderType As MasterType)
+        Dim lcls As New ProductListDAO
+        Dim dataTable As New DataTable()
+        Dim lProList As New List(Of ProductListDAO)
+        Dim rec As New ProductListDAO
+        Dim lNotRefUnit As Long = 0, lEachUnit As Long = 0
+        Dim lOrderIDList = New List(Of Long)
+        Try
+            lOrderIDList = New List(Of Long)
+
+            If Not bindingOrder Is Nothing Then
+                For Each pOrder As SubOrder In bindingOrder
+                    lOrderIDList.Clear()
+                    lOrderIDList.Add(pOrder.OrderID)
+
+                    dataTable = lcls.GetDataTable(lOrderIDList, pOrderType.ToString, Nothing, False, "", False, mOrderType, True)
+                    If dataTable.Rows.Count > 0 Then
+                        For Each dr As DataRow In dataTable.Rows
+                            lEachUnit = 0
+                            lNotRefUnit = 0
+
+                            Call GetUnitNotRef(dr("RefID"), "'" & pOrderType.ToString & "'", "'" & mOrderType.ToString & "'" _
+                                                       , mOrderType, Nothing, dr("ID"), dr("ProductID"), lNotRefUnit)
+                            If lNotRefUnit > 0 Then
+                                rec = New ProductListDAO
+                                rec.IsSelect = False
+                                rec.ID = dr("ID")
+                                rec.ProductListRefID = dr("ID")
+                                rec.SEQ = ConvertNullToZero(dr("SEQ"))
+                                rec.RefID = ConvertNullToZero(dr("RefID"))
+                                rec.ProductID = ConvertNullToZero(dr("ProductID"))
+                                rec.ProductCode = ConvertNullToString(dr("ProductCode"))
+                                rec.ProductName = ConvertNullToString(dr("ProductName"))
+                                rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
+                                rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                                rec.LocationDTLID_Old = ConvertNullToZero(dr("LocationDTLID"))
+                                rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                                rec.UnitName = ConvertNullToString(dr("UnitName"))
+                                rec.Remark = ConvertNullToString(dr("Remark"))
+                                rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
+                                rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                                rec.Price = ConvertNullToZero(dr("Price"))
+                                rec.Cost = ConvertNullToZero(dr("Cost"))
+                                rec.Discount = ConvertNullToZero(dr("Discount"))
+                                rec.IsShow = ConvertNullToZero(dr("IsShow"))
+                                rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
+                                rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                                rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                                rec.ModePro = DataMode.ModeNew
+                                rec.RefOrderCode = pOrder.OrderCode
+                                rec.IsSN = ConvertNullToZero(dr("IsSN"))
+
+                                ''ถูกดึงไปแล้วบางส่วน
+                                lEachUnit = lNotRefUnit
+                                If lEachUnit < ConvertNullToZero(dr("Units")) Then
+                                    rec.Units = lEachUnit
+                                    rec.AdjustUnit = lEachUnit / rec.RateUnit
+                                    rec.Total = (rec.AdjustUnit * rec.Price) - (rec.AdjustUnit * rec.Discount)
+                                Else
+                                    rec.Units = ConvertNullToZero(dr("Units"))
+                                    rec.AdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                                    rec.Total = ConvertNullToZero(dr("Total"))
+                                End If
+
+                                lProList.Add(rec)
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+
+            Dim lColData As ProColumn = ProColumn.IsSelect + ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.Remark + ProColumn.RefOrderCode
+            UcProductLists1.ShowControlByDataSource(DataMode.ModeNew, lProList, lColData, True, Nothing, pOrderType.ToString, True, lOrderIDList, True, False, "")
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".LoadProListData : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
     End Sub
+
 End Class
 
 Public Class OrderTypeList
@@ -465,6 +614,5 @@ Public Class OrderType
         End Set
     End Property
 
-   
+
 End Class
- 

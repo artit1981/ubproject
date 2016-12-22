@@ -38,19 +38,19 @@ Public Class frmOrderDTL
         Me.OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
 
         Dim bindingSource1 = New BindingSource
-        Dim lProSub As ProductSubDAO
+        Dim lProSub As ProductListDAO
 
-        bindingSource1.DataSource = GetType(ProductSubDAO)
+        bindingSource1.DataSource = GetType(ProductListDAO)
         LoadDataLocationDTL()
 
         For Each pProlist As ProductListDAO In ProList
-            lProSub = New ProductSubDAO
+            lProSub = New ProductListDAO
             lProSub.IsSelect = True
             lProSub.ID = pProlist.ID
             lProSub.SEQ = pProlist.SEQ
             lProSub.ProductID = pProlist.ProductID
             lProSub.ProductCode = pProlist.ProductCode
-            lProSub.ProductNames = pProlist.ProductName
+            lProSub.ProductName = pProlist.ProductName
             lProSub.ProductNameExt = pProlist.ProductNameExt
             lProSub.LocationDTLID = pProlist.LocationDTLID
             lProSub.LocationDTLID_Old = pProlist.LocationDTLID
@@ -122,7 +122,7 @@ Public Class frmOrderDTL
             'If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
             'If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
             '.Columns("ProductCode").OptionsColumn.ReadOnly = True
-            '.Columns("ProductNames").OptionsColumn.ReadOnly = True
+            '.Columns("ProductName").OptionsColumn.ReadOnly = True
             '.Columns("UnitName").OptionsColumn.ReadOnly = True
             '.Columns("ProductCode").OptionsColumn.ReadOnly = True
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 ")

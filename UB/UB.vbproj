@@ -648,7 +648,6 @@
     <Compile Include="DAO\ProductListDAO.vb" />
     <Compile Include="DAO\ProductLocationSDAO.vb" />
     <Compile Include="DAO\ProductStockDAO.vb" />
-    <Compile Include="DAO\ProductSubDAO.vb" />
     <Compile Include="DAO\ProductTypeDAO.vb" />
     <Compile Include="DAO\ProductUnitDAO.vb" />
     <Compile Include="DAO\ProvinceDAO.vb" />

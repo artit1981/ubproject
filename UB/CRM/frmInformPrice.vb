@@ -12,7 +12,7 @@ Public Class frmInformPrice
     Private mcls As New InformPriceDAO
     Private mIsFromLoad As Boolean
     Private mMode As DataMode
-    Private mProductList As New List(Of ProductSubDAO)
+    Private mProductList As New List(Of ProductListDAO)
     Private mOrderType As MasterType
     Private mIDs As Long
     Private mIsOnLoad As Boolean = False
@@ -121,7 +121,7 @@ Public Class frmInformPrice
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
-   
+
     Private Sub ProductCategoryID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductCategoryID.EditValueChanged
         Try
             If mIsFromLoad = False Then
@@ -133,7 +133,7 @@ Public Class frmInformPrice
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
-     
+
     Private Sub FormChangedComponent1_FormControlChanged1(ByVal sender As Object, ByVal e As FormChangedEventArgs) Handles FormChangedComponent1.FormControlChanged
         MyBase.CheckFormChanged()
     End Sub
@@ -443,7 +443,7 @@ Public Class frmInformPrice
 
 
     Private Sub AddingOrder()
-        Dim lcls As ProductSubDAO
+        Dim lcls As ProductListDAO
         Dim rowHandle As Integer, llngProID As Long, lIndex As Integer
         Try
             If gridView.RowCount = 0 Then Exit Sub
@@ -453,7 +453,7 @@ Public Class frmInformPrice
             llngProID = gridView.GetRowCellDisplayText(rowHandle, "ProductID")
 
             'Check duplicate
-            lIndex = mProductList.FindIndex(Function(m As ProductSubDAO) m.ProductID = llngProID)
+            lIndex = mProductList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID)
             If lIndex >= 0 Then
                 MsgBox("รายการสินค้าซ้ำ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "แจ้งเตือน")
             Else

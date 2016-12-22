@@ -30,11 +30,12 @@ Partial Class ucProductLists
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.IsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SelectCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RefOrderCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
-        Me.ProductNames = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductNameBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.LocationDTLID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
@@ -123,7 +124,7 @@ Partial Class ucProductLists
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductNames, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.RefOrderCode, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -164,6 +165,24 @@ Partial Class ucProductLists
         Me.SelectCheckEdit2.AutoHeight = False
         Me.SelectCheckEdit2.Name = "SelectCheckEdit2"
         '
+        'RefOrderCode
+        '
+        Me.RefOrderCode.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.RefOrderCode.AppearanceCell.Options.UseBackColor = True
+        Me.RefOrderCode.AppearanceHeader.Options.UseTextOptions = True
+        Me.RefOrderCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.RefOrderCode.Caption = "เลขที่เอกสาร"
+        Me.RefOrderCode.FieldName = "RefOrderCode"
+        Me.RefOrderCode.MaxWidth = 150
+        Me.RefOrderCode.MinWidth = 80
+        Me.RefOrderCode.Name = "RefOrderCode"
+        Me.RefOrderCode.OptionsColumn.AllowEdit = False
+        Me.RefOrderCode.OptionsColumn.ReadOnly = True
+        Me.RefOrderCode.OptionsColumn.TabStop = False
+        Me.RefOrderCode.Visible = True
+        Me.RefOrderCode.VisibleIndex = 1
+        Me.RefOrderCode.Width = 100
+        '
         'ID
         '
         Me.ID.Caption = "ID"
@@ -187,7 +206,7 @@ Partial Class ucProductLists
         Me.ProductCode.MinWidth = 90
         Me.ProductCode.Name = "ProductCode"
         Me.ProductCode.Visible = True
-        Me.ProductCode.VisibleIndex = 1
+        Me.ProductCode.VisibleIndex = 2
         Me.ProductCode.Width = 91
         '
         'ProductBtn
@@ -196,21 +215,21 @@ Partial Class ucProductLists
         Me.ProductBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.ProductBtn.Name = "ProductBtn"
         '
-        'ProductNames
+        'ProductName
         '
-        Me.ProductNames.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
-        Me.ProductNames.AppearanceCell.Options.UseBackColor = True
-        Me.ProductNames.AppearanceHeader.Options.UseTextOptions = True
-        Me.ProductNames.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.ProductNames.Caption = "ชื่อสินค้า"
-        Me.ProductNames.ColumnEdit = Me.ProductNameBtn
-        Me.ProductNames.FieldName = "ProductNames"
-        Me.ProductNames.MinWidth = 140
-        Me.ProductNames.Name = "ProductNames"
-        Me.ProductNames.OptionsColumn.ReadOnly = True
-        Me.ProductNames.Visible = True
-        Me.ProductNames.VisibleIndex = 2
-        Me.ProductNames.Width = 182
+        Me.ProductName.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.ProductName.AppearanceCell.Options.UseBackColor = True
+        Me.ProductName.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductName.Caption = "ชื่อสินค้า"
+        Me.ProductName.ColumnEdit = Me.ProductNameBtn
+        Me.ProductName.FieldName = "ProductName"
+        Me.ProductName.MinWidth = 140
+        Me.ProductName.Name = "ProductName"
+        Me.ProductName.OptionsColumn.ReadOnly = True
+        Me.ProductName.Visible = True
+        Me.ProductName.VisibleIndex = 3
+        Me.ProductName.Width = 182
         '
         'ProductNameBtn
         '
@@ -229,7 +248,7 @@ Partial Class ucProductLists
         Me.LocationDTLID.MinWidth = 70
         Me.LocationDTLID.Name = "LocationDTLID"
         Me.LocationDTLID.Visible = True
-        Me.LocationDTLID.VisibleIndex = 3
+        Me.LocationDTLID.VisibleIndex = 4
         Me.LocationDTLID.Width = 100
         '
         'LocationDTLIDLookUpEdit1
@@ -255,7 +274,7 @@ Partial Class ucProductLists
         Me.UnitName.Name = "UnitName"
         Me.UnitName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor
         Me.UnitName.Visible = True
-        Me.UnitName.VisibleIndex = 4
+        Me.UnitName.VisibleIndex = 5
         Me.UnitName.Width = 90
         '
         'UnitBtn
@@ -280,7 +299,7 @@ Partial Class ucProductLists
         Me.KeepMin.Name = "KeepMin"
         Me.KeepMin.ToolTip = "จำนวนต่ำสุด"
         Me.KeepMin.Visible = True
-        Me.KeepMin.VisibleIndex = 5
+        Me.KeepMin.VisibleIndex = 6
         Me.KeepMin.Width = 50
         '
         'UnitsSpin
@@ -311,7 +330,7 @@ Partial Class ucProductLists
         Me.AdjustUnit.MinWidth = 50
         Me.AdjustUnit.Name = "AdjustUnit"
         Me.AdjustUnit.Visible = True
-        Me.AdjustUnit.VisibleIndex = 6
+        Me.AdjustUnit.VisibleIndex = 7
         Me.AdjustUnit.Width = 62
         '
         'Cost
@@ -327,7 +346,7 @@ Partial Class ucProductLists
         Me.Cost.MinWidth = 90
         Me.Cost.Name = "Cost"
         Me.Cost.Visible = True
-        Me.Cost.VisibleIndex = 7
+        Me.Cost.VisibleIndex = 8
         Me.Cost.Width = 91
         '
         'CostCalcEdit1
@@ -357,7 +376,7 @@ Partial Class ucProductLists
         Me.Price.MinWidth = 80
         Me.Price.Name = "Price"
         Me.Price.Visible = True
-        Me.Price.VisibleIndex = 8
+        Me.Price.VisibleIndex = 9
         Me.Price.Width = 101
         '
         'PriceCalcEdit1
@@ -384,7 +403,7 @@ Partial Class ucProductLists
         Me.Discount.MinWidth = 60
         Me.Discount.Name = "Discount"
         Me.Discount.Visible = True
-        Me.Discount.VisibleIndex = 9
+        Me.Discount.VisibleIndex = 10
         Me.Discount.Width = 71
         '
         'DiscountCalcEdit1
@@ -418,7 +437,7 @@ Partial Class ucProductLists
         Me.Total.OptionsColumn.ReadOnly = True
         Me.Total.OptionsColumn.TabStop = False
         Me.Total.Visible = True
-        Me.Total.VisibleIndex = 10
+        Me.Total.VisibleIndex = 11
         Me.Total.Width = 101
         '
         'TotalEdit
@@ -436,7 +455,7 @@ Partial Class ucProductLists
         Me.Remark.MinWidth = 50
         Me.Remark.Name = "Remark"
         Me.Remark.Visible = True
-        Me.Remark.VisibleIndex = 11
+        Me.Remark.VisibleIndex = 12
         Me.Remark.Width = 50
         '
         'SEQ
@@ -492,7 +511,7 @@ Partial Class ucProductLists
         Me.SN.Name = "SN"
         Me.SN.OptionsColumn.ReadOnly = True
         Me.SN.Visible = True
-        Me.SN.VisibleIndex = 12
+        Me.SN.VisibleIndex = 13
         Me.SN.Width = 23
         '
         'RepositoryItemButtonSN
@@ -541,7 +560,7 @@ Partial Class ucProductLists
         Me.Image.MinWidth = 30
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 13
+        Me.Image.VisibleIndex = 14
         Me.Image.Width = 38
         '
         'btnImage
@@ -656,7 +675,7 @@ Partial Class ucProductLists
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ProductNames As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ProductName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents AdjustUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents UnitsSpin As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
@@ -693,5 +712,6 @@ Partial Class ucProductLists
     Friend WithEvents RateUnit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceMain As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RefOrderCode As DevExpress.XtraGrid.Columns.GridColumn
 
 End Class
