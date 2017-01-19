@@ -138,8 +138,18 @@ Public Class frmFindOrder
                 Case MasterType.Asset
                     mCustomerID = 0
                     lIsOpen = False
-                Case MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.ReduceCredit, MasterType.ReduceCreditBuy
+                Case MasterType.ClaimOut, MasterType.ClaimReturn
+                    mCustomerID = 0
+                    lIsOpen = True
+                Case MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.Claim
                     lIsOpen = False
+                Case MasterType.AddCredit, MasterType.ReduceCredit
+                    If pOrderType = MasterType.ClaimResult Then
+                        mCustomerID = 0
+                        lIsOpen = True
+                    Else
+                        lIsOpen = False
+                    End If
             End Select
 
             lcls.TableID = pOrderType
@@ -428,6 +438,7 @@ Public Class frmFindOrder
                 cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
                 cList.Add(New OrderType("ใบส่งของ (ขาย)", MasterType.Shiping))
+                cList.Add(New OrderType("ผลการเคลม Supplier", MasterType.ClaimResult))
                 cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.Receipt, MasterType.Bill
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
@@ -445,10 +456,17 @@ Public Class frmFindOrder
                 cboOrderType.EditValue = MasterType.PurchaseOrder
             Case MasterType.Claim
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
+                cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
                 cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.ClaimOut
-                cList.Add(New OrderType("ใบกำกับภาษี (ซื้อ)", MasterType.InvoiceBuy))
-                cboOrderType.EditValue = MasterType.InvoiceBuy
+                cList.Add(New OrderType("รับแจ้งเคลม", MasterType.Claim))
+                cboOrderType.EditValue = MasterType.Claim
+            Case MasterType.ClaimResult
+                cList.Add(New OrderType("แจ้งเคลม Supplier", MasterType.ClaimOut))
+                cboOrderType.EditValue = MasterType.ClaimOut
+            Case MasterType.ClaimReturn
+                cList.Add(New OrderType("ผลการเคลม Supplier", MasterType.ClaimResult))
+                cboOrderType.EditValue = MasterType.ClaimResult
             Case MasterType.ReceiptBuy
                 cList.Add(New OrderType("ใบกำกับภาษี (ซื้อ)", MasterType.InvoiceBuy))
                 cList.Add(New OrderType("ส่งของ (ซื้อ)", MasterType.ShipingBuy))

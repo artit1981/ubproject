@@ -13,6 +13,7 @@ Public Class EmployeeDAO
     Private mWorkingStatus As String
     Private mViewLevel As eViewLevel
     Dim mCommission As Decimal
+    Dim mEmpUserID As Long
 
     Public ReadOnly Property TableName() As String
         Get
@@ -81,6 +82,18 @@ Public Class EmployeeDAO
 
     End Property
 
+
+    Public Property EmpUserID() As Long
+        Get
+            Return mEmpUserID
+        End Get
+        Set(ByVal value As Long)
+            mEmpUserID = value
+        End Set
+
+    End Property
+
+
     Public Property Commission() As Decimal
         Get
             Return mCommission
@@ -128,16 +141,17 @@ Public Class EmployeeDAO
         Dim lUserDAO As New UserDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
-            SQL = "SELECT *   "
-            SQL = SQL & " FROM Employee "
+            SQL = "SELECT E.* ,U.UserID  "
+            SQL = SQL & " FROM Employee E"
+            SQL = SQL & " Left outer join Admin_User U ON U.EmpID=E.EmpID"
             SQL = SQL & " WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & " and EmpID=" & pID
+                SQL = SQL & " and E.EmpID=" & pID
             End If
             If pName <> "" Then
-                SQL = SQL & " and Firstname like '%" & pName & "%'"
+                SQL = SQL & " and E.Firstname like '%" & pName & "%'"
             End If
-            SQL = SQL & " ORDER BY EmpCode"
+            SQL = SQL & " ORDER BY E.EmpCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -189,6 +203,7 @@ Public Class EmployeeDAO
                     TerritoryID = ConvertNullToZero(dr("TerritoryID"))
                     EmpGroupID = ConvertNullToZero(dr("EmpGroupID"))
                     Commission = ConvertNullToZero(dr("Commission"))
+                    EmpUserID = ConvertNullToZero(dr("UserID"))
 
                     'Load Position
                     PositionID = ConvertNullToZero(dr("PositionID"))
@@ -506,5 +521,6 @@ Public Class EmployeeDAO
         mWorkingStatus = ""
         mViewLevel = 3
         mCommission = 0
+        mEmpUserID = 0
     End Sub
 End Class

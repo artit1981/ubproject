@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
 Public Class clsNotifi
+
     Public Enum eNotifyLevel
         Low = 1
         Normal = 2
@@ -143,7 +144,7 @@ Public Class clsNotifi
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
                     AddDataNotifi(eNotifyLevel.Hi, "Approve", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID") _
-                                  , "เอกสารเลขที่ " & dr("OrderCode") & " : " & ConvertNullToString(dr("Remark")))
+                                  , "เอกสารเลขที่ " & dr("OrderCode") & " : " & ConvertNullToString(dr("Remark")), Nothing, gUserID)
                 Next
                 Return True
             Else
@@ -170,11 +171,12 @@ Public Class clsNotifi
             Err.Raise(Err.Number, e.Source, "clsNotifi.CloseNotifi : " & e.Message)
         End Try
     End Function
-    Private Sub AddDataNotifi(ByVal pNotifyLevel As eNotifyLevel, ByVal pSystem As String, ByVal pMenuDisplay As String, ByVal pValueDate As Date, ByVal pRefTable As String _
-                            , ByVal pRefID As Long, ByVal pRemark As String)
+
+    Public Sub AddDataNotifi(ByVal pNotifyLevel As eNotifyLevel, ByVal pSystem As String, ByVal pMenuDisplay As String, ByVal pValueDate As Date, ByVal pRefTable As String _
+                            , ByVal pRefID As Long, ByVal pRemark As String, ByRef ptr As SqlTransaction, ByVal pUserID As Long)
         Dim SQL As String = ""
         Try
-            If IsNotExist(gUserID, pRefID, pRefTable) Then
+            If IsNotExist(gUserID, pRefID, pRefTable, ptr) Then
                 SQL = " INSERT INTO NotifiData  (IsClose,NotifyLevel,System,MenuDisplay,ValueDate,RefTable,RefID,UserID,Remark)"
                 SQL = SQL & " VALUES (0"
                 SQL = SQL & " , " & pNotifyLevel
@@ -183,10 +185,10 @@ Public Class clsNotifi
                 SQL = SQL & " ,'" & formatSQLDate(pValueDate) & "'"
                 SQL = SQL & " ,'" & pRefTable & "'"
                 SQL = SQL & " , " & pRefID
-                SQL = SQL & " , " & gUserID
+                SQL = SQL & " , " & pUserID
                 SQL = SQL & " ,'" & pRemark & "'"
                 SQL = SQL & " ) "
-                gConnection.executeInsertQuery(SQL, Nothing)
+                gConnection.executeInsertQuery(SQL, ptr)
 
             End If
         Catch e As Exception
@@ -194,7 +196,7 @@ Public Class clsNotifi
         End Try
     End Sub
 
-    Private Function IsNotExist(ByVal pUserID As Long, ByRef pRefID As Long, ByVal pRefTable As String) As Boolean
+    Private Function IsNotExist(ByVal pUserID As Long, ByRef pRefID As Long, ByVal pRefTable As String, ByRef ptr As SqlTransaction) As Boolean
         Dim SQL As String
         Dim dataTable As New DataTable()
         Try
@@ -203,7 +205,7 @@ Public Class clsNotifi
             SQL = SQL & " where UserID=" & pUserID
             SQL = SQL & " and RefID=" & pRefID
             SQL = SQL & " and RefTable='" & pRefTable & "'"
-            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            dataTable = gConnection.executeSelectQuery(SQL, ptr)
             Return dataTable.Rows.Count = 0
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "clsNotifi.IsExist : " & e.Message)

@@ -374,6 +374,7 @@
     <Compile Include="Master\frmProvince.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Module\modOrder.vb" />
     <Compile Include="Report\frmStockReport.Designer.vb">
       <DependentUpon>frmStockReport.vb</DependentUpon>
     </Compile>

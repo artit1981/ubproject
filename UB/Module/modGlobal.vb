@@ -107,6 +107,9 @@ Module modGlobal
         Province = 98
         ReportDebtAnalyst = 99
         ReportStock = 100
+        ClaimResult = 101
+        ClaimReturn = 102
+        Quotation2 = 103
     End Enum
 
     Public Enum DataMode

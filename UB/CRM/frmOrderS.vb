@@ -115,7 +115,7 @@ Public Class frmOrderS
 
             mFormName = mOrderType.ToString
             Select Case mOrderType
-                Case MasterType.Quotation
+                Case MasterType.Quotation, MasterType.Quotation2
                     LayoutQuotationDays.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutQuotationDays2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutSendBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -275,7 +275,7 @@ Public Class frmOrderS
                     LayoutInvoiceSuplierID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID.Text = "เอกสารอ้างอิงเจ้าหนี้"
-                Case MasterType.Claim, MasterType.Expose
+                Case MasterType.Claim, MasterType.Expose, MasterType.ClaimReturn
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
@@ -289,7 +289,7 @@ Public Class frmOrderS
                     LayoutbtnShipingBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayouShipingBy.Text = "วิธีการส่งเคลม"
                     TaxGroup1.Enabled = False
-                Case MasterType.ClaimOut
+                Case MasterType.ClaimOut, MasterType.ClaimResult
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
@@ -466,7 +466,8 @@ Public Class frmOrderS
                     'ShowProgress(False, "")
                     Select Case mOrderType
                         Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
-                            , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose
+                            , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy _
+                            , MasterType.Borrow, MasterType.Expose
                             If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
                                 modReport.PrintReportOrder(mOrderType, mcls.ID)
                             End If
@@ -597,14 +598,7 @@ Public Class frmOrderS
     Private Sub btnCustomerID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustomerID.Click
         Try
             ShowProgress(True, "Loading...")
-            Select Case mOrderType
-                Case MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut, MasterType.PurchaseOrder, MasterType.ShipingBuy, MasterType.MakePO, MasterType.CancelPO
-                    SetComboAgency()
-                Case Else
-                    SetComboCustomer()
-            End Select
-
-            'SetComboCustomer()
+            SetComboCustomer()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -915,15 +909,21 @@ Public Class frmOrderS
                     Case MasterType.AddCredit, MasterType.ReduceCredit
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.SellOrders) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping) Then Return True
-                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice)
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
+                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ClaimResult)
                     Case MasterType.Reserve
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Quotation)
                     Case MasterType.InvoiceBuy, MasterType.ShipingBuy
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.PurchaseOrder)
                     Case MasterType.Claim
-                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice)
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
+                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping)
                     Case MasterType.ClaimOut
-                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceBuy)
+                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Claim)
+                    Case MasterType.ClaimResult
+                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ClaimOut)
+                    Case MasterType.ClaimReturn
+                        InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ClaimResult)
                     Case MasterType.ReduceCreditBuy, MasterType.AddCreditBuy
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceBuy) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ShipingBuy) Then Return True
@@ -1242,22 +1242,13 @@ Public Class frmOrderS
             SetCreditRole()
             SetVatType()
             SetEmployees()
-            Select Case mOrderType
-                Case MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut, MasterType.PurchaseOrder, MasterType.ShipingBuy, MasterType.MakePO, MasterType.CancelPO
-                    SetComboAgency()
-                Case Else
-                    SetComboCustomer()
-            End Select
-
-
+            SetComboCustomer()
             SetComboShipingByID()
             SetComboShipingMethodeID()
-
             SetCurrency()
             SetComboShipingRuleID()
             SetComboQuoRemarkID()
             SetComboCampaign(mMode = DataMode.ModeEdit)
-
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try
@@ -1409,7 +1400,7 @@ Public Class frmOrderS
                 lIsReadOnly = False
             ElseIf mcls.IsDelete = True Then
                 lIsReadOnly = True
-            ElseIf mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString Then
+            ElseIf mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Then
                 lIsReadOnly = False
             Else
                 lIsReadOnly = True
@@ -1833,11 +1824,17 @@ Public Class frmOrderS
 
     Private Sub SetComboCustomer()
         Try
-            If mOrderType = MasterType.Asset Then
-                SetSearchLookCustomer(CustomerID, True, True)
-            Else
-                SetSearchLookCustomer(CustomerID, True, False)
-            End If
+            Select Case mOrderType
+                Case MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut, MasterType.PurchaseOrder _
+                    , MasterType.ShipingBuy, MasterType.MakePO, MasterType.CancelPO, MasterType.ClaimResult
+                    SetSearchLookAgency(CustomerID)
+                Case Else
+                    If mOrderType = MasterType.Asset Then
+                        SetSearchLookCustomer(CustomerID, True, True)
+                    Else
+                        SetSearchLookCustomer(CustomerID, True, False)
+                    End If
+            End Select
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCustomer : " & e.Message)
@@ -1906,13 +1903,7 @@ Public Class frmOrderS
         End Try
     End Sub
 
-    Private Sub SetComboAgency()
-        Try
-            SetSearchLookAgency(CustomerID)
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboAgency : " & e.Message)
-        End Try
-    End Sub
+  
 #End Region
 
 

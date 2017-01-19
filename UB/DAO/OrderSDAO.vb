@@ -346,9 +346,9 @@ Public Class OrderSDAO
             'Ref Order Status
             If IsNothing(RefToOrderID) = False Then
                 Select Case TableID
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
+                        , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn
                         If RefToOrderID.Count > 0 Then
-
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Close.ToString, tr, ModeData)
 
@@ -366,9 +366,10 @@ Public Class OrderSDAO
                                 End If
                             Next
                         End If
-                    Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset, MasterType.Claim, MasterType.Expose
+                    Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset _
+                        , MasterType.Claim, MasterType.Expose, MasterType.ReceiptCut
                         If RefToOrderID.Count > 0 Then
-                            UpdateRefOrderStatus(RefToOrderID, TableID, ID, "", tr, ModeData)
+                            UpdateRefOrderStatus(RefToOrderID, TableID, ID, "", tr, ModeData) ''Not change ref status
                         End If
                 End Select
             End If
