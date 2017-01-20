@@ -103,6 +103,10 @@ Public Class OrderSDAO
                     RefReceiptID = ConvertNullToZero(dr("RefReceiptID"))
                     StockType = ConvertNullToString(dr("StockType"))
                     CampaignID = ConvertNullToZero(dr("CampaignID"))
+                    ClaimRemark = ConvertNullToString(dr("ClaimRemark"))
+                    ClaimResult = ConvertNullToString(dr("ClaimResult"))
+
+
                     ID = Int32.Parse(dr("OrderID"))
                     IsInActive = dr("IsInActive")
                     IsDelete = dr("IsDelete")
@@ -411,10 +415,6 @@ Public Class OrderSDAO
                     , MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.CancelPO
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
                     SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                    'Case MasterType.Bill, MasterType.Receipt
-                    '    SQL = "SELECT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    '    SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-
             End Select
 
             If TableID = MasterType.StockIn Or TableID = MasterType.UpdateStock Then
@@ -640,8 +640,6 @@ Public Class OrderSDAO
         Return lstrCode
     End Function
 
-
-
     Public Overrides Function GetToRefReserveCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
         Dim SQL As String = "", lstrCode As String = ""
         Dim dataTable As New DataTable()
@@ -671,7 +669,6 @@ Public Class OrderSDAO
         Return lstrCode
     End Function
 
-
     Public Overrides Function CheckExist() As Boolean
         Dim SQL As String
         Dim dataTable As New DataTable()
@@ -695,7 +692,6 @@ Public Class OrderSDAO
     Public Function CheckIsToUse() As Boolean ''ถูกใช้งานอยู่ ???
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
-
         Try
 
 
@@ -935,7 +931,6 @@ Public Class OrderSDAO
 
     End Sub
 
-
     Private Sub UpdateStock(ByRef ptr As SqlTransaction, ByVal pProductList As ProductListDAO, ByVal pIsUpdate As Integer, ByVal pIsMainUnitID As Boolean)
         Try
             Dim lclsStock As ProductStockDAO
@@ -1095,7 +1090,7 @@ Public Class OrderSDAO
                     Sql &= " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
                     Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
                     Sql &= " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
-                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID)"
+                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult)"
                     Sql &= " VALUES ( " & ID
                     Sql &= " , " & TableID
                     Sql &= " , '" & Trim(Code) & "'"
@@ -1153,6 +1148,8 @@ Public Class OrderSDAO
                     Sql &= " ,  " & ConvertNullToZero(QuotationRemarkID)
                     Sql &= " ,  " & IIf(IsNotPass = True, 1, 0)
                     Sql &= " ,  " & ConvertNullToZero(CampaignID)
+                    Sql &= " , '" & ConvertNullToString(ClaimRemark) & "'"
+                    Sql &= " , '" & ConvertNullToString(ClaimResult) & "'"
                     Sql &= " ) "
 
                 Case DataMode.ModeEdit
@@ -1212,6 +1209,8 @@ Public Class OrderSDAO
                     Sql &= " ,StockType='" & ConvertNullToString(StockType) & "'"
                     Sql &= " ,QuotationRemarkID=" & ConvertNullToZero(QuotationRemarkID)
                     Sql &= " ,CampaignID=" & ConvertNullToZero(CampaignID)
+                    Sql &= " ,ClaimRemark='" & ConvertNullToString(ClaimRemark) & "'"
+                    Sql &= " ,ClaimResult='" & ConvertNullToString(ClaimResult) & "'"
                     Sql &= " WHERE OrderID=" & ID
                 Case DataMode.ModeDelete
                     Sql = " UPDATE Orders SET IsDelete=1 "
@@ -1239,13 +1238,13 @@ Public Class OrderSDAO
             Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
             Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
             Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
-            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID)"
+            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult)"
             Sql &= " SELECT '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
             Sql &= " ,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
             Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
             Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
             Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
-            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID"
+            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult"
             Sql &= " FROM Orders"""
             Sql &= " WHERE OrderID=" & ID
             gConnection.executeInsertQuery(Sql, ptr)
@@ -1318,7 +1317,6 @@ Public Class OrderSDAO
         End Try
     End Sub
 
-
     Private Sub UpdateBillReceipt(ByRef ptr As SqlTransaction)
         Try
             If ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeDelete Then
@@ -1390,7 +1388,6 @@ Public Class OrderSDAO
 
         End Try
     End Sub
-
 
     Public Function CheckSNIsClose(ByVal pOrderID As Long, ByVal pTableName As String, ByRef ptr As SqlTransaction, pProductDAOs As ProductListDAO) As Boolean
         Dim lSNTable As New DataTable

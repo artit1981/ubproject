@@ -136,7 +136,7 @@ Partial Class frmOrderS
         Me.LayoutPO = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutShipingMethod = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutbtnShipingMethod = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutClaimRemark2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.SimpleSeparator3 = New DevExpress.XtraLayout.SimpleSeparator()
         Me.SimpleSeparator1 = New DevExpress.XtraLayout.SimpleSeparator()
         Me.LayoutOrderDate2 = New DevExpress.XtraLayout.EmptySpaceItem()
@@ -169,7 +169,7 @@ Partial Class frmOrderS
         Me.EmptySpaceItem10 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutStockType = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutRefPO = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutStockType2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutRefPO1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutQuotationRemark = New DevExpress.XtraLayout.LayoutControlItem()
@@ -257,6 +257,15 @@ Partial Class frmOrderS
         Me.LayoutPO2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem12 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.ClaimRemark = New DevExpress.XtraEditors.MemoEdit()
+        Me.LayoutClaimRemark = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.ClaimResult = New DevExpress.XtraEditors.RadioGroup()
+        Me.LayoutClaimResult = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutClaimResult2 = New DevExpress.XtraLayout.EmptySpaceItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -347,7 +356,7 @@ Partial Class frmOrderS
         CType(Me.LayoutPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutShipingMethod, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutbtnShipingMethod, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimRemark2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SimpleSeparator3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SimpleSeparator1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutOrderDate2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -380,7 +389,7 @@ Partial Class frmOrderS
         CType(Me.EmptySpaceItem10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutStockType, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutRefPO, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutStockType2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutRefPO1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutQuotationRemark, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -443,6 +452,15 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -461,7 +479,7 @@ Partial Class frmOrderS
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(927, 696)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(927, 754)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.PledgeTabPage, Me.TaxTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -478,13 +496,15 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
         Me.GeneralTabPage.ScrollBarSmallChange = 50
-        Me.GeneralTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(921, 726)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
         'LayoutControl1
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.LayoutControl1, "")
+        Me.LayoutControl1.Controls.Add(Me.ClaimResult)
+        Me.LayoutControl1.Controls.Add(Me.ClaimRemark)
         Me.LayoutControl1.Controls.Add(Me.XtraTabControl2)
         Me.LayoutControl1.Controls.Add(Me.Campaign)
         Me.LayoutControl1.Controls.Add(Me.btnCampaign)
@@ -542,9 +562,9 @@ Partial Class frmOrderS
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LayoutControl1, True)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(143, 42, 280, 604)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(598, 404, 280, 347)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(921, 668)
+        Me.LayoutControl1.Size = New System.Drawing.Size(921, 726)
         Me.LayoutControl1.TabIndex = 9
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
@@ -552,12 +572,12 @@ Partial Class frmOrderS
         'XtraTabControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl2, "")
-        Me.XtraTabControl2.Location = New System.Drawing.Point(12, 336)
+        Me.XtraTabControl2.Location = New System.Drawing.Point(12, 379)
         Me.XtraTabControl2.MinimumSize = New System.Drawing.Size(0, 50)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl2, True)
         Me.XtraTabControl2.Name = "XtraTabControl2"
         Me.XtraTabControl2.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl2.Size = New System.Drawing.Size(891, 171)
+        Me.XtraTabControl2.Size = New System.Drawing.Size(891, 154)
         Me.XtraTabControl2.TabIndex = 319
         Me.XtraTabControl2.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl2, "")
@@ -568,7 +588,7 @@ Partial Class frmOrderS
         Me.XtraTabPage1.Controls.Add(Me.UcProductLists1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabPage1, True)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(885, 143)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(885, 126)
         Me.XtraTabPage1.Text = "สินค้า"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage1, "")
         '
@@ -580,7 +600,7 @@ Partial Class frmOrderS
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists1, True)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(885, 143)
+        Me.UcProductLists1.Size = New System.Drawing.Size(885, 126)
         Me.UcProductLists1.TabIndex = 21
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
@@ -590,7 +610,7 @@ Partial Class frmOrderS
         Me.XtraTabPage2.Controls.Add(Me.UcNote2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabPage2, True)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 143)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 126)
         Me.XtraTabPage2.Text = "หมายเหตุ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage2, "")
         '
@@ -601,7 +621,7 @@ Partial Class frmOrderS
         Me.UcNote2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote2, True)
         Me.UcNote2.Name = "UcNote2"
-        Me.UcNote2.Size = New System.Drawing.Size(885, 143)
+        Me.UcNote2.Size = New System.Drawing.Size(885, 126)
         Me.UcNote2.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote2, "")
         '
@@ -692,7 +712,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCampaign, "")
         Me.btnCampaign.Image = CType(resources.GetObject("btnCampaign.Image"), System.Drawing.Image)
         Me.btnCampaign.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCampaign.Location = New System.Drawing.Point(431, 276)
+        Me.btnCampaign.Location = New System.Drawing.Point(431, 274)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCampaign, True)
         Me.btnCampaign.Name = "btnCampaign"
         Me.btnCampaign.Size = New System.Drawing.Size(26, 22)
@@ -725,7 +745,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnQuotationRemark, "")
         Me.btnQuotationRemark.Image = CType(resources.GetObject("btnQuotationRemark.Image"), System.Drawing.Image)
         Me.btnQuotationRemark.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnQuotationRemark.Location = New System.Drawing.Point(431, 250)
+        Me.btnQuotationRemark.Location = New System.Drawing.Point(431, 248)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnQuotationRemark, True)
         Me.btnQuotationRemark.Name = "btnQuotationRemark"
         Me.btnQuotationRemark.Size = New System.Drawing.Size(26, 22)
@@ -761,7 +781,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkIsEditVat, "CheckedChanged")
         Me.chkIsEditVat.EnterMoveNextControl = True
-        Me.chkIsEditVat.Location = New System.Drawing.Point(592, 586)
+        Me.chkIsEditVat.Location = New System.Drawing.Point(592, 612)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkIsEditVat, True)
         Me.chkIsEditVat.Name = "chkIsEditVat"
         Me.chkIsEditVat.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -844,7 +864,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GrandTotal, "TextChanged")
         Me.GrandTotal.EnterMoveNextControl = True
-        Me.GrandTotal.Location = New System.Drawing.Point(697, 634)
+        Me.GrandTotal.Location = New System.Drawing.Point(697, 660)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GrandTotal, True)
         Me.GrandTotal.Name = "GrandTotal"
         Me.GrandTotal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -868,7 +888,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalTax, "TextChanged")
         Me.TotalTax.EnterMoveNextControl = True
-        Me.TotalTax.Location = New System.Drawing.Point(697, 610)
+        Me.TotalTax.Location = New System.Drawing.Point(697, 636)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalTax, True)
         Me.TotalTax.Name = "TotalTax"
         Me.TotalTax.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -917,7 +937,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingRuleID, "")
         Me.btnShipingRuleID.Image = CType(resources.GetObject("btnShipingRuleID.Image"), System.Drawing.Image)
         Me.btnShipingRuleID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingRuleID.Location = New System.Drawing.Point(431, 226)
+        Me.btnShipingRuleID.Location = New System.Drawing.Point(431, 224)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingRuleID, True)
         Me.btnShipingRuleID.Name = "btnShipingRuleID"
         Me.btnShipingRuleID.Size = New System.Drawing.Size(26, 20)
@@ -931,7 +951,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PledgeTotal, "TextChanged")
         Me.PledgeTotal.EnterMoveNextControl = True
-        Me.PledgeTotal.Location = New System.Drawing.Point(424, 536)
+        Me.PledgeTotal.Location = New System.Drawing.Point(424, 562)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTotal, True)
         Me.PledgeTotal.Name = "PledgeTotal"
         Me.PledgeTotal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -955,7 +975,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalAfterPledge, "TextChanged")
         Me.TotalAfterPledge.EnterMoveNextControl = True
-        Me.TotalAfterPledge.Location = New System.Drawing.Point(697, 536)
+        Me.TotalAfterPledge.Location = New System.Drawing.Point(697, 562)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalAfterPledge, True)
         Me.TotalAfterPledge.Name = "TotalAfterPledge"
         Me.TotalAfterPledge.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1035,7 +1055,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefOrder, "")
         Me.btnRefOrder.Image = CType(resources.GetObject("btnRefOrder.Image"), System.Drawing.Image)
         Me.btnRefOrder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnRefOrder.Location = New System.Drawing.Point(877, 234)
+        Me.btnRefOrder.Location = New System.Drawing.Point(877, 233)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefOrder, True)
         Me.btnRefOrder.Name = "btnRefOrder"
         Me.btnRefOrder.Size = New System.Drawing.Size(26, 22)
@@ -1074,7 +1094,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingBy, "")
         Me.btnShipingBy.Image = CType(resources.GetObject("btnShipingBy.Image"), System.Drawing.Image)
         Me.btnShipingBy.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingBy.Location = New System.Drawing.Point(877, 281)
+        Me.btnShipingBy.Location = New System.Drawing.Point(877, 283)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingBy, True)
         Me.btnShipingBy.Name = "btnShipingBy"
         Me.btnShipingBy.Size = New System.Drawing.Size(26, 22)
@@ -1091,7 +1111,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingMethod, "")
         Me.btnShipingMethod.Image = CType(resources.GetObject("btnShipingMethod.Image"), System.Drawing.Image)
         Me.btnShipingMethod.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingMethod.Location = New System.Drawing.Point(431, 202)
+        Me.btnShipingMethod.Location = New System.Drawing.Point(431, 200)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingMethod, True)
         Me.btnShipingMethod.Name = "btnShipingMethod"
         Me.btnShipingMethod.Size = New System.Drawing.Size(26, 20)
@@ -1203,7 +1223,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshCurrency, "")
         Me.btnRefreshCurrency.Image = CType(resources.GetObject("btnRefreshCurrency.Image"), System.Drawing.Image)
         Me.btnRefreshCurrency.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnRefreshCurrency.Location = New System.Drawing.Point(288, 634)
+        Me.btnRefreshCurrency.Location = New System.Drawing.Point(288, 660)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshCurrency, True)
         Me.btnRefreshCurrency.Name = "btnRefreshCurrency"
         Me.btnRefreshCurrency.Size = New System.Drawing.Size(26, 22)
@@ -1217,7 +1237,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Exchange, "TextChanged")
         Me.Exchange.EnterMoveNextControl = True
-        Me.Exchange.Location = New System.Drawing.Point(423, 634)
+        Me.Exchange.Location = New System.Drawing.Point(423, 660)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Exchange, True)
         Me.Exchange.Name = "Exchange"
         Me.Exchange.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1408,7 +1428,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboCurrency, "TextChanged")
         Me.cboCurrency.EditValue = CType(0, Short)
         Me.cboCurrency.EnterMoveNextControl = True
-        Me.cboCurrency.Location = New System.Drawing.Point(117, 634)
+        Me.cboCurrency.Location = New System.Drawing.Point(117, 660)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboCurrency, True)
         Me.cboCurrency.Name = "cboCurrency"
         Me.cboCurrency.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1450,7 +1470,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatPercen, "TextChanged")
         Me.VatPercen.EnterMoveNextControl = True
-        Me.VatPercen.Location = New System.Drawing.Point(423, 586)
+        Me.VatPercen.Location = New System.Drawing.Point(423, 612)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatPercen, True)
         Me.VatPercen.Name = "VatPercen"
         Me.VatPercen.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1474,7 +1494,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatAmount, "TextChanged")
         Me.VatAmount.EnterMoveNextControl = True
-        Me.VatAmount.Location = New System.Drawing.Point(720, 586)
+        Me.VatAmount.Location = New System.Drawing.Point(720, 612)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatAmount, True)
         Me.VatAmount.Name = "VatAmount"
         Me.VatAmount.Properties.Appearance.BackColor = System.Drawing.Color.White
@@ -1519,7 +1539,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCreditRuleID, "")
         Me.btnCreditRuleID.Image = CType(resources.GetObject("btnCreditRuleID.Image"), System.Drawing.Image)
         Me.btnCreditRuleID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCreditRuleID.Location = New System.Drawing.Point(431, 82)
+        Me.btnCreditRuleID.Location = New System.Drawing.Point(431, 86)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCreditRuleID, True)
         Me.btnCreditRuleID.Name = "btnCreditRuleID"
         Me.btnCreditRuleID.Size = New System.Drawing.Size(26, 22)
@@ -1556,7 +1576,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatTypeID, "TextChanged")
         Me.VatTypeID.EnterMoveNextControl = True
-        Me.VatTypeID.Location = New System.Drawing.Point(117, 586)
+        Me.VatTypeID.Location = New System.Drawing.Point(117, 612)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTypeID, True)
         Me.VatTypeID.Name = "VatTypeID"
         Me.VatTypeID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1605,7 +1625,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnEmpID, "")
         Me.btnEmpID.Image = CType(resources.GetObject("btnEmpID.Image"), System.Drawing.Image)
         Me.btnEmpID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnEmpID.Location = New System.Drawing.Point(431, 108)
+        Me.btnEmpID.Location = New System.Drawing.Point(431, 112)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnEmpID, True)
         Me.btnEmpID.Name = "btnEmpID"
         Me.btnEmpID.Size = New System.Drawing.Size(26, 22)
@@ -1619,7 +1639,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalAfterDis, "TextChanged")
         Me.TotalAfterDis.EnterMoveNextControl = True
-        Me.TotalAfterDis.Location = New System.Drawing.Point(697, 561)
+        Me.TotalAfterDis.Location = New System.Drawing.Point(697, 587)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalAfterDis, True)
         Me.TotalAfterDis.Name = "TotalAfterDis"
         Me.TotalAfterDis.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1716,7 +1736,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnVatTypeID, "")
         Me.btnVatTypeID.Image = CType(resources.GetObject("btnVatTypeID.Image"), System.Drawing.Image)
         Me.btnVatTypeID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnVatTypeID.Location = New System.Drawing.Point(288, 586)
+        Me.btnVatTypeID.Location = New System.Drawing.Point(288, 612)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnVatTypeID, True)
         Me.btnVatTypeID.Name = "btnVatTypeID"
         Me.btnVatTypeID.Size = New System.Drawing.Size(26, 22)
@@ -1730,7 +1750,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountAmount, "TextChanged")
         Me.DiscountAmount.EnterMoveNextControl = True
-        Me.DiscountAmount.Location = New System.Drawing.Point(423, 561)
+        Me.DiscountAmount.Location = New System.Drawing.Point(423, 587)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountAmount, True)
         Me.DiscountAmount.Name = "DiscountAmount"
         Me.DiscountAmount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1772,7 +1792,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Total, "TextChanged")
         Me.Total.EnterMoveNextControl = True
-        Me.Total.Location = New System.Drawing.Point(697, 511)
+        Me.Total.Location = New System.Drawing.Point(697, 537)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Total, True)
         Me.Total.Name = "Total"
         Me.Total.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -1796,7 +1816,7 @@ Partial Class frmOrderS
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountPercen, "TextChanged")
         Me.DiscountPercen.EnterMoveNextControl = True
-        Me.DiscountPercen.Location = New System.Drawing.Point(117, 561)
+        Me.DiscountPercen.Location = New System.Drawing.Point(117, 587)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountPercen, True)
         Me.DiscountPercen.Name = "DiscountPercen"
         Me.DiscountPercen.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1819,10 +1839,10 @@ Partial Class frmOrderS
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.EmptySpaceItem2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.LayoutPO_2, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutRefPO, Me.EmptySpaceItem8, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.LayoutNotPass, Me.LayoutbtnCampaign, Me.LayoutCampaign, Me.SplitterItem1, Me.LayoutControlProduct})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutbtnGenID, Me.LayoutbtnCustomerID, Me.LayoutCreditRuleID, Me.LayoutCode, Me.LayoutCustomerID, Me.LayoutbtnCreditRuleID, Me.EmptySpaceItem4, Me.SimpleSeparator2, Me.LayoutOrderDate, Me.LayoutbtnEmpID, Me.LayoutControlItem9, Me.LayoutExpireDate, Me.LayoutQuotationDays, Me.LayoutSendBy, Me.LayoutOrderStatus, Me.LayoutControlItem17, Me.SimpleSeparator4, Me.EmptySpaceItem5, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem25, Me.LayoutControlItem26, Me.LayoutControlItem27, Me.EmptySpaceItem6, Me.LayoutControlRefOrder, Me.LayoutShipingDate, Me.LayoutPO, Me.LayoutShipingMethod, Me.LayoutbtnShipingMethod, Me.LayoutClaimRemark2, Me.SimpleSeparator3, Me.SimpleSeparator1, Me.LayoutOrderDate2, Me.LayoutControlRefOrder2, Me.LayoutQuotationDays2, Me.LayoutShipingDate2, Me.LayoutPO_2, Me.LayoutExpireDate2, Me.LayoutSendBy2, Me.LayoutOrderStatus2, Me.LayoutIsCancel2, Me.LayoutIsCancel, Me.LayoutCancelRemark, Me.LayoutPayType, Me.LayoutPayType2, Me.LayoutCreditBalance2, Me.LayoutCreditBalance, Me.LayoutPledge1, Me.LayoutPledge4, Me.LayoutPledge3, Me.LayouShipingBy, Me.LayoutbtnShipingBy, Me.LayoutShipingRuleID2, Me.LayoutShipingRuleID, Me.LayoutTotalTax, Me.LayoutGrandTotal, Me.LayoutInvoiceSuplierID, Me.LayoutInvoiceSuplierID2, Me.LayoutInstitute, Me.EmptySpaceItem10, Me.LayoutStockType, Me.LayoutRefPO, Me.LayoutStockType2, Me.LayoutRefPO1, Me.LayoutControlItem2, Me.LayoutQuotationRemark, Me.LayoutbtnQuotationRemark, Me.LayoutNotPass, Me.LayoutbtnCampaign, Me.LayoutCampaign, Me.SplitterItem1, Me.LayoutControlProduct, Me.LayoutClaimRemark, Me.EmptySpaceItem1, Me.EmptySpaceItem3, Me.EmptySpaceItem2, Me.EmptySpaceItem9, Me.LayoutClaimResult, Me.LayoutClaimResult2})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(921, 668)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(921, 726)
         Me.LayoutControlGroup1.Text = "Root"
         Me.LayoutControlGroup1.TextVisible = False
         '
@@ -1861,8 +1881,11 @@ Partial Class frmOrderS
         Me.LayoutCreditRuleID.Control = Me.CreditRuleID
         Me.LayoutCreditRuleID.CustomizationFormText = "เงื่อนไขการชำระเงิน"
         Me.LayoutCreditRuleID.Location = New System.Drawing.Point(0, 72)
+        Me.LayoutCreditRuleID.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutCreditRuleID.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutCreditRuleID.Name = "LayoutCreditRuleID"
         Me.LayoutCreditRuleID.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutCreditRuleID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutCreditRuleID.Text = "เงื่อนไขการชำระเงิน"
         Me.LayoutCreditRuleID.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1873,8 +1896,11 @@ Partial Class frmOrderS
         Me.LayoutCode.Control = Me.OrderCode
         Me.LayoutCode.CustomizationFormText = "เลขที่เอกสาร"
         Me.LayoutCode.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutCode.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutCode.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutCode.Name = "LayoutCode"
         Me.LayoutCode.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutCode.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutCode.Text = "เลขที่เอกสาร"
         Me.LayoutCode.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1885,8 +1911,11 @@ Partial Class frmOrderS
         Me.LayoutCustomerID.Control = Me.CustomerID
         Me.LayoutCustomerID.CustomizationFormText = "ลูกค้า"
         Me.LayoutCustomerID.Location = New System.Drawing.Point(0, 24)
+        Me.LayoutCustomerID.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutCustomerID.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutCustomerID.Name = "LayoutCustomerID"
         Me.LayoutCustomerID.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutCustomerID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutCustomerID.Text = "ลูกค้า"
         Me.LayoutCustomerID.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1894,7 +1923,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnCreditRuleID.Control = Me.btnCreditRuleID
         Me.LayoutbtnCreditRuleID.CustomizationFormText = "LayoutbtnCreditRuleID"
-        Me.LayoutbtnCreditRuleID.Location = New System.Drawing.Point(419, 70)
+        Me.LayoutbtnCreditRuleID.Location = New System.Drawing.Point(419, 74)
         Me.LayoutbtnCreditRuleID.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnCreditRuleID.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnCreditRuleID.Name = "LayoutbtnCreditRuleID"
@@ -1909,11 +1938,11 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
         Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 286)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 353)
         Me.EmptySpaceItem4.MaxSize = New System.Drawing.Size(417, 12)
         Me.EmptySpaceItem4.MinSize = New System.Drawing.Size(417, 12)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(417, 36)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(417, 12)
         Me.EmptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem4.Text = "EmptySpaceItem4"
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
@@ -1924,7 +1953,7 @@ Partial Class frmOrderS
         Me.SimpleSeparator2.CustomizationFormText = "SimpleSeparator2"
         Me.SimpleSeparator2.Location = New System.Drawing.Point(449, 0)
         Me.SimpleSeparator2.Name = "SimpleSeparator2"
-        Me.SimpleSeparator2.Size = New System.Drawing.Size(2, 322)
+        Me.SimpleSeparator2.Size = New System.Drawing.Size(2, 365)
         Me.SimpleSeparator2.Text = "SimpleSeparator2"
         '
         'LayoutOrderDate
@@ -1932,8 +1961,11 @@ Partial Class frmOrderS
         Me.LayoutOrderDate.Control = Me.OrderDate
         Me.LayoutOrderDate.CustomizationFormText = "วันที่เอกสาร"
         Me.LayoutOrderDate.Location = New System.Drawing.Point(451, 0)
+        Me.LayoutOrderDate.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutOrderDate.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutOrderDate.Name = "LayoutOrderDate"
         Me.LayoutOrderDate.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutOrderDate.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutOrderDate.Text = "วันที่เอกสาร"
         Me.LayoutOrderDate.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1941,7 +1973,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnEmpID.Control = Me.btnEmpID
         Me.LayoutbtnEmpID.CustomizationFormText = "LayoutbtnEmpID"
-        Me.LayoutbtnEmpID.Location = New System.Drawing.Point(419, 96)
+        Me.LayoutbtnEmpID.Location = New System.Drawing.Point(419, 100)
         Me.LayoutbtnEmpID.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnEmpID.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnEmpID.Name = "LayoutbtnEmpID"
@@ -1957,8 +1989,11 @@ Partial Class frmOrderS
         Me.LayoutControlItem9.Control = Me.EmpID
         Me.LayoutControlItem9.CustomizationFormText = "พนักงาน"
         Me.LayoutControlItem9.Location = New System.Drawing.Point(0, 96)
+        Me.LayoutControlItem9.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutControlItem9.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
         Me.LayoutControlItem9.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem9.Text = "พนักงาน"
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1967,8 +2002,11 @@ Partial Class frmOrderS
         Me.LayoutExpireDate.Control = Me.ExpireDate
         Me.LayoutExpireDate.CustomizationFormText = "วันที่ครบกำหนด"
         Me.LayoutExpireDate.Location = New System.Drawing.Point(451, 72)
+        Me.LayoutExpireDate.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutExpireDate.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutExpireDate.Name = "LayoutExpireDate"
         Me.LayoutExpireDate.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutExpireDate.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutExpireDate.Text = "วันที่ครบกำหนด"
         Me.LayoutExpireDate.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1977,8 +2015,11 @@ Partial Class frmOrderS
         Me.LayoutQuotationDays.Control = Me.QuotationDays
         Me.LayoutQuotationDays.CustomizationFormText = "ยืนราคา(วัน)"
         Me.LayoutQuotationDays.Location = New System.Drawing.Point(451, 149)
+        Me.LayoutQuotationDays.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutQuotationDays.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutQuotationDays.Name = "LayoutQuotationDays"
         Me.LayoutQuotationDays.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutQuotationDays.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutQuotationDays.Text = "ยืนราคา(วัน)"
         Me.LayoutQuotationDays.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1987,8 +2028,11 @@ Partial Class frmOrderS
         Me.LayoutSendBy.Control = Me.SendBy
         Me.LayoutSendBy.CustomizationFormText = "การส่งมอบ"
         Me.LayoutSendBy.Location = New System.Drawing.Point(451, 173)
+        Me.LayoutSendBy.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutSendBy.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutSendBy.Name = "LayoutSendBy"
         Me.LayoutSendBy.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutSendBy.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutSendBy.Text = "การส่งมอบ"
         Me.LayoutSendBy.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -1997,8 +2041,11 @@ Partial Class frmOrderS
         Me.LayoutOrderStatus.Control = Me.OrderStatus
         Me.LayoutOrderStatus.CustomizationFormText = "สถานะ"
         Me.LayoutOrderStatus.Location = New System.Drawing.Point(0, 120)
+        Me.LayoutOrderStatus.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutOrderStatus.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutOrderStatus.Name = "LayoutOrderStatus"
         Me.LayoutOrderStatus.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutOrderStatus.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutOrderStatus.Text = "สถานะ"
         Me.LayoutOrderStatus.TextSize = New System.Drawing.Size(102, 13)
         Me.LayoutOrderStatus.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -2007,7 +2054,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem17.Control = Me.Total
         Me.LayoutControlItem17.CustomizationFormText = "ยอดรวม"
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(580, 499)
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(580, 525)
         Me.LayoutControlItem17.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem17.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem17.Name = "LayoutControlItem17"
@@ -2020,7 +2067,7 @@ Partial Class frmOrderS
         '
         Me.SimpleSeparator4.AllowHotTrack = False
         Me.SimpleSeparator4.CustomizationFormText = "SimpleSeparator4"
-        Me.SimpleSeparator4.Location = New System.Drawing.Point(0, 322)
+        Me.SimpleSeparator4.Location = New System.Drawing.Point(0, 365)
         Me.SimpleSeparator4.Name = "SimpleSeparator4"
         Me.SimpleSeparator4.Size = New System.Drawing.Size(895, 2)
         Me.SimpleSeparator4.Text = "SimpleSeparator4"
@@ -2029,7 +2076,7 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
         Me.EmptySpaceItem5.CustomizationFormText = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 499)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 525)
         Me.EmptySpaceItem5.MaxSize = New System.Drawing.Size(0, 25)
         Me.EmptySpaceItem5.MinSize = New System.Drawing.Size(104, 25)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
@@ -2042,7 +2089,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem18.Control = Me.DiscountPercen
         Me.LayoutControlItem18.CustomizationFormText = "ส่วนลด %"
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 549)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(0, 575)
         Me.LayoutControlItem18.MaxSize = New System.Drawing.Size(276, 25)
         Me.LayoutControlItem18.MinSize = New System.Drawing.Size(276, 25)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
@@ -2055,7 +2102,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem19.Control = Me.DiscountAmount
         Me.LayoutControlItem19.CustomizationFormText = "ส่วนลด"
-        Me.LayoutControlItem19.Location = New System.Drawing.Point(306, 549)
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(306, 575)
         Me.LayoutControlItem19.MaxSize = New System.Drawing.Size(274, 25)
         Me.LayoutControlItem19.MinSize = New System.Drawing.Size(274, 25)
         Me.LayoutControlItem19.Name = "LayoutControlItem19"
@@ -2068,7 +2115,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem20.Control = Me.TotalAfterDis
         Me.LayoutControlItem20.CustomizationFormText = "ยอดหลังหักส่วนลด"
-        Me.LayoutControlItem20.Location = New System.Drawing.Point(580, 549)
+        Me.LayoutControlItem20.Location = New System.Drawing.Point(580, 575)
         Me.LayoutControlItem20.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem20.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutControlItem20.Name = "LayoutControlItem20"
@@ -2083,7 +2130,7 @@ Partial Class frmOrderS
         Me.LayoutControlItem21.AppearanceItemCaption.Options.UseForeColor = True
         Me.LayoutControlItem21.Control = Me.VatTypeID
         Me.LayoutControlItem21.CustomizationFormText = "รูปแบบภาษี *"
-        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 574)
+        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 600)
         Me.LayoutControlItem21.MaxSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem21.MinSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem21.Name = "LayoutControlItem21"
@@ -2096,7 +2143,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem22.Control = Me.btnVatTypeID
         Me.LayoutControlItem22.CustomizationFormText = "LayoutControlItem22"
-        Me.LayoutControlItem22.Location = New System.Drawing.Point(276, 574)
+        Me.LayoutControlItem22.Location = New System.Drawing.Point(276, 600)
         Me.LayoutControlItem22.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem22.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem22.Name = "LayoutControlItem22"
@@ -2111,7 +2158,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem23.Control = Me.VatPercen
         Me.LayoutControlItem23.CustomizationFormText = "อัตรา %"
-        Me.LayoutControlItem23.Location = New System.Drawing.Point(306, 574)
+        Me.LayoutControlItem23.Location = New System.Drawing.Point(306, 600)
         Me.LayoutControlItem23.MaxSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem23.MinSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem23.Name = "LayoutControlItem23"
@@ -2124,7 +2171,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem24.Control = Me.VatAmount
         Me.LayoutControlItem24.CustomizationFormText = "ยอดภาษี"
-        Me.LayoutControlItem24.Location = New System.Drawing.Point(603, 574)
+        Me.LayoutControlItem24.Location = New System.Drawing.Point(603, 600)
         Me.LayoutControlItem24.Name = "LayoutControlItem24"
         Me.LayoutControlItem24.Size = New System.Drawing.Size(292, 24)
         Me.LayoutControlItem24.Text = "ยอดภาษี"
@@ -2134,7 +2181,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem25.Control = Me.cboCurrency
         Me.LayoutControlItem25.CustomizationFormText = "สกุลเงิน"
-        Me.LayoutControlItem25.Location = New System.Drawing.Point(0, 622)
+        Me.LayoutControlItem25.Location = New System.Drawing.Point(0, 648)
         Me.LayoutControlItem25.MaxSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem25.MinSize = New System.Drawing.Size(276, 26)
         Me.LayoutControlItem25.Name = "LayoutControlItem25"
@@ -2147,7 +2194,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem26.Control = Me.btnRefreshCurrency
         Me.LayoutControlItem26.CustomizationFormText = "LayoutControlItem26"
-        Me.LayoutControlItem26.Location = New System.Drawing.Point(276, 622)
+        Me.LayoutControlItem26.Location = New System.Drawing.Point(276, 648)
         Me.LayoutControlItem26.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem26.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlItem26.Name = "LayoutControlItem26"
@@ -2162,7 +2209,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem27.Control = Me.Exchange
         Me.LayoutControlItem27.CustomizationFormText = "อัตราแลกเปลี่ยน"
-        Me.LayoutControlItem27.Location = New System.Drawing.Point(306, 622)
+        Me.LayoutControlItem27.Location = New System.Drawing.Point(306, 648)
         Me.LayoutControlItem27.MaxSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem27.MinSize = New System.Drawing.Size(274, 26)
         Me.LayoutControlItem27.Name = "LayoutControlItem27"
@@ -2175,7 +2222,7 @@ Partial Class frmOrderS
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
         Me.EmptySpaceItem6.CustomizationFormText = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(276, 549)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(276, 575)
         Me.EmptySpaceItem6.MaxSize = New System.Drawing.Size(30, 25)
         Me.EmptySpaceItem6.MinSize = New System.Drawing.Size(30, 25)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
@@ -2189,8 +2236,11 @@ Partial Class frmOrderS
         Me.LayoutControlRefOrder.Control = Me.txtRefOrder
         Me.LayoutControlRefOrder.CustomizationFormText = "เอกสารอ้างอิง"
         Me.LayoutControlRefOrder.Location = New System.Drawing.Point(451, 221)
+        Me.LayoutControlRefOrder.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutControlRefOrder.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutControlRefOrder.Name = "LayoutControlRefOrder"
         Me.LayoutControlRefOrder.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutControlRefOrder.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlRefOrder.Text = "เอกสารอ้างอิง"
         Me.LayoutControlRefOrder.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2199,8 +2249,11 @@ Partial Class frmOrderS
         Me.LayoutShipingDate.Control = Me.ShipingDate
         Me.LayoutShipingDate.CustomizationFormText = "วันที่ส่งของ"
         Me.LayoutShipingDate.Location = New System.Drawing.Point(451, 96)
+        Me.LayoutShipingDate.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutShipingDate.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutShipingDate.Name = "LayoutShipingDate"
         Me.LayoutShipingDate.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutShipingDate.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutShipingDate.Text = "วันที่ส่งของ"
         Me.LayoutShipingDate.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2209,8 +2262,11 @@ Partial Class frmOrderS
         Me.LayoutPO.Control = Me.PO
         Me.LayoutPO.CustomizationFormText = "เลขที่ใบสั่งซื้อ"
         Me.LayoutPO.Location = New System.Drawing.Point(451, 197)
+        Me.LayoutPO.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutPO.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutPO.Name = "LayoutPO"
         Me.LayoutPO.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutPO.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutPO.Text = "เลขที่ใบสั่งซื้อ"
         Me.LayoutPO.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2219,8 +2275,11 @@ Partial Class frmOrderS
         Me.LayoutShipingMethod.Control = Me.ShipingMethod
         Me.LayoutShipingMethod.CustomizationFormText = "วิธีการขนส่ง"
         Me.LayoutShipingMethod.Location = New System.Drawing.Point(0, 190)
+        Me.LayoutShipingMethod.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutShipingMethod.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutShipingMethod.Name = "LayoutShipingMethod"
         Me.LayoutShipingMethod.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutShipingMethod.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutShipingMethod.Text = "วิธีการขนส่ง"
         Me.LayoutShipingMethod.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2228,7 +2287,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnShipingMethod.Control = Me.btnShipingMethod
         Me.LayoutbtnShipingMethod.CustomizationFormText = "LayoutbtnShipingMethod"
-        Me.LayoutbtnShipingMethod.Location = New System.Drawing.Point(419, 190)
+        Me.LayoutbtnShipingMethod.Location = New System.Drawing.Point(419, 188)
         Me.LayoutbtnShipingMethod.MaxSize = New System.Drawing.Size(30, 24)
         Me.LayoutbtnShipingMethod.MinSize = New System.Drawing.Size(30, 24)
         Me.LayoutbtnShipingMethod.Name = "LayoutbtnShipingMethod"
@@ -2239,15 +2298,18 @@ Partial Class frmOrderS
         Me.LayoutbtnShipingMethod.TextToControlDistance = 0
         Me.LayoutbtnShipingMethod.TextVisible = False
         '
-        'EmptySpaceItem2
+        'LayoutClaimRemark2
         '
-        Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(419, 290)
-        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(30, 32)
-        Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutClaimRemark2.AllowHotTrack = False
+        Me.LayoutClaimRemark2.CustomizationFormText = "EmptySpaceItem2"
+        Me.LayoutClaimRemark2.Location = New System.Drawing.Point(419, 317)
+        Me.LayoutClaimRemark2.MaxSize = New System.Drawing.Size(30, 38)
+        Me.LayoutClaimRemark2.MinSize = New System.Drawing.Size(30, 38)
+        Me.LayoutClaimRemark2.Name = "LayoutClaimRemark2"
+        Me.LayoutClaimRemark2.Size = New System.Drawing.Size(30, 38)
+        Me.LayoutClaimRemark2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimRemark2.Text = "LayoutClaimRemark2"
+        Me.LayoutClaimRemark2.TextSize = New System.Drawing.Size(0, 0)
         '
         'SimpleSeparator3
         '
@@ -2255,7 +2317,7 @@ Partial Class frmOrderS
         Me.SimpleSeparator3.CustomizationFormText = "SimpleSeparator3"
         Me.SimpleSeparator3.Location = New System.Drawing.Point(863, 0)
         Me.SimpleSeparator3.Name = "SimpleSeparator3"
-        Me.SimpleSeparator3.Size = New System.Drawing.Size(2, 322)
+        Me.SimpleSeparator3.Size = New System.Drawing.Size(2, 365)
         Me.SimpleSeparator3.Text = "SimpleSeparator3"
         '
         'SimpleSeparator1
@@ -2264,7 +2326,7 @@ Partial Class frmOrderS
         Me.SimpleSeparator1.CustomizationFormText = "SimpleSeparator1"
         Me.SimpleSeparator1.Location = New System.Drawing.Point(417, 0)
         Me.SimpleSeparator1.Name = "SimpleSeparator1"
-        Me.SimpleSeparator1.Size = New System.Drawing.Size(2, 322)
+        Me.SimpleSeparator1.Size = New System.Drawing.Size(2, 365)
         Me.SimpleSeparator1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.SimpleSeparator1.Text = "SimpleSeparator1"
         '
@@ -2273,10 +2335,10 @@ Partial Class frmOrderS
         Me.LayoutOrderDate2.AllowHotTrack = False
         Me.LayoutOrderDate2.CustomizationFormText = "LayoutOrderDate2"
         Me.LayoutOrderDate2.Location = New System.Drawing.Point(865, 0)
-        Me.LayoutOrderDate2.MaxSize = New System.Drawing.Size(30, 26)
-        Me.LayoutOrderDate2.MinSize = New System.Drawing.Size(30, 26)
+        Me.LayoutOrderDate2.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutOrderDate2.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutOrderDate2.Name = "LayoutOrderDate2"
-        Me.LayoutOrderDate2.Size = New System.Drawing.Size(30, 26)
+        Me.LayoutOrderDate2.Size = New System.Drawing.Size(30, 24)
         Me.LayoutOrderDate2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutOrderDate2.Text = "1"
         Me.LayoutOrderDate2.TextSize = New System.Drawing.Size(0, 0)
@@ -2285,7 +2347,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlRefOrder2.Control = Me.btnRefOrder
         Me.LayoutControlRefOrder2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlRefOrder2.Location = New System.Drawing.Point(865, 222)
+        Me.LayoutControlRefOrder2.Location = New System.Drawing.Point(865, 221)
         Me.LayoutControlRefOrder2.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlRefOrder2.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutControlRefOrder2.Name = "LayoutControlRefOrder2"
@@ -2301,10 +2363,10 @@ Partial Class frmOrderS
         Me.LayoutQuotationDays2.AllowHotTrack = False
         Me.LayoutQuotationDays2.CustomizationFormText = "LayoutQuotationDays2"
         Me.LayoutQuotationDays2.Location = New System.Drawing.Point(865, 149)
-        Me.LayoutQuotationDays2.MaxSize = New System.Drawing.Size(30, 25)
-        Me.LayoutQuotationDays2.MinSize = New System.Drawing.Size(30, 25)
+        Me.LayoutQuotationDays2.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutQuotationDays2.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutQuotationDays2.Name = "LayoutQuotationDays2"
-        Me.LayoutQuotationDays2.Size = New System.Drawing.Size(30, 25)
+        Me.LayoutQuotationDays2.Size = New System.Drawing.Size(30, 24)
         Me.LayoutQuotationDays2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutQuotationDays2.Text = "4"
         Me.LayoutQuotationDays2.TextSize = New System.Drawing.Size(0, 0)
@@ -2313,7 +2375,7 @@ Partial Class frmOrderS
         '
         Me.LayoutShipingDate2.AllowHotTrack = False
         Me.LayoutShipingDate2.CustomizationFormText = "LayoutShipingDate2"
-        Me.LayoutShipingDate2.Location = New System.Drawing.Point(865, 97)
+        Me.LayoutShipingDate2.Location = New System.Drawing.Point(865, 96)
         Me.LayoutShipingDate2.MaxSize = New System.Drawing.Size(30, 24)
         Me.LayoutShipingDate2.MinSize = New System.Drawing.Size(30, 24)
         Me.LayoutShipingDate2.Name = "LayoutShipingDate2"
@@ -2326,11 +2388,11 @@ Partial Class frmOrderS
         '
         Me.LayoutPO_2.AllowHotTrack = False
         Me.LayoutPO_2.CustomizationFormText = "LayoutPO2"
-        Me.LayoutPO_2.Location = New System.Drawing.Point(865, 200)
-        Me.LayoutPO_2.MaxSize = New System.Drawing.Size(30, 22)
-        Me.LayoutPO_2.MinSize = New System.Drawing.Size(30, 22)
+        Me.LayoutPO_2.Location = New System.Drawing.Point(865, 197)
+        Me.LayoutPO_2.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutPO_2.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutPO_2.Name = "LayoutPO_2"
-        Me.LayoutPO_2.Size = New System.Drawing.Size(30, 22)
+        Me.LayoutPO_2.Size = New System.Drawing.Size(30, 24)
         Me.LayoutPO_2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutPO_2.Text = "6"
         Me.LayoutPO_2.TextSize = New System.Drawing.Size(0, 0)
@@ -2339,11 +2401,11 @@ Partial Class frmOrderS
         '
         Me.LayoutExpireDate2.AllowHotTrack = False
         Me.LayoutExpireDate2.CustomizationFormText = "LayoutExpireDate2"
-        Me.LayoutExpireDate2.Location = New System.Drawing.Point(865, 74)
-        Me.LayoutExpireDate2.MaxSize = New System.Drawing.Size(30, 23)
-        Me.LayoutExpireDate2.MinSize = New System.Drawing.Size(30, 23)
+        Me.LayoutExpireDate2.Location = New System.Drawing.Point(865, 72)
+        Me.LayoutExpireDate2.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutExpireDate2.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutExpireDate2.Name = "LayoutExpireDate2"
-        Me.LayoutExpireDate2.Size = New System.Drawing.Size(30, 23)
+        Me.LayoutExpireDate2.Size = New System.Drawing.Size(30, 24)
         Me.LayoutExpireDate2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutExpireDate2.Text = "2"
         Me.LayoutExpireDate2.TextSize = New System.Drawing.Size(0, 0)
@@ -2352,11 +2414,11 @@ Partial Class frmOrderS
         '
         Me.LayoutSendBy2.AllowHotTrack = False
         Me.LayoutSendBy2.CustomizationFormText = "LayoutSendBy2"
-        Me.LayoutSendBy2.Location = New System.Drawing.Point(865, 174)
-        Me.LayoutSendBy2.MaxSize = New System.Drawing.Size(30, 26)
-        Me.LayoutSendBy2.MinSize = New System.Drawing.Size(30, 26)
+        Me.LayoutSendBy2.Location = New System.Drawing.Point(865, 173)
+        Me.LayoutSendBy2.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutSendBy2.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutSendBy2.Name = "LayoutSendBy2"
-        Me.LayoutSendBy2.Size = New System.Drawing.Size(30, 26)
+        Me.LayoutSendBy2.Size = New System.Drawing.Size(30, 24)
         Me.LayoutSendBy2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutSendBy2.Text = "5"
         Me.LayoutSendBy2.TextSize = New System.Drawing.Size(0, 0)
@@ -2365,11 +2427,11 @@ Partial Class frmOrderS
         '
         Me.LayoutOrderStatus2.AllowHotTrack = False
         Me.LayoutOrderStatus2.CustomizationFormText = "LayoutOrderStatus2"
-        Me.LayoutOrderStatus2.Location = New System.Drawing.Point(419, 122)
-        Me.LayoutOrderStatus2.MaxSize = New System.Drawing.Size(30, 23)
-        Me.LayoutOrderStatus2.MinSize = New System.Drawing.Size(30, 23)
+        Me.LayoutOrderStatus2.Location = New System.Drawing.Point(419, 126)
+        Me.LayoutOrderStatus2.MaxSize = New System.Drawing.Size(30, 17)
+        Me.LayoutOrderStatus2.MinSize = New System.Drawing.Size(30, 17)
         Me.LayoutOrderStatus2.Name = "LayoutOrderStatus2"
-        Me.LayoutOrderStatus2.Size = New System.Drawing.Size(30, 23)
+        Me.LayoutOrderStatus2.Size = New System.Drawing.Size(30, 17)
         Me.LayoutOrderStatus2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutOrderStatus2.Text = "LayoutOrderStatus2"
         Me.LayoutOrderStatus2.TextSize = New System.Drawing.Size(0, 0)
@@ -2379,7 +2441,7 @@ Partial Class frmOrderS
         '
         Me.LayoutIsCancel2.AllowHotTrack = False
         Me.LayoutIsCancel2.CustomizationFormText = "EmptySpaceItem10"
-        Me.LayoutIsCancel2.Location = New System.Drawing.Point(419, 145)
+        Me.LayoutIsCancel2.Location = New System.Drawing.Point(419, 143)
         Me.LayoutIsCancel2.MaxSize = New System.Drawing.Size(30, 45)
         Me.LayoutIsCancel2.MinSize = New System.Drawing.Size(30, 45)
         Me.LayoutIsCancel2.Name = "LayoutIsCancel2"
@@ -2393,8 +2455,11 @@ Partial Class frmOrderS
         Me.LayoutIsCancel.Control = Me.IsCancel
         Me.LayoutIsCancel.CustomizationFormText = "LayoutIsCancel"
         Me.LayoutIsCancel.Location = New System.Drawing.Point(0, 144)
+        Me.LayoutIsCancel.MaxSize = New System.Drawing.Size(0, 23)
+        Me.LayoutIsCancel.MinSize = New System.Drawing.Size(59, 23)
         Me.LayoutIsCancel.Name = "LayoutIsCancel"
         Me.LayoutIsCancel.Size = New System.Drawing.Size(108, 23)
+        Me.LayoutIsCancel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutIsCancel.Text = "LayoutIsCancel"
         Me.LayoutIsCancel.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutIsCancel.TextToControlDistance = 0
@@ -2420,8 +2485,11 @@ Partial Class frmOrderS
         Me.LayoutPayType.Control = Me.PayType
         Me.LayoutPayType.CustomizationFormText = "ประเภทการขาย"
         Me.LayoutPayType.Location = New System.Drawing.Point(451, 120)
+        Me.LayoutPayType.MaxSize = New System.Drawing.Size(0, 29)
+        Me.LayoutPayType.MinSize = New System.Drawing.Size(159, 29)
         Me.LayoutPayType.Name = "LayoutPayType"
         Me.LayoutPayType.Size = New System.Drawing.Size(412, 29)
+        Me.LayoutPayType.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutPayType.Text = "ประเภทการขาย"
         Me.LayoutPayType.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2429,11 +2497,11 @@ Partial Class frmOrderS
         '
         Me.LayoutPayType2.AllowHotTrack = False
         Me.LayoutPayType2.CustomizationFormText = "LayoutPayType2"
-        Me.LayoutPayType2.Location = New System.Drawing.Point(865, 121)
-        Me.LayoutPayType2.MaxSize = New System.Drawing.Size(30, 28)
-        Me.LayoutPayType2.MinSize = New System.Drawing.Size(30, 28)
+        Me.LayoutPayType2.Location = New System.Drawing.Point(865, 120)
+        Me.LayoutPayType2.MaxSize = New System.Drawing.Size(0, 29)
+        Me.LayoutPayType2.MinSize = New System.Drawing.Size(10, 29)
         Me.LayoutPayType2.Name = "LayoutPayType2"
-        Me.LayoutPayType2.Size = New System.Drawing.Size(30, 28)
+        Me.LayoutPayType2.Size = New System.Drawing.Size(30, 29)
         Me.LayoutPayType2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutPayType2.Text = "LayoutPayType2"
         Me.LayoutPayType2.TextSize = New System.Drawing.Size(0, 0)
@@ -2442,7 +2510,7 @@ Partial Class frmOrderS
         '
         Me.LayoutCreditBalance2.AllowHotTrack = False
         Me.LayoutCreditBalance2.CustomizationFormText = "LayoutCreditBalance2"
-        Me.LayoutCreditBalance2.Location = New System.Drawing.Point(865, 26)
+        Me.LayoutCreditBalance2.Location = New System.Drawing.Point(865, 24)
         Me.LayoutCreditBalance2.MaxSize = New System.Drawing.Size(30, 24)
         Me.LayoutCreditBalance2.MinSize = New System.Drawing.Size(30, 24)
         Me.LayoutCreditBalance2.Name = "LayoutCreditBalance2"
@@ -2456,8 +2524,11 @@ Partial Class frmOrderS
         Me.LayoutCreditBalance.Control = Me.CreditBalance
         Me.LayoutCreditBalance.CustomizationFormText = "ยอดหนี้"
         Me.LayoutCreditBalance.Location = New System.Drawing.Point(451, 24)
+        Me.LayoutCreditBalance.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutCreditBalance.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutCreditBalance.Name = "LayoutCreditBalance"
         Me.LayoutCreditBalance.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutCreditBalance.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutCreditBalance.Text = "ยอดหนี้"
         Me.LayoutCreditBalance.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2465,7 +2536,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge1.AllowHotTrack = False
         Me.LayoutPledge1.CustomizationFormText = "LayoutPledge1"
-        Me.LayoutPledge1.Location = New System.Drawing.Point(0, 524)
+        Me.LayoutPledge1.Location = New System.Drawing.Point(0, 550)
         Me.LayoutPledge1.MaxSize = New System.Drawing.Size(307, 25)
         Me.LayoutPledge1.MinSize = New System.Drawing.Size(307, 25)
         Me.LayoutPledge1.Name = "LayoutPledge1"
@@ -2478,7 +2549,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge4.Control = Me.TotalAfterPledge
         Me.LayoutPledge4.CustomizationFormText = "LayoutPledge4"
-        Me.LayoutPledge4.Location = New System.Drawing.Point(580, 524)
+        Me.LayoutPledge4.Location = New System.Drawing.Point(580, 550)
         Me.LayoutPledge4.MaxSize = New System.Drawing.Size(315, 25)
         Me.LayoutPledge4.MinSize = New System.Drawing.Size(315, 25)
         Me.LayoutPledge4.Name = "LayoutPledge4"
@@ -2491,7 +2562,7 @@ Partial Class frmOrderS
         '
         Me.LayoutPledge3.Control = Me.PledgeTotal
         Me.LayoutPledge3.CustomizationFormText = "LayoutPledge3"
-        Me.LayoutPledge3.Location = New System.Drawing.Point(307, 524)
+        Me.LayoutPledge3.Location = New System.Drawing.Point(307, 550)
         Me.LayoutPledge3.MaxSize = New System.Drawing.Size(273, 25)
         Me.LayoutPledge3.MinSize = New System.Drawing.Size(273, 25)
         Me.LayoutPledge3.Name = "LayoutPledge3"
@@ -2505,8 +2576,11 @@ Partial Class frmOrderS
         Me.LayouShipingBy.Control = Me.ShipingBy
         Me.LayouShipingBy.CustomizationFormText = "ขนส่งโดย"
         Me.LayouShipingBy.Location = New System.Drawing.Point(451, 269)
+        Me.LayouShipingBy.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayouShipingBy.MinSize = New System.Drawing.Size(159, 24)
         Me.LayouShipingBy.Name = "LayouShipingBy"
         Me.LayouShipingBy.Size = New System.Drawing.Size(412, 24)
+        Me.LayouShipingBy.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayouShipingBy.Text = "ขนส่งโดย"
         Me.LayouShipingBy.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2514,7 +2588,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnShipingBy.Control = Me.btnShipingBy
         Me.LayoutbtnShipingBy.CustomizationFormText = "LayoutbtnShipingBy"
-        Me.LayoutbtnShipingBy.Location = New System.Drawing.Point(865, 269)
+        Me.LayoutbtnShipingBy.Location = New System.Drawing.Point(865, 271)
         Me.LayoutbtnShipingBy.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnShipingBy.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnShipingBy.Name = "LayoutbtnShipingBy"
@@ -2529,7 +2603,7 @@ Partial Class frmOrderS
         '
         Me.LayoutShipingRuleID2.Control = Me.btnShipingRuleID
         Me.LayoutShipingRuleID2.CustomizationFormText = "LayoutShipingRuleID2"
-        Me.LayoutShipingRuleID2.Location = New System.Drawing.Point(419, 214)
+        Me.LayoutShipingRuleID2.Location = New System.Drawing.Point(419, 212)
         Me.LayoutShipingRuleID2.MaxSize = New System.Drawing.Size(30, 24)
         Me.LayoutShipingRuleID2.MinSize = New System.Drawing.Size(30, 24)
         Me.LayoutShipingRuleID2.Name = "LayoutShipingRuleID2"
@@ -2545,8 +2619,11 @@ Partial Class frmOrderS
         Me.LayoutShipingRuleID.Control = Me.ShipingRuleID
         Me.LayoutShipingRuleID.CustomizationFormText = "เงื่อนไขการขนส่ง"
         Me.LayoutShipingRuleID.Location = New System.Drawing.Point(0, 214)
+        Me.LayoutShipingRuleID.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutShipingRuleID.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutShipingRuleID.Name = "LayoutShipingRuleID"
         Me.LayoutShipingRuleID.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutShipingRuleID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutShipingRuleID.Text = "เงื่อนไขการขนส่ง"
         Me.LayoutShipingRuleID.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2554,7 +2631,7 @@ Partial Class frmOrderS
         '
         Me.LayoutTotalTax.Control = Me.TotalTax
         Me.LayoutTotalTax.CustomizationFormText = "หักภาษี"
-        Me.LayoutTotalTax.Location = New System.Drawing.Point(580, 598)
+        Me.LayoutTotalTax.Location = New System.Drawing.Point(580, 624)
         Me.LayoutTotalTax.MaxSize = New System.Drawing.Size(315, 24)
         Me.LayoutTotalTax.MinSize = New System.Drawing.Size(315, 24)
         Me.LayoutTotalTax.Name = "LayoutTotalTax"
@@ -2567,7 +2644,7 @@ Partial Class frmOrderS
         '
         Me.LayoutGrandTotal.Control = Me.GrandTotal
         Me.LayoutGrandTotal.CustomizationFormText = "ยอดรวมทั้งสิ้น"
-        Me.LayoutGrandTotal.Location = New System.Drawing.Point(580, 622)
+        Me.LayoutGrandTotal.Location = New System.Drawing.Point(580, 648)
         Me.LayoutGrandTotal.MaxSize = New System.Drawing.Size(315, 26)
         Me.LayoutGrandTotal.MinSize = New System.Drawing.Size(315, 26)
         Me.LayoutGrandTotal.Name = "LayoutGrandTotal"
@@ -2581,8 +2658,11 @@ Partial Class frmOrderS
         Me.LayoutInvoiceSuplierID.Control = Me.InvoiceSuplierID
         Me.LayoutInvoiceSuplierID.CustomizationFormText = "LayoutControlItem1"
         Me.LayoutInvoiceSuplierID.Location = New System.Drawing.Point(451, 48)
+        Me.LayoutInvoiceSuplierID.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutInvoiceSuplierID.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutInvoiceSuplierID.Name = "LayoutInvoiceSuplierID"
         Me.LayoutInvoiceSuplierID.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutInvoiceSuplierID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutInvoiceSuplierID.Text = "ใบกำกับภาษีเจ้าหนี้"
         Me.LayoutInvoiceSuplierID.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2590,7 +2670,7 @@ Partial Class frmOrderS
         '
         Me.LayoutInvoiceSuplierID2.AllowHotTrack = False
         Me.LayoutInvoiceSuplierID2.CustomizationFormText = "LayoutInvoiceSuplierID2"
-        Me.LayoutInvoiceSuplierID2.Location = New System.Drawing.Point(865, 50)
+        Me.LayoutInvoiceSuplierID2.Location = New System.Drawing.Point(865, 48)
         Me.LayoutInvoiceSuplierID2.MaxSize = New System.Drawing.Size(30, 24)
         Me.LayoutInvoiceSuplierID2.MinSize = New System.Drawing.Size(30, 24)
         Me.LayoutInvoiceSuplierID2.Name = "LayoutInvoiceSuplierID2"
@@ -2604,8 +2684,11 @@ Partial Class frmOrderS
         Me.LayoutInstitute.Control = Me.Institute
         Me.LayoutInstitute.CustomizationFormText = "หน่วยงาน"
         Me.LayoutInstitute.Location = New System.Drawing.Point(0, 48)
+        Me.LayoutInstitute.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutInstitute.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutInstitute.Name = "LayoutInstitute"
         Me.LayoutInstitute.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutInstitute.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutInstitute.Text = "หน่วยงาน"
         Me.LayoutInstitute.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2614,10 +2697,10 @@ Partial Class frmOrderS
         Me.EmptySpaceItem10.AllowHotTrack = False
         Me.EmptySpaceItem10.CustomizationFormText = "EmptySpaceItem10"
         Me.EmptySpaceItem10.Location = New System.Drawing.Point(419, 50)
-        Me.EmptySpaceItem10.MaxSize = New System.Drawing.Size(30, 20)
-        Me.EmptySpaceItem10.MinSize = New System.Drawing.Size(30, 20)
+        Me.EmptySpaceItem10.MaxSize = New System.Drawing.Size(30, 24)
+        Me.EmptySpaceItem10.MinSize = New System.Drawing.Size(30, 24)
         Me.EmptySpaceItem10.Name = "EmptySpaceItem10"
-        Me.EmptySpaceItem10.Size = New System.Drawing.Size(30, 20)
+        Me.EmptySpaceItem10.Size = New System.Drawing.Size(30, 24)
         Me.EmptySpaceItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem10.Text = "EmptySpaceItem10"
         Me.EmptySpaceItem10.TextSize = New System.Drawing.Size(0, 0)
@@ -2627,8 +2710,11 @@ Partial Class frmOrderS
         Me.LayoutStockType.Control = Me.StockType
         Me.LayoutStockType.CustomizationFormText = "การตัดสต๊อก"
         Me.LayoutStockType.Location = New System.Drawing.Point(451, 293)
+        Me.LayoutStockType.MaxSize = New System.Drawing.Size(0, 29)
+        Me.LayoutStockType.MinSize = New System.Drawing.Size(159, 29)
         Me.LayoutStockType.Name = "LayoutStockType"
         Me.LayoutStockType.Size = New System.Drawing.Size(412, 29)
+        Me.LayoutStockType.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutStockType.Text = "การตัดสต๊อก"
         Me.LayoutStockType.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2637,30 +2723,36 @@ Partial Class frmOrderS
         Me.LayoutRefPO.Control = Me.txtRefPO
         Me.LayoutRefPO.CustomizationFormText = "LayoutRefPO"
         Me.LayoutRefPO.Location = New System.Drawing.Point(451, 245)
+        Me.LayoutRefPO.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutRefPO.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutRefPO.Name = "LayoutRefPO"
         Me.LayoutRefPO.Size = New System.Drawing.Size(412, 24)
+        Me.LayoutRefPO.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutRefPO.Text = "อ้างอิงใบสั่งจอง"
         Me.LayoutRefPO.TextSize = New System.Drawing.Size(102, 13)
         '
-        'EmptySpaceItem8
+        'LayoutStockType2
         '
-        Me.EmptySpaceItem8.AllowHotTrack = False
-        Me.EmptySpaceItem8.CustomizationFormText = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.Location = New System.Drawing.Point(865, 295)
-        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.Size = New System.Drawing.Size(30, 27)
-        Me.EmptySpaceItem8.Text = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutStockType2.AllowHotTrack = False
+        Me.LayoutStockType2.CustomizationFormText = "EmptySpaceItem8"
+        Me.LayoutStockType2.Location = New System.Drawing.Point(865, 297)
+        Me.LayoutStockType2.MaxSize = New System.Drawing.Size(30, 26)
+        Me.LayoutStockType2.MinSize = New System.Drawing.Size(30, 26)
+        Me.LayoutStockType2.Name = "LayoutStockType2"
+        Me.LayoutStockType2.Size = New System.Drawing.Size(30, 26)
+        Me.LayoutStockType2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutStockType2.Text = "LayoutStockType2"
+        Me.LayoutStockType2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutRefPO1
         '
         Me.LayoutRefPO1.AllowHotTrack = False
         Me.LayoutRefPO1.CustomizationFormText = "LayoutRefPO1"
-        Me.LayoutRefPO1.Location = New System.Drawing.Point(865, 248)
-        Me.LayoutRefPO1.MaxSize = New System.Drawing.Size(30, 21)
-        Me.LayoutRefPO1.MinSize = New System.Drawing.Size(30, 21)
+        Me.LayoutRefPO1.Location = New System.Drawing.Point(865, 247)
+        Me.LayoutRefPO1.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutRefPO1.MinSize = New System.Drawing.Size(10, 24)
         Me.LayoutRefPO1.Name = "LayoutRefPO1"
-        Me.LayoutRefPO1.Size = New System.Drawing.Size(30, 21)
+        Me.LayoutRefPO1.Size = New System.Drawing.Size(30, 24)
         Me.LayoutRefPO1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutRefPO1.Text = "LayoutRefPO1"
         Me.LayoutRefPO1.TextSize = New System.Drawing.Size(0, 0)
@@ -2669,7 +2761,7 @@ Partial Class frmOrderS
         '
         Me.LayoutControlItem2.Control = Me.chkIsEditVat
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(580, 574)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(580, 600)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(23, 24)
         Me.LayoutControlItem2.Text = "LayoutControlItem2"
@@ -2682,8 +2774,11 @@ Partial Class frmOrderS
         Me.LayoutQuotationRemark.Control = Me.QuotationRemark
         Me.LayoutQuotationRemark.CustomizationFormText = "หมายเหตุใบเสนอราคา"
         Me.LayoutQuotationRemark.Location = New System.Drawing.Point(0, 238)
+        Me.LayoutQuotationRemark.MaxSize = New System.Drawing.Size(0, 24)
+        Me.LayoutQuotationRemark.MinSize = New System.Drawing.Size(159, 24)
         Me.LayoutQuotationRemark.Name = "LayoutQuotationRemark"
         Me.LayoutQuotationRemark.Size = New System.Drawing.Size(417, 24)
+        Me.LayoutQuotationRemark.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutQuotationRemark.Text = "หมายเหตุใบเสนอราคา"
         Me.LayoutQuotationRemark.TextSize = New System.Drawing.Size(102, 13)
         '
@@ -2691,7 +2786,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnQuotationRemark.Control = Me.btnQuotationRemark
         Me.LayoutbtnQuotationRemark.CustomizationFormText = "LayoutbtnQuotationRemark"
-        Me.LayoutbtnQuotationRemark.Location = New System.Drawing.Point(419, 238)
+        Me.LayoutbtnQuotationRemark.Location = New System.Drawing.Point(419, 236)
         Me.LayoutbtnQuotationRemark.Name = "LayoutbtnQuotationRemark"
         Me.LayoutbtnQuotationRemark.Size = New System.Drawing.Size(30, 26)
         Me.LayoutbtnQuotationRemark.Text = "LayoutbtnQuotationRemark"
@@ -2715,7 +2810,7 @@ Partial Class frmOrderS
         '
         Me.LayoutbtnCampaign.Control = Me.btnCampaign
         Me.LayoutbtnCampaign.CustomizationFormText = "LayoutControlItem3"
-        Me.LayoutbtnCampaign.Location = New System.Drawing.Point(419, 264)
+        Me.LayoutbtnCampaign.Location = New System.Drawing.Point(419, 262)
         Me.LayoutbtnCampaign.MaxSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnCampaign.MinSize = New System.Drawing.Size(30, 26)
         Me.LayoutbtnCampaign.Name = "LayoutbtnCampaign"
@@ -2745,16 +2840,16 @@ Partial Class frmOrderS
         Me.SplitterItem1.CustomizationFormText = "SplitterItem1"
         Me.SplitterItem1.Location = New System.Drawing.Point(895, 0)
         Me.SplitterItem1.Name = "SplitterItem1"
-        Me.SplitterItem1.Size = New System.Drawing.Size(6, 648)
+        Me.SplitterItem1.Size = New System.Drawing.Size(6, 674)
         '
         'LayoutControlProduct
         '
         Me.LayoutControlProduct.Control = Me.XtraTabControl2
         Me.LayoutControlProduct.CustomizationFormText = "LayoutControlProduct"
-        Me.LayoutControlProduct.Location = New System.Drawing.Point(0, 324)
+        Me.LayoutControlProduct.Location = New System.Drawing.Point(0, 367)
         Me.LayoutControlProduct.MinSize = New System.Drawing.Size(104, 150)
         Me.LayoutControlProduct.Name = "LayoutControlProduct"
-        Me.LayoutControlProduct.Size = New System.Drawing.Size(895, 175)
+        Me.LayoutControlProduct.Size = New System.Drawing.Size(895, 158)
         Me.LayoutControlProduct.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlProduct.Text = "LayoutControlProduct"
         Me.LayoutControlProduct.TextSize = New System.Drawing.Size(0, 0)
@@ -3883,12 +3978,121 @@ Partial Class frmOrderS
         Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
+        'ClaimRemark
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimRemark, "TextChanged")
+        Me.ClaimRemark.EnterMoveNextControl = True
+        Me.ClaimRemark.Location = New System.Drawing.Point(117, 327)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimRemark, True)
+        Me.ClaimRemark.Name = "ClaimRemark"
+        Me.ClaimRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.ClaimRemark.Properties.Appearance.Options.UseFont = True
+        Me.ClaimRemark.Properties.MaxLength = 100
+        Me.ClaimRemark.Size = New System.Drawing.Size(308, 34)
+        Me.ClaimRemark.StyleController = Me.LayoutControl1
+        Me.ClaimRemark.TabIndex = 320
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimRemark, "Text")
+        '
+        'LayoutClaimRemark
+        '
+        Me.LayoutClaimRemark.Control = Me.ClaimRemark
+        Me.LayoutClaimRemark.CustomizationFormText = "อาการ/สาเหตุ"
+        Me.LayoutClaimRemark.Location = New System.Drawing.Point(0, 315)
+        Me.LayoutClaimRemark.MaxSize = New System.Drawing.Size(0, 38)
+        Me.LayoutClaimRemark.MinSize = New System.Drawing.Size(119, 38)
+        Me.LayoutClaimRemark.Name = "LayoutClaimRemark"
+        Me.LayoutClaimRemark.Size = New System.Drawing.Size(417, 38)
+        Me.LayoutClaimRemark.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimRemark.Text = "อาการ/สาเหตุ"
+        Me.LayoutClaimRemark.TextSize = New System.Drawing.Size(102, 13)
+        '
+        'EmptySpaceItem1
+        '
+        Me.EmptySpaceItem1.AllowHotTrack = False
+        Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 674)
+        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(901, 32)
+        Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem3
+        '
+        Me.EmptySpaceItem3.AllowHotTrack = False
+        Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(419, 355)
+        Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(30, 10)
+        Me.EmptySpaceItem3.Text = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem2
+        '
+        Me.EmptySpaceItem2.AllowHotTrack = False
+        Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(451, 322)
+        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(412, 43)
+        Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem9
+        '
+        Me.EmptySpaceItem9.AllowHotTrack = False
+        Me.EmptySpaceItem9.CustomizationFormText = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.Location = New System.Drawing.Point(865, 323)
+        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.Size = New System.Drawing.Size(30, 42)
+        Me.EmptySpaceItem9.Text = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'ClaimResult
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimResult, "")
+        Me.ClaimResult.EditValue = "Y"
+        Me.ClaimResult.EnterMoveNextControl = True
+        Me.ClaimResult.Location = New System.Drawing.Point(117, 298)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimResult, True)
+        Me.ClaimResult.Name = "ClaimResult"
+        Me.ClaimResult.Properties.Columns = 3
+        Me.ClaimResult.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("Y", "ได้"), New DevExpress.XtraEditors.Controls.RadioGroupItem("N", "ไม่ได้")})
+        Me.ClaimResult.Size = New System.Drawing.Size(308, 25)
+        Me.ClaimResult.StyleController = Me.LayoutControl1
+        Me.ClaimResult.TabIndex = 13
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimResult, "")
+        '
+        'LayoutClaimResult
+        '
+        Me.LayoutClaimResult.Control = Me.ClaimResult
+        Me.LayoutClaimResult.CustomizationFormText = "ผลการเคลม"
+        Me.LayoutClaimResult.Location = New System.Drawing.Point(0, 286)
+        Me.LayoutClaimResult.MaxSize = New System.Drawing.Size(0, 29)
+        Me.LayoutClaimResult.MinSize = New System.Drawing.Size(159, 29)
+        Me.LayoutClaimResult.Name = "LayoutClaimResult"
+        Me.LayoutClaimResult.Size = New System.Drawing.Size(417, 29)
+        Me.LayoutClaimResult.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimResult.Text = "ผลการเคลม"
+        Me.LayoutClaimResult.TextSize = New System.Drawing.Size(102, 13)
+        '
+        'LayoutClaimResult2
+        '
+        Me.LayoutClaimResult2.AllowHotTrack = False
+        Me.LayoutClaimResult2.CustomizationFormText = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.Location = New System.Drawing.Point(419, 288)
+        Me.LayoutClaimResult2.MaxSize = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.MinSize = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.Name = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.Size = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimResult2.Text = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.TextSize = New System.Drawing.Size(0, 0)
+        '
         'frmOrderS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1227, 733)
+        Me.ClientSize = New System.Drawing.Size(1049, 750)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Controls.Add(Me.DockPanel1)
         Me.Name = "frmOrderS"
@@ -3985,7 +4189,7 @@ Partial Class frmOrderS
         CType(Me.LayoutPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutShipingMethod, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutbtnShipingMethod, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimRemark2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SimpleSeparator3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SimpleSeparator1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutOrderDate2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4018,7 +4222,7 @@ Partial Class frmOrderS
         CType(Me.EmptySpaceItem10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutStockType, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutRefPO, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutStockType2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutRefPO1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutQuotationRemark, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4089,6 +4293,15 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4188,13 +4401,13 @@ Partial Class frmOrderS
     Private WithEvents ShipingMethod As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LayoutShipingMethod As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutbtnShipingMethod As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents EmptySpaceItem2 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents LayoutClaimRemark2 As DevExpress.XtraLayout.EmptySpaceItem
     Private WithEvents ShipingBy As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents btnShipingBy As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayouShipingBy As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutbtnShipingBy As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents btnRefOrder As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents LayoutStockType2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents SimpleSeparator3 As DevExpress.XtraLayout.SimpleSeparator
     Friend WithEvents LayoutOrderDate2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlRefOrder2 As DevExpress.XtraLayout.LayoutControlItem
@@ -4329,4 +4542,13 @@ Partial Class frmOrderS
     Friend WithEvents XtraTabPage2 As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents LayoutControlProduct As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents UcNote2 As UB.ucNote
+    Friend WithEvents ClaimRemark As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents LayoutClaimRemark As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents EmptySpaceItem3 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents EmptySpaceItem2 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents EmptySpaceItem9 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents ClaimResult As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents LayoutClaimResult As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutClaimResult2 As DevExpress.XtraLayout.EmptySpaceItem
 End Class

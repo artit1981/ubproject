@@ -44,8 +44,7 @@ Public Class frmOrderS
             OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
             MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
 
-            '*****
-            'mOrderType = MasterType.Quotation
+
             'Qua
             LayoutQuotationDays.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutQuotationDays2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -70,10 +69,6 @@ Public Class frmOrderS
             LayoutShipingRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutShipingRuleID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
-            ''OrderIn
-            'LayoutAgencyID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            'LayoutbtnAgencyID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-
             'Cus
             LayoutCustomerID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
             LayoutbtnCustomerID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -96,6 +91,7 @@ Public Class frmOrderS
             LayoutInvoiceSuplierID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
             LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutStockType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             TaxGroup.Enabled = False
 
             'Make PO
@@ -112,6 +108,12 @@ Public Class frmOrderS
 
             LayoutCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             LayoutbtnCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
+            'Claim
+            LayoutClaimRemark.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutClaimRemark2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutClaimResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            LayoutClaimResult2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
             mFormName = mOrderType.ToString
             Select Case mOrderType
@@ -156,13 +158,12 @@ Public Class frmOrderS
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutStockType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 Case MasterType.Shiping
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-                    'LayoutCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    'LayoutbtnCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -243,8 +244,6 @@ Public Class frmOrderS
                 Case MasterType.ShipingBuy
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-                    'LayoutCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    'LayoutbtnCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -274,8 +273,9 @@ Public Class frmOrderS
                     LayoutInvoiceSuplierID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutStockType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID.Text = "เอกสารอ้างอิงเจ้าหนี้"
-                Case MasterType.Claim, MasterType.Expose, MasterType.ClaimReturn
+                Case MasterType.Claim, MasterType.Expose, MasterType.ClaimReturn, MasterType.ClaimOut, MasterType.ClaimResult
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
@@ -287,18 +287,11 @@ Public Class frmOrderS
                     LayoutbtnCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayouShipingBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutbtnShipingBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimRemark.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimRemark2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimResult2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayouShipingBy.Text = "วิธีการส่งเคลม"
-                    TaxGroup1.Enabled = False
-                Case MasterType.ClaimOut, MasterType.ClaimResult
-                    OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-                    MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-                    LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
-                    LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    LayoutCreditBalance.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    LayoutCreditBalance2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    LayoutCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-                    LayoutbtnCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     TaxGroup1.Enabled = False
             End Select
 
@@ -400,6 +393,8 @@ Public Class frmOrderS
             mcls.InvoiceSuplierID = ConvertNullToString(InvoiceSuplierID.EditValue)
             mcls.Institute = ConvertNullToString(Institute.EditValue)
             mcls.StockType = StockType.EditValue
+            mcls.ClaimRemark = ConvertListToString(ClaimRemark.EditValue)
+            mcls.ClaimResult = ClaimResult.EditValue
             mcls.QuotationRemarkID = ConvertNullToZero(QuotationRemark.EditValue)
             mcls.CampaignID = ConvertNullToZero(Campaign.EditValue)
             If TaxCanYes.Checked = True Then
@@ -1359,6 +1354,8 @@ Public Class frmOrderS
                     Institute.EditValue = mcls.Institute
                     QuotationRemark.EditValue = mcls.QuotationRemarkID
                     Campaign.EditValue = mcls.CampaignID
+                    ClaimRemark.EditValue = mcls.ClaimRemark
+                    ClaimResult.EditValue = mcls.ClaimResult
                     If mcls.TaxCanYes = "Y" Then
                         TaxCanYes.Checked = True
                     Else

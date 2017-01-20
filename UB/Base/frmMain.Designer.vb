@@ -31,7 +31,7 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim GalleryItemGroup2 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
+        Dim GalleryItemGroup1 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
         Me.ribbonMain = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.appMenu = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
         Me.ImageMenu = New DevExpress.Utils.ImageCollection(Me.components)
@@ -140,6 +140,9 @@ Partial Class frmMain
         Me.lblDatabase = New DevExpress.XtraBars.BarStaticItem()
         Me.ReportDebtAnalystBar = New DevExpress.XtraBars.BarButtonItem()
         Me.StockReportBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ClaimResultBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ClaimReturnBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.Quotation2Bar = New DevExpress.XtraBars.BarButtonItem()
         Me.imageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.homeRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.fileRibbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -163,7 +166,6 @@ Partial Class frmMain
         Me.RibbonPageGroup22 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup20 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup32 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup27 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup33 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.SaleRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup10 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -219,17 +221,17 @@ Partial Class frmMain
         Me.ribbonMain.ApplicationButtonText = Nothing
         Me.ribbonMain.ExpandCollapseItem.Id = 0
         Me.ribbonMain.Images = Me.ImageMenu
-        Me.ribbonMain.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonMain.ExpandCollapseItem, Me.rgbiSkins, Me.LeadBar, Me.PrefixBar, Me.LeadTypeBar, Me.SourceBar, Me.PrivilegeBar, Me.DepartmentBar, Me.PositionBar, Me.IndustryTypeBar, Me.BusinessTypeBar, Me.TerritoryBar, Me.EmployeeBar, Me.UserBar, Me.lblCompany, Me.lblUser, Me.lblVersion, Me.lblEmp, Me.ActivityBar, Me.UnitBar, Me.ProductGroupBar, Me.ProductDimensionBar, Me.ProductCategoryBar, Me.ProductBrandBar, Me.ProductTypeBar, Me.EmpGroupBar, Me.LocationBar, Me.ProductBar, Me.BarButtonItem1, Me.BarButtonItem2, Me.ContactRoleBar, Me.CreditRuleBar, Me.CurrencyBar, Me.ContactBar, Me.AccountsBar, Me.BarButtonItem4, Me.BarButtonItem5, Me.RunningBar, Me.VerifyCusBar, Me.OpportunityBar, Me.OpportunityTypeBar, Me.OpportunityStageBar, Me.VatTypeBar, Me.OrderBar, Me.QuotationBar, Me.CriterionPriceBar, Me.InformPriceBar, Me.CompanyTypeBar, Me.StockInBar, Me.ShipingMethodyBar, Me.ShipingByBar, Me.InvoiceBar, Me.ShipingBar, Me.BillMethodBar, Me.BillBar, Me.CheckStockBar, Me.AgencyBar, Me.OrderInBar, Me.CompanyBar, Me.ApproveUserBar, Me.ApproveTXBar, Me.CreditGroupBar, Me.AddCreditBar, Me.ReserveBar, Me.ReceiptBar, Me.ReduceCreditBar, Me.BarButtonGroup1, Me.AssetBar, Me.InformPriceBuyBar, Me.ShipingRuleBar, Me.AddCreditBuyBar, Me.ReduceCreditBuyBar, Me.InvoiceBuyBar, Me.ReportTaxSellBar, Me.TaxTypeBar, Me.CustomerZoneBar, Me.CustomerGroupBar, Me.ClaimBar, Me.ClaimOutBar, Me.UpdateStockBar, Me.ReceiptBuyBar, Me.BankAccounBar, Me.OrderHisBar, Me.BorrowBar, Me.ShipingBuyBar, Me.RecordChequeBar, Me.ReceiptCutBar, Me.ReportSellAnalyzeBar, Me.UpdateSNBar, Me.ReportTaxAtSellBar, Me.ReportSNBar, Me.ExposeBar, Me.OrderSNHisBar, Me.MakePOBar, Me.CancelPOBar, Me.QuotationRemarkBar, Me.InformPriceProBar, Me.CampaignBar, Me.ReportDealBar, Me.UpdateSNStatusBar, Me.BankBar, Me.OrderSellHisBar, Me.ProvinceBar, Me.lblDatabase, Me.ReportDebtAnalystBar, Me.StockReportBar})
+        Me.ribbonMain.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonMain.ExpandCollapseItem, Me.rgbiSkins, Me.LeadBar, Me.PrefixBar, Me.LeadTypeBar, Me.SourceBar, Me.PrivilegeBar, Me.DepartmentBar, Me.PositionBar, Me.IndustryTypeBar, Me.BusinessTypeBar, Me.TerritoryBar, Me.EmployeeBar, Me.UserBar, Me.lblCompany, Me.lblUser, Me.lblVersion, Me.lblEmp, Me.ActivityBar, Me.UnitBar, Me.ProductGroupBar, Me.ProductDimensionBar, Me.ProductCategoryBar, Me.ProductBrandBar, Me.ProductTypeBar, Me.EmpGroupBar, Me.LocationBar, Me.ProductBar, Me.BarButtonItem1, Me.BarButtonItem2, Me.ContactRoleBar, Me.CreditRuleBar, Me.CurrencyBar, Me.ContactBar, Me.AccountsBar, Me.BarButtonItem4, Me.BarButtonItem5, Me.RunningBar, Me.VerifyCusBar, Me.OpportunityBar, Me.OpportunityTypeBar, Me.OpportunityStageBar, Me.VatTypeBar, Me.OrderBar, Me.QuotationBar, Me.CriterionPriceBar, Me.InformPriceBar, Me.CompanyTypeBar, Me.StockInBar, Me.ShipingMethodyBar, Me.ShipingByBar, Me.InvoiceBar, Me.ShipingBar, Me.BillMethodBar, Me.BillBar, Me.CheckStockBar, Me.AgencyBar, Me.OrderInBar, Me.CompanyBar, Me.ApproveUserBar, Me.ApproveTXBar, Me.CreditGroupBar, Me.AddCreditBar, Me.ReserveBar, Me.ReceiptBar, Me.ReduceCreditBar, Me.BarButtonGroup1, Me.AssetBar, Me.InformPriceBuyBar, Me.ShipingRuleBar, Me.AddCreditBuyBar, Me.ReduceCreditBuyBar, Me.InvoiceBuyBar, Me.ReportTaxSellBar, Me.TaxTypeBar, Me.CustomerZoneBar, Me.CustomerGroupBar, Me.ClaimBar, Me.ClaimOutBar, Me.UpdateStockBar, Me.ReceiptBuyBar, Me.BankAccounBar, Me.OrderHisBar, Me.BorrowBar, Me.ShipingBuyBar, Me.RecordChequeBar, Me.ReceiptCutBar, Me.ReportSellAnalyzeBar, Me.UpdateSNBar, Me.ReportTaxAtSellBar, Me.ReportSNBar, Me.ExposeBar, Me.OrderSNHisBar, Me.MakePOBar, Me.CancelPOBar, Me.QuotationRemarkBar, Me.InformPriceProBar, Me.CampaignBar, Me.ReportDealBar, Me.UpdateSNStatusBar, Me.BankBar, Me.OrderSellHisBar, Me.ProvinceBar, Me.lblDatabase, Me.ReportDebtAnalystBar, Me.StockReportBar, Me.ClaimResultBar, Me.ClaimReturnBar, Me.Quotation2Bar})
         Me.ribbonMain.LargeImages = Me.imageCollection1
         Me.ribbonMain.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonMain.MaxItemId = 195
+        Me.ribbonMain.MaxItemId = 208
         Me.ribbonMain.Name = "ribbonMain"
         Me.ribbonMain.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.homeRibbonPage, Me.ProductRibbonPage, Me.BuyRibbonPage, Me.SaleRibbonPage, Me.ChequeRibbonPage, Me.ApproveRibbonPage, Me.AdminRibbonPage, Me.ReportRibbonPage, Me.helpRibbonPage, Me.ViewRibbonPage})
         Me.ribbonMain.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMarqueeProgressBar1, Me.RepositoryItemTextEdit1})
         Me.ribbonMain.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
         Me.ribbonMain.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.ribbonMain.ShowToolbarCustomizeItem = False
-        Me.ribbonMain.Size = New System.Drawing.Size(1235, 144)
+        Me.ribbonMain.Size = New System.Drawing.Size(1376, 144)
         Me.ribbonMain.StatusBar = Me.ribbonStatusBar
         Me.ribbonMain.Toolbar.ShowCustomizeItem = False
         '
@@ -255,8 +257,8 @@ Partial Class frmMain
         '
         '
         '
-        GalleryItemGroup2.Caption = "Group1"
-        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup2})
+        GalleryItemGroup1.Caption = "Group1"
+        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup1})
         Me.rgbiSkins.Id = 62
         Me.rgbiSkins.Name = "rgbiSkins"
         '
@@ -652,7 +654,7 @@ Partial Class frmMain
         '
         'ReceiptBar
         '
-        Me.ReceiptBar.Caption = "ใบเสร็จรับเงิน /ชำระเงิน"
+        Me.ReceiptBar.Caption = "ใบเสร็จรับเงิน"
         Me.ReceiptBar.Id = 144
         Me.ReceiptBar.Name = "ReceiptBar"
         '
@@ -903,6 +905,24 @@ Partial Class frmMain
         Me.StockReportBar.Id = 189
         Me.StockReportBar.Name = "StockReportBar"
         '
+        'ClaimResultBar
+        '
+        Me.ClaimResultBar.Caption = "ผลการเคลม Supplier "
+        Me.ClaimResultBar.Id = 196
+        Me.ClaimResultBar.Name = "ClaimResultBar"
+        '
+        'ClaimReturnBar
+        '
+        Me.ClaimReturnBar.Caption = "เคลม(ส่งคืน)"
+        Me.ClaimReturnBar.Id = 197
+        Me.ClaimReturnBar.Name = "ClaimReturnBar"
+        '
+        'Quotation2Bar
+        '
+        Me.Quotation2Bar.Caption = "ใบเสนอราคาคู่เทียบ"
+        Me.Quotation2Bar.Id = 203
+        Me.Quotation2Bar.Name = "Quotation2Bar"
+        '
         'imageCollection1
         '
         Me.imageCollection1.ImageSize = New System.Drawing.Size(50, 50)
@@ -1013,7 +1033,7 @@ Partial Class frmMain
         '
         'BuyRibbonPage
         '
-        Me.BuyRibbonPage.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup12, Me.RibbonPageGroup13, Me.RibbonPageGroup21, Me.RibbonPageGroup22, Me.RibbonPageGroup20, Me.RibbonPageGroup32, Me.RibbonPageGroup27, Me.RibbonPageGroup33})
+        Me.BuyRibbonPage.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup12, Me.RibbonPageGroup13, Me.RibbonPageGroup21, Me.RibbonPageGroup22, Me.RibbonPageGroup20, Me.RibbonPageGroup32, Me.RibbonPageGroup33})
         Me.BuyRibbonPage.Name = "BuyRibbonPage"
         Me.BuyRibbonPage.Text = "ฝ่ายซื้อ"
         '
@@ -1050,11 +1070,6 @@ Partial Class frmMain
         '
         Me.RibbonPageGroup32.ItemLinks.Add(Me.ReceiptBuyBar)
         Me.RibbonPageGroup32.Name = "RibbonPageGroup32"
-        '
-        'RibbonPageGroup27
-        '
-        Me.RibbonPageGroup27.ItemLinks.Add(Me.ClaimOutBar)
-        Me.RibbonPageGroup27.Name = "RibbonPageGroup27"
         '
         'RibbonPageGroup33
         '
@@ -1096,8 +1111,9 @@ Partial Class frmMain
         'RibbonPageGroup11
         '
         Me.RibbonPageGroup11.ItemLinks.Add(Me.OpportunityBar)
-        Me.RibbonPageGroup11.ItemLinks.Add(Me.ReserveBar)
+        Me.RibbonPageGroup11.ItemLinks.Add(Me.Quotation2Bar)
         Me.RibbonPageGroup11.ItemLinks.Add(Me.QuotationBar)
+        Me.RibbonPageGroup11.ItemLinks.Add(Me.ReserveBar)
         Me.RibbonPageGroup11.ItemLinks.Add(Me.OrderBar)
         Me.RibbonPageGroup11.ItemLinks.Add(Me.BorrowBar)
         Me.RibbonPageGroup11.ItemLinks.Add(Me.InvoiceBar)
@@ -1109,6 +1125,7 @@ Partial Class frmMain
         '
         Me.RibbonPageGroup14.ItemLinks.Add(Me.AddCreditBar)
         Me.RibbonPageGroup14.ItemLinks.Add(Me.ReduceCreditBar)
+        Me.RibbonPageGroup14.ItemLinks.Add(Me.ExposeBar)
         Me.RibbonPageGroup14.Name = "RibbonPageGroup14"
         '
         'RibbonPageGroup19
@@ -1121,7 +1138,9 @@ Partial Class frmMain
         'RibbonPageGroup26
         '
         Me.RibbonPageGroup26.ItemLinks.Add(Me.ClaimBar)
-        Me.RibbonPageGroup26.ItemLinks.Add(Me.ExposeBar)
+        Me.RibbonPageGroup26.ItemLinks.Add(Me.ClaimOutBar)
+        Me.RibbonPageGroup26.ItemLinks.Add(Me.ClaimResultBar)
+        Me.RibbonPageGroup26.ItemLinks.Add(Me.ClaimReturnBar)
         Me.RibbonPageGroup26.Name = "RibbonPageGroup26"
         '
         'ChequeRibbonPage
@@ -1252,7 +1271,7 @@ Partial Class frmMain
         Me.ribbonStatusBar.Location = New System.Drawing.Point(0, 639)
         Me.ribbonStatusBar.Name = "ribbonStatusBar"
         Me.ribbonStatusBar.Ribbon = Me.ribbonMain
-        Me.ribbonStatusBar.Size = New System.Drawing.Size(1235, 31)
+        Me.ribbonStatusBar.Size = New System.Drawing.Size(1376, 31)
         '
         'XtraTabbedMdiManager1
         '
@@ -1332,7 +1351,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1235, 670)
+        Me.ClientSize = New System.Drawing.Size(1376, 670)
         Me.Controls.Add(Me.MenuNavBarControl)
         Me.Controls.Add(Me.ribbonStatusBar)
         Me.Controls.Add(Me.ribbonMain)
@@ -1485,7 +1504,6 @@ Partial Class frmMain
     Friend WithEvents CustomerGroupBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ClaimBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ClaimOutBar As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents RibbonPageGroup27 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonPageGroup26 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents UpdateStockBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup25 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
@@ -1524,5 +1542,8 @@ Partial Class frmMain
     Friend WithEvents ReportDebtAnalystBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents StockReportBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup22 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents ClaimResultBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ClaimReturnBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents Quotation2Bar As DevExpress.XtraBars.BarButtonItem
 
 End Class

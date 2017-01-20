@@ -88,6 +88,8 @@ Public Class iOrder
     Private mOrderStatus2 As String = ""
     Private mIsChangeCancel As Boolean = False
     Private mNoteProductDAOs As List(Of NoteDAO)
+    Private mClaimRemark As String = ""
+    Private mClaimResult As String = ""
 
     Public Overridable ReadOnly Property TableName() As String
         Get
@@ -798,6 +800,24 @@ Public Class iOrder
         End Get
         Set(ByVal value As Long)
             mCampaignID = value
+        End Set
+    End Property
+
+    Public Property ClaimRemark() As String
+        Get
+            Return mClaimRemark
+        End Get
+        Set(ByVal value As String)
+            mClaimRemark = value
+        End Set
+    End Property
+
+    Public Property ClaimResult() As String
+        Get
+            Return mClaimResult
+        End Get
+        Set(ByVal value As String)
+            mClaimResult = value
         End Set
     End Property
 
