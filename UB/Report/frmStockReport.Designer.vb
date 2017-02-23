@@ -107,14 +107,14 @@ Partial Class frmStockReport
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.UcMoverItem1.Location = New System.Drawing.Point(133, 241)
         Me.UcMoverItem1.Name = "UcMoverItem1"
-        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 199)
+        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 248)
         Me.UcMoverItem1.TabIndex = 215
         '
         'frmStockReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1112, 535)
+        Me.ClientSize = New System.Drawing.Size(1112, 501)
         Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.Label4)

@@ -747,7 +747,7 @@ Public Class ProductDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT 'TRUE' AS IsSelect, Product.ProductID AS ID,Product.ProductCode,Product.ProductName,Product.Remark"
+            SQL = "SELECT Product.ProductID AS ID,Product.ProductCode,Product.ProductName,Product.Remark"
             If pCustomerID = 0 Then
                 SQL = SQL & ",Product.PriceStandard AS Price "
             Else

@@ -25,6 +25,8 @@ Partial Class frmOrderS
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.ClaimResult = New DevExpress.XtraEditors.RadioGroup()
+        Me.ClaimRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.XtraTabControl2 = New DevExpress.XtraTab.XtraTabControl()
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
         Me.UcProductLists1 = New UB.ucProductLists()
@@ -179,6 +181,13 @@ Partial Class frmOrderS
         Me.LayoutCampaign = New DevExpress.XtraLayout.LayoutControlItem()
         Me.SplitterItem1 = New DevExpress.XtraLayout.SplitterItem()
         Me.LayoutControlProduct = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutClaimRemark = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutClaimResult = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutClaimResult2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.PledgeTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcPledge1 = New UB.ucPledge()
         Me.TaxTabPage = New DevExpress.XtraTab.XtraTabPage()
@@ -257,20 +266,13 @@ Partial Class frmOrderS
         Me.LayoutPO2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem12 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
-        Me.ClaimRemark = New DevExpress.XtraEditors.MemoEdit()
-        Me.LayoutClaimRemark = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.ClaimResult = New DevExpress.XtraEditors.RadioGroup()
-        Me.LayoutClaimResult = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutClaimResult2 = New DevExpress.XtraLayout.EmptySpaceItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl2.SuspendLayout()
         Me.XtraTabPage1.SuspendLayout()
@@ -399,6 +401,13 @@ Partial Class frmOrderS
         CType(Me.LayoutCampaign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitterItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PledgeTabPage.SuspendLayout()
         Me.TaxTabPage.SuspendLayout()
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -452,15 +461,6 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -568,6 +568,36 @@ Partial Class frmOrderS
         Me.LayoutControl1.TabIndex = 9
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
+        '
+        'ClaimResult
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimResult, "")
+        Me.ClaimResult.EditValue = "Y"
+        Me.ClaimResult.EnterMoveNextControl = True
+        Me.ClaimResult.Location = New System.Drawing.Point(117, 298)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimResult, True)
+        Me.ClaimResult.Name = "ClaimResult"
+        Me.ClaimResult.Properties.Columns = 3
+        Me.ClaimResult.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("Y", "ได้"), New DevExpress.XtraEditors.Controls.RadioGroupItem("N", "ไม่ได้")})
+        Me.ClaimResult.Size = New System.Drawing.Size(308, 25)
+        Me.ClaimResult.StyleController = Me.LayoutControl1
+        Me.ClaimResult.TabIndex = 13
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimResult, "")
+        '
+        'ClaimRemark
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimRemark, "TextChanged")
+        Me.ClaimRemark.EnterMoveNextControl = True
+        Me.ClaimRemark.Location = New System.Drawing.Point(117, 327)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimRemark, True)
+        Me.ClaimRemark.Name = "ClaimRemark"
+        Me.ClaimRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.ClaimRemark.Properties.Appearance.Options.UseFont = True
+        Me.ClaimRemark.Properties.MaxLength = 100
+        Me.ClaimRemark.Size = New System.Drawing.Size(308, 34)
+        Me.ClaimRemark.StyleController = Me.LayoutControl1
+        Me.ClaimRemark.TabIndex = 320
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimRemark, "Text")
         '
         'XtraTabControl2
         '
@@ -2856,13 +2886,92 @@ Partial Class frmOrderS
         Me.LayoutControlProduct.TextToControlDistance = 0
         Me.LayoutControlProduct.TextVisible = False
         '
+        'LayoutClaimRemark
+        '
+        Me.LayoutClaimRemark.Control = Me.ClaimRemark
+        Me.LayoutClaimRemark.CustomizationFormText = "อาการ/สาเหตุ"
+        Me.LayoutClaimRemark.Location = New System.Drawing.Point(0, 315)
+        Me.LayoutClaimRemark.MaxSize = New System.Drawing.Size(0, 38)
+        Me.LayoutClaimRemark.MinSize = New System.Drawing.Size(119, 38)
+        Me.LayoutClaimRemark.Name = "LayoutClaimRemark"
+        Me.LayoutClaimRemark.Size = New System.Drawing.Size(417, 38)
+        Me.LayoutClaimRemark.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimRemark.Text = "อาการ/สาเหตุ"
+        Me.LayoutClaimRemark.TextSize = New System.Drawing.Size(102, 13)
+        '
+        'EmptySpaceItem1
+        '
+        Me.EmptySpaceItem1.AllowHotTrack = False
+        Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 674)
+        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(901, 32)
+        Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem3
+        '
+        Me.EmptySpaceItem3.AllowHotTrack = False
+        Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(419, 355)
+        Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(30, 10)
+        Me.EmptySpaceItem3.Text = "EmptySpaceItem3"
+        Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem2
+        '
+        Me.EmptySpaceItem2.AllowHotTrack = False
+        Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(451, 322)
+        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(412, 43)
+        Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem9
+        '
+        Me.EmptySpaceItem9.AllowHotTrack = False
+        Me.EmptySpaceItem9.CustomizationFormText = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.Location = New System.Drawing.Point(865, 323)
+        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.Size = New System.Drawing.Size(30, 42)
+        Me.EmptySpaceItem9.Text = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'LayoutClaimResult
+        '
+        Me.LayoutClaimResult.Control = Me.ClaimResult
+        Me.LayoutClaimResult.CustomizationFormText = "ผลการเคลม"
+        Me.LayoutClaimResult.Location = New System.Drawing.Point(0, 286)
+        Me.LayoutClaimResult.MaxSize = New System.Drawing.Size(0, 29)
+        Me.LayoutClaimResult.MinSize = New System.Drawing.Size(159, 29)
+        Me.LayoutClaimResult.Name = "LayoutClaimResult"
+        Me.LayoutClaimResult.Size = New System.Drawing.Size(417, 29)
+        Me.LayoutClaimResult.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimResult.Text = "ผลการเคลม"
+        Me.LayoutClaimResult.TextSize = New System.Drawing.Size(102, 13)
+        '
+        'LayoutClaimResult2
+        '
+        Me.LayoutClaimResult2.AllowHotTrack = False
+        Me.LayoutClaimResult2.CustomizationFormText = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.Location = New System.Drawing.Point(419, 288)
+        Me.LayoutClaimResult2.MaxSize = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.MinSize = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.Name = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.Size = New System.Drawing.Size(30, 29)
+        Me.LayoutClaimResult2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutClaimResult2.Text = "LayoutClaimResult2"
+        Me.LayoutClaimResult2.TextSize = New System.Drawing.Size(0, 0)
+        '
         'PledgeTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PledgeTabPage, "")
         Me.PledgeTabPage.Controls.Add(Me.UcPledge1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTabPage, True)
         Me.PledgeTabPage.Name = "PledgeTabPage"
-        Me.PledgeTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.PledgeTabPage.Size = New System.Drawing.Size(921, 726)
         Me.PledgeTabPage.Text = "รายการมัดจำ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PledgeTabPage, "")
         '
@@ -2873,7 +2982,7 @@ Partial Class frmOrderS
         Me.UcPledge1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcPledge1, True)
         Me.UcPledge1.Name = "UcPledge1"
-        Me.UcPledge1.Size = New System.Drawing.Size(921, 668)
+        Me.UcPledge1.Size = New System.Drawing.Size(921, 726)
         Me.UcPledge1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcPledge1, "")
         '
@@ -2884,7 +2993,7 @@ Partial Class frmOrderS
         Me.TaxTabPage.Controls.Add(Me.TaxGroup1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxTabPage, True)
         Me.TaxTabPage.Name = "TaxTabPage"
-        Me.TaxTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.TaxTabPage.Size = New System.Drawing.Size(921, 726)
         Me.TaxTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxTabPage, "")
         '
@@ -3458,7 +3567,7 @@ Partial Class frmOrderS
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(921, 726)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -3482,7 +3591,7 @@ Partial Class frmOrderS
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.NoteTabPage.Size = New System.Drawing.Size(921, 726)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -3493,7 +3602,7 @@ Partial Class frmOrderS
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(921, 668)
+        Me.UcNote1.Size = New System.Drawing.Size(921, 726)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -3503,7 +3612,7 @@ Partial Class frmOrderS
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(921, 726)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -3514,7 +3623,7 @@ Partial Class frmOrderS
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(921, 668)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(921, 726)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -3524,7 +3633,7 @@ Partial Class frmOrderS
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(921, 668)
+        Me.AdminTabPage.Size = New System.Drawing.Size(921, 726)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -3544,7 +3653,7 @@ Partial Class frmOrderS
         Me.DockPanel1.Controls.Add(Me.DockPanel1_Container)
         Me.DockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right
         Me.DockPanel1.ID = New System.Guid("a7f23336-9ebd-4f72-ba02-b27dcac124bf")
-        Me.DockPanel1.Location = New System.Drawing.Point(931, 37)
+        Me.DockPanel1.Location = New System.Drawing.Point(753, 37)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DockPanel1, True)
         Me.DockPanel1.Name = "DockPanel1"
         Me.DockPanel1.Options.AllowDockAsTabbedDocument = False
@@ -3554,7 +3663,7 @@ Partial Class frmOrderS
         Me.DockPanel1.Options.AllowDockTop = False
         Me.DockPanel1.Options.ShowCloseButton = False
         Me.DockPanel1.OriginalSize = New System.Drawing.Size(296, 200)
-        Me.DockPanel1.Size = New System.Drawing.Size(296, 696)
+        Me.DockPanel1.Size = New System.Drawing.Size(296, 713)
         Me.DockPanel1.Text = "Order Information"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DockPanel1, "")
         '
@@ -3565,7 +3674,7 @@ Partial Class frmOrderS
         Me.DockPanel1_Container.Location = New System.Drawing.Point(4, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DockPanel1_Container, True)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
-        Me.DockPanel1_Container.Size = New System.Drawing.Size(288, 669)
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(288, 686)
         Me.DockPanel1_Container.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DockPanel1_Container, "")
         '
@@ -3577,7 +3686,7 @@ Partial Class frmOrderS
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(288, 669)
+        Me.PanelControl2.Size = New System.Drawing.Size(288, 686)
         Me.PanelControl2.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
         '
@@ -3978,115 +4087,6 @@ Partial Class frmOrderS
         Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
-        'ClaimRemark
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimRemark, "TextChanged")
-        Me.ClaimRemark.EnterMoveNextControl = True
-        Me.ClaimRemark.Location = New System.Drawing.Point(117, 327)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimRemark, True)
-        Me.ClaimRemark.Name = "ClaimRemark"
-        Me.ClaimRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.ClaimRemark.Properties.Appearance.Options.UseFont = True
-        Me.ClaimRemark.Properties.MaxLength = 100
-        Me.ClaimRemark.Size = New System.Drawing.Size(308, 34)
-        Me.ClaimRemark.StyleController = Me.LayoutControl1
-        Me.ClaimRemark.TabIndex = 320
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimRemark, "Text")
-        '
-        'LayoutClaimRemark
-        '
-        Me.LayoutClaimRemark.Control = Me.ClaimRemark
-        Me.LayoutClaimRemark.CustomizationFormText = "อาการ/สาเหตุ"
-        Me.LayoutClaimRemark.Location = New System.Drawing.Point(0, 315)
-        Me.LayoutClaimRemark.MaxSize = New System.Drawing.Size(0, 38)
-        Me.LayoutClaimRemark.MinSize = New System.Drawing.Size(119, 38)
-        Me.LayoutClaimRemark.Name = "LayoutClaimRemark"
-        Me.LayoutClaimRemark.Size = New System.Drawing.Size(417, 38)
-        Me.LayoutClaimRemark.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutClaimRemark.Text = "อาการ/สาเหตุ"
-        Me.LayoutClaimRemark.TextSize = New System.Drawing.Size(102, 13)
-        '
-        'EmptySpaceItem1
-        '
-        Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 674)
-        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(901, 32)
-        Me.EmptySpaceItem1.Text = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem3
-        '
-        Me.EmptySpaceItem3.AllowHotTrack = False
-        Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(419, 355)
-        Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(30, 10)
-        Me.EmptySpaceItem3.Text = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem2
-        '
-        Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(451, 322)
-        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(412, 43)
-        Me.EmptySpaceItem2.Text = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem9
-        '
-        Me.EmptySpaceItem9.AllowHotTrack = False
-        Me.EmptySpaceItem9.CustomizationFormText = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.Location = New System.Drawing.Point(865, 323)
-        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.Size = New System.Drawing.Size(30, 42)
-        Me.EmptySpaceItem9.Text = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'ClaimResult
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ClaimResult, "")
-        Me.ClaimResult.EditValue = "Y"
-        Me.ClaimResult.EnterMoveNextControl = True
-        Me.ClaimResult.Location = New System.Drawing.Point(117, 298)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ClaimResult, True)
-        Me.ClaimResult.Name = "ClaimResult"
-        Me.ClaimResult.Properties.Columns = 3
-        Me.ClaimResult.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("Y", "ได้"), New DevExpress.XtraEditors.Controls.RadioGroupItem("N", "ไม่ได้")})
-        Me.ClaimResult.Size = New System.Drawing.Size(308, 25)
-        Me.ClaimResult.StyleController = Me.LayoutControl1
-        Me.ClaimResult.TabIndex = 13
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ClaimResult, "")
-        '
-        'LayoutClaimResult
-        '
-        Me.LayoutClaimResult.Control = Me.ClaimResult
-        Me.LayoutClaimResult.CustomizationFormText = "ผลการเคลม"
-        Me.LayoutClaimResult.Location = New System.Drawing.Point(0, 286)
-        Me.LayoutClaimResult.MaxSize = New System.Drawing.Size(0, 29)
-        Me.LayoutClaimResult.MinSize = New System.Drawing.Size(159, 29)
-        Me.LayoutClaimResult.Name = "LayoutClaimResult"
-        Me.LayoutClaimResult.Size = New System.Drawing.Size(417, 29)
-        Me.LayoutClaimResult.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutClaimResult.Text = "ผลการเคลม"
-        Me.LayoutClaimResult.TextSize = New System.Drawing.Size(102, 13)
-        '
-        'LayoutClaimResult2
-        '
-        Me.LayoutClaimResult2.AllowHotTrack = False
-        Me.LayoutClaimResult2.CustomizationFormText = "LayoutClaimResult2"
-        Me.LayoutClaimResult2.Location = New System.Drawing.Point(419, 288)
-        Me.LayoutClaimResult2.MaxSize = New System.Drawing.Size(30, 29)
-        Me.LayoutClaimResult2.MinSize = New System.Drawing.Size(30, 29)
-        Me.LayoutClaimResult2.Name = "LayoutClaimResult2"
-        Me.LayoutClaimResult2.Size = New System.Drawing.Size(30, 29)
-        Me.LayoutClaimResult2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutClaimResult2.Text = "LayoutClaimResult2"
-        Me.LayoutClaimResult2.TextSize = New System.Drawing.Size(0, 0)
-        '
         'frmOrderS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4104,6 +4104,8 @@ Partial Class frmOrderS
         Me.GeneralTabPage.ResumeLayout(False)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl2.ResumeLayout(False)
         Me.XtraTabPage1.ResumeLayout(False)
@@ -4232,6 +4234,13 @@ Partial Class frmOrderS
         CType(Me.LayoutCampaign, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SplitterItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PledgeTabPage.ResumeLayout(False)
         Me.TaxTabPage.ResumeLayout(False)
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4293,15 +4302,6 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ClaimRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutClaimRemark, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutClaimResult, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -59,10 +59,10 @@ Partial Class ucMoverItem
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lsLeft.HotTrackItems = True
         Me.lsLeft.IncrementalSearch = True
-        Me.lsLeft.Location = New System.Drawing.Point(12, 53)
+        Me.lsLeft.Location = New System.Drawing.Point(12, 67)
         Me.lsLeft.Name = "lsLeft"
         Me.lsLeft.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lsLeft.Size = New System.Drawing.Size(190, 231)
+        Me.lsLeft.Size = New System.Drawing.Size(190, 217)
         Me.lsLeft.StyleController = Me.LayoutControl1
         Me.lsLeft.TabIndex = 1
         Me.lsLeft.ToolTip = "ดับเบิ้ลคลิ๊ก หรือติ๊กเครื่องหมายถูก แล้วกดปุ่ม "">>"" ,""<<"" เพื่อเลือกข้อมูล"
@@ -91,14 +91,14 @@ Partial Class ucMoverItem
         Me.LabelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(181, 14)
+        Me.LabelControl1.Size = New System.Drawing.Size(181, 28)
         Me.LabelControl1.StyleController = Me.LayoutControl1
         Me.LabelControl1.TabIndex = 204
-        Me.LabelControl1.Text = "กรุณาเลือกข้อมูลที่ต้องการไปด้านขวา"
+        Me.LabelControl1.Text = "กรุณาเลือกข้อมูลที่ต้องการไปด้านขวา" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  สามารถพิมพ์ข้อความเพื่อค้นหาข้อมูล"
         '
         'chkAllRight
         '
-        Me.chkAllRight.Location = New System.Drawing.Point(261, 30)
+        Me.chkAllRight.Location = New System.Drawing.Point(261, 44)
         Me.chkAllRight.Name = "chkAllRight"
         Me.chkAllRight.Properties.Caption = "Select /Unselect All"
         Me.chkAllRight.Size = New System.Drawing.Size(190, 19)
@@ -107,7 +107,7 @@ Partial Class ucMoverItem
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(206, 53)
+        Me.btnAdd.Location = New System.Drawing.Point(206, 67)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(51, 22)
         Me.btnAdd.StyleController = Me.LayoutControl1
@@ -117,7 +117,7 @@ Partial Class ucMoverItem
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(206, 79)
+        Me.btnRemove.Location = New System.Drawing.Point(206, 93)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(51, 22)
         Me.btnRemove.StyleController = Me.LayoutControl1
@@ -127,7 +127,7 @@ Partial Class ucMoverItem
         '
         'chkAllLeft
         '
-        Me.chkAllLeft.Location = New System.Drawing.Point(12, 30)
+        Me.chkAllLeft.Location = New System.Drawing.Point(12, 44)
         Me.chkAllLeft.Name = "chkAllLeft"
         Me.chkAllLeft.Properties.Caption = "Select /Unselect All"
         Me.chkAllLeft.Size = New System.Drawing.Size(190, 19)
@@ -140,10 +140,10 @@ Partial Class ucMoverItem
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lsRight.HotTrackItems = True
         Me.lsRight.IncrementalSearch = True
-        Me.lsRight.Location = New System.Drawing.Point(261, 53)
+        Me.lsRight.Location = New System.Drawing.Point(261, 67)
         Me.lsRight.Name = "lsRight"
         Me.lsRight.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lsRight.Size = New System.Drawing.Size(190, 231)
+        Me.lsRight.Size = New System.Drawing.Size(190, 217)
         Me.lsRight.StyleController = Me.LayoutControl1
         Me.lsRight.TabIndex = 5
         Me.lsRight.ToolTip = "ดับเบิ้ลคลิ๊ก หรือติ๊กเครื่องหมายถูก แล้วกดปุ่ม "">>"" ,""<<"" เพื่อเลือกข้อมูล"
@@ -163,9 +163,9 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem1.Control = Me.lsLeft
         Me.LayoutControlItem1.CustomizationFormText = "LayoutControlItem1"
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 41)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 55)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(194, 235)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(194, 221)
         Me.LayoutControlItem1.Text = "LayoutControlItem1"
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem1.TextToControlDistance = 0
@@ -175,9 +175,9 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem2.Control = Me.lsRight
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(249, 41)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(249, 55)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(194, 235)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(194, 221)
         Me.LayoutControlItem2.Text = "LayoutControlItem2"
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextToControlDistance = 0
@@ -187,7 +187,7 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem3.Control = Me.chkAllLeft
         Me.LayoutControlItem3.CustomizationFormText = "LayoutControlItem3"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 18)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 32)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(194, 23)
         Me.LayoutControlItem3.Text = "LayoutControlItem3"
@@ -199,7 +199,7 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem4.Control = Me.chkAllRight
         Me.LayoutControlItem4.CustomizationFormText = "LayoutControlItem4"
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(249, 18)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(249, 32)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
         Me.LayoutControlItem4.Size = New System.Drawing.Size(194, 23)
         Me.LayoutControlItem4.Text = "LayoutControlItem4"
@@ -211,7 +211,7 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem5.Control = Me.btnAdd
         Me.LayoutControlItem5.CustomizationFormText = "LayoutControlItem5"
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(194, 41)
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(194, 55)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
         Me.LayoutControlItem5.Size = New System.Drawing.Size(55, 26)
         Me.LayoutControlItem5.Text = "LayoutControlItem5"
@@ -223,11 +223,11 @@ Partial Class ucMoverItem
         '
         Me.LayoutControlItem6.Control = Me.btnRemove
         Me.LayoutControlItem6.CustomizationFormText = "LayoutControlItem6"
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(194, 67)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(194, 81)
         Me.LayoutControlItem6.MaxSize = New System.Drawing.Size(55, 26)
         Me.LayoutControlItem6.MinSize = New System.Drawing.Size(55, 26)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(55, 209)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(55, 195)
         Me.LayoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem6.Text = "LayoutControlItem6"
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
@@ -240,7 +240,7 @@ Partial Class ucMoverItem
         Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
         Me.LayoutControlItem7.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(443, 18)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(443, 32)
         Me.LayoutControlItem7.Text = "LayoutControlItem7"
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextToControlDistance = 0
@@ -250,7 +250,7 @@ Partial Class ucMoverItem
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(194, 18)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(194, 32)
         Me.EmptySpaceItem1.MaxSize = New System.Drawing.Size(55, 0)
         Me.EmptySpaceItem1.MinSize = New System.Drawing.Size(55, 10)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"

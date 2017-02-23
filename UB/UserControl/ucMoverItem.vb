@@ -34,7 +34,7 @@
             lRightTable = pDataTable.Clone
             lRightTable.Clear()
 
-            chkAllLeft.CheckState = CheckState.Checked
+            chkAllLeft.CheckState = CheckState.Unchecked
             chkAllRight.CheckState = CheckState.Unchecked
 
             lsLeft.DataSource = pDataTable
