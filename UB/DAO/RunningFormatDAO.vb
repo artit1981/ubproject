@@ -177,7 +177,7 @@ Public Class RunningFormatDAO
                     , MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.Quotation, MasterType.PurchaseOrder _
                     , MasterType.Asset, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut _
                     , MasterType.ReceiptBuy, MasterType.ShipingBuy, MasterType.Borrow, MasterType.ClaimOut, MasterType.StockIn, MasterType.UpdateStock _
-                    , MasterType.ReceiptCut, MasterType.Expose, MasterType.CancelPO
+                    , MasterType.ReceiptCut, MasterType.Expose, MasterType.CancelPO, MasterType.Quotation2, MasterType.ClaimResult, MasterType.ClaimReturn
                     SQL = " select top 2 right(OrderCode ," & RunningCount & ") AS ID"
                     SQL = SQL & " FROM Orders"
                     SQL = SQL & " WHERE IsDelete=0 and TableID=" & pTableID
