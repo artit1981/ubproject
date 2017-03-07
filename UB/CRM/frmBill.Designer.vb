@@ -290,7 +290,7 @@ Partial Class frmBill
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1158, 517)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1158, 444)
         Me.XtraTabControl1.TabIndex = 10
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.VatTabPage, Me.ChequeTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -1280,7 +1280,7 @@ Partial Class frmBill
         Me.VatTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTabPage, True)
         Me.VatTabPage.Name = "VatTabPage"
-        Me.VatTabPage.Size = New System.Drawing.Size(1152, 489)
+        Me.VatTabPage.Size = New System.Drawing.Size(1152, 416)
         Me.VatTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.VatTabPage, "")
         '
@@ -1311,7 +1311,7 @@ Partial Class frmBill
         Me.TaxGroup.Location = New System.Drawing.Point(30, 115)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxGroup, True)
         Me.TaxGroup.Name = "TaxGroup"
-        Me.TaxGroup.Size = New System.Drawing.Size(787, 367)
+        Me.TaxGroup.Size = New System.Drawing.Size(787, 294)
         Me.TaxGroup.TabIndex = 1
         Me.TaxGroup.Text = "รายละเอียดการหักภาษี ณ ที่จ่าย"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxGroup, "")
@@ -1326,7 +1326,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GridTaxOrder, True)
         Me.GridTaxOrder.Name = "GridTaxOrder"
         Me.GridTaxOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.TaxTypeIDLookUp, Me.RepositoryItemCalcEdit1, Me.RepositoryItemSpinEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemCalcEdit2, Me.RepositoryItemButtonEdit1})
-        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 166)
+        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 93)
         Me.GridTaxOrder.TabIndex = 281
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GridTaxOrder, "")
         Me.GridTaxOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
@@ -2365,7 +2365,7 @@ Partial Class frmBill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1158, 554)
+        Me.ClientSize = New System.Drawing.Size(1158, 481)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Name = "frmBill"
         Me.Text = "frmBill"

@@ -161,7 +161,7 @@ Partial Class frmStockReport
         Me.Controls.Add(Me.ProductTypeID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmStockReport"
-        Me.Text = "รายงานวิเคราะห์ยอดขาย"
+        Me.Text = "รายงานมูลค่าสต๊อกคลังสินค้า"
         Me.Controls.SetChildIndex(Me.ProductTypeID, 0)
         Me.Controls.SetChildIndex(Me.ProductBrandID, 0)
         Me.Controls.SetChildIndex(Me.Label7, 0)
