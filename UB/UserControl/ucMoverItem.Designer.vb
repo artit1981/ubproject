@@ -61,7 +61,6 @@ Partial Class ucMoverItem
         Me.lsLeft.IncrementalSearch = True
         Me.lsLeft.Location = New System.Drawing.Point(12, 67)
         Me.lsLeft.Name = "lsLeft"
-        Me.lsLeft.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.lsLeft.Size = New System.Drawing.Size(190, 217)
         Me.lsLeft.StyleController = Me.LayoutControl1
         Me.lsLeft.TabIndex = 1
@@ -142,7 +141,6 @@ Partial Class ucMoverItem
         Me.lsRight.IncrementalSearch = True
         Me.lsRight.Location = New System.Drawing.Point(261, 67)
         Me.lsRight.Name = "lsRight"
-        Me.lsRight.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.lsRight.Size = New System.Drawing.Size(190, 217)
         Me.lsRight.StyleController = Me.LayoutControl1
         Me.lsRight.TabIndex = 5
