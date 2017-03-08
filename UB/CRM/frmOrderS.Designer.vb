@@ -479,7 +479,7 @@ Partial Class frmOrderS
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(753, 713)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(753, 601)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.PledgeTabPage, Me.TaxTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -640,7 +640,7 @@ Partial Class frmOrderS
         Me.XtraTabPage2.Controls.Add(Me.UcNote2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabPage2, True)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 126)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(885, 118)
         Me.XtraTabPage2.Text = "หมายเหตุ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabPage2, "")
         '
@@ -651,7 +651,7 @@ Partial Class frmOrderS
         Me.UcNote2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote2, True)
         Me.UcNote2.Name = "UcNote2"
-        Me.UcNote2.Size = New System.Drawing.Size(885, 126)
+        Me.UcNote2.Size = New System.Drawing.Size(885, 118)
         Me.UcNote2.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote2, "")
         '
@@ -2971,7 +2971,7 @@ Partial Class frmOrderS
         Me.PledgeTabPage.Controls.Add(Me.UcPledge1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PledgeTabPage, True)
         Me.PledgeTabPage.Name = "PledgeTabPage"
-        Me.PledgeTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.PledgeTabPage.Size = New System.Drawing.Size(747, 685)
         Me.PledgeTabPage.Text = "รายการมัดจำ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PledgeTabPage, "")
         '
@@ -2982,7 +2982,7 @@ Partial Class frmOrderS
         Me.UcPledge1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcPledge1, True)
         Me.UcPledge1.Name = "UcPledge1"
-        Me.UcPledge1.Size = New System.Drawing.Size(921, 726)
+        Me.UcPledge1.Size = New System.Drawing.Size(747, 685)
         Me.UcPledge1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcPledge1, "")
         '
@@ -2993,7 +2993,7 @@ Partial Class frmOrderS
         Me.TaxTabPage.Controls.Add(Me.TaxGroup1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxTabPage, True)
         Me.TaxTabPage.Name = "TaxTabPage"
-        Me.TaxTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.TaxTabPage.Size = New System.Drawing.Size(747, 573)
         Me.TaxTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxTabPage, "")
         '
@@ -3024,7 +3024,7 @@ Partial Class frmOrderS
         Me.TaxGroup.Location = New System.Drawing.Point(45, 141)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxGroup, True)
         Me.TaxGroup.Name = "TaxGroup"
-        Me.TaxGroup.Size = New System.Drawing.Size(787, 391)
+        Me.TaxGroup.Size = New System.Drawing.Size(787, 425)
         Me.TaxGroup.TabIndex = 2
         Me.TaxGroup.Text = "รายละเอียดการหักภาษี ณ ที่จ่าย"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxGroup, "")
@@ -3039,7 +3039,7 @@ Partial Class frmOrderS
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GridTaxOrder, True)
         Me.GridTaxOrder.Name = "GridTaxOrder"
         Me.GridTaxOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.TaxTypeIDLookUp, Me.RepositoryItemCalcEdit1, Me.RepositoryItemSpinEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemCalcEdit2})
-        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 190)
+        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 224)
         Me.GridTaxOrder.TabIndex = 281
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GridTaxOrder, "")
         Me.GridTaxOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
@@ -3567,7 +3567,7 @@ Partial Class frmOrderS
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(747, 685)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -3591,7 +3591,7 @@ Partial Class frmOrderS
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.NoteTabPage.Size = New System.Drawing.Size(747, 685)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -3602,7 +3602,7 @@ Partial Class frmOrderS
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(921, 726)
+        Me.UcNote1.Size = New System.Drawing.Size(747, 685)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -3612,7 +3612,7 @@ Partial Class frmOrderS
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(747, 685)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -3623,7 +3623,7 @@ Partial Class frmOrderS
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(921, 726)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(747, 685)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -3633,7 +3633,7 @@ Partial Class frmOrderS
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(921, 726)
+        Me.AdminTabPage.Size = New System.Drawing.Size(747, 685)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -3663,7 +3663,7 @@ Partial Class frmOrderS
         Me.DockPanel1.Options.AllowDockTop = False
         Me.DockPanel1.Options.ShowCloseButton = False
         Me.DockPanel1.OriginalSize = New System.Drawing.Size(296, 200)
-        Me.DockPanel1.Size = New System.Drawing.Size(296, 713)
+        Me.DockPanel1.Size = New System.Drawing.Size(296, 601)
         Me.DockPanel1.Text = "Order Information"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DockPanel1, "")
         '
@@ -3674,7 +3674,7 @@ Partial Class frmOrderS
         Me.DockPanel1_Container.Location = New System.Drawing.Point(4, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DockPanel1_Container, True)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
-        Me.DockPanel1_Container.Size = New System.Drawing.Size(288, 686)
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(288, 574)
         Me.DockPanel1_Container.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DockPanel1_Container, "")
         '
@@ -3686,7 +3686,7 @@ Partial Class frmOrderS
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(288, 686)
+        Me.PanelControl2.Size = New System.Drawing.Size(288, 574)
         Me.PanelControl2.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
         '
@@ -4092,7 +4092,7 @@ Partial Class frmOrderS
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1049, 750)
+        Me.ClientSize = New System.Drawing.Size(1049, 638)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Controls.Add(Me.DockPanel1)
         Me.Name = "frmOrderS"

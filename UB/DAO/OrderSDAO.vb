@@ -271,7 +271,7 @@ Public Class OrderSDAO
                     End If
 
                     If TableID = MasterType.Reserve Then
-                        MakePOStatus = EnumStatus.Ordering.ToString
+                        MakePOStatus = EnumStatus.Waiting.ToString
                     Else
                         MakePOStatus = ""
                     End If

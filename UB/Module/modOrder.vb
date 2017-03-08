@@ -327,7 +327,7 @@ Module modOrder
                                                    , MasterType.PurchaseOrder & "," & MasterType.CancelPO, tr, 0, 0, 0)
 
                 If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Ordering.ToString
+                    lStatus = EnumStatus.Waiting.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
                     lStatus = EnumStatus.Ordering.ToString
                 Else

@@ -1302,6 +1302,9 @@ Public Class frmOrderS
                                                    Or mcls.OrderStatus = EnumStatus.Cancel.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString _
                                                    Or mcls.OrderStatus = EnumStatus.Receive.ToString Or mcls.OrderStatus = EnumStatus.WaitApprove.ToString) And mcls.IsDelete = False
 
+                                If mcls.MakePOStatus = EnumStatus.Ordering.ToString Or mcls.MakePOStatus = EnumStatus.Ordered.ToString Then
+                                    SaveBar.Enabled = False
+                                End If
                         End Select
 
                         PrintBar2.Enabled = (mcls.IsDelete = False) And (mcls.OrderStatus <> EnumStatus.WaitApprove.ToString)
@@ -1746,36 +1749,36 @@ Public Class frmOrderS
     End Function
 
     Private Sub MakeReserve(ByVal pProList As List(Of ProductListDAO))
-        Dim lcls As ProductListDAO
-        Dim lProductList As New List(Of ProductListDAO)
+        'Dim lcls As ProductListDAO
+        'Dim lProductList As New List(Of ProductListDAO)
         Try
             ShowProgress(True, "Loading...")
 
-            For Each pProID As ProductListDAO In pProList
-                lcls = New ProductListDAO
-                lcls.IsSelect = True
-                lcls.Cost = pProID.Cost
-                lcls.ID = pProID.ID
-                lcls.LocationDTLID = pProID.LocationDTLID
-                lcls.Price = pProID.Price
-                lcls.PriceMain = pProID.PriceMain
-                lcls.ProductCode = pProID.ProductCode
-                lcls.ProductID = pProID.ProductID
-                lcls.ProductNameExt = pProID.ProductNameExt
-                lcls.ProductName = pProID.ProductName
-                lcls.Remark = pProID.Remark
-                lcls.SEQ = pProID.SEQ
-                lcls.Total = pProID.Total
-                lcls.UnitID = pProID.UnitID
-                lcls.UnitMainID = pProID.UnitMainID
-                lcls.UnitName = pProID.UnitName
-                lcls.Units = pProID.Units
-                lcls.RateUnit = pProID.RateUnit
-                lcls.AdjustUnit = pProID.AdjustUnit
-                lcls.Units_Old = pProID.Units_Old
-                lcls.AdjustUnit_Old = pProID.AdjustUnit_Old
-                lProductList.Add(lcls)
-            Next
+            'For Each pProID As ProductListDAO In pProList
+            '    lcls = New ProductListDAO
+            '    lcls.IsSelect = True
+            '    lcls.Cost = pProID.Cost
+            '    lcls.ID = pProID.ID
+            '    lcls.LocationDTLID = pProID.LocationDTLID
+            '    lcls.Price = pProID.Price
+            '    lcls.PriceMain = pProID.PriceMain
+            '    lcls.ProductCode = pProID.ProductCode
+            '    lcls.ProductID = pProID.ProductID
+            '    lcls.ProductNameExt = pProID.ProductNameExt
+            '    lcls.ProductName = pProID.ProductName
+            '    lcls.Remark = pProID.Remark
+            '    lcls.SEQ = pProID.SEQ
+            '    lcls.Total = pProID.Total
+            '    lcls.UnitID = pProID.UnitID
+            '    lcls.UnitMainID = pProID.UnitMainID
+            '    lcls.UnitName = pProID.UnitName
+            '    lcls.Units = pProID.Units
+            '    lcls.RateUnit = pProID.RateUnit
+            '    lcls.AdjustUnit = pProID.AdjustUnit
+            '    lcls.Units_Old = pProID.Units_Old
+            '    lcls.AdjustUnit_Old = pProID.AdjustUnit_Old
+            '    lProductList.Add(lcls)
+            'Next
 
             Dim lFormEdit As New frmOrderS
             With lFormEdit
@@ -1784,7 +1787,7 @@ Public Class frmOrderS
                 .MdiParent = frmMain
                 .ModeData = DataMode.ModeNew
                 .IDs = 0
-                .ProductList = lProductList
+                .ProductList = pProList
                 .CusID = ConvertNullToZero(CustomerID.EditValue)
                 .Show()
             End With

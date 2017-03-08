@@ -445,50 +445,34 @@ Public Class frmSN
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
-        Dim lSnData As SnDAO, lSNCount As Long = 0
-
-        'If mSnList.Count <> Math.Abs(UnitsMain.EditValue) Then
-        '    MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    SNNo.Focus()
-        'Else
-        'If GridView1.RowCount > 0 Then
-        '    mSnList = Nothing
-        '    mSnList = New List(Of SnDAO)
-        '    For lRow = 0 To GridView1.RowCount
-        '        If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
-        '            lSnData = New SnDAO
-        '            lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
-        '            lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
-        '            lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
-        '            lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
-        '            mSnList.Add(lSnData)
-        '            If lSnData.IsDelete = 0 Then
-        '                lSNCount = lSNCount + 1
-        '            End If
-        '        End If
-
-        '    Next
-        'End If
+        Dim lSnData As SnDAO, lSNCount As Long = 0, lstrSNNo As String = ""
+ 
         GridView1.ClearColumnsFilter()
         If GridView1.RowCount > 0 Then
             mSnList = Nothing
             mSnList = New List(Of SnDAO)
             For lRow = 0 To GridView1.RowCount
-                If ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo")) <> "" Then
-                    lSnData = New SnDAO
-                    lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
-                    lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
-                    lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
-                    lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
-                    mSnList.Add(lSnData)
-                    If lSnData.IsDelete = 0 Then
-                        lSNCount = lSNCount + 1
+                lstrSNNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+                If lstrSNNo <> "" Then
+                    If mSnList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo) >= 0 Then
+                        MessageBox.Show("Serial Number ซ้ำ : " & lstrSNNo, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        SNNo.Focus()
+                        Exit Sub
+                    Else
+                        lSnData = New SnDAO
+                        lSnData.SerialNumberID = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "SerialNumberID"))
+                        lSnData.SerialNumberNo = ConvertNullToString(GridView1.GetRowCellValue(lRow, "SerialNumberNo"))
+                        lSnData.IsDelete = ConvertNullToZero(GridView1.GetRowCellValue(lRow, "IsDelete"))
+                        lSnData.Status = ConvertNullToString(GridView1.GetRowCellValue(lRow, "Status"))
+                        mSnList.Add(lSnData)
+                        If lSnData.IsDelete = 0 Then
+                            lSNCount = lSNCount + 1
+                        End If
                     End If
                 End If
 
             Next
         End If
-
 
         If lSNCount <> Math.Abs(UnitsMain.EditValue) Then
             MessageBox.Show("รายการ S/N ไม่เท่ากับจำนวนสินค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -501,9 +485,7 @@ Public Class frmSN
                 modReport.PrintBarCode(ProductName.EditValue, mSnList)
             End If
         End If
-
         Me.Close()
-        'End If
     End Sub
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
