@@ -86,6 +86,7 @@ Public Class OrderSDAO
                     PO = ConvertNullToString(dr("PO"))
                     OrderStatus = ConvertNullToString(dr("OrderStatus"))
                     OrderStatus2 = ConvertNullToString(dr("OrderStatus2"))
+                    MakePOStatus = ConvertNullToString(dr("MakePOStatus"))
                     CancelRemark = ConvertNullToString(dr("CancelRemark"))
                     IsCancel = dr("IsCancel")
                     Total = ConvertNullToZero(dr("Total"))
@@ -1245,7 +1246,7 @@ Public Class OrderSDAO
             Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
             Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
             Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult"
-            Sql &= " FROM Orders"""
+            Sql &= " FROM Orders"
             Sql &= " WHERE OrderID=" & ID
             gConnection.executeInsertQuery(Sql, ptr)
         Catch e As Exception

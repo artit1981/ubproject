@@ -393,8 +393,8 @@ Public Class frmOrderS
             mcls.InvoiceSuplierID = ConvertNullToString(InvoiceSuplierID.EditValue)
             mcls.Institute = ConvertNullToString(Institute.EditValue)
             mcls.StockType = StockType.EditValue
-            mcls.ClaimRemark = ConvertListToString(ClaimRemark.EditValue)
-            mcls.ClaimResult = ClaimResult.EditValue
+            mcls.ClaimRemark = ConvertNullToString(ClaimRemark.EditValue)
+            mcls.ClaimResult = ConvertNullToString(ClaimResult.EditValue)
             mcls.QuotationRemarkID = ConvertNullToZero(QuotationRemark.EditValue)
             mcls.CampaignID = ConvertNullToZero(Campaign.EditValue)
             If TaxCanYes.Checked = True Then

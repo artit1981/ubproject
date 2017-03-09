@@ -69,7 +69,7 @@ Public Class frmFindReserve
         Try
 
             SQL = " AND Orders.OrderDate Between '" & formatSQLDate(DateFrom.EditValue) & "' AND '" & formatSQLDate(DateTo.EditValue) & "'"
-            SQL &= " AND Orders.MakePOStatus='Ordering' "
+            SQL &= " AND Orders.MakePOStatus in('Ordering','Waiting') "
             'SQL &= " AND Orders.OrderID in ( "
             'SQL &= "       select RefID from ProductList where RefTable='Reserve'  and IsDelete =0"
             'SQL &= "            AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "

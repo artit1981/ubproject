@@ -660,7 +660,7 @@ Public Class ProductListDAO
             Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID"
             Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
             Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1"
-            Sql &= " FROM ProductList"""
+            Sql &= " FROM ProductList"
             Sql &= " WHERE ProductListID=" & ID
             gConnection.executeInsertQuery(Sql, ptr)
         Catch e As Exception
