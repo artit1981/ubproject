@@ -308,7 +308,7 @@ Public Class frmSN
                 lRunCount = lRunCount & "0"
             Next
             lSNAdd = mSnList.Count
-            Do Until lSNAdd = UnitsMain.EditValue
+            Do Until lSNAdd >= UnitsMain.EditValue
                 lCode = lstrExam & lLastCount.ToString(lRunCount)
                 If mOrderType = MasterType.StockIn.ToString Or (mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0) Then
                     lclsSN = New SnDAO
@@ -385,7 +385,7 @@ Public Class frmSN
             Else
                 lIndex = mSnList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = ConvertNullToString(SNNo.EditValue))
                 If lIndex >= 0 Then
-                    lIsError = True
+                    lIsError = "Serial Number ซ้ำ"
                 End If
 
                 lclsSN = New SnDAO

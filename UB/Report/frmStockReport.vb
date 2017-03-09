@@ -21,9 +21,10 @@ Public Class frmStockReport
             ReportType.EditValue = "A"
             SetComboProductType("", ProductTypeID)
             SetComboProductBrand("", ProductBrandID)
-
+            SetComboProductLocation(ProLocation)
             ProductTypeID.CheckAll()
             ProductBrandID.CheckAll()
+            ProLocation.CheckAll()
             SetComboProduct()
 
         Catch e As Exception
@@ -63,7 +64,7 @@ Public Class frmStockReport
             If sQN <> "" Then
                 lSQL = lSQL & " and Product.ProductBrandID in (" & sQN & ") "
             End If
-
+             
             'Product
             dataTable = Nothing
             dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
@@ -92,8 +93,19 @@ Public Class frmStockReport
             lclsReport.SaveData()
 
             Dim lTableOrder As New DataTable
-            Dim SQL As String
-
+            Dim SQL As String, sQN As String
+             
+            'ProductLocat
+            sQN = ""
+            For Each item As Object In ProLocation.CheckedItems
+                Dim row As DataRowView = CType(item, DataRowView)
+                If sQN = "" Then
+                    sQN = ConvertNullToString(row(0))
+                Else
+                    sQN = sQN & "," & ConvertNullToZero(row(0))
+                End If
+            Next
+           
 
             'Build Product List
             Dim lProductList As String = UcMoverItem1.GetSelectItem
@@ -126,6 +138,9 @@ Public Class frmStockReport
             If lProductList <> "" Then
                 SQL = SQL & " and a.ProductID in(" & lProductList & ")"
             End If
+            If sQN <> "" Then
+                SQL = SQL & " and a.LocationDTLID in(" & sQN & ")"
+            End If
             SQL &= " group by a.ProductID,b.ProductCode,c.NameThai,d.CodeThai,b.ProductName"
             gConnection.executeInsertQuery(SQL, Nothing)
 
@@ -155,5 +170,5 @@ Public Class frmStockReport
     Private Sub ProductTypeID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductTypeID.LostFocus
         SetComboProduct()
     End Sub
- 
+  
 End Class

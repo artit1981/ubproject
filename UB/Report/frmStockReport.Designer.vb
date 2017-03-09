@@ -30,11 +30,14 @@ Partial Class frmStockReport
         Me.UcMoverItem1 = New UB.ucMoverItem()
         Me.DateFrom = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ProLocation = New DevExpress.XtraEditors.CheckedListBoxControl()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ProLocation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label8
@@ -111,7 +114,7 @@ Partial Class frmStockReport
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.UcMoverItem1.Location = New System.Drawing.Point(133, 265)
         Me.UcMoverItem1.Name = "UcMoverItem1"
-        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 224)
+        Me.UcMoverItem1.Size = New System.Drawing.Size(574, 224)
         Me.UcMoverItem1.TabIndex = 215
         '
         'DateFrom
@@ -144,11 +147,31 @@ Partial Class frmStockReport
         Me.Label1.TabIndex = 217
         Me.Label1.Text = "วันที่"
         '
+        'ProLocation
+        '
+        Me.ProLocation.Location = New System.Drawing.Point(526, 148)
+        Me.ProLocation.Name = "ProLocation"
+        Me.ProLocation.Size = New System.Drawing.Size(181, 104)
+        Me.ProLocation.TabIndex = 218
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label2.Location = New System.Drawing.Point(523, 131)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(50, 14)
+        Me.Label2.TabIndex = 219
+        Me.Label2.Text = "หน่วยนับ"
+        '
         'frmStockReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1112, 501)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.ProLocation)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DateFrom)
         Me.Controls.Add(Me.UcMoverItem1)
@@ -172,11 +195,14 @@ Partial Class frmStockReport
         Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
         Me.Controls.SetChildIndex(Me.DateFrom, 0)
         Me.Controls.SetChildIndex(Me.Label1, 0)
+        Me.Controls.SetChildIndex(Me.ProLocation, 0)
+        Me.Controls.SetChildIndex(Me.Label2, 0)
         CType(Me.ProductBrandID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductTypeID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ProLocation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -191,5 +217,7 @@ Partial Class frmStockReport
     Friend WithEvents UcMoverItem1 As UB.ucMoverItem
     Friend WithEvents DateFrom As DevExpress.XtraEditors.DateEdit
     Private WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ProLocation As DevExpress.XtraEditors.CheckedListBoxControl
+    Private WithEvents Label2 As System.Windows.Forms.Label
 
 End Class

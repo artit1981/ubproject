@@ -701,6 +701,43 @@ Module modFunction
 
     End Sub
 
+
+    Public Sub SetComboProductLocation(ByRef pProductLocation As DevExpress.XtraEditors.CheckedListBoxControl)
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+
+        Try
+
+            SQL = "SELECT b.LocationDTLID AS ID,b.NameThai, 0 as Flag"
+           
+            SQL = SQL & " FROM Product_LocationDTL b"
+            SQL = SQL & " Inner join Product_Location a on a.LocationID=b.RefID"
+            SQL = SQL & " WHERE a.IsDelete= 0   "
+            SQL = SQL & " AND a.IsInActive = 0"
+            SQL = SQL & " ORDER BY NameThai"
+
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            pProductLocation.DataSource = dataTable
+            pProductLocation.DisplayMember = "NameThai"
+            pProductLocation.ValueMember = "ID"
+
+            For i As Integer = 0 To dataTable.DefaultView.Count - 1
+                Dim row As DataRowView = dataTable.DefaultView(i)
+                If row("Flag") = 1 Then
+                    pProductLocation.SetItemChecked(i, True)
+                Else
+                    pProductLocation.SetItemChecked(i, False)
+                End If
+            Next i
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modFunction.SetComboProductLocation : " & e.Message)
+        Finally
+            dataTable = Nothing
+        End Try
+
+
+    End Sub
     Public Function CheckIsUseStock(ByVal TableID As MasterType, ByVal RefToOrderID As List(Of Long) _
                                         , ByVal StockType As String, ByRef tr As SqlTransaction) As Integer
         Dim lclsOrder As OrderSDAO = Nothing

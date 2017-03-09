@@ -1302,9 +1302,17 @@ Public Class frmOrderS
                                                    Or mcls.OrderStatus = EnumStatus.Cancel.ToString Or mcls.OrderStatus = EnumStatus.Waiting.ToString _
                                                    Or mcls.OrderStatus = EnumStatus.Receive.ToString Or mcls.OrderStatus = EnumStatus.WaitApprove.ToString) And mcls.IsDelete = False
 
-                                If mcls.MakePOStatus = EnumStatus.Ordering.ToString Or mcls.MakePOStatus = EnumStatus.Ordered.ToString Then
+                                If mcls.MakePOStatus = EnumStatus.Ordered.ToString Then
                                     SaveBar.Enabled = False
                                 End If
+                                If mcls.MakePOStatus = EnumStatus.Ordering.ToString Then
+                                    If gUserID = 5 Or gUserID = 8 Then
+                                        SaveBar.Enabled = True
+                                    Else
+                                        SaveBar.Enabled = False
+                                    End If
+                                End If
+
                         End Select
 
                         PrintBar2.Enabled = (mcls.IsDelete = False) And (mcls.OrderStatus <> EnumStatus.WaitApprove.ToString)
