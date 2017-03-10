@@ -32,7 +32,7 @@ Public Class frmFindOrder
     End Property
     Public ReadOnly Property IsGetByProduct() As Boolean
         Get
-            Return (CheckProduct.CheckState = CheckState.Checked)
+            Return TabControl1.SelectedTabPageIndex = 1
         End Get
     End Property
 
@@ -350,7 +350,7 @@ Public Class frmFindOrder
 
     Private Sub GetOrder(ByVal pMultiSelect As Boolean)
         Try
-            If CheckProduct.CheckState = CheckState.Checked Then
+            If TabControl1.SelectedTabPageIndex = 1 Then
                 GetProList()
             Else
                 GetOrderDAOs(pMultiSelect)
@@ -391,7 +391,7 @@ Public Class frmFindOrder
 
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         Try
-            If CheckProduct.CheckState = CheckState.Checked Then
+            If TabControl1.SelectedTabPageIndex = 1 Then
                 ShowProgress(True, "")
                 LoadOrderByCondition()
                 LoadProListData(cboOrderType.EditValue)
@@ -492,16 +492,16 @@ Public Class frmFindOrder
         LoadOrderByCondition()
     End Sub
 
-    Private Sub CheckProduct_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckProduct.CheckedChanged
-        If CheckProduct.CheckState = CheckState.Checked Then
-            ShowProgress(True, "")
-            LoadProListData(cboOrderType.EditValue)
-            TabControl1.SelectedTabPage = ProductTabPage
-            ShowProgress(False, "")
-        Else
-            TabControl1.SelectedTabPage = OrderTabPage
-        End If
-    End Sub
+    'Private Sub CheckProduct_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If TabControl1.SelectedTabPageIndex = 1 Then
+    '        ShowProgress(True, "")
+    '        LoadProListData(cboOrderType.EditValue)
+    '        TabControl1.SelectedTabPage = ProductTabPage
+    '        ShowProgress(False, "")
+    '    Else
+    '        TabControl1.SelectedTabPage = OrderTabPage
+    '    End If
+    'End Sub
 
 
     Private Sub LoadProListData(ByVal pOrderType As MasterType)

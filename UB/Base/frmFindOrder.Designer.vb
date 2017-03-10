@@ -21,7 +21,6 @@ Partial Class frmFindOrder
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFindOrder))
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
-        Me.CheckProduct = New DevExpress.XtraEditors.CheckEdit()
         Me.btnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -55,7 +54,6 @@ Partial Class frmFindOrder
         Me.btnOrderCode = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
-        CType(Me.CheckProduct.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,7 +72,6 @@ Partial Class frmFindOrder
         '
         'GroupControl1
         '
-        Me.GroupControl1.Controls.Add(Me.CheckProduct)
         Me.GroupControl1.Controls.Add(Me.btnOK)
         Me.GroupControl1.Controls.Add(Me.btnFind)
         Me.GroupControl1.Controls.Add(Me.Label20)
@@ -88,19 +85,6 @@ Partial Class frmFindOrder
         Me.GroupControl1.Size = New System.Drawing.Size(931, 98)
         Me.GroupControl1.TabIndex = 1
         Me.GroupControl1.Text = "เงื่อนไขการค้นหาข้อมูล"
-        '
-        'CheckProduct
-        '
-        Me.CheckProduct.Location = New System.Drawing.Point(384, 70)
-        Me.CheckProduct.Name = "CheckProduct"
-        Me.CheckProduct.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckProduct.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.CheckProduct.Properties.Appearance.Options.UseFont = True
-        Me.CheckProduct.Properties.Appearance.Options.UseForeColor = True
-        Me.CheckProduct.Properties.Caption = "ค้นหารายการสินค้า"
-        Me.CheckProduct.Size = New System.Drawing.Size(147, 19)
-        Me.CheckProduct.TabIndex = 249
-        Me.CheckProduct.Visible = False
         '
         'btnOK
         '
@@ -235,7 +219,7 @@ Partial Class frmFindOrder
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Location = New System.Drawing.Point(1, 101)
         Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedTabPage = Me.ProductTabPage
+        Me.TabControl1.SelectedTabPage = Me.OrderTabPage
         Me.TabControl1.Size = New System.Drawing.Size(926, 370)
         Me.TabControl1.TabIndex = 248
         Me.TabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.OrderTabPage, Me.ProductTabPage})
@@ -244,7 +228,6 @@ Partial Class frmFindOrder
         '
         Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
         Me.ProductTabPage.Name = "ProductTabPage"
-        Me.ProductTabPage.PageVisible = False
         Me.ProductTabPage.Size = New System.Drawing.Size(920, 342)
         Me.ProductTabPage.Text = "Products"
         '
@@ -525,7 +508,6 @@ Partial Class frmFindOrder
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
-        CType(Me.CheckProduct.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboOrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -556,7 +538,6 @@ Partial Class frmFindOrder
     Friend WithEvents OrderTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents ProductTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents UcProductLists1 As ucProductLists
-    Friend WithEvents CheckProduct As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridControl As DevExpress.XtraGrid.GridControl
     Private WithEvents GridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents IsSelect As DevExpress.XtraGrid.Columns.GridColumn
