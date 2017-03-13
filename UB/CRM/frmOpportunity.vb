@@ -210,7 +210,7 @@ Public Class frmOpportunity
                     ExpectRevenue.EditValue = FormatNumber(mcls.ExpectRevenue, 2)
                     SourceID.EditValue = mcls.SourceID
                     Remark.EditValue = mcls.Remark
-                    txtEmp.Text = mcls.EmployeeDAO.Title & " " & mcls.EmployeeDAO.FirstName & " " & mcls.EmployeeDAO.LastName
+                    txtEmp.Text = mcls.EmployeeDAO(Nothing).Title & " " & mcls.EmployeeDAO(Nothing).FirstName & " " & mcls.EmployeeDAO(Nothing).LastName
                     UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
                     UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
                     UcAdmin1.txtCreateTime.Text = mcls.CreateTime

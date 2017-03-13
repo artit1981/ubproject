@@ -347,7 +347,7 @@ Module modOrder
                         If lclsOrder.InitailData(pOrderID, , tr) Then
                             lclsNotifi = New clsNotifi
                             lclsNotifi.AddDataNotifi(2, "MakePO", "สร้างใบสั่งซื้อ", GetCurrentDate(tr), "Orders", lclsOrder.ID _
-                                , "เอกสารเลขที่ " & lclsOrder.Code & " = Ordered ", tr, lclsOrder.EmployeeDAO.EmpUserID)
+                                , "เอกสารเลขที่ " & lclsOrder.Code & " = Ordered ", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
                         End If
                     End If
                 End If

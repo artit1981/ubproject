@@ -513,11 +513,11 @@ Public Class iOrder
         End Set
     End Property
 
-    Public ReadOnly Property EmployeeDAO() As EmployeeDAO
+    Public ReadOnly Property EmployeeDAO(ByVal tr As SqlTransaction) As EmployeeDAO
         Get
             If mclsEmployee Is Nothing Then
                 mclsEmployee = New EmployeeDAO
-                mclsEmployee.InitailData(EmpID)
+                mclsEmployee.InitailData(EmpID, , tr)
             End If
             Return mclsEmployee
         End Get

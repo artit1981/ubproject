@@ -271,7 +271,7 @@ Public Class ucOrderList
                 rec.OrderCode = lcls.Code
                 rec.OrderDate = lcls.OrderDate
                 rec.CusName = lcls.CustomerDAO.FirstName
-                rec.EmpName = lcls.EmployeeDAO.Title & lcls.EmployeeDAO.FirstName & " " & lcls.EmployeeDAO.LastName
+                rec.EmpName = lcls.EmployeeDAO(Nothing).Title & lcls.EmployeeDAO(Nothing).FirstName & " " & lcls.EmployeeDAO(Nothing).LastName
               
                 rec.Remark = ""
                 rec.TableID = lcls.TableID
