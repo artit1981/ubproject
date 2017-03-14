@@ -141,7 +141,7 @@ Module modOrder
             If pOrderType = MasterType.StockIn Then 'Ref from PO
                 lRefStatus = GetUnitNotRef(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr, pProListID, pProID, pUnitNotRef)
                 If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Waiting.ToString
+                    lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
                     lStatus = EnumStatus.Waiting.ToString
                 Else
@@ -170,7 +170,7 @@ Module modOrder
                 If pMode = DataMode.ModeDelete Then
                     lRefStatus = GetUnitNotRef(pRefOrderID, "'PurchaseOrder'", "'StockIn'", MasterType.StockIn, tr, pProListID, pProID, pUnitNotRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
-                        lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
+                        lStatus = EnumStatus.Open.ToString 'รอทำ stockin  
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
                         lStatus = EnumStatus.Waiting.ToString 'รอทำ stockin  
                     Else

@@ -205,8 +205,8 @@ Public Class OrderSDAO
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveBorrow And TableID = MasterType.Borrow Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
-                    ElseIf TableID = MasterType.PurchaseOrder Then
-                        OrderStatus = EnumStatus.Waiting.ToString
+                        'ElseIf TableID = MasterType.PurchaseOrder Then
+                        '    OrderStatus = EnumStatus.Waiting.ToString
                     Else
                         OrderStatus = EnumStatus.Open.ToString
                     End If

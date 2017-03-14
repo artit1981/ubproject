@@ -1410,6 +1410,12 @@ Public Class frmOrderS
                 lIsReadOnly = True
             ElseIf mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString Then
                 lIsReadOnly = False
+            ElseIf mOrderType = MasterType.PurchaseOrder And mcls.OrderStatus = EnumStatus.Waiting.ToString Then
+                If gUserID = 5 Or gUserID = 8 Or gUserName = "Aoae" Then
+                    lIsReadOnly = False
+                Else
+                    lIsReadOnly = True
+                End If
             Else
                 lIsReadOnly = True
             End If
