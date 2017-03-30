@@ -48,7 +48,7 @@ Public Class frmPreReport
                 Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                     , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose
                     Call PrintOrder(mOrderID, pClaimLoop)
-                Case MasterType.Bill, MasterType.Receipt
+                Case MasterType.Bill, MasterType.Receipt, MasterType.ReceiptBuy
                     Call PrintBill(mOrderID)
                     'Case MasterType.Quotation
                     '    Call PrintQuotation(pOrderID)
@@ -388,7 +388,7 @@ Public Class frmPreReport
             Select Case mOrderType
                 Case MasterType.Bill
                     report = New rptBillReport
-                Case MasterType.Receipt
+                Case MasterType.Receipt, MasterType.ReceiptBuy
                     report = New rptReceipt
             End Select
             If lclsOrder.InitailData(pOrderID) Then
