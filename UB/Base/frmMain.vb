@@ -123,11 +123,11 @@ Public Class frmMain
         SkinHelper.InitSkinGallery(rgbiSkins, True)
     End Sub
 
-    Private Sub frmMain_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+    Private Sub frmMain_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Application.Exit()
     End Sub
 
-    Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         AppConfigFileSettings.UpdateAppSettings("SkinName", UserLookAndFeel.Default.SkinName)
         AppConfigFileSettings.UpdateAppSettings("OpenTab", ribbonMain.SelectedPage.Name)
         InsertActivity(DataMode.ModeLogOut, 0, "", Nothing)
@@ -181,7 +181,7 @@ Public Class frmMain
                     .Show()
                 End With
             End If
-          
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -833,5 +833,24 @@ Public Class frmMain
         frmStockReport.MdiParent = Me
         frmStockReport.Show()
         InsertActivity(DataMode.ModeOpen, MasterType.ReportStock, "", Nothing)
+    End Sub
+
+    Private Sub ClaimResultBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ClaimResultBar.ItemClick
+        Dim lcls As New OrderControl
+        ShowDataOnControl(lcls, MasterType.ClaimResult)
+        InsertActivity(DataMode.ModeOpen, MasterType.ClaimResult, "", Nothing)
+    End Sub
+
+
+    Private Sub ClaimReturnBar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ClaimReturnBar.ItemClick
+        Dim lcls As New OrderControl
+        ShowDataOnControl(lcls, MasterType.ClaimReturn)
+        InsertActivity(DataMode.ModeOpen, MasterType.ClaimReturn, "", Nothing)
+    End Sub
+
+    Private Sub Quotation2Bar_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles Quotation2Bar.ItemClick
+        Dim lcls As New OrderControl
+        ShowDataOnControl(lcls, MasterType.Quotation2)
+        InsertActivity(DataMode.ModeOpen, MasterType.Quotation2, "", Nothing)
     End Sub
 End Class

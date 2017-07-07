@@ -30,8 +30,6 @@ Partial Class frmFindOrder
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DateFrom = New DevExpress.XtraEditors.DateEdit()
         Me.TabControl1 = New DevExpress.XtraTab.XtraTabControl()
-        Me.ProductTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcProductLists1 = New UB.ucProductLists()
         Me.OrderTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -52,6 +50,8 @@ Partial Class frmFindOrder
         Me.TableID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CustomerID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnOrderCode = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.ProductTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcProductLists1 = New UB.ucProductLists()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.cboOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,13 +61,13 @@ Partial Class frmFindOrder
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
-        Me.ProductTabPage.SuspendLayout()
         Me.OrderTabPage.SuspendLayout()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.IsSelectCheckEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOrderCode, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ProductTabPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -93,9 +93,9 @@ Partial Class frmFindOrder
         Me.btnOK.Appearance.Options.UseImage = True
         Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
         Me.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnOK.Location = New System.Drawing.Point(764, 65)
+        Me.btnOK.Location = New System.Drawing.Point(648, 40)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(82, 24)
+        Me.btnOK.Size = New System.Drawing.Size(82, 43)
         Me.btnOK.TabIndex = 248
         Me.btnOK.TabStop = False
         Me.btnOK.Text = "ตกลง"
@@ -108,7 +108,7 @@ Partial Class frmFindOrder
         Me.btnFind.Appearance.Options.UseImage = True
         Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
         Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnFind.Location = New System.Drawing.Point(764, 30)
+        Me.btnFind.Location = New System.Drawing.Point(386, 65)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(82, 24)
         Me.btnFind.TabIndex = 247
@@ -223,21 +223,6 @@ Partial Class frmFindOrder
         Me.TabControl1.Size = New System.Drawing.Size(926, 370)
         Me.TabControl1.TabIndex = 248
         Me.TabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.OrderTabPage, Me.ProductTabPage})
-        '
-        'ProductTabPage
-        '
-        Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
-        Me.ProductTabPage.Name = "ProductTabPage"
-        Me.ProductTabPage.Size = New System.Drawing.Size(920, 342)
-        Me.ProductTabPage.Text = "Products"
-        '
-        'UcProductLists1
-        '
-        Me.UcProductLists1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
-        Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(920, 342)
-        Me.UcProductLists1.TabIndex = 0
         '
         'OrderTabPage
         '
@@ -492,6 +477,21 @@ Partial Class frmFindOrder
         Me.btnOrderCode.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.btnOrderCode.Name = "btnOrderCode"
         '
+        'ProductTabPage
+        '
+        Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
+        Me.ProductTabPage.Name = "ProductTabPage"
+        Me.ProductTabPage.Size = New System.Drawing.Size(920, 342)
+        Me.ProductTabPage.Text = "Products"
+        '
+        'UcProductLists1
+        '
+        Me.UcProductLists1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
+        Me.UcProductLists1.Name = "UcProductLists1"
+        Me.UcProductLists1.Size = New System.Drawing.Size(920, 342)
+        Me.UcProductLists1.TabIndex = 0
+        '
         'frmFindOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -515,13 +515,13 @@ Partial Class frmFindOrder
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
-        Me.ProductTabPage.ResumeLayout(False)
         Me.OrderTabPage.ResumeLayout(False)
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.IsSelectCheckEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnOrderCode, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ProductTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

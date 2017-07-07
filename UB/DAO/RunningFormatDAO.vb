@@ -278,7 +278,7 @@ Public Class RunningFormatDAO
                     FormatYear = ConvertNullToString(dr("FormatYear"))
                     RunningCount = ConvertNullToZero(dr("RunningCount"))
                     LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
-                    IsReset = dr("IsReset")
+                    IsReset = ConvertNullToZero(dr("IsReset"))
                     LastNo = GetLastNo(tr, ID)
                     CreateBy = ""
                     CreateTime = ""

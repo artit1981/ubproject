@@ -285,6 +285,7 @@ Public Class frmFindOrder
             lProductSubList.Sort(Function(x, y) x.RefID.CompareTo(y.RefID))
 
             For Each pProLIst As ProductListDAO In lProductSubList
+                pProLIst.IsSelect = True
                 llngProID = pProLIst.ProductID
                 lUnitID = pProLIst.UnitID
                 lIndex = mProductSubList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = lUnitID)
@@ -490,18 +491,17 @@ Public Class frmFindOrder
         cboOrderType.Properties.ValueMember = "MasterTypes"
 
         LoadOrderByCondition()
+        Select Case mOrderType
+            Case MasterType.Receipt, MasterType.Bill, MasterType.ReceiptCut, MasterType.ReceiptBuy, MasterType.ReduceCreditBuy, MasterType.AddCreditBuy
+                ProductTabPage.PageVisible = False
+            Case Else
+                LoadProListData(cboOrderType.EditValue)
+        End Select
+
+
     End Sub
 
-    'Private Sub CheckProduct_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    If TabControl1.SelectedTabPageIndex = 1 Then
-    '        ShowProgress(True, "")
-    '        LoadProListData(cboOrderType.EditValue)
-    '        TabControl1.SelectedTabPage = ProductTabPage
-    '        ShowProgress(False, "")
-    '    Else
-    '        TabControl1.SelectedTabPage = OrderTabPage
-    '    End If
-    'End Sub
+
 
 
     Private Sub LoadProListData(ByVal pOrderType As MasterType)

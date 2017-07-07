@@ -912,7 +912,7 @@ Public Class iOrder
     End Function
 
 
-    Public Overridable Function GetToRefReserveCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
+    'Public Overridable Function GetToRefReserveCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
 
-    End Function
+    'End Function
 End Class

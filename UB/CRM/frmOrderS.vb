@@ -203,6 +203,11 @@ Public Class frmOrderS
                     LayoutRefPO1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutControlRefOrder.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
                     LayoutControlRefOrder2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                    LayoutPledge1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPledge3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPledge4.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    PledgeTabPage.PageEnabled = True
+
                 Case MasterType.Reserve
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -1209,28 +1214,6 @@ Public Class frmOrderS
     End Function
 
 
-    Private Function LoadSN(ByVal pOrderID As List(Of Long), ByVal pProListID As Long, ByVal pProID As Long) As List(Of SnDAO)
-        Dim lclsSN As New SnDAO, dataSN As New DataTable()
-        Dim lSNList As New List(Of SnDAO)
-        LoadSN = Nothing
-        Try
-            dataSN = lclsSN.GetDataTable(pOrderID, pProListID, pProID, "", Nothing, True, "")
-            For Each dr2 As DataRow In dataSN.Rows
-                lclsSN = New SnDAO
-                lclsSN.SerialNumberID = 0
-                lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
-                lclsSN.Status = ConvertNullToString(dr2("Status"))
-                lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
-                lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
-                lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
-                lSNList.Add(lclsSN)
-            Next
-            Return lSNList
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".LoadSN : " & e.Message)
-        Finally
-        End Try
-    End Function
 
     Private Sub InitialCombo()
         Try
@@ -1264,10 +1247,11 @@ Public Class frmOrderS
                         mRefReserveID.Add(pOrderID)
                         InitialRefReserve(pOrderID, "", False)
                     Next
-                    Calculation()
+                    'Calculation()
                 End If
             ElseIf pMode = DataMode.ModeConvert Then
                 Call LoadConvert(pID)
+                Calculation()
                 MyBase.SetMode = DataMode.ModeNew
             ElseIf pMode = DataMode.ModeEdit Or pMode = DataMode.ModeCopy Then
                 If mcls.InitailData(pID) Then
@@ -1322,7 +1306,7 @@ Public Class frmOrderS
                         txtRefOrder.Text = mcls.GetToRefOrderCode(pID, Nothing)
                         mRefOrderID = mcls.RefToOrderID
                         If mOrderType = MasterType.PurchaseOrder Or mOrderType = MasterType.CancelPO Then
-                            txtRefPO.Text = mcls.GetToRefReserveCode(pID, Nothing)
+                            txtRefPO.Text = GetToRefReserveCode(pID, Nothing, mcls.RefToReserveID)
                             mRefReserveID = mcls.RefToReserveID
                         End If
                     Else  '*** Copy
@@ -1374,18 +1358,21 @@ Public Class frmOrderS
                     End If
                 End If
             End If
-            InitialIsEditVat(mcls.IsEditVat)
-            UcNote1.ShowControl(mcls.TableName, pID)
-            UcNote2.ShowControl(mcls.TableName & "_PRO", pID)  'Product Remark
-            ShowProductList(mMode)
-            LoadTaxOrder(pID)
-            InitialCusTaxInfo(ConvertNullToZero(CustomerID.EditValue), Nothing)
-            UcPledge1.ShowControl(mcls.ID, False)
-            CancelRemark.Properties.ReadOnly = (IsCancel.EditValue = False)
+
+            If pMode <> DataMode.ModeConvert Then
+                InitialIsEditVat(mcls.IsEditVat)
+                UcNote1.ShowControl(mcls.TableName, pID)
+                UcNote2.ShowControl(mcls.TableName & "_PRO", pID)  'Product Remark
+                ShowProductList(mMode)
+                LoadTaxOrder(pID)
+                InitialCusTaxInfo(ConvertNullToZero(CustomerID.EditValue), Nothing)
+                UcPledge1.ShowControl(mcls.ID, False)
+                CancelRemark.Properties.ReadOnly = (IsCancel.EditValue = False)
+            End If
 
             'Total panel
             Dim lUnits As Long = 0
-            If mMode = DataMode.ModeEdit Then
+            If mMode = DataMode.ModeEdit Or pMode = DataMode.ModeConvert Then
                 lUnits = UcProductLists1.GetDAOs(False, True, mOrderType = MasterType.SellOrders, Nothing, True, 0, False, "", 0, mcls.StockType).Count
             End If
             InitialTotalPanel(lUnits)

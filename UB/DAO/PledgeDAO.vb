@@ -126,7 +126,6 @@ Public Class PledgeDAO
                     SQL = SQL & " ,OrderDate=@OrderDate"
                     SQL = SQL & " ,Total=@Total"
                     SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " ,IsDelete=@IsDelete"
                     SQL = SQL & " WHERE PledgeID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Pledge SET IsDelete=@IsDelete "

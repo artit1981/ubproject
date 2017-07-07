@@ -90,7 +90,7 @@ Public Class OrderControl
                 mCaption = "บันทึกลดหนี้"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ClaimOut
-                mCaption = "แจ้งเคลม Supplier "
+                mCaption = "แจ้งเคลม Supplier"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Claim
                 mCaption = "รับแจ้งเคลม"
@@ -101,6 +101,15 @@ Public Class OrderControl
             Case MasterType.UpdateStock
                 mCaption = "ปรับยอดสินค้า"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.EmpName
+            Case MasterType.ClaimResult
+                mCaption = "ผลการเคลม Supplier"
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
+            Case MasterType.ClaimReturn
+                mCaption = "เคลม(ส่งคืน)"
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+            Case MasterType.Quotation2
+                mCaption = "ใบเสนอราคาคู่เทียบ"
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
         End Select
 
         Call InitialFilterCon(mCtlForm.cboFindIn, lFilterCol)

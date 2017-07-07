@@ -64,6 +64,7 @@ Public Class ucProductLists
         Try
             mColData = pColumnData
             mIsReaOnly = pIsReaOnly
+            btnFind.Enabled = (pIsReaOnly = False)
             mFormOrder = pFormOrder
             mIsUsePriceSell = pIsUsePriceSell
             mMode = pMode
@@ -111,7 +112,7 @@ Public Class ucProductLists
             DxErrorProvider1.ContainerControl = Me
             mCheckType = 0
             mStockType = pStockType
-
+            btnFind.Enabled = (pIsReaOnly = False)
             'Copy to BindingSource
             For Each pPro As ProductListDAO In pProList
                 rec = New ProductSub

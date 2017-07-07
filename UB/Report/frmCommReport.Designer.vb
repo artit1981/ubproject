@@ -191,14 +191,14 @@ Partial Class frmCommReport
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.UcMoverItem1.Location = New System.Drawing.Point(137, 210)
         Me.UcMoverItem1.Name = "UcMoverItem1"
-        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 218)
+        Me.UcMoverItem1.Size = New System.Drawing.Size(500, 274)
         Me.UcMoverItem1.TabIndex = 199
         '
         'frmCommReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1112, 434)
+        Me.ClientSize = New System.Drawing.Size(1112, 490)
         Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DateFrom)

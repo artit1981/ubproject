@@ -4,14 +4,6 @@
         Dim lTableRight As DataTable
         lTableRight = lsRight.DataSource
         Try
-            'For Each item As Object In lsRight.Items
-            '    row = CType(item, DataRowView)
-            '    If lItemList = "" Then
-            '        lItemList = ConvertNullToZero(row(0))
-            '    Else
-            '        lItemList = lItemList & "," & ConvertNullToZero(row(0))
-            '    End If
-            'Next
             For Each item As DataRow In lTableRight.Rows
                 If lItemList = "" Then
                     lItemList = ConvertNullToZero(item.Item(0))
@@ -44,6 +36,8 @@
             lsRight.DataSource = lRightTable
             lsRight.DisplayMember = pColDisplay
             lsRight.ValueMember = pColValue
+
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucMoverItem.ShowControl : " & e.Message)
 
@@ -70,10 +64,11 @@
         Dim lTableLeft As DataTable, lTableRight As DataTable, lrow As DataRow, lDatarow As DataRowView
         Dim lKey As New List(Of Long)
         Try
+
             ShowProgress(True, "Loading...")
             lTableLeft = lsLeft.DataSource
             lTableRight = lsRight.DataSource
-           
+
             For Each item As Object In lsLeft.CheckedItems
                 lDatarow = CType(item, DataRowView)
                 lKey.Add(ConvertNullToZero(lDatarow(0)))

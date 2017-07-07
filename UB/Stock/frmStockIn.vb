@@ -8,9 +8,10 @@ Public Class frmStockIn
     Private mcls As New OrderSDAO
     Private mIsFromLoad As Boolean
     Private mMode As DataMode
-    'Private mRefOrderID As Long
     Private mRefOrderID As List(Of Long)
     Private mOrderType As MasterType
+    Private mProductList As List(Of ProductListDAO)
+    Private mIsGroupDupProduct As Integer = 0 '0 none ,1=yes,2=no
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
@@ -154,7 +155,7 @@ Public Class frmStockIn
             If e.KeyChar = ChrW(Keys.Enter) Then
                 If txtRefOrder.Text.Trim <> "" Then
                     ShowProgress(True, "Loading...")
-                    If InitialOrder(0, txtRefOrder.Text.Trim) = False Then
+                    If InitialOrder(0, txtRefOrder.Text.Trim, True) = False Then
                         ShowFindOrder()
                     End If
                 End If
@@ -326,10 +327,8 @@ Public Class frmStockIn
     Private Sub ShowFindOrder()
         Dim lfrm As New frmFindOrder
         Dim lSubOrderList As New List(Of SubOrder)
-        Dim bindingSource1 As New BindingSource
+        Dim bindingSource1 As New BindingSource, lIsInitProduct As Boolean
         Try
-            'mRefOrderID = New List(Of Long)
-            'mRefOrderID.Clear()
             lfrm.CustomerID_ = 0
             lfrm.OrderDate = OrderDate.EditValue
             lfrm.Text = "ค้นหารายการ  "
@@ -337,17 +336,26 @@ Public Class frmStockIn
             lfrm.ShowDialog()
             If lfrm.IsAccept Then
                 If lfrm.IsGetByProduct = True Then
-                    ShowProductListBySource(mMode, lfrm.GetProductSubList)
+                    lIsInitProduct = False
+                    mProductList = lfrm.GetProductSubList
                 Else
-                    lSubOrderList = lfrm.GetSubOrderList
-                    If Not lSubOrderList Is Nothing Then
-                        If lSubOrderList.Count > 0 Then
-                            mRefOrderID = New List(Of Long)
-                            For Each rec As SubOrder In lSubOrderList
-                                mRefOrderID.Add(rec.OrderID)
-                                InitialRefOrder(rec.OrderID)
-                            Next
-                        End If
+                    lIsInitProduct = True
+                    mProductList = New List(Of ProductListDAO)
+                End If
+
+
+                lSubOrderList = lfrm.GetSubOrderList
+                If Not lSubOrderList Is Nothing Then
+                    If lSubOrderList.Count > 0 Then
+                        mIsGroupDupProduct = 0
+                        txtRefOrder.Text = ""
+                        mRefOrderID = New List(Of Long)
+
+                        For Each rec As SubOrder In lSubOrderList
+                            mRefOrderID.Add(rec.OrderID)
+                            InitialRefOrder(rec.OrderID, lIsInitProduct)
+                        Next
+                        ShowProductListBySource(mMode, mProductList)
                     End If
                 End If
             End If
@@ -372,13 +380,18 @@ Public Class frmStockIn
     End Function
 
 
-    Private Function InitialRefOrder(ByVal pRefOrderID As Long) As Boolean
+    Private Function InitialRefOrder(ByVal pRefOrderID As Long, ByVal pInitProduct As Boolean) As Boolean
         Try
             If pRefOrderID > 0 And mIsFromLoad = False Then
-                InitialOrder(pRefOrderID, "")
+                If pInitProduct Then
+                    UcProductLists1.ClearControl()
+                End If
+                InitialOrder(pRefOrderID, "", pInitProduct)
             ElseIf pRefOrderID = 0 And mIsFromLoad = False Then
                 txtRefOrder.Text = ""
-                UcProductLists1.ClearControl()
+                If pInitProduct Then
+                    UcProductLists1.ClearControl()
+                End If
             End If
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".InitialRefOrder : " & ex.Message)
@@ -386,22 +399,24 @@ Public Class frmStockIn
         End Try
     End Function
 
-    Private Function InitialOrder(ByVal plngOrderID As Long, ByVal pstrOrderCode As String) As Boolean
+    Private Function InitialOrder(ByVal plngOrderID As Long, ByVal pstrOrderCode As String, ByVal pInitProduct As Boolean) As Boolean
         Dim lcls As OrderSDAO
         Try
             If (plngOrderID > 0 Or pstrOrderCode.Trim <> "") And mIsFromLoad = False Then
                 lcls = New OrderSDAO
                 lcls.TableID = MasterType.PurchaseOrder
                 If lcls.InitailData(plngOrderID, pstrOrderCode.Trim) = True Then
-                    mRefOrderID.Clear()
-                    mRefOrderID.Add(plngOrderID)
-                    txtRefOrder.Text = lcls.Code
+                    If txtRefOrder.Text = "" Then
+                        txtRefOrder.Text = lcls.Code
+                    Else
+                        txtRefOrder.Text = txtRefOrder.Text & ", " & lcls.Code
+                    End If
                     gCustomerID = lcls.CustomerID
                     Customer.EditValue = lcls.CustomerDAO.CustomerName
-                    Dim lOrderList As New List(Of Long)
-                    lOrderList.Add(lcls.ID)
-                    UcProductLists1.ShowControl(mMode, lOrderList, lcls.TableName, ProColumn.Units + ProColumn.UnitName + ProColumn.LocationDTLID _
-                                                , False, True, Nothing, False, mcls.TableName, True, False, MasterType.StockIn, "")
+                    If pInitProduct Then
+                        LoadProList(plngOrderID, MasterType.PurchaseOrder)
+                    End If
+
                     Return True
                 Else
                     Return False
@@ -413,6 +428,172 @@ Public Class frmStockIn
             lcls = Nothing
         End Try
     End Function
+
+
+    Private Function LoadProList(ByVal pOrderID As Long, ByVal pTableID As MasterType) As Boolean
+        Dim lcls As New ProductListDAO
+        Dim rec As New ProductListDAO, lIndex As Long
+        Dim dataTable As New DataTable()
+        Dim llngProID As Long, llngUnitID As Long
+        Dim lOrderList As New List(Of Long)
+        Dim lNotRefUnits As Long = 0
+        Dim lCalcUnit As Long, lCalcAdjustUnit As Long, lCalcTotal As Long, lCanNotMerge As Boolean = False
+
+        'lIsSell = CheckIsSell(mOrderType)
+        lOrderList.Add(pOrderID)
+        Try
+            Dim lIsConfirm As Boolean = False
+            'If pTableID = MasterType.ReduceCredit Or pTableID = MasterType.AddCredit Then
+            '    lIsConfirm = False
+            'End If
+
+            dataTable = lcls.GetDataTable(lOrderList, pTableID.ToString, Nothing, lIsConfirm, "", False, mOrderType, True)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    llngProID = ConvertNullToZero(dr("ProductID"))
+                    llngUnitID = ConvertNullToZero(dr("UnitID"))
+
+                    Call GetRefOrderStatus(pOrderID, mOrderType, mcls.ID, dr("ID"), llngProID, Nothing, mMode, lNotRefUnits, ConvertNullToZero(dr("Units")))
+
+                    If lNotRefUnits > 0 Then
+                        If lNotRefUnits < ConvertNullToZero(dr("Units")) Then
+                            lCalcUnit = lNotRefUnits
+                            lCalcAdjustUnit = lNotRefUnits / ConvertNullToZero(dr("RateUnit"))
+                            lCalcTotal = (lNotRefUnits * ConvertNullToZero(dr("PriceMain"))) - (lCalcAdjustUnit * ConvertNullToZero(dr("Discount")))
+                        Else
+                            lCalcUnit = ConvertNullToZero(dr("Units"))
+                            lCalcAdjustUnit = ConvertNullToZero(dr("AdjustUnit"))
+                            lCalcTotal = ConvertNullToZero(dr("Total"))
+                        End If
+
+                        lIndex = mProductList.FindIndex(Function(m As ProductListDAO) m.ProductID = llngProID And m.IsShow = 1 And m.UnitID = llngUnitID)
+
+                        If lIndex < 0 Or mIsGroupDupProduct = 1 Or ConvertNullToZero(dr("IsShow")) = 0 Or lCanNotMerge = True Then
+                            rec = New ProductListDAO
+                            rec.IsSelect = True
+                            rec.ID = ConvertNullToZero(dr("ID"))
+                            rec.SEQ = 0
+                            rec.IsSN = ConvertNullToZero(dr("IsSN"))
+                            rec.RefID = ConvertNullToZero(dr("RefID"))
+                            rec.ProductID = ConvertNullToZero(dr("ProductID"))
+                            rec.ProductCode = ConvertNullToString(dr("ProductCode"))
+                            rec.ProductName = ConvertNullToString(dr("ProductName"))
+                            rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
+                            rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                            rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                            rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                            rec.UnitName = ConvertNullToString(dr("UnitName"))
+                            rec.Remark = ConvertNullToString(dr("Remark"))
+                            rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
+                            rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                            rec.Price = ConvertNullToZero(dr("Price"))
+                            rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                            rec.Cost = ConvertNullToZero(dr("Cost"))
+                            rec.Discount = ConvertNullToZero(dr("Discount"))
+                            rec.IsShow = ConvertNullToZero(dr("IsShow"))
+
+                            'Recalc
+                            rec.Units = lCalcUnit
+                            rec.AdjustUnit = lCalcAdjustUnit
+                            rec.Total = lCalcTotal
+                            rec.ProductListRefID = ConvertNullToZero(dr("ID"))
+                            rec.ProductListRefID2 = 0
+                            rec.ProductListRefID3 = 0
+                            rec.ProductListUnitRef1 = lCalcUnit
+                            rec.ProductListUnitRef2 = 0
+                            rec.ProductListUnitRef3 = 0
+                            If rec.IsSN = 1 Then
+                                rec.SNList = New List(Of SnDAO)
+                                For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                                    rec.SNList.Add(pSN)
+                                Next
+                            End If
+                            rec.IsMerge = 0
+                            rec.ModePro = DataMode.ModeNew
+                            mProductList.Add(rec)
+                        Else
+                            If mIsGroupDupProduct = 0 Then
+                                If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                                    mIsGroupDupProduct = 2
+                                Else
+                                    mIsGroupDupProduct = 1
+                                    rec = New ProductListDAO
+                                    rec.IsSelect = True
+                                    rec.IsSN = ConvertNullToZero(dr("IsSN"))
+                                    rec.SEQ = 0
+                                    rec.ID = ConvertNullToZero(dr("ID"))
+                                    rec.RefID = ConvertNullToZero(dr("RefID"))
+                                    rec.ProductID = ConvertNullToZero(dr("ProductID"))
+                                    rec.ProductCode = ConvertNullToString(dr("ProductCode"))
+                                    rec.ProductName = ConvertNullToString(dr("ProductName"))
+                                    rec.ProductNameExt = ConvertNullToString(dr("ProductNameExt"))
+                                    rec.LocationDTLID = ConvertNullToZero(dr("LocationDTLID"))
+                                    rec.UnitID = ConvertNullToZero(dr("UnitID"))
+                                    rec.UnitMainID = ConvertNullToZero(dr("UnitMainIDBuy"))
+                                    rec.UnitName = ConvertNullToString(dr("UnitName"))
+                                    rec.Remark = ConvertNullToString(dr("Remark"))
+                                    rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
+                                    rec.RateUnit = ConvertNullToZero(dr("RateUnit"))
+                                    rec.Price = ConvertNullToZero(dr("Price"))
+                                    rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
+                                    rec.Cost = ConvertNullToZero(dr("Cost"))
+                                    rec.Discount = ConvertNullToZero(dr("Discount"))
+                                    'Recalc
+                                    rec.Units = lCalcUnit
+                                    rec.AdjustUnit = lCalcAdjustUnit
+                                    rec.Total = lCalcTotal
+
+                                    rec.ModePro = DataMode.ModeNew
+                                    rec.IsShow = 1
+                                    rec.IsMerge = 0
+                                    rec.ProductListRefID = ConvertNullToZero(dr("ID"))
+                                    rec.ProductListRefID2 = 0
+                                    rec.ProductListRefID3 = 0
+                                    rec.ProductListUnitRef1 = lCalcUnit
+                                    rec.ProductListUnitRef2 = 0
+                                    rec.ProductListUnitRef3 = 0
+                                    If rec.IsSN = 1 Then
+                                        rec.SNList = New List(Of SnDAO)
+                                        For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                                            rec.SNList.Add(pSN)
+                                        Next
+                                    End If
+                                    mProductList.Add(rec)
+                                End If
+                            End If
+                            If mIsGroupDupProduct = 2 Then
+                                mProductList.Item(lIndex).Units = mProductList.Item(lIndex).Units + lCalcUnit
+                                mProductList.Item(lIndex).AdjustUnit = mProductList.Item(lIndex).AdjustUnit + lCalcAdjustUnit
+                                mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + lCalcTotal
+
+                                If ConvertNullToZero(dr("IsSN")) = 1 Then
+                                    For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
+                                        mProductList.Item(lIndex).SNList.Add(pSN)
+                                    Next
+                                End If
+                                If mProductList.Item(lIndex).ProductListRefID2 = 0 Then
+                                    mProductList.Item(lIndex).ProductListRefID2 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef2 = ConvertNullToZero(dr("Units"))
+                                Else
+                                    mProductList.Item(lIndex).ProductListRefID3 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef3 = ConvertNullToZero(dr("Units"))
+                                    lCanNotMerge = True   'Ref slot full
+                                End If
+                                mProductList.Item(lIndex).IsMerge = 1
+                            End If
+                        End If
+                    End If 'If lNotRefUnits > 0 Then
+                Next
+            End If 'If dataTable.Rows.Count > 0 Then
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".LoadProList : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Function
+
 #End Region
 
 #Region "Set combo"

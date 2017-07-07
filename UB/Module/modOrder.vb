@@ -180,7 +180,9 @@ Module modOrder
                     lRefStatus = GetUnitNotRef(pRefOrderID, "'PurchaseOrder'", "'InvoiceBuy','ShipingBuy'" _
                                                 , MasterType.InvoiceBuy & "," & MasterType.ShipingBuy, tr, pProListID, pProID, pUnitNotRef)
                     If lRefStatus = RefOrderStatus.NotToRef Then
+                        lStatus = EnumStatus.Open.ToString 'รอทำ 
                     ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                        lStatus = EnumStatus.Waiting.ToString
                     Else
                         lStatus = EnumStatus.Close.ToString 'PO ที่ทำ InvoiceBuy หมดแล้ว
                     End If
@@ -292,6 +294,11 @@ Module modOrder
                     SQL = SQL & " OrderStatus='" & lStatus & "'"
                     SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
                     gConnection.executeInsertQuery(SQL, tr)
+
+                    If pOrderType = MasterType.StockIn And lStatus = EnumStatus.Receive.ToString Then 'Ref from PO
+                        Call NotifiReserveFromPO(pRefOrderID, tr)
+                    End If
+
                 End If
                 If pMode = DataMode.ModeNew Then
                     SQL = " Insert into OrdersRef (OrderID,RefOrderID,IsDelete) values( " & pParentOrderID & "," & pRefOrderID & ",0)"
@@ -310,9 +317,9 @@ Module modOrder
 
     Public Sub UpdateRefReserveStatus(ByVal pRefToReserveID As List(Of Long), ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByRef ptr As SqlTransaction, ByVal pMode As DataMode)
         Dim SQL As String, lTableNameThai As String = "", lStatus As String = ""
-        Dim tr As SqlTransaction = Nothing, lOrderType As MasterType
+        Dim tr As SqlTransaction = Nothing ', lOrderType As MasterType
         Dim lCount As Long = 0, lRefStatus As RefOrderStatus = 0, pUnitSameRef As Long = 0
-        Dim lclsOrder As OrderSDAO, lclsNotifi As New clsNotifi
+        'Dim lclsOrder As OrderSDAO, lclsNotifi As New clsNotifi
         SQL = ""
         Try
             If ptr Is Nothing Then
@@ -341,15 +348,15 @@ Module modOrder
                     gConnection.executeInsertQuery(SQL, tr)
 
                     'Add notifi
-                    lOrderType = GetOrderTypeFromID(pOrderID, tr)
-                    If lOrderType = MasterType.Reserve And lStatus = EnumStatus.Ordered.ToString Then
-                        lclsOrder = New OrderSDAO
-                        If lclsOrder.InitailData(pOrderID, , tr) Then
-                            lclsNotifi = New clsNotifi
-                            lclsNotifi.AddDataNotifi(2, "MakePO", "สร้างใบสั่งซื้อ", GetCurrentDate(tr), "Orders", lclsOrder.ID _
-                                , "เอกสารเลขที่ " & lclsOrder.Code & " = Ordered ", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
-                        End If
-                    End If
+                    'lOrderType = GetOrderTypeFromID(pOrderID, tr)
+                    'If lOrderType = MasterType.Reserve And lStatus = EnumStatus.Ordered.ToString Then
+                    '    lclsOrder = New OrderSDAO
+                    '    If lclsOrder.InitailData(pOrderID, , tr) Then
+                    '        lclsNotifi = New clsNotifi
+                    '        lclsNotifi.AddDataNotifi(2, "MakePO", "สร้างใบสั่งซื้อ", GetCurrentDate(tr), "Orders", lclsOrder.ID _
+                    '            , "เอกสารเลขที่ " & lclsOrder.Code & " = Ordered ", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
+                    '    End If
+                    'End If
                 End If
 
                 If pMode = DataMode.ModeNew Then
@@ -526,7 +533,103 @@ Module modOrder
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.SetFlagProductList" & e.Message)
         End Try
-
     End Sub
 
+
+    Public Function GetToRefReserveCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction, ByRef pRefToReserveID As List(Of Long)) As String
+        Dim SQL As String = "", lstrCode As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = "SELECT  OrdersRef.OrderID,OrdersRef.RefReserveID, Orders.OrderCode  "
+            SQL = SQL & " FROM OrdersRef,Orders  "
+            SQL = SQL & " WHERE OrdersRef.RefReserveID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
+            SQL = SQL & " ORDER BY Orders.OrderCode"
+            dataTable = gConnection.executeSelectQuery(SQL, tr)
+            If Not pRefToReserveID Is Nothing Then
+                pRefToReserveID.Clear()
+            End If
+
+            lstrCode = ""
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    If lstrCode = "" Then
+                        lstrCode = dr("OrderCode").ToString
+                    Else
+                        lstrCode = lstrCode & ", " & dr("OrderCode").ToString
+                    End If
+                    If Not pRefToReserveID Is Nothing Then
+                        pRefToReserveID.Add(ConvertNullToZero(dr("RefReserveID")))
+                    End If
+                Next
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modOrder.GetToRefReserveCode : " & e.Message)
+        End Try
+        Return lstrCode
+    End Function
+
+
+    Public Sub NotifiReserveFromPO(ByVal pPOID As Long, ByRef ptr As SqlTransaction)
+        Dim tr As SqlTransaction = Nothing
+        Dim lclsOrder As OrderSDAO, lclsNotifi As New clsNotifi
+        Dim lRefToReserveID As List(Of Long), lOrderType As Long
+        Dim lPOCode As String = ""
+        Try
+            If ptr Is Nothing Then
+                tr = gConnection.Connection.BeginTransaction
+            Else
+                tr = ptr
+            End If
+
+            lclsOrder = New OrderSDAO
+            If lclsOrder.InitailData(pPOID, , tr) Then
+                lPOCode = lclsOrder.Code
+            End If
+
+            lRefToReserveID = New List(Of Long)
+            Call GetToRefReserveCode(pPOID, tr, lRefToReserveID)
+
+            For Each pOrderID As Long In lRefToReserveID
+                'Add notifi
+                lOrderType = GetOrderTypeFromID(pOrderID, tr)
+                If lOrderType = MasterType.Reserve Then
+                    lclsOrder = New OrderSDAO
+                    If lclsOrder.InitailData(pOrderID, , tr) Then
+                        lclsNotifi = New clsNotifi
+                        lclsNotifi.AddDataNotifi(2, "ใบจองสินค้า", "ใบจองสินค้า", GetCurrentDate(tr), "Orders", lclsOrder.ID _
+                            , "PO เลขที่ " & lPOCode & " นำสินค้าเข้าระบบแล้ว", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
+                    End If
+                End If
+            Next
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modOrder.NotifiReserveFromPO : " & e.Message)
+        Finally
+            'lcls = Nothing
+        End Try
+    End Sub
+
+
+    Public Function LoadSN(ByVal pOrderID As List(Of Long), ByVal pProListID As Long, ByVal pProID As Long) As List(Of SnDAO)
+        Dim lclsSN As New SnDAO, dataSN As New DataTable()
+        Dim lSNList As New List(Of SnDAO)
+        LoadSN = Nothing
+        Try
+            dataSN = lclsSN.GetDataTable(pOrderID, pProListID, pProID, "", Nothing, True, "")
+            For Each dr2 As DataRow In dataSN.Rows
+                lclsSN = New SnDAO
+                lclsSN.SerialNumberID = 0
+                lclsSN.SerialNumberNo = ConvertNullToString(dr2("SerialNumberNo"))
+                lclsSN.Status = ConvertNullToString(dr2("Status"))
+                lclsSN.OrderID = ConvertNullToZero(dr2("OrderID"))
+                lclsSN.ProductID = ConvertNullToZero(dr2("ProductID"))
+                lclsSN.IsDelete = ConvertNullToZero(dr2("IsDelete"))
+                lSNList.Add(lclsSN)
+            Next
+            Return lSNList
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modOrder..LoadSN : " & e.Message)
+        Finally
+        End Try
+    End Function
 End Module

@@ -130,7 +130,7 @@ Partial Class frmFindReserve
         Me.GroupControl1.Controls.Add(Me.DateFrom)
         Me.GroupControl1.Location = New System.Drawing.Point(-4, 1)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1090, 75)
+        Me.GroupControl1.Size = New System.Drawing.Size(1078, 75)
         Me.GroupControl1.TabIndex = 1
         Me.GroupControl1.Text = "เงื่อนไขการค้นหาข้อมูล"
         '
@@ -142,7 +142,7 @@ Partial Class frmFindReserve
         Me.GroupControl2.Controls.Add(Me.cboCustomerID)
         Me.GroupControl2.Controls.Add(Me.Label1)
         Me.GroupControl2.Controls.Add(Me.btnMakeOrder)
-        Me.GroupControl2.Location = New System.Drawing.Point(567, 24)
+        Me.GroupControl2.Location = New System.Drawing.Point(555, 24)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.Size = New System.Drawing.Size(518, 51)
         Me.GroupControl2.TabIndex = 309
@@ -375,7 +375,7 @@ Partial Class frmFindReserve
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
         Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.IsSelectCheckEdit, Me.RepositoryItemCalcEdit1, Me.btnOrderCode})
-        Me.GridControl.Size = New System.Drawing.Size(1086, 228)
+        Me.GridControl.Size = New System.Drawing.Size(1074, 228)
         Me.GridControl.TabIndex = 21
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -621,7 +621,7 @@ Partial Class frmFindReserve
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 313)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(760, 198)
+        Me.UcProductLists1.Size = New System.Drawing.Size(748, 198)
         Me.UcProductLists1.TabIndex = 22
         '
         'PanelControl1
@@ -649,7 +649,7 @@ Partial Class frmFindReserve
         Me.PanelControl1.Controls.Add(Me.LabelControl3)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Location = New System.Drawing.Point(765, 340)
+        Me.PanelControl1.Location = New System.Drawing.Point(753, 340)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(321, 111)
         Me.PanelControl1.TabIndex = 129
@@ -941,7 +941,7 @@ Partial Class frmFindReserve
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1088, 514)
+        Me.ClientSize = New System.Drawing.Size(1076, 514)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.UcProductLists1)
         Me.Controls.Add(Me.GridControl)

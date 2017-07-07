@@ -344,7 +344,7 @@ Public Class OrderSDAO
             If ModeData = DataMode.ModeDelete Or OrderStatus = EnumStatus.NotApprove.ToString Then
                 Call GetToRefOrderCode(ID, tr)
                 If IsMakePO = True Then
-                    Call GetToRefReserveCode(ID, tr)
+                    Call GetToRefReserveCode(ID, tr, RefToReserveID)
                 End If
             End If
 
@@ -356,8 +356,7 @@ Public Class OrderSDAO
                         If RefToOrderID.Count > 0 Then
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Close.ToString, tr, ModeData)
-
-                            Else 'Delete,NotApprove
+                             Else 'Delete,NotApprove
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Open.ToString, tr, DataMode.ModeDelete)
 
                             End If
@@ -406,14 +405,14 @@ Public Class OrderSDAO
             Select Case pTableID
                 Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.Borrow, MasterType.Bill _
                     , MasterType.AddCredit, MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.ReceiptCut _
-                    , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose
+                    , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose, MasterType.ClaimReturn
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
                     SQL = SQL & ",Customer.CustomerCode ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                Case MasterType.Quotation
+                Case MasterType.Quotation, MasterType.Quotation2
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate,Orders.ExpireDate  "
                     SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 Case MasterType.PurchaseOrder, MasterType.Asset, MasterType.ShipingBuy, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy _
-                    , MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.CancelPO
+                    , MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.CancelPO, MasterType.ClaimResult
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
                     SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             End Select
@@ -641,34 +640,6 @@ Public Class OrderSDAO
         Return lstrCode
     End Function
 
-    Public Overrides Function GetToRefReserveCode(ByVal pParentOrderID As Long, ByRef tr As SqlTransaction) As String
-        Dim SQL As String = "", lstrCode As String = ""
-        Dim dataTable As New DataTable()
-
-        Try
-            SQL = "SELECT  OrdersRef.OrderID,OrdersRef.RefReserveID, Orders.OrderCode  "
-            SQL = SQL & " FROM OrdersRef,Orders  "
-            SQL = SQL & " WHERE OrdersRef.RefReserveID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
-            SQL = SQL & " ORDER BY Orders.OrderCode"
-            dataTable = gConnection.executeSelectQuery(SQL, tr)
-
-            RefToReserveID.Clear()
-            lstrCode = ""
-            If dataTable.Rows.Count > 0 Then
-                For Each dr As DataRow In dataTable.Rows
-                    If lstrCode = "" Then
-                        lstrCode = dr("OrderCode").ToString
-                    Else
-                        lstrCode = lstrCode & ", " & dr("OrderCode").ToString
-                    End If
-                    RefToReserveID.Add(ConvertNullToZero(dr("RefReserveID")))
-                Next
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetToRefReserveCode : " & e.Message)
-        End Try
-        Return lstrCode
-    End Function
 
     Public Overrides Function CheckExist() As Boolean
         Dim SQL As String
