@@ -432,8 +432,6 @@ Public Class frmFindReserve
                 If lCusID > 0 Then
                     SQL = SQL & " and Orders.CustomerID =" & lCusID
                 End If
-                'SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
-                'SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
                 SQL = SQL & " ORDER BY Orders.OrderID desc "
                 dataTable = New DataTable()
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -466,7 +464,39 @@ Public Class frmFindReserve
                         End If
                     Next
                 End If
+
+                'Lower Price
+                SQL = "SELECT top 1  OrderDate ,Price,Units,Customer "
+                SQL = SQL & " FROM ("
+                SQL = SQL & "SELECT Orders.OrderDate ,CASE WHEN ProductList.UnitID=ProductList.UnitMainID THEN ProductList.Price ELSE ProductList.Price/ProductList.RateUnit END Price "
+                SQL = SQL & " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL = SQL & " FROM Orders  "
+                SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+                SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+                SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
+                SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+                If lCusID > 0 Then
+                    SQL = SQL & " and Orders.CustomerID =" & lCusID
+                End If
+                SQL = SQL & " ) AS TMP "
+                SQL = SQL & " ORDER BY Price "
+                dataTable = New DataTable()
+                dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+                If dataTable.Rows.Count > 0 And pIsSetText = True Then
+                    For Each dr As DataRow In dataTable.Rows
+                        If pIsSetText = True Then
+                            txtSupLast.Text = ConvertNullToString(dr("Customer"))
+                            txtDateLast.Text = Format(dr("OrderDate"), "dd/MM/yy")
+                            txtPriceLast.Text = Format(ConvertNullToZero(dr("Price")), "#,##0.00")
+                            txtQtyLast.Text = Format(ConvertNullToZero(dr("Units")), "#,##0")
+                            Exit For
+                        End If
+                    Next
+                End If
             End If
+
+
             If lLastPrice > 0 Then
                 Return lLastPrice
             Else 'Find inform price

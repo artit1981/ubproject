@@ -61,6 +61,7 @@ Partial Class frmFindReserve
         Me.btnOrderCode = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.UcProductLists1 = New UB.ucProductLists()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.txtQtyLow3 = New DevExpress.XtraEditors.TextEdit()
         Me.txtPriceLow3 = New DevExpress.XtraEditors.TextEdit()
         Me.txtDateLow3 = New DevExpress.XtraEditors.TextEdit()
@@ -77,7 +78,6 @@ Partial Class frmFindReserve
         Me.txtPriceLast = New DevExpress.XtraEditors.TextEdit()
         Me.txtDateLast = New DevExpress.XtraEditors.TextEdit()
         Me.txtSupLast = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
@@ -130,7 +130,7 @@ Partial Class frmFindReserve
         Me.GroupControl1.Controls.Add(Me.DateFrom)
         Me.GroupControl1.Location = New System.Drawing.Point(-4, 1)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1078, 75)
+        Me.GroupControl1.Size = New System.Drawing.Size(1102, 75)
         Me.GroupControl1.TabIndex = 1
         Me.GroupControl1.Text = "เงื่อนไขการค้นหาข้อมูล"
         '
@@ -142,7 +142,7 @@ Partial Class frmFindReserve
         Me.GroupControl2.Controls.Add(Me.cboCustomerID)
         Me.GroupControl2.Controls.Add(Me.Label1)
         Me.GroupControl2.Controls.Add(Me.btnMakeOrder)
-        Me.GroupControl2.Location = New System.Drawing.Point(555, 24)
+        Me.GroupControl2.Location = New System.Drawing.Point(579, 24)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.Size = New System.Drawing.Size(518, 51)
         Me.GroupControl2.TabIndex = 309
@@ -375,7 +375,7 @@ Partial Class frmFindReserve
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
         Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.IsSelectCheckEdit, Me.RepositoryItemCalcEdit1, Me.btnOrderCode})
-        Me.GridControl.Size = New System.Drawing.Size(1074, 228)
+        Me.GridControl.Size = New System.Drawing.Size(1098, 228)
         Me.GridControl.TabIndex = 21
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -621,12 +621,13 @@ Partial Class frmFindReserve
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 313)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(748, 198)
+        Me.UcProductLists1.Size = New System.Drawing.Size(772, 209)
         Me.UcProductLists1.TabIndex = 22
         '
         'PanelControl1
         '
         Me.PanelControl1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelControl1.Controls.Add(Me.LabelControl6)
         Me.PanelControl1.Controls.Add(Me.txtQtyLow3)
         Me.PanelControl1.Controls.Add(Me.txtPriceLow3)
         Me.PanelControl1.Controls.Add(Me.txtDateLow3)
@@ -643,16 +644,24 @@ Partial Class frmFindReserve
         Me.PanelControl1.Controls.Add(Me.txtPriceLast)
         Me.PanelControl1.Controls.Add(Me.txtDateLast)
         Me.PanelControl1.Controls.Add(Me.txtSupLast)
-        Me.PanelControl1.Controls.Add(Me.LabelControl7)
         Me.PanelControl1.Controls.Add(Me.LabelControl5)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
         Me.PanelControl1.Controls.Add(Me.LabelControl3)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Location = New System.Drawing.Point(753, 340)
+        Me.PanelControl1.Location = New System.Drawing.Point(777, 340)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(321, 111)
+        Me.PanelControl1.Size = New System.Drawing.Size(321, 152)
         Me.PanelControl1.TabIndex = 129
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LabelControl6.Location = New System.Drawing.Point(5, 100)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(96, 13)
+        Me.LabelControl6.TabIndex = 151
+        Me.LabelControl6.Text = "รายการซื้อราคาต่ำสุด"
         '
         'txtQtyLow3
         '
@@ -825,7 +834,7 @@ Partial Class frmFindReserve
         'txtQtyLast
         '
         Me.txtQtyLast.EditValue = "0"
-        Me.txtQtyLast.Location = New System.Drawing.Point(267, 134)
+        Me.txtQtyLast.Location = New System.Drawing.Point(267, 119)
         Me.txtQtyLast.Name = "txtQtyLast"
         Me.txtQtyLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtQtyLast.Properties.Appearance.Options.UseBackColor = True
@@ -836,12 +845,11 @@ Partial Class frmFindReserve
         Me.txtQtyLast.Size = New System.Drawing.Size(44, 18)
         Me.txtQtyLast.TabIndex = 138
         Me.txtQtyLast.TabStop = False
-        Me.txtQtyLast.Visible = False
         '
         'txtPriceLast
         '
         Me.txtPriceLast.EditValue = "0.0"
-        Me.txtPriceLast.Location = New System.Drawing.Point(207, 134)
+        Me.txtPriceLast.Location = New System.Drawing.Point(207, 119)
         Me.txtPriceLast.Name = "txtPriceLast"
         Me.txtPriceLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtPriceLast.Properties.Appearance.Options.UseBackColor = True
@@ -852,12 +860,11 @@ Partial Class frmFindReserve
         Me.txtPriceLast.Size = New System.Drawing.Size(61, 18)
         Me.txtPriceLast.TabIndex = 137
         Me.txtPriceLast.TabStop = False
-        Me.txtPriceLast.Visible = False
         '
         'txtDateLast
         '
         Me.txtDateLast.EditValue = ""
-        Me.txtDateLast.Location = New System.Drawing.Point(151, 134)
+        Me.txtDateLast.Location = New System.Drawing.Point(151, 119)
         Me.txtDateLast.Name = "txtDateLast"
         Me.txtDateLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtDateLast.Properties.Appearance.Options.UseBackColor = True
@@ -866,12 +873,11 @@ Partial Class frmFindReserve
         Me.txtDateLast.Size = New System.Drawing.Size(57, 18)
         Me.txtDateLast.TabIndex = 136
         Me.txtDateLast.TabStop = False
-        Me.txtDateLast.Visible = False
         '
         'txtSupLast
         '
         Me.txtSupLast.EditValue = ""
-        Me.txtSupLast.Location = New System.Drawing.Point(5, 134)
+        Me.txtSupLast.Location = New System.Drawing.Point(5, 119)
         Me.txtSupLast.Name = "txtSupLast"
         Me.txtSupLast.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.txtSupLast.Properties.Appearance.Options.UseBackColor = True
@@ -880,17 +886,6 @@ Partial Class frmFindReserve
         Me.txtSupLast.Size = New System.Drawing.Size(146, 18)
         Me.txtSupLast.TabIndex = 135
         Me.txtSupLast.TabStop = False
-        Me.txtSupLast.Visible = False
-        '
-        'LabelControl7
-        '
-        Me.LabelControl7.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LabelControl7.Location = New System.Drawing.Point(16, 136)
-        Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(101, 13)
-        Me.LabelControl7.TabIndex = 134
-        Me.LabelControl7.Text = "ราคาซื้อ 3 ลำดับต่ำสุด"
-        Me.LabelControl7.Visible = False
         '
         'LabelControl5
         '
@@ -941,7 +936,7 @@ Partial Class frmFindReserve
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1076, 514)
+        Me.ClientSize = New System.Drawing.Size(1100, 504)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.UcProductLists1)
         Me.Controls.Add(Me.GridControl)
@@ -1032,7 +1027,6 @@ Partial Class frmFindReserve
     Friend WithEvents txtPriceLast As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txtDateLast As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txtSupLast As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
@@ -1053,4 +1047,5 @@ Partial Class frmFindReserve
     Friend WithEvents Email1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnCancelPO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
 End Class

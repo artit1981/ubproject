@@ -371,7 +371,7 @@ Public Class frmStockIn
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
             UcProductLists1.ShowControlByDataSource(pMode, pSource, ProColumn.Units + ProColumn.UnitName + ProColumn.LocationDTLID _
-                                                    , pMode = DataMode.ModeEdit, Nothing, mOrderType.ToString, False, lOrderList, True, False, "")
+                                                    , pMode = DataMode.ModeEdit, Nothing, mOrderType.ToString, False, lOrderList, False, False, "")
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".ShowProductListBySource : " & ex.Message)
             Return False
