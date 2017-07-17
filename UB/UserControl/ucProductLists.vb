@@ -34,7 +34,7 @@ Public Class ucProductLists
     Private mMode As DataMode
     Private mIsUsePriceSell As Boolean
     Private mRefTable As String
-    Private mCheckType As Long = 0
+    'Private mCheckType As Long = 0
     Private mOrderID As List(Of Long)
     Private mIsDelete As Boolean
     Shared mColData As ProColumn
@@ -60,7 +60,7 @@ Public Class ucProductLists
     Public Function ShowControl(ByVal pMode As Long, ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal pColumnData As ProColumn _
                                 , ByVal pIsReaOnly As Boolean, ByVal pShowFooter As Boolean, ByVal pFormOrder As frmOrderS _
                                 , ByVal pIsUsePriceSell As Boolean, ByVal mParentTable As String, ByVal pIsLoadFromRefOrder As Boolean _
-                                , ByVal pIsDelete As Boolean, ByVal pCheckType As Long, ByVal pStockType As String) As Boolean
+                                , ByVal pIsDelete As Boolean, ByVal pStockType As String) As Boolean
         Try
             mColData = pColumnData
             mIsReaOnly = pIsReaOnly
@@ -71,12 +71,12 @@ Public Class ucProductLists
             mIsCheckError = (pIsReaOnly = False)
             mRefTable = pRefTable
             mOrderID = pRefID
-            mCheckType = pCheckType
+
             mStockType = pStockType
             mIsDelete = pIsDelete
             gridView.OptionsView.ShowFooter = pShowFooter
             mIsLoadFromRef = pIsLoadFromRefOrder
-            Call LoadData(pRefID, pRefTable, pIsLoadFromRefOrder, pIsDelete, pCheckType)
+            Call LoadData(pRefID, pRefTable, pIsLoadFromRefOrder, pIsDelete, mRefTable)
             If (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID Then
                 LoadDataLocationDTL()
             End If
@@ -110,7 +110,7 @@ Public Class ucProductLists
             bindingSource1.DataSource = GetType(ProductSub)
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
-            mCheckType = 0
+
             mStockType = pStockType
             btnFind.Enabled = (pIsReaOnly = False)
             'Copy to BindingSource
@@ -470,7 +470,7 @@ Public Class ucProductLists
     End Sub
 
     Private Sub LoadData(ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal pIsLoadFromRefOrder As Boolean _
-                         , ByVal pIsDelete As Boolean, ByVal pCheckType As Long)
+                         , ByVal pIsDelete As Boolean, ByVal pCheckType As String)
         Dim lcls As New ProductListDAO
         Dim lclsSN As New SnDAO, dataSN As New DataTable()
         Dim dataTable As New DataTable()
@@ -527,7 +527,7 @@ Public Class ucProductLists
                     rec.SNList = New List(Of SnDAO)
 
                     '*** Stock in not ref sn
-                    If pCheckType <> MasterType.StockIn Then
+                    If pCheckType <> MasterType.StockIn.ToString Then
                         dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
                         For Each dr2 As DataRow In dataSN.Rows
                             lclsSN = New SnDAO
@@ -611,7 +611,7 @@ Public Class ucProductLists
             End If
             If mIsLoadFromRef Then
                 .Columns("ProductCode").OptionsColumn.ReadOnly = True
-                If mCheckType <> MasterType.StockIn Then
+                If mRefTable <> MasterType.StockIn.ToString Then
                     If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
                 End If
             End If

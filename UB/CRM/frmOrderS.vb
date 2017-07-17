@@ -1407,7 +1407,7 @@ Public Class frmOrderS
                 lIsReadOnly = True
             End If
             If IsNothing(ProductList) Then
-                UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, lColData, lIsReadOnly, False, Me, True, mcls.TableName, False, mcls.IsDelete, 0, mcls.StockType)
+                UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, lColData, lIsReadOnly, False, Me, True, mcls.TableName, False, mcls.IsDelete, mcls.StockType)
             Else
                 UcProductLists1.ShowControlByDataSource(pMode, ProductList, lColData, lIsReadOnly, Me, mOrderType.ToString, lBuyOrSell, lOrderList, False, mIsMakePO, mcls.StockType)
             End If
@@ -1474,7 +1474,7 @@ Public Class frmOrderS
                 Dim lOrderList As New List(Of Long)
                 lOrderList.Add(mclsConvert.ID)
 
-                UcProductLists1.ShowControl(mMode, lOrderList, mclsConvert.TableName, GetColData, False, True, Me, True, mcls.TableName, False, False, 0, mcls.StockType)
+                UcProductLists1.ShowControl(mMode, lOrderList, mclsConvert.TableName, GetColData, False, True, Me, True, mcls.TableName, False, False, mcls.StockType)
                 UcNote1.ShowControl(mclsConvert.TableName, mclsConvert.ID)
                 UcNote2.ShowControl(mclsConvert.TableName & "_PRO", mclsConvert.ID)
                 InitialRefOrder(pID, "", False)

@@ -30,7 +30,7 @@ Public Class frmSellOrderHis
 
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(0)
-            UcProductLists1.ShowControl(pMode, lOrderList, "", 0, True, True, Nothing, True, "", False, False, 0, "")
+            UcProductLists1.ShowControl(pMode, lOrderList, "", 0, False, True, Nothing, True, "", False, False, "")
             UcCustomer1.ShowControl(0, 0, False)
             ExportPrivilege()
 

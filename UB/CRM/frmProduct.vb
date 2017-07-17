@@ -240,9 +240,9 @@ Public Class frmProduct
             gCustomerID = 0
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(pID)
-            UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.UnitName + ProColumn.Remark, False, True, Nothing, True, mcls.TableName, False, False, 0, "")
+            UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.UnitName + ProColumn.Remark, False, True, Nothing, True, mcls.TableName, False, False, "")
             UcProductLists2.ShowControl(pMode, lOrderList, mcls.TableName & "_ProSet", ProColumn.UnitName + ProColumn.Remark + ProColumn.Price + ProColumn.Units _
-                                        , False, True, Nothing, True, mcls.TableName, False, False, 0, "")
+                                        , False, True, Nothing, True, mcls.TableName, False, False, "")
             'Default Control
             ProSetTabPage.PageEnabled = IsProductSet.Checked
         Catch ex As Exception

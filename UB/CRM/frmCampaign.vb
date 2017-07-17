@@ -161,9 +161,9 @@ Public Class frmCampaign
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount _
-                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, 0, "")
+                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
             UcProductLists2.ShowControl(pMode, lOrderList, mcls.TableName & "_ProAdd", ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total _
-                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, 0, "")
+                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
             UcEmployee1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
             UcCustomer1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
             UcCampaignDTL1.ShowControl(mCampaignDtlList)

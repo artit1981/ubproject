@@ -253,7 +253,7 @@ Public Class frmOpportunity
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount _
-                                        , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, 0, "")
+                                        , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
             UcContactRole1.ShowControl(pID)
 
         Catch ex As Exception

@@ -430,12 +430,12 @@ Public Class ProductListDAO
 #End Region
 
     Public Function GetDataTable(ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal tr As SqlTransaction, ByVal pIsCheckConfirm As Boolean _
-                                 , ByVal pExcludeProListID As String, ByVal pIsDelete As Boolean, ByVal pCheckType As Long, ByVal pIsShowALL As Boolean) As DataTable
-        Dim SQL As String, lCheckType As MasterType
+                                 , ByVal pExcludeProListID As String, ByVal pIsDelete As Boolean, ByVal pCheckType As String, ByVal pIsShowALL As Boolean) As DataTable
+        Dim SQL As String
         Dim dataTable As New DataTable()
         Dim lRefOrderList As String = ConvertListToString(pRefID)
 
-        lCheckType = pCheckType
+        'lCheckType = pCheckType
         Try 'ใช้ชื่อสินค้าจาก Table Product
             SQL = "SELECT  ProductList.ProductID,ProductList.ProductListID AS ID,ProductList.SEQ,Product.Remark,ProductList.RefID,ProductList.RefTable"
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
@@ -452,7 +452,7 @@ Public Class ProductListDAO
 
             If pRefTable <> "" Then
                 SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
-                If pRefTable = "PurchaseOrder" And lCheckType = MasterType.StockIn Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
+                If pRefTable = "PurchaseOrder" And pCheckType = MasterType.StockIn.ToString Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
                     SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
                     SQL = SQL & "   WHERE p2.IsDelete =0  "
                     SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"

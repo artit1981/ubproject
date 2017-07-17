@@ -251,7 +251,7 @@ Public Class frmLead
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total _
-                                        , False, True, Nothing, True, mcls.TableName, False, False, 0, "")
+                                        , False, True, Nothing, True, mcls.TableName, False, False, "")
 
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
