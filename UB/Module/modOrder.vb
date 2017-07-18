@@ -598,7 +598,7 @@ Module modOrder
                     If lclsOrder.InitailData(pOrderID, , tr) Then
                         lclsNotifi = New clsNotifi
                         lclsNotifi.AddDataNotifi(2, "ใบจองสินค้า", "ใบจองสินค้า", GetCurrentDate(tr), "Orders", lclsOrder.ID _
-                            , "PO เลขที่ " & lPOCode & " นำสินค้าเข้าระบบแล้ว", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
+                            , "ใบจองเลขที่ " & lclsOrder.Code & " นำสินค้าเข้าระบบแล้ว", tr, lclsOrder.EmployeeDAO(tr).EmpUserID)
                     End If
                 End If
             Next

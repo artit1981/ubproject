@@ -110,6 +110,7 @@ Module modGlobal
         ClaimResult = 101
         ClaimReturn = 102
         Quotation2 = 103
+        Notifi = 104
     End Enum
 
     Public Enum DataMode
