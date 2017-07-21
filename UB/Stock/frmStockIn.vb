@@ -81,7 +81,7 @@ Public Class frmStockIn
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
-            mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, False, mOrderType.ToString, 0, "")
+            mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, False, mOrderType.ToString, mMode, "")
             mcls.RefToOrderID = mRefOrderID
             mcls.TableID = mOrderType
             mcls.IsSumStock = IsSumStock.Checked

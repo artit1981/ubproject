@@ -346,8 +346,18 @@ Public Class ucProductLists
                                     End If
                                 ElseIf lSNDup = True Then
                                     mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ"
+                                Else
+                                    Dim lclsSN As New SnDAO
+                                    Dim dataSN As New DataTable()
+                                    dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "", Nothing, False, "")
+                                    For Each dr2 As DataRow In dataSN.Rows
+                                        lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
+                                        If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo And m.SerialNumberID = 0) >= 0 Then
+                                            mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" & lstrSNNo & "]"
+                                            Exit For
+                                        End If
+                                    Next
                                 End If
-
                             ElseIf lDataDAO.IsSN = 1 And (pRefTable = MasterType.SellOrders.ToString Or (lIsCheckCreditType = True And mStockType = "O")) Then
 
                                 Dim lclsSN As New SnDAO
@@ -527,7 +537,7 @@ Public Class ucProductLists
                     rec.SNList = New List(Of SnDAO)
 
                     '*** Stock in not ref sn
-                    If pCheckType <> MasterType.StockIn.ToString Then
+                    If pCheckType <> MasterType.StockIn.ToString Or mMode = DataMode.ModeEdit Then
                         dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
                         For Each dr2 As DataRow In dataSN.Rows
                             lclsSN = New SnDAO
