@@ -414,6 +414,7 @@ Public Class ucProductLists
                                     lProductListFail = lDataDAO
                                     lProductListFail.Units = lUnitDiff
                                     lProductListFail.AdjustUnit = lUnitDiff
+                                    lProductListFail.IsSelect = True
                                     pProListStockFail.Add(lProductListFail)
                                     info.ErrorType = ErrorType.Critical
                                     mIsError = info.ErrorText
