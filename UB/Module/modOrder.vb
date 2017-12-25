@@ -218,16 +218,16 @@ Module modOrder
                         lStatus = EnumStatus.Close.ToString 'Quotation ที่ทำ Reserve,SellOrders หมดแล้ว
                     End If
                 End If
-            ElseIf pOrderType = MasterType.ReduceCreditBuy Or pOrderType = MasterType.AddCreditBuy Then
-                lRefStatus = GetUnitNotRef(pRefOrderID, "'ShipingBuy','InvoiceBuy'", "'ReduceCreditBuy','AddCreditBuy'" _
-                                                , MasterType.ReduceCreditBuy & "," & MasterType.AddCreditBuy, tr, pProListID, pProID, pUnitNotRef)
-                If lRefStatus = RefOrderStatus.NotToRef Then
-                    lStatus = EnumStatus.Open.ToString
-                ElseIf lRefStatus = RefOrderStatus.RefSome Then
-                    lStatus = EnumStatus.Waiting.ToString
-                Else
-                    lStatus = EnumStatus.Close.ToString
-                End If
+                'ElseIf pOrderType = MasterType.ReduceCreditBuy Or pOrderType = MasterType.AddCreditBuy Then
+                '    lRefStatus = GetUnitNotRef(pRefOrderID, "'ShipingBuy','InvoiceBuy'", "'ReduceCreditBuy','AddCreditBuy'" _
+                '                                    , MasterType.ReduceCreditBuy & "," & MasterType.AddCreditBuy, tr, pProListID, pProID, pUnitNotRef)
+                '    If lRefStatus = RefOrderStatus.NotToRef Then
+                '        lStatus = EnumStatus.Open.ToString
+                '    ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                '        lStatus = EnumStatus.Waiting.ToString
+                '    Else
+                '        lStatus = EnumStatus.Close.ToString
+                '    End If
             ElseIf pOrderType = MasterType.ClaimResult Then
                 lRefStatus = GetUnitNotRef(pRefOrderID, "'ClaimOut'", "'ClaimResult'" _
                                                 , MasterType.ClaimResult, tr, pProListID, pProID, pUnitNotRef)
