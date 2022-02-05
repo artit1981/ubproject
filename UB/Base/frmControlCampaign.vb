@@ -136,7 +136,7 @@ Public Class frmControlCampaign
             If rowHandle < 0 Then Exit Sub
 
             mID = GridView.GetRowCellDisplayText(rowHandle, "CampaignID")
-            If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 ShowProgress(True, "Deleting...")
                 mRowFocus = rowHandle
                 Dim lID As Long = mID

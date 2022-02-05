@@ -15,7 +15,7 @@ Public Class frmUpdateStockDTL
     End Property
 
     Private Sub frmUpdateStockDTL_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If Me.DialogResult = Windows.Forms.DialogResult.OK Or Me.DialogResult = Windows.Forms.DialogResult.Cancel Then
+        If Me.DialogResult = DialogResult.OK Or Me.DialogResult = DialogResult.Cancel Then
         Else
             e.Cancel = True
         End If
@@ -68,7 +68,7 @@ Public Class frmUpdateStockDTL
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -78,7 +78,7 @@ Public Class frmUpdateStockDTL
         Dim lUnits As Long = 0
         Try
             If Verify() Then
-                If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการปรับสต๊อกสินค้า ใช่หรือไม่", "Product Stock", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     tr = gConnection.Connection.BeginTransaction
 
                     'Unit adjust
@@ -143,11 +143,11 @@ Public Class frmUpdateStockDTL
 
                     tr.Commit()
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                    Me.DialogResult = Windows.Forms.DialogResult.OK
+                    Me.DialogResult = DialogResult.OK
                     Me.Close()
                 End If
             Else
-                Me.DialogResult = Windows.Forms.DialogResult.None
+                Me.DialogResult = DialogResult.None
             End If
         Catch ex As Exception
             tr.Rollback()

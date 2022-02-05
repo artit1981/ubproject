@@ -163,7 +163,7 @@ Public Class frmFindReserve
                     End If
                 Else
                     If lIsGroupDupProduct = 0 Then
-                        If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                             lIsGroupDupProduct = 2
                         Else
                             lIsGroupDupProduct = 1
@@ -635,7 +635,7 @@ Public Class frmFindReserve
                 XtraMessageBox.Show(Me, "กรุณาระบุเจ้าหนี้", "ตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 cboCustomerID.Focus()
             Else
-                If XtraMessageBox.Show(Me, "ยืนยันสร้างใบสั่งซื้อ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันสร้างใบสั่งซื้อ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     GetProList()
                     If mProductSubList.Count > 0 Then
                         ShowProgress(True, "Loading...")
@@ -675,7 +675,7 @@ Public Class frmFindReserve
                 XtraMessageBox.Show(Me, "กรุณาระบุเจ้าหนี้", "ตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 cboCustomerID.Focus()
             Else
-                If XtraMessageBox.Show(Me, "ยืนยันยกเลิกการสั่งซื้อ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันยกเลิกการสั่งซื้อ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     GetProList()
                     If mProductSubList.Count > 0 Then
                         ShowProgress(True, "Loading...")

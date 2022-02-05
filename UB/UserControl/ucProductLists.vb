@@ -1077,7 +1077,7 @@ Public Class ucProductLists
                 gridView.RefreshData()
                 gridControl.RefreshDataSource()
             Case "Remove"
-                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     If mMode = DataMode.ModeNew Or ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
                         gridView.DeleteSelectedRows()
                         gridView.RefreshData()

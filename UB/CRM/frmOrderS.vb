@@ -437,7 +437,7 @@ Public Class frmOrderS
             'Stock fail to Reserve
             If lProListStockFail.Count > 0 Then
                 ShowProgress(False, "")
-                If XtraMessageBox.Show(Me, "สินค้าในสต๊อกไม่เพียงพอ ต้องการทำรายการใบสั่งจองหรือไม่" & vbNewLine & UcProductLists1.IsError, "สต๊อกหมด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "สินค้าในสต๊อกไม่เพียงพอ ต้องการทำรายการใบสั่งจองหรือไม่" & vbNewLine & UcProductLists1.IsError, "สต๊อกหมด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     MakeReserve(lProListStockFail)
                 End If
                 Return False
@@ -452,13 +452,13 @@ Public Class frmOrderS
                 Call mcls.SaveData()
                 ShowProgress(False, "")
                 'If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString) Then
-                '    If XtraMessageBox.Show(Me, "ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                '    If XtraMessageBox.Show(Me, "ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 '        modReport.PrintOrder(mcls.ID)
                 '    End If
                 If (mcls.OrderStatus = EnumStatus.WaitApprove.ToString) Then
                     'ShowProgress(False, "")
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                    'If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    'If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     '    modReport.PrintReportOrder(mOrderType, mcls.ID)
                     'End If
                 Else
@@ -468,7 +468,7 @@ Public Class frmOrderS
                         Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                             , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy _
                             , MasterType.Borrow, MasterType.Expose
-                            If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                            If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                                 modReport.PrintReportOrder(mOrderType, mcls.ID)
                             End If
                         Case Else
@@ -492,7 +492,7 @@ Public Class frmOrderS
     'Protected Overrides Sub CloseReserve(ByVal pID As Long)
     '    Dim Sql As String = ""
     '    Try
-    '        If XtraMessageBox.Show(Me, "ต้องการปิดสถานะการสร้างใบสั่งซื้อใช่หรือไม่ [Ordered]", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+    '        If XtraMessageBox.Show(Me, "ต้องการปิดสถานะการสร้างใบสั่งซื้อใช่หรือไม่ [Ordered]", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
     '            Sql = " UPDATE Orders SET "
     '            Sql = Sql & " where OrderID=" & pID
     '            gConnection.executeInsertQuery(Sql, Nothing)
@@ -1128,7 +1128,7 @@ Public Class frmOrderS
                             mProductList.Add(rec)
                         Else
                             If mIsGroupDupProduct = 0 Then
-                                If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                                If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                                     mIsGroupDupProduct = 2
                                 Else
                                     mIsGroupDupProduct = 1

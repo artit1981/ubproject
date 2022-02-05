@@ -105,7 +105,7 @@ Partial Class frmUpdateStockDTL
         Me.btnOK.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnOK.Appearance.Options.UseFont = True
         Me.btnOK.Appearance.Options.UseImage = True
-        Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
+        Me.btnOK.DialogResult = DialogResult.OK
         Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
         Me.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnOK.Location = New System.Drawing.Point(554, 12)
@@ -120,7 +120,7 @@ Partial Class frmUpdateStockDTL
         Me.btnCancel.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancel.Appearance.Options.UseFont = True
         Me.btnCancel.Appearance.Options.UseImage = True
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.DialogResult = DialogResult.Cancel
         Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
         Me.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnCancel.Location = New System.Drawing.Point(554, 51)

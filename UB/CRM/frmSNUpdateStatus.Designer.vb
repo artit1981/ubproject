@@ -251,7 +251,7 @@ Partial Class frmSNUpdateStatus
         Me.btnCancel.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancel.Appearance.Options.UseFont = True
         Me.btnCancel.Appearance.Options.UseImage = True
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.DialogResult = DialogResult.Cancel
         Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
         Me.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnCancel.Location = New System.Drawing.Point(740, 38)

@@ -481,7 +481,7 @@ Public Class frmSN
         End If
 
         If mIsReadOnly = False And mOrderType = MasterType.StockIn.ToString Or (mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0) Then
-            If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show(Me, "ต้องการพิมพ์บาร์โค้ดหรือไม่", "พิมพ์บาร์โค้ด", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 modReport.PrintBarCode(ProductName.EditValue, mSnList)
             End If
         End If
@@ -595,7 +595,7 @@ Public Class frmSN
                 If ConvertNullToString(GridView1.GetRowCellValue(index, "Status")) = "Close" Then
                     XtraMessageBox.Show("Serial Number Close แล้ว ไม่สามารถทำรายการได้", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    If XtraMessageBox.Show(Me, "ยืนยันการลบรายการสินค้า ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                         If ConvertNullToZero(GridView1.GetRowCellValue(index, "SerialNumberID")) = 0 Then
                             GridView1.DeleteSelectedRows()
                             GridView1.RefreshData()

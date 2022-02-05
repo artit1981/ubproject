@@ -234,7 +234,7 @@ Public Class ucFileAttach
                 lFileID = GridView.GetRowCellDisplayText(rowHandle, "ID")
                 If lFileID > 0 Then
                     If lFileAttach.InitailData(lFileID, Nothing) Then
-                        If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่ (ไฟล์นี้จะถูกลบออกจากฐานข้อมูลทันที)", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่ (ไฟล์นี้จะถูกลบออกจากฐานข้อมูลทันที)", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                             ''Delete fromDB
                             lFileAttach.ModeData = DataMode.ModeDelete
                             Dim myCommandS As New List(Of SqlCommand)

@@ -513,7 +513,7 @@ Public Class frmStockIn
                             mProductList.Add(rec)
                         Else
                             If mIsGroupDupProduct = 0 Then
-                                If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                                If XtraMessageBox.Show(Me, "มีข้อมูลสินค้าซ้ำต้องการรวมรายการหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                                     mIsGroupDupProduct = 2
                                 Else
                                     mIsGroupDupProduct = 1

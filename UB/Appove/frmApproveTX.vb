@@ -45,7 +45,7 @@ Public Class frmApproveTX
                 MessageBox.Show("กรุณาเลือกรายการเพื่ออนุมัติ", "อนุมัติรายการ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
                 ShowProgress(False, "")
-                If XtraMessageBox.Show(Me, "ยืนยันการอนุมัติรายการจำนวน " & lDataDAOs.Count & " ใช่หรือไม่", "อนุมัติรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการอนุมัติรายการจำนวน " & lDataDAOs.Count & " ใช่หรือไม่", "อนุมัติรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     tr = gConnection.Connection.BeginTransaction
                     For Each pclsApprove As ApproveTX In lDataDAOs
                         If gLimitAmount < pclsApprove.OrderAmount And pclsApprove.ApproveType = 2 Then

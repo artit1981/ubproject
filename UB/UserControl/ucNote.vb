@@ -187,7 +187,7 @@ Public Class ucNote
                 gridView.RefreshData()
                 gridControl.RefreshDataSource()
             Case "Remove"
-                If XtraMessageBox.Show(Me, "ยืนยันการลบข้อความ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการลบข้อความ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
                         gridView.DeleteSelectedRows()
                         gridView.RefreshData()

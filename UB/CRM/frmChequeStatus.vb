@@ -73,7 +73,7 @@ Public Class frmChequeStatus
                 MessageBox.Show("กรุณาเลือกรายการเพื่ออนุมัติ", "อนุมัติรายการ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
                 ShowProgress(False, "")
-                If XtraMessageBox.Show(Me, "ยืนยันการอนุมัติรายการจำนวน " & lSuccessTX & " ใช่หรือไม่", "อนุมัติรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการอนุมัติรายการจำนวน " & lSuccessTX & " ใช่หรือไม่", "อนุมัติรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     tr = gConnection.Connection.BeginTransaction
                     lSuccessTX = 0
                     For Each pSubCheque As ChequeDAO In lDataDAOs

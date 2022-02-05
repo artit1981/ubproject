@@ -76,7 +76,7 @@ Public Class frmOrderHis
         Try
             lstrOrderType = InitialOrderType()
 
-            SQL = " select Orders.OrderID 
+            SQL = " select Orders.OrderID "
             SQL = SQL & " from Orders"
             SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
             SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
@@ -87,7 +87,7 @@ Public Class frmOrderHis
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             If dataTable.Rows.Count > 1000 Then
-                If XtraMessageBox.Show(Me, "พบข้อมูลประวัติตามเงื่อนไขมีจำนวนมาก อาจทำให้การโหลดข้อมูลช้า ยืนยันทำรายการต่อใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "พบข้อมูลประวัติตามเงื่อนไขมีจำนวนมาก อาจทำให้การโหลดข้อมูลช้า ยืนยันทำรายการต่อใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     lToCont = True
                 End If
             Else
@@ -101,10 +101,10 @@ Public Class frmOrderHis
                 SQL = SQL & " from Orders"
                 SQL = SQL & " inner join ProductList on Orders.OrderID=ProductList.RefID"
                 SQL = SQL & " inner join Product on Product.ProductID= ProductList.ProductID"
-                SQL = SQL & " inner join Menu on Orders.TableID=Menu.MenuID"
-                SQL = SQL & " inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
+                SQL = SQL & " left outer join Menu on Orders.TableID=Menu.MenuID"
+                SQL = SQL & " left outer join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
                 SQL = SQL & " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
+                SQL = SQL & " left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
                 SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
                 SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
                 SQL = SQL & "  AND ProductList.IsShow = 1"

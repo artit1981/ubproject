@@ -97,7 +97,7 @@ Public Class frmSNUpdateStatus
         Dim lSnData As SnDAO
         Try
             If GridView1.RowCount > 0 Then
-                If XtraMessageBox.Show(Me, "ยืนยันการแก้ไขสถานะ", "SerialNumber", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                If XtraMessageBox.Show(Me, "ยืนยันการแก้ไขสถานะ", "SerialNumber", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                     For lRow = 0 To GridView1.RowCount
                         If GridView1.GetRowCellValue(lRow, "IsSelect") = True Then
                             lSnData = New SnDAO

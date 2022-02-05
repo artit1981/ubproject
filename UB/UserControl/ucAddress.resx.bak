@@ -121,14 +121,17 @@
   <data name="btnCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOvwAA
-        Dr8BOAVTJAAAAQlJREFUOE/dUqsSgzAQjETyC3wCshaJjMQiKyNjkZVIbCWyEouMrKztJ1Re9y7hEUo7
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOvgAA
+        Dr4B6kKxwAAAAQlJREFUOE/dUqsSgzAQjETyC3wCshaJjMQiKyNjkZVIbCWyEouMrKztJ1Re9y7hEUo7
         g+3O3ACX281mifoT2NZR1YwUPiM0naO0xtrZ+aoGKs5DPHuyjuqBSNtYJKtupOyTVIOyD1Lm7kUgmJb9
         MpsZR3lPVDZYDJBdhYjSg4ibC4gaoryGqifXCVSTjqiYBHiIyejnsCa9NUoWwdF4ToAP1b58g4vtgqzt
         DhkoDDsAh4UEk11uGpDxnO3t4FMAyc4hYSEtrsTpT+WHVuAAeW4+Ar/MCW9rjH6bCG5DFEV28aWi44Td
         F/sHIPciuPqV0S5yIfvwROgIhFx58hLcAWjDWUBgfX0FSr0BeJABNfJh8YcAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="ImageCollection1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="ImageCollection1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

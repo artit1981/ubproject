@@ -66,7 +66,7 @@ Partial Class frmPreReport
         '
         'btnCancel
         '
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.DialogResult = DialogResult.Cancel
         Me.btnCancel.Location = New System.Drawing.Point(366, 72)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)

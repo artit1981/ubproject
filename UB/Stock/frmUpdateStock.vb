@@ -185,7 +185,7 @@ Public Class frmUpdateStock
             lProductListDAO.UnitID = gridView.GetRowCellValue(rowHandle, "UnitID")
             lFrmEditStock.ProductListDAO = lProductListDAO
             lResult = lFrmEditStock.ShowDialog()
-            If lResult = Windows.Forms.DialogResult.OK Then
+            If lResult = DialogResult.OK Then
                 LoadData()
             End If
 

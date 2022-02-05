@@ -585,7 +585,7 @@ Public Class frmInformPrice
     End Sub
     Private Sub btnReset_Click(sender As System.Object, e As System.EventArgs) Handles btnReset.Click
         Try
-            If XtraMessageBox.Show(Me, "ยืนยันรีเซตข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show(Me, "ยืนยันรีเซตข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 ShowProgress(True, "Loading...")
                 LoadDataGrid()
                 calcPriceInform.EditValue = 0

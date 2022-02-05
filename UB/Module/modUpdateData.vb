@@ -10,7 +10,7 @@ Module modUpdateData
         Dim pID As Long, Sql As String
         Dim tr As SqlTransaction = Nothing
         Dim myCommand As SqlCommand
-        If XtraMessageBox.Show("ยืนยันการปรับปรุงข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+        If XtraMessageBox.Show("ยืนยันการปรับปรุงข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
             Try
 
                 ShowProgress(True, "Loading...")

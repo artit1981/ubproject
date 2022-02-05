@@ -163,7 +163,7 @@ Public Class frmImport
     End Sub
 
     Private Sub WizardControl1_CancelClick(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WizardControl1.CancelClick
-        If XtraMessageBox.Show(Me, "ยืนยันการปิดหน้าจอ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+        If XtraMessageBox.Show(Me, "ยืนยันการปิดหน้าจอ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
             Me.Close()
         End If
     End Sub

@@ -122,7 +122,7 @@ Public Class frmBill
                         XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "บันทึก", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                         ShowProgress(False, "")
                     Else
-                        If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                             modReport.PrintReportOrder(mOrderType, mcls.ID)
                         End If
                     End If
@@ -421,7 +421,7 @@ Public Class frmBill
             Else
                 If pChequeAmt > 0 Then
                     If pChequeAmt < mcls.GrandTotal Then
-                        If XtraMessageBox.Show(Me, "ยอดชำระ ต่ำกว่ายอดรวม ยืนยันการทำรายการหรือไม่ ?", "ตรวจสอบ", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                        If XtraMessageBox.Show(Me, "ยอดชำระ ต่ำกว่ายอดรวม ยืนยันการทำรายการหรือไม่ ?", "ตรวจสอบ", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                             Return True
                         Else
                             Return False

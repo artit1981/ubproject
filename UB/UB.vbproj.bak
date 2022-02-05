@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,13 +12,14 @@
     <RootNamespace>UB</RootNamespace>
     <AssemblyName>UB</AssemblyName>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\ARTIT-DELL\Setup\DeployUB\</PublishUrl>
+    <TargetFrameworkProfile />
+    <PublishUrl>\\128.1.0.35\Test Interface\UB\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationVersion>1.0.1.20</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -48,6 +49,7 @@
     <DocumentationFile>UB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -58,6 +60,7 @@
     <DocumentationFile>UB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -82,49 +85,87 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.BonusSkins.v12.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Charts.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Charts.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Charts.v12.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v12.2">
+      <HintPath>..\..\DLL\DevExpress.CodeParser.v12.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.Data.v12.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Office.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.PivotGrid.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Office.v12.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.PivotGrid.v12.2.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.Printing.v12.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v12.2.Core, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.RichEdit.v12.2.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Utils.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.Utils.v12.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Utils.v12.2.UI, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v12.2.UI, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Utils.v12.2.UI.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraBars.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraBars.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraCharts.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v12.2.Extensions">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v12.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v12.2.UI">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v12.2.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v12.2.Wizard, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v12.2.Wizard.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraEditors.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraGrid.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraGrid.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraLayout.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraLayout.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraNavBar.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraNavBar.v12.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v12.2">
+      <HintPath>..\..\DLL\DevExpress.XtraPivotGrid.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraPrinting.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraReports.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraReports.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraReports.v12.2.Extensions, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraReports.v12.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v12.2">
+      <HintPath>..\..\DLL\DevExpress.XtraRichEdit.v12.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v12.2">
+      <HintPath>..\..\DLL\DevExpress.XtraTreeList.v12.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v12.2">
+      <HintPath>..\..\DLL\DevExpress.XtraVerticalGrid.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraWizard.v12.2, Version=12.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\DLL\DevExpress.XtraWizard.v12.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Barcode, Version=1.2.5.21040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Spire.Barcode.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,6 +175,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Zen.Barcode.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -195,6 +240,18 @@
     <Compile Include="Base\ChequeStatus.vb" />
     <Compile Include="Base\ChequeStep.vb" />
     <Compile Include="Base\clsNotifi.vb" />
+    <Compile Include="Base\frmControlCampaign.Designer.vb">
+      <DependentUpon>frmControlCampaign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmControlCampaign.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmFindCustomer.Designer.vb">
+      <DependentUpon>frmFindCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmFindCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\CostType.vb" />
     <Compile Include="Base\DBConnection.vb" />
     <Compile Include="Base\frmControls.Designer.vb">
@@ -257,6 +314,12 @@
     <Compile Include="Base\frmSplash.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Base\frmViewImage.Designer.vb">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmViewImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\iControl.vb" />
     <Compile Include="Base\iDAO.vb" />
     <Compile Include="Base\iEditForm.Designer.vb">
@@ -280,6 +343,8 @@
     <Compile Include="clsControl\BankAccountControl.vb" />
     <Compile Include="clsControl\CompanyControl.vb" />
     <Compile Include="clsControl\ContactControl.vb" />
+    <Compile Include="clsControl\CampaignControl.vb" />
+    <Compile Include="clsControl\BankControl.vb" />
     <Compile Include="clsControl\CreditGroupControl.vb" />
     <Compile Include="clsControl\CreditRoleControl.vb" />
     <Compile Include="clsControl\CurrencyControl.vb" />
@@ -298,11 +363,105 @@
     <Compile Include="clsControl\ProductCategoryControl.vb" />
     <Compile Include="clsControl\ProductControl.vb" />
     <Compile Include="clsControl\ProductTypeControl.vb" />
+    <Compile Include="clsControl\ProvinceControl.vb" />
     <Compile Include="clsControl\RunnignFormatControl.vb" />
     <Compile Include="clsControl\TerritoryControl.vb" />
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
+    <Compile Include="DAO\CampaignDetail.vb" />
+    <Compile Include="DAO\CampaignSub.vb" />
+    <Compile Include="Master\frmProvince.Designer.vb">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmProvince.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module\modOrder.vb" />
+    <Compile Include="Report\frmStockReport.Designer.vb">
+      <DependentUpon>frmStockReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmStockReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.Designer.vb">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDebtAnalyst.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.Designer.vb">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmDebtAnalystReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptStockReport.Designer.vb">
+      <DependentUpon>rptStockReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptStockReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.Designer.vb">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.Designer.vb">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStockDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmOrderDTL.Designer.vb">
+      <DependentUpon>frmOrderDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmOrderDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmSellOrderHis.Designer.vb">
+      <DependentUpon>frmSellOrderHis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmSellOrderHis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmSNUpdateStatus.Designer.vb">
+      <DependentUpon>frmSNUpdateStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmSNUpdateStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmCampaign.Designer.vb">
+      <DependentUpon>frmCampaign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmCampaign.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmInformPricePro.Designer.vb">
+      <DependentUpon>frmInformPricePro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmInformPricePro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmSNSelect.Designer.vb">
+      <DependentUpon>frmSNSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmSNSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmSNList.Designer.vb">
+      <DependentUpon>frmSNList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmSNList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmProductSN.Designer.vb">
+      <DependentUpon>frmProductSN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmProductSN.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmOrderHis.Designer.vb">
       <DependentUpon>frmOrderHis.vb</DependentUpon>
     </Compile>
@@ -429,6 +588,12 @@
     <Compile Include="CRM\frmProduct.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CRM\frmSN.Designer.vb">
+      <DependentUpon>frmSN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmSN.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmTerritory.Designer.vb">
       <DependentUpon>frmTerritory.vb</DependentUpon>
     </Compile>
@@ -451,6 +616,10 @@
     <Compile Include="DAO\BankDocTypeDAO.vb" />
     <Compile Include="DAO\ChequeDAO.vb" />
     <Compile Include="DAO\CompanyDAO.vb" />
+    <Compile Include="DAO\CampaignDAO.vb" />
+    <Compile Include="DAO\CustomerListDAO.vb" />
+    <Compile Include="DAO\EmployeeListDAO.vb" />
+    <Compile Include="DAO\InformPriceProDAO.vb" />
     <Compile Include="DAO\CreditBalanceDAO.vb" />
     <Compile Include="DAO\CreditGroupDAO.vb" />
     <Compile Include="DAO\CreditRoleDAO.vb" />
@@ -483,11 +652,11 @@
     <Compile Include="DAO\ProductListDAO.vb" />
     <Compile Include="DAO\ProductLocationSDAO.vb" />
     <Compile Include="DAO\ProductStockDAO.vb" />
-    <Compile Include="DAO\ProductSubDAO.vb" />
     <Compile Include="DAO\ProductTypeDAO.vb" />
     <Compile Include="DAO\ProductUnitDAO.vb" />
     <Compile Include="DAO\ProvinceDAO.vb" />
     <Compile Include="DAO\RunningFormatDAO.vb" />
+    <Compile Include="DAO\SnDAO.vb" />
     <Compile Include="DAO\TaxOrderDAO.vb" />
     <Compile Include="DAO\TerritoryDAO.vb" />
     <Compile Include="DAO\UnitDAO.vb" />
@@ -586,6 +755,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -597,9 +767,62 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Person.vb" />
     <Compile Include="Program.vb" />
     <Compile Include="Report\clsReport.vb" />
+    <Compile Include="Base\frmPreExport.Designer.vb">
+      <DependentUpon>frmPreExport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmPreExport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptDealSellNot.Designer.vb">
+      <DependentUpon>rptDealSellNot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDealSellNot.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDealBuy.Designer.vb">
+      <DependentUpon>rptDealBuy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDealBuy.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\frmDealReport.Designer.vb">
+      <DependentUpon>frmDealReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmDealReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptDealSell.Designer.vb">
+      <DependentUpon>rptDealSell.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDealSell.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptPaymentBuy.Designer.vb">
+      <DependentUpon>rptPaymentBuy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptPaymentBuy.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBarcode2.Designer.vb">
+      <DependentUpon>rptBarcode2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptBarcode2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\frmTaxAtSellReport.Designer.vb">
+      <DependentUpon>frmTaxAtSellReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmTaxAtSellReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptBarcode.Designer.vb">
+      <DependentUpon>rptBarcode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptBarcode.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptSellByCus.Designer.vb">
       <DependentUpon>rptSellByCus.vb</DependentUpon>
     </Compile>
@@ -661,12 +884,6 @@
     <Compile Include="Report\rptBillReport.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\rptClaim.Designer.vb">
-      <DependentUpon>rptClaim.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Report\rptClaim.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\rptClaimMain.Designer.vb">
       <DependentUpon>rptClaimMain.vb</DependentUpon>
     </Compile>
@@ -723,6 +940,18 @@
     </Compile>
     <Compile Include="Report\TmpOrderDAO.vb" />
     <Compile Include="Report\TmpProductList.vb" />
+    <Compile Include="ReserveFlow\frmFindReserve.Designer.vb">
+      <DependentUpon>frmFindReserve.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveFlow\frmFindReserve.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStock.Designer.vb">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\frmUpdateStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Stock\frmCheckStock.Designer.vb">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </Compile>
@@ -739,6 +968,30 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TmpOrders.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmFindEmployee.Designer.vb">
+      <DependentUpon>frmFindEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmFindEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucCampaignDTL.Designer.vb">
+      <DependentUpon>ucCampaignDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucCampaignDTL.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucCustomer.Designer.vb">
+      <DependentUpon>ucCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucCustomer.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucEmployee.Designer.vb">
+      <DependentUpon>ucEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucEmployee.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControl\FormChangedComponent.Designer.vb">
       <DependentUpon>FormChangedComponent.vb</DependentUpon>
@@ -818,6 +1071,12 @@
     <Compile Include="UserControl\ucLocationDTL.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\ucMoverItem.Designer.vb">
+      <DependentUpon>ucMoverItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucMoverItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\ucNote.Designer.vb">
       <DependentUpon>ucNote.vb</DependentUpon>
     </Compile>
@@ -828,6 +1087,12 @@
       <DependentUpon>ucOrderList.vb</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ucOrderList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucOrderLog.Designer.vb">
+      <DependentUpon>ucOrderLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucOrderLog.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControl\ucPledge.Designer.vb">
@@ -854,12 +1119,6 @@
     <Compile Include="UserControl\ucProductUnit.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\ucSN.Designer.vb">
-      <DependentUpon>ucSN.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\ucSN.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="UserControl\ucSWOT.Designer.vb">
       <DependentUpon>ucSWOT.vb</DependentUpon>
     </Compile>
@@ -876,6 +1135,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\frmPrivilege.resx">
       <DependentUpon>frmPrivilege.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\frmSelectCompany.resx">
       <DependentUpon>frmSelectCompany.vb</DependentUpon>
@@ -889,8 +1149,16 @@
     <EmbeddedResource Include="Appove\frmApproveUser.resx">
       <DependentUpon>frmApproveUser.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmControlCampaign.resx">
+      <DependentUpon>frmControlCampaign.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmFindCustomer.resx">
+      <DependentUpon>frmFindCustomer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmControls.resx">
       <DependentUpon>frmControls.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmFindData.resx">
       <DependentUpon>frmFindData.vb</DependentUpon>
@@ -918,12 +1186,61 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmSplash.resx">
       <DependentUpon>frmSplash.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmViewImage.resx">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iEditForm.resx">
       <DependentUpon>iEditForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmProvince.resx">
+      <DependentUpon>frmProvince.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmStockReport.resx">
+      <DependentUpon>frmStockReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDebtAnalyst.resx">
+      <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
+      <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptStockReport.resx">
+      <DependentUpon>rptStockReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockLog.resx">
+      <DependentUpon>frmUpdateStockLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStockDTL.resx">
+      <DependentUpon>frmUpdateStockDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmOrderDTL.resx">
+      <DependentUpon>frmOrderDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmSellOrderHis.resx">
+      <DependentUpon>frmSellOrderHis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmSNUpdateStatus.resx">
+      <DependentUpon>frmSNUpdateStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmCampaign.resx">
+      <DependentUpon>frmCampaign.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmInformPricePro.resx">
+      <DependentUpon>frmInformPricePro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmSNSelect.resx">
+      <DependentUpon>frmSNSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmSNList.resx">
+      <DependentUpon>frmSNList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmProductSN.resx">
+      <DependentUpon>frmProductSN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis.resx">
       <DependentUpon>frmOrderHis.vb</DependentUpon>
@@ -988,6 +1305,9 @@
     <EmbeddedResource Include="CRM\frmProduct.resx">
       <DependentUpon>frmProduct.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmSN.resx">
+      <DependentUpon>frmSN.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmTerritory.resx">
       <DependentUpon>frmTerritory.vb</DependentUpon>
     </EmbeddedResource>
@@ -1040,6 +1360,33 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmPreExport.resx">
+      <DependentUpon>frmPreExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDealSellNot.resx">
+      <DependentUpon>rptDealSellNot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDealBuy.resx">
+      <DependentUpon>rptDealBuy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDealReport.resx">
+      <DependentUpon>frmDealReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDealSell.resx">
+      <DependentUpon>rptDealSell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptPaymentBuy.resx">
+      <DependentUpon>rptPaymentBuy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBarcode2.resx">
+      <DependentUpon>rptBarcode2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmTaxAtSellReport.resx">
+      <DependentUpon>frmTaxAtSellReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBarcode.resx">
+      <DependentUpon>rptBarcode.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptSellByCus.resx">
       <DependentUpon>rptSellByCus.vb</DependentUpon>
     </EmbeddedResource>
@@ -1070,9 +1417,6 @@
     <EmbeddedResource Include="Report\rptBillReport.resx">
       <DependentUpon>rptBillReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\rptClaim.resx">
-      <DependentUpon>rptClaim.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptClaimMain.resx">
       <DependentUpon>rptClaimMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -1101,11 +1445,29 @@
     <EmbeddedResource Include="Report\rptTaxSell.resx">
       <DependentUpon>rptTaxSell.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReserveFlow\frmFindReserve.resx">
+      <DependentUpon>frmFindReserve.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\frmUpdateStock.resx">
+      <DependentUpon>frmUpdateStock.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Stock\frmCheckStock.resx">
       <DependentUpon>frmCheckStock.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\frmStockIn.resx">
       <DependentUpon>frmStockIn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmFindEmployee.resx">
+      <DependentUpon>frmFindEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucCampaignDTL.resx">
+      <DependentUpon>ucCampaignDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucCustomer.resx">
+      <DependentUpon>ucCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucEmployee.resx">
+      <DependentUpon>ucEmployee.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucAddress.resx">
       <DependentUpon>ucAddress.vb</DependentUpon>
@@ -1143,11 +1505,17 @@
     <EmbeddedResource Include="UserControl\ucLocationDTL.resx">
       <DependentUpon>ucLocationDTL.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucMoverItem.resx">
+      <DependentUpon>ucMoverItem.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucNote.resx">
       <DependentUpon>ucNote.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucOrderList.resx">
       <DependentUpon>ucOrderList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucOrderLog.resx">
+      <DependentUpon>ucOrderLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucPledge.resx">
       <DependentUpon>ucPledge.vb</DependentUpon>
@@ -1160,9 +1528,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucProductUnit.resx">
       <DependentUpon>ucProductUnit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControl\ucSN.resx">
-      <DependentUpon>ucSN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucSWOT.resx">
       <DependentUpon>ucSWOT.vb</DependentUpon>
@@ -1193,11 +1558,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -1207,16 +1567,6 @@
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
-      <Visible>False</Visible>
-      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
@@ -1244,6 +1594,16 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="DevExpress.CodeParser.v12.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.CodeParser.v13.2">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -1353,7 +1713,27 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="DevExpress.XtraCharts.v12.2.UI">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="DevExpress.XtraCharts.v12.2.Wizard">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraCharts.v13.2.Extensions">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -1413,6 +1793,16 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="DevExpress.XtraPivotGrid.v13.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="DevExpress.XtraPrinting.v12.2">
       <Visible>False</Visible>
       <Group>
@@ -1453,6 +1843,16 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="DevExpress.XtraRichEdit.v13.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="DevExpress.XtraTreeList.v12.2">
       <Visible>False</Visible>
       <Group>
@@ -1463,7 +1863,27 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="DevExpress.XtraTreeList.v13.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="DevExpress.XtraVerticalGrid.v12.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraVerticalGrid.v13.2">
       <Visible>False</Visible>
       <Group>
       </Group>

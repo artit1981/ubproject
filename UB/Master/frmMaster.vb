@@ -180,7 +180,7 @@ Public Class frmMaster
         Try
             rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
             If rowHandle < 0 Then Exit Sub
-            If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show(Me, "ต้องการลบข้อมูลใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 ShowProgress(True, "Deleting...")
                 mMode = DataMode.ModeDelete
                 RaiseEvent Delete(lSuccess, mID)

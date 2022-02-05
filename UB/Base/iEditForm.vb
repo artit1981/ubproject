@@ -146,7 +146,7 @@ Partial Public Class iEditForm
 
     Private Sub iEditForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If mIsChange = True And SaveBar.Enabled = True Then
-            If XtraMessageBox.Show(Me, "ต้องการยกเลิกข้อมูลใช่หรือไม่", "คำเตือน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+            If XtraMessageBox.Show(Me, "ต้องการยกเลิกข้อมูลใช่หรือไม่", "คำเตือน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
                 e.Cancel = True
             End If
         End If
@@ -174,7 +174,7 @@ Partial Public Class iEditForm
 
     Private Sub Addbar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles Addbar.ItemClick
         Try
-            If XtraMessageBox.Show(Me, "ต้องการเคลียร์ข้อมูลทั้งหมดใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+            If XtraMessageBox.Show(Me, "ต้องการเคลียร์ข้อมูลทั้งหมดใช่หรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                 ShowProgress(True, "Loading...")
                 mIsFromLoad = True
                 ModeData = DataMode.ModeNew
