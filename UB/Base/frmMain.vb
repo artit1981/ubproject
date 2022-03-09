@@ -883,4 +883,18 @@ Public Class frmMain
         Finally
         End Try
     End Sub
+
+    Private Sub ReceiptHisBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ReceiptHisBar.ItemClick
+        Try
+
+            Dim lFormEdit As New frmOrderHis2
+            With lFormEdit
+                .Show()
+                InsertActivity(DataMode.ModeOpen, MasterType.OrderHis2, "", Nothing)
+            End With
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 End Class

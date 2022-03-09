@@ -91,7 +91,7 @@ Partial Class ucCreditInfo
         Me.BankAccountID1 = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BankAccountCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BankAccountNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnBankAccountID1 = New DevExpress.XtraEditors.SimpleButton()
         Me.btnBankAccountID2 = New DevExpress.XtraEditors.SimpleButton()
@@ -222,11 +222,10 @@ Partial Class ucCreditInfo
         Me.cboTerritory.Properties.Appearance.Options.UseFont = True
         Me.cboTerritory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboTerritory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboTerritory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("TerritoryCode", 50, "รหัสทีมขาย"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 70, "ชื่อทีมขาย")})
+        Me.cboTerritory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("TerritoryCode", "รหัสทีมขาย", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อทีมขาย", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboTerritory.Properties.DropDownRows = 10
         Me.cboTerritory.Properties.ImmediatePopup = True
         Me.cboTerritory.Properties.NullText = ""
-        Me.cboTerritory.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboTerritory.Properties.PopupWidth = 300
         Me.cboTerritory.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboTerritory.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -238,8 +237,8 @@ Partial Class ucCreditInfo
         '
         Me.btnRefreshTerritory.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshTerritory.Appearance.Options.UseFont = True
-        Me.btnRefreshTerritory.Image = CType(resources.GetObject("btnRefreshTerritory.Image"), System.Drawing.Image)
-        Me.btnRefreshTerritory.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshTerritory.ImageOptions.Image = CType(resources.GetObject("btnRefreshTerritory.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshTerritory.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshTerritory.Location = New System.Drawing.Point(340, 55)
         Me.btnRefreshTerritory.Name = "btnRefreshTerritory"
         Me.btnRefreshTerritory.Size = New System.Drawing.Size(21, 21)
@@ -279,8 +278,8 @@ Partial Class ucCreditInfo
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(623, 14)
         Me.Label30.TabIndex = 317
-        Me.Label30.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label30.Text = "_________________________________________________________________________________" &
+    "_______"
         '
         'Label31
         '
@@ -304,11 +303,10 @@ Partial Class ucCreditInfo
         Me.VatTypeID.Properties.Appearance.Options.UseFont = True
         Me.VatTypeID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.VatTypeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.VatTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", 30, "รหัสภาษี"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อรูปแบบภาษี", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("VatRate", "อัตราภาษี (%)", 20, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.VatTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "รหัสภาษี", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อรูปแบบภาษี", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("VatRate", "อัตราภาษี (%)", 20, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.VatTypeID.Properties.DropDownRows = 10
         Me.VatTypeID.Properties.ImmediatePopup = True
         Me.VatTypeID.Properties.NullText = ""
-        Me.VatTypeID.Properties.NullValuePromptShowForEmptyValue = True
         Me.VatTypeID.Properties.PopupWidth = 300
         Me.VatTypeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.VatTypeID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -332,8 +330,8 @@ Partial Class ucCreditInfo
         '
         Me.btnVatTypeID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnVatTypeID.Appearance.Options.UseFont = True
-        Me.btnVatTypeID.Image = CType(resources.GetObject("btnVatTypeID.Image"), System.Drawing.Image)
-        Me.btnVatTypeID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnVatTypeID.ImageOptions.Image = CType(resources.GetObject("btnVatTypeID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnVatTypeID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnVatTypeID.Location = New System.Drawing.Point(363, 85)
         Me.btnVatTypeID.Name = "btnVatTypeID"
         Me.btnVatTypeID.Size = New System.Drawing.Size(21, 21)
@@ -351,11 +349,10 @@ Partial Class ucCreditInfo
         Me.CriterionPriceID.Properties.Appearance.Options.UseFont = True
         Me.CriterionPriceID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CriterionPriceID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CriterionPriceID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.CriterionPriceID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CriterionPriceID.Properties.DropDownRows = 10
         Me.CriterionPriceID.Properties.ImmediatePopup = True
         Me.CriterionPriceID.Properties.NullText = ""
-        Me.CriterionPriceID.Properties.NullValuePromptShowForEmptyValue = True
         Me.CriterionPriceID.Properties.PopupWidth = 300
         Me.CriterionPriceID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CriterionPriceID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -367,8 +364,8 @@ Partial Class ucCreditInfo
         '
         Me.btnCriterionPrice.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCriterionPrice.Appearance.Options.UseFont = True
-        Me.btnCriterionPrice.Image = CType(resources.GetObject("btnCriterionPrice.Image"), System.Drawing.Image)
-        Me.btnCriterionPrice.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCriterionPrice.ImageOptions.Image = CType(resources.GetObject("btnCriterionPrice.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCriterionPrice.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCriterionPrice.Location = New System.Drawing.Point(363, 112)
         Me.btnCriterionPrice.Name = "btnCriterionPrice"
         Me.btnCriterionPrice.Size = New System.Drawing.Size(21, 21)
@@ -410,6 +407,7 @@ Partial Class ucCreditInfo
         Me.CreditAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.CreditAmount.Properties.Mask.EditMask = "n"
         Me.CreditAmount.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.CreditAmount.Properties.MaskSettings.Set("mask", "n")
         Me.CreditAmount.Properties.Precision = 2
         Me.CreditAmount.Size = New System.Drawing.Size(212, 20)
         Me.CreditAmount.TabIndex = 9
@@ -426,6 +424,7 @@ Partial Class ucCreditInfo
         Me.txtBuyingTimeFrame.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.txtBuyingTimeFrame.Properties.Mask.EditMask = "n0"
         Me.txtBuyingTimeFrame.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.txtBuyingTimeFrame.Properties.MaskSettings.Set("mask", "n0")
         Me.txtBuyingTimeFrame.Properties.Precision = 0
         Me.txtBuyingTimeFrame.Size = New System.Drawing.Size(212, 20)
         Me.txtBuyingTimeFrame.TabIndex = 1
@@ -445,8 +444,8 @@ Partial Class ucCreditInfo
         '
         Me.btnRefreshCurrency.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshCurrency.Appearance.Options.UseFont = True
-        Me.btnRefreshCurrency.Image = CType(resources.GetObject("btnRefreshCurrency.Image"), System.Drawing.Image)
-        Me.btnRefreshCurrency.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCurrency.ImageOptions.Image = CType(resources.GetObject("btnRefreshCurrency.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCurrency.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshCurrency.Location = New System.Drawing.Point(707, 85)
         Me.btnRefreshCurrency.Name = "btnRefreshCurrency"
         Me.btnRefreshCurrency.Size = New System.Drawing.Size(21, 21)
@@ -469,8 +468,8 @@ Partial Class ucCreditInfo
         '
         Me.btnRefreshCreditRule.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshCreditRule.Appearance.Options.UseFont = True
-        Me.btnRefreshCreditRule.Image = CType(resources.GetObject("btnRefreshCreditRule.Image"), System.Drawing.Image)
-        Me.btnRefreshCreditRule.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCreditRule.ImageOptions.Image = CType(resources.GetObject("btnRefreshCreditRule.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCreditRule.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshCreditRule.Location = New System.Drawing.Point(364, 58)
         Me.btnRefreshCreditRule.Name = "btnRefreshCreditRule"
         Me.btnRefreshCreditRule.Size = New System.Drawing.Size(21, 21)
@@ -499,11 +498,10 @@ Partial Class ucCreditInfo
         Me.cboCreditRule.Properties.Appearance.Options.UseFont = True
         Me.cboCreditRule.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboCreditRule.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboCreditRule.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditRoleCode", 30, "รหัสเครดิต"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อเครดิต", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditDay", "จำนวนวัน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.cboCreditRule.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditRoleCode", "รหัสเครดิต", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อเครดิต", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditDay", "จำนวนวัน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboCreditRule.Properties.DropDownRows = 10
         Me.cboCreditRule.Properties.ImmediatePopup = True
         Me.cboCreditRule.Properties.NullText = ""
-        Me.cboCreditRule.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboCreditRule.Properties.PopupWidth = 300
         Me.cboCreditRule.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboCreditRule.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -544,8 +542,8 @@ Partial Class ucCreditInfo
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(623, 14)
         Me.Label4.TabIndex = 302
-        Me.Label4.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label4.Text = "_________________________________________________________________________________" &
+    "_______"
         '
         'Label1
         '
@@ -569,15 +567,15 @@ Partial Class ucCreditInfo
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(623, 14)
         Me.Label2.TabIndex = 329
-        Me.Label2.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label2.Text = "_________________________________________________________________________________" &
+    "_______"
         '
         'btnCreditGroupID
         '
         Me.btnCreditGroupID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCreditGroupID.Appearance.Options.UseFont = True
-        Me.btnCreditGroupID.Image = CType(resources.GetObject("btnCreditGroupID.Image"), System.Drawing.Image)
-        Me.btnCreditGroupID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCreditGroupID.ImageOptions.Image = CType(resources.GetObject("btnCreditGroupID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCreditGroupID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCreditGroupID.Location = New System.Drawing.Point(707, 221)
         Me.btnCreditGroupID.Name = "btnCreditGroupID"
         Me.btnCreditGroupID.Size = New System.Drawing.Size(21, 21)
@@ -606,11 +604,10 @@ Partial Class ucCreditInfo
         Me.CreditGroupID.Properties.Appearance.Options.UseFont = True
         Me.CreditGroupID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CreditGroupID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CreditGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditGroupCode", 30, "รหัสกลุ่มวงเงิน"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อกลุ่มวงเงิน", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditAmount", "วงเงิน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.CreditGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditGroupCode", "รหัสกลุ่มวงเงิน", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อกลุ่มวงเงิน", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditAmount", "วงเงิน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CreditGroupID.Properties.DropDownRows = 10
         Me.CreditGroupID.Properties.ImmediatePopup = True
         Me.CreditGroupID.Properties.NullText = ""
-        Me.CreditGroupID.Properties.NullValuePromptShowForEmptyValue = True
         Me.CreditGroupID.Properties.PopupWidth = 300
         Me.CreditGroupID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CreditGroupID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -627,8 +624,8 @@ Partial Class ucCreditInfo
         Me.cboEmp.Properties.Appearance.Options.UseFont = True
         Me.cboEmp.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboEmp.Properties.NullText = ""
+        Me.cboEmp.Properties.PopupView = Me.SearchLookUpEdit1View
         Me.cboEmp.Properties.ValidateOnEnterKey = True
-        Me.cboEmp.Properties.View = Me.SearchLookUpEdit1View
         Me.cboEmp.Size = New System.Drawing.Size(212, 20)
         Me.cboEmp.TabIndex = 17
         '
@@ -645,6 +642,7 @@ Partial Class ucCreditInfo
         Me.GridColumn4.Caption = "รหัส"
         Me.GridColumn4.FieldName = " ID"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Width = 64
         '
         'GridColumn5
         '
@@ -653,6 +651,7 @@ Partial Class ucCreditInfo
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 0
+        Me.GridColumn5.Width = 64
         '
         'GridColumn6
         '
@@ -661,13 +660,14 @@ Partial Class ucCreditInfo
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 1
+        Me.GridColumn6.Width = 64
         '
         'btnEmp
         '
         Me.btnEmp.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnEmp.Appearance.Options.UseFont = True
-        Me.btnEmp.Image = CType(resources.GetObject("btnEmp.Image"), System.Drawing.Image)
-        Me.btnEmp.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnEmp.ImageOptions.Image = CType(resources.GetObject("btnEmp.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnEmp.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnEmp.Location = New System.Drawing.Point(679, 55)
         Me.btnEmp.Name = "btnEmp"
         Me.btnEmp.Size = New System.Drawing.Size(21, 21)
@@ -686,11 +686,10 @@ Partial Class ucCreditInfo
         Me.cboCurrency.Properties.Appearance.Options.UseFont = True
         Me.cboCurrency.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboCurrency.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboCurrency.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", 50, "สกุลเงิน"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ExchangeRate", "อัตราแลกเปลี่ยน", 40, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.cboCurrency.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "สกุลเงิน", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ExchangeRate", "อัตราแลกเปลี่ยน", 40, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboCurrency.Properties.DropDownRows = 10
         Me.cboCurrency.Properties.ImmediatePopup = True
         Me.cboCurrency.Properties.NullText = ""
-        Me.cboCurrency.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboCurrency.Properties.PopupWidth = 300
         Me.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboCurrency.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -709,11 +708,10 @@ Partial Class ucCreditInfo
         Me.CustomerZoneID.Properties.Appearance.Options.UseFont = True
         Me.CustomerZoneID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CustomerZoneID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CustomerZoneID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.CustomerZoneID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CustomerZoneID.Properties.DropDownRows = 10
         Me.CustomerZoneID.Properties.ImmediatePopup = True
         Me.CustomerZoneID.Properties.NullText = ""
-        Me.CustomerZoneID.Properties.NullValuePromptShowForEmptyValue = True
         Me.CustomerZoneID.Properties.PopupWidth = 300
         Me.CustomerZoneID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CustomerZoneID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -725,8 +723,8 @@ Partial Class ucCreditInfo
         '
         Me.btnRefreshCustomerZone.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshCustomerZone.Appearance.Options.UseFont = True
-        Me.btnRefreshCustomerZone.Image = CType(resources.GetObject("btnRefreshCustomerZone.Image"), System.Drawing.Image)
-        Me.btnRefreshCustomerZone.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCustomerZone.ImageOptions.Image = CType(resources.GetObject("btnRefreshCustomerZone.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCustomerZone.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshCustomerZone.Location = New System.Drawing.Point(340, 29)
         Me.btnRefreshCustomerZone.Name = "btnRefreshCustomerZone"
         Me.btnRefreshCustomerZone.Size = New System.Drawing.Size(21, 21)
@@ -756,11 +754,10 @@ Partial Class ucCreditInfo
         Me.CustomerGroupID.Properties.Appearance.Options.UseFont = True
         Me.CustomerGroupID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CustomerGroupID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CustomerGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.CustomerGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CustomerGroupID.Properties.DropDownRows = 10
         Me.CustomerGroupID.Properties.ImmediatePopup = True
         Me.CustomerGroupID.Properties.NullText = ""
-        Me.CustomerGroupID.Properties.NullValuePromptShowForEmptyValue = True
         Me.CustomerGroupID.Properties.PopupWidth = 300
         Me.CustomerGroupID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CustomerGroupID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -772,8 +769,8 @@ Partial Class ucCreditInfo
         '
         Me.btnCustomerGroup.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCustomerGroup.Appearance.Options.UseFont = True
-        Me.btnCustomerGroup.Image = CType(resources.GetObject("btnCustomerGroup.Image"), System.Drawing.Image)
-        Me.btnCustomerGroup.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCustomerGroup.ImageOptions.Image = CType(resources.GetObject("btnCustomerGroup.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCustomerGroup.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCustomerGroup.Location = New System.Drawing.Point(679, 29)
         Me.btnCustomerGroup.Name = "btnCustomerGroup"
         Me.btnCustomerGroup.Size = New System.Drawing.Size(21, 21)
@@ -989,8 +986,8 @@ Partial Class ucCreditInfo
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(623, 14)
         Me.Label14.TabIndex = 360
-        Me.Label14.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label14.Text = "_________________________________________________________________________________" &
+    "_______"
         '
         'Label15
         '
@@ -1025,13 +1022,13 @@ Partial Class ucCreditInfo
         Me.BankAccountID1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.BankAccountID1.Properties.NullText = ""
         Me.BankAccountID1.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.BankAccountID1.Properties.View = Me.GridView1
+        Me.BankAccountID1.Properties.PopupView = Me.GridView1
         Me.BankAccountID1.Size = New System.Drawing.Size(211, 20)
         Me.BankAccountID1.TabIndex = 361
         '
         'GridView1
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.BankAccountNo})
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.BankAccountCode, Me.BankAccountNo})
         Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
@@ -1044,33 +1041,34 @@ Partial Class ucCreditInfo
         Me.GridColumn1.Caption = "รหัส"
         Me.GridColumn1.FieldName = " ID"
         Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Width = 64
         '
-        'GridColumn2
+        'BankAccountCode
         '
-        Me.GridColumn2.Caption = "ชื่อเรียกบัญชี"
-        Me.GridColumn2.FieldName = "Code"
-        Me.GridColumn2.MaxWidth = 100
-        Me.GridColumn2.MinWidth = 75
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 0
+        Me.BankAccountCode.Caption = "ชื่อเรียกบัญชี"
+        Me.BankAccountCode.FieldName = "BankAccountCode"
+        Me.BankAccountCode.MinWidth = 100
+        Me.BankAccountCode.Name = "BankAccountCode"
+        Me.BankAccountCode.Visible = True
+        Me.BankAccountCode.VisibleIndex = 0
+        Me.BankAccountCode.Width = 200
         '
         'BankAccountNo
         '
         Me.BankAccountNo.Caption = "เลขบัญชี"
         Me.BankAccountNo.FieldName = "BankAccountNo"
-        Me.BankAccountNo.MinWidth = 150
+        Me.BankAccountNo.MinWidth = 100
         Me.BankAccountNo.Name = "BankAccountNo"
         Me.BankAccountNo.Visible = True
         Me.BankAccountNo.VisibleIndex = 1
-        Me.BankAccountNo.Width = 150
+        Me.BankAccountNo.Width = 200
         '
         'btnBankAccountID1
         '
         Me.btnBankAccountID1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnBankAccountID1.Appearance.Options.UseFont = True
-        Me.btnBankAccountID1.Image = CType(resources.GetObject("btnBankAccountID1.Image"), System.Drawing.Image)
-        Me.btnBankAccountID1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBankAccountID1.ImageOptions.Image = CType(resources.GetObject("btnBankAccountID1.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBankAccountID1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnBankAccountID1.Location = New System.Drawing.Point(363, 416)
         Me.btnBankAccountID1.Name = "btnBankAccountID1"
         Me.btnBankAccountID1.Size = New System.Drawing.Size(21, 21)
@@ -1082,8 +1080,8 @@ Partial Class ucCreditInfo
         '
         Me.btnBankAccountID2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnBankAccountID2.Appearance.Options.UseFont = True
-        Me.btnBankAccountID2.Image = CType(resources.GetObject("btnBankAccountID2.Image"), System.Drawing.Image)
-        Me.btnBankAccountID2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBankAccountID2.ImageOptions.Image = CType(resources.GetObject("btnBankAccountID2.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBankAccountID2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnBankAccountID2.Location = New System.Drawing.Point(363, 441)
         Me.btnBankAccountID2.Name = "btnBankAccountID2"
         Me.btnBankAccountID2.Size = New System.Drawing.Size(21, 21)
@@ -1112,7 +1110,7 @@ Partial Class ucCreditInfo
         Me.BankAccountID2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.BankAccountID2.Properties.NullText = ""
         Me.BankAccountID2.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.BankAccountID2.Properties.View = Me.GridView2
+        Me.BankAccountID2.Properties.PopupView = Me.GridView2
         Me.BankAccountID2.Size = New System.Drawing.Size(211, 20)
         Me.BankAccountID2.TabIndex = 364
         '
@@ -1131,33 +1129,34 @@ Partial Class ucCreditInfo
         Me.GridColumn3.Caption = "รหัส"
         Me.GridColumn3.FieldName = " ID"
         Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Width = 64
         '
         'GridColumn7
         '
         Me.GridColumn7.Caption = "ชื่อเรียกบัญชี"
-        Me.GridColumn7.FieldName = "Code"
-        Me.GridColumn7.MaxWidth = 100
-        Me.GridColumn7.MinWidth = 75
+        Me.GridColumn7.FieldName = "BankAccountCode"
+        Me.GridColumn7.MinWidth = 100
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 0
+        Me.GridColumn7.Width = 100
         '
         'GridColumn8
         '
         Me.GridColumn8.Caption = "เลขบัญชี"
         Me.GridColumn8.FieldName = "BankAccountNo"
-        Me.GridColumn8.MinWidth = 150
+        Me.GridColumn8.MinWidth = 200
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 1
-        Me.GridColumn8.Width = 150
+        Me.GridColumn8.Width = 200
         '
         'btnBankAccountID3
         '
         Me.btnBankAccountID3.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnBankAccountID3.Appearance.Options.UseFont = True
-        Me.btnBankAccountID3.Image = CType(resources.GetObject("btnBankAccountID3.Image"), System.Drawing.Image)
-        Me.btnBankAccountID3.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBankAccountID3.ImageOptions.Image = CType(resources.GetObject("btnBankAccountID3.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBankAccountID3.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnBankAccountID3.Location = New System.Drawing.Point(363, 466)
         Me.btnBankAccountID3.Name = "btnBankAccountID3"
         Me.btnBankAccountID3.Size = New System.Drawing.Size(21, 21)
@@ -1186,7 +1185,7 @@ Partial Class ucCreditInfo
         Me.BankAccountID3.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.BankAccountID3.Properties.NullText = ""
         Me.BankAccountID3.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.BankAccountID3.Properties.View = Me.GridView3
+        Me.BankAccountID3.Properties.PopupView = Me.GridView3
         Me.BankAccountID3.Size = New System.Drawing.Size(211, 20)
         Me.BankAccountID3.TabIndex = 367
         '
@@ -1205,26 +1204,27 @@ Partial Class ucCreditInfo
         Me.GridColumn9.Caption = "รหัส"
         Me.GridColumn9.FieldName = " ID"
         Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Width = 64
         '
         'GridColumn10
         '
         Me.GridColumn10.Caption = "ชื่อเรียกบัญชี"
-        Me.GridColumn10.FieldName = "Code"
-        Me.GridColumn10.MaxWidth = 100
-        Me.GridColumn10.MinWidth = 75
+        Me.GridColumn10.FieldName = "BankAccountCode"
+        Me.GridColumn10.MinWidth = 100
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 0
+        Me.GridColumn10.Width = 100
         '
         'GridColumn11
         '
         Me.GridColumn11.Caption = "เลขบัญชี"
         Me.GridColumn11.FieldName = "BankAccountNo"
-        Me.GridColumn11.MinWidth = 150
+        Me.GridColumn11.MinWidth = 200
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 1
-        Me.GridColumn11.Width = 150
+        Me.GridColumn11.Width = 200
         '
         'GroupPrivilege
         '
@@ -1418,7 +1418,7 @@ Partial Class ucCreditInfo
     Friend WithEvents BankAccountID1 As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BankAccountCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BankAccountNo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnBankAccountID1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btnBankAccountID2 As DevExpress.XtraEditors.SimpleButton

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmOrderHis
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmOrderHis2
     Inherits iEditForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,34 +17,21 @@ Partial Class frmOrderHis
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOrderHis))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOrderHis2))
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.DatePanel = New DevExpress.XtraEditors.PanelControl()
         Me.CheckAll = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.chkUpdateStock = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckExpose = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckReceiptCut = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckShipingBuy = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckBorrow = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckClaimOut = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckReduceCreditBuy = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckAddCreditBuy = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckAsset = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckInvoiceBuy = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckReduceCredit = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckAddCredit = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckReserve = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckClaim = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckPurchaseOrder = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckShiping = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckStockIn = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckInvoice = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckQuotation = New DevExpress.XtraEditors.CheckEdit()
-        Me.CheckOrders = New DevExpress.XtraEditors.CheckEdit()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.btnExportExcel = New DevExpress.XtraEditors.PictureEdit()
@@ -72,26 +59,13 @@ Partial Class frmOrderHis
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.chkUpdateStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckExpose.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckReceiptCut.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckShipingBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckBorrow.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckClaimOut.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckReduceCreditBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckAddCreditBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckAsset.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckInvoiceBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckReduceCredit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckAddCredit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckReserve.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckClaim.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckPurchaseOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckShiping.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckStockIn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckQuotation.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckOrders.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.btnExportExcel.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,64 +125,25 @@ Partial Class frmOrderHis
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
-        Me.PanelControl2.Controls.Add(Me.chkUpdateStock)
-        Me.PanelControl2.Controls.Add(Me.CheckExpose)
         Me.PanelControl2.Controls.Add(Me.CheckReceiptCut)
         Me.PanelControl2.Controls.Add(Me.CheckShipingBuy)
-        Me.PanelControl2.Controls.Add(Me.CheckBorrow)
-        Me.PanelControl2.Controls.Add(Me.CheckClaimOut)
         Me.PanelControl2.Controls.Add(Me.CheckReduceCreditBuy)
-        Me.PanelControl2.Controls.Add(Me.CheckAddCreditBuy)
-        Me.PanelControl2.Controls.Add(Me.CheckAsset)
         Me.PanelControl2.Controls.Add(Me.CheckInvoiceBuy)
         Me.PanelControl2.Controls.Add(Me.CheckReduceCredit)
-        Me.PanelControl2.Controls.Add(Me.CheckAddCredit)
-        Me.PanelControl2.Controls.Add(Me.CheckReserve)
-        Me.PanelControl2.Controls.Add(Me.CheckClaim)
-        Me.PanelControl2.Controls.Add(Me.CheckPurchaseOrder)
         Me.PanelControl2.Controls.Add(Me.CheckShiping)
-        Me.PanelControl2.Controls.Add(Me.CheckStockIn)
         Me.PanelControl2.Controls.Add(Me.CheckInvoice)
-        Me.PanelControl2.Controls.Add(Me.CheckQuotation)
-        Me.PanelControl2.Controls.Add(Me.CheckOrders)
         Me.PanelControl2.Location = New System.Drawing.Point(70, 57)
         Me.PanelControl2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(868, 105)
+        Me.PanelControl2.Size = New System.Drawing.Size(649, 105)
         Me.PanelControl2.TabIndex = 298
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
-        '
-        'chkUpdateStock
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkUpdateStock, "CheckedChanged")
-        Me.chkUpdateStock.Location = New System.Drawing.Point(715, 28)
-        Me.chkUpdateStock.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.chkUpdateStock, True)
-        Me.chkUpdateStock.Name = "chkUpdateStock"
-        Me.chkUpdateStock.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.chkUpdateStock.Properties.Appearance.Options.UseForeColor = True
-        Me.chkUpdateStock.Properties.Caption = "Update stock"
-        Me.chkUpdateStock.Size = New System.Drawing.Size(119, 24)
-        Me.chkUpdateStock.TabIndex = 316
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkUpdateStock, "Checked")
-        '
-        'CheckExpose
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckExpose, "CheckedChanged")
-        Me.CheckExpose.Location = New System.Drawing.Point(576, 28)
-        Me.CheckExpose.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckExpose, True)
-        Me.CheckExpose.Name = "CheckExpose"
-        Me.CheckExpose.Properties.Caption = "ทำรายการเบิก"
-        Me.CheckExpose.Size = New System.Drawing.Size(119, 24)
-        Me.CheckExpose.TabIndex = 315
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckExpose, "Checked")
         '
         'CheckReceiptCut
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReceiptCut, "CheckedChanged")
-        Me.CheckReceiptCut.Location = New System.Drawing.Point(450, 28)
+        Me.CheckReceiptCut.Location = New System.Drawing.Point(169, 28)
         Me.CheckReceiptCut.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReceiptCut, True)
         Me.CheckReceiptCut.Name = "CheckReceiptCut"
@@ -220,7 +155,7 @@ Partial Class frmOrderHis
         'CheckShipingBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShipingBuy, "CheckedChanged")
-        Me.CheckShipingBuy.Location = New System.Drawing.Point(450, 52)
+        Me.CheckShipingBuy.Location = New System.Drawing.Point(169, 52)
         Me.CheckShipingBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShipingBuy, True)
         Me.CheckShipingBuy.Name = "CheckShipingBuy"
@@ -229,34 +164,10 @@ Partial Class frmOrderHis
         Me.CheckShipingBuy.TabIndex = 313
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShipingBuy, "Checked")
         '
-        'CheckBorrow
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckBorrow, "CheckedChanged")
-        Me.CheckBorrow.Location = New System.Drawing.Point(715, 6)
-        Me.CheckBorrow.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckBorrow, True)
-        Me.CheckBorrow.Name = "CheckBorrow"
-        Me.CheckBorrow.Properties.Caption = "ยืมสินค้า(ขาย)"
-        Me.CheckBorrow.Size = New System.Drawing.Size(119, 24)
-        Me.CheckBorrow.TabIndex = 312
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckBorrow, "Checked")
-        '
-        'CheckClaimOut
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckClaimOut, "CheckedChanged")
-        Me.CheckClaimOut.Location = New System.Drawing.Point(576, 52)
-        Me.CheckClaimOut.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckClaimOut, True)
-        Me.CheckClaimOut.Name = "CheckClaimOut"
-        Me.CheckClaimOut.Properties.Caption = "รับแจ้งเคลม(ซื้อ)"
-        Me.CheckClaimOut.Size = New System.Drawing.Size(135, 24)
-        Me.CheckClaimOut.TabIndex = 311
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckClaimOut, "Checked")
-        '
         'CheckReduceCreditBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReduceCreditBuy, "CheckedChanged")
-        Me.CheckReduceCreditBuy.Location = New System.Drawing.Point(299, 74)
+        Me.CheckReduceCreditBuy.Location = New System.Drawing.Point(18, 74)
         Me.CheckReduceCreditBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReduceCreditBuy, True)
         Me.CheckReduceCreditBuy.Name = "CheckReduceCreditBuy"
@@ -265,34 +176,10 @@ Partial Class frmOrderHis
         Me.CheckReduceCreditBuy.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReduceCreditBuy, "Checked")
         '
-        'CheckAddCreditBuy
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckAddCreditBuy, "CheckedChanged")
-        Me.CheckAddCreditBuy.Location = New System.Drawing.Point(156, 74)
-        Me.CheckAddCreditBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckAddCreditBuy, True)
-        Me.CheckAddCreditBuy.Name = "CheckAddCreditBuy"
-        Me.CheckAddCreditBuy.Properties.Caption = "บันทึกเพิ่มหนี้(ซื้อ)"
-        Me.CheckAddCreditBuy.Size = New System.Drawing.Size(135, 24)
-        Me.CheckAddCreditBuy.TabIndex = 309
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckAddCreditBuy, "Checked")
-        '
-        'CheckAsset
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckAsset, "CheckedChanged")
-        Me.CheckAsset.Location = New System.Drawing.Point(6, 74)
-        Me.CheckAsset.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckAsset, True)
-        Me.CheckAsset.Name = "CheckAsset"
-        Me.CheckAsset.Properties.Caption = "บันทึกค่าใช้จ่ายอื่นๆ"
-        Me.CheckAsset.Size = New System.Drawing.Size(135, 24)
-        Me.CheckAsset.TabIndex = 308
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckAsset, "Checked")
-        '
         'CheckInvoiceBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceBuy, "CheckedChanged")
-        Me.CheckInvoiceBuy.Location = New System.Drawing.Point(299, 52)
+        Me.CheckInvoiceBuy.Location = New System.Drawing.Point(18, 52)
         Me.CheckInvoiceBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceBuy, True)
         Me.CheckInvoiceBuy.Name = "CheckInvoiceBuy"
@@ -304,7 +191,7 @@ Partial Class frmOrderHis
         'CheckReduceCredit
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReduceCredit, "CheckedChanged")
-        Me.CheckReduceCredit.Location = New System.Drawing.Point(299, 28)
+        Me.CheckReduceCredit.Location = New System.Drawing.Point(18, 28)
         Me.CheckReduceCredit.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReduceCredit, True)
         Me.CheckReduceCredit.Name = "CheckReduceCredit"
@@ -313,58 +200,10 @@ Partial Class frmOrderHis
         Me.CheckReduceCredit.TabIndex = 306
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReduceCredit, "Checked")
         '
-        'CheckAddCredit
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckAddCredit, "CheckedChanged")
-        Me.CheckAddCredit.Location = New System.Drawing.Point(156, 28)
-        Me.CheckAddCredit.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckAddCredit, True)
-        Me.CheckAddCredit.Name = "CheckAddCredit"
-        Me.CheckAddCredit.Properties.Caption = "บันทึกเพิ่มหนี้(ขาย)"
-        Me.CheckAddCredit.Size = New System.Drawing.Size(135, 24)
-        Me.CheckAddCredit.TabIndex = 305
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckAddCredit, "Checked")
-        '
-        'CheckReserve
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReserve, "CheckedChanged")
-        Me.CheckReserve.Location = New System.Drawing.Point(6, 28)
-        Me.CheckReserve.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReserve, True)
-        Me.CheckReserve.Name = "CheckReserve"
-        Me.CheckReserve.Properties.Caption = "ใบสั่งจอง"
-        Me.CheckReserve.Size = New System.Drawing.Size(114, 24)
-        Me.CheckReserve.TabIndex = 304
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReserve, "Checked")
-        '
-        'CheckClaim
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckClaim, "CheckedChanged")
-        Me.CheckClaim.Location = New System.Drawing.Point(576, 6)
-        Me.CheckClaim.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckClaim, True)
-        Me.CheckClaim.Name = "CheckClaim"
-        Me.CheckClaim.Properties.Caption = "รับแจ้งเคลม(ขาย)"
-        Me.CheckClaim.Size = New System.Drawing.Size(119, 24)
-        Me.CheckClaim.TabIndex = 303
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckClaim, "Checked")
-        '
-        'CheckPurchaseOrder
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckPurchaseOrder, "CheckedChanged")
-        Me.CheckPurchaseOrder.Location = New System.Drawing.Point(6, 52)
-        Me.CheckPurchaseOrder.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckPurchaseOrder, True)
-        Me.CheckPurchaseOrder.Name = "CheckPurchaseOrder"
-        Me.CheckPurchaseOrder.Properties.Caption = "ใบสั่งซื้อ"
-        Me.CheckPurchaseOrder.Size = New System.Drawing.Size(119, 24)
-        Me.CheckPurchaseOrder.TabIndex = 302
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckPurchaseOrder, "Checked")
-        '
         'CheckShiping
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShiping, "CheckedChanged")
-        Me.CheckShiping.Location = New System.Drawing.Point(450, 6)
+        Me.CheckShiping.Location = New System.Drawing.Point(169, 6)
         Me.CheckShiping.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShiping, True)
         Me.CheckShiping.Name = "CheckShiping"
@@ -373,22 +212,10 @@ Partial Class frmOrderHis
         Me.CheckShiping.TabIndex = 301
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShiping, "Checked")
         '
-        'CheckStockIn
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckStockIn, "CheckedChanged")
-        Me.CheckStockIn.Location = New System.Drawing.Point(156, 52)
-        Me.CheckStockIn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckStockIn, True)
-        Me.CheckStockIn.Name = "CheckStockIn"
-        Me.CheckStockIn.Properties.Caption = "นำสินค้าเข้าระบบ"
-        Me.CheckStockIn.Size = New System.Drawing.Size(153, 24)
-        Me.CheckStockIn.TabIndex = 300
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckStockIn, "Checked")
-        '
         'CheckInvoice
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoice, "CheckedChanged")
-        Me.CheckInvoice.Location = New System.Drawing.Point(299, 6)
+        Me.CheckInvoice.Location = New System.Drawing.Point(18, 6)
         Me.CheckInvoice.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoice, True)
         Me.CheckInvoice.Name = "CheckInvoice"
@@ -396,30 +223,6 @@ Partial Class frmOrderHis
         Me.CheckInvoice.Size = New System.Drawing.Size(125, 24)
         Me.CheckInvoice.TabIndex = 299
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoice, "Checked")
-        '
-        'CheckQuotation
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckQuotation, "CheckedChanged")
-        Me.CheckQuotation.Location = New System.Drawing.Point(156, 6)
-        Me.CheckQuotation.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckQuotation, True)
-        Me.CheckQuotation.Name = "CheckQuotation"
-        Me.CheckQuotation.Properties.Caption = "ใบเสนอราคา"
-        Me.CheckQuotation.Size = New System.Drawing.Size(111, 24)
-        Me.CheckQuotation.TabIndex = 298
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckQuotation, "Checked")
-        '
-        'CheckOrders
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckOrders, "CheckedChanged")
-        Me.CheckOrders.Location = New System.Drawing.Point(6, 6)
-        Me.CheckOrders.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckOrders, True)
-        Me.CheckOrders.Name = "CheckOrders"
-        Me.CheckOrders.Properties.Caption = "ใบสั่งขาย"
-        Me.CheckOrders.Size = New System.Drawing.Size(87, 24)
-        Me.CheckOrders.TabIndex = 297
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckOrders, "Checked")
         '
         'Label5
         '
@@ -755,16 +558,16 @@ Partial Class frmOrderHis
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
-        'frmOrderHis
+        'frmOrderHis2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1099, 578)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.DatePanel)
-        Me.IconOptions.Icon = CType(resources.GetObject("frmOrderHis.IconOptions.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmOrderHis2.IconOptions.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.Name = "frmOrderHis"
+        Me.Name = "frmOrderHis2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ประวัติการซื้อ-ขายสินค้า"
         Me.Controls.SetChildIndex(Me.DatePanel, 0)
@@ -775,26 +578,13 @@ Partial Class frmOrderHis
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
-        CType(Me.chkUpdateStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckExpose.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckReceiptCut.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckShipingBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckBorrow.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckClaimOut.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckReduceCreditBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckAddCreditBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckAsset.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckInvoiceBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckReduceCredit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckAddCredit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckReserve.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckClaim.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckPurchaseOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckShiping.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckStockIn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckQuotation.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckOrders.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -844,25 +634,12 @@ Partial Class frmOrderHis
     Private WithEvents Label4 As System.Windows.Forms.Label
     Private WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents CheckQuotation As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckOrders As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckReceiptCut As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckShipingBuy As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckBorrow As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckClaimOut As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckReduceCreditBuy As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckAddCreditBuy As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckAsset As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckInvoiceBuy As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckReduceCredit As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckAddCredit As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckReserve As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckClaim As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckPurchaseOrder As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckShiping As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckStockIn As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckInvoice As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents CheckExpose As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckAll As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents chkUpdateStock As DevExpress.XtraEditors.CheckEdit
 End Class

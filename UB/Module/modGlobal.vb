@@ -111,6 +111,7 @@ Module modGlobal
         ClaimReturn = 102
         Quotation2 = 103
         Notifi = 104
+        OrderHis2 = 105
     End Enum
 
     Public Enum DataMode

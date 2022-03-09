@@ -19,7 +19,7 @@
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>\\DESKTOP-70GULPP\Deploy\</PublishUrl>
+    <PublishUrl>\\DESKTOP-RK6HA2M\Deploy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>21</ApplicationRevision>
-    <ApplicationVersion>1.0.1.21</ApplicationVersion>
+    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationVersion>1.0.1.26</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -147,11 +147,18 @@
     </Reference>
     <Reference Include="DevExpress.XtraWizard.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -348,6 +355,12 @@
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
+    <Compile Include="CRM\frmOrderHis2.Designer.vb">
+      <DependentUpon>frmOrderHis2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmOrderHis2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="Master\frmProvince.Designer.vb">
@@ -1175,6 +1188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmOrderHis2.resx">
+      <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\frmProvince.resx">
       <DependentUpon>frmProvince.vb</DependentUpon>

@@ -181,6 +181,7 @@ Public Class ucCheque
                 Else
                     rec1.ChequeOwnerTH = lclsCus.CompanyName
                 End If
+                rec1.BankAccountID = lclsCus.BankAccountID1
 
                 lfrm.clsChequeDAO = rec1
                 lfrm.IDs = 0

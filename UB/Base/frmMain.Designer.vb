@@ -31,7 +31,7 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim GalleryItemGroup1 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
+        Dim GalleryItemGroup2 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
         Me.ribbonMain = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.appMenu = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
         Me.ImageMenu = New DevExpress.Utils.ImageCollection(Me.components)
@@ -143,6 +143,7 @@ Partial Class frmMain
         Me.ClaimResultBar = New DevExpress.XtraBars.BarButtonItem()
         Me.ClaimReturnBar = New DevExpress.XtraBars.BarButtonItem()
         Me.Quotation2Bar = New DevExpress.XtraBars.BarButtonItem()
+        Me.NotifyBar = New DevExpress.XtraBars.BarButtonItem()
         Me.imageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.homeRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.fileRibbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -179,6 +180,7 @@ Partial Class frmMain
         Me.ApproveRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup16 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup17 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup27 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.AdminRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup15 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -204,8 +206,7 @@ Partial Class frmMain
         Me.ExitBar = New DevExpress.XtraNavBar.NavBarItem()
         Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
-        Me.RibbonPageGroup27 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.NotifyBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ReceiptHisBar = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.ribbonMain, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.appMenu, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageMenu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -221,19 +222,22 @@ Partial Class frmMain
         '
         Me.ribbonMain.ApplicationButtonDropDownControl = Me.appMenu
         Me.ribbonMain.ApplicationButtonText = Nothing
+        Me.ribbonMain.EmptyAreaImageOptions.ImagePadding = New System.Windows.Forms.Padding(35, 37, 35, 37)
         Me.ribbonMain.ExpandCollapseItem.Id = 0
         Me.ribbonMain.Images = Me.ImageMenu
-        Me.ribbonMain.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonMain.ExpandCollapseItem, Me.rgbiSkins, Me.LeadBar, Me.PrefixBar, Me.LeadTypeBar, Me.SourceBar, Me.PrivilegeBar, Me.DepartmentBar, Me.PositionBar, Me.IndustryTypeBar, Me.BusinessTypeBar, Me.TerritoryBar, Me.EmployeeBar, Me.UserBar, Me.lblCompany, Me.lblUser, Me.lblVersion, Me.lblEmp, Me.ActivityBar, Me.UnitBar, Me.ProductGroupBar, Me.ProductDimensionBar, Me.ProductCategoryBar, Me.ProductBrandBar, Me.ProductTypeBar, Me.EmpGroupBar, Me.LocationBar, Me.ProductBar, Me.BarButtonItem1, Me.BarButtonItem2, Me.ContactRoleBar, Me.CreditRuleBar, Me.CurrencyBar, Me.ContactBar, Me.AccountsBar, Me.BarButtonItem4, Me.BarButtonItem5, Me.RunningBar, Me.VerifyCusBar, Me.OpportunityBar, Me.OpportunityTypeBar, Me.OpportunityStageBar, Me.VatTypeBar, Me.OrderBar, Me.QuotationBar, Me.CriterionPriceBar, Me.InformPriceBar, Me.CompanyTypeBar, Me.StockInBar, Me.ShipingMethodyBar, Me.ShipingByBar, Me.InvoiceBar, Me.ShipingBar, Me.BillMethodBar, Me.BillBar, Me.CheckStockBar, Me.AgencyBar, Me.OrderInBar, Me.CompanyBar, Me.ApproveUserBar, Me.ApproveTXBar, Me.CreditGroupBar, Me.AddCreditBar, Me.ReserveBar, Me.ReceiptBar, Me.ReduceCreditBar, Me.BarButtonGroup1, Me.AssetBar, Me.InformPriceBuyBar, Me.ShipingRuleBar, Me.AddCreditBuyBar, Me.ReduceCreditBuyBar, Me.InvoiceBuyBar, Me.ReportTaxSellBar, Me.TaxTypeBar, Me.CustomerZoneBar, Me.CustomerGroupBar, Me.ClaimBar, Me.ClaimOutBar, Me.UpdateStockBar, Me.ReceiptBuyBar, Me.BankAccounBar, Me.OrderHisBar, Me.BorrowBar, Me.ShipingBuyBar, Me.RecordChequeBar, Me.ReceiptCutBar, Me.ReportSellAnalyzeBar, Me.UpdateSNBar, Me.ReportTaxAtSellBar, Me.ReportSNBar, Me.ExposeBar, Me.OrderSNHisBar, Me.MakePOBar, Me.CancelPOBar, Me.QuotationRemarkBar, Me.InformPriceProBar, Me.CampaignBar, Me.ReportDealBar, Me.UpdateSNStatusBar, Me.BankBar, Me.OrderSellHisBar, Me.ProvinceBar, Me.lblDatabase, Me.ReportDebtAnalystBar, Me.StockReportBar, Me.ClaimResultBar, Me.ClaimReturnBar, Me.Quotation2Bar, Me.NotifyBar})
+        Me.ribbonMain.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonMain.ExpandCollapseItem, Me.rgbiSkins, Me.LeadBar, Me.PrefixBar, Me.LeadTypeBar, Me.SourceBar, Me.PrivilegeBar, Me.DepartmentBar, Me.PositionBar, Me.IndustryTypeBar, Me.BusinessTypeBar, Me.TerritoryBar, Me.EmployeeBar, Me.UserBar, Me.lblCompany, Me.lblUser, Me.lblVersion, Me.lblEmp, Me.ActivityBar, Me.UnitBar, Me.ProductGroupBar, Me.ProductDimensionBar, Me.ProductCategoryBar, Me.ProductBrandBar, Me.ProductTypeBar, Me.EmpGroupBar, Me.LocationBar, Me.ProductBar, Me.BarButtonItem1, Me.BarButtonItem2, Me.ContactRoleBar, Me.CreditRuleBar, Me.CurrencyBar, Me.ContactBar, Me.AccountsBar, Me.BarButtonItem4, Me.BarButtonItem5, Me.RunningBar, Me.VerifyCusBar, Me.OpportunityBar, Me.OpportunityTypeBar, Me.OpportunityStageBar, Me.VatTypeBar, Me.OrderBar, Me.QuotationBar, Me.CriterionPriceBar, Me.InformPriceBar, Me.CompanyTypeBar, Me.StockInBar, Me.ShipingMethodyBar, Me.ShipingByBar, Me.InvoiceBar, Me.ShipingBar, Me.BillMethodBar, Me.BillBar, Me.CheckStockBar, Me.AgencyBar, Me.OrderInBar, Me.CompanyBar, Me.ApproveUserBar, Me.ApproveTXBar, Me.CreditGroupBar, Me.AddCreditBar, Me.ReserveBar, Me.ReceiptBar, Me.ReduceCreditBar, Me.BarButtonGroup1, Me.AssetBar, Me.InformPriceBuyBar, Me.ShipingRuleBar, Me.AddCreditBuyBar, Me.ReduceCreditBuyBar, Me.InvoiceBuyBar, Me.ReportTaxSellBar, Me.TaxTypeBar, Me.CustomerZoneBar, Me.CustomerGroupBar, Me.ClaimBar, Me.ClaimOutBar, Me.UpdateStockBar, Me.ReceiptBuyBar, Me.BankAccounBar, Me.OrderHisBar, Me.BorrowBar, Me.ShipingBuyBar, Me.RecordChequeBar, Me.ReceiptCutBar, Me.ReportSellAnalyzeBar, Me.UpdateSNBar, Me.ReportTaxAtSellBar, Me.ReportSNBar, Me.ExposeBar, Me.OrderSNHisBar, Me.MakePOBar, Me.CancelPOBar, Me.QuotationRemarkBar, Me.InformPriceProBar, Me.CampaignBar, Me.ReportDealBar, Me.UpdateSNStatusBar, Me.BankBar, Me.OrderSellHisBar, Me.ProvinceBar, Me.lblDatabase, Me.ReportDebtAnalystBar, Me.StockReportBar, Me.ClaimResultBar, Me.ClaimReturnBar, Me.Quotation2Bar, Me.NotifyBar, Me.ribbonMain.SearchEditItem, Me.ReceiptHisBar})
         Me.ribbonMain.LargeImages = Me.imageCollection1
         Me.ribbonMain.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonMain.MaxItemId = 216
+        Me.ribbonMain.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ribbonMain.MaxItemId = 217
         Me.ribbonMain.Name = "ribbonMain"
+        Me.ribbonMain.OptionsMenuMinWidth = 385
         Me.ribbonMain.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.homeRibbonPage, Me.ProductRibbonPage, Me.BuyRibbonPage, Me.SaleRibbonPage, Me.ChequeRibbonPage, Me.ApproveRibbonPage, Me.AdminRibbonPage, Me.ReportRibbonPage, Me.helpRibbonPage, Me.ViewRibbonPage})
         Me.ribbonMain.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMarqueeProgressBar1, Me.RepositoryItemTextEdit1})
         Me.ribbonMain.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
         Me.ribbonMain.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.ribbonMain.ShowToolbarCustomizeItem = False
-        Me.ribbonMain.Size = New System.Drawing.Size(1376, 144)
+        Me.ribbonMain.Size = New System.Drawing.Size(1605, 193)
         Me.ribbonMain.StatusBar = Me.ribbonStatusBar
         Me.ribbonMain.Toolbar.ShowCustomizeItem = False
         '
@@ -259,8 +263,8 @@ Partial Class frmMain
         '
         '
         '
-        GalleryItemGroup1.Caption = "Group1"
-        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup1})
+        GalleryItemGroup2.Caption = "Group1"
+        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup2})
         Me.rgbiSkins.Id = 62
         Me.rgbiSkins.Name = "rgbiSkins"
         '
@@ -268,8 +272,8 @@ Partial Class frmMain
         '
         Me.LeadBar.Caption = "Leads"
         Me.LeadBar.Id = 64
+        Me.LeadBar.ImageOptions.LargeImageIndex = 1
         Me.LeadBar.ItemAppearance.Normal.Options.UseImage = True
-        Me.LeadBar.LargeImageIndex = 1
         Me.LeadBar.Name = "LeadBar"
         '
         'PrefixBar
@@ -345,7 +349,6 @@ Partial Class frmMain
         Me.lblCompany.Caption = "บริษัท"
         Me.lblCompany.Id = 80
         Me.lblCompany.Name = "lblCompany"
-        Me.lblCompany.TextAlignment = System.Drawing.StringAlignment.Near
         Me.lblCompany.Width = 150
         '
         'lblUser
@@ -354,7 +357,6 @@ Partial Class frmMain
         Me.lblUser.Caption = "ผู้ใช้งาน"
         Me.lblUser.Id = 81
         Me.lblUser.Name = "lblUser"
-        Me.lblUser.TextAlignment = System.Drawing.StringAlignment.Near
         Me.lblUser.Width = 120
         '
         'lblVersion
@@ -362,7 +364,6 @@ Partial Class frmMain
         Me.lblVersion.Caption = "Version"
         Me.lblVersion.Id = 84
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.TextAlignment = System.Drawing.StringAlignment.Near
         Me.lblVersion.Width = 100
         '
         'lblEmp
@@ -371,7 +372,6 @@ Partial Class frmMain
         Me.lblEmp.Caption = "พนักงาน"
         Me.lblEmp.Id = 85
         Me.lblEmp.Name = "lblEmp"
-        Me.lblEmp.TextAlignment = System.Drawing.StringAlignment.Near
         Me.lblEmp.Width = 150
         '
         'ActivityBar
@@ -468,14 +468,14 @@ Partial Class frmMain
         '
         Me.ContactBar.Caption = "Contacts"
         Me.ContactBar.Id = 102
-        Me.ContactBar.LargeImageIndex = 2
+        Me.ContactBar.ImageOptions.LargeImageIndex = 2
         Me.ContactBar.Name = "ContactBar"
         '
         'AccountsBar
         '
         Me.AccountsBar.Caption = "Accounts"
         Me.AccountsBar.Id = 103
-        Me.AccountsBar.LargeImageIndex = 3
+        Me.AccountsBar.ImageOptions.LargeImageIndex = 3
         Me.AccountsBar.Name = "AccountsBar"
         '
         'BarButtonItem4
@@ -609,7 +609,7 @@ Partial Class frmMain
         '
         Me.AgencyBar.Caption = "เจ้าหนี้"
         Me.AgencyBar.Id = 135
-        Me.AgencyBar.LargeImageIndex = 4
+        Me.AgencyBar.ImageOptions.LargeImageIndex = 4
         Me.AgencyBar.Name = "AgencyBar"
         '
         'OrderInBar
@@ -893,7 +893,6 @@ Partial Class frmMain
         Me.lblDatabase.Caption = "Database"
         Me.lblDatabase.Id = 187
         Me.lblDatabase.Name = "lblDatabase"
-        Me.lblDatabase.TextAlignment = System.Drawing.StringAlignment.Near
         '
         'ReportDebtAnalystBar
         '
@@ -924,6 +923,12 @@ Partial Class frmMain
         Me.Quotation2Bar.Caption = "ใบเสนอราคาคู่เทียบ"
         Me.Quotation2Bar.Id = 203
         Me.Quotation2Bar.Name = "Quotation2Bar"
+        '
+        'NotifyBar
+        '
+        Me.NotifyBar.Caption = "ข้อความแจ้งเตือน"
+        Me.NotifyBar.Id = 215
+        Me.NotifyBar.Name = "NotifyBar"
         '
         'imageCollection1
         '
@@ -1108,6 +1113,7 @@ Partial Class frmMain
         Me.SaleRibbonPageGroup.ItemLinks.Add(Me.InformPriceBar)
         Me.SaleRibbonPageGroup.ItemLinks.Add(Me.InformPriceProBar)
         Me.SaleRibbonPageGroup.ItemLinks.Add(Me.OrderSellHisBar)
+        Me.SaleRibbonPageGroup.ItemLinks.Add(Me.ReceiptHisBar)
         Me.SaleRibbonPageGroup.Name = "SaleRibbonPageGroup"
         '
         'RibbonPageGroup11
@@ -1171,6 +1177,11 @@ Partial Class frmMain
         '
         Me.RibbonPageGroup17.ItemLinks.Add(Me.ApproveTXBar)
         Me.RibbonPageGroup17.Name = "RibbonPageGroup17"
+        '
+        'RibbonPageGroup27
+        '
+        Me.RibbonPageGroup27.ItemLinks.Add(Me.NotifyBar)
+        Me.RibbonPageGroup27.Name = "RibbonPageGroup27"
         '
         'AdminRibbonPage
         '
@@ -1241,9 +1252,9 @@ Partial Class frmMain
         '
         'skinsRibbonPageGroup
         '
+        Me.skinsRibbonPageGroup.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.[False]
         Me.skinsRibbonPageGroup.ItemLinks.Add(Me.rgbiSkins)
         Me.skinsRibbonPageGroup.Name = "skinsRibbonPageGroup"
-        Me.skinsRibbonPageGroup.ShowCaptionButton = False
         Me.skinsRibbonPageGroup.Text = "Skins"
         '
         'RepositoryItemProgressBar1
@@ -1270,10 +1281,11 @@ Partial Class frmMain
         Me.ribbonStatusBar.ItemLinks.Add(Me.lblUser, True)
         Me.ribbonStatusBar.ItemLinks.Add(Me.lblEmp, True)
         Me.ribbonStatusBar.ItemLinks.Add(Me.lblDatabase, True)
-        Me.ribbonStatusBar.Location = New System.Drawing.Point(0, 639)
+        Me.ribbonStatusBar.Location = New System.Drawing.Point(0, 795)
+        Me.ribbonStatusBar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ribbonStatusBar.Name = "ribbonStatusBar"
         Me.ribbonStatusBar.Ribbon = Me.ribbonMain
-        Me.ribbonStatusBar.Size = New System.Drawing.Size(1376, 31)
+        Me.ribbonStatusBar.Size = New System.Drawing.Size(1605, 30)
         '
         'XtraTabbedMdiManager1
         '
@@ -1295,10 +1307,11 @@ Partial Class frmMain
         Me.MenuNavBarControl.Groups.AddRange(New DevExpress.XtraNavBar.NavBarGroup() {Me.MenuNavBarGroup})
         Me.MenuNavBarControl.Items.AddRange(New DevExpress.XtraNavBar.NavBarItem() {Me.AdminBar, Me.CrmBar, Me.AccountBar, Me.ExitBar})
         Me.MenuNavBarControl.LargeImages = Me.ImageMenu
-        Me.MenuNavBarControl.Location = New System.Drawing.Point(0, 144)
+        Me.MenuNavBarControl.Location = New System.Drawing.Point(0, 193)
+        Me.MenuNavBarControl.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MenuNavBarControl.Name = "MenuNavBarControl"
-        Me.MenuNavBarControl.OptionsNavPane.ExpandedWidth = 60
-        Me.MenuNavBarControl.Size = New System.Drawing.Size(60, 495)
+        Me.MenuNavBarControl.OptionsNavPane.ExpandedWidth = 70
+        Me.MenuNavBarControl.Size = New System.Drawing.Size(70, 602)
         Me.MenuNavBarControl.SmallImages = Me.ImageMenu
         Me.MenuNavBarControl.TabIndex = 9
         Me.MenuNavBarControl.Text = "NavBarControl1"
@@ -1315,60 +1328,54 @@ Partial Class frmMain
         '
         Me.AdminBar.Caption = "0000"
         Me.AdminBar.Enabled = False
-        Me.AdminBar.LargeImageIndex = 2
+        Me.AdminBar.ImageOptions.LargeImageIndex = 2
+        Me.AdminBar.ImageOptions.SmallImageIndex = 2
         Me.AdminBar.Name = "AdminBar"
-        Me.AdminBar.SmallImageIndex = 2
         '
         'CrmBar
         '
         Me.CrmBar.Caption = ""
+        Me.CrmBar.ImageOptions.SmallImageIndex = 3
         Me.CrmBar.Name = "CrmBar"
-        Me.CrmBar.SmallImageIndex = 3
         '
         'AccountBar
         '
         Me.AccountBar.Caption = ""
         Me.AccountBar.Enabled = False
+        Me.AccountBar.ImageOptions.SmallImageIndex = 4
         Me.AccountBar.Name = "AccountBar"
-        Me.AccountBar.SmallImageIndex = 4
         '
         'ExitBar
         '
         Me.ExitBar.Caption = ""
+        Me.ExitBar.ImageOptions.SmallImageIndex = 0
         Me.ExitBar.Name = "ExitBar"
-        Me.ExitBar.SmallImageIndex = 0
         '
         'BarButtonItem3
         '
-        Me.BarButtonItem3.Id = -1
         Me.BarButtonItem3.Name = "BarButtonItem3"
         '
         'BarSubItem1
         '
-        Me.BarSubItem1.Id = -1
         Me.BarSubItem1.Name = "BarSubItem1"
         '
-        'RibbonPageGroup27
+        'ReceiptHisBar
         '
-        Me.RibbonPageGroup27.ItemLinks.Add(Me.NotifyBar)
-        Me.RibbonPageGroup27.Name = "RibbonPageGroup27"
-        '
-        'NotifyBar
-        '
-        Me.NotifyBar.Caption = "ข้อความแจ้งเตือน"
-        Me.NotifyBar.Id = 215
-        Me.NotifyBar.Name = "NotifyBar"
+        Me.ReceiptHisBar.Caption = "ประวัติการรับชำระ"
+        Me.ReceiptHisBar.Id = 216
+        Me.ReceiptHisBar.Name = "ReceiptHisBar"
         '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1376, 670)
+        Me.ClientSize = New System.Drawing.Size(1605, 825)
         Me.Controls.Add(Me.MenuNavBarControl)
         Me.Controls.Add(Me.ribbonStatusBar)
         Me.Controls.Add(Me.ribbonMain)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmMain.IconOptions.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmMain"
         Me.Ribbon = Me.ribbonMain
         Me.StatusBar = Me.ribbonStatusBar
@@ -1384,6 +1391,7 @@ Partial Class frmMain
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MenuNavBarControl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Private WithEvents ribbonMain As DevExpress.XtraBars.Ribbon.RibbonControl
@@ -1560,5 +1568,5 @@ Partial Class frmMain
     Friend WithEvents Quotation2Bar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents NotifyBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup27 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
-
+    Friend WithEvents ReceiptHisBar As DevExpress.XtraBars.BarButtonItem
 End Class

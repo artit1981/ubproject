@@ -29,15 +29,18 @@ Partial Class frmFindData
         'GridControl
         '
         Me.GridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GridControl.Location = New System.Drawing.Point(0, 0)
         Me.GridControl.MainView = Me.GridView
+        Me.GridControl.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GridControl.Name = "GridControl"
-        Me.GridControl.Size = New System.Drawing.Size(723, 396)
+        Me.GridControl.Size = New System.Drawing.Size(843, 487)
         Me.GridControl.TabIndex = 18
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
         'GridView
         '
+        Me.GridView.DetailHeight = 431
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -46,18 +49,20 @@ Partial Class frmFindData
         Me.GridView.OptionsBehavior.ReadOnly = True
         Me.GridView.OptionsFind.AlwaysVisible = True
         Me.GridView.OptionsFind.FindMode = DevExpress.XtraEditors.FindMode.Always
+        Me.GridView.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel
         Me.GridView.OptionsLayout.Columns.AddNewColumns = False
         Me.GridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.GridView.OptionsView.ShowViewCaption = True
         '
         'frmFindData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(723, 396)
+        Me.ClientSize = New System.Drawing.Size(843, 487)
         Me.Controls.Add(Me.GridControl)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmFindData.IconOptions.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmFindData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ค้นหา : Ctrl + F"

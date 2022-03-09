@@ -92,7 +92,7 @@ Partial Class frmNotify
         Me.NotifyLevel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.NotifyLevel.ColumnEdit = Me.ImageComboBox1
         Me.NotifyLevel.FieldName = "NotifyLevel"
-        Me.NotifyLevel.ImageAlignment = StringAlignment.Center
+        Me.NotifyLevel.ImageOptions.Alignment = StringAlignment.Center
         Me.NotifyLevel.MaxWidth = 50
         Me.NotifyLevel.Name = "NotifyLevel"
         Me.NotifyLevel.OptionsColumn.ReadOnly = True
@@ -182,7 +182,7 @@ Partial Class frmNotify
         '
         Me.ClientSize = New System.Drawing.Size(754, 369)
         Me.Controls.Add(Me.GridControl)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmNotify.IconOptions.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "frmNotify"
         Me.Text = "แจ้งเตือน"

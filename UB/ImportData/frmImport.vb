@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Data.OleDb
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
-
+Imports ExcelDataReader
 
 
 Public Class frmImport
@@ -76,7 +76,6 @@ Public Class frmImport
     End Function
 
     Private Function OpenFile(ByVal fileName As String) As Object
-        'Dim fullFileName = String.Format("{0}\{1}", Directory.GetCurrentDirectory(), fileName)
         Dim fullFileName = fileName
         Dim data As DataTable = Nothing
         Dim dt As New DataTable
@@ -85,43 +84,42 @@ Public Class frmImport
                 System.Windows.Forms.MessageBox.Show("File not found")
                 Return Nothing
             End If
-            Dim connectionString As String = String.Format("Provider=Microsoft.ACE.Oledb.12.0; data source={0}; Extended Properties=Excel 12.0;", fullFileName)
-            Dim con As OleDbConnection = New OleDbConnection(connectionString)
-            con.Open()
-            dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
-            Dim adapter = New OleDbDataAdapter("select * from [" & dt.Rows(0).Item(2) & "]", connectionString)
-            Dim ds = New DataSet()
-            Dim tableName As String = "excelData"
-            adapter.Fill(ds, tableName)
-            data = ds.Tables(tableName)
+            Using stream As FileStream = File.Open(fileName, FileMode.Open, FileAccess.Read)
+                Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
+                Dim lds As DataSet = excelReader.AsDataSet
+                data = lds.Tables(0)
+                'Remove header
+                data.Rows.RemoveAt(0)
 
+            End Using
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
         Return data
 
+
+        'Dim fullFileName = fileName
+        'Dim data As DataTable = Nothing
+        'Dim dt As New DataTable
         'Try
-        '    Dim MyDs As DataSet
-        '    Dim ConnectionString As String = ("Provider=Microsoft.Jet.OLEDB.4.0;" & _
-        '                                  "Data Source=" & fileName & ";" & _
-        '                                  "Extended Properties=""Excel 8.0;HDR=YES;IMEX=1""")
-        '    Dim Connection As New OleDbConnection(ConnectionString)
-        '    Connection.Open()
-        '    Dim MyCommand As New OleDbCommand
-        '    Dim MyAdapter As New OleDbDataAdapter(MyCommand)
-        '    MyDs = New DataSet
-        '    For Each ws As String In GetWorksheets(Connection)
-        '        MyCommand.Connection = Connection
-        '        MyCommand.CommandText = ("select * from [" + ws + "]")
-        '        Dim Table As DataTable = New DataTable(ws)
-        '        MyAdapter.Fill(Table)
-        '        MyDs.Tables.Add(Table)
-        '    Next
-        '    Connection.Close()
+        '    If (Not File.Exists(fullFileName)) Then
+        '        System.Windows.Forms.MessageBox.Show("File not found")
+        '        Return Nothing
+        '    End If
+        '    Dim connectionString As String = String.Format("Provider=Microsoft.ACE.Oledb.12.0; data source={0}; Extended Properties=Excel 12.0;", fullFileName)
+        '    Dim con As OleDbConnection = New OleDbConnection(connectionString)
+        '    con.Open()
+        '    dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
+        '    Dim adapter = New OleDbDataAdapter("select * from [" & dt.Rows(0).Item(2) & "]", connectionString)
+        '    Dim ds = New DataSet()
+        '    Dim tableName As String = "excelData"
+        '    adapter.Fill(ds, tableName)
+        '    data = ds.Tables(tableName)
 
         'Catch ex As Exception
         '    ShowErrorMsg(False, ex.Message)
         'End Try
+
 
 
 
@@ -336,7 +334,7 @@ Public Class frmImport
                     .Columns("ProductID").Visible = False
                 End If
             ElseIf mMasterType = MasterType.StockIn Then
-                 If Not IsNothing(.Columns("ProductID")) Then
+                If Not IsNothing(.Columns("ProductID")) Then
                     .Columns("ProductID").Visible = False
                     .Columns("UnitMainID").Visible = False
                     .Columns("LocationDTLID").Visible = False

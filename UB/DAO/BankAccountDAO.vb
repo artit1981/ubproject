@@ -93,7 +93,7 @@ Public Class BankAccountDAO
                 SQL = SQL & "  AND BankAccount.IsInActive = 0"
             End If
             If pCusID > 0 Then
-                SQL = SQL & "  AND BankAccount.CustomerID=" & pCusID
+                'SQL = SQL & "  AND BankAccount.CustomerID=" & pCusID
             End If
             If pBankID > 0 Then
                 SQL = SQL & "  AND BankAccount.BankID=" & pBankID
