@@ -761,7 +761,7 @@ Module modFunction
                     End If
                 End If
             ElseIf (TableID = MasterType.ReduceCredit) Or (TableID = MasterType.AddCredit) _
-                    Or (TableID = MasterType.ReduceCreditBuy) Or (TableID = MasterType.AddCreditBuy) Then
+                    Or (TableID = MasterType.ReduceCreditBuy) Or (TableID = MasterType.AddCreditBuy) Or (TableID = MasterType.ClaimReturn) Then
                 If StockType = "N" Or StockType = "" Then
                     Return 0
                 Else

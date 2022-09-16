@@ -46,7 +46,7 @@ Public Class frmPreReport
         Try
             Select Case mOrderType
                 Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
-                    , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose
+                    , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
                     Call PrintOrder(mOrderID, pClaimLoop)
                 Case MasterType.Bill, MasterType.Receipt, MasterType.ReceiptBuy
                     Call PrintBill(mOrderID)
@@ -93,8 +93,16 @@ Public Class frmPreReport
                         Else
                             lclsReport.Header2 = "สำเนา(ลูกค้า)"
                         End If
+                    Case MasterType.ClaimReturn
+                        report = New rptClaimReturn
+                        lclsReport.Header1 = "ใบเคลมคืนสินค้า"
+                        If pClaimLoop = 1 Then
+                            lclsReport.Header2 = "ต้นฉบับ"
+                        Else
+                            lclsReport.Header2 = "สำเนา(ลูกค้า)"
+                        End If
                     Case MasterType.Expose
-                        report = New rptClaimMain
+                        report = New rptExpose
                         lclsReport.Header1 = "รายการเบิก"
                     Case MasterType.Shiping, MasterType.ShipingBuy
                         report = New rptShipingReport
@@ -191,6 +199,7 @@ Public Class frmPreReport
 
                 lclsReport.RefOrderCode = ""
                 lclsReport.RefOrderCode = lclsOrder.GetToRefOrderCode(lclsOrder.ID, Nothing)
+
                 If mOrderType = MasterType.ReduceCredit Or mOrderType = MasterType.ReduceCreditBuy Then
                     Dim lclsRefOreder As New OrderSDAO
                     Dim lTotal As Decimal = 0
@@ -202,6 +211,11 @@ Public Class frmPreReport
                         Next
                     End If
                     lclsReport.DiscountAmount = lTotal
+                ElseIf mOrderType = MasterType.ClaimReturn Then
+                    For Each pRefID In lclsOrder.RefToOrderID
+                        lclsReport.RefOrderCode = lclsOrder.GetToRefOrderCode(pRefID, Nothing)
+                        Exit For
+                    Next
                 Else
                     lclsReport.DiscountAmount = lclsOrder.DiscountAmount
                 End If
@@ -311,6 +325,12 @@ Public Class frmPreReport
                 lclsTmpProList.Discount = ConvertNullToZero(pRow.Item("Discount"))
                 lclsTmpProList.Total = ConvertNullToZero(pRow.Item("ToTal"))
                 lclsTmpProList.Remark = ConvertNullToString(pRow.Item("Remark"))
+                If mOrderType = MasterType.ClaimReturn Then
+                    lclsTmpProList.ClaimRemark = ConvertNullToString(pRow.Item("ClaimResult"))
+                Else
+                    lclsTmpProList.ClaimRemark = ConvertNullToString(pRow.Item("ClaimRemark"))
+                End If
+
                 Select Case mOrderType
                     Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
                         lSnCodeList = ""
@@ -929,11 +949,14 @@ Public Class frmPreReport
         ElseIf mOrderID = 1004 Or mOrderID = 1005 Then
             mReportCode = "Tax"
         Else
-            If lclsOrder.InitailData(mOrderID) Then
-                mReportCode = lclsOrder.Code
-                mReportCode = Replace(mReportCode, "\", "-")
-                mReportCode = Replace(mReportCode, "/", "-")
+            If mOrderID > 0 Then
+                If lclsOrder.InitailData(mOrderID) Then
+                    mReportCode = lclsOrder.Code
+                    mReportCode = Replace(mReportCode, "\", "-")
+                    mReportCode = Replace(mReportCode, "/", "-")
+                End If
             End If
+
         End If
 
         txtBrows.Enabled = False
@@ -1084,7 +1107,7 @@ Public Class frmPreReport
             ElseIf mOrderType = 1005 Then
                 ExecuteReport()
                 PrintReport()
-            ElseIf mOrderType = MasterType.Claim Then
+            ElseIf mOrderType = MasterType.Claim Or mOrderType = MasterType.ClaimReturn Then
                 If chkPrintCopy.Checked = True Then
                     PrintReportOrder(1)
                     PrintReport()

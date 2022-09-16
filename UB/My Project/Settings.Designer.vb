@@ -54,16 +54,6 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=artit-dell;Initial Catalog=BS;User ID=admin;Password=admin")>  _
-        Public ReadOnly Property BSConnectionString() As String
-            Get
-                Return CType(Me("BSConnectionString"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("BS")>  _
@@ -165,6 +155,58 @@ Namespace My
         Public ReadOnly Property BSConnectionString2() As String
             Get
                 Return CType(Me("BSConnectionString2"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=SQLNCLI11;Data Source=DESKTOP-RK6HA2M;Integrated Security=SSPI;Initial C"& _ 
+            "atalog=BS")>  _
+        Public ReadOnly Property ConnectionString() As String
+            Get
+                Return CType(Me("ConnectionString"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-RK6HA2M;Initial Catalog=BS;Integrated Security=True")>  _
+        Public ReadOnly Property BSConnectionString3() As String
+            Get
+                Return CType(Me("BSConnectionString3"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=SQLNCLI11;Data Source=DESKTOP-RK6HA2M;Persist Security Info=True;Passwor"& _ 
+            "d=admin;User ID=admin;Initial Catalog=BS")>  _
+        Public ReadOnly Property ConnectionString1() As String
+            Get
+                Return CType(Me("ConnectionString1"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-RK6HA2M;Initial Catalog=BS;User ID=admin;Password=admin")>  _
+        Public ReadOnly Property BSConnectionString() As String
+            Get
+                Return CType(Me("BSConnectionString"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Dsn=BS;uid=admin;pwd=admin")>  _
+        Public ReadOnly Property ConnectionString2() As String
+            Get
+                Return CType(Me("ConnectionString2"),String)
             End Get
         End Property
     End Class

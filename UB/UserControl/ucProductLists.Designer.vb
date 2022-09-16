@@ -21,8 +21,16 @@ Partial Class ucProductLists
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucProductLists))
+        Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
         Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject4 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim EditorButtonImageOptions2 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject5 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject6 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject7 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject8 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
@@ -53,6 +61,9 @@ Partial Class ucProductLists
         Me.DiscountCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.Total = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TotalEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.ClaimRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ClaimResult = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -90,6 +101,7 @@ Partial Class ucProductLists
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -117,14 +129,14 @@ Partial Class ucProductLists
         Me.gridControl.Location = New System.Drawing.Point(0, 26)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
-        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage})
+        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage, Me.RepositoryItemCheckEdit1})
         Me.gridControl.Size = New System.Drawing.Size(1075, 387)
         Me.gridControl.TabIndex = 9
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.RefOrderCode, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.RefOrderCode, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.ClaimRemark, Me.ClaimResult, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -234,7 +246,7 @@ Partial Class ucProductLists
         'ProductNameBtn
         '
         Me.ProductNameBtn.AutoHeight = False
-        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, True)})
+        Me.ProductNameBtn.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, EditorButtonImageOptions1, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, SerializableAppearanceObject2, SerializableAppearanceObject3, SerializableAppearanceObject4, "ชื่อสินค้าเพิ่มเติม", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.ProductNameBtn.Name = "ProductNameBtn"
         '
         'LocationDTLID
@@ -255,7 +267,7 @@ Partial Class ucProductLists
         '
         Me.LocationDTLIDLookUpEdit1.AutoHeight = False
         Me.LocationDTLIDLookUpEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "คลังสินค้า", 25, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", 40, "ตำแหน่ง"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "Name6", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default])})
+        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "คลังสินค้า", 25, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", "ตำแหน่ง", 40, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "Name6", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.LocationDTLIDLookUpEdit1.DisplayMember = "LocationDTL"
         Me.LocationDTLIDLookUpEdit1.Name = "LocationDTLIDLookUpEdit1"
         Me.LocationDTLIDLookUpEdit1.NullText = ""
@@ -446,6 +458,35 @@ Partial Class ucProductLists
         Me.TotalEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.TotalEdit.Name = "TotalEdit"
         '
+        'ClaimRemark
+        '
+        Me.ClaimRemark.Caption = "อาการ/สาเหตุ"
+        Me.ClaimRemark.FieldName = "ClaimRemark"
+        Me.ClaimRemark.MaxWidth = 200
+        Me.ClaimRemark.MinWidth = 100
+        Me.ClaimRemark.Name = "ClaimRemark"
+        Me.ClaimRemark.Visible = True
+        Me.ClaimRemark.VisibleIndex = 15
+        Me.ClaimRemark.Width = 100
+        '
+        'ClaimResult
+        '
+        Me.ClaimResult.Caption = "ผลการเคลม"
+        Me.ClaimResult.FieldName = "ClaimResult"
+        Me.ClaimResult.MaxWidth = 100
+        Me.ClaimResult.MinWidth = 50
+        Me.ClaimResult.Name = "ClaimResult"
+        Me.ClaimResult.Visible = True
+        Me.ClaimResult.VisibleIndex = 16
+        Me.ClaimResult.Width = 60
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = 1
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = 0
+        '
         'Remark
         '
         Me.Remark.AppearanceHeader.Options.UseTextOptions = True
@@ -568,7 +609,8 @@ Partial Class ucProductLists
         Me.btnImage.Appearance.Image = CType(resources.GetObject("btnImage.Appearance.Image"), System.Drawing.Image)
         Me.btnImage.Appearance.Options.UseImage = True
         Me.btnImage.AutoHeight = False
-        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("btnImage.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        EditorButtonImageOptions2.Image = CType(resources.GetObject("EditorButtonImageOptions2.Image"), System.Drawing.Image)
+        Me.btnImage.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, True, True, False, EditorButtonImageOptions2, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject5, SerializableAppearanceObject6, SerializableAppearanceObject7, SerializableAppearanceObject8, "", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.btnImage.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple
         Me.btnImage.Name = "btnImage"
         Me.btnImage.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
@@ -622,8 +664,8 @@ Partial Class ucProductLists
         Me.btnFind.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnFind.Appearance.Options.UseFont = True
         Me.btnFind.Appearance.Options.UseImage = True
-        Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
-        Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnFind.Location = New System.Drawing.Point(3, 1)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(102, 24)
@@ -656,6 +698,7 @@ Partial Class ucProductLists
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -713,5 +756,7 @@ Partial Class ucProductLists
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PriceMain As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RefOrderCode As DevExpress.XtraGrid.Columns.GridColumn
-
+    Friend WithEvents ClaimRemark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ClaimResult As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

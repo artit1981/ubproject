@@ -76,11 +76,12 @@ Public Class frmOrderHis2
             lstrOrderType = InitialOrderType()
 
 
-            SQL = " select Orders.OrderID,Cheque.ChequeDate as OrderDate,Cheque.ChequePay as OrderTotal,BankAccountCode,Orders.OrderCode   "
+            SQL = " select Orders.OrderID,Cheque.ChequeDateReceive  ,Cheque.ChequePay as OrderTotal,BankAccountCode,Orders.OrderDate ,Orders.OrderCode   "
             SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             SQL = SQL & " ,Orders.GrandTotal as ReceiptTotal "
             SQL = SQL & " ,isnull(Orders.DiscountAmount,0)+ isnull(TaxOrder.TaxAmount,0) DiscountAmount"
-            SQL = SQL & "  ,Receipt.OrderCode AS ReceiptCode,Receipt.OrderDate as ReceiptDate,BankDocType,ChequeNo,Orders.IsDelete"
+            SQL = SQL & " ,Receipt.OrderCode AS ReceiptCode,Receipt.OrderDate as ReceiptDate,BankDocType,ChequeNo,Orders.IsDelete"
+            SQL = SQL & " ,case when Receipt.ModifiedTime is not null then Receipt.ModifiedTime else Receipt.CreateTime end CreateTime"
             SQL = SQL & " from Orders"
             'SQL = SQL & " left outer join Menu on Orders.TableID=Menu.MenuID"
             SQL = SQL & " inner join Customer ON Orders.CustomerID=Customer.CustomerID  "
@@ -194,41 +195,51 @@ Public Class frmOrderHis2
             .Columns("OrderCode").Width = 100
             '.Columns("MenuDisplay").Caption = "รายการ"
             '.Columns("MenuDisplay").Width = 90
-            .Columns("OrderDate").Caption = "วันที่ชำระ"
-            .Columns("OrderDate").Width = 50
+            .Columns("ChequeDateReceive").Caption = "วันที่ชำระ"
+            .Columns("ChequeDateReceive").Width = 100
+
+            .Columns("OrderDate").Caption = "วันที่ใบกำกับ-ใบส่งของ"
+            .Columns("OrderDate").Width = 100
 
             .Columns("BankAccountCode").Width = 150
             .Columns("BankAccountCode").Caption = "เลขบัญชี"
 
             .Columns("Customer").Width = 150
+            .Columns("Customer").MaxWidth = 0
+            .Columns("Customer").MinWidth = 150
             .Columns("Customer").Caption = "ลูกค้า/เจ้าหนี้"
 
             .Columns("OrderTotal").Caption = "ยอดชำระ"
-            .Columns("OrderTotal").Width = 50
+            .Columns("OrderTotal").Width = 100
             .Columns("OrderTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("OrderTotal").DisplayFormat.FormatString = "n2"
 
 
             .Columns("ReceiptTotal").Caption = "ยอดรวมบิล"
-            .Columns("ReceiptTotal").Width = 50
+            .Columns("ReceiptTotal").Width = 100
             .Columns("ReceiptTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("ReceiptTotal").DisplayFormat.FormatString = "n2"
 
             .Columns("DiscountAmount").Caption = "ยอดหัก"
-            .Columns("DiscountAmount").Width = 50
+            .Columns("DiscountAmount").Width = 100
             .Columns("DiscountAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("DiscountAmount").DisplayFormat.FormatString = "n2"
 
             .Columns("ReceiptCode").Width = 100
             .Columns("ReceiptCode").Caption = "เลขที่ใบเสร็จ"
 
+            .Columns("CreateTime").Width = 150
+            .Columns("CreateTime").Caption = "วันสร้าง/แก้ไข"
+            .Columns("CreateTime").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+            .Columns("CreateTime").DisplayFormat.FormatString = "dd/MM/yyyy HH:mm:ss"
+
             .Columns("ReceiptDate").Caption = "วันที่ใบเสร็จ"
-            .Columns("ReceiptDate").Width = 50
+            .Columns("ReceiptDate").Width = 100
 
             .Columns("BankDocType").Width = 100
             .Columns("BankDocType").Caption = "ชำระโดย"
 
-            .Columns("ChequeNo").Width = 60
+            .Columns("ChequeNo").Width = 100
             .Columns("ChequeNo").Caption = "เลขที่เช็ค-เอกสาร"
         End With
     End Sub

@@ -19,6 +19,8 @@ Public Enum ProColumn
     IsSelect = 256
     KeepMin = 512
     RefOrderCode = 1024
+    ClaimRemark = 2048
+    ClaimResult = 4096
 End Enum
 
 Public Class ucProductLists
@@ -133,6 +135,8 @@ Public Class ucProductLists
                 rec.ProductListUnitRef1 = pPro.ProductListUnitRef1
                 rec.ProductListUnitRef2 = pPro.ProductListUnitRef2
                 rec.ProductListUnitRef3 = pPro.ProductListUnitRef3
+                rec.ClaimRemark = pPro.ClaimRemark
+                rec.ClaimResult = pPro.ClaimResult
                 rec.UnitID = pPro.UnitID
                 rec.UnitName = pPro.UnitName
                 rec.Remark = pPro.Remark
@@ -254,6 +258,8 @@ Public Class ucProductLists
 
                         lDataDAO.ProductListUnitRef2 = pProSub.ProductListUnitRef2
                         lDataDAO.ProductListUnitRef3 = pProSub.ProductListUnitRef3
+                        lDataDAO.ClaimRemark = pProSub.ClaimRemark
+                        lDataDAO.ClaimResult = pProSub.ClaimResult
                         If pLocationDtlID > 0 Then
                             lDataDAO.LocationDTLID = pLocationDtlID
                         ElseIf pIsSetLocation = True Then
@@ -518,6 +524,8 @@ Public Class ucProductLists
                     rec.UnitID = ConvertNullToZero(dr("UnitID"))
                     rec.UnitName = ConvertNullToString(dr("UnitName"))
                     rec.Remark = ConvertNullToString(dr("Remark"))
+                    rec.ClaimRemark = ConvertNullToString(dr("ClaimRemark"))
+                    rec.ClaimResult = ConvertNullToString(dr("ClaimResult"))
                     rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                     rec.Units = ConvertNullToZero(dr("Units"))
 
@@ -577,6 +585,8 @@ Public Class ucProductLists
             .Columns("LocationDTLID").Visible = (mColData And ProColumn.LocationDTLID) = ProColumn.LocationDTLID
             .Columns("UnitName").Visible = (mColData And ProColumn.UnitName) = ProColumn.UnitName
             .Columns("Remark").Visible = (mColData And ProColumn.Remark) = ProColumn.Remark
+            .Columns("ClaimRemark").Visible = (mColData And ProColumn.ClaimRemark) = ProColumn.ClaimRemark
+            .Columns("ClaimResult").Visible = (mColData And ProColumn.ClaimResult) = ProColumn.ClaimResult
             .Columns("KeepMin").Visible = (mColData And ProColumn.KeepMin) = ProColumn.KeepMin
             .Columns("RefOrderCode").Visible = (mColData And ProColumn.RefOrderCode) = ProColumn.RefOrderCode
             If (mColData And ProColumn.Units) = ProColumn.Units Then

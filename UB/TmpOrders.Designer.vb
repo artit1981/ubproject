@@ -908,9 +908,9 @@ Partial Public Class TmpOrders
         Public Overloads Function AddTmpOrdersRow( _
                     ByVal UserID As Long,  _
                     ByVal OrderCode As String,  _
-                    ByVal OrderDate As Date,  _
-                    ByVal ExpireDate As Date,  _
-                    ByVal ShipingDate As Date,  _
+                    ByVal OrderDate As String,  _
+                    ByVal ExpireDate As String,  _
+                    ByVal ShipingDate As String,  _
                     ByVal CustomerCode As String,  _
                     ByVal CustomerName As String,  _
                     ByVal AddressBill As String,  _
@@ -1035,11 +1035,11 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnUserID)
             Me.columnOrderCode = New Global.System.Data.DataColumn("OrderCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnOrderCode)
-            Me.columnOrderDate = New Global.System.Data.DataColumn("OrderDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnOrderDate = New Global.System.Data.DataColumn("OrderDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnOrderDate)
-            Me.columnExpireDate = New Global.System.Data.DataColumn("ExpireDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnExpireDate = New Global.System.Data.DataColumn("ExpireDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnExpireDate)
-            Me.columnShipingDate = New Global.System.Data.DataColumn("ShipingDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnShipingDate = New Global.System.Data.DataColumn("ShipingDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnShipingDate)
             Me.columnCustomerCode = New Global.System.Data.DataColumn("CustomerCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCustomerCode)
@@ -1129,6 +1129,9 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnEmployeePosition)
             Me.columnUserID.AllowDBNull = false
             Me.columnOrderCode.MaxLength = 100
+            Me.columnOrderDate.MaxLength = 10
+            Me.columnExpireDate.MaxLength = 10
+            Me.columnShipingDate.MaxLength = 10
             Me.columnCustomerCode.MaxLength = 50
             Me.columnCustomerName.MaxLength = 100
             Me.columnAddressBill.MaxLength = 500
@@ -1155,8 +1158,8 @@ Partial Public Class TmpOrders
             Me.columnGrandTotalSTR.MaxLength = 100
             Me.columnRemark.MaxLength = 500
             Me.columnHeader1.MaxLength = 200
-            Me.columnHeader2.MaxLength = 100
-            Me.columnHeader3.MaxLength = 100
+            Me.columnHeader2.MaxLength = 200
+            Me.columnHeader3.MaxLength = 200
             Me.columnContactPerson.MaxLength = 100
             Me.columnInstitute.MaxLength = 100
             Me.columnRefOrderCode.MaxLength = 500
@@ -1338,6 +1341,8 @@ Partial Public Class TmpOrders
         
         Private columnIsMainCompany As Global.System.Data.DataColumn
         
+        Private columnClaimRemark As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -1518,6 +1523,14 @@ Partial Public Class TmpOrders
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClaimRemarkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClaimRemark
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1568,13 +1581,14 @@ Partial Public Class TmpOrders
                     ByVal Discount As Decimal,  _
                     ByVal Total As Decimal,  _
                     ByVal Remark As String,  _
-                    ByVal OrderDate As Date,  _
-                    ByVal ExpiryDate As Date,  _
+                    ByVal OrderDate As String,  _
+                    ByVal ExpiryDate As String,  _
                     ByVal Customer As String,  _
                     ByVal CustomerTaxID As String,  _
-                    ByVal IsMainCompany As Integer) As TmpProductListRow
+                    ByVal IsMainCompany As Integer,  _
+                    ByVal ClaimRemark As String) As TmpProductListRow
             Dim rowTmpProductListRow As TmpProductListRow = CType(Me.NewRow,TmpProductListRow)
-            Dim columnValuesArray() As Object = New Object() {UserID, SEQ, ProductID, ProductCode, ProductName, ProductNameExt, UnitCode, Units, Cost, Price, Discount, Total, Remark, OrderDate, ExpiryDate, Customer, CustomerTaxID, IsMainCompany}
+            Dim columnValuesArray() As Object = New Object() {UserID, SEQ, ProductID, ProductCode, ProductName, ProductNameExt, UnitCode, Units, Cost, Price, Discount, Total, Remark, OrderDate, ExpiryDate, Customer, CustomerTaxID, IsMainCompany, ClaimRemark}
             rowTmpProductListRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTmpProductListRow)
             Return rowTmpProductListRow
@@ -1615,6 +1629,7 @@ Partial Public Class TmpOrders
             Me.columnCustomer = MyBase.Columns("Customer")
             Me.columnCustomerTaxID = MyBase.Columns("CustomerTaxID")
             Me.columnIsMainCompany = MyBase.Columns("IsMainCompany")
+            Me.columnClaimRemark = MyBase.Columns("ClaimRemark")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1646,9 +1661,9 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnTotal)
             Me.columnRemark = New Global.System.Data.DataColumn("Remark", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRemark)
-            Me.columnOrderDate = New Global.System.Data.DataColumn("OrderDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnOrderDate = New Global.System.Data.DataColumn("OrderDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnOrderDate)
-            Me.columnExpiryDate = New Global.System.Data.DataColumn("ExpiryDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnExpiryDate = New Global.System.Data.DataColumn("ExpiryDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnExpiryDate)
             Me.columnCustomer = New Global.System.Data.DataColumn("Customer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCustomer)
@@ -1656,14 +1671,19 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnCustomerTaxID)
             Me.columnIsMainCompany = New Global.System.Data.DataColumn("IsMainCompany", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIsMainCompany)
+            Me.columnClaimRemark = New Global.System.Data.DataColumn("ClaimRemark", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClaimRemark)
             Me.columnUserID.AllowDBNull = false
             Me.columnProductCode.MaxLength = 50
-            Me.columnProductName.MaxLength = 2147483647
+            Me.columnProductName.MaxLength = 1073741823
             Me.columnProductNameExt.MaxLength = 500
             Me.columnUnitCode.MaxLength = 50
             Me.columnRemark.MaxLength = 500
+            Me.columnOrderDate.MaxLength = 10
+            Me.columnExpiryDate.MaxLength = 10
             Me.columnCustomer.MaxLength = 100
             Me.columnCustomerTaxID.MaxLength = 100
+            Me.columnClaimRemark.MaxLength = 100
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2376,18 +2396,18 @@ Partial Public Class TmpOrders
         Public Overloads Function AddTmpTaxRow( _
                     ByVal UserID As Long,  _
                     ByVal TaxType_Desc As String,  _
-                    ByVal TaxDate1 As Date,  _
-                    ByVal TaxDate2 As Date,  _
-                    ByVal TaxDate3 As Date,  _
-                    ByVal TaxDate4 As Date,  _
-                    ByVal TaxDate5 As Date,  _
-                    ByVal TaxDate6 As Date,  _
-                    ByVal TaxDate7 As Date,  _
-                    ByVal TaxDate8 As Date,  _
-                    ByVal TaxDate9 As Date,  _
-                    ByVal TaxDate10 As Date,  _
-                    ByVal TaxDate11 As Date,  _
-                    ByVal TaxDate12 As Date,  _
+                    ByVal TaxDate1 As String,  _
+                    ByVal TaxDate2 As String,  _
+                    ByVal TaxDate3 As String,  _
+                    ByVal TaxDate4 As String,  _
+                    ByVal TaxDate5 As String,  _
+                    ByVal TaxDate6 As String,  _
+                    ByVal TaxDate7 As String,  _
+                    ByVal TaxDate8 As String,  _
+                    ByVal TaxDate9 As String,  _
+                    ByVal TaxDate10 As String,  _
+                    ByVal TaxDate11 As String,  _
+                    ByVal TaxDate12 As String,  _
                     ByVal TaxTotal1 As Decimal,  _
                     ByVal TaxTotal2 As Decimal,  _
                     ByVal TaxTotal3 As Decimal,  _
@@ -2507,29 +2527,29 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnUserID)
             Me.columnTaxType_Desc = New Global.System.Data.DataColumn("TaxType_Desc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxType_Desc)
-            Me.columnTaxDate1 = New Global.System.Data.DataColumn("TaxDate1", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate1 = New Global.System.Data.DataColumn("TaxDate1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate1)
-            Me.columnTaxDate2 = New Global.System.Data.DataColumn("TaxDate2", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate2 = New Global.System.Data.DataColumn("TaxDate2", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate2)
-            Me.columnTaxDate3 = New Global.System.Data.DataColumn("TaxDate3", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate3 = New Global.System.Data.DataColumn("TaxDate3", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate3)
-            Me.columnTaxDate4 = New Global.System.Data.DataColumn("TaxDate4", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate4 = New Global.System.Data.DataColumn("TaxDate4", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate4)
-            Me.columnTaxDate5 = New Global.System.Data.DataColumn("TaxDate5", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate5 = New Global.System.Data.DataColumn("TaxDate5", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate5)
-            Me.columnTaxDate6 = New Global.System.Data.DataColumn("TaxDate6", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate6 = New Global.System.Data.DataColumn("TaxDate6", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate6)
-            Me.columnTaxDate7 = New Global.System.Data.DataColumn("TaxDate7", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate7 = New Global.System.Data.DataColumn("TaxDate7", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate7)
-            Me.columnTaxDate8 = New Global.System.Data.DataColumn("TaxDate8", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate8 = New Global.System.Data.DataColumn("TaxDate8", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate8)
-            Me.columnTaxDate9 = New Global.System.Data.DataColumn("TaxDate9", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate9 = New Global.System.Data.DataColumn("TaxDate9", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate9)
-            Me.columnTaxDate10 = New Global.System.Data.DataColumn("TaxDate10", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate10 = New Global.System.Data.DataColumn("TaxDate10", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate10)
-            Me.columnTaxDate11 = New Global.System.Data.DataColumn("TaxDate11", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate11 = New Global.System.Data.DataColumn("TaxDate11", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate11)
-            Me.columnTaxDate12 = New Global.System.Data.DataColumn("TaxDate12", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTaxDate12 = New Global.System.Data.DataColumn("TaxDate12", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxDate12)
             Me.columnTaxTotal1 = New Global.System.Data.DataColumn("TaxTotal1", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxTotal1)
@@ -2604,6 +2624,18 @@ Partial Public Class TmpOrders
             Me.columnTaxImage = New Global.System.Data.DataColumn("TaxImage", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTaxImage)
             Me.columnTaxType_Desc.MaxLength = 100
+            Me.columnTaxDate1.MaxLength = 10
+            Me.columnTaxDate2.MaxLength = 10
+            Me.columnTaxDate3.MaxLength = 10
+            Me.columnTaxDate4.MaxLength = 10
+            Me.columnTaxDate5.MaxLength = 10
+            Me.columnTaxDate6.MaxLength = 10
+            Me.columnTaxDate7.MaxLength = 10
+            Me.columnTaxDate8.MaxLength = 10
+            Me.columnTaxDate9.MaxLength = 10
+            Me.columnTaxDate10.MaxLength = 10
+            Me.columnTaxDate11.MaxLength = 10
+            Me.columnTaxDate12.MaxLength = 10
             Me.columnTaxText1.MaxLength = 100
             Me.columnTaxText2.MaxLength = 100
             Me.columnTaxText3.MaxLength = 100
@@ -2786,10 +2818,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property OrderDate() As Date
+        Public Property OrderDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpOrders.OrderDateColumn),Date)
+                    Return CType(Me(Me.tableTmpOrders.OrderDateColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'OrderDate' in table 'TmpOrders' is DBNull.", e)
                 End Try
@@ -2801,10 +2833,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property ExpireDate() As Date
+        Public Property ExpireDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpOrders.ExpireDateColumn),Date)
+                    Return CType(Me(Me.tableTmpOrders.ExpireDateColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ExpireDate' in table 'TmpOrders' is DBNull.", e)
                 End Try
@@ -2816,10 +2848,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property ShipingDate() As Date
+        Public Property ShipingDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpOrders.ShipingDateColumn),Date)
+                    Return CType(Me(Me.tableTmpOrders.ShipingDateColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ShipingDate' in table 'TmpOrders' is DBNull.", e)
                 End Try
@@ -4247,10 +4279,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property OrderDate() As Date
+        Public Property OrderDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpProductList.OrderDateColumn),Date)
+                    Return CType(Me(Me.tableTmpProductList.OrderDateColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'OrderDate' in table 'TmpProductList' is DBNull.", e)
                 End Try
@@ -4262,10 +4294,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property ExpiryDate() As Date
+        Public Property ExpiryDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpProductList.ExpiryDateColumn),Date)
+                    Return CType(Me(Me.tableTmpProductList.ExpiryDateColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ExpiryDate' in table 'TmpProductList' is DBNull.", e)
                 End Try
@@ -4317,6 +4349,21 @@ Partial Public Class TmpOrders
             End Get
             Set
                 Me(Me.tableTmpProductList.IsMainCompanyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClaimRemark() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTmpProductList.ClaimRemarkColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClaimRemark' in table 'TmpProductList' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTmpProductList.ClaimRemarkColumn) = value
             End Set
         End Property
         
@@ -4523,6 +4570,18 @@ Partial Public Class TmpOrders
         Public Sub SetIsMainCompanyNull()
             Me(Me.tableTmpProductList.IsMainCompanyColumn) = Global.System.Convert.DBNull
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClaimRemarkNull() As Boolean
+            Return Me.IsNull(Me.tableTmpProductList.ClaimRemarkColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClaimRemarkNull()
+            Me(Me.tableTmpProductList.ClaimRemarkColumn) = Global.System.Convert.DBNull
+        End Sub
     End Class
     
     '''<summary>
@@ -4572,10 +4631,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate1() As Date
+        Public Property TaxDate1() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate1Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate1Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate1' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4587,10 +4646,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate2() As Date
+        Public Property TaxDate2() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate2Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate2Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate2' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4602,10 +4661,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate3() As Date
+        Public Property TaxDate3() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate3Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate3Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate3' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4617,10 +4676,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate4() As Date
+        Public Property TaxDate4() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate4Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate4Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate4' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4632,10 +4691,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate5() As Date
+        Public Property TaxDate5() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate5Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate5Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate5' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4647,10 +4706,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate6() As Date
+        Public Property TaxDate6() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate6Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate6Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate6' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4662,10 +4721,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate7() As Date
+        Public Property TaxDate7() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate7Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate7Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate7' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4677,10 +4736,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate8() As Date
+        Public Property TaxDate8() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate8Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate8Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate8' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4692,10 +4751,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate9() As Date
+        Public Property TaxDate9() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate9Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate9Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate9' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4707,10 +4766,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate10() As Date
+        Public Property TaxDate10() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate10Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate10Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate10' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4722,10 +4781,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate11() As Date
+        Public Property TaxDate11() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate11Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate11Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate11' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -4737,10 +4796,10 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TaxDate12() As Date
+        Public Property TaxDate12() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTmpTax.TaxDate12Column),Date)
+                    Return CType(Me(Me.tableTmpTax.TaxDate12Column),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TaxDate12' in table 'TmpTax' is DBNull.", e)
                 End Try
@@ -6014,13 +6073,13 @@ Namespace TmpOrdersTableAdapters
     Partial Public Class TmpOrdersTableAdapter
         Inherits Global.System.ComponentModel.Component
         
-        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        Private WithEvents _adapter As Global.System.Data.Odbc.OdbcDataAdapter
         
-        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        Private _connection As Global.System.Data.Odbc.OdbcConnection
         
-        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        Private _transaction As Global.System.Data.Odbc.OdbcTransaction
         
-        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        Private _commandCollection() As Global.System.Data.Odbc.OdbcCommand
         
         Private _clearBeforeFill As Boolean
         
@@ -6033,7 +6092,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.Odbc.OdbcDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
                     Me.InitAdapter
@@ -6044,7 +6103,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+        Friend Property Connection() As Global.System.Data.Odbc.OdbcConnection
             Get
                 If (Me._connection Is Nothing) Then
                     Me.InitConnection
@@ -6065,7 +6124,7 @@ Namespace TmpOrdersTableAdapters
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i),Global.System.Data.Odbc.OdbcCommand).Connection = value
                     End If
                     i = (i + 1)
                 Loop
@@ -6074,7 +6133,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+        Friend Property Transaction() As Global.System.Data.Odbc.OdbcTransaction
             Get
                 Return Me._transaction
             End Get
@@ -6102,7 +6161,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.Odbc.OdbcCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
                     Me.InitCommandCollection
@@ -6125,7 +6184,7 @@ Namespace TmpOrdersTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitAdapter()
-            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Me._adapter = New Global.System.Data.Odbc.OdbcDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "TmpOrders"
@@ -6178,89 +6237,82 @@ Namespace TmpOrdersTableAdapters
             tableMapping.ColumnMappings.Add("CompanyBankAccount", "CompanyBankAccount")
             tableMapping.ColumnMappings.Add("EmployeePosition", "EmployeePosition")
             Me._adapter.TableMappings.Add(tableMapping)
-            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TmpOrders] ([UserID], [OrderCode], [OrderDate], [ExpireDate], "& _ 
-                "[ShipingDate], [CustomerCode], [CustomerName], [AddressBill], [AddressShip], [Cu"& _ 
-                "stomerPhone], [CustomerFAX], [CustomerType], [CustomerTax], [Company], [CompanyO"& _ 
-                "wner], [CompanyAddress], [CompanyPhone], [CompanyFax], [CompanyTax], [CompanyBra"& _ 
-                "nch], [CompanyMail], [CompanyWeb], [PO], [CreditRule], [SendBy], [ShipingMethod]"& _ 
-                ", [ShipingRule], [Employee], [Total], [DiscountPercen], [DiscountAmount], [VatPe"& _ 
-                "rcen], [VatAmount], [GrandTotal], [GrandTotalSTR], [Remark], [Header1], [Header2"& _ 
-                "], [Header3], [Logo], [QuotationDays], [ContactPerson], [IsMainCompany], [Instit"& _ 
-                "ute], [RefOrderCode], [EmployeePhone], [CompanyBankAccount], [EmployeePosition])"& _ 
-                " VALUES (@UserID, @OrderCode, @OrderDate, @ExpireDate, @ShipingDate, @CustomerCo"& _ 
-                "de, @CustomerName, @AddressBill, @AddressShip, @CustomerPhone, @CustomerFAX, @Cu"& _ 
-                "stomerType, @CustomerTax, @Company, @CompanyOwner, @CompanyAddress, @CompanyPhon"& _ 
-                "e, @CompanyFax, @CompanyTax, @CompanyBranch, @CompanyMail, @CompanyWeb, @PO, @Cr"& _ 
-                "editRule, @SendBy, @ShipingMethod, @ShipingRule, @Employee, @Total, @DiscountPer"& _ 
-                "cen, @DiscountAmount, @VatPercen, @VatAmount, @GrandTotal, @GrandTotalSTR, @Rema"& _ 
-                "rk, @Header1, @Header2, @Header3, @Logo, @QuotationDays, @ContactPerson, @IsMain"& _ 
-                "Company, @Institute, @RefOrderCode, @EmployeePhone, @CompanyBankAccount, @Employ"& _ 
-                "eePosition)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [BS].[dbo].[TmpOrders] ([UserID], [OrderCode], [OrderDate], [ExpireDa"& _ 
+                "te], [ShipingDate], [CustomerCode], [CustomerName], [AddressBill], [AddressShip]"& _ 
+                ", [CustomerPhone], [CustomerFAX], [CustomerType], [CustomerTax], [Company], [Com"& _ 
+                "panyOwner], [CompanyAddress], [CompanyPhone], [CompanyFax], [CompanyTax], [Compa"& _ 
+                "nyBranch], [CompanyMail], [CompanyWeb], [PO], [CreditRule], [SendBy], [ShipingMe"& _ 
+                "thod], [ShipingRule], [Employee], [Total], [DiscountPercen], [DiscountAmount], ["& _ 
+                "VatPercen], [VatAmount], [GrandTotal], [GrandTotalSTR], [Remark], [Header1], [He"& _ 
+                "ader2], [Header3], [Logo], [QuotationDays], [ContactPerson], [IsMainCompany], [I"& _ 
+                "nstitute], [RefOrderCode], [EmployeePhone], [CompanyBankAccount], [EmployeePosit"& _ 
+                "ion]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "& _ 
+                "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@UserID", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OrderCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "OrderCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OrderDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ExpireDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ExpireDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ShipingDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ShipingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AddressBill", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AddressBill", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AddressShip", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AddressShip", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerPhone", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerPhone", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerFAX", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerFAX", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerType", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerTax", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerTax", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Company", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Company", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyOwner", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyOwner", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyAddress", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyAddress", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyPhone", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyPhone", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyFax", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyFax", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyTax", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyTax", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyBranch", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyBranch", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyMail", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyMail", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyWeb", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyWeb", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PO", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PO", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CreditRule", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CreditRule", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SendBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SendBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ShipingMethod", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ShipingMethod", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ShipingRule", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ShipingRule", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Employee", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Employee", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiscountPercen", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "DiscountPercen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiscountAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "DiscountAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VatPercen", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "VatPercen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VatAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "VatAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GrandTotal", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "GrandTotal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GrandTotalSTR", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GrandTotalSTR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Remark", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Remark", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Header1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Header1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Header2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Header2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Header3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Header3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Logo", Global.System.Data.SqlDbType.Image, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Logo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@QuotationDays", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "QuotationDays", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ContactPerson", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ContactPerson", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsMainCompany", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsMainCompany", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Institute", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Institute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RefOrderCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RefOrderCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeePhone", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeePhone", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CompanyBankAccount", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CompanyBankAccount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeePosition", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeePosition", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("UserID", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("OrderCode", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderCode", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("OrderDate", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ExpireDate", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ExpireDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ShipingDate", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ShipingDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerCode", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerCode", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerName", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerName", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("AddressBill", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AddressBill", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("AddressShip", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AddressShip", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerPhone", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerPhone", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerFAX", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerFAX", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerType", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerTax", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerTax", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Company", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Company", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyOwner", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyOwner", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyAddress", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyAddress", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyPhone", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyPhone", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyFax", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyFax", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyTax", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyTax", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyBranch", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyBranch", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyMail", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyMail", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyWeb", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyWeb", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("PO", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PO", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CreditRule", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CreditRule", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("SendBy", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SendBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ShipingMethod", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ShipingMethod", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ShipingRule", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ShipingRule", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Employee", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Employee", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Total", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "Total", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("DiscountPercen", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "DiscountPercen", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("DiscountAmount", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "DiscountAmount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("VatPercen", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "VatPercen", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("VatAmount", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "VatAmount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("GrandTotal", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "GrandTotal", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("GrandTotalSTR", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GrandTotalSTR", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Remark", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Remark", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Header1", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Header1", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Header2", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Header2", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Header3", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Header3", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Logo", Global.System.Data.Odbc.OdbcType.Image, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Logo", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("QuotationDays", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "QuotationDays", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ContactPerson", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ContactPerson", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("IsMainCompany", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IsMainCompany", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Institute", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Institute", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("RefOrderCode", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "RefOrderCode", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("EmployeePhone", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmployeePhone", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CompanyBankAccount", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompanyBankAccount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("EmployeePosition", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmployeePosition", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitConnection()
-            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.BSConnectionString
+            Me._connection = New Global.System.Data.Odbc.OdbcConnection()
+            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.ConnectionString2
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
-            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT UserID, OrderCode, OrderDate, ExpireDate, ShipingDate, CustomerCode, Custo"& _ 
                 "merName, AddressBill, AddressShip, CustomerPhone, CustomerFAX, CustomerType, Cus"& _ 
@@ -6332,9 +6384,9 @@ Namespace TmpOrdersTableAdapters
         Public Overloads Overridable Function Insert( _
                     ByVal UserID As Long,  _
                     ByVal OrderCode As String,  _
-                    ByVal OrderDate As Global.System.Nullable(Of Date),  _
-                    ByVal ExpireDate As Global.System.Nullable(Of Date),  _
-                    ByVal ShipingDate As Global.System.Nullable(Of Date),  _
+                    ByVal OrderDate As String,  _
+                    ByVal ExpireDate As String,  _
+                    ByVal ShipingDate As String,  _
                     ByVal CustomerCode As String,  _
                     ByVal CustomerName As String,  _
                     ByVal AddressBill As String,  _
@@ -6384,20 +6436,20 @@ Namespace TmpOrdersTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(OrderCode,String)
             End If
-            If (OrderDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(OrderDate.Value,Date)
-            Else
+            If (OrderDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (ExpireDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(ExpireDate.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(OrderDate,String)
+            End If
+            If (ExpireDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            End If
-            If (ShipingDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(ShipingDate.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(ExpireDate,String)
+            End If
+            If (ShipingDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(ShipingDate,String)
             End If
             If (CustomerCode Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
@@ -6642,13 +6694,13 @@ Namespace TmpOrdersTableAdapters
     Partial Public Class TmpProductListTableAdapter
         Inherits Global.System.ComponentModel.Component
         
-        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        Private WithEvents _adapter As Global.System.Data.Odbc.OdbcDataAdapter
         
-        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        Private _connection As Global.System.Data.Odbc.OdbcConnection
         
-        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        Private _transaction As Global.System.Data.Odbc.OdbcTransaction
         
-        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        Private _commandCollection() As Global.System.Data.Odbc.OdbcCommand
         
         Private _clearBeforeFill As Boolean
         
@@ -6661,7 +6713,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.Odbc.OdbcDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
                     Me.InitAdapter
@@ -6672,7 +6724,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+        Friend Property Connection() As Global.System.Data.Odbc.OdbcConnection
             Get
                 If (Me._connection Is Nothing) Then
                     Me.InitConnection
@@ -6693,7 +6745,7 @@ Namespace TmpOrdersTableAdapters
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i),Global.System.Data.Odbc.OdbcCommand).Connection = value
                     End If
                     i = (i + 1)
                 Loop
@@ -6702,7 +6754,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+        Friend Property Transaction() As Global.System.Data.Odbc.OdbcTransaction
             Get
                 Return Me._transaction
             End Get
@@ -6730,7 +6782,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.Odbc.OdbcCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
                     Me.InitCommandCollection
@@ -6753,7 +6805,7 @@ Namespace TmpOrdersTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitAdapter()
-            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Me._adapter = New Global.System.Data.Odbc.OdbcDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "TmpProductList"
@@ -6775,52 +6827,53 @@ Namespace TmpOrdersTableAdapters
             tableMapping.ColumnMappings.Add("Customer", "Customer")
             tableMapping.ColumnMappings.Add("CustomerTaxID", "CustomerTaxID")
             tableMapping.ColumnMappings.Add("IsMainCompany", "IsMainCompany")
+            tableMapping.ColumnMappings.Add("ClaimRemark", "ClaimRemark")
             Me._adapter.TableMappings.Add(tableMapping)
-            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TmpProductList] ([UserID], [SEQ], [ProductID], [ProductCode], "& _ 
-                "[ProductName], [ProductNameExt], [UnitCode], [Units], [Cost], [Price], [Discount"& _ 
-                "], [Total], [Remark], [OrderDate], [ExpiryDate], [Customer], [CustomerTaxID], [I"& _ 
-                "sMainCompany]) VALUES (@UserID, @SEQ, @ProductID, @ProductCode, @ProductName, @P"& _ 
-                "roductNameExt, @UnitCode, @Units, @Cost, @Price, @Discount, @Total, @Remark, @Or"& _ 
-                "derDate, @ExpiryDate, @Customer, @CustomerTaxID, @IsMainCompany)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [BS].[dbo].[TmpProductList] ([UserID], [SEQ], [ProductID], [ProductCo"& _ 
+                "de], [ProductName], [ProductNameExt], [UnitCode], [Units], [Cost], [Price], [Dis"& _ 
+                "count], [Total], [Remark], [OrderDate], [ExpiryDate], [Customer], [CustomerTaxID"& _ 
+                "], [IsMainCompany], [ClaimRemark]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"& _ 
+                ", ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@UserID", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SEQ", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SEQ", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductID", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductNameExt", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductNameExt", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@UnitCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "UnitCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Units", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Units", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cost", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Cost", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Discount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Discount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Remark", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Remark", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OrderDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ExpiryDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ExpiryDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Customer", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Customer", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CustomerTaxID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CustomerTaxID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsMainCompany", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsMainCompany", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("UserID", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("SEQ", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SEQ", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ProductID", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ProductID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ProductCode", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ProductCode", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ProductName", Global.System.Data.Odbc.OdbcType.NText, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ProductName", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ProductNameExt", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ProductNameExt", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("UnitCode", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UnitCode", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Units", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Units", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Cost", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "Cost", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Price", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "Price", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Discount", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "Discount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Total", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "Total", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Remark", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Remark", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("OrderDate", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ExpiryDate", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ExpiryDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("Customer", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Customer", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("CustomerTaxID", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CustomerTaxID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("IsMainCompany", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IsMainCompany", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("ClaimRemark", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ClaimRemark", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitConnection()
-            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.BSConnectionString
+            Me._connection = New Global.System.Data.Odbc.OdbcConnection()
+            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.ConnectionString2
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
-            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT UserID, SEQ, ProductID, ProductCode, ProductName, ProductNameExt, UnitCode"& _ 
                 ", Units, Cost, Price, Discount, Total, Remark, OrderDate, ExpiryDate, Customer, "& _ 
-                "CustomerTaxID, IsMainCompany FROM dbo.TmpProductList"
+                "CustomerTaxID, IsMainCompany, ClaimRemark FROM dbo.TmpProductList"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -6894,11 +6947,12 @@ Namespace TmpOrdersTableAdapters
                     ByVal Discount As Global.System.Nullable(Of Decimal),  _
                     ByVal Total As Global.System.Nullable(Of Decimal),  _
                     ByVal Remark As String,  _
-                    ByVal OrderDate As Global.System.Nullable(Of Date),  _
-                    ByVal ExpiryDate As Global.System.Nullable(Of Date),  _
+                    ByVal OrderDate As String,  _
+                    ByVal ExpiryDate As String,  _
                     ByVal Customer As String,  _
                     ByVal CustomerTaxID As String,  _
-                    ByVal IsMainCompany As Global.System.Nullable(Of Integer)) As Integer
+                    ByVal IsMainCompany As Global.System.Nullable(Of Integer),  _
+                    ByVal ClaimRemark As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(UserID,Long)
             If (SEQ.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(SEQ.Value,Integer)
@@ -6960,15 +7014,15 @@ Namespace TmpOrdersTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(12).Value = CType(Remark,String)
             End If
-            If (OrderDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(OrderDate.Value,Date)
-            Else
+            If (OrderDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
-            End If
-            If (ExpiryDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ExpiryDate.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(OrderDate,String)
+            End If
+            If (ExpiryDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ExpiryDate,String)
             End If
             If (Customer Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
@@ -6984,6 +7038,11 @@ Namespace TmpOrdersTableAdapters
                 Me.Adapter.InsertCommand.Parameters(17).Value = CType(IsMainCompany.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            End If
+            If (ClaimRemark Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(ClaimRemark,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7013,13 +7072,13 @@ Namespace TmpOrdersTableAdapters
     Partial Public Class TmpTaxTableAdapter
         Inherits Global.System.ComponentModel.Component
         
-        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        Private WithEvents _adapter As Global.System.Data.Odbc.OdbcDataAdapter
         
-        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        Private _connection As Global.System.Data.Odbc.OdbcConnection
         
-        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        Private _transaction As Global.System.Data.Odbc.OdbcTransaction
         
-        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        Private _commandCollection() As Global.System.Data.Odbc.OdbcCommand
         
         Private _clearBeforeFill As Boolean
         
@@ -7032,7 +7091,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.Odbc.OdbcDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
                     Me.InitAdapter
@@ -7043,7 +7102,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+        Friend Property Connection() As Global.System.Data.Odbc.OdbcConnection
             Get
                 If (Me._connection Is Nothing) Then
                     Me.InitConnection
@@ -7064,7 +7123,7 @@ Namespace TmpOrdersTableAdapters
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i),Global.System.Data.Odbc.OdbcCommand).Connection = value
                     End If
                     i = (i + 1)
                 Loop
@@ -7073,7 +7132,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+        Friend Property Transaction() As Global.System.Data.Odbc.OdbcTransaction
             Get
                 Return Me._transaction
             End Get
@@ -7101,7 +7160,7 @@ Namespace TmpOrdersTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.Odbc.OdbcCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
                     Me.InitCommandCollection
@@ -7124,7 +7183,7 @@ Namespace TmpOrdersTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitAdapter()
-            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Me._adapter = New Global.System.Data.Odbc.OdbcDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "TmpTax"
@@ -7179,89 +7238,84 @@ Namespace TmpOrdersTableAdapters
             tableMapping.ColumnMappings.Add("SEQ", "SEQ")
             tableMapping.ColumnMappings.Add("TaxImage", "TaxImage")
             Me._adapter.TableMappings.Add(tableMapping)
-            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand = New Global.System.Data.Odbc.OdbcCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TmpTax] ([UserID], [TaxType_Desc], [TaxDate1], [TaxDate2], [Ta"& _ 
-                "xDate3], [TaxDate4], [TaxDate5], [TaxDate6], [TaxDate7], [TaxDate8], [TaxDate9],"& _ 
-                " [TaxDate10], [TaxDate11], [TaxDate12], [TaxTotal1], [TaxTotal2], [TaxTotal3], ["& _ 
-                "TaxTotal4], [TaxTotal5], [TaxTotal6], [TaxTotal7], [TaxTotal8], [TaxTotal9], [Ta"& _ 
-                "xTotal10], [TaxTotal11], [TaxTotal12], [TaxAmount1], [TaxAmount2], [TaxAmount3],"& _ 
-                " [TaxAmount4], [TaxAmount5], [TaxAmount6], [TaxAmount7], [TaxAmount8], [TaxAmoun"& _ 
-                "t9], [TaxAmount10], [TaxAmount11], [TaxAmount12], [TaxText1], [TaxText2], [TaxTe"& _ 
-                "xt3], [TaxText4], [TaxText5], [TaxText6], [TaxText7], [TaxText8], [TaxText9], [T"& _ 
-                "axText10], [SEQ], [TaxImage]) VALUES (@UserID, @TaxType_Desc, @TaxDate1, @TaxDat"& _ 
-                "e2, @TaxDate3, @TaxDate4, @TaxDate5, @TaxDate6, @TaxDate7, @TaxDate8, @TaxDate9,"& _ 
-                " @TaxDate10, @TaxDate11, @TaxDate12, @TaxTotal1, @TaxTotal2, @TaxTotal3, @TaxTot"& _ 
-                "al4, @TaxTotal5, @TaxTotal6, @TaxTotal7, @TaxTotal8, @TaxTotal9, @TaxTotal10, @T"& _ 
-                "axTotal11, @TaxTotal12, @TaxAmount1, @TaxAmount2, @TaxAmount3, @TaxAmount4, @Tax"& _ 
-                "Amount5, @TaxAmount6, @TaxAmount7, @TaxAmount8, @TaxAmount9, @TaxAmount10, @TaxA"& _ 
-                "mount11, @TaxAmount12, @TaxText1, @TaxText2, @TaxText3, @TaxText4, @TaxText5, @T"& _ 
-                "axText6, @TaxText7, @TaxText8, @TaxText9, @TaxText10, @SEQ, @TaxImage)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [BS].[dbo].[TmpTax] ([UserID], [TaxType_Desc], [TaxDate1], [TaxDate2]"& _ 
+                ", [TaxDate3], [TaxDate4], [TaxDate5], [TaxDate6], [TaxDate7], [TaxDate8], [TaxDa"& _ 
+                "te9], [TaxDate10], [TaxDate11], [TaxDate12], [TaxTotal1], [TaxTotal2], [TaxTotal"& _ 
+                "3], [TaxTotal4], [TaxTotal5], [TaxTotal6], [TaxTotal7], [TaxTotal8], [TaxTotal9]"& _ 
+                ", [TaxTotal10], [TaxTotal11], [TaxTotal12], [TaxAmount1], [TaxAmount2], [TaxAmou"& _ 
+                "nt3], [TaxAmount4], [TaxAmount5], [TaxAmount6], [TaxAmount7], [TaxAmount8], [Tax"& _ 
+                "Amount9], [TaxAmount10], [TaxAmount11], [TaxAmount12], [TaxText1], [TaxText2], ["& _ 
+                "TaxText3], [TaxText4], [TaxText5], [TaxText6], [TaxText7], [TaxText8], [TaxText9"& _ 
+                "], [TaxText10], [SEQ], [TaxImage]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"& _ 
+                ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "& _ 
+                "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@UserID", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxType_Desc", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxType_Desc", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate1", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate2", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate3", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate4", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate5", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate5", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate6", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate6", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate7", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate7", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate8", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate8", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate9", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate9", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate10", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate10", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate11", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate11", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxDate12", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxDate12", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal1", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal2", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal4", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal5", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal5", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal6", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal6", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal7", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal7", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal8", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal8", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal9", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal9", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal10", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal10", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal11", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal11", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxTotal12", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxTotal12", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount1", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount2", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount4", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount5", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount5", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount6", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount6", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount7", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount7", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount8", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount8", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount9", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount9", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount10", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount10", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount11", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount11", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxAmount12", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TaxAmount12", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText5", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText5", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText6", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText6", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText7", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText7", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText8", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText8", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText9", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText9", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxText10", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxText10", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SEQ", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SEQ", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TaxImage", Global.System.Data.SqlDbType.Image, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TaxImage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("UserID", Global.System.Data.Odbc.OdbcType.BigInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxType_Desc", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxType_Desc", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate1", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate1", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate2", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate2", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate3", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate3", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate4", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate4", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate5", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate5", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate6", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate6", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate7", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate8", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate8", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate9", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate9", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate10", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate10", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate11", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate11", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxDate12", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxDate12", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal1", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal1", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal2", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal2", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal3", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal3", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal4", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal4", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal5", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal5", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal6", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal6", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal7", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal8", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal8", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal9", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal9", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal10", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal10", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal11", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal11", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxTotal12", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxTotal12", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount1", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount1", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount2", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount2", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount3", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount3", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount4", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount4", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount5", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount5", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount6", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount6", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount7", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount8", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount8", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount9", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount9", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount10", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount10", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount11", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount11", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxAmount12", Global.System.Data.Odbc.OdbcType.Numeric, 0, Global.System.Data.ParameterDirection.Input, CType(18,Byte), CType(2,Byte), "TaxAmount12", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText1", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText1", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText2", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText2", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText3", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText3", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText4", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText4", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText5", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText5", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText6", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText6", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText7", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText7", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText8", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText8", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText9", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText9", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxText10", Global.System.Data.Odbc.OdbcType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxText10", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("SEQ", Global.System.Data.Odbc.OdbcType.Int, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SEQ", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.Odbc.OdbcParameter("TaxImage", Global.System.Data.Odbc.OdbcType.Image, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TaxImage", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitConnection()
-            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.BSConnectionString
+            Me._connection = New Global.System.Data.Odbc.OdbcConnection()
+            Me._connection.ConnectionString = Global.UB.My.MySettings.Default.ConnectionString2
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
-            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection = New Global.System.Data.Odbc.OdbcCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.Odbc.OdbcCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT UserID, TaxType_Desc, TaxDate1, TaxDate2, TaxDate3, TaxDate4, TaxDate5, Ta"& _ 
                 "xDate6, TaxDate7, TaxDate8, TaxDate9, TaxDate10, TaxDate11, TaxDate12, TaxTotal1"& _ 
@@ -7333,18 +7387,18 @@ Namespace TmpOrdersTableAdapters
         Public Overloads Overridable Function Insert( _
                     ByVal UserID As Global.System.Nullable(Of Long),  _
                     ByVal TaxType_Desc As String,  _
-                    ByVal TaxDate1 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate2 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate3 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate4 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate5 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate6 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate7 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate8 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate9 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate10 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate11 As Global.System.Nullable(Of Date),  _
-                    ByVal TaxDate12 As Global.System.Nullable(Of Date),  _
+                    ByVal TaxDate1 As String,  _
+                    ByVal TaxDate2 As String,  _
+                    ByVal TaxDate3 As String,  _
+                    ByVal TaxDate4 As String,  _
+                    ByVal TaxDate5 As String,  _
+                    ByVal TaxDate6 As String,  _
+                    ByVal TaxDate7 As String,  _
+                    ByVal TaxDate8 As String,  _
+                    ByVal TaxDate9 As String,  _
+                    ByVal TaxDate10 As String,  _
+                    ByVal TaxDate11 As String,  _
+                    ByVal TaxDate12 As String,  _
                     ByVal TaxTotal1 As Global.System.Nullable(Of Decimal),  _
                     ByVal TaxTotal2 As Global.System.Nullable(Of Decimal),  _
                     ByVal TaxTotal3 As Global.System.Nullable(Of Decimal),  _
@@ -7391,65 +7445,65 @@ Namespace TmpOrdersTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(TaxType_Desc,String)
             End If
-            If (TaxDate1.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(TaxDate1.Value,Date)
-            Else
+            If (TaxDate1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate2.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TaxDate2.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(TaxDate1,String)
+            End If
+            If (TaxDate2 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate3.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(TaxDate3.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TaxDate2,String)
+            End If
+            If (TaxDate3 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate4.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TaxDate4.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(TaxDate3,String)
+            End If
+            If (TaxDate4 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate5.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(TaxDate5.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TaxDate4,String)
+            End If
+            If (TaxDate5 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate6.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(TaxDate6.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(TaxDate5,String)
+            End If
+            If (TaxDate6 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate7.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(TaxDate7.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(TaxDate6,String)
+            End If
+            If (TaxDate7 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate8.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(TaxDate8.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(TaxDate7,String)
+            End If
+            If (TaxDate8 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate9.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(TaxDate9.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(TaxDate8,String)
+            End If
+            If (TaxDate9 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate10.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(TaxDate10.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(TaxDate9,String)
+            End If
+            If (TaxDate10 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate11.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TaxDate11.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(TaxDate10,String)
+            End If
+            If (TaxDate11 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
-            End If
-            If (TaxDate12.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TaxDate12.Value,Date)
             Else
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TaxDate11,String)
+            End If
+            If (TaxDate12 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TaxDate12,String)
             End If
             If (TaxTotal1.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(14).Value = CType(TaxTotal1.Value,Decimal)
@@ -7972,8 +8026,8 @@ Namespace TmpOrdersTableAdapters
                 '
                 If (Not (Me._tmpOrdersTableAdapter) Is Nothing) Then
                     revertConnections.Add(Me._tmpOrdersTableAdapter, Me._tmpOrdersTableAdapter.Connection)
-                    Me._tmpOrdersTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
-                    Me._tmpOrdersTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    Me._tmpOrdersTableAdapter.Connection = CType(workConnection,Global.System.Data.Odbc.OdbcConnection)
+                    Me._tmpOrdersTableAdapter.Transaction = CType(workTransaction,Global.System.Data.Odbc.OdbcTransaction)
                     If Me._tmpOrdersTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._tmpOrdersTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._tmpOrdersTableAdapter.Adapter)
@@ -7981,8 +8035,8 @@ Namespace TmpOrdersTableAdapters
                 End If
                 If (Not (Me._tmpProductListTableAdapter) Is Nothing) Then
                     revertConnections.Add(Me._tmpProductListTableAdapter, Me._tmpProductListTableAdapter.Connection)
-                    Me._tmpProductListTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
-                    Me._tmpProductListTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    Me._tmpProductListTableAdapter.Connection = CType(workConnection,Global.System.Data.Odbc.OdbcConnection)
+                    Me._tmpProductListTableAdapter.Transaction = CType(workTransaction,Global.System.Data.Odbc.OdbcTransaction)
                     If Me._tmpProductListTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._tmpProductListTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._tmpProductListTableAdapter.Adapter)
@@ -7990,8 +8044,8 @@ Namespace TmpOrdersTableAdapters
                 End If
                 If (Not (Me._tmpTaxTableAdapter) Is Nothing) Then
                     revertConnections.Add(Me._tmpTaxTableAdapter, Me._tmpTaxTableAdapter.Connection)
-                    Me._tmpTaxTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
-                    Me._tmpTaxTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    Me._tmpTaxTableAdapter.Connection = CType(workConnection,Global.System.Data.Odbc.OdbcConnection)
+                    Me._tmpTaxTableAdapter.Transaction = CType(workTransaction,Global.System.Data.Odbc.OdbcTransaction)
                     If Me._tmpTaxTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._tmpTaxTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._tmpTaxTableAdapter.Adapter)
@@ -8058,15 +8112,15 @@ Namespace TmpOrdersTableAdapters
                     workConnection.Close
                 End If
                 If (Not (Me._tmpOrdersTableAdapter) Is Nothing) Then
-                    Me._tmpOrdersTableAdapter.Connection = CType(revertConnections(Me._tmpOrdersTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._tmpOrdersTableAdapter.Connection = CType(revertConnections(Me._tmpOrdersTableAdapter),Global.System.Data.Odbc.OdbcConnection)
                     Me._tmpOrdersTableAdapter.Transaction = Nothing
                 End If
                 If (Not (Me._tmpProductListTableAdapter) Is Nothing) Then
-                    Me._tmpProductListTableAdapter.Connection = CType(revertConnections(Me._tmpProductListTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._tmpProductListTableAdapter.Connection = CType(revertConnections(Me._tmpProductListTableAdapter),Global.System.Data.Odbc.OdbcConnection)
                     Me._tmpProductListTableAdapter.Transaction = Nothing
                 End If
                 If (Not (Me._tmpTaxTableAdapter) Is Nothing) Then
-                    Me._tmpTaxTableAdapter.Connection = CType(revertConnections(Me._tmpTaxTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._tmpTaxTableAdapter.Connection = CType(revertConnections(Me._tmpTaxTableAdapter),Global.System.Data.Odbc.OdbcConnection)
                     Me._tmpTaxTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then

@@ -33,14 +33,16 @@ Partial Class frmCommReport
         Me.VatType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.UcMoverItem1 = New UB.ucMoverItem()
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.chkShowPO = New DevExpress.XtraEditors.CheckEdit()
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkShowPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DateFrom
@@ -53,12 +55,12 @@ Partial Class frmCommReport
         Me.DateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateFrom.Properties.Appearance.Options.UseFont = True
         Me.DateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateFrom.Properties.EditFormat.FormatString = "dd MMMM yyyy"
         Me.DateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateFrom.Properties.Mask.EditMask = "dd MMMM yyyy"
-        Me.DateFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Size = New System.Drawing.Size(149, 20)
         Me.DateFrom.TabIndex = 4
         '
@@ -89,7 +91,7 @@ Partial Class frmCommReport
         Me.chkInvoice.Location = New System.Drawing.Point(293, 149)
         Me.chkInvoice.Name = "chkInvoice"
         Me.chkInvoice.Properties.Caption = "ใบกำกับภาษี"
-        Me.chkInvoice.Size = New System.Drawing.Size(175, 19)
+        Me.chkInvoice.Size = New System.Drawing.Size(175, 20)
         Me.chkInvoice.TabIndex = 196
         '
         'Label4
@@ -109,7 +111,7 @@ Partial Class frmCommReport
         Me.chkShiping.Location = New System.Drawing.Point(135, 149)
         Me.chkShiping.Name = "chkShiping"
         Me.chkShiping.Properties.Caption = "ใบส่งของ"
-        Me.chkShiping.Size = New System.Drawing.Size(152, 19)
+        Me.chkShiping.Size = New System.Drawing.Size(152, 20)
         Me.chkShiping.TabIndex = 194
         '
         'DateTo
@@ -122,12 +124,12 @@ Partial Class frmCommReport
         Me.DateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateTo.Properties.Appearance.Options.UseFont = True
         Me.DateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateTo.Properties.EditFormat.FormatString = "dd MMMM yyyy"
         Me.DateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateTo.Properties.Mask.EditMask = "dd MMMM yyyy"
-        Me.DateTo.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Size = New System.Drawing.Size(148, 20)
         Me.DateTo.TabIndex = 193
         '
@@ -194,11 +196,20 @@ Partial Class frmCommReport
         Me.UcMoverItem1.Size = New System.Drawing.Size(500, 274)
         Me.UcMoverItem1.TabIndex = 199
         '
+        'chkShowPO
+        '
+        Me.chkShowPO.Location = New System.Drawing.Point(462, 149)
+        Me.chkShowPO.Name = "chkShowPO"
+        Me.chkShowPO.Properties.Caption = "แสดงเลขใบสั่งซื้อ"
+        Me.chkShowPO.Size = New System.Drawing.Size(175, 20)
+        Me.chkShowPO.TabIndex = 200
+        '
         'frmCommReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1112, 490)
+        Me.Controls.Add(Me.chkShowPO)
         Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DateFrom)
@@ -212,7 +223,7 @@ Partial Class frmCommReport
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.chkInvoice)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmCommReport.IconOptions.Icon"), System.Drawing.Icon)
         Me.Name = "frmCommReport"
         Me.Text = "รายงานวิเคราะห์ยอดขาย"
         Me.Controls.SetChildIndex(Me.chkInvoice, 0)
@@ -228,14 +239,16 @@ Partial Class frmCommReport
         Me.Controls.SetChildIndex(Me.DateFrom, 0)
         Me.Controls.SetChildIndex(Me.Label2, 0)
         Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Controls.SetChildIndex(Me.chkShowPO, 0)
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkShowPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -253,5 +266,5 @@ Partial Class frmCommReport
     Friend WithEvents ReportType As DevExpress.XtraEditors.RadioGroup
     Private WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents UcMoverItem1 As UB.ucMoverItem
-
+    Friend WithEvents chkShowPO As DevExpress.XtraEditors.CheckEdit
 End Class

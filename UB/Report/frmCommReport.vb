@@ -81,7 +81,12 @@ Public Class frmCommReport
             Select Case ReportType.EditValue
                 Case 1
                     lclsReport.Header1 = "รายงานวิเคราะห์การขายแยกตามลูกค้า"
-                    report = New rptSellByCus
+                    If chkShowPO.CheckState = CheckState.Checked Then
+                        report = New rptSellByCusPO
+                    Else
+                        report = New rptSellByCus
+                    End If
+
                 Case 2
                     report = New rptCommission
                     If VatType.EditValue = "E" Then
@@ -114,8 +119,8 @@ Public Class frmCommReport
 
             'Build Employee List
             Dim lEmployeeList As String = UcMoverItem1.GetSelectItem
-            
-            SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID "
+
+            SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID ,Orders.PO"
             SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             SQL = SQL & " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Orders.GrandTotal, Orders.TableID"
             SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
@@ -158,7 +163,7 @@ Public Class frmCommReport
                         lCommissionAMT = ConvertNullToZero(pRow.Item("GrandTotal")) * (ConvertNullToZero(pRow.Item("Commission")) / 100)
                     End If
 
-                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxDate1,TaxText2,TaxText3,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7  "
+                    SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxDate1,TaxText2,TaxText3,TaxText4,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7  "
                     SQL = SQL & "  )"
                     SQL = SQL & " VALUES ( " & gUserID
                     SQL = SQL & " ," & i                                                                    'SEQ
@@ -170,6 +175,7 @@ Public Class frmCommReport
                         SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"               'TaxText2
                     End If
                     SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText3
+                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("PO")) & "'"                    'TaxText4
                     SQL = SQL & " , " & ConvertNullToZero(pRow.Item("Total"))                               'TaxTotal2
                     SQL = SQL & " , " & ConvertNullToZero(pRow.Item("DiscountAmount"))                      'TaxTotal3
                     SQL = SQL & " , " & ConvertNullToZero(pRow.Item("VatAmount"))                           'TaxTotal4

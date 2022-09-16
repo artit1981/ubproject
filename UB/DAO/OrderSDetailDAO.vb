@@ -166,10 +166,10 @@ Public Class OrderSDetailDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT  OrdersDetail.OrdersDetailID AS ID,0 as SEQ,OrdersDetail.BillID,OrdersDetail.TableID,OrdersDetail.OrderID "
-            SQL = SQL & " ,OrdersDetail.OrderCode,OrdersDetail.OrderDate,OrdersDetail.CusName,OrdersDetail.EmpName,OrdersDetail.GrandTotal "
+            SQL = SQL & " ,Orders.OrderCode,OrdersDetail.OrderDate,OrdersDetail.CusName,OrdersDetail.EmpName,OrdersDetail.GrandTotal "
             SQL = SQL & " ,OrdersDetail.BillTotal,OrdersDetail.Remark,OrdersDetail.BillType" ',Orders.ExpireDate"
             SQL = SQL & " FROM OrdersDetail"
-            'SQL = SQL & " Left outer join Orders on Orders.OrderID=OrdersDetail.OrderID"
+            SQL = SQL & " Left outer join Orders on Orders.OrderID=OrdersDetail.OrderID"
             SQL = SQL & " WHERE OrdersDetail.BillID =" & pBillID
             SQL = SQL & " AND OrdersDetail.IsDelete =0   "
             SQL = SQL & " ORDER BY OrdersDetail.OrdersDetailID"

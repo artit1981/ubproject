@@ -21,7 +21,7 @@ Public Class TmpProductList
     Dim mCustomer As String
     Dim mCustomerTaxID As String
     Dim mIsMainCompany As Long
-
+    Dim mClaimRemark As String
     Public ReadOnly Property UserID() As Long
         Get
             Return gUserID
@@ -173,6 +173,14 @@ Public Class TmpProductList
             mIsMainCompany = value
         End Set
     End Property
+    Public Property ClaimRemark() As String
+        Get
+            Return mClaimRemark
+        End Get
+        Set(ByVal value As String)
+            mClaimRemark = value
+        End Set
+    End Property
 #End Region
 
     Public Function ClearTemp() As Boolean
@@ -202,7 +210,7 @@ Public Class TmpProductList
         SQL = ""
         Try
             SQL = " INSERT INTO TmpProductList (UserID,SEQ,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
-            SQL = SQL & " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany)"
+            SQL = SQL & " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany,ClaimRemark)"
             SQL = SQL & " VALUES ( @UserID"
             SQL = SQL & " ,  @SEQ"
             SQL = SQL & " ,  @ProductID"
@@ -221,6 +229,7 @@ Public Class TmpProductList
             SQL = SQL & " ,  @Customer"
             SQL = SQL & " ,  @CustomerTaxID"
             SQL = SQL & " ,  @IsMainCompany"
+            SQL = SQL & " ,  @ClaimRemark"
             SQL = SQL & " ) "
 
             myCommand = New SqlCommand
@@ -243,6 +252,7 @@ Public Class TmpProductList
             myCommand.Parameters.Add(New SqlParameter("@Customer", ConvertNullToString(Customer)))
             myCommand.Parameters.Add(New SqlParameter("@CustomerTaxID", ConvertNullToString(CustomerTaxID)))
             myCommand.Parameters.Add(New SqlParameter("@IsMainCompany", ConvertNullToZero(IsMainCompany)))
+            myCommand.Parameters.Add(New SqlParameter("@ClaimRemark", ConvertNullToString(ClaimRemark)))
             gConnection.executeInsertSqlCommand(myCommand, tr)
             Return True
         Catch e As Exception
@@ -260,9 +270,10 @@ Public Class TmpProductList
         Try
             Do While pLoop > 0
                 SQL = " INSERT INTO TmpProductList (UserID,SEQ,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
-                SQL = SQL & " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany)"
+                SQL = SQL & " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany,ClaimRemark)"
                 SQL = SQL & " VALUES ( @UserID"
                 SQL = SQL & " , 999"
+                SQL = SQL & " , NULL"
                 SQL = SQL & " , NULL"
                 SQL = SQL & " , NULL"
                 SQL = SQL & " , NULL"
@@ -313,5 +324,6 @@ Public Class TmpProductList
         mCustomer = ""
         mCustomerTaxID = ""
         mIsMainCompany = 1
+        mClaimRemark = ""
     End Sub
 End Class

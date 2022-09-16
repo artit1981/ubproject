@@ -176,6 +176,8 @@ Public Class frmOrderS
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutShipingRuleID2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 Case MasterType.Asset
 
                     TaxGroup.Enabled = True
@@ -280,7 +282,7 @@ Public Class frmOrderS
                     LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutStockType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutInvoiceSuplierID.Text = "เอกสารอ้างอิงเจ้าหนี้"
-                Case MasterType.Claim, MasterType.Expose, MasterType.ClaimReturn, MasterType.ClaimOut, MasterType.ClaimResult
+                Case MasterType.Claim, MasterType.Expose, MasterType.ClaimOut, MasterType.ClaimResult
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
@@ -298,8 +300,31 @@ Public Class frmOrderS
                     LayoutClaimResult2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayouShipingBy.Text = "วิธีการส่งเคลม"
                     TaxGroup1.Enabled = False
+                Case MasterType.ClaimReturn
+                    OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                    MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                    LayoutExpireDate.Text = "วันได้รับสินค้าคืน"
+                    LayoutExpireDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutCreditBalance.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                    LayoutCreditBalance2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                    LayoutCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                    LayoutbtnCreditRuleID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                    LayouShipingBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutbtnShipingBy.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimRemark.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimRemark2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutClaimResult2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayouShipingBy.Text = "วิธีการส่งเคลม"
+                    LayoutRefPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutRefPO.Text = "เลขที่รับเคลม"
+                    LayoutRefPO1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    TaxGroup1.Enabled = False
+                    LayoutStockType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    LayoutStockType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
             End Select
-
+            LayoutControl1.AllowCustomization = False
             InitialCombo()
             Call LoadData(pMode, pID)
         Catch e As Exception
@@ -467,7 +492,7 @@ Public Class frmOrderS
                     Select Case mOrderType
                         Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                             , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy _
-                            , MasterType.Borrow, MasterType.Expose
+                            , MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
                             If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                                 modReport.PrintReportOrder(mOrderType, mcls.ID)
                             End If
@@ -1106,6 +1131,9 @@ Public Class frmOrderS
                             rec.Cost = ConvertNullToZero(dr("Cost"))
                             rec.Discount = ConvertNullToZero(dr("Discount"))
                             rec.IsShow = ConvertNullToZero(dr("IsShow"))
+                            rec.ClaimRemark = ConvertNullToString(dr("ClaimRemark"))
+                            rec.ClaimResult = ConvertNullToString(dr("ClaimResult"))
+
 
                             'Recalc
                             rec.Units = lCalcUnit
@@ -1305,6 +1333,15 @@ Public Class frmOrderS
                         'Ref order
                         txtRefOrder.Text = mcls.GetToRefOrderCode(pID, Nothing)
                         mRefOrderID = mcls.RefToOrderID
+
+                        If mOrderType = MasterType.ClaimReturn Then
+                            Dim lclsOrder As New OrderSDAO
+                            For Each pRefID In mRefOrderID
+                                txtRefPO.Text = lclsOrder.GetToRefOrderCode(pRefID, Nothing)
+                                Exit For
+                            Next
+                        End If
+
                         If mOrderType = MasterType.PurchaseOrder Or mOrderType = MasterType.CancelPO Then
                             txtRefPO.Text = GetToRefReserveCode(pID, Nothing, mcls.RefToReserveID)
                             mRefReserveID = mcls.RefToReserveID
@@ -1740,7 +1777,14 @@ Public Class frmOrderS
     Private Function GetColData() As ProColumn
         Try
             Dim lColData As ProColumn = 0
-            lColData = ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount
+            If mOrderType = MasterType.Claim Or mOrderType = MasterType.ClaimOut Then
+                lColData = ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.ClaimRemark
+            ElseIf mOrderType = MasterType.ClaimReturn Or mOrderType = MasterType.ClaimResult Then
+                lColData = ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.ClaimResult
+            Else
+                lColData = ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount
+            End If
+
             Return lColData
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".GetColData : " & ex.Message)

@@ -48,7 +48,8 @@ Public Class ProductListDAO
     Private mProductListUnitRef3 As Long = 0
     Private mProductListUnitRef1 As Long = 0
     Private mRefOrderCode As String = ""
-
+    Private mClaimRemark As String = ""
+    Private mClaimResult As String = ""
 
     Public Property IsSelect() As Boolean
         Get
@@ -427,6 +428,23 @@ Public Class ProductListDAO
             mRefOrderCode = value
         End Set
     End Property
+
+    Public Property ClaimRemark() As String
+        Get
+            Return mClaimRemark
+        End Get
+        Set(ByVal value As String)
+            mClaimRemark = value
+        End Set
+    End Property
+    Public Property ClaimResult() As String
+        Get
+            Return mClaimResult
+        End Get
+        Set(ByVal Value As String)
+            mClaimResult = Value
+        End Set
+    End Property
 #End Region
 
     Public Function GetDataTable(ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal tr As SqlTransaction, ByVal pIsCheckConfirm As Boolean _
@@ -441,7 +459,7 @@ Public Class ProductListDAO
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
             SQL = SQL & " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
             SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
-            SQL = SQL & " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy"
+            SQL = SQL & " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy,ProductList.ClaimRemark,ProductList.ClaimResult"
             SQL = SQL & " FROM ProductList"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
@@ -540,7 +558,7 @@ Public Class ProductListDAO
                     ID = GenNewID("ProductListID", "ProductList", tr)
                     SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,PriceMain,Total,Remark,IsDelete"
                     SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,ProductListRefID2,ProductListRefID3,IsShow,IsMerge  "
-                    SQL = SQL & " ,UnitMainID,AdjustUnit,RateUnit,ProductListUnitRef1,ProductListUnitRef2,ProductListUnitRef3)"
+                    SQL = SQL & " ,UnitMainID,AdjustUnit,RateUnit,ProductListUnitRef1,ProductListUnitRef2,ProductListUnitRef3,ClaimRemark,ClaimResult)"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"
                     SQL = SQL & " ,  @SEQ"
@@ -572,6 +590,8 @@ Public Class ProductListDAO
                     SQL = SQL & " ,  @ProductListUnitRef1"
                     SQL = SQL & " ,  @ProductListUnitRef2"
                     SQL = SQL & " ,  @ProductListUnitRef3"
+                    SQL = SQL & " ,  @ClaimRemark"
+                    SQL = SQL & " ,  @ClaimResult"
                     SQL = SQL & " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update ProductList   "
@@ -592,6 +612,8 @@ Public Class ProductListDAO
                     SQL = SQL & " ,LocationDTLID=@LocationDTLID"
                     SQL = SQL & " ,AdjustUnit=@AdjustUnit"
                     SQL = SQL & " ,RateUnit=@RateUnit"
+                    SQL = SQL & " ,ClaimRemark=@ClaimRemark"
+                    SQL = SQL & " ,ClaimResult=@ClaimResult"
                     SQL = SQL & " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
@@ -630,6 +652,8 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@IsMerge", IsMerge))
             myCommand.Parameters.Add(New SqlParameter("@AdjustUnit", AdjustUnit))
             myCommand.Parameters.Add(New SqlParameter("@RateUnit", RateUnit))
+            myCommand.Parameters.Add(New SqlParameter("@ClaimRemark", ConvertNullToString(ClaimRemark)))
+            myCommand.Parameters.Add(New SqlParameter("@ClaimResult", ConvertNullToString(ClaimResult)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))
@@ -654,12 +678,12 @@ Public Class ProductListDAO
             Sql = " INSERT INTO ProductListLog  (LogTime,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
             Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID "
             Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
-            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1  )"
+            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1 ,ClaimRemark,ClaimResult )"
             Sql &= " SELECT '" & formatSQLDateTime(pLogTime) & "'"
             Sql &= " ,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
             Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID"
             Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
-            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1"
+            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1,ClaimRemark,ClaimResult"
             Sql &= " FROM ProductList"
             Sql &= " WHERE ProductListID=" & ID
             gConnection.executeInsertQuery(Sql, ptr)
@@ -775,5 +799,7 @@ Public Class ProductListDAO
         mUnitName = ""
         mLocationDTLID_Old = 0
         mProductListRefID = 0
+        mClaimRemark = ""
+        mClaimResult = ""
     End Sub
 End Class

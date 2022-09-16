@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>26</ApplicationRevision>
-    <ApplicationVersion>1.0.1.26</ApplicationVersion>
+    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationVersion>1.0.1.32</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -376,6 +376,18 @@
     <Compile Include="Report\frmStockReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\rptClaimReturn.Designer.vb">
+      <DependentUpon>rptClaimReturn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptClaimReturn.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptExpose.Designer.vb">
+      <DependentUpon>rptExpose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptExpose.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptDebtAnalyst.Designer.vb">
       <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </Compile>
@@ -387,6 +399,12 @@
     </Compile>
     <Compile Include="Report\frmDebtAnalystReport.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptSellByCusPO.Designer.vb">
+      <DependentUpon>rptSellByCusPO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptSellByCusPO.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptStockReport.Designer.vb">
       <DependentUpon>rptStockReport.vb</DependentUpon>
@@ -956,16 +974,16 @@
     <Compile Include="Stock\frmStockIn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TmpOrders.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TmpOrders.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Base\frmFindEmployee.Designer.vb">
       <DependentUpon>frmFindEmployee.vb</DependentUpon>
     </Compile>
     <Compile Include="Base\frmFindEmployee.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TmpOrders.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TmpOrders.xsd</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ucCampaignDTL.Designer.vb">
       <DependentUpon>ucCampaignDTL.vb</DependentUpon>
@@ -1198,11 +1216,20 @@
     <EmbeddedResource Include="Report\frmStockReport.resx">
       <DependentUpon>frmStockReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptClaimReturn.resx">
+      <DependentUpon>rptClaimReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptExpose.resx">
+      <DependentUpon>rptExpose.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDebtAnalyst.resx">
       <DependentUpon>rptDebtAnalyst.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
       <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptSellByCusPO.resx">
+      <DependentUpon>rptSellByCusPO.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptStockReport.resx">
       <DependentUpon>rptStockReport.vb</DependentUpon>
