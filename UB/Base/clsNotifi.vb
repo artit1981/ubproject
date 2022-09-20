@@ -166,7 +166,7 @@ Public Class clsNotifi
         Dim SQL As String
         Dim lIsOpen As Boolean = True
         Try
-            SQL = " AND Orders.OrderDate Between '" & formatSQLDate(Now.Date.AddMonths(-12)) & "' AND '" & formatSQLDate(Now.Date) & "'"
+            SQL = " AND Orders.OrderDate Between '" & formatSQLDate(Now.Date.AddYears(-2)) & "' AND '" & formatSQLDate(Now.Date) & "'"
             If pParentOrderType = MasterType.Bill Then
                 SQL &= " AND Orders.RefBillID=0 "
             End If
