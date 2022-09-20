@@ -168,10 +168,11 @@ Public Class clsNotifi
         Try
             SQL = " AND Orders.OrderDate Between '" & formatSQLDate(Now.Date.AddYears(-2)) & "' AND '" & formatSQLDate(Now.Date) & "'"
             If pParentOrderType = MasterType.Bill Then
-                SQL &= " AND Orders.RefBillID=0 "
+                SQL &= " AND Orders.RefBillID>0 "
             End If
             If pParentOrderType = MasterType.Receipt Then
-                SQL &= " AND Orders.RefReceiptID=0 "
+                SQL &= " AND Orders.RefReceiptID>0 "
+                SQL &= " AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )"
             End If
             SQL &= " AND ExpireDate <= '" & formatSQLDate(Now.Date) & "'"
 
@@ -187,7 +188,7 @@ Public Class clsNotifi
                 For Each dr As DataRow In dataTable.Rows
 
                     AddDataNotifi(eNotifyLevel.Hi, "Overdue", lOrderTypeName, dr("ExpireDate"), pChildOrderType.ToString, dr("ID") _
-                                  , "รายการเกินกำหนดชำระไม่ได้ออกใบเสร็จ เลขที่ " & dr("Code"), Nothing, gUserID)
+                                  , "รายการเกินกำหนดชำระ เลขที่ " & dr("Code"), Nothing, gUserID)
 
                 Next
                 Return True
