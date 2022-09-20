@@ -496,12 +496,12 @@ Public Class OrderSDAO
         Try
             'SQL = "SELECT Orders.OrderID AS ID,case when Orders.InvoiceSuplierID <> '' then Orders.InvoiceSuplierID else Orders.OrderCode end Code"
             SQL = "SELECT Orders.OrderID AS ID, Orders.OrderCode  Code,Orders.CustomerID"
-            Select Case pTableID
-                Case MasterType.Quotation
-                    SQL = SQL & " ,Orders.OrderDate,Orders.ExpireDate  "
-                Case Else
-                    SQL = SQL & " ,Orders.OrderDate  "
-            End Select
+            'Select Case pTableID
+            '    Case MasterType.Quotation
+            SQL = SQL & " ,Orders.OrderDate,Orders.ExpireDate  "
+            'Case Else
+            '    SQL = SQL & " ,Orders.OrderDate  "
+            'End Select
             SQL = SQL & ",Orders.InvoiceSuplierID "
             SQL = SQL & " ,Orders.OrderStatus,Orders.GrandTotal,Orders.PayTotal "
             SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "

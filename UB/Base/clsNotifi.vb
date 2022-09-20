@@ -137,7 +137,7 @@ Public Class clsNotifi
     Public Function InitialNotifi() As Boolean
         Dim dataTable As New DataTable()
         Try
-            'mNotifiList = New List(Of clsNotifi)
+
             'ApproveTX
             Dim lclsApprove As New ApproveTX
             dataTable = lclsApprove.GetDataTable()
@@ -146,16 +146,61 @@ Public Class clsNotifi
                     AddDataNotifi(eNotifyLevel.Hi, "Approve", "อนุมัติรายการ", dr("OrderDate"), "ApproveTX", dr("ApproveTXID") _
                                   , "เอกสารเลขที่ " & dr("OrderCode") & " : " & ConvertNullToString(dr("Remark")), Nothing, gUserID)
                 Next
-                Return True
-            Else
-                Return False
             End If
+
+            'Overdue Order
+            LoadExpireOrder(MasterType.Receipt, MasterType.Invoice)
+            LoadExpireOrder(MasterType.Receipt, MasterType.Shiping)
+            'LoadExpireOrder(MasterType.Bill, MasterType.Invoice)
+            'LoadExpireOrder(MasterType.Bill, MasterType.Shiping)
+
+            Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "clsNotifi.GetDataTable : " & e.Message)
         End Try
     End Function
 
+    Private Function LoadExpireOrder(ByVal pParentOrderType As MasterType, ByVal pChildOrderType As MasterType) As Boolean
+        Dim lcls As New OrderSDAO
+        Dim dataTable As New DataTable()
+        Dim SQL As String
+        Dim lIsOpen As Boolean = True
+        Try
+            SQL = " AND Orders.OrderDate Between '" & formatSQLDate(Now.Date.AddMonths(-12)) & "' AND '" & formatSQLDate(Now.Date) & "'"
+            If pParentOrderType = MasterType.Bill Then
+                SQL &= " AND Orders.RefBillID=0 "
+            End If
+            If pParentOrderType = MasterType.Receipt Then
+                SQL &= " AND Orders.RefReceiptID=0 "
+            End If
+            SQL &= " AND ExpireDate <= '" & formatSQLDate(Now.Date) & "'"
 
+
+            Dim lOrderTypeName As String = ""
+            Dim lclsMenu As New MenuADO
+            lclsMenu.InitailData(pChildOrderType)
+            lOrderTypeName = lclsMenu.MenuDisplay
+
+            lcls.TableID = pChildOrderType
+            dataTable = lcls.GetDataTableForCombo(pParentOrderType, pChildOrderType, 0, Now.Date, lIsOpen, SQL)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+
+                    AddDataNotifi(eNotifyLevel.Hi, "Overdue", lOrderTypeName, dr("ExpireDate"), pChildOrderType.ToString, dr("ID") _
+                                  , "รายการเกินกำหนดชำระไม่ได้ออกใบเสร็จ เลขที่ " & dr("Code"), Nothing, gUserID)
+
+                Next
+                Return True
+            Else
+                Return False
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, ".LoadExpireOrder : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Function
     Public Function CloseNotifi(ByVal pUserID As Long, ByVal pRefTable As String, ByVal pRefID As Long) As Boolean
         Dim SQL As String = ""
         Try
