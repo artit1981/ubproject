@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
 Imports System.Data.SqlClient
- 
+
 Public Class ProductUnitDAO
 
     Private mMode As DataMode

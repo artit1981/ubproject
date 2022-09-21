@@ -1,8 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors.DXErrorProvider
 Public Class StockImport
     Private mClassName As String = "StockImport"
     Private mRunningFormatDAO As RunningFormatDAO

@@ -1,7 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
 
 Public Class ProductImport
@@ -9,7 +6,7 @@ Public Class ProductImport
     Private mClassName As String = "ProductImport"
     Private mRunningFormatDAO As RunningFormatDAO
     Private mProductPropertyS As List(Of ProductProperty)
- 
+
     Public Property DataDAOs() As List(Of ProductProperty)
         Get
             Return mProductPropertyS
@@ -340,11 +337,11 @@ Public Class ProductImport
         End If
 
         If String.IsNullOrEmpty(pData.NameThai) Then
-            lError = lError & vbNewLine &  "กรุณาระบุชื่อสินค้า" 
+            lError = lError & vbNewLine & "กรุณาระบุชื่อสินค้า"
         End If
 
         If ConvertNullToZero(pData.Price) <= 0 Then
-             lError = lError & vbNewLine &  "กรุณาระบุราคา"
+            lError = lError & vbNewLine & "กรุณาระบุราคา"
         End If
 
 
@@ -370,14 +367,14 @@ Public Class ProductImport
             End If
         End If
 
-         
+
         If ConvertNullToString(pData.ProductBrand) <> "" Then
             pData.ProductBrandID = CheckBrandfromCode(pData.ProductBrand)
             If pData.ProductBrandID <= 0 Then
                 lError = lError & vbNewLine & "ไม่พบยี่ห้อสินค้าในระบบ"
             End If
         End If
-        
+
         If ConvertNullToString(pData.ProductType) <> "" Then
             pData.ProductTypeID = CheckTypeFromCode(pData.ProductType)
             If pData.ProductTypeID <= 0 Then
@@ -388,10 +385,10 @@ Public Class ProductImport
         If ConvertNullToString(pData.ProductGroup1) <> "" Then
             pData.ProductGroup1ID = CheckDataMasterFromCode(pData.ProductGroup1, MasterType.ProductGroup)
             If pData.ProductGroup1ID <= 0 Then
-               lError = lError & vbNewLine & "ไม่พบกลุ่มสินค้าในระบบ"
+                lError = lError & vbNewLine & "ไม่พบกลุ่มสินค้าในระบบ"
             End If
         End If
-         
+
 
         If ConvertNullToString(pData.ProductDimension1) <> "" Then
             pData.ProductDimension1ID = CheckDataMasterFromCode(pData.ProductDimension1, MasterType.ProductDimension)
@@ -609,7 +606,7 @@ Public Class ProductProperty
             mLocationSubNo = value
         End Set
     End Property
-     
+
     Public Property Remark() As String
         Get
             Return mRemark
@@ -768,7 +765,7 @@ Public Class ProductProperty
         End Set
     End Property
 
-  
+
     Public Property ProductID() As Long
         Get
             Return mProductID
@@ -779,8 +776,8 @@ Public Class ProductProperty
     End Property
 
 #End Region
-     
-     
+
+
 
 #Region "Save Product"
     Public Sub SaveData(ByRef ptr As SqlTransaction, ByVal pImportID As Long)

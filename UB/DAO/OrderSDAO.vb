@@ -5,7 +5,7 @@ Public Class OrderSDAO
 
 #Region "Property"
     Private mTableID As MasterType
-  
+
     Public Overrides ReadOnly Property TableName() As String
         Get
             mTableID = TableID
@@ -339,7 +339,7 @@ Public Class OrderSDAO
             End If
 
             Call SaveProductList(ProductDAOs, ModeData, ID, TableName, tr)
-          
+
             'Rebuild RefToOrderID
             If ModeData = DataMode.ModeDelete Or OrderStatus = EnumStatus.NotApprove.ToString Then
                 Call GetToRefOrderCode(ID, tr)
@@ -356,7 +356,7 @@ Public Class OrderSDAO
                         If RefToOrderID.Count > 0 Then
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Close.ToString, tr, ModeData)
-                             Else 'Delete,NotApprove
+                            Else 'Delete,NotApprove
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Open.ToString, tr, DataMode.ModeDelete)
 
                             End If
@@ -385,7 +385,7 @@ Public Class OrderSDAO
                 End If
 
             End If
-           
+
             InsertActivity(ModeData, TableID, Code, tr)
             If ptr Is Nothing Then tr.Commit()
 

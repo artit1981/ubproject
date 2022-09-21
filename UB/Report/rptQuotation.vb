@@ -14,7 +14,7 @@
     End Sub
 
     Private Sub XrLabel53_PrintOnPage(ByVal sender As Object, ByVal e As DevExpress.XtraReports.UI.PrintOnPageEventArgs) Handles XrLabel53.PrintOnPage
-    
+
         XrLabel53.Visible = gShowDateReport
     End Sub
     'Private Sub XrLabel10_PrintOnPage(ByVal sender As Object, ByVal e As DevExpress.XtraReports.UI.PrintOnPageEventArgs) Handles XrLabel10.PrintOnPage

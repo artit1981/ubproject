@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
 
 Public Class frmUpdateStockDTL
     Private mIsFromLoad As Boolean
@@ -204,7 +204,7 @@ Public Class frmUpdateStockDTL
     Private Sub btnSN_Click(sender As Object, e As System.EventArgs) Handles btnSN.Click
         Dim lfrmSN As New frmSN
         Try
-                If Not mProductListDAO Is Nothing Then
+            If Not mProductListDAO Is Nothing Then
                 lfrmSN.Unit = SpinUnit.EditValue
                 lfrmSN.UnitMain = UnitsMain.EditValue
                 lfrmSN.ProductCodes = mProductListDAO.ProductCode

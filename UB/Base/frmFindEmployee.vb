@@ -1,11 +1,11 @@
 ﻿
 Option Explicit On
- 
+
 Public Class frmFindEmployee
     Private mDataKey As Collection
-    Private mLookFor As String 
+    Private mLookFor As String
     Private mIsAccept As Boolean = False
-    
+
     Public ReadOnly Property IsAccept() As Boolean
         Get
             Return mIsAccept

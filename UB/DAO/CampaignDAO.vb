@@ -47,7 +47,7 @@ Public Class CampaignDAO
             mBudget = value
         End Set
     End Property
-     
+
     Public Property MinimumAmount() As Decimal
         Get
             Return mMinimumAmount
@@ -56,7 +56,7 @@ Public Class CampaignDAO
             mMinimumAmount = value
         End Set
     End Property
-   
+
     Public Property MinimumUnit() As Long
         Get
             Return mMinimumUnit
@@ -108,7 +108,7 @@ Public Class CampaignDAO
             mStartDate = value
         End Set
     End Property
-     
+
 
     Public Property CampaignType() As Integer
         Get
@@ -325,7 +325,7 @@ Public Class CampaignDAO
                 SQL = SQL & " AND Campaign.IsDelete =0   "
                 SQL = SQL & " AND Campaign.IsInActive = 0"
             End If
-            
+
             SQL = SQL & " ORDER BY Campaign.CampaignID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -354,7 +354,7 @@ Public Class CampaignDAO
                 SQL = SQL & "  AND Campaign.StartDate <= '" & formatSQLDate(pStartDate) & "'"
                 SQL = SQL & "  AND Campaign.ExpireDate >= '" & formatSQLDate(pExpireDate) & "'"
             End If
-        
+
 
             SQL = SQL & " ORDER BY Campaign.CampaignID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -452,7 +452,7 @@ Public Class CampaignDAO
             myCommand.Parameters.Add(New SqlParameter("@CampaignStatus", ConvertNullToZero(CampaignStatus)))
             myCommand.Parameters.Add(New SqlParameter("@StatusDesc", ConvertNullToString(StatusDesc)))
             myCommand.Parameters.Add(New SqlParameter("@Remark", ConvertNullToString(Remark)))
-            
+
             myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
             myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
             myCommand.Parameters.Add(New SqlParameter("@IsInActive", IsInActive))
@@ -477,7 +477,7 @@ Public Class CampaignDAO
                 lclsOrder.SaveProductList(ProductDAOs, ModeData, ID, TableName, tr)
                 lclsOrder.SaveProductList(ProductAddDAOs, ModeData, ID, TableName & "_ProAdd", tr)
             End If
- 
+
 
             tr.Commit()
             Return True
@@ -488,8 +488,8 @@ Public Class CampaignDAO
         End Try
 
     End Function
-     
-     
+
+
     Public Overrides Function CheckExist() As Boolean
         Dim SQL As String
         Dim dataTable As New DataTable()
@@ -531,5 +531,5 @@ Public Class CampaignDAO
         End Try
     End Function
 
-     
+
 End Class

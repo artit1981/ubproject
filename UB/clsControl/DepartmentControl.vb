@@ -1,9 +1,6 @@
 ﻿
 Option Explicit On
 
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
-
 Public Class DepartmentControl
     Implements iControl
     Private Const mCaption As String = "แผนก"
@@ -107,9 +104,9 @@ Public Class DepartmentControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmDepartment 
+        Dim lFormEdit As frmDepartment
         Try
-            
+
             lFormEdit = New frmDepartment
             With lFormEdit
                 .Caption = mCaption

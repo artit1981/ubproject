@@ -1,7 +1,4 @@
 ﻿Option Explicit On
-
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class ProductTypeControl
     Implements iControl
     Private Const mCaption As String = "ประเภทสินค้า"

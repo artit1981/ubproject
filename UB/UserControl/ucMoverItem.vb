@@ -22,7 +22,7 @@
         Dim lRightTable As DataTable
         Try
             pDataTable.PrimaryKey = New DataColumn() {pDataTable.Columns(pColValue)}
-            
+
             lRightTable = pDataTable.Clone
             lRightTable.Clear()
 
@@ -32,7 +32,7 @@
             lsLeft.DataSource = pDataTable
             lsLeft.DisplayMember = pColDisplay
             lsLeft.ValueMember = pColValue
-           
+
             lsRight.DataSource = lRightTable
             lsRight.DisplayMember = pColDisplay
             lsRight.ValueMember = pColValue
@@ -163,5 +163,5 @@
         End Try
     End Sub
 
-    
+
 End Class

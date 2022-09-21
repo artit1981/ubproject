@@ -1,6 +1,6 @@
 ﻿
 Option Explicit On
- 
+
 Public Class frmFindData
     Dim mKey As String
     Dim mType As MasterType
@@ -53,13 +53,13 @@ Public Class frmFindData
             End If
             With GridView
                 .Columns("ID").Visible = False
-                
+
                 .Columns("UnitCode").Caption = "รหัสหน่วยนับ"
                 .Columns("UnitCode").Width = 400
 
                 .Columns("CodeThai").Caption = "ชื่อหน่วยนับ"
                 .Columns("CodeThai").Width = 700
-               
+
             End With
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmFindData.LoadDataUnit : " & e.Message)
@@ -106,7 +106,7 @@ Public Class frmFindData
             dataTable = Nothing
         End Try
     End Sub
-     
+
 
     Private Sub LoadDataContact()
         Dim lcls As New CustomerDAO
@@ -164,7 +164,7 @@ Public Class frmFindData
                 .Columns("EmpCode").Width = 300
                 .Columns("NAME").Caption = "ชื่อ - นามสกุล"
                 .Columns("NAME").Width = 500
-                
+
             End With
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmFindData.LoadDataEmp : " & e.Message)
@@ -190,9 +190,9 @@ Public Class frmFindData
             ShowErrorMsg(False, ex.Message)
         Finally
         End Try
-         
+
     End Sub
-      
+
 
     Private Sub GridControl_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles GridControl.KeyDown
         If e.KeyData = Keys.Enter Then
@@ -201,7 +201,7 @@ Public Class frmFindData
         End If
     End Sub
 
-  
+
     Private Sub GridView_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GridView.DoubleClick
         GetKey()
         Me.Close()

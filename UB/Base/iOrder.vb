@@ -29,7 +29,7 @@ Public Class iOrder
     Private mVatPercen As Double
     Private mVatAmount As Double
     Private mGrandTotal As Double
-     
+
     Private mFileAttachs As List(Of FileAttachDAO)       ' a container for the Files collection
     Private mNoteDAOs As List(Of NoteDAO)
 
@@ -465,7 +465,7 @@ Public Class iOrder
             mTaxTaxSection = value
         End Set
     End Property
- 
+
     Public Property TaxType() As String
         Get
             Return mTaxType
@@ -503,7 +503,7 @@ Public Class iOrder
             mFileAttachs = Value
         End Set
     End Property
- 
+
     Public Property EmpID() As Long
         Get
             Return mEmpID
@@ -900,7 +900,7 @@ Public Class iOrder
     End Function
 
     Public Overridable Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean
-    
+
     End Function
 
     Public Overridable Function CheckExist() As Boolean

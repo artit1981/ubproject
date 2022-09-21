@@ -50,7 +50,7 @@ Public Class frmSNUpdateStatus
         Init()
         ProductCode.EditValue = mProductCode
         ProductName.EditValue = mProductName
-       
+
         mIsFromLoad = False
     End Sub
 
@@ -159,6 +159,6 @@ Public Class frmSNUpdateStatus
 
         End Try
     End Sub
- 
-    
+
+
 End Class

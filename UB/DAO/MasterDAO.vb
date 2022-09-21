@@ -1,7 +1,5 @@
 ﻿Option Explicit On
 
-Imports System.Data.SqlClient
-
 Public Class MasterDAO
     Inherits iDAO
 

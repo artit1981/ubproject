@@ -656,8 +656,8 @@ Public Class OpportunityDAO
         Return False
     End Function
 
- 
- 
+
+
 
     Public Sub New()
         mOppContactRoleDAOs = Nothing

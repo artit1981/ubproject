@@ -1,7 +1,4 @@
 ﻿Option Explicit On
-
-Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frmTaxAtSellReport
@@ -25,7 +22,7 @@ Public Class frmTaxAtSellReport
                 ShowProgress(True, "Loading...")
                 PrintTaxAtPay(lOrderID, lTaxNo, ReportDate.EditValue)
             End If
-          
+
         Catch ex As Exception
 
             ShowErrorMsg(False, ex.Message)
@@ -33,7 +30,7 @@ Public Class frmTaxAtSellReport
             ShowProgress(False, "")
 
         End Try
-      
+
     End Sub
 
     Protected Overrides Sub ClearAllForm()

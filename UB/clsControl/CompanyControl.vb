@@ -1,5 +1,4 @@
-﻿Imports DevExpress.XtraEditors
-Public Class CompanyControl
+﻿Public Class CompanyControl
     Implements iControl
     Private Const mCaption As String = "บริษัท"
 
@@ -22,7 +21,7 @@ Public Class CompanyControl
         End Try
     End Sub
 
-    Private WithEvents mCtlForm As frmControls 
+    Private WithEvents mCtlForm As frmControls
     Private mCHECKSUM_AGG As Long
 
     Private ReadOnly Property ClassName() As String
@@ -62,7 +61,7 @@ Public Class CompanyControl
             dataTable = Nothing
         End Try
     End Sub
-     
+
     Private Sub GridStyle()
         With mCtlForm.GridView
 

@@ -1,9 +1,5 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class frmSellOrderHis
     Inherits iEditForm
@@ -253,7 +249,7 @@ Public Class frmSellOrderHis
         With gridView
 
             .Columns("IsDelete").Visible = False
-          
+
             '.Columns("OrderID").Caption = "รหัส"
             '.Columns("OrderID").Width = 50
 
@@ -336,5 +332,5 @@ Public Class frmSellOrderHis
         CheckQuotation.Checked = lCheck
         CheckShiping.Checked = lCheck
     End Sub
-      
+
 End Class

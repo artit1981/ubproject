@@ -58,7 +58,7 @@ Public Class OppContactRoleDAO
 
     End Property
 
-  
+
     Public Property ID() As Long
         Get
             Return mIDs

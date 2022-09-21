@@ -1,0 +1,42 @@
+USE [BS]
+GO
+
+/****** Object:  StoredProcedure [dbo].[spTotalSellByYear]    Script Date: 9/21/2022 4:55:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [dbo].[spTotalSellByYear] 
+ @YearList NVARCHAR(MAX) 
+ ,@MonthList NVARCHAR(MAX) 
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT OrderYear,ROUND(Cost/1000000,3)Cost
+,ROUND(Profit/1000000,3)Profit
+,ROUND(TotalAmount/1000000,3)TotalAmount
+FROM (
+	SELECT 
+	year(Orders.OrderDate) as OrderYear
+	,SUM(Orders.Cost * Orders.Units) AS Cost
+	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS Profit
+	,SUM(Orders.Price * Orders.Units) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.TableID in(39,41)
+	and year(Orders.OrderDate)in(select val from split(@YearList, ','))
+	and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
+	group by 
+	year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END
+GO
+
+

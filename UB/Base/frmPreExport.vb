@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraReports.Extensions
-Imports DevExpress.XtraReports.UI
- 
+﻿
 
 Public Class frmPreExport
     Private mReportCode As String
@@ -16,11 +14,11 @@ Public Class frmPreExport
         End Try
     End Function
 
-   
+
     Private Sub InitialCondition()
         mReportCode = Replace(mReportCode, "\", "-")
         mReportCode = Replace(mReportCode, "/", "-")
-        
+
         Select Case rdoCondition.EditValue
             Case 1
                 txtBrows.Enabled = True
@@ -34,11 +32,11 @@ Public Class frmPreExport
         End Select
     End Sub
 
-     
+
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Try
             ShowProgress(True, "Exporting...")
-            
+
             Select Case rdoCondition.EditValue
                 Case 1 : mGridControl.ExportToXlsx(txtBrows.Text)
                 Case 2 : mGridControl.ExportToPdf(txtBrows.Text)
@@ -54,7 +52,7 @@ Public Class frmPreExport
 
 
     End Sub
-     
+
 
     Private Sub frmPreExport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
@@ -90,6 +88,6 @@ Public Class frmPreExport
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
- 
+
 
 End Class

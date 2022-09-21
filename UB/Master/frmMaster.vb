@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frmMaster
 
@@ -103,8 +103,8 @@ Public Class frmMaster
 
             mMode = DataMode.ModeNone
             Call LockAllControl()
-            Me.Select() 
-        Catch ex As Exception 
+            Me.Select()
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
@@ -124,8 +124,8 @@ Public Class frmMaster
             ShowProgress(True, "Loading...")
             RaiseEvent InitialData(mID)
             mMode = DataMode.ModeNone
-            Call LockAllControl() 
-        Catch ex As Exception 
+            Call LockAllControl()
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
@@ -137,8 +137,8 @@ Public Class frmMaster
     Private Sub AddBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles AddBar.ItemClick
         Try
             ShowProgress(True, "Loading...")
-            Call AddNew() 
-        Catch ex As Exception 
+            Call AddNew()
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
@@ -167,7 +167,7 @@ Public Class frmMaster
             ShowProgress(True, "Saving...")
             Call SavedData()
             GridControl.Select()
-        Catch ex As Exception 
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
@@ -184,8 +184,8 @@ Public Class frmMaster
                 ShowProgress(True, "Deleting...")
                 mMode = DataMode.ModeDelete
                 RaiseEvent Delete(lSuccess, mID)
-            End If 
-        Catch ex As Exception 
+            End If
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")
@@ -198,7 +198,7 @@ Public Class frmMaster
             RaiseEvent ReLoad(0)
             mMode = DataMode.ModeNone
             Call LockAllControl()
-        Catch ex As Exception 
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")

@@ -1,7 +1,4 @@
 ﻿Option Explicit On
-
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
 Public Class ucCustomer
     Dim mIsError As Boolean
     Private mRefID As Long = 0
@@ -30,7 +27,7 @@ Public Class ucCustomer
                         lDataDAO.CustomerID = lCusID
                         mDataDAOs.Add(lDataDAO)
                     End If
-                    
+
                 Next
             End If
 

@@ -1,5 +1,4 @@
-﻿Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraEditors
+﻿Imports DevExpress.XtraEditors
 
 Public Class frmFindOrder
 

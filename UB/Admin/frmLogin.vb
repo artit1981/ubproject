@@ -1,6 +1,4 @@
-﻿Imports DevExpress.LookAndFeel
-Imports System.Configuration
-Imports System.Deployment.Application
+﻿Imports System.Deployment.Application
 
 Public Class frmLogin
 

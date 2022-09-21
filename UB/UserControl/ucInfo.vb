@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraEditors
-
-Public Class ucInfo
+﻿Public Class ucInfo
 
     Public Sub Init(ByVal pInfo As String, ByVal pFILEID As Image)
         Try
@@ -13,5 +11,5 @@ Public Class ucInfo
         End Try
     End Sub
 
-    
+
 End Class

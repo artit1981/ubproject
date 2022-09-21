@@ -12,7 +12,7 @@ Public Class ProductCostDAO
     Private mCost As Double
     Private mCostType As CostTypes
     Private mCostID As Long
-    
+
     Public Property ModeData() As Integer
         Get
             Return mMode
@@ -45,7 +45,7 @@ Public Class ProductCostDAO
             mCostType = value
         End Set
     End Property
-   
+
 
     Public Function InitailData(ByVal pProID As Long, ByVal pCostType As CostTypes, ByVal pProListID As Long, ByRef tr As SqlTransaction) As Boolean
         Dim SQL As String = ""
@@ -103,7 +103,7 @@ Public Class ProductCostDAO
             If pCostType > 0 Then
                 mCostType = pCostType
             End If
-             Select mMode
+            Select mMode
                 Case DataMode.ModeNew, DataMode.ModeEdit
                     Select Case mCostType
                         Case CostTypes.Average
@@ -147,9 +147,9 @@ Public Class ProductCostDAO
                     Return False
                     Exit Function
             End Select
-                   
-            
-                    Return True
+
+
+            Return True
         Catch e As Exception
             tr.Rollback()
             Err.Raise(Err.Number, e.Source, "ProductCostDAO.SaveData : " & e.Message)

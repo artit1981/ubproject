@@ -1,6 +1,4 @@
-﻿Imports System.Data.SqlClient
-
-Module modConfig
+﻿Module modConfig
     Public Enum eViewLevel
         OnlyOwner = 1
         Group = 2

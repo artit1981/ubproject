@@ -122,7 +122,7 @@ Public Class FileAttachDAO
         Set(ByVal value As DateTime)
             mCreateTime = value
         End Set
-         
+
     End Property
 
     Public ReadOnly Property Images() As Image
@@ -372,7 +372,7 @@ Public Class FileAttachDAO
 
     '    End Function
 
-  
+
     Public Sub New()
         mMode = DataMode.ModeNone
         mIDs = 0

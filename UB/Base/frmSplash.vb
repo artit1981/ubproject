@@ -32,7 +32,7 @@ Public NotInheritable Class frmSplash
         Else
             Version.Text = Application.ProductVersion
         End If
- 
+
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright
     End Sub

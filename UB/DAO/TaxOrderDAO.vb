@@ -119,7 +119,7 @@ Public Class TaxOrderDAO
         Dim SQL As String = ""
         Dim myCommand As SqlCommand
         Try
-            If   TaxOrderID <= 0 And RefOrderID <> 0 Then
+            If TaxOrderID <= 0 And RefOrderID <> 0 Then
                 mMode = DataMode.ModeNew
             ElseIf TaxOrderID > 0 And RefOrderID <> 0 Then
                 mMode = DataMode.ModeEdit

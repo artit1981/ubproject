@@ -1,6 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class ProvinceControl
     Implements iControl
     Private Const mCaption As String = "จังหวัด"
@@ -178,7 +176,7 @@ Public Class ProvinceControl
             Dim lstrCon As String
             lstrCon = ""
             Select Case Trim(mCtlForm.cboFindIn.SelectedItem)
-              
+
                 Case mFindName(0)
                     lstrCon = mFindName(1)
             End Select

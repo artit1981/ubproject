@@ -1,9 +1,6 @@
 ﻿
 Option Explicit On
 
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
-
 Public Class RunnignFormatControl
     Implements iControl
     Private Const mCaption As String = "Running Format"
@@ -106,9 +103,9 @@ Public Class RunnignFormatControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmRuningFormat 
+        Dim lFormEdit As frmRuningFormat
         Try
-            
+
             lFormEdit = New frmRuningFormat
             With lFormEdit
                 .Caption = mCaption
@@ -140,7 +137,7 @@ Public Class RunnignFormatControl
     End Sub
 
     Private Sub mCtlForm_Delete(ByRef pID As Long) Handles mCtlForm.Delete
-         
+
     End Sub
 
     Private Sub mCtlForm_Edit(ByVal pID As Long) Handles mCtlForm.Edit

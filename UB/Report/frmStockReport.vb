@@ -1,7 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraReports.UI
 Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
+Imports DevExpress.XtraReports.UI
 
 Public Class frmStockReport
     Inherits iReport
@@ -64,12 +63,12 @@ Public Class frmStockReport
             If sQN <> "" Then
                 lSQL = lSQL & " and Product.ProductBrandID in (" & sQN & ") "
             End If
-             
+
             'Product
             dataTable = Nothing
             dataTable = lcls.GetDataTableForCombo(0, 0, True, "", lSQL)
             UcMoverItem1.ShowControl(dataTable, "ID", "ProductName")
-            
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProduct : " & e.Message)
         Finally
@@ -88,13 +87,13 @@ Public Class frmStockReport
             lclsReport.Header1 = "รายงานมูลค่าสต๊อกคลังสินค้า"
             report = New rptStockReport
 
-            lclsReport.Header2 = "" 
+            lclsReport.Header2 = ""
             lclsReport.Header3 = ""
             lclsReport.SaveData()
 
             Dim lTableOrder As New DataTable
             Dim SQL As String, sQN As String
-             
+
             'ProductLocat
             sQN = ""
             For Each item As Object In ProLocation.CheckedItems
@@ -105,7 +104,7 @@ Public Class frmStockReport
                     sQN = sQN & "," & ConvertNullToZero(row(0))
                 End If
             Next
-           
+
 
             'Build Product List
             Dim lProductList As String = UcMoverItem1.GetSelectItem
@@ -161,7 +160,7 @@ Public Class frmStockReport
         End Try
     End Sub
 
- 
+
 
     Private Sub ProductBrandID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductBrandID.LostFocus
         SetComboProduct()
@@ -170,5 +169,5 @@ Public Class frmStockReport
     Private Sub ProductTypeID_LostFocus(sender As Object, e As System.EventArgs) Handles ProductTypeID.LostFocus
         SetComboProduct()
     End Sub
-  
+
 End Class

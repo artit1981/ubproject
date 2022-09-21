@@ -1,7 +1,5 @@
 ﻿
 Option Explicit On
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class CurrencyControl
     Implements iControl
     Private Const mCaption As String = "สกุลเงิน"

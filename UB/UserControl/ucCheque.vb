@@ -31,7 +31,7 @@ Public Class ucCheque
                 mChequeList.Clear()
                 gridControl.DataSource = mChequeList
             End If
-          
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucPledge.ClearAll : " & e.Message)
         End Try

@@ -1,11 +1,9 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
-
 Partial Public Class iReport
-  
+
     Private mCaption As String
-   
+
 
 #Region "Property"
 
@@ -26,7 +24,7 @@ Partial Public Class iReport
             Err.Raise(Err.Number, e.Source, "iReport.ClearAllForm : " & e.Message)
         End Try
     End Sub
- 
+
     Protected Overridable Sub Print()
     End Sub
 #End Region
@@ -41,7 +39,7 @@ Partial Public Class iReport
     End Sub
 
     Private Sub iEditForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-       
+
     End Sub
 
     Private Sub iReport_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -71,7 +69,7 @@ Partial Public Class iReport
         Try
             ShowProgress(True, "Loading...")
             Me.Print()
-         Catch ex As Exception
+        Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
             ShowProgress(False, "")

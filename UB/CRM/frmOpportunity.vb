@@ -180,7 +180,7 @@ Public Class frmOpportunity
     End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             If pMode = DataMode.ModeNew Then
                 IsSysRevenue.EditValue = True
@@ -260,7 +260,7 @@ Public Class frmOpportunity
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 

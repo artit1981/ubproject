@@ -1,8 +1,5 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
-
 Public Class frmUpdateStockLog
 
     Dim mProductListDAO As ProductListDAO

@@ -106,7 +106,7 @@ Public Class UserDAO
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".CHECKSUM_AGG : " & e.Message)
             Return 0
-        Finally 
+        Finally
             dataTable = Nothing
         End Try
     End Function
@@ -139,7 +139,7 @@ Public Class UserDAO
                     Dim lcls As New clsEncrypt
                     Password = lcls.decryptString(dr("Password").ToString)
                     lcls = Nothing
- 
+
 
                     ' PrivilegeID
                     PrivilegeID = ConvertNullToZero(dr("PrivilegeID"))

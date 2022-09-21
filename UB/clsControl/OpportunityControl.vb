@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class OpportunityControl
     Implements iControl
@@ -132,7 +131,7 @@ Public Class OpportunityControl
     End Sub
 
     Private Sub mCtlForm_CreateQuick() Handles mCtlForm.CreateQuick
-       
+
     End Sub
 
     Private Sub mCtlForm_Delete(ByRef pID As Long) Handles mCtlForm.Delete

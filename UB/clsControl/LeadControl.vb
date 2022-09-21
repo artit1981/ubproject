@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class LeadControl
     Implements iControl
@@ -28,7 +27,7 @@ Public Class LeadControl
     End Sub
 
 
-    
+
     Private Sub LoadData()
         Dim lcls As New CustomerDAO
         Dim dataTable As New DataTable()
@@ -94,7 +93,7 @@ Public Class LeadControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmLead 
+        Dim lFormEdit As frmLead
         Try
             lFormEdit = New frmLead
             With lFormEdit
@@ -191,7 +190,7 @@ Public Class LeadControl
         End Try
     End Sub
 
-    
+
 
     Private Sub mCtlForm_Delete(ByRef pID As Long) Handles mCtlForm.Delete
         Dim lcls As New CustomerDAO

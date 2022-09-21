@@ -1,10 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.DXErrorProvider
 Imports System.Data.SqlClient
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmProductSN
     Inherits iEditForm
@@ -135,7 +131,7 @@ Public Class frmProductSN
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
 
         Try
-            
+
             InitialGrid()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -253,7 +249,7 @@ Public Class frmProductSN
         End Try
     End Function
 
-     
+
 
 #End Region
 
@@ -265,9 +261,9 @@ Public Class frmProductSN
         RepositoryItemMemoEdit1.LinesCount = 0
         gridView.RefreshData()
     End Sub
-     
+
 
     Private Sub btnSNList_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles btnSNList.ButtonClick
-       
+
     End Sub
 End Class

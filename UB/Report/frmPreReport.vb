@@ -1,10 +1,8 @@
 ﻿'Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraReports.Extensions
-Imports DevExpress.XtraReports.UI
-
 Imports System.Data.SqlClient
-Imports Zen.Barcode
 Imports System.IO
+Imports DevExpress.XtraReports.UI
+Imports Zen.Barcode
 'Imports Spire.Barcode
 
 Public Class frmPreReport
@@ -444,7 +442,7 @@ Public Class frmPreReport
                 lclsReport.DiscountPercen = lclsOrder.DiscountPercen
                 lclsReport.GrandTotal = lclsOrder.GrandTotal
                 lclsReport.GrandTotalSTR = ChangeToThaibathWord(lclsOrder.GrandTotal.ToString)
-               
+
                 'lclsReport.SaveData()
             End If
 
@@ -489,8 +487,8 @@ Public Class frmPreReport
                 lclsTmpProList.SaveData()
                 i = i + 1
             Next
-          
-           
+
+
             lclsReport.SaveData()
             mReport = report
             ExecuteReport()

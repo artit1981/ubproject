@@ -2,9 +2,9 @@
 'Created date: 09/04/2007
 'Last updated: 09/17/2007
 
-Imports Microsoft.Win32
 Imports System.Globalization
 Imports System.Runtime.InteropServices
+Imports Microsoft.Win32
 
 ''' <summary>
 ''' Represents a time zone and provides access to all system time zones.
@@ -56,7 +56,7 @@ Public Class TimeZoneInfo : Implements IComparer(Of TimeZoneInfo)
         ''' <param name="obj">The System.Object to compare 
         ''' with the current System.Object.</param>
         <DebuggerHidden()> _
-            Public Overrides Function Equals(ByVal obj As Object) As Boolean
+        Public Overrides Function Equals(ByVal obj As Object) As Boolean
             If Me.GetType Is obj.GetType Then
                 Dim objSt As SYSTEMTIME = DirectCast(obj, SYSTEMTIME)
                 If Me.wDay <> objSt.wDay _
@@ -117,7 +117,7 @@ Public Class TimeZoneInfo : Implements IComparer(Of TimeZoneInfo)
         ''' <param name="obj">The System.Object to compare 
         ''' with the current System.Object.</param>
         <DebuggerHidden()> _
-            Public Overrides Function Equals(ByVal obj As Object) As Boolean
+        Public Overrides Function Equals(ByVal obj As Object) As Boolean
             If Me.GetType Is obj.GetType Then
                 Dim objTzi As TimeZoneInformation = DirectCast(obj, TimeZoneInformation)
                 If Me.bias <> objTzi.bias _

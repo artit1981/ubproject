@@ -250,7 +250,7 @@ Public Class frmEmployee
         Dim lstrErr As String = ""
         Try
             DxErrorProvider1.ClearErrors()
-            
+
             If Trim(EmpCode.Text) = "" Then
                 SetErrorProvider(DxErrorProvider1, EmpCode, "กรุณาระบุรหัสพนักงาน")
             ElseIf mcls.CheckExist() Then
@@ -275,7 +275,7 @@ Public Class frmEmployee
                 End If
 
             End If
-          
+
             If ConvertNullToZero(Commission.EditValue) < 0 Then
                 Commission.EditValue = 0
             ElseIf ConvertNullToZero(Commission.EditValue) > 100 Then
@@ -327,7 +327,7 @@ Public Class frmEmployee
                 GroupPrivilege.Enabled = True
                 GroupPrivilege.Visible = True
             End If
-           
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".SetPrivilege : " & ex.Message)
             Return False

@@ -187,7 +187,7 @@ Public Class ProductStockDAO
             SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product_Unit.CodeThai AS UnitName,Product_LocationS.KeepMin "
             SQL = SQL & " FROM Product_Stock"
             SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=Product_Stock.ProductID "
-             SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
+            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
             SQL = SQL & " LEFT OUTER JOIN Product_LocationS ON Product_LocationS.RefID=Product_Stock.ProductID "
             SQL = SQL & " WHERE 1=1 "
             If pProductID > 0 Then
@@ -250,7 +250,7 @@ Public Class ProductStockDAO
 
 
     Public Function GetDataStockByLocation2(ByVal pProductCategoryID As Long, ByVal pProductTypeID As Long _
-                                 , ByVal pProductGroupID As Long, ByVal pProductBrandID As Long ) As DataTable
+                                 , ByVal pProductGroupID As Long, ByVal pProductBrandID As Long) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 

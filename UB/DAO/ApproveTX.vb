@@ -170,7 +170,7 @@ Public Class ApproveTX
                             ModifiedBy = ""
                         End If
                     End If
-                     
+
                     Return True
                     Exit For
                 Next
@@ -234,7 +234,7 @@ Public Class ApproveTX
         Return dataTable
     End Function
 
-  
+
     Public Function SaveData(ByRef ptr As SqlTransaction) As Boolean
         Dim SQL As String
         Dim llngAddressID As Long = 0

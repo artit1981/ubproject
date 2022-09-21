@@ -1,7 +1,5 @@
 ﻿
 Option Explicit On
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class BankControl
     Implements iControl
     Private Const mCaption As String = "ข้อมูลธนาคาร"
@@ -90,7 +88,7 @@ Public Class BankControl
 
             .Columns("NameThai").Caption = "ชื่อธนาคาร"
             .Columns("NameThai").Width = 700
- 
+
         End With
     End Sub
 

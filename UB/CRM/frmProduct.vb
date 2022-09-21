@@ -1,7 +1,5 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.DXErrorProvider
 Imports DevExpress.XtraEditors
-Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frmProduct
     Inherits iEditForm
@@ -401,7 +399,7 @@ Public Class frmProduct
         End Try
     End Sub
 
-  
+
 
 
     Private Sub SetComboProductGroup(ByVal pIndex As Integer)
@@ -690,7 +688,7 @@ Public Class frmProduct
         End Try
     End Sub
 
-  
+
     'Private Sub UnitMainID_EditValueChanged(sender As Object, e As System.EventArgs) Handles UnitMainID.EditValueChanged
     '    'Dim lcls As ProductStockDAO
     '    Try
@@ -712,5 +710,5 @@ Public Class frmProduct
     '        ShowProgress(False, "")
     '    End Try
     'End Sub
- 
+
 End Class

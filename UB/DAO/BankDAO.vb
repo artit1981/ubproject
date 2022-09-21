@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 
 Public Class BankDAO
     Inherits iDAO
-   
+
     Public ReadOnly Property TableName() As String
         Get
             Return "Bank"
@@ -243,7 +243,7 @@ Public Class BankDAO
     End Function
 
     Public Function CheckIsToUse() As Boolean ''ถูกใช้งานอยู่ ???
-  Dim SQL As String
+        Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
@@ -261,6 +261,6 @@ Public Class BankDAO
     End Function
 
     Public Sub New()
-        
+
     End Sub
 End Class

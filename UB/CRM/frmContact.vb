@@ -440,7 +440,7 @@ Public Class frmContact
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboBusinessType : " & e.Message)
         End Try
     End Sub
- 
+
     Private Sub SetComboContacts()
         Try
             SetComboContact(ContactPersonID)
@@ -457,7 +457,7 @@ Public Class frmContact
         MyBase.CheckFormChanged()
     End Sub
 
-  
+
     Private Sub btnContactPersonID_Click(sender As System.Object, e As System.EventArgs) Handles btnContactPersonID.Click
         Try
             ShowProgress(True, "Loading...")
@@ -468,5 +468,5 @@ Public Class frmContact
             ShowProgress(False, "")
         End Try
     End Sub
- 
+
 End Class

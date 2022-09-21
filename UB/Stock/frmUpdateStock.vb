@@ -1,6 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraGrid.Views.Base
+﻿Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frmUpdateStock
     Private Const mFormName As String = "frmUpdateStock"
@@ -217,7 +215,7 @@ Public Class frmUpdateStock
                 lProductListDAO.UnitID = gridView.GetRowCellValue(rowHandle, "UnitID")
                 lFrmEditStock.ProductListDAO = lProductListDAO
                 lFrmEditStock.ShowDialog()
-                
+
 
             Catch ex As Exception
                 ShowErrorMsg(False, ex.Message)

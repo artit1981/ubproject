@@ -355,7 +355,7 @@ Public Class TmpOrderDAO
             mRemark = value
         End Set
     End Property
-    
+
     Public Property CompanyFAX() As String
         Get
             Return mCompanyFAX
@@ -413,7 +413,7 @@ Public Class TmpOrderDAO
             mCompanyBankAccount = value
         End Set
     End Property
-    
+
     Public Property LogoID() As Long
         Get
             Return mLogoID
@@ -565,7 +565,7 @@ Public Class TmpOrderDAO
                 gConnection.executeInsertSqlCommand(myCommand, Nothing)
             End If
 
-       
+
 
             Return True
         Catch e As Exception

@@ -267,7 +267,7 @@ Public Class ApproveUserDTLDAO
 
     Public Sub New()
         mMode = DataMode.ModeNone
-        mIDs = 0 
+        mIDs = 0
         mIDs = 0
         mSEQ = 0
         mApproveType = 0

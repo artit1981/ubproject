@@ -113,16 +113,16 @@ Public Class ucNote
     End Sub
 
     Private Sub gridView_FocusedColumnChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs) Handles gridView.FocusedColumnChanged
-       ReGenSEQ
+        ReGenSEQ
     End Sub
 
     Private Sub gridView_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles gridView.CellValueChanged
         If e.Column.FieldName <> "SEQ" Then
-           ReGenSEQ
+            ReGenSEQ
         End If
     End Sub
 
-  
+
 
     'Private Sub gridView_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles gridView.FocusedRowChanged
     '    If e.FocusedRowHandle >= 0 Then
@@ -159,8 +159,8 @@ Public Class ucNote
     Private Sub gridView_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles gridView.FocusedRowChanged
         ReGenSEQ()
     End Sub
- 
- 
+
+
 
     Private Sub gridView_ValidatingEditor(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs) Handles gridView.ValidatingEditor
         Dim reply As Object() = Nothing

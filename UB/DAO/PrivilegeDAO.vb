@@ -26,7 +26,7 @@ Public Class PrivilegeDAO
         End Set
     End Property
 
-   
+
     Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()

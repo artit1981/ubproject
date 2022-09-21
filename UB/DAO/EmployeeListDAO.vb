@@ -8,7 +8,7 @@ Public Class EmployeeListDAO
     Private mRefID As Long = 0
     Private mRefTableID As Long = 0
     Private mEmpID As Long = 0
-   
+
     Public Property RefID() As Long
         Get
             Return mRefID
@@ -36,7 +36,7 @@ Public Class EmployeeListDAO
         End Set
     End Property
 
-     
+
 
     Public Overrides Function InitailData(ByVal pID As Long, Optional ByVal pName As String = "", Optional ByVal tr As SqlTransaction = Nothing) As Boolean
         'Dim SQL As String
@@ -138,7 +138,7 @@ Public Class EmployeeListDAO
         'End Try
 
     End Function
-     
+
     Public Function GetDataTable(ByVal pRefID As Long, ByVal pRefTableID As Long, ByVal pIsDelete As Integer) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
@@ -165,7 +165,7 @@ Public Class EmployeeListDAO
         End Try
         Return dataTable
     End Function
-     
+
 
 
     Public Overrides Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean
@@ -189,7 +189,7 @@ Public Class EmployeeListDAO
                     Return False
                     Exit Function
             End Select
-               myCommand = New SqlCommand
+            myCommand = New SqlCommand
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))
             myCommand.Parameters.Add(New SqlParameter("@mRefTable", RefTableID))
@@ -218,7 +218,7 @@ Public Class EmployeeListDAO
                 myCommand.Parameters.Add(New SqlParameter("@mRefTable", RefTableID))
                 gConnection.executeInsertSqlCommand(myCommand, tr)
             End If
-          
+
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeListDAO.ClearOldData : " & e.Message)
@@ -241,7 +241,7 @@ Public Class EmployeeListDAO
                 myCommand.Parameters.Add(New SqlParameter("@mRefTable", RefTableID))
                 gConnection.executeInsertSqlCommand(myCommand, tr)
             End If
-           
+
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeListDAO.DeleteAllData : " & e.Message)
@@ -249,5 +249,5 @@ Public Class EmployeeListDAO
         End Try
     End Function
 
-     
+
 End Class

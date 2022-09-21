@@ -48,8 +48,8 @@ Public Class iPerson
     Dim mIsMainCompany As Integer
     Dim mBillDayTo As Long
     Dim mChqDayTo As Long
-    
- 
+
+
 
     Public Property ModeData() As Integer
         Get
@@ -171,7 +171,7 @@ Public Class iPerson
             mCompanyName = value
         End Set
     End Property
- 
+
     Public Property SourceID() As Long
         Get
             Return mSourceID
@@ -218,7 +218,7 @@ Public Class iPerson
         End Set
     End Property
 
-  
+
 
     'Public ReadOnly Property CreditRuleDAOs() As CreditRoleDAO
     '    Get

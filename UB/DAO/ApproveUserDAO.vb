@@ -1,6 +1,6 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
- 
+
 Public Class ApproveUserDAO
     Inherits iDAO
     Private mApproveUsers1 As List(Of ApproveUserDTLDAO)

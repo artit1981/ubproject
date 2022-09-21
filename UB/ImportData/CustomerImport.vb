@@ -1,8 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class CustomerImport
     Private mClassName As String = "CustomerImport"
@@ -100,7 +98,7 @@ Public Class CustomerImport
         Finally
         End Try
     End Function
-  
+
     Public Function ImportData() As Long()
         Dim lRow As Long = 0
         Dim tr As SqlTransaction = Nothing
@@ -117,7 +115,7 @@ Public Class CustomerImport
                 lclsLog.TableID = MasterTypes
                 Call lclsLog.SaveData(tr)
                 lImportID = lclsLog.ImportTXID
-                 
+
                 'Bwegin import
                 lCount(0) = mCustomerPropertyS.Count
                 For Each clsProperty As CustomerProperty In mCustomerPropertyS
@@ -664,7 +662,7 @@ Public Class CustomerProperty
             Else
                 Return False
             End If
-           
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mClassName & ".CheckCodeCheckExist : " & e.Message)
         Finally
@@ -721,7 +719,7 @@ Public Class CustomerProperty
                 End If
             End If
         End If
-       
+
         If propertyName = "IsCorporation" Then
             If String.IsNullOrEmpty(IsCorporation) Then
                 info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
@@ -731,7 +729,7 @@ Public Class CustomerProperty
                 info.ErrorType = ErrorType.Critical
             End If
         End If
- 
+
 
         If propertyName = "CustomerGroup" Then
             If ConvertNullToString(CustomerGroup) <> "" Then
@@ -809,7 +807,7 @@ Public Class CustomerProperty
         'If gIsCheckError = True Then
 
         GetPropertyError("IsNew", propertyInfo)
-        
+
         If propertyInfo.ErrorText = "" Then
             GetPropertyError("Code", propertyInfo)
         End If
@@ -873,7 +871,7 @@ Public Class CustomerProperty
                 lclsDAO.ModeData = DataMode.ModeEdit
                 lSuccess = lclsDAO.InitailData(CustomerID, "", ptr)
             End If
-             
+
             IsSelect = False   'Re verify --> Is success
             If lSuccess = True Then
                 lclsDAO.TableID = mMasterType

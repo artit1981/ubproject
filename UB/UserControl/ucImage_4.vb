@@ -82,7 +82,7 @@ Public Class ucImage_4
         Return openFileDialog
     End Function
 
-    Private Sub InnitialNew() 
+    Private Sub InnitialNew()
         Try
             Dim lFileAttachs As FileAttachDAO
             mFileAttachs = New List(Of FileAttachDAO)
@@ -263,7 +263,7 @@ Public Class ucImage_4
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
- 
+
     Private Sub picPro2_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles picPro2.DoubleClick
         Try
             If mFileAttachs(1).FilePath <> "" Then
@@ -296,5 +296,5 @@ Public Class ucImage_4
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
- 
+
 End Class

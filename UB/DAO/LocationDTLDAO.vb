@@ -1,10 +1,9 @@
 ﻿Option Explicit On
 
 Imports System.Data.SqlClient
-Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class LocationDTLDAO
-   
+
     Private mMode As DataMode
     Private mIDs As Long
     Private mRefID As Long

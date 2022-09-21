@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class CampaignControl
     Implements iControl
@@ -222,7 +221,7 @@ Public Class CampaignControl
     'Private Sub mCtlForm_Detail(pIndex As Long) Handles mCtlForm.Detail
 
     'End Sub
-     
+
 
     Private Sub mCtlForm_Edit(ByVal pID As Long, ByVal pIndex As Long) Handles mCtlForm.Edit
         Try
@@ -235,7 +234,7 @@ Public Class CampaignControl
     Private Sub mCtlForm_InitStatus(pIsDelete As Integer) Handles mCtlForm.InitStatus
         mCtlForm.DeleteBar.Enabled = (pIsDelete = 0)
     End Sub
- 
+
     Private Sub mCtlForm_ReLoad() Handles mCtlForm.ReLoad
         Try
             Call LoadData()

@@ -1,4 +1,4 @@
-﻿Public Class frmActivityLog 
+﻿Public Class frmActivityLog
 
     Private Sub frmActivityLog_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
@@ -85,12 +85,12 @@
         Finally
             ShowProgress(False, "")
         End Try
-        
+
     End Sub
 
     Private Sub GridStyle()
         With GridView
-             
+
             .Columns("Date").Caption = "วัน"
             .Columns("Date").Width = 100
             .Columns("Date").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime

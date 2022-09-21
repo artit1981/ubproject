@@ -241,7 +241,7 @@ Public Class CustomerDAO
             mCurrencyID = value
         End Set
     End Property
-    
+
     Public Property CustomerType() As String
         Get
             Return mCustomerType
@@ -484,7 +484,7 @@ Public Class CustomerDAO
                     AddressS = New AddressDAO
                     AddressS.InitailData(ConvertNullToZero(dr("AddressID")), tr)
 
-                   
+
                     'Ship Address
                     AddressShip = Nothing
                     AddressShip = New AddressDAO
@@ -675,7 +675,7 @@ Public Class CustomerDAO
                 tr = ptr
             End If
 
-         
+
             llngAddressID = SaveAddress(AddressS, ModeData, tr)
             llngAddressShipID = SaveAddress(AddressShip, ModeData, tr)
 

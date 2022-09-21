@@ -1,9 +1,8 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmInformPricePro
     Inherits iEditForm
@@ -42,7 +41,7 @@ Public Class frmInformPricePro
             Select Case pMode
                 Case DataMode.ModeNew
                     ClearForm(GeneralTabPage)
-                   
+
             End Select
 
             XtraTabControl1.SelectedTabPage = GeneralTabPage
@@ -59,7 +58,7 @@ Public Class frmInformPricePro
         Try
             mcls.ID = pID
             mcls.ModeData = pMode
-           
+
             mcls.ProductDAOs = GetDAOs()
             If Verify() = True Then
                 Return mcls.SaveData()
@@ -112,7 +111,7 @@ Public Class frmInformPricePro
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
-    
+
     Private Sub ProductCategoryID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ProductCategoryID.EditValueChanged
         Try
             If mIsFromLoad = False Then
@@ -125,13 +124,13 @@ Public Class frmInformPricePro
         End Try
     End Sub
 
-   
+
     Private Sub FormChangedComponent1_FormControlChanged1(ByVal sender As Object, ByVal e As FormChangedEventArgs) Handles FormChangedComponent1.FormControlChanged
         MyBase.CheckFormChanged()
     End Sub
 
-   
-     
+
+
 
 #End Region
 
@@ -220,7 +219,7 @@ Public Class frmInformPricePro
             mIsOnLoad = True
 
             chkSelectAll.Checked = False
-          
+
             InitialGrid(lCusID)
 
         Catch ex As Exception
@@ -236,15 +235,15 @@ Public Class frmInformPricePro
 
             ElseIf pMode = DataMode.ModeEdit Then
                 InitialGrid(pID)
-                
+
             End If
 
-            
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-           
+
         End Try
     End Function
 
@@ -258,7 +257,7 @@ Public Class frmInformPricePro
             lProType = ConvertNullToZero(ProductTypeID.EditValue)
             lProBrand = ConvertNullToZero(ProductBrandID.EditValue)
             bindingSource1.DataSource = Nothing
-            
+
             Call mcls.InitailData(Nothing, lProGroupID, lProCateID, lProType, lProBrand)
             If IsNothing(mcls.ProductTable) = False Then
                 bindingSource1.DataSource = mcls.ProductTable
@@ -278,14 +277,14 @@ Public Class frmInformPricePro
             mIsOnLoad = False
         End Try
     End Function
-     
+
 
 
     Private Function Verify() As Boolean
         Try
             DxErrorProvider1.ClearErrors()
 
-           
+
             Return DxErrorProvider1.HasErrors = False
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".Verify : " & e.Message)
@@ -348,9 +347,9 @@ Public Class frmInformPricePro
             ShowProgress(False, "")
         End Try
     End Sub
-     
+
 #End Region
-     
+
 
 
     Public Class InformPriceDAOSub
@@ -378,8 +377,8 @@ Public Class frmInformPricePro
 #End Region
     End Class
 
-     
-     
+
+
 
     Private Sub chkAutoRow_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAutoRow.CheckedChanged
         'InitialGrid(mIDs)
@@ -492,7 +491,7 @@ Public Class frmInformPricePro
             ShowProgress(False, "")
         End Try
     End Sub
-     
+
     Private Sub btnExportExcel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportExcel.Click
         Try
             Dim lfrm As New frmPreExport

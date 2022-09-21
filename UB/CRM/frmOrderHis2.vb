@@ -1,9 +1,5 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class frmOrderHis2
     Inherits iEditForm
@@ -102,14 +98,14 @@ Public Class frmOrderHis2
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
-                If dataTable.Rows.Count > 0 Then
-                    gridControl.DataSource = dataTable
-                    GridView.ViewCaption = ""
-                    GridView.MoveLastVisible()
-                    Call GridStyle()
-                Else
-                    gridControl.DataSource = Nothing
-                End If
+            If dataTable.Rows.Count > 0 Then
+                gridControl.DataSource = dataTable
+                GridView.ViewCaption = ""
+                GridView.MoveLastVisible()
+                Call GridStyle()
+            Else
+                gridControl.DataSource = Nothing
+            End If
 
 
 

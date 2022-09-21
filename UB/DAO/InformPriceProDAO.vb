@@ -11,7 +11,7 @@ Public Class InformPriceProDAO
             Return "Product"
         End Get
     End Property
-    
+
     Public ReadOnly Property ProductTable() As DataTable
         Get
             Return mProductTable
@@ -131,7 +131,7 @@ Public Class InformPriceProDAO
 
     End Function
 
-  
+
 
     Public Sub New()
         mProductDAOs = Nothing

@@ -1,6 +1,5 @@
 ﻿
 Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class PositionControl
     Implements iControl
@@ -41,7 +40,7 @@ Public Class PositionControl
         End Get
     End Property
 
- 
+
     Private Sub LoadData()
         Dim lcls As New PositionDAO
         Dim dataTable As New DataTable()
@@ -115,9 +114,9 @@ Public Class PositionControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmPosition 
+        Dim lFormEdit As frmPosition
         Try
-             
+
             lFormEdit = New frmPosition
             With lFormEdit
                 .Caption = mCaption
@@ -144,7 +143,7 @@ Public Class PositionControl
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".mCtlForm_CHeckRefresh : " & e.Message)
         Finally
-            lcls = Nothing 
+            lcls = Nothing
         End Try
     End Sub
 
@@ -187,7 +186,7 @@ Public Class PositionControl
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, ClassName & ".mCtlForm_InitDetail : " & ex.Message)
         Finally
-            lclsDAO = Nothing 
+            lclsDAO = Nothing
         End Try
     End Sub
 

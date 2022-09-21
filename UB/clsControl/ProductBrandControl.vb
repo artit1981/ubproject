@@ -1,7 +1,4 @@
 ﻿Option Explicit On
-
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class ProductBrandControl
     Implements iControl
     Private Const mCaption As String = "ยี่ห้อสินค้า"

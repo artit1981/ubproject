@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 Public Class InformPriceBuyControl
     Implements iControl
     Private Const mCaption As String = "ระบบแจ้งราคาซื้อ"

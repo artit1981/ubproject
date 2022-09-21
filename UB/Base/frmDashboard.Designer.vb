@@ -21,6 +21,7 @@ Partial Class frmDashboard
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl15 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl14 = New DevExpress.XtraEditors.GroupControl()
@@ -28,6 +29,7 @@ Partial Class frmDashboard
         Me.GroupControl9 = New DevExpress.XtraEditors.GroupControl()
         Me.ChartTotalSellByCatalog = New DevExpress.XtraCharts.ChartControl()
         Me.GroupControl6 = New DevExpress.XtraEditors.GroupControl()
+        Me.ChartTotalSellCOGSByYear = New DevExpress.XtraCharts.ChartControl()
         Me.GroupControl12 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl11 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
@@ -51,11 +53,11 @@ Partial Class frmDashboard
         Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem15 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.ChartTotalSellCOGSByYear = New DevExpress.XtraCharts.ChartControl()
+        Me.ChartTotalSellProfitByYear = New DevExpress.XtraCharts.ChartControl()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl14, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,10 +67,12 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellByCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl6.SuspendLayout()
+        CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl7.SuspendLayout()
         CType(Me.GroupControl8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,9 +92,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -118,6 +121,14 @@ Partial Class frmDashboard
         Me.LayoutControl1.Size = New System.Drawing.Size(1489, 840)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'GroupControl4
+        '
+        Me.GroupControl4.Location = New System.Drawing.Point(12, 154)
+        Me.GroupControl4.Name = "GroupControl4"
+        Me.GroupControl4.Size = New System.Drawing.Size(243, 217)
+        Me.GroupControl4.TabIndex = 14
+        Me.GroupControl4.Text = "GroupControl4"
         '
         'GroupControl3
         '
@@ -178,6 +189,15 @@ Partial Class frmDashboard
         Me.GroupControl6.TabIndex = 0
         Me.GroupControl6.Text = "GroupControl6"
         '
+        'ChartTotalSellCOGSByYear
+        '
+        Me.ChartTotalSellCOGSByYear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ChartTotalSellCOGSByYear.Location = New System.Drawing.Point(2, 23)
+        Me.ChartTotalSellCOGSByYear.Name = "ChartTotalSellCOGSByYear"
+        Me.ChartTotalSellCOGSByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
+        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(389, 271)
+        Me.ChartTotalSellCOGSByYear.TabIndex = 1
+        '
         'GroupControl12
         '
         Me.GroupControl12.Location = New System.Drawing.Point(755, 12)
@@ -204,6 +224,7 @@ Partial Class frmDashboard
         '
         'GroupControl7
         '
+        Me.GroupControl7.Controls.Add(Me.ChartTotalSellProfitByYear)
         Me.GroupControl7.Location = New System.Drawing.Point(1055, 179)
         Me.GroupControl7.Name = "GroupControl7"
         Me.GroupControl7.Size = New System.Drawing.Size(422, 296)
@@ -377,14 +398,6 @@ Partial Class frmDashboard
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem3.TextVisible = False
         '
-        'GroupControl4
-        '
-        Me.GroupControl4.Location = New System.Drawing.Point(12, 154)
-        Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(243, 217)
-        Me.GroupControl4.TabIndex = 14
-        Me.GroupControl4.Text = "GroupControl4"
-        '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.GroupControl4
@@ -394,14 +407,14 @@ Partial Class frmDashboard
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem4.TextVisible = False
         '
-        'ChartTotalSellCOGSByYear
+        'ChartTotalSellProfitByYear
         '
-        Me.ChartTotalSellCOGSByYear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ChartTotalSellCOGSByYear.Location = New System.Drawing.Point(2, 23)
-        Me.ChartTotalSellCOGSByYear.Name = "ChartTotalSellCOGSByYear"
-        Me.ChartTotalSellCOGSByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(389, 271)
-        Me.ChartTotalSellCOGSByYear.TabIndex = 1
+        Me.ChartTotalSellProfitByYear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ChartTotalSellProfitByYear.Location = New System.Drawing.Point(2, 23)
+        Me.ChartTotalSellProfitByYear.Name = "ChartTotalSellProfitByYear"
+        Me.ChartTotalSellProfitByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
+        Me.ChartTotalSellProfitByYear.Size = New System.Drawing.Size(418, 271)
+        Me.ChartTotalSellProfitByYear.TabIndex = 2
         '
         'frmDashboard
         '
@@ -413,6 +426,7 @@ Partial Class frmDashboard
         Me.Text = "แจ้งเตือน"
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl14, System.ComponentModel.ISupportInitialize).EndInit()
@@ -422,10 +436,12 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellByCatalog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl6.ResumeLayout(False)
+        CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl7.ResumeLayout(False)
         CType(Me.GroupControl8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -445,9 +461,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -486,4 +501,5 @@ Partial Class frmDashboard
     Friend WithEvents GroupControl4 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents ChartTotalSellCOGSByYear As DevExpress.XtraCharts.ChartControl
+    Friend WithEvents ChartTotalSellProfitByYear As DevExpress.XtraCharts.ChartControl
 End Class

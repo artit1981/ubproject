@@ -1,11 +1,11 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
 Imports DevExpress.XtraGrid.Columns
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Enum ProColumn
     UnitName = 1
@@ -323,7 +323,7 @@ Public Class ucProductLists
                             If ConvertNullToZero(lDataDAO.LocationDTLID) <= 0 Then
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุตำแหน่งเก็บ"
                             End If
-                           
+
                             'Count SN list exclude delete
                             Dim lSNDup As Boolean = False, lSNList As New List(Of String)
                             If IsNothing(lDataDAO.SNList) = False Then
@@ -916,7 +916,7 @@ Public Class ucProductLists
         Dim view As GridView = CType(sender, GridView)
         Dim lView As New DataView
         Try
-            If view.FocusedColumn.FieldName = "LocationDTLID" AndAlso _
+            If view.FocusedColumn.FieldName = "LocationDTLID" AndAlso
           TypeOf view.ActiveEditor Is LookUpEdit AndAlso mlngProductID > 0 Then
                 Dim edit As LookUpEdit = CType(view.ActiveEditor, LookUpEdit)
                 lView = New DataView(mclone)
@@ -1020,7 +1020,7 @@ Public Class ucProductLists
 
         If rowHandle < 0 Then Exit Sub
         mlngProductID = ConvertNullToZero(gridView.GetRowCellValue(rowHandle, "ProductID"))
-       
+
         RaiseEvent SelectedProduct(mlngProductID)
     End Sub
 

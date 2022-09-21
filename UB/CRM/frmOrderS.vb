@@ -1948,7 +1948,7 @@ Public Class frmOrderS
         End Try
     End Sub
 
-  
+
 #End Region
 
 
@@ -2083,7 +2083,7 @@ Public Class frmOrderS
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-     
-  
- 
+
+
+
 End Class

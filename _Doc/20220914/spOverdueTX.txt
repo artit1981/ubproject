@@ -1,0 +1,27 @@
+CREATE PROCEDURE [dbo].[spOverdueTX] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT Orders.OrderID AS ID, Orders.OrderCode  Code,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,Orders.PayTotal  
+,Menu.TableName,Menu.MenuDisplay
+FROM Orders     
+left outer join Menu on Orders.TableID=menu.MenuID
+
+WHERE Orders.IsDelete =0 
+AND Orders.IsCancel = 0   
+and Orders.TableID =39 --invoice
+AND Orders.OrderDate Between @FromDate AND @ToDate 
+AND Orders.RefReceiptID>0  
+AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 ) 
+AND ExpireDate <= @ToDate  AND Orders.IsInActive = 0  AND Orders.IsCancel= 0  
+AND Orders.OrderDate <= @ToDate  
+ORDER BY Orders.OrderCode
+
+END
+GO
+
+

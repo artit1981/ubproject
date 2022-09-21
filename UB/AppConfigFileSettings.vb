@@ -1,8 +1,4 @@
-﻿
-Imports System.Configuration
-Imports System.Xml
-
-Public Class AppConfigFileSettings
+﻿Public Class AppConfigFileSettings
     ''' <summary>
     ''' UpdateAppSettings: It will update the app.Config file AppConfig key values
     ''' </summary>

@@ -1,7 +1,6 @@
 ﻿Option Explicit On
 
 Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.Controls
 
 Public Class frmProductCategory
     Inherits iEditForm
@@ -130,7 +129,7 @@ Public Class frmProductCategory
 
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             If pMode = DataMode.ModeNew Then
                 SetComboProductGroup("", ProductGroupID)
@@ -165,7 +164,7 @@ Public Class frmProductCategory
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 
@@ -202,10 +201,10 @@ Public Class frmProductCategory
 #Region "Set combo"
 
 
-   
 
 
-   
+
+
 
 #End Region
 

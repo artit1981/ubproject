@@ -1,6 +1,5 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
- 
+
 Public Class AgencyControl
     Implements iControl
     Private Const mCaption As String = "เจ้าหนี้"

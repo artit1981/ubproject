@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
-Imports System.Text
 
 Module modFunction
 
@@ -35,7 +34,7 @@ Module modFunction
     Private mFindCustomer(1) As String
     Private mFindOppName(1) As String
     Private mFindAgency(1) As String
-  
+
     Public Sub InitialFilterCon(ByVal pCombo As DevExpress.XtraEditors.ComboBoxEdit, ByVal pFilterBy As FilterBy)
         mFindAll(0) = "ทั้งหมด"
         mFindAll(1) = "*"
@@ -709,7 +708,7 @@ Module modFunction
         Try
 
             SQL = "SELECT b.LocationDTLID AS ID,b.NameThai, 0 as Flag"
-           
+
             SQL = SQL & " FROM Product_LocationDTL b"
             SQL = SQL & " Inner join Product_Location a on a.LocationID=b.RefID"
             SQL = SQL & " WHERE a.IsDelete= 0   "

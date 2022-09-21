@@ -2,7 +2,6 @@
 
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Base
 
 Public Class ucProductUnit
 
@@ -58,7 +57,7 @@ Public Class ucProductUnit
                         '    End If
                         'End If
 
-                      
+
 
                         If mIsError = "" Then
                             TryCast(gridView.GetRow(lRow), MyRecord).GetError(info)

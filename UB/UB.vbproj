@@ -375,12 +375,19 @@
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
+    <Compile Include="CRM\frmBankAccountRec.Designer.vb">
+      <DependentUpon>frmBankAccountRec.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmBankAccountRec.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmOrderHis2.Designer.vb">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </Compile>
     <Compile Include="CRM\frmOrderHis2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DAO\BankAccountRecordSDAO.vb" />
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="Master\frmProvince.Designer.vb">
@@ -1229,6 +1236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmBankAccountRec.resx">
+      <DependentUpon>frmBankAccountRec.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>

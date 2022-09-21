@@ -1,8 +1,5 @@
 ﻿Option Explicit On
-
-Imports System.Data.SqlClient
 Imports System.IO
-Imports DevExpress.XtraEditors
 
 Public Class ucHistory
     Dim mcurrentFiles As FileAttachDAO         ' the current Files (displayed)
@@ -33,7 +30,7 @@ Public Class ucHistory
                 MaritalStatus.Text = lcls.MaritalStatus
                 MaritalName.Text = lcls.MaritalName
                 MilitaryStatus.Text = lcls.MilitaryStatus
-               
+
                 'ImageS
                 mcurrentFiles = lcls.ImageS
                 If mcurrentFiles Is Nothing Then
@@ -230,7 +227,7 @@ Public Class ucHistory
         End Try
     End Sub
 
-   
+
     Private Sub picPhoto_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picPhoto.EditValueChanged
 
     End Sub

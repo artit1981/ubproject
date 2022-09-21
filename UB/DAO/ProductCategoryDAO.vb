@@ -7,7 +7,7 @@ Public Class ProductCategoryDAO
     Dim mProductBrandIDList As String
     Dim mProductTypeIDList As String
     'Private mProductGroupDAO As MasterDAO
-  
+
     Public Property ProductGroupIDList() As String
         Get
             Return mProductGroupIDList

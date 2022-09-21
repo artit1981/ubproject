@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraReports.UI
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraReports.UI
 
 Public Class frmTaxReport
     Inherits iReport
@@ -84,7 +84,7 @@ Public Class frmTaxReport
 
                     lclsTmpProList.OrderDate = pRow.Item("OrderDate")
                     lclsTmpProList.Customer = ConvertNullToString(pRow.Item("Customer"))
-                   
+
                     Select Case ConvertNullToZero(pRow.Item("TableID"))
                         Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy
                             lclsTmpProList.Total = (ConvertNullToZero(pRow.Item("Total")) - ConvertNullToZero(pRow.Item("DiscountAmount"))) * -1

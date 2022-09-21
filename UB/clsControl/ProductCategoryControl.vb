@@ -1,8 +1,5 @@
 ﻿
 Option Explicit On
-
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class ProductCategoryControl
     Implements iControl
     Private Const mCaption As String = "หมวดสินค้า"
@@ -92,7 +89,7 @@ Public Class ProductCategoryControl
 
             .Columns("NameThai").Caption = "ชื่อหมวดสินค้า"
             .Columns("NameThai").Width = 700
- 
+
 
         End With
     End Sub

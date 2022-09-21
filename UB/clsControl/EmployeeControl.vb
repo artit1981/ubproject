@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraEditors
-
-Public Class EmployeeControl
+﻿Public Class EmployeeControl
     Implements iControl
     Private Const mCaption As String = "พนักงาน"
 
@@ -23,7 +21,7 @@ Public Class EmployeeControl
         End Try
     End Sub
 
-    Private WithEvents mCtlForm As frmControls 
+    Private WithEvents mCtlForm As frmControls
     Private mCHECKSUM_AGG As Long
 
     Private ReadOnly Property ClassName() As String
@@ -39,7 +37,7 @@ Public Class EmployeeControl
 
     End Property
 
-  
+
 
     Private Sub LoadData()
         Dim lcls As New EmployeeDAO
@@ -64,7 +62,7 @@ Public Class EmployeeControl
         End Try
     End Sub
 
-     
+
     Private Sub GridStyle()
         With mCtlForm.GridView
 
@@ -91,9 +89,9 @@ Public Class EmployeeControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmEmployee 
+        Dim lFormEdit As frmEmployee
         Try
-             
+
             lFormEdit = New frmEmployee
             With lFormEdit
                 .Caption = mCaption
@@ -120,7 +118,7 @@ Public Class EmployeeControl
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".mCtlForm_CHeckRefresh : " & e.Message)
         Finally
-            lcls = Nothing 
+            lcls = Nothing
         End Try
     End Sub
 
@@ -170,11 +168,11 @@ Public Class EmployeeControl
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, ClassName & ".mCtlForm_InitDetail : " & ex.Message)
         Finally
-            lclsDAO = Nothing 
+            lclsDAO = Nothing
         End Try
     End Sub
 
-     Private Sub mCtlForm_RefreshFind() Handles mCtlForm.RefreshFind
+    Private Sub mCtlForm_RefreshFind() Handles mCtlForm.RefreshFind
         Try
             Dim findText As String = mCtlForm.GridView.FindFilterText
             Dim lstrCon As String = InitialFilterMapping(mCtlForm.cboFindIn.SelectedItem)  'Call Global function

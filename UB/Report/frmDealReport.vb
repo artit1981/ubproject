@@ -1,8 +1,8 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
+Imports DevExpress.XtraReports.UI
 
 Public Class frmDealReport
     Inherits iReport
@@ -42,7 +42,7 @@ Public Class frmDealReport
                     report = New rptDealSellNot
                     lclsReport.Header1 = "รายงานค้างชำระหนี้ของลูกหนี้การค้าปี " & Year(OrderDate.EditValue)
                 End If
-               
+
             Else
                 If OrderType2.EditValue = "S" Then
                     lclsReport.Header1 = "รายงานการจ่ายชำระหนี้ของเจ้าหนี้การค้าปี " & Year(OrderDate.EditValue)
@@ -97,7 +97,7 @@ Public Class frmDealReport
                     SQL = SQL & " and Orders.TableID in (" & MasterType.Invoice & ")"
                 End If
             End If
-           
+
             SQL = SQL & " ) as TMP"
 
             If OrderType.EditValue = "S" Then 'Sell
@@ -157,5 +157,5 @@ Public Class frmDealReport
         Finally
         End Try
     End Sub
- 
+
 End Class

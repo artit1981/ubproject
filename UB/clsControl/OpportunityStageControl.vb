@@ -1,8 +1,5 @@
 ﻿
 Option Explicit On
-
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class OpportunityStageControl
     Implements iControl
     Private Const mCaption As String = "ช่วงโอกาสทางการขาย"

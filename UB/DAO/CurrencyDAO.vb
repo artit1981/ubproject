@@ -4,7 +4,7 @@ Imports System.Data.SqlClient
 Public Class CurrencyDAO
     Inherits iDAO
     Dim mExchangeRate As Double
-    
+
     Public ReadOnly Property TableName() As String
         Get
             Return "Currency"
@@ -23,7 +23,7 @@ Public Class CurrencyDAO
         End Get
     End Property
 
-    
+
     Public Property ExchangeRate() As Double
         Get
             Return mExchangeRate

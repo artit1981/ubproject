@@ -1,7 +1,5 @@
 ﻿Option Explicit On
 
-Imports System.Data.SqlClient
-
 
 Public Class frmConvertLead
     Private mConVertType As Integer

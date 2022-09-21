@@ -1,6 +1,6 @@
 ﻿Public Class ucApproveTX
     Private mDataDAOs As List(Of ApproveTX)
-    Private mIsReaOnly As Boolean 
+    Private mIsReaOnly As Boolean
     Private bindingSource1 As New BindingSource
 
     Public Function ShowControl(ByVal pIsReaOnly As Boolean) As Boolean
@@ -89,10 +89,10 @@
                     rec.ApproveStatus = ConvertNullToString(dr("ApproveStatus"))
                     rec.ApproveType = ConvertNullToZero(dr("ApproveType"))
                     rec.Remark = ConvertNullToString(dr("Remark"))
-                    rec.ModeData = DataMode.ModeEdit 
+                    rec.ModeData = DataMode.ModeEdit
                     bindingSource1.Add(rec)
                 Next
-            End If 
+            End If
             gridControl.DataSource = bindingSource1
             GridStyle()
         Catch e As Exception
@@ -112,6 +112,6 @@
             End If
         End With
     End Sub
-     
+
 
 End Class

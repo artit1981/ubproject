@@ -27,7 +27,7 @@ Public Class ucPledge
         Try
             mIsReadOnly = pIsReadOnly
             dataTable = lcls.GetDataTable(pRefOrderID)
- 
+
             gridControl.DataSource = dataTable
             GridStyle()
             Return True
@@ -125,7 +125,7 @@ Public Class ucPledge
 
 
 #End Region
- 
+
     Private Sub gridView_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles gridView.InitNewRow
         Dim view As GridView = CType(sender, GridView)
         view.SetRowCellValue(e.RowHandle, view.Columns("OrderDate"), DateTime.Today)

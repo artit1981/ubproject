@@ -94,7 +94,7 @@ Public Class frmProductBrand
     'End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             If pMode = DataMode.ModeNew Then
 
@@ -122,7 +122,7 @@ Public Class frmProductBrand
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 
@@ -130,7 +130,7 @@ Public Class frmProductBrand
     Private Function Verify() As Boolean
         Try
             DxErrorProvider1.ClearErrors()
-     
+
             If Trim(IDCode.Text) = "" Then
                 SetErrorProvider(DxErrorProvider1, IDCode, "กรุณาระบุข้อมูล")
             ElseIf mcls.CheckExist() Then
@@ -156,7 +156,7 @@ Public Class frmProductBrand
 #End Region
 
 #Region "Set combo"
-    
+
 
     'Private Sub SetComboProductType()
     '    Try
@@ -165,7 +165,7 @@ Public Class frmProductBrand
     '        Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProductType : " & e.Message)
     '    End Try
     'End Sub
- 
+
 
 #End Region
 End Class

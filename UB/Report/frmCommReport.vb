@@ -1,7 +1,7 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
+Imports DevExpress.XtraReports.UI
 
 Public Class frmCommReport
     Inherits iReport
@@ -22,9 +22,9 @@ Public Class frmCommReport
             Me.DateFrom.EditValue = thisMonth.AddMonths(-1)
             Me.DateTo.EditValue = thisMonth.AddDays(-1)
             VatType.EditValue = "E"
-            
+
             SetComboCustomer()
-             
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)
         End Try
@@ -40,7 +40,7 @@ Public Class frmCommReport
         Try
             dataTable = lcls.GetDataTable(0, True)
             UcMoverItem1.ShowControl(dataTable, "ID", "NAME")
-            
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
         Finally
@@ -67,7 +67,7 @@ Public Class frmCommReport
 
     End Sub
 
-     
+
 
     Private Sub PrintReport()
         Dim report As New XtraReport
@@ -211,6 +211,6 @@ Public Class frmCommReport
         End Select
     End Sub
 
-     
- 
+
+
 End Class

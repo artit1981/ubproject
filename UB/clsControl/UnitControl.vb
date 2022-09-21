@@ -1,9 +1,6 @@
 ﻿
 Option Explicit On
 
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
-
 Public Class UnitControl
     Implements iControl
     Private Const mCaption As String = "หน่วยนับ"
@@ -106,8 +103,8 @@ Public Class UnitControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmUnit 
-        Try 
+        Dim lFormEdit As frmUnit
+        Try
             lFormEdit = New frmUnit
             With lFormEdit
                 .Caption = mCaption

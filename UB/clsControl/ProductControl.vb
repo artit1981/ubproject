@@ -1,8 +1,5 @@
 ﻿
 Option Explicit On
-
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
 Public Class ProductControl
     Implements iControl
     Private Const mCaption As String = "สินค้า"
@@ -123,9 +120,9 @@ Public Class ProductControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmProduct 
+        Dim lFormEdit As frmProduct
         Try
-             
+
             lFormEdit = New frmProduct
             With lFormEdit
                 .Caption = mCaption

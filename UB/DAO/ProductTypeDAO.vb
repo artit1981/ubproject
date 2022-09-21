@@ -158,7 +158,7 @@ Public Class ProductTypeDAO
                     Next
                 End If
             End If
-            
+
             SQL = "SELECT ProductTypeID AS ID,IDCode,NameThai "
             SQL = SQL & " FROM ProductType  "
             SQL = SQL & " WHERE IsDelete =0   "

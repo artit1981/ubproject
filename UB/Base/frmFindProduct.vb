@@ -1,6 +1,6 @@
 ﻿
 Option Explicit On
- 
+
 Public Class frmFindProduct
     Private mDataKey As Collection
     Private mLookFor As String
@@ -145,7 +145,7 @@ Public Class frmFindProduct
         Try
             mDataKey = New Collection
             mIsAccept = False
-           Me.Close()
+            Me.Close()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally

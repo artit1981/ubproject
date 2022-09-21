@@ -1,7 +1,7 @@
-﻿Imports System.IO
-Imports System.Data.SqlClient
-Imports DevExpress.XtraGrid.Views.Base
+﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Base
 
 Public Class ucFileAttach
     Private mFileAttachs As List(Of FileAttachDAO)       ' a container for the Files collection
@@ -286,5 +286,5 @@ Public Class ucFileAttach
         End Try
     End Sub
 
-  
+
 End Class

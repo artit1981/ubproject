@@ -1,9 +1,5 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class frmSNList
     Inherits iEditForm

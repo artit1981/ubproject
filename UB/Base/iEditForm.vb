@@ -126,7 +126,7 @@ Partial Public Class iEditForm
     Protected Overridable Sub OnClosedForm()
     End Sub
 
-     
+
     Protected Overridable Sub PrintOrder(ByVal pID As Long, ByVal pPrintType As Long) '1=Order, 2=Payment, 3=Cheque
     End Sub
 
@@ -216,7 +216,7 @@ Partial Public Class iEditForm
         Me.MakeOrder(mIDs)
     End Sub
 
-    
+
     Private Sub PrintBar2_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles PrintBar2.ItemClick
         Try
             'ShowProgress(True, "Printing...")
@@ -265,5 +265,5 @@ Partial Public Class iEditForm
         End Try
     End Sub
 
-   
+
 End Class

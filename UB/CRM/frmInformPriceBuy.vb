@@ -1,11 +1,9 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors.Controls
-
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmInformPriceBuy
     Inherits iEditForm
@@ -23,7 +21,7 @@ Public Class frmInformPriceBuy
             mIsFromLoad = True
             chkAutoRow.Checked = True
             Dim point1 As New Point(10, 10)
-            
+
             'GroupControl1.Height = 24
             'point1 = New Point(11, 129)
             'gridControl.Location = point1
@@ -160,12 +158,12 @@ Public Class frmInformPriceBuy
         End Try
     End Sub
 
-     
+
 
 #End Region
 
 #Region "Private"
-   
+
 
 
     Private Sub InitialCombo()
@@ -252,7 +250,7 @@ Public Class frmInformPriceBuy
             lProType = ConvertNullToZero(ProductTypeID.EditValue)
             lProBrand = ConvertNullToZero(ProductBrandID.EditValue)
 
-           bindingSource1.DataSource = Nothing
+            bindingSource1.DataSource = Nothing
 
             Call mcls.InitailData(pID, 0, Nothing, lProGroupID, lProCateID, lProType, lProBrand)
             If IsNothing(mcls.ProductTable) = False Then

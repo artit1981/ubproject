@@ -1,8 +1,5 @@
 ﻿Option Explicit On
-
-Imports System.Data.SqlClient
 Imports System.IO
-Imports DevExpress.XtraEditors
 
 Public Class ucAddress
     Dim mcurrentFiles As FileAttachDAO         ' the current Files (displayed)
@@ -10,7 +7,7 @@ Public Class ucAddress
 
     Dim mIDs As Long
     Dim mImageID As Long
-  
+
 
     Public Function InitailData(ByVal lclsAddress As AddressDAO, ByVal pProvinceTable As DataTable) As Boolean
 
@@ -246,5 +243,5 @@ Public Class ucAddress
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
-     
+
 End Class

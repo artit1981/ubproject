@@ -1,10 +1,9 @@
 ﻿Option Explicit On
 
 Imports System.Data.SqlClient
-Imports DevExpress.XtraEditors.DXErrorProvider
 Public Class ProductLocationSDAO
 
-   
+
 
 #Region "Property"
     Dim mIsMain As String
@@ -109,7 +108,7 @@ Public Class ProductLocationSDAO
         End Set
     End Property
 #End Region
-     
+
     Public Function GetDataTable(ByVal pRefID As Long) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()

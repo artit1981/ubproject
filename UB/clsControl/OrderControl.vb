@@ -1,6 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraGrid
 
 Public Class OrderControl
     Implements iControl
@@ -247,7 +245,7 @@ Public Class OrderControl
             .Columns("OrderDate").Caption = "วันที่"
             .Columns("OrderDate").Width = 80
             .Columns("OrderDate").MaxWidth = 90
-           
+
             .Columns("GrandTotal").Caption = "ยอดรวม"
             .Columns("GrandTotal").Width = 110
             .Columns("GrandTotal").MaxWidth = 120

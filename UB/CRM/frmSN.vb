@@ -1,9 +1,9 @@
 ﻿Option Explicit On
 
 Imports DevExpress.XtraEditors
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Columns
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmSN
 
@@ -446,7 +446,7 @@ Public Class frmSN
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Dim lSnData As SnDAO, lSNCount As Long = 0, lstrSNNo As String = ""
- 
+
         GridView1.ClearColumnsFilter()
         If GridView1.RowCount > 0 Then
             mSnList = Nothing
@@ -607,7 +607,7 @@ Public Class frmSN
                         End If
                     End If
                 End If
-               
+
         End Select
     End Sub
 End Class

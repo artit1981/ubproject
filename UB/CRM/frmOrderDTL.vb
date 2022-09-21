@@ -101,7 +101,7 @@ Public Class frmOrderDTL
             .Columns("SN").Visible = True
             .Columns("Units_Old").Visible = True
 
-            
+
             .Columns("Price").Visible = True
             .Columns("Cost").Visible = False
             .Columns("Total").Visible = True

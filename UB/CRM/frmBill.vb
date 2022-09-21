@@ -117,21 +117,21 @@ Public Class frmBill
             mcls.TaxOrderDAOs = GetTaxOrderList()
             If Verify(lChequePayAmt) = True Then
                 Call mcls.SaveData()
+                ShowProgress(False, "")
+                If mOrderType = MasterType.ReceiptCut Then
+                    XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "บันทึก", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     ShowProgress(False, "")
-                    If mOrderType = MasterType.ReceiptCut Then
-                        XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "บันทึก", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                        ShowProgress(False, "")
-                    Else
-                        If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                            modReport.PrintReportOrder(mOrderType, mcls.ID)
-                        End If
+                Else
+                    If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                        modReport.PrintReportOrder(mOrderType, mcls.ID)
                     End If
+                End If
 
-                    PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                    'PrintChequeBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                PrintPaymantBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                'PrintChequeBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
 
-                    Return True
-               
+                Return True
+
             Else
                 ShowProgress(False, "")
                 XtraMessageBox.Show(Me, "พบข้อผิดพลาดกรุณาตรวจสอบ", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -313,7 +313,7 @@ Public Class frmBill
     End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             mcls.TableID = mOrderType
 
@@ -381,7 +381,7 @@ Public Class frmBill
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 
@@ -579,7 +579,7 @@ Public Class frmBill
                         mTaxOrderTotal = mTaxOrderTotal + lDataDAO.TaxAmount
                         lDataList.Add(lDataDAO)
                     End If
-                
+
                 Next
                 Calculation()
             End If
@@ -629,7 +629,7 @@ Public Class frmBill
     End Sub
 
     Private Sub GridView2_RowUpdated(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.RowObjectEventArgs) Handles GridView2.RowUpdated
-       
+
         Call GetTaxOrderList()
     End Sub
 
@@ -701,8 +701,8 @@ Public Class frmBill
     End Sub
 #End Region
 
-   
-     
+
+
     Private Sub btnCalc_Click(sender As System.Object, e As System.EventArgs) Handles btnCalc.Click
         CalcEdit1.ShowPopup()
         CalcEdit1.Focus()

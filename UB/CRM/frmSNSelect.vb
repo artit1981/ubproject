@@ -1,7 +1,5 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
-
 Public Class frmSNSelect
 
     Dim mProductName As String
@@ -37,7 +35,7 @@ Public Class frmSNSelect
             mUnit = value
         End Set
     End Property
- 
+
     Public WriteOnly Property ProductIDs() As Long
         Set(ByVal value As Long)
             mProductIDs = value
@@ -55,7 +53,7 @@ Public Class frmSNSelect
 
         LoadSN()
 
- 
+
         mIsFromLoad = False
     End Sub
 
@@ -97,7 +95,7 @@ Public Class frmSNSelect
         Finally
         End Try
     End Sub
-     
+
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         mSnList = New List(Of SnDAO)
@@ -137,7 +135,7 @@ Public Class frmSNSelect
         End Try
 
     End Sub
-     
+
 
     Private Sub InitialProduct(ByVal pProID As Long, ByVal pProCode As String)
         Dim lcls As New ProductDAO
@@ -152,5 +150,5 @@ Public Class frmSNSelect
         End If
     End Sub
 
-    
+
 End Class

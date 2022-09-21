@@ -1,8 +1,5 @@
 ﻿Option Explicit On
-
-Imports DevExpress.XtraEditors.Controls
 'Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Base
 Public Class ucEmployee
     Dim mIsError As Boolean
     Private mRefID As Long = 0
@@ -77,7 +74,7 @@ Public Class ucEmployee
         End Try
     End Sub
 
-    
+
     Private Function LoadDataContact(ByVal pName As String, ByVal pAutoAdd As Boolean) As String
 
         Dim lstrName As String
@@ -106,7 +103,7 @@ Public Class ucEmployee
                         lfrmFind = Nothing
                     End If
                 End If
-                 
+
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucContactRole.LoadDataContact : " & e.Message)
@@ -141,7 +138,7 @@ Public Class ucEmployee
                         newRow("Email1") = ConvertNullToString(lcls.AddressS.Email1)
                         newRow("Phone1") = ConvertNullToString(lcls.AddressS.Phone1)
                     End If
-                 
+
                     TryCast(gridControl.DataSource, DataTable).Rows.Add(newRow)
                     gridControl.RefreshDataSource()
                 Else
@@ -155,7 +152,7 @@ Public Class ucEmployee
                         gridView.SetFocusedRowCellValue("Email1", ConvertNullToString(lcls.AddressS.Email1))
                         gridView.SetFocusedRowCellValue("Phone1", ConvertNullToString(lcls.AddressS.Phone1))
                     End If
-                  
+
                 End If
 
                 Return ConvertNullToString(lcls.CustomerName)
@@ -170,7 +167,7 @@ Public Class ucEmployee
             lcls = Nothing
         End Try
     End Function
-  
+
 
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         LoadDataContact("", True)

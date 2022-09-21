@@ -1,14 +1,14 @@
-﻿Public Class frmVerifyCustomer 
+﻿Public Class frmVerifyCustomer
 
-    
-    
+
+
     Private Sub frmVerifyCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
 
             With Me
                 .Text = "Verify Customer"
                 .MdiParent = frmMain
- 
+
                 Call LoadDataLead()
                 Call LoadDataContact()
                 Call LoadDataAccount()

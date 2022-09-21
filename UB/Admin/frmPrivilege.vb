@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Base
 
 
 Public Class frmPrivilege

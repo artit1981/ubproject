@@ -91,7 +91,6 @@ Public Class frmApproveUser
     End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
         Try
             If pMode = DataMode.ModeNew Then
 
@@ -123,7 +122,6 @@ Public Class frmApproveUser
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
         End Try
     End Function
 

@@ -103,7 +103,7 @@ Public Class UnitDAO
             Info = Constants.vbCrLf & Constants.vbCrLf & "รหัสหน่วยนับ: " & Code
             Info &= Constants.vbCrLf & "ชื่อหน่วยนับ: " & NameThai
             Info &= Constants.vbCrLf & "ชื่อหน่วยนับ (Eng): " & NameEng
-            
+
             Info &= Constants.vbCrLf & "รายละเอียด: " & Remark
 
         Catch e As Exception

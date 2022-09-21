@@ -1,11 +1,9 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Columns
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Enum AppColumn
     Amount = 1
@@ -55,7 +53,7 @@ Public Class ucApproveUser
                 DxErrorProvider1.ContainerControl = Me
                 gridControl.DataSource = bindingSource1
                 GridStyle()
-                
+
             Catch e As Exception
                 Err.Raise(Err.Number, e.Source, "ucApproveUser.LoadData : " & e.Message)
             Finally
@@ -149,7 +147,7 @@ Public Class ucApproveUser
                     rec.ApproveAmount = ConvertNullToZero(dr("ApproveAmount"))
                     rec.IsCancel = dr("IsCancel")
                     rec.Remark = ConvertNullToString(dr("Remark"))
-                    rec.ModeData = DataMode.ModeEdit 
+                    rec.ModeData = DataMode.ModeEdit
                     bindingSource1.Add(rec)
                 Next
             End If
@@ -167,7 +165,7 @@ Public Class ucApproveUser
 
     Private Sub GridStyle()
         With gridView
-           
+
             .Columns("ApproveUserDtlID").Visible = False
             .Columns("SEQ").Visible = False
             .Columns("EmpID").Visible = False
@@ -183,7 +181,7 @@ Public Class ucApproveUser
                 'If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
                 .Columns("EmpName").OptionsColumn.ReadOnly = True
             End If
-         End With
+        End With
     End Sub
 
     Private Function LoadDataEmp(ByVal pEmpName As String, ByVal pAutoAdd As Boolean) As String
@@ -224,7 +222,7 @@ Public Class ucApproveUser
 
         End Try
     End Function
-     
+
 
     Private Function LoadDataTableEmp(ByVal pllngID As Long, ByVal pEmpName As String, ByVal pAutoAdd As Boolean) As String
         Dim lcls As New EmployeeDAO

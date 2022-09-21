@@ -1,11 +1,10 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 
 Public Class ContactControl
     Implements iControl
     Private Const mCaption As String = "Contacts"
-    Private WithEvents mCtlForm As frmControls 
+    Private WithEvents mCtlForm As frmControls
     Private mCHECKSUM_AGG As Long
 
     Public Sub Execute(ByVal pOrderType As Integer) Implements iControl.Execute
@@ -50,7 +49,7 @@ Public Class ContactControl
             dataTable = Nothing
         End Try
     End Sub
-     
+
     Private Sub GridStyle()
         With mCtlForm.GridView
 

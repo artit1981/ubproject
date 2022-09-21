@@ -106,7 +106,7 @@ Public Class TerritoryDAO
 
                     ' Manager
                     ManagerID = Int32.Parse(dr("ManagerID"))
-                    
+
                     'Load FileAttach
                     FileAttachs = LoadFileAttach(ID, TableName, Nothing)
 

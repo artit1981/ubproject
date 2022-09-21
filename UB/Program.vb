@@ -1,8 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
 Imports DevExpress.LookAndFeel
-Imports System.Configuration
+Imports DevExpress.XtraEditors
 
 
 Friend Class Program
@@ -25,7 +24,7 @@ Friend Class Program
             Application.EnableVisualStyles()
 
             Application.Run(New frmLogin())
- 
+
         Catch ex As Exception
             XtraMessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             End

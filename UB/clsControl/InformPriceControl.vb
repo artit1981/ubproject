@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class InformPriceControl
     Implements iControl

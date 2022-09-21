@@ -24,7 +24,7 @@ Public Class frmCampaign
         Try
 
             Call LoadData(pMode, pID)
-           
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
         End Try
@@ -96,7 +96,7 @@ Public Class frmCampaign
         End Try
     End Function
 
- 
+
     Protected Overrides Sub OnClosedForm()
         mcls = Nothing
     End Sub
@@ -119,10 +119,10 @@ Public Class frmCampaign
 
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             If pMode = DataMode.ModeNew Then
-               
+
             ElseIf pMode = DataMode.ModeEdit Then
                 If mcls.InitailData(pID) Then
                     Subject.Text = mcls.Subject
@@ -141,7 +141,7 @@ Public Class frmCampaign
                     StatusDesc.EditValue = mcls.StatusDesc
                     StartDate.EditValue = mcls.StartDate
                     ExpireDate.EditValue = mcls.ExpireDate
-                  
+
                     Remark.EditValue = mcls.Remark
 
                     UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
@@ -171,7 +171,7 @@ Public Class frmCampaign
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 
@@ -229,6 +229,6 @@ Public Class frmCampaign
     'End Sub
 
 #End Region
-      
-  
+
+
 End Class

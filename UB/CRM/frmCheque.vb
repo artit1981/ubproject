@@ -25,7 +25,7 @@ Public Class frmCheque
         End Set
     End Property
 
-    
+
 
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
@@ -52,7 +52,7 @@ Public Class frmCheque
             Select Case pMode
                 Case DataMode.ModeNew
                     'ClearForm(GroupControl1)
-                   
+
             End Select
 
             'txtCode.Select()
@@ -86,7 +86,7 @@ Public Class frmCheque
                     mcls.ChequeType = 1
                 Else
                     mcls.ChequeType = 2
-                End If 
+                End If
                 mcls.ID = mIDs
                 mcls.Remark = Remark.EditValue
                 mcls.ModeData = pMode
@@ -268,8 +268,8 @@ Public Class frmCheque
     End Sub
 #End Region
 
-   
- 
+
+
 
     Private Sub BankDocTypeID_EditValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles BankDocTypeID.EditValueChanged
         If mIsFromLoad = False Then
@@ -277,5 +277,5 @@ Public Class frmCheque
         End If
     End Sub
 
-    
+
 End Class

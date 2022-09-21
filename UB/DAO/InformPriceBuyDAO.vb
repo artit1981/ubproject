@@ -243,7 +243,7 @@ Public Class InformPriceBuyDAO
                                     SQL = SQL & " , Discount=@Discount"
                                     SQL = SQL & " where InformPriceID=@InformPriceID"
                                 End If
-                               
+
                                 myCommand = New SqlCommand
                                 myCommand.CommandText = SQL
                                 myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))

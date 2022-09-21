@@ -42,7 +42,7 @@
             lcls = Nothing
         End Try
     End Function
-     
+
 
 
     Private Sub btnRefreshTerritory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefreshTerritory.Click
@@ -213,7 +213,7 @@
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmp : " & e.Message)
         End Try
     End Sub
-   
+
     Private Sub btnEmp_Click(sender As System.Object, e As System.EventArgs) Handles btnEmp.Click
         Try
             ShowProgress(True, "Loading...")
@@ -225,8 +225,8 @@
         End Try
 
     End Sub
- 
-    
+
+
 
     Private Sub btnRefreshCustomerZone_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefreshCustomerZone.Click
         Try
@@ -249,7 +249,7 @@
             ShowProgress(False, "")
         End Try
     End Sub
- 
+
     'Private Sub IsMainCompany_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
     '    Branch.Enabled = IsMainCompanyNo.Checked = True
     '    Branch.TabStop = IsMainCompanyNo.Checked = True

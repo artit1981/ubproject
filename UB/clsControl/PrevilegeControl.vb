@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraEditors
-
-Public Class PrevilegeControl
+﻿Public Class PrevilegeControl
     Implements iControl
     Private Const mCaption As String = "กำหนดสิทธิ"
     Public Sub Execute(ByVal pOrderType As Integer) Implements iControl.Execute
@@ -26,7 +24,7 @@ Public Class PrevilegeControl
     Private mFindCode(1) As String
     Private mFindRemark(1) As String
     Private mCHECKSUM_AGG As Long
- 
+
 
     Private Sub LoadData()
         Dim lcls As New PrivilegeDAO
@@ -103,8 +101,8 @@ Public Class PrevilegeControl
 
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmPrivilege 
-        Try 
+        Dim lFormEdit As frmPrivilege
+        Try
             lFormEdit = New frmPrivilege
             With lFormEdit
                 .Caption = mCaption
@@ -131,7 +129,7 @@ Public Class PrevilegeControl
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "PrevilegeControl.mCtlForm_CHeckRefresh : " & e.Message)
         Finally
-            lcls = Nothing 
+            lcls = Nothing
         End Try
     End Sub
 

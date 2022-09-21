@@ -1,8 +1,8 @@
 ﻿Option Explicit On
 
+Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraSplashScreen
-Imports System.Data.SqlClient
 
 Module modGlobal
 

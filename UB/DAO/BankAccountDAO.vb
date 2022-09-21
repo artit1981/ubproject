@@ -82,6 +82,7 @@ Public Class BankAccountDAO
         Try
             SQL = "SELECT BankAccountID AS ID,BankAccount.BankAccountCode,BankAccount.BankAccountNo,Bank.NameThai as BankName"
             SQL = SQL & ",case when Customer.CompanyName='' then Customer.Title + Customer.Firstname + ' ' + Customer.LastName else Customer.CompanyName end CusName"
+            SQL = SQL & ",BankAccount + ' ' BankAccountNo AS ACCNAME+ "
             SQL = SQL & " FROM BankAccount  "
             SQL = SQL & " left outer join Bank on Bank.BankID=BankAccount.BankID"
             SQL = SQL & " left outer join Customer on BankAccount.CustomerID=Customer.CustomerID"

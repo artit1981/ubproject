@@ -1,9 +1,6 @@
 ﻿
 Option Explicit On
 
-Imports DevExpress.XtraEditors
-Imports System.Data.SqlClient
-
 Public Class LocationControl
     Implements iControl
     Private Const mCaption As String = "คลังสินค้า"

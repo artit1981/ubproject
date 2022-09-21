@@ -1,7 +1,7 @@
 USE [BS]
 GO
 
-/****** Object:  StoredProcedure [dbo].[spTotalSellByCatalog]    Script Date: 9/20/2022 4:29:32 PM ******/
+/****** Object:  StoredProcedure [dbo].[spTotalSellByCatalog]    Script Date: 9/21/2022 4:54:55 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,38 +17,18 @@ AS
 BEGIN
 SET NOCOUNT ON;
 
-SELECT top 5 ProductCategory,ROUND(TotalAmount/1000,2)TotalAmount FROM(
+SELECT top 5 ProductCategory,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
 SELECT 
---Orders.OrderID,Orders.OrderCode
---,
 Product.ProductCategoryID,ProductCategory.NameThai as ProductCategory
---,Product.ProductID,Product.ProductName 
---,Orders.CustomerID,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer 
---,SUM(ProductList.PriceMain* ProductList.RateUnit)   AS Price
---,SUM(ProductList.Cost * ProductList.RateUnit) AS Cost
---,SUM((ProductList.PriceMain-ProductList.Cost) * ProductList.RateUnit) AS TotalGain
-,SUM(ProductList.Total) AS TotalAmount
-FROM Orders  
---LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  
-LEFT OUTER JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
-LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID 
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+LEFT OUTER JOIN Product ON Product.ProductID=Orders.ProductID 
 LEFT OUTER JOIN ProductCategory ON Product.ProductCategoryID=ProductCategory.CategoryID
-WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  
-and Orders.TableID=39
+WHERE Orders.TableID in(39,41)
 and year(Orders.OrderDate)in(select val from split(@YearList, ','))
 and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
 and Product.ProductCategoryID>0
-group by 
---Orders.OrderID,Orders.CustomerID,Orders.OrderCode
---,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName
---,Product.ProductID,Product.ProductName
---,
-Product.ProductCategoryID,ProductCategory.NameThai
---ORDER BY Orders.OrderCode
---,Customer.CompanyName
---,Customer.Title
---,Customer.Firstname,Customer.LastName
---,Product.ProductName
+group by Product.ProductCategoryID,ProductCategory.NameThai
 ) as tmp
 order by TotalAmount desc
 

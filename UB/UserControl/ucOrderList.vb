@@ -1,8 +1,6 @@
-﻿Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraEditors
+﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Views.Grid
 Public Class ucOrderList
     Private bindingSource1 As BindingSource
     Private mDataDAOs As List(Of SubOrder)
@@ -171,7 +169,7 @@ Public Class ucOrderList
         End Try
     End Sub
 
-      Private Sub CalcToForm()
+    Private Sub CalcToForm()
         If Not mFormOrder Is Nothing And mCanFind = True Then
             Call mFormOrder.Calculation()
         End If
@@ -272,7 +270,7 @@ Public Class ucOrderList
                 rec.OrderDate = lcls.OrderDate
                 rec.CusName = lcls.CustomerDAO.FirstName
                 rec.EmpName = lcls.EmployeeDAO(Nothing).Title & lcls.EmployeeDAO(Nothing).FirstName & " " & lcls.EmployeeDAO(Nothing).LastName
-              
+
                 rec.Remark = ""
                 rec.TableID = lcls.TableID
                 Select Case lcls.TableID
@@ -349,7 +347,7 @@ Public Class ucOrderList
         End If
 
     End Sub
-     
+
 End Class
 
 

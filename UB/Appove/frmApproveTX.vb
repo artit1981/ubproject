@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
 
 Public Class frmApproveTX
     Inherits iEditForm
@@ -78,7 +78,6 @@ Public Class frmApproveTX
 
 #Region "Private"
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
         Try
             If pMode = DataMode.ModeNew Then
 
@@ -87,13 +86,6 @@ Public Class frmApproveTX
                 MyBase.SetMode = DataMode.ModeNew
             ElseIf pMode = DataMode.ModeEdit Or pMode = DataMode.ModeCopy Then
 
-                'If mcls.InitailData(pID) Then
-                '    If pMode = DataMode.ModeEdit Then
-
-                '    ElseIf pMode = DataMode.ModeCopy Then
-                '        MyBase.SetMode = DataMode.ModeNew
-                '    End If
-                'End If
             End If
 
             UcApproveTX1.ShowControl(False)
@@ -101,28 +93,8 @@ Public Class frmApproveTX
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
         End Try
     End Function
 
-    'Private Function Verify() As Boolean
-    '    Try
-    '        DxErrorProvider1.ClearErrors()
-    '        'If Trim(AccountCode.Text) = "" Then
-    '        '    SetErrorProvider(DxErrorProvider1, AccountCode, "กรุณาระบุข้อมูล")
-    '        'ElseIf mcls.CheckExist() Then
-    '        '    SetErrorProvider(DxErrorProvider1, AccountCode, "ข้อมูลซ้ำ")
-    '        'End If
-
-    '        'If Trim(txtCompanyName.Text) = "" Then
-    '        '    SetErrorProvider(DxErrorProvider1, txtCompanyName, "กรุณาระบุข้อมูล")
-    '        'End If
-
-    '        'Return DxErrorProvider1.HasErrors = False
-    '        Return True
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mFormName & ".Verify : " & e.Message)
-    '    End Try
-    'End Function
 #End Region
 End Class

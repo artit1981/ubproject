@@ -155,7 +155,7 @@ Public Class frmRuningFormat
             Return False
         End Try
     End Function
-     
+
     Private Function Verify() As Boolean
         DxErrorProvider1.ClearErrors()
         Try
@@ -180,7 +180,7 @@ Public Class frmRuningFormat
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboLocation : " & e.Message)
         End Try
     End Sub
-#End Region 
+#End Region
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
@@ -241,5 +241,5 @@ Public Class frmRuningFormat
     End Sub
 #End Region
 
-   
+
 End Class

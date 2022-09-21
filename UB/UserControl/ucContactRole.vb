@@ -2,7 +2,6 @@
 
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraGrid.Views.Base
 Public Class ucContactRole
     Dim mIsError As Boolean
 
@@ -255,7 +254,7 @@ Public Class ucContactRole
         Private mPhone1 As String
         Private mFax As String
         Private mContactRole As String
-        
+
 
         Public Property ContactRole() As String
             Get
@@ -330,7 +329,7 @@ Public Class ucContactRole
             'If propertyInfo.ErrorText = "" Then
             '    GetPropertyError("Rate", propertyInfo)
             'End If
-            
+
         End Sub
 #End Region
     End Class

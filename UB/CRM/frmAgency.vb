@@ -232,7 +232,7 @@ Public Class frmAgency
             Err.Raise(Err.Number, e.Source, mFormName & ".SetVatType : " & e.Message)
         End Try
     End Sub
-    
+
 
     Private Sub SetComboIndustryType()
         Try
@@ -268,7 +268,7 @@ Public Class frmAgency
         End Try
     End Sub
 
-   
+
     Private Sub SetComboBusinessType()
         Try
             SetComboMasterLook(cboBusinessType, MasterType.BusinessType)
@@ -301,7 +301,7 @@ Public Class frmAgency
         End Try
     End Sub
 #End Region
- 
+
     Private Sub btnRefreshIndustryType_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefreshIndustryType.Click
         Try
             ShowProgress(True, "Loading...")
@@ -356,7 +356,7 @@ Public Class frmAgency
             ShowProgress(False, "")
         End Try
     End Sub
- 
+
     Private Sub btnGenID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenID.Click
         Try
             ShowProgress(True, "Loading...")
@@ -423,7 +423,7 @@ Public Class frmAgency
             ShowProgress(False, "")
         End Try
     End Sub
- 
+
     Private Sub IsMainCompanyYes_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles IsMainCompanyYes.CheckedChanged
         Branch.Enabled = IsMainCompanyYes.Checked = False
         Branch.TabStop = IsMainCompanyYes.Checked = False

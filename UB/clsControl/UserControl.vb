@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraEditors
-
-Public Class UserControl
+﻿Public Class UserControl
     Implements iControl
     Private Const mCaption As String = "ผู้ใช้งาน"
 
@@ -120,9 +118,9 @@ Public Class UserControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmUser 
+        Dim lFormEdit As frmUser
         Try
-             
+
             lFormEdit = New frmUser
             With lFormEdit
                 .Caption = mCaption
@@ -149,7 +147,7 @@ Public Class UserControl
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".mCtlForm_CHeckRefresh : " & e.Message)
         Finally
-            lcls = Nothing 
+            lcls = Nothing
         End Try
     End Sub
 

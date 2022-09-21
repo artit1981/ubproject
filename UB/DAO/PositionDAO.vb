@@ -115,7 +115,7 @@ Public Class PositionDAO
                     'Load FileAttach
                     FileAttachs = LoadFileAttach(ID, TableName, Nothing)
 
-                     Return True
+                    Return True
                     Exit For
                 Next
             End If

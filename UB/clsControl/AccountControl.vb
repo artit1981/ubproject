@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 
 
 Public Class AccountControl
@@ -212,7 +211,7 @@ Public Class AccountControl
     Private Sub mCtlForm_RefreshFind() Handles mCtlForm.RefreshFind
         Try
             Dim findText As String = mCtlForm.GridView.FindFilterText
-           Dim lstrCon As String = InitialFilterMapping(mCtlForm.cboFindIn.SelectedItem)  'Call Global function
+            Dim lstrCon As String = InitialFilterMapping(mCtlForm.cboFindIn.SelectedItem)  'Call Global function
             mCtlForm.GridView.OptionsFind.FindFilterColumns = lstrCon
             mCtlForm.GridView.ApplyFindFilter(String.Empty)
             mCtlForm.GridView.ApplyFindFilter(findText)

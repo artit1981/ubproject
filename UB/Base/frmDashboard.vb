@@ -17,7 +17,7 @@ Public Class frmDashboard
 
             InitChartTotalSellByCatalog()
             InitChartTotalSellCOGSByYear()
-
+            InitChartTotalSellProfitByYear()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -39,7 +39,7 @@ Public Class frmDashboard
             ChartTotalSellByCatalog.Series.Add(series1)
 
             ' Specify the text pattern of series labels.
-            series1.Label.TextPattern = "{VP:P0} ({V:F2}M)"
+            series1.Label.TextPattern = "{VP:P0} ({V:F3}M)"
             series1.LegendTextPattern = "{A}"
 
             ' Specify how series points are sorted.
@@ -69,7 +69,7 @@ Public Class frmDashboard
 
     Private Sub InitChartTotalSellCOGSByYear()
         Try
-            Dim SQL = " EXEC [dbo].[spTotalSellCOGSByYear]"
+            Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @YearList = '2020,2021,2022'"
             SQL &= " ,@MonthList = '1,2,3,4,5,6,7,8,9,10,11,12'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -86,8 +86,8 @@ Public Class frmDashboard
             ChartTotalSellCOGSByYear.Series.Add(seriesCOGS)
 
             ' Specify the text pattern of series labels.
-            seriesSale.Label.TextPattern = "{V:F2}M"
-            seriesCOGS.Label.TextPattern = "{V:F2}M"
+            seriesSale.Label.TextPattern = "{V:#,##0.000,M}"
+            seriesCOGS.Label.TextPattern = "{V:#,##0.000,M}"
 
             seriesSale.ArgumentScaleType = ScaleType.Numerical
             seriesSale.ValueScaleType = ScaleType.Numerical
@@ -107,7 +107,7 @@ Public Class frmDashboard
             diagram.AxisX.Title.Alignment = StringAlignment.Center
             diagram.AxisX.Title.Text = "Year"
             diagram.AxisX.Title.TextColor = Color.Gray
-            diagram.AxisX.Title.Font = New Font("Tahoma", 14, FontStyle.Bold)
+            diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
 
             'xAxisOptions.GridOffset = 100
             'Dim yAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
@@ -129,7 +129,7 @@ Public Class frmDashboard
 
             ' Add a title to the chart and hide the legend.
             Dim chartTitle1 As New ChartTitle With {
-                .Text = "Total Sale by Catagoly",
+                .Text = "Total Sale and COGS",
                 .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
             }
             ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
@@ -144,4 +144,78 @@ Public Class frmDashboard
         End Try
     End Sub
 
+    Private Sub InitChartTotalSellProfitByYear()
+        Try
+            Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
+            SQL &= " @YearList = '2020,2021,2022'"
+            SQL &= " ,@MonthList = '1,2,3,4,5,6,7,8,9,10,11,12'"
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+
+            Dim seriesSale As New Series("Total Sale", ViewType.Line)
+            Dim seriesProfit As New Series("Total Profit", ViewType.Line)
+            For Each pRow In dataTable.Rows
+                seriesSale.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("TotalAmount"))))
+                seriesProfit.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Profit"))))
+            Next
+
+            ' Add the series to the chart.
+            ChartTotalSellProfitByYear.Series.Add(seriesSale)
+            ChartTotalSellProfitByYear.Series.Add(seriesProfit)
+
+            ' Specify the text pattern of series labels.
+            seriesSale.Label.TextPattern = "{V:#,##0.000,M}"
+            seriesProfit.Label.TextPattern = "{V:#,##0.000,M}"
+
+            seriesSale.ArgumentScaleType = ScaleType.Numerical
+            seriesSale.ValueScaleType = ScaleType.Numerical
+
+            seriesProfit.ArgumentScaleType = ScaleType.Numerical
+            seriesProfit.ValueScaleType = ScaleType.Numerical
+
+            CType(seriesProfit.View, LineSeriesView).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True
+            'CType(seriesProfit.View, LineSeriesView).LineMarkerOptions.Size = 20
+            'CType(seriesProfit.View, LineSeriesView).LineMarkerOptions.Kind = MarkerKind.
+            'CType(seriesProfit.View, LineSeriesView).LineStyle.DashStyle = DashStyle.Dash
+
+            CType(seriesSale.View, LineSeriesView).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True
+            'CType(seriesSale.View, LineSeriesView).LineMarkerOptions.Size = 20
+            'CType(seriesSale.View, LineSeriesView).LineMarkerOptions.Kind = MarkerKind.Triangle
+            'CType(seriesSale.View, LineSeriesView).LineStyle.DashStyle = DashStyle.Dash
+
+            Dim xAxisOptions As NumericScaleOptions = CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
+            xAxisOptions.ScaleMode = ScaleMode.Manual
+            xAxisOptions.GridSpacing = 1
+            xAxisOptions.GridAlignment = NumericGridAlignment.Ones
+            xAxisOptions.AggregateFunction = AggregateFunction.None
+
+            Dim diagram As XYDiagram = CType(ChartTotalSellProfitByYear.Diagram, XYDiagram)
+            ' Customize the appearance of the X-axis title.
+            diagram.AxisX.Title.Visible = True
+            diagram.AxisX.Title.Alignment = StringAlignment.Center
+            diagram.AxisX.Title.Text = "Year"
+            diagram.AxisX.Title.TextColor = Color.Gray
+            diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
+
+            CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisY.Interlaced = True
+            CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisY.InterlacedColor = Color.FromArgb(20, 60, 60, 60)
+            CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions.AutoGrid = False
+            CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions.GridSpacing = 1
+
+
+            ' Add a title to the chart and hide the legend.
+            Dim chartTitle1 As New ChartTitle With {
+                .Text = "Total Sale and Profit",
+                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+            }
+            ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
+            ChartTotalSellProfitByYear.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
+            ChartTotalSellProfitByYear.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ' Add the chart to the form.
+            ChartTotalSellProfitByYear.Dock = DockStyle.Fill
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 End Class

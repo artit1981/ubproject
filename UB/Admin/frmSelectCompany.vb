@@ -17,7 +17,7 @@ Public Class frmSelectCompany
                 Next
                 rdoCompany.SelectedIndex = 0
             End If
-          
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally

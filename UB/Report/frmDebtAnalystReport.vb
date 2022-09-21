@@ -1,7 +1,7 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
+Imports DevExpress.XtraReports.UI
 
 Public Class frmDebtAnalystReport
     Inherits iReport
@@ -31,7 +31,7 @@ Public Class frmDebtAnalystReport
     Private Sub SetComboCustomer()
         Dim dataTable As New DataTable()
         Dim lcls As New CustomerDAO
-       
+
         Try
             If ReportType.EditValue = 1 Then
                 lcls.TableID = MasterType.Accounts
@@ -245,5 +245,5 @@ Public Class frmDebtAnalystReport
     Private Sub ReportType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ReportType.SelectedIndexChanged
         SetComboCustomer()
     End Sub
-   
+
 End Class

@@ -243,7 +243,7 @@ Public Class CustomerListDAO
                 myCommand.Parameters.Add(New SqlParameter("@mRefTable", RefTableID))
                 gConnection.executeInsertSqlCommand(myCommand, tr)
             End If
-           
+
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CustomerListDAO.DeleteAllData : " & e.Message)

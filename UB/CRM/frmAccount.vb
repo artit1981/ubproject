@@ -446,7 +446,7 @@ Public Class frmAccount
         End Try
     End Sub
 
-  
+
     Private Sub SetComboBusinessType()
         Try
             SetComboMasterLook(cboBusinessType, MasterType.BusinessType)
@@ -549,7 +549,7 @@ Public Class frmAccount
             ShowProgress(False, "")
         End Try
     End Sub
-       
+
     Private Sub btnContactPersonID_Click(sender As System.Object, e As System.EventArgs) Handles btnContactPersonID.Click
         Try
             ShowProgress(True, "Loading...")
@@ -560,5 +560,5 @@ Public Class frmAccount
             ShowProgress(False, "")
         End Try
     End Sub
- 
+
 End Class

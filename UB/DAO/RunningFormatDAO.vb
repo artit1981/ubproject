@@ -2,8 +2,8 @@
 Imports System.Data.SqlClient
 Public Class RunningFormatDAO
     Inherits iDAO
- 
-  
+
+
 
 #Region "Property"
     Dim mSystem As String
@@ -384,7 +384,7 @@ Public Class RunningFormatDAO
         SQL = ""
         Try
             If IsReset = True And ID > 0 Then
-               
+
                 SQL = " UPDATE RunningFormat SET "
                 SQL = SQL & " IsReset=0"
                 SQL = SQL & " WHERE MenuID= " & ID
@@ -393,7 +393,7 @@ Public Class RunningFormatDAO
                 gConnection.executeInsertSqlCommand(myCommand, tr)
             End If
 
-  
+
             Return True
         Catch e As Exception
 

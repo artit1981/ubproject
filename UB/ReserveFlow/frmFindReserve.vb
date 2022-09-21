@@ -1,6 +1,4 @@
-﻿Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraEditors
+﻿Imports DevExpress.XtraEditors
 
 Public Class frmFindReserve
 
@@ -628,7 +626,7 @@ Public Class frmFindReserve
         Finally
         End Try
     End Sub
-     
+
     Private Sub btnMakeOrder_Click(sender As System.Object, e As System.EventArgs) Handles btnMakeOrder.Click
         Try
             If ConvertNullToZero(cboCustomerID.EditValue) = 0 Then
@@ -668,7 +666,7 @@ Public Class frmFindReserve
         End Try
     End Sub
 
-    
+
     Private Sub btnCancelPO_Click(sender As System.Object, e As System.EventArgs) Handles btnCancelPO.Click
         Try
             If ConvertNullToZero(cboCustomerID.EditValue) = 0 Then

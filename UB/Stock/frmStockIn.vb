@@ -167,7 +167,7 @@ Public Class frmStockIn
         End Try
 
     End Sub
- 
+
 #End Region
 
 #Region "Private"
@@ -182,7 +182,7 @@ Public Class frmStockIn
     End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-        Dim lclsProvince As New ProvinceDAO
+
         Try
             If pMode = DataMode.ModeNew Then
                 OrderCode.EditValue = AutoGenCode(mOrderType)
@@ -251,7 +251,7 @@ Public Class frmStockIn
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
         Finally
-            lclsProvince = Nothing
+
         End Try
     End Function
 
@@ -271,11 +271,11 @@ Public Class frmStockIn
                 SetErrorProvider(DxErrorProvider1, EmpID, "กรุณาระบุพนักงาน")
                 lstrErr = lstrErr & DxErrorProvider1.GetError(EmpID) & vbNewLine
             End If
- 
-          
+
+
 
             lstrErr = lstrErr & UcProductLists1.IsError
- 
+
 
             If lstrErr.Trim = "PRODUCTCHANGE" Then
                 ShowProgress(False, "")

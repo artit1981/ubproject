@@ -1,9 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmOrderHis
     Inherits iEditForm
@@ -61,12 +58,12 @@ Public Class frmOrderHis
 
 #Region "Event"
 
- 
+
 #End Region
 
 #Region "Private"
 
-    
+
     Private Function LoadData() As Boolean
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
@@ -235,7 +232,7 @@ Public Class frmOrderHis
                 PanelControl1.Visible = (lcls.PrivilegeData And Privilege.Visible) = Privilege.Visible
                 lIsEnable = (lcls.PrivilegeData And Privilege.Enable) = Privilege.Enable
                 btnExportExcel.Enabled = lIsEnable
-               
+
             Else
                 btnExportExcel.Enabled = False
             End If
@@ -248,8 +245,8 @@ Public Class frmOrderHis
     End Function
 
     Private Sub GridStyle()
-          With gridView
-             
+        With gridView
+
             .Columns("IsDelete").Visible = False
             .Columns("OrderID").Caption = "รหัส"
             .Columns("OrderID").Width = 50
@@ -275,7 +272,7 @@ Public Class frmOrderHis
             .Columns("IsDelete").Width = 10
             .Columns("Customer").Width = 150
             .Columns("Customer").Caption = "ลูกค้า/เจ้าหนี้"
-           
+
             .Columns("Price").Caption = "ราคาขาย"
             .Columns("Price").Width = 50
             .Columns("Price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -290,12 +287,12 @@ Public Class frmOrderHis
     End Sub
 
 #End Region
-     
+
     Private Sub GridView_RowStyle(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles gridView.RowStyle
         Dim lData As Integer = 0
         If DatePanel.Visible = True Then
             If (e.RowHandle >= 0) Then
-                
+
                 lData = GridView.GetRowCellValue(e.RowHandle, GridView.Columns("IsDelete"))
                 If lData = 1 Then
                     e.Appearance.BackColor = Color.WhiteSmoke
@@ -307,7 +304,7 @@ Public Class frmOrderHis
 
     End Sub
 
-    
+
     Private Sub btnFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFind.Click
         Try
             ShowProgress(True, "Loading...")
@@ -329,7 +326,7 @@ Public Class frmOrderHis
         Finally
         End Try
     End Sub
- 
+
     Private Sub CheckAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckAll.CheckedChanged
         Dim lCheck As Boolean = False
 
@@ -356,6 +353,6 @@ Public Class frmOrderHis
         CheckStockIn.Checked = lCheck
         chkUpdateStock.Checked = lCheck
     End Sub
-     
-    
+
+
 End Class

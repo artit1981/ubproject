@@ -1,6 +1,6 @@
 ﻿
 Option Explicit On
- 
+
 Public Class frmFindCustomer
     Private mDataKey As Collection
     Private mLookFor As String

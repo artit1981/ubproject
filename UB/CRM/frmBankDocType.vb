@@ -65,7 +65,7 @@ Public Class frmBankDocType
 #End Region
 
 #Region "Event"
- 
+
 
 #End Region
 

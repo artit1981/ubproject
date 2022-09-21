@@ -1,6 +1,5 @@
 ﻿
 Option Explicit On
-Imports DevExpress.XtraEditors
 
 Public Class TerritoryControl
     Implements iControl
@@ -42,7 +41,7 @@ Public Class TerritoryControl
         End Get
     End Property
 
-    
+
     Private Sub LoadData()
         Dim lcls As New TerritoryDAO
         Dim dataTable As New DataTable()
@@ -120,8 +119,8 @@ Public Class TerritoryControl
     End Sub
 
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long)
-        Dim lFormEdit As frmTerritory 
-        Try 
+        Dim lFormEdit As frmTerritory
+        Try
             lFormEdit = New frmTerritory
             With lFormEdit
                 .Caption = mCaption
@@ -148,7 +147,7 @@ Public Class TerritoryControl
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".mCtlForm_CHeckRefresh : " & e.Message)
         Finally
-            lcls = Nothing 
+            lcls = Nothing
         End Try
     End Sub
 

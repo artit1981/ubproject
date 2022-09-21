@@ -32,7 +32,7 @@ Public Class EmployeeDAO
             Return mPositionDAO
         End Get
     End Property
-     
+
 
     Public Property StartDate() As Date
         Get
@@ -514,7 +514,7 @@ Public Class EmployeeDAO
 
 
     Public Sub New()
-        mPositionDAO = Nothing 
+        mPositionDAO = Nothing
         mEmpCode = ""
         mPositionID = 0
         mStartDate = Now

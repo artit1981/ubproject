@@ -1,10 +1,5 @@
 ﻿Option Explicit On
-
-Imports System
-Imports System.Data
 Imports System.Data.SqlClient
-Imports System.Configuration
-Imports DevExpress.XtraEditors
 
 
 
@@ -123,7 +118,7 @@ Public Class DBConnection
         Dim myAdapter = New SqlDataAdapter
         Dim ds As New DataSet()
         Try
-         
+
             myCommand.Connection = OpenConnection()
             For Each dr As DataTableList In pDataTableList
                 myCommand.CommandText = dr.SQL

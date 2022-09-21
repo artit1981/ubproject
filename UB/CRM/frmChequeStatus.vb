@@ -1,6 +1,6 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors
 
 Public Class frmChequeStatus
     Inherits iEditForm

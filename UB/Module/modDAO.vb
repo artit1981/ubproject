@@ -327,7 +327,7 @@ Module modDAO
             lcls.CostTypeCode = ProductCostDAO.CostTypes.Average
             lcls.CostTypeName = "Average"
             lList.Add(lcls)
-             
+
             pCombo.Properties.DataSource = lList
             pCombo.Properties.DisplayMember = "CostTypeName"
             pCombo.Properties.ValueMember = "CostTypeCode"
@@ -903,7 +903,7 @@ Module modDAO
             Err.Raise(Err.Number, e.Source, "modDAO.SaveAttachFile : " & e.Message)
         End Try
     End Sub
-     
+
 
 
     Public Sub SaveApproveUserDtl(ByVal pApproveType As Long, ByVal ApproveUserDtlList As List(Of ApproveUserDTLDAO), ByVal ModeData As DataMode, ByRef tr As SqlTransaction)
@@ -1089,5 +1089,5 @@ Module modDAO
         End Try
     End Sub
 
-    
+
 End Module

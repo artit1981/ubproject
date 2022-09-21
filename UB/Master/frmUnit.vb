@@ -4,7 +4,7 @@ Public Class frmUnit
     Inherits iEditForm
     Private Const mFormName As String = "frmUnit"
     Dim mcls As New UnitDAO
-   
+
 
 
 #Region "Overrides"
@@ -64,7 +64,7 @@ Public Class frmUnit
 
     End Sub
 #End Region
-     
+
 #Region "Private"
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
@@ -98,7 +98,7 @@ Public Class frmUnit
             Return False
         End Try
     End Function
-     
+
 
     Private Function Verify() As Boolean
         DxErrorProvider1.ClearErrors()

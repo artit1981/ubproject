@@ -261,7 +261,7 @@ Public Class CompanyDAO
         End Set
     End Property
 #End Region
-   
+
     Public Function CHECKSUM_AGG() As Long
         Dim SQL As String
         Dim dataTable As New DataTable()
@@ -354,7 +354,7 @@ Public Class CompanyDAO
                             ModifiedBy = ""
                         End If
                     End If
-                  
+
                     'Load AddressDAO
                     AddressS = Nothing
                     AddressS = New AddressDAO
@@ -414,7 +414,7 @@ Public Class CompanyDAO
 
         Try
             SQL = "SELECT Company.CompanyID AS ID,Company.CompanyName,Company.Branch  ,ModifiedTime"
-            SQL = SQL & " FROM Company  " 
+            SQL = SQL & " FROM Company  "
             SQL = SQL & " "
             SQL = SQL & " WHERE Company.IsDelete =0   "
             If pID > 0 Then
@@ -676,4 +676,3 @@ Public Class CompanyDAO
         mBranch = ""
     End Sub
 End Class
- 

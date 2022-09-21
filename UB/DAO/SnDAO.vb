@@ -13,7 +13,7 @@ Public Class SnDAO
     Dim mIsSelect As Boolean = False
     Dim mProductListID As Long
     Dim mIsDelete As Long = 0
-   
+
     Public Property IsSelect() As Boolean
         Get
             Return mIsSelect
@@ -79,7 +79,7 @@ Public Class SnDAO
             mIsDelete = value
         End Set
     End Property
- 
+
 #End Region
 
 #Region "Public"
@@ -143,40 +143,40 @@ Public Class SnDAO
         Dim myCommand As SqlCommand
         SQL = ""
         Try
-            
-                If SerialNumberID = 0 Then
-                    pMode = DataMode.ModeNew
-                ElseIf pMode = DataMode.ModeEdit And IsDelete = 1 And SerialNumberID > 0 Then
-                    pMode = DataMode.ModeDelete
-                End If
 
-                Select Case pMode
-                    Case DataMode.ModeNew
-                        SerialNumberID = GenNewID("SerialNumberID", "SerialNumber", tr)
-                        SQL = " INSERT INTO SerialNumber  (SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID ,IsDelete)"
-                        SQL = SQL & " VALUES ( "
-                        SQL = SQL & "   @SerialNumberID"
-                        SQL = SQL & " ,  @SerialNumberNo"
-                        SQL = SQL & " ,  @OrderID"
-                        SQL = SQL & " ,  @ProductID"
-                        SQL = SQL & " ,  @Status"
-                        SQL = SQL & " ,  @ProductListID"
-                        SQL = SQL & " , 0 "
-                        SQL = SQL & " ) "
-                    Case DataMode.ModeEdit
-                        SQL = " Update SerialNumber   "
-                        SQL = SQL & " SET"
-                        SQL = SQL & " Status=@Status"
-                        SQL = SQL & " ,SerialNumberNo=@SerialNumberNo"
-                        SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
-                    Case DataMode.ModeDelete
-                        SQL = " Update SerialNumber Set IsDelete=1 "
-                        SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
-                    Case Else
-                        Return False
-                        Exit Function
-                End Select
-            
+            If SerialNumberID = 0 Then
+                pMode = DataMode.ModeNew
+            ElseIf pMode = DataMode.ModeEdit And IsDelete = 1 And SerialNumberID > 0 Then
+                pMode = DataMode.ModeDelete
+            End If
+
+            Select Case pMode
+                Case DataMode.ModeNew
+                    SerialNumberID = GenNewID("SerialNumberID", "SerialNumber", tr)
+                    SQL = " INSERT INTO SerialNumber  (SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID ,IsDelete)"
+                    SQL = SQL & " VALUES ( "
+                    SQL = SQL & "   @SerialNumberID"
+                    SQL = SQL & " ,  @SerialNumberNo"
+                    SQL = SQL & " ,  @OrderID"
+                    SQL = SQL & " ,  @ProductID"
+                    SQL = SQL & " ,  @Status"
+                    SQL = SQL & " ,  @ProductListID"
+                    SQL = SQL & " , 0 "
+                    SQL = SQL & " ) "
+                Case DataMode.ModeEdit
+                    SQL = " Update SerialNumber   "
+                    SQL = SQL & " SET"
+                    SQL = SQL & " Status=@Status"
+                    SQL = SQL & " ,SerialNumberNo=@SerialNumberNo"
+                    SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
+                Case DataMode.ModeDelete
+                    SQL = " Update SerialNumber Set IsDelete=1 "
+                    SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
+                Case Else
+                    Return False
+                    Exit Function
+            End Select
+
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@SerialNumberID", SerialNumberID))

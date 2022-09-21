@@ -1,9 +1,8 @@
 ﻿Option Explicit On
-Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmInformPrice
     Inherits iEditForm
@@ -487,7 +486,7 @@ Public Class frmInformPrice
     Public Class InformPriceDAOSub
         Inherits InformPriceSubDAO
         Implements IDXDataErrorInfo
-         
+
 
 
 #Region "IDXDataErrorInfo Members"
@@ -509,7 +508,7 @@ Public Class frmInformPrice
 #End Region
     End Class
 
-   
+
 
     Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
         mProductList.Clear()
@@ -542,7 +541,7 @@ Public Class frmInformPrice
 
                         lCost = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CostAdjust"))
                         If lCost > 0 Then
-                           
+
                             If ConvertNullToZero(calcPriceInform.EditValue) <> 0 Then
                                 lCalc = lCost * (ConvertNullToZero(calcPriceInform.EditValue) / 100)
                                 lCalc = Format(ConvertNullToZero(lCost + lCalc), "#,##0.00")
@@ -597,5 +596,5 @@ Public Class frmInformPrice
         End Try
     End Sub
 
-   
+
 End Class

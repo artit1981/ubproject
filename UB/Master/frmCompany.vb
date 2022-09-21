@@ -102,7 +102,7 @@ Public Class frmCompany
 
 
 #Region "Event"
-    
+
 
 #End Region
 
@@ -136,7 +136,7 @@ Public Class frmCompany
 
 
                     End If
-                     
+
                     CompanyNames.Text = mcls.FirstName
                     CompanyNameEng.Text = mcls.FirstNameEng
                     Owners.Text = mcls.Owner
@@ -190,7 +190,7 @@ Public Class frmCompany
         End Try
     End Function
 
-   
+
 
     Private Function Verify() As Boolean
         Try
@@ -208,7 +208,7 @@ Public Class frmCompany
 #End Region
 
 #Region "Set combo"
-   Private Sub SetComboTaxType()
+    Private Sub SetComboTaxType()
         Try
             TaxType.Properties.Items.Add("แยกนอก")
             TaxType.Properties.Items.Add("รวมใน")
@@ -224,10 +224,10 @@ Public Class frmCompany
         Throw New NotImplementedException
     End Function
 
-   Private Sub IsMainCompanyYes_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles IsMainCompanyYes.CheckedChanged
+    Private Sub IsMainCompanyYes_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles IsMainCompanyYes.CheckedChanged
         Branch.Enabled = IsMainCompanyYes.Checked = False = 0
         Branch.TabStop = IsMainCompanyYes.Checked = False
     End Sub
 
-  
+
 End Class

@@ -61,7 +61,7 @@ Public Class AddressDAO
             mMode = Value
         End Set
     End Property
-     
+
     Public Property ImageID() As Long
         Get
             Return mImageID
@@ -251,7 +251,7 @@ Public Class AddressDAO
             mEmail2 = Value
         End Set
     End Property
-     
+
     Public Property Email3() As String
         Get
             Return mEmail3
@@ -328,8 +328,8 @@ Public Class AddressDAO
                 lstrAddress = lstrAddress & " " & mPostalCode.Trim
             End If
         End If
-       
-       
+
+
         Return lstrAddress.Trim
     End Function
 

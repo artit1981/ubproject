@@ -88,7 +88,7 @@ Public Class InformPriceDAO
         Dim dataTable As New DataTable()
 
         Try
-          
+
             SQL = SQL & "SELECT 0 as IsSelect, Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy"
             SQL = SQL & " ,Inform.ProductCode,Inform.ProductName,Inform.CostAdjust,Inform.PriceInform,Inform.PriceInform as PriceInformOld,sum(Stock.Units) as Unit"
             SQL = SQL & " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3 ,Inform.Price4 ,Inform.Price5 ,Inform.Price6  "
@@ -152,7 +152,7 @@ Public Class InformPriceDAO
             'If pAccountID > 0 Then
             '    SQL = SQL & "       and Campaign.CustomerID=" & pAccountID
             'End If
-           
+
             SQL = SQL & " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
             SQL = SQL & " ,Inform.PriceInform,Inform.ProductRemark"
             SQL = SQL & " ,Inform.CostAdjust"

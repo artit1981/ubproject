@@ -1,7 +1,5 @@
 ﻿Option Explicit On
 
-Imports DevExpress.XtraEditors
-
 Public Class MasterControl
     Private WithEvents mCtlForm As frmMaster
 
@@ -31,12 +29,12 @@ Public Class MasterControl
 
     Private Sub SetMasterType()
         Dim lcls As New MenuADO
-        
+
         Try
             If lcls.InitailData(mMasterType) Then
                 mCaption = lcls.MenuDisplay
             End If
-            
+
             mTable = GetMasterTableName(mMasterType)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mCaption & ".LoadData : " & e.Message)

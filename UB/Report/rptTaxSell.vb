@@ -53,7 +53,7 @@
         End If
     End Sub
 
-  
+
 
     Private Sub NameCus_PrintOnPage(ByVal sender As Object, ByVal e As DevExpress.XtraReports.UI.PrintOnPageEventArgs) Handles NameCus.PrintOnPage
         If Header1.Text = "รายงานภาษีขาย" Then
@@ -63,5 +63,5 @@
         End If
     End Sub
 
-   
+
 End Class

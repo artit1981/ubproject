@@ -1,4 +1,4 @@
-﻿Public Class frmCheckStock 
+﻿Public Class frmCheckStock
     Private Const mFormName As String = "frmCheckStock"
     Private mIsFromLoad As Boolean = False
 
@@ -66,11 +66,11 @@
             Dim lcls As New ProductStockDAO
             Dim dataTable As New DataTable()
 
-           
+
             dataTable = lcls.GetDataStockByLocation(ConvertNullToZero(ProductCategoryID.EditValue), ConvertNullToZero(ProductTypeID.EditValue) _
                                           , ConvertNullToZero(ProductGroupID.EditValue), ConvertNullToZero(ProductBrandID.EditValue))
             If dataTable.Rows.Count > 0 Then
-                 If dataTable.Rows.Count > 0 Then
+                If dataTable.Rows.Count > 0 Then
                     GridControl.DataSource = dataTable
                     GridView.ViewCaption = "Stock"
                     Call GridStyle()
@@ -92,7 +92,7 @@
 
             .Columns("ProductID").Visible = False
             .Columns("UnitID").Visible = False
-           
+
             .Columns("ProductCode").Caption = "รหัสสินค้า"
             .Columns("ProductCode").Width = 150
 
@@ -113,8 +113,8 @@
 
 
 #Region "Event"
-    
-    
+
+
 
     Private Sub btnBrandRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBrandRefresh.Click
         Try
@@ -201,7 +201,7 @@
         End Try
     End Sub
 
-  
+
     Private Sub btnExportExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExportExcel.Click
         Try
             Dim lfrm As New frmPreExport

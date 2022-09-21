@@ -1,17 +1,16 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
-Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class ProductDAO
     Inherits iDAO
-    
+
     Dim mProductImageS As List(Of FileAttachDAO)
     Dim mProductUnitBuyDAOs As List(Of ProductUnitDAO)
     Dim mProductUnitSellDAOs As List(Of ProductUnitDAO)
     Dim mProductLocationSDAOs As List(Of ProductLocationSDAO)
     Dim mProductSubstituteDAOs As List(Of ProductListDAO)
     Dim mProductSetDAOs As List(Of ProductListDAO)
- 
+
 
 
 #Region "Property"

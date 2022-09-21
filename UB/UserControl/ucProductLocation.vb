@@ -1,11 +1,9 @@
 ﻿Option Explicit On
 
+Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
-Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid.Views.Grid
-Imports DevExpress.XtraGrid.Views.Base
-Imports DevExpress.XtraGrid.Views.Grid.ViewInfo
 
 Public Class ucProductLocation
     Private mDataDAOs As List(Of ProductLocationSDAO)
@@ -167,7 +165,7 @@ Public Class ucProductLocation
     Private Sub gridView_ShownEditor(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridView.ShownEditor
         Dim view As GridView = CType(sender, GridView)
         Try
-            If view.FocusedColumn.FieldName = "LocationDTLID" AndAlso _
+            If view.FocusedColumn.FieldName = "LocationDTLID" AndAlso
           TypeOf view.ActiveEditor Is LookUpEdit Then
                 Dim edit As LookUpEdit
                 Dim table As DataTable
@@ -307,7 +305,7 @@ Public Class ucProductLocation
 #End Region
     End Class
 
-   
+
 
 
 
