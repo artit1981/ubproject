@@ -1,6 +1,7 @@
 ﻿Imports System.Deployment.Application
 Imports DevExpress.LookAndFeel
 Imports DevExpress.XtraBars.Helpers
+Imports DevExpress.XtraEditors
 
 Public Class frmMain
     'Constant for english language
@@ -849,48 +850,54 @@ Public Class frmMain
 
     Private Sub ShowNotifi(ByVal pIsChkCount As Boolean)
         Try
-            Dim mCtlForm = New frmDashboard
-            With mCtlForm
-                .Text = "ข้อความแจ้งเตือน"
-                .MdiParent = Me
-                .Show()
-            End With
-
-            'Dim lcls As New PrivilegeDAO
-            'Dim lIsVisible As Boolean, lIsEnable As Boolean
-            'If lcls.InitailData(gPrivilegeID, MasterType.Notifi) Then
-            '    lIsVisible = (lcls.PrivilegeData And Privilege.Visible) = Privilege.Visible
-            '    lIsEnable = (lcls.PrivilegeData And Privilege.Enable) = Privilege.Enable
-            '    If (lIsVisible = False) Or (lIsEnable = False) Then
-            '        Exit Sub
-            '    End If
-            'End If
+            Dim mcls As New clsNotifi
+            Dim lcls As New PrivilegeDAO
+            Dim lIsVisible As Boolean, lIsEnable As Boolean
+            If lcls.InitailData(gPrivilegeID, MasterType.Notifi) Then
+                lIsVisible = (lcls.PrivilegeData And Privilege.Visible) = Privilege.Visible
+                lIsEnable = (lcls.PrivilegeData And Privilege.Enable) = Privilege.Enable
+                If (lIsVisible = False) Or (lIsEnable = False) Then
+                    Exit Sub
+                End If
+            End If
 
 
-            'If pIsChkCount Then
-            '    Dim lclsNotifi As List(Of clsNotifi)
-            '    Dim mcls As New clsNotifi
-            '    mcls.InitialNotifi()
-            '    lclsNotifi = mcls.GetNotifiList(gUserID)
-            '    If lclsNotifi.Count > 0 Then
-            '        pIsChkCount = True
-            '    Else
-            '        pIsChkCount = False
-            '    End If
-            'Else
-            '    pIsChkCount = True
-            'End If
+            If pIsChkCount Then
+                Dim lclsNotifi As List(Of clsNotifi)
 
-            'If pIsChkCount Then
-            '    Dim mCtlForm = New frmNotify
-            '    With mCtlForm
-            '        .Text = "ข้อความแจ้งเตือน"
-            '        .MdiParent = Me
-            '        .Show()
-            '    End With
-            '    InsertActivity(DataMode.ModeOpen, MasterType.Notifi, "", Nothing)
-            'End If
+                mcls.InitialNotifi()
+                lclsNotifi = mcls.GetNotifiList(gUserID)
+                If lclsNotifi.Count > 0 Then
+                    pIsChkCount = True
+                Else
+                    pIsChkCount = False
+                End If
+            Else
+                pIsChkCount = True
+            End If
 
+            If pIsChkCount Then
+                Dim mCtlForm = New frmNotify
+                With mCtlForm
+                    .Text = "ข้อความแจ้งเตือน"
+                    .MdiParent = Me
+                    .Show()
+                End With
+                InsertActivity(DataMode.ModeOpen, MasterType.Notifi, "", Nothing)
+            End If
+
+            Dim lOverdueTable = mcls.LoadExpireOrder()
+            If lOverdueTable.Rows.Count > 0 Then
+                If XtraMessageBox.Show(Me, "ขณะนี้มีบิล Overdue " & lOverdueTable.Rows.Count & " รายการ ต้องการเปิดดูข้อมูลหรือไม่", "Overdue", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                    Dim mCtlForm = New frmOverdue
+                    With mCtlForm
+                        .Text = "Overdue"
+                        .MdiParent = Me
+                        .OverdueData = lOverdueTable
+                        .Show()
+                    End With
+                End If
+            End If
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally

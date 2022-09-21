@@ -148,8 +148,7 @@ Public Class clsNotifi
                 Next
             End If
 
-            'Overdue Order
-            LoadExpireOrder()
+
 
             Return True
         Catch e As Exception
@@ -157,7 +156,7 @@ Public Class clsNotifi
         End Try
     End Function
 
-    Private Function LoadExpireOrder() As Boolean
+    Public Function LoadExpireOrder() As DataTable
         Dim lcls As New OrderSDAO
 
         Try
@@ -165,15 +164,8 @@ Public Class clsNotifi
             SQL &= " @FromDate = '" & formatSQLDate(Now.Date.AddYears(-2)) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(Now.Date) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
-            If dataTable.Rows.Count > 0 Then
-                For Each dr As DataRow In dataTable.Rows
-                    AddDataNotifi(eNotifyLevel.Hi, "Overdue", dr("MenuDisplay").ToString, dr("ExpireDate"), dr("TableName").ToString, dr("OrderID") _
-                                  , "รายการเกินกำหนดชำระ เลขที่ " & dr("OrderCode"), Nothing, gUserID)
-                Next
-                Return True
-            Else
-                Return False
-            End If
+            Return dataTable
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".LoadExpireOrder : " & e.Message)
         Finally

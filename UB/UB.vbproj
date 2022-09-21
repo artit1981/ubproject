@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>32</ApplicationRevision>
-    <ApplicationVersion>1.0.1.32</ApplicationVersion>
+    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationVersion>1.0.1.33</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -302,6 +302,12 @@
     <Compile Include="Base\frmNotify.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Base\frmOverdue.Designer.vb">
+      <DependentUpon>frmOverdue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmOverdue.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmProgress.Designer.vb">
       <DependentUpon>frmProgress.vb</DependentUpon>
     </Compile>
@@ -375,12 +381,6 @@
     <Compile Include="clsControl\UnitControl.vb" />
     <Compile Include="clsControl\UserControl.vb" />
     <Compile Include="clsControl\VatTypeControl.vb" />
-    <Compile Include="CRM\frmBankAccountRec.Designer.vb">
-      <DependentUpon>frmBankAccountRec.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CRM\frmBankAccountRec.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CRM\frmOrderHis2.Designer.vb">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </Compile>
@@ -1218,6 +1218,9 @@
     <EmbeddedResource Include="Base\frmNotify.resx">
       <DependentUpon>frmNotify.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmOverdue.resx">
+      <DependentUpon>frmOverdue.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmProgress.resx">
       <DependentUpon>frmProgress.vb</DependentUpon>
     </EmbeddedResource>
@@ -1236,9 +1239,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\iReport.resx">
       <DependentUpon>iReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CRM\frmBankAccountRec.resx">
-      <DependentUpon>frmBankAccountRec.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
