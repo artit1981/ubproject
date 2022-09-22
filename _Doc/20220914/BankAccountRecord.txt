@@ -1,0 +1,26 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BankAccountRecord](
+	[ID] [bigint] NOT NULL,
+	[BankAccountID] [bigint] NOT NULL,	
+	[RecordDate] [date] NULL,
+	[DR] [decimal](18, 2) NULL,
+	[CR] [decimal](18, 2) NULL,
+	[Remark] [nvarchar](100) NULL,	
+	[IsDelete] [int] NULL,
+	[CreateBy] [bigint] NULL,
+	[CreateTime] [datetime] NULL,
+	[ModifiedBy] [bigint] NULL,
+	[ModifiedTime] [datetime] NULL,
+ CONSTRAINT [PK_BankAccountRecord] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

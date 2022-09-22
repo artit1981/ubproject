@@ -80,15 +80,19 @@ Public Class BankAccountRecordSDAO
     End Property
 #End Region
 
-    Public Function GetDataTable(ByVal pRefID As Long) As DataTable
+    Public Function GetDataTable(ByVal pBankAccID As Integer, ByVal pFromDate As Date, ByVal pTodate As Date) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
             SQL = "SELECT  ID,BankAccountID ,RecordDate,Remark,DR,CR"
-            SQL = SQL & " FROM BankAccountRecord"
-            SQL = SQL & " WHERE IsDelete =0   "
-            SQL = SQL & " ORDER BY ID"
+            SQL &= " FROM BankAccountRecord"
+            SQL &= " WHERE IsDelete =0   "
+            If pBankAccID > 0 Then
+                SQL &= " and BankAccountID=" & pBankAccID
+            End If
+            SQL &= " and RecordDate between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pTodate) & "'"
+            SQL &= " ORDER BY ID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "BankAccountRecordSDAO.GetDataTable : " & e.Message)
@@ -103,19 +107,20 @@ Public Class BankAccountRecordSDAO
 
         SQL = ""
         Try
-            If mMode = DataMode.ModeNew Then
-            ElseIf mMode = DataMode.ModeDelete Then
-            ElseIf ID <= 0 Then
-                mMode = DataMode.ModeNew
-            ElseIf ID > 0 Then
-                mMode = DataMode.ModeEdit
-            Else  'not chang
-            End If
+            'If mMode = DataMode.ModeNew Then
+            'ElseIf mMode = DataMode.ModeDelete Then
+            'ElseIf ID <= 0 Then
+            '    mMode = DataMode.ModeNew
+            '    'ElseIf ID > 0 Then
+            '    '    mMode = DataMode.ModeEdit
+            'Else  'not chang
+            '    Return True
+            'End If
 
             Select Case mMode
                 Case DataMode.ModeNew
                     mIDs = GenNewID("ID", "BankAccountRecord", tr)
-                    SQL = " INSERT INTO BankAccountRecord  (ID,BankAccountID,RecordDate,Remark,DR,CR,IsDelete )"
+                    SQL = " INSERT INTO BankAccountRecord  (ID,BankAccountID,RecordDate,Remark,DR,CR,IsDelete,CreateBy,CreateTime )"
                     SQL = SQL & " VALUES ( "
                     SQL = SQL & "   @ID"
                     SQL = SQL & " ,  @BankAccountID"
@@ -124,6 +129,8 @@ Public Class BankAccountRecordSDAO
                     SQL = SQL & " ,  @DR"
                     SQL = SQL & " ,  @CR"
                     SQL = SQL & " ,  @IsDelete"
+                    SQL = SQL & " ,  @gUserID"
+                    SQL = SQL & " ,  @CreateTime"
                     SQL = SQL & " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update BankAccountRecord   "
@@ -133,9 +140,13 @@ Public Class BankAccountRecordSDAO
                     SQL = SQL & " ,Remark=@Remark"
                     SQL = SQL & " ,DR=@DR"
                     SQL = SQL & " ,CR=@CR"
+                    SQL = SQL & " ,ModifiedBy= @gUserID"
+                    SQL = SQL & " ,ModifiedTime= @CreateTime"
                     SQL = SQL & " WHERE ID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE BankAccountRecord SET IsDelete=@IsDelete "
+                    SQL = SQL & " ,ModifiedBy= @gUserID"
+                    SQL = SQL & " ,ModifiedTime= @CreateTime"
                     SQL = SQL & " WHERE ID= @ID"
                 Case Else
                     Return False
@@ -149,7 +160,8 @@ Public Class BankAccountRecordSDAO
             myCommand.Parameters.Add(New SqlParameter("@Remark", Remark))
             myCommand.Parameters.Add(New SqlParameter("@DR", DR))
             myCommand.Parameters.Add(New SqlParameter("@CR", CR))
-
+            myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
+            myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

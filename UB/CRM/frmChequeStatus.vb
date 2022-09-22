@@ -49,6 +49,7 @@ Public Class frmChequeStatus
     Private Sub SetComboBank()
         Try
             SetSearchLookBank(BankID)
+           
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboBank : " & e.Message)
         End Try

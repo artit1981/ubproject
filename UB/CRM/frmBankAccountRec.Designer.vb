@@ -19,23 +19,41 @@ Partial Class frmBankAccountRec
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
-        Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBankAccountRec))
+        Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dtpDateTo = New DevExpress.XtraEditors.DateEdit()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpDateFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.BankAccID = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ACCNAME = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BankName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RecordDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RecordDateDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.BankAccountID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BankAccountIDLookUpEdit = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
-        Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
-        Me.Debit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.DR = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.DebitCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
-        Me.Credit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CR = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CreditCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.IsChange = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.repositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.repositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.KeepMinSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.LocationDTLIDLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.LocationDTLSearchLookUp1 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -48,23 +66,29 @@ Partial Class frmBankAccountRec
         Me.LocationButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.RepositoryItemRadioGroup1 = New DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.RecordDate = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RecordDateDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
-        Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XtraTabControl1.SuspendLayout()
-        Me.GeneralTabPage.SuspendLayout()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl1.SuspendLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BankAccID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BankAccountIDLookUpEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DebitCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CreditCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KeepMinSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocationDTLSearchLookUp1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,30 +101,166 @@ Partial Class frmBankAccountRec
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'XtraTabControl1
+        'DxErrorProvider1
         '
-        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(911, 411)
-        Me.XtraTabControl1.TabIndex = 15
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage})
+        Me.DxErrorProvider1.ContainerControl = Me
         '
-        'GeneralTabPage
+        'GroupControl1
         '
-        Me.GeneralTabPage.Appearance.PageClient.BackColor = System.Drawing.Color.LightGray
-        Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
-        Me.GeneralTabPage.AutoScroll = True
-        Me.GeneralTabPage.Controls.Add(Me.gridControl)
-        Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(909, 386)
-        Me.GeneralTabPage.Text = "อนุมัติเอกสาร"
+        Me.GroupControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupControl1.Controls.Add(Me.btnFind)
+        Me.GroupControl1.Controls.Add(Me.Label1)
+        Me.GroupControl1.Controls.Add(Me.dtpDateTo)
+        Me.GroupControl1.Controls.Add(Me.Label3)
+        Me.GroupControl1.Controls.Add(Me.dtpDateFrom)
+        Me.GroupControl1.Controls.Add(Me.BankAccID)
+        Me.GroupControl1.Controls.Add(Me.Label10)
+        Me.GroupControl1.Location = New System.Drawing.Point(12, 50)
+        Me.GroupControl1.Name = "GroupControl1"
+        Me.GroupControl1.Size = New System.Drawing.Size(1383, 110)
+        Me.GroupControl1.TabIndex = 16
+        Me.GroupControl1.Text = "Filter data"
+        '
+        'btnFind
+        '
+        Me.btnFind.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnFind.Appearance.Options.UseFont = True
+        Me.btnFind.Appearance.Options.UseImage = True
+        Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnFind.Location = New System.Drawing.Point(455, 46)
+        Me.btnFind.Name = "btnFind"
+        Me.btnFind.Size = New System.Drawing.Size(101, 24)
+        Me.btnFind.TabIndex = 295
+        Me.btnFind.TabStop = False
+        Me.btnFind.Text = "ค้นหา"
+        Me.btnFind.ToolTip = "ค้นหา"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label1.Location = New System.Drawing.Point(261, 76)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(20, 14)
+        Me.Label1.TabIndex = 294
+        Me.Label1.Text = "ถึง"
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateTo.EnterMoveNextControl = True
+        Me.dtpDateTo.Location = New System.Drawing.Point(281, 73)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateTo.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateTo.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.MaskSettings.Set("mask", "D")
+        Me.dtpDateTo.Size = New System.Drawing.Size(143, 20)
+        Me.dtpDateTo.TabIndex = 130
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label3.Location = New System.Drawing.Point(73, 76)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(29, 14)
+        Me.Label3.TabIndex = 129
+        Me.Label3.Text = "วันที่"
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateFrom.EnterMoveNextControl = True
+        Me.dtpDateFrom.Location = New System.Drawing.Point(112, 73)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateFrom.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.MaskSettings.Set("mask", "D")
+        Me.dtpDateFrom.Size = New System.Drawing.Size(143, 20)
+        Me.dtpDateFrom.TabIndex = 128
+        '
+        'BankAccID
+        '
+        Me.BankAccID.EnterMoveNextControl = True
+        Me.BankAccID.Location = New System.Drawing.Point(112, 43)
+        Me.BankAccID.Name = "BankAccID"
+        Me.BankAccID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BankAccID.Properties.Appearance.Options.UseFont = True
+        Me.BankAccID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.BankAccID.Properties.NullText = ""
+        Me.BankAccID.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
+        Me.BankAccID.Properties.PopupView = Me.SearchLookUpEdit1View
+        Me.BankAccID.Size = New System.Drawing.Size(312, 20)
+        Me.BankAccID.TabIndex = 126
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.ACCNAME, Me.BankName})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ColumnAutoWidth = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowViewCaption = True
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "รหัส"
+        Me.GridColumn4.FieldName = " ID"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'ACCNAME
+        '
+        Me.ACCNAME.Caption = "บัญชี"
+        Me.ACCNAME.FieldName = "ACCNAME"
+        Me.ACCNAME.MaxWidth = 500
+        Me.ACCNAME.MinWidth = 100
+        Me.ACCNAME.Name = "ACCNAME"
+        Me.ACCNAME.Visible = True
+        Me.ACCNAME.VisibleIndex = 0
+        Me.ACCNAME.Width = 300
+        '
+        'BankName
+        '
+        Me.BankName.Caption = "ชื่อธนาคาร"
+        Me.BankName.FieldName = "BankName"
+        Me.BankName.MaxWidth = 200
+        Me.BankName.MinWidth = 100
+        Me.BankName.Name = "BankName"
+        Me.BankName.Visible = True
+        Me.BankName.VisibleIndex = 1
+        Me.BankName.Width = 150
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label10.Location = New System.Drawing.Point(73, 46)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(33, 14)
+        Me.Label10.TabIndex = 127
+        Me.Label10.Text = "บัญชี"
         '
         'gridControl
         '
@@ -110,17 +270,17 @@ Partial Class frmBankAccountRec
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.Location = New System.Drawing.Point(11, 3)
+        Me.gridControl.Location = New System.Drawing.Point(12, 178)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BankAccountIDLookUpEdit, Me.repositoryItemCalcEdit1, Me.repositoryItemSpinEdit1, Me.repositoryItemTextEdit1, Me.KeepMinSpinEdit, Me.LocationDTLIDLookUpEdit1, Me.DebitCalcEdit, Me.CreditCalcEdit, Me.RepositoryItemCheckEdit1, Me.LocationDTLSearchLookUp1, Me.RepositoryItemLookUpEdit1, Me.LocationGrid, Me.LocationIDComboBox, Me.LocationDTLLookUp, Me.RepositoryItemPopupContainerEdit1, Me.LocationButtonEdit, Me.RepositoryItemRadioGroup1, Me.RepositoryItemCheckEdit2, Me.RecordDateDateEdit1, Me.RepositoryItemTextEdit2})
-        Me.gridControl.Size = New System.Drawing.Size(828, 359)
-        Me.gridControl.TabIndex = 10
+        Me.gridControl.Size = New System.Drawing.Size(1383, 403)
+        Me.gridControl.TabIndex = 17
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.SEQ, Me.RecordDate, Me.BankAccountID, Me.Remark, Me.Debit, Me.Credit})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.BankAccountID, Me.Remark, Me.DR, Me.CR, Me.IsChange})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -138,30 +298,43 @@ Partial Class frmBankAccountRec
         Me.ID.FieldName = "ID"
         Me.ID.Name = "ID"
         '
-        'SEQ
+        'RecordDate
         '
-        Me.SEQ.Caption = "SEQ"
-        Me.SEQ.FieldName = "SEQ"
-        Me.SEQ.Name = "SEQ"
+        Me.RecordDate.Caption = "วันที่"
+        Me.RecordDate.ColumnEdit = Me.RecordDateDateEdit1
+        Me.RecordDate.FieldName = "RecordDate"
+        Me.RecordDate.MaxWidth = 150
+        Me.RecordDate.MinWidth = 100
+        Me.RecordDate.Name = "RecordDate"
+        Me.RecordDate.Visible = True
+        Me.RecordDate.VisibleIndex = 1
+        Me.RecordDate.Width = 150
+        '
+        'RecordDateDateEdit1
+        '
+        Me.RecordDateDateEdit1.AutoHeight = False
+        Me.RecordDateDateEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RecordDateDateEdit1.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RecordDateDateEdit1.Name = "RecordDateDateEdit1"
         '
         'BankAccountID
         '
         Me.BankAccountID.Caption = "บัญชี"
         Me.BankAccountID.ColumnEdit = Me.BankAccountIDLookUpEdit
         Me.BankAccountID.FieldName = "BankAccountID"
-        Me.BankAccountID.MaxWidth = 200
-        Me.BankAccountID.MinWidth = 100
+        Me.BankAccountID.MaxWidth = 500
+        Me.BankAccountID.MinWidth = 300
         Me.BankAccountID.Name = "BankAccountID"
         Me.BankAccountID.OptionsFilter.AutoFilterCondition = DevExpress.XtraGrid.Columns.AutoFilterCondition.Equals
         Me.BankAccountID.Visible = True
         Me.BankAccountID.VisibleIndex = 0
-        Me.BankAccountID.Width = 100
+        Me.BankAccountID.Width = 300
         '
         'BankAccountIDLookUpEdit
         '
         Me.BankAccountIDLookUpEdit.AutoHeight = False
         Me.BankAccountIDLookUpEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.BankAccountIDLookUpEdit.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo(" ID", " ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ACCNAME", "บัญชี", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("BankName", "ธนาคาร")})
+        Me.BankAccountIDLookUpEdit.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo(" ID", " ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ACCNAME", "บัญชี", 200, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("BankName", "ธนาคาร", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.BankAccountIDLookUpEdit.DisplayMember = "ACCNAME"
         Me.BankAccountIDLookUpEdit.DropDownRows = 10
         Me.BankAccountIDLookUpEdit.Name = "BankAccountIDLookUpEdit"
@@ -170,34 +343,37 @@ Partial Class frmBankAccountRec
         Me.BankAccountIDLookUpEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.BankAccountIDLookUpEdit.ValueMember = "ID"
         '
-        'LocationDTLIDLookUpEdit1
+        'Remark
         '
-        Me.LocationDTLIDLookUpEdit1.AutoHeight = False
-        Me.LocationDTLIDLookUpEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationID", "คลังสินค้า", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", "ตำแหน่ง"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.LocationDTLIDLookUpEdit1.DisplayMember = "LocationDTL"
-        Me.LocationDTLIDLookUpEdit1.Name = "LocationDTLIDLookUpEdit1"
-        Me.LocationDTLIDLookUpEdit1.NullText = ""
-        Me.LocationDTLIDLookUpEdit1.PopupResizeMode = DevExpress.XtraEditors.Controls.ResizeMode.LiveResize
-        Me.LocationDTLIDLookUpEdit1.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete
-        Me.LocationDTLIDLookUpEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.LocationDTLIDLookUpEdit1.ValueMember = "LocationDTLID"
+        Me.Remark.Caption = "รายละเอียด"
+        Me.Remark.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.Remark.FieldName = "Remark"
+        Me.Remark.MinWidth = 200
+        Me.Remark.Name = "Remark"
+        Me.Remark.Visible = True
+        Me.Remark.VisibleIndex = 2
+        Me.Remark.Width = 277
         '
-        'Debit
+        'RepositoryItemTextEdit2
         '
-        Me.Debit.AppearanceHeader.Options.UseTextOptions = True
-        Me.Debit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Debit.Caption = "เดบิท"
-        Me.Debit.ColumnEdit = Me.DebitCalcEdit
-        Me.Debit.DisplayFormat.FormatString = "n2"
-        Me.Debit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Debit.FieldName = "Debit"
-        Me.Debit.MaxWidth = 200
-        Me.Debit.MinWidth = 100
-        Me.Debit.Name = "Debit"
-        Me.Debit.Visible = True
-        Me.Debit.VisibleIndex = 2
-        Me.Debit.Width = 158
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        '
+        'DR
+        '
+        Me.DR.AppearanceHeader.Options.UseTextOptions = True
+        Me.DR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.DR.Caption = "เดบิท"
+        Me.DR.ColumnEdit = Me.DebitCalcEdit
+        Me.DR.DisplayFormat.FormatString = "n2"
+        Me.DR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.DR.FieldName = "DR"
+        Me.DR.MaxWidth = 200
+        Me.DR.MinWidth = 150
+        Me.DR.Name = "DR"
+        Me.DR.Visible = True
+        Me.DR.VisibleIndex = 3
+        Me.DR.Width = 150
         '
         'DebitCalcEdit
         '
@@ -205,26 +381,33 @@ Partial Class frmBankAccountRec
         Me.DebitCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DebitCalcEdit.Name = "DebitCalcEdit"
         '
-        'Credit
+        'CR
         '
-        Me.Credit.AppearanceHeader.Options.UseTextOptions = True
-        Me.Credit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Credit.Caption = "เครดิต"
-        Me.Credit.ColumnEdit = Me.CreditCalcEdit
-        Me.Credit.DisplayFormat.FormatString = "Numeric ""n2"""
-        Me.Credit.FieldName = "Credit"
-        Me.Credit.MaxWidth = 200
-        Me.Credit.MinWidth = 100
-        Me.Credit.Name = "Credit"
-        Me.Credit.Visible = True
-        Me.Credit.VisibleIndex = 3
-        Me.Credit.Width = 150
+        Me.CR.AppearanceHeader.Options.UseTextOptions = True
+        Me.CR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.CR.Caption = "เครดิต"
+        Me.CR.ColumnEdit = Me.CreditCalcEdit
+        Me.CR.DisplayFormat.FormatString = "Numeric ""n2"""
+        Me.CR.FieldName = "CR"
+        Me.CR.MaxWidth = 200
+        Me.CR.MinWidth = 150
+        Me.CR.Name = "CR"
+        Me.CR.Visible = True
+        Me.CR.VisibleIndex = 4
+        Me.CR.Width = 150
         '
         'CreditCalcEdit
         '
         Me.CreditCalcEdit.AutoHeight = False
         Me.CreditCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.CreditCalcEdit.Name = "CreditCalcEdit"
+        '
+        'IsChange
+        '
+        Me.IsChange.Caption = "GridColumn1"
+        Me.IsChange.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.IsChange.FieldName = "IsChange"
+        Me.IsChange.Name = "IsChange"
         '
         'repositoryItemCalcEdit1
         '
@@ -255,6 +438,19 @@ Partial Class frmBankAccountRec
         Me.KeepMinSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.KeepMinSpinEdit.Mask.EditMask = "n2"
         Me.KeepMinSpinEdit.Name = "KeepMinSpinEdit"
+        '
+        'LocationDTLIDLookUpEdit1
+        '
+        Me.LocationDTLIDLookUpEdit1.AutoHeight = False
+        Me.LocationDTLIDLookUpEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LocationDTLIDLookUpEdit1.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationID", "คลังสินค้า", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTL", "ตำแหน่ง"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("LocationDTLID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
+        Me.LocationDTLIDLookUpEdit1.DisplayMember = "LocationDTL"
+        Me.LocationDTLIDLookUpEdit1.Name = "LocationDTLIDLookUpEdit1"
+        Me.LocationDTLIDLookUpEdit1.NullText = ""
+        Me.LocationDTLIDLookUpEdit1.PopupResizeMode = DevExpress.XtraEditors.Controls.ResizeMode.LiveResize
+        Me.LocationDTLIDLookUpEdit1.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete
+        Me.LocationDTLIDLookUpEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
+        Me.LocationDTLIDLookUpEdit1.ValueMember = "LocationDTLID"
         '
         'RepositoryItemCheckEdit1
         '
@@ -335,58 +531,41 @@ Partial Class frmBankAccountRec
         Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
-        'RecordDate
-        '
-        Me.RecordDate.Caption = "วันที่"
-        Me.RecordDate.ColumnEdit = Me.RecordDateDateEdit1
-        Me.RecordDate.FieldName = "RecordDate"
-        Me.RecordDate.Name = "RecordDate"
-        Me.RecordDate.Visible = True
-        Me.RecordDate.VisibleIndex = 1
-        '
-        'RecordDateDateEdit1
-        '
-        Me.RecordDateDateEdit1.AutoHeight = False
-        Me.RecordDateDateEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RecordDateDateEdit1.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RecordDateDateEdit1.Name = "RecordDateDateEdit1"
-        '
-        'Remark
-        '
-        Me.Remark.Caption = "รายละเอียด"
-        Me.Remark.ColumnEdit = Me.RepositoryItemTextEdit2
-        Me.Remark.FieldName = "Remark"
-        Me.Remark.Name = "Remark"
-        Me.Remark.Visible = True
-        Me.Remark.VisibleIndex = 4
-        '
-        'RepositoryItemTextEdit2
-        '
-        Me.RepositoryItemTextEdit2.AutoHeight = False
-        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
-        '
         'frmBankAccountRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(911, 441)
-        Me.Controls.Add(Me.XtraTabControl1)
+        Me.ClientSize = New System.Drawing.Size(1407, 593)
+        Me.Controls.Add(Me.gridControl)
+        Me.Controls.Add(Me.GroupControl1)
         Me.Name = "frmBankAccountRec"
-        Me.Text = "ผู้อนุมัติ"
-        Me.Controls.SetChildIndex(Me.XtraTabControl1, 0)
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XtraTabControl1.ResumeLayout(False)
-        Me.GeneralTabPage.ResumeLayout(False)
+        Me.Text = "บันทึกยอดธนาคาร"
+        Me.Controls.SetChildIndex(Me.GroupControl1, 0)
+        Me.Controls.SetChildIndex(Me.gridControl, 0)
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl1.ResumeLayout(False)
+        Me.GroupControl1.PerformLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BankAccID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BankAccountIDLookUpEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DebitCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CreditCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.KeepMinSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LocationDTLIDLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LocationDTLSearchLookUp1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
@@ -399,27 +578,26 @@ Partial Class frmBankAccountRec
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
-    Friend WithEvents GeneralTabPage As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
+    Private WithEvents bindingSource1 As BindingSource
     Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
     Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ID As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents SEQ As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RecordDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RecordDateDateEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
     Friend WithEvents BankAccountID As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents BankAccountIDLookUpEdit As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
-    Friend WithEvents Debit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Remark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents DR As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DebitCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
-    Friend WithEvents Credit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CR As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CreditCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents IsChange As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents repositoryItemCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Private WithEvents repositoryItemSpinEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Private WithEvents repositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
@@ -437,6 +615,16 @@ Partial Class frmBankAccountRec
     Friend WithEvents LocationButtonEdit As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents RepositoryItemRadioGroup1 As DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup
     Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents Remark As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
+    Private WithEvents Label1 As Label
+    Friend WithEvents dtpDateTo As DevExpress.XtraEditors.DateEdit
+    Private WithEvents Label3 As Label
+    Friend WithEvents dtpDateFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents BankAccID As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ACCNAME As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BankName As DevExpress.XtraGrid.Columns.GridColumn
+    Private WithEvents Label10 As Label
 End Class

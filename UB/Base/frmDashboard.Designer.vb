@@ -34,6 +34,7 @@ Partial Class frmDashboard
         Me.GroupControl11 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl7 = New DevExpress.XtraEditors.GroupControl()
+        Me.ChartTotalSellProfitByYear = New DevExpress.XtraCharts.ChartControl()
         Me.GroupControl8 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl5 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
@@ -54,10 +55,12 @@ Partial Class frmDashboard
         Me.LayoutControlItem15 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.ChartTotalSellProfitByYear = New DevExpress.XtraCharts.ChartControl()
+        Me.ListYear = New DevExpress.XtraEditors.CheckedListBoxControl()
+        Me.ListMonth = New DevExpress.XtraEditors.CheckedListBoxControl()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl4.SuspendLayout()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl14, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,8 +76,10 @@ Partial Class frmDashboard
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl7.SuspendLayout()
+        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl5.SuspendLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,7 +98,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ListYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ListMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -124,15 +130,16 @@ Partial Class frmDashboard
         '
         'GroupControl4
         '
+        Me.GroupControl4.Controls.Add(Me.ListMonth)
         Me.GroupControl4.Location = New System.Drawing.Point(12, 154)
         Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(243, 217)
+        Me.GroupControl4.Size = New System.Drawing.Size(195, 267)
         Me.GroupControl4.TabIndex = 14
         Me.GroupControl4.Text = "GroupControl4"
         '
         'GroupControl3
         '
-        Me.GroupControl3.Location = New System.Drawing.Point(991, 12)
+        Me.GroupControl3.Location = New System.Drawing.Point(943, 12)
         Me.GroupControl3.Name = "GroupControl3"
         Me.GroupControl3.Size = New System.Drawing.Size(238, 163)
         Me.GroupControl3.TabIndex = 13
@@ -140,7 +147,7 @@ Partial Class frmDashboard
         '
         'GroupControl15
         '
-        Me.GroupControl15.Location = New System.Drawing.Point(869, 479)
+        Me.GroupControl15.Location = New System.Drawing.Point(821, 479)
         Me.GroupControl15.Name = "GroupControl15"
         Me.GroupControl15.Size = New System.Drawing.Size(105, 349)
         Me.GroupControl15.TabIndex = 0
@@ -148,7 +155,7 @@ Partial Class frmDashboard
         '
         'GroupControl14
         '
-        Me.GroupControl14.Location = New System.Drawing.Point(509, 12)
+        Me.GroupControl14.Location = New System.Drawing.Point(461, 12)
         Me.GroupControl14.Name = "GroupControl14"
         Me.GroupControl14.Size = New System.Drawing.Size(242, 163)
         Me.GroupControl14.TabIndex = 12
@@ -156,7 +163,7 @@ Partial Class frmDashboard
         '
         'GroupControl13
         '
-        Me.GroupControl13.Location = New System.Drawing.Point(793, 479)
+        Me.GroupControl13.Location = New System.Drawing.Point(745, 479)
         Me.GroupControl13.Name = "GroupControl13"
         Me.GroupControl13.Size = New System.Drawing.Size(72, 349)
         Me.GroupControl13.TabIndex = 11
@@ -165,9 +172,9 @@ Partial Class frmDashboard
         'GroupControl9
         '
         Me.GroupControl9.Controls.Add(Me.ChartTotalSellByCatalog)
-        Me.GroupControl9.Location = New System.Drawing.Point(259, 179)
+        Me.GroupControl9.Location = New System.Drawing.Point(211, 179)
         Me.GroupControl9.Name = "GroupControl9"
-        Me.GroupControl9.Size = New System.Drawing.Size(395, 296)
+        Me.GroupControl9.Size = New System.Drawing.Size(419, 296)
         Me.GroupControl9.TabIndex = 10
         Me.GroupControl9.Text = "GroupControl9"
         '
@@ -177,15 +184,15 @@ Partial Class frmDashboard
         Me.ChartTotalSellByCatalog.Location = New System.Drawing.Point(2, 23)
         Me.ChartTotalSellByCatalog.Name = "ChartTotalSellByCatalog"
         Me.ChartTotalSellByCatalog.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellByCatalog.Size = New System.Drawing.Size(391, 271)
+        Me.ChartTotalSellByCatalog.Size = New System.Drawing.Size(415, 271)
         Me.ChartTotalSellByCatalog.TabIndex = 0
         '
         'GroupControl6
         '
         Me.GroupControl6.Controls.Add(Me.ChartTotalSellCOGSByYear)
-        Me.GroupControl6.Location = New System.Drawing.Point(658, 179)
+        Me.GroupControl6.Location = New System.Drawing.Point(634, 179)
         Me.GroupControl6.Name = "GroupControl6"
-        Me.GroupControl6.Size = New System.Drawing.Size(393, 296)
+        Me.GroupControl6.Size = New System.Drawing.Size(424, 296)
         Me.GroupControl6.TabIndex = 0
         Me.GroupControl6.Text = "GroupControl6"
         '
@@ -195,12 +202,12 @@ Partial Class frmDashboard
         Me.ChartTotalSellCOGSByYear.Location = New System.Drawing.Point(2, 23)
         Me.ChartTotalSellCOGSByYear.Name = "ChartTotalSellCOGSByYear"
         Me.ChartTotalSellCOGSByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(389, 271)
+        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(420, 271)
         Me.ChartTotalSellCOGSByYear.TabIndex = 1
         '
         'GroupControl12
         '
-        Me.GroupControl12.Location = New System.Drawing.Point(755, 12)
+        Me.GroupControl12.Location = New System.Drawing.Point(707, 12)
         Me.GroupControl12.Name = "GroupControl12"
         Me.GroupControl12.Size = New System.Drawing.Size(232, 163)
         Me.GroupControl12.TabIndex = 9
@@ -208,7 +215,7 @@ Partial Class frmDashboard
         '
         'GroupControl11
         '
-        Me.GroupControl11.Location = New System.Drawing.Point(259, 479)
+        Me.GroupControl11.Location = New System.Drawing.Point(211, 479)
         Me.GroupControl11.Name = "GroupControl11"
         Me.GroupControl11.Size = New System.Drawing.Size(530, 349)
         Me.GroupControl11.TabIndex = 0
@@ -216,48 +223,58 @@ Partial Class frmDashboard
         '
         'GroupControl10
         '
-        Me.GroupControl10.Location = New System.Drawing.Point(978, 479)
+        Me.GroupControl10.Location = New System.Drawing.Point(930, 479)
         Me.GroupControl10.Name = "GroupControl10"
-        Me.GroupControl10.Size = New System.Drawing.Size(499, 349)
+        Me.GroupControl10.Size = New System.Drawing.Size(547, 349)
         Me.GroupControl10.TabIndex = 8
         Me.GroupControl10.Text = "GroupControl10"
         '
         'GroupControl7
         '
         Me.GroupControl7.Controls.Add(Me.ChartTotalSellProfitByYear)
-        Me.GroupControl7.Location = New System.Drawing.Point(1055, 179)
+        Me.GroupControl7.Location = New System.Drawing.Point(1062, 179)
         Me.GroupControl7.Name = "GroupControl7"
-        Me.GroupControl7.Size = New System.Drawing.Size(422, 296)
+        Me.GroupControl7.Size = New System.Drawing.Size(415, 296)
         Me.GroupControl7.TabIndex = 2
         Me.GroupControl7.Text = "GroupControl7"
         '
+        'ChartTotalSellProfitByYear
+        '
+        Me.ChartTotalSellProfitByYear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ChartTotalSellProfitByYear.Location = New System.Drawing.Point(2, 23)
+        Me.ChartTotalSellProfitByYear.Name = "ChartTotalSellProfitByYear"
+        Me.ChartTotalSellProfitByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
+        Me.ChartTotalSellProfitByYear.Size = New System.Drawing.Size(411, 271)
+        Me.ChartTotalSellProfitByYear.TabIndex = 2
+        '
         'GroupControl8
         '
-        Me.GroupControl8.Location = New System.Drawing.Point(1233, 12)
+        Me.GroupControl8.Location = New System.Drawing.Point(1185, 12)
         Me.GroupControl8.Name = "GroupControl8"
-        Me.GroupControl8.Size = New System.Drawing.Size(244, 163)
+        Me.GroupControl8.Size = New System.Drawing.Size(292, 163)
         Me.GroupControl8.TabIndex = 6
         Me.GroupControl8.Text = "GroupControl8"
         '
         'GroupControl5
         '
+        Me.GroupControl5.Controls.Add(Me.ListYear)
         Me.GroupControl5.Location = New System.Drawing.Point(12, 12)
         Me.GroupControl5.Name = "GroupControl5"
-        Me.GroupControl5.Size = New System.Drawing.Size(243, 138)
+        Me.GroupControl5.Size = New System.Drawing.Size(195, 138)
         Me.GroupControl5.TabIndex = 0
         Me.GroupControl5.Text = "GroupControl5"
         '
         'GroupControl2
         '
-        Me.GroupControl2.Location = New System.Drawing.Point(12, 375)
+        Me.GroupControl2.Location = New System.Drawing.Point(12, 425)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(243, 453)
+        Me.GroupControl2.Size = New System.Drawing.Size(195, 403)
         Me.GroupControl2.TabIndex = 5
         Me.GroupControl2.Text = "GroupControl2"
         '
         'GroupControl1
         '
-        Me.GroupControl1.Location = New System.Drawing.Point(259, 12)
+        Me.GroupControl1.Location = New System.Drawing.Point(211, 12)
         Me.GroupControl1.Name = "GroupControl1"
         Me.GroupControl1.Size = New System.Drawing.Size(246, 163)
         Me.GroupControl1.TabIndex = 4
@@ -275,7 +292,7 @@ Partial Class frmDashboard
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.GroupControl1
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(247, 0)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(199, 0)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
         Me.LayoutControlItem1.Size = New System.Drawing.Size(250, 167)
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
@@ -284,9 +301,9 @@ Partial Class frmDashboard
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.GroupControl2
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 363)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 413)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(247, 457)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(199, 407)
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextVisible = False
         '
@@ -295,41 +312,41 @@ Partial Class frmDashboard
         Me.LayoutControlItem5.Control = Me.GroupControl5
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(247, 142)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(199, 142)
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
         '
         'LayoutControlItem7
         '
         Me.LayoutControlItem7.Control = Me.GroupControl8
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(1221, 0)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(1173, 0)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(248, 167)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(296, 167)
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextVisible = False
         '
         'LayoutControlItem6
         '
         Me.LayoutControlItem6.Control = Me.GroupControl7
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(1043, 167)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(1050, 167)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(426, 300)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(419, 300)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'LayoutControlItem10
         '
         Me.LayoutControlItem10.Control = Me.GroupControl10
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(966, 467)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(918, 467)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(503, 353)
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(551, 353)
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem10.TextVisible = False
         '
         'LayoutControlItem11
         '
         Me.LayoutControlItem11.Control = Me.GroupControl11
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(247, 467)
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(199, 467)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
         Me.LayoutControlItem11.Size = New System.Drawing.Size(534, 353)
         Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
@@ -338,7 +355,7 @@ Partial Class frmDashboard
         'LayoutControlItem12
         '
         Me.LayoutControlItem12.Control = Me.GroupControl12
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(743, 0)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(695, 0)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
         Me.LayoutControlItem12.Size = New System.Drawing.Size(236, 167)
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(0, 0)
@@ -347,25 +364,25 @@ Partial Class frmDashboard
         'LayoutControlItem8
         '
         Me.LayoutControlItem8.Control = Me.GroupControl6
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(646, 167)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(622, 167)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(397, 300)
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(428, 300)
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem8.TextVisible = False
         '
         'LayoutControlItem9
         '
         Me.LayoutControlItem9.Control = Me.GroupControl9
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(247, 167)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(199, 167)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(399, 300)
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(423, 300)
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem9.TextVisible = False
         '
         'LayoutControlItem13
         '
         Me.LayoutControlItem13.Control = Me.GroupControl13
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(781, 467)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(733, 467)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
         Me.LayoutControlItem13.Size = New System.Drawing.Size(76, 353)
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(0, 0)
@@ -374,7 +391,7 @@ Partial Class frmDashboard
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.GroupControl14
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(497, 0)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(449, 0)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
         Me.LayoutControlItem14.Size = New System.Drawing.Size(246, 167)
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(0, 0)
@@ -383,7 +400,7 @@ Partial Class frmDashboard
         'LayoutControlItem15
         '
         Me.LayoutControlItem15.Control = Me.GroupControl15
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(857, 467)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(809, 467)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
         Me.LayoutControlItem15.Size = New System.Drawing.Size(109, 353)
         Me.LayoutControlItem15.TextSize = New System.Drawing.Size(0, 0)
@@ -392,7 +409,7 @@ Partial Class frmDashboard
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.GroupControl3
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(979, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(931, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(242, 167)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
@@ -403,18 +420,23 @@ Partial Class frmDashboard
         Me.LayoutControlItem4.Control = Me.GroupControl4
         Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 142)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(247, 221)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(199, 271)
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem4.TextVisible = False
         '
-        'ChartTotalSellProfitByYear
+        'ListYear
         '
-        Me.ChartTotalSellProfitByYear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ChartTotalSellProfitByYear.Location = New System.Drawing.Point(2, 23)
-        Me.ChartTotalSellProfitByYear.Name = "ChartTotalSellProfitByYear"
-        Me.ChartTotalSellProfitByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellProfitByYear.Size = New System.Drawing.Size(418, 271)
-        Me.ChartTotalSellProfitByYear.TabIndex = 2
+        Me.ListYear.Location = New System.Drawing.Point(5, 29)
+        Me.ListYear.Name = "ListYear"
+        Me.ListYear.Size = New System.Drawing.Size(181, 104)
+        Me.ListYear.TabIndex = 202
+        '
+        'ListMonth
+        '
+        Me.ListMonth.Location = New System.Drawing.Point(5, 26)
+        Me.ListMonth.Name = "ListMonth"
+        Me.ListMonth.Size = New System.Drawing.Size(181, 236)
+        Me.ListMonth.TabIndex = 203
         '
         'frmDashboard
         '
@@ -427,6 +449,7 @@ Partial Class frmDashboard
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl4.ResumeLayout(False)
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl14, System.ComponentModel.ISupportInitialize).EndInit()
@@ -442,8 +465,10 @@ Partial Class frmDashboard
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl7.ResumeLayout(False)
+        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl5.ResumeLayout(False)
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).EndInit()
@@ -462,7 +487,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ListYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ListMonth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -502,4 +528,6 @@ Partial Class frmDashboard
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents ChartTotalSellCOGSByYear As DevExpress.XtraCharts.ChartControl
     Friend WithEvents ChartTotalSellProfitByYear As DevExpress.XtraCharts.ChartControl
+    Friend WithEvents ListMonth As DevExpress.XtraEditors.CheckedListBoxControl
+    Friend WithEvents ListYear As DevExpress.XtraEditors.CheckedListBoxControl
 End Class

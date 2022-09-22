@@ -1,8 +1,10 @@
 ﻿
 Imports DevExpress.XtraCharts
+Imports DevExpress.XtraEditors.Controls
 
 Public Class frmDashboard
-    Private mcls As clsNotifi
+    Private mYearList As String
+    Private mMonthList As String
 
     Private Sub frmNotify_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -14,7 +16,15 @@ Public Class frmDashboard
 
     Private Sub frmNotify_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-
+            InitCondition()
+            LoadData()
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+    Private Sub LoadData()
+        Try
+            GetCondition()
             InitChartTotalSellByCatalog()
             InitChartTotalSellCOGSByYear()
             InitChartTotalSellProfitByYear()
@@ -22,12 +32,66 @@ Public Class frmDashboard
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
+    Private Sub InitCondition()
+        Dim lYear As Integer = Now.Year
 
+        Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
+        ListYear.Items.Add(lCheckedListBoxItem)
+
+        lYear -= 1
+        For i = 0 To 10
+            lCheckedListBoxItem = New CheckedListBoxItem(lYear, False)
+            ListYear.Items.Add(lCheckedListBoxItem)
+            lYear -= 1
+        Next
+
+        Dim items() As CheckedListBoxItem = {
+              New CheckedListBoxItem("January", True), New CheckedListBoxItem("February", True),
+              New CheckedListBoxItem("March", True), New CheckedListBoxItem("April", True),
+              New CheckedListBoxItem("May", True), New CheckedListBoxItem("June", True),
+              New CheckedListBoxItem("July", True), New CheckedListBoxItem("August", True),
+              New CheckedListBoxItem("September", True), New CheckedListBoxItem("October", True),
+              New CheckedListBoxItem("November", True), New CheckedListBoxItem("December", True)}
+        ListMonth.Items.AddRange(items)
+    End Sub
+
+    Private Sub GetCondition()
+        Dim lYearList As String = ""
+        For Each item As Object In ListYear.CheckedItems
+            'Dim row As DataRowView = CType(item, DataRowView)
+            If lYearList = "" Then
+                lYearList = ConvertNullToZero(item.ToString)
+            Else
+                lYearList += "," & ConvertNullToZero(item.ToString)
+            End If
+        Next
+        mYearList = lYearList
+
+        Dim lMonthList As String = ""
+        For Each item As Object In ListMonth.CheckedItems
+            'Dim row As DataRowView = CType(item, DataRowView)
+            If lMonthList = "" Then
+                lMonthList = GetMonthNumber(item.ToString)
+            Else
+                lMonthList += "," & GetMonthNumber(item.ToString)
+            End If
+        Next
+        mMonthList = lMonthList
+
+    End Sub
+
+    Private Function GetMonthNumber(ByVal pMonthName As String) As Integer
+        Dim lGetMonthNumber As String
+
+        lGetMonthNumber = Month(DateValue("1 " & pMonthName & " 2020"))
+        Return Integer.Parse(lGetMonthNumber)
+
+    End Function
     Private Sub InitChartTotalSellByCatalog()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByCatalog]"
-            SQL &= " @YearList = '2021,2022'"
-            SQL &= " ,@MonthList = '1,2,3,4,5,6'"
+            SQL &= " @YearList = '" & mYearList & "'"
+            SQL &= " ,@MonthList = '" & mMonthList & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
@@ -70,8 +134,8 @@ Public Class frmDashboard
     Private Sub InitChartTotalSellCOGSByYear()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
-            SQL &= " @YearList = '2020,2021,2022'"
-            SQL &= " ,@MonthList = '1,2,3,4,5,6,7,8,9,10,11,12'"
+            SQL &= " @YearList = '" & mYearList & "'"
+            SQL &= " ,@MonthList = '" & mMonthList & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Bar)
@@ -147,8 +211,8 @@ Public Class frmDashboard
     Private Sub InitChartTotalSellProfitByYear()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
-            SQL &= " @YearList = '2020,2021,2022'"
-            SQL &= " ,@MonthList = '1,2,3,4,5,6,7,8,9,10,11,12'"
+            SQL &= " @YearList = '" & mYearList & "'"
+            SQL &= " ,@MonthList = '" & mMonthList & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Line)
@@ -218,4 +282,8 @@ Public Class frmDashboard
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
+
+    'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged
+    '    LoadData()
+    'End Sub
 End Class

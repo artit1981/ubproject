@@ -165,7 +165,15 @@ Public Class frmMain
             lblEmp.Caption = gEmpName
             lblCompany.Caption = gCompanyName
 
-            ShowNotifi(True)
+            Dim mCtlForm = New frmDashboard
+            With mCtlForm
+                .Text = "ข้อความแจ้งเตือน"
+                .MdiParent = Me
+                .Show()
+
+
+            End With
+            'ShowNotifi(True)
 
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -664,6 +672,21 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub BankAccountRecordBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BankAccountRecordBar.ItemClick
+        Try
+
+            Dim lFormEdit As New frmBankAccountRec
+            With lFormEdit
+                .MdiParent = Me
+                .Show()
+                InsertActivity(DataMode.ModeOpen, MasterType.BankAccountRecord, "", Nothing)
+            End With
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
     Private Sub ReceiptCutBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles ReceiptCutBar.ItemClick
         Dim lcls As New OrderControl
         ShowDataOnControl(lcls, MasterType.ReceiptCut)
@@ -917,4 +940,6 @@ Public Class frmMain
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
+
+
 End Class
