@@ -167,14 +167,14 @@ Public Class frmMain
 
             Dim mCtlForm = New frmDashboard
             With mCtlForm
-                .Text = "ข้อความแจ้งเตือน"
+                .Text = "Dashboard"
                 .MdiParent = Me
                 .Show()
 
 
             End With
             'ShowNotifi(True)
-
+            'ShowOverdue(True)
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -882,6 +882,8 @@ Public Class frmMain
                 If (lIsVisible = False) Or (lIsEnable = False) Then
                     Exit Sub
                 End If
+            Else
+                Exit Sub
             End If
 
 
@@ -909,9 +911,42 @@ Public Class frmMain
                 InsertActivity(DataMode.ModeOpen, MasterType.Notifi, "", Nothing)
             End If
 
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
+
+    Private Sub ShowOverdue(ByVal pShowMsg As Boolean)
+        Try
+            Dim mcls As New clsNotifi
+            Dim lcls As New PrivilegeDAO
+            Dim lIsVisible As Boolean, lIsEnable As Boolean
+            If lcls.InitailData(gPrivilegeID, MasterType.Overdue) Then
+                lIsVisible = (lcls.PrivilegeData And Privilege.Visible) = Privilege.Visible
+                lIsEnable = (lcls.PrivilegeData And Privilege.Enable) = Privilege.Enable
+                If (lIsVisible = False) Or (lIsEnable = False) Then
+                    Exit Sub
+                End If
+            Else
+                Exit Sub
+            End If
+
+
             Dim lOverdueTable = mcls.LoadExpireOrder()
             If lOverdueTable.Rows.Count > 0 Then
-                If XtraMessageBox.Show(Me, "ขณะนี้มีบิล Overdue " & lOverdueTable.Rows.Count & " รายการ ต้องการเปิดดูข้อมูลหรือไม่", "Overdue", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                If pShowMsg = True Then
+                    If XtraMessageBox.Show(Me, "ขณะนี้มีบิล Overdue " & lOverdueTable.Rows.Count & " รายการ ต้องการเปิดดูข้อมูลหรือไม่", "Overdue", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                        Dim mCtlForm = New frmOverdue
+                        With mCtlForm
+                            .Text = "Overdue"
+                            .MdiParent = Me
+                            .OverdueData = lOverdueTable
+                            .Show()
+                        End With
+                    End If
+                Else
                     Dim mCtlForm = New frmOverdue
                     With mCtlForm
                         .Text = "Overdue"
@@ -920,12 +955,14 @@ Public Class frmMain
                         .Show()
                     End With
                 End If
+
             End If
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
         End Try
     End Sub
+
 
     Private Sub ReceiptHisBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ReceiptHisBar.ItemClick
         Try
@@ -941,5 +978,11 @@ Public Class frmMain
         End Try
     End Sub
 
-
+    Private Sub OverdueBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles OverdueBar.ItemClick
+        Try
+            ShowOverdue(False)
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 End Class

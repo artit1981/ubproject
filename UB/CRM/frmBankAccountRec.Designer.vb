@@ -280,16 +280,22 @@ Partial Class frmBankAccountRec
         '
         'gridView
         '
+        Me.gridView.Appearance.FooterPanel.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.gridView.Appearance.FooterPanel.Options.UseFont = True
         Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.BankAccountID, Me.Remark, Me.DR, Me.CR, Me.IsChange})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.gridView.OptionsLayout.Columns.AddNewColumns = False
         Me.gridView.OptionsLayout.Columns.RemoveOldColumns = False
+        Me.gridView.OptionsMenu.EnableFooterMenu = False
+        Me.gridView.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.[False]
         Me.gridView.OptionsNavigation.AutoFocusNewRow = True
         Me.gridView.OptionsNavigation.EnterMoveNextColumn = True
+        Me.gridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.gridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom
+        Me.gridView.OptionsView.ShowFooter = True
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
         'ID
@@ -371,6 +377,7 @@ Partial Class frmBankAccountRec
         Me.DR.MaxWidth = 200
         Me.DR.MinWidth = 150
         Me.DR.Name = "DR"
+        Me.DR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DR", "{0:#,###.00}")})
         Me.DR.Visible = True
         Me.DR.VisibleIndex = 3
         Me.DR.Width = 150
@@ -392,6 +399,7 @@ Partial Class frmBankAccountRec
         Me.CR.MaxWidth = 200
         Me.CR.MinWidth = 150
         Me.CR.Name = "CR"
+        Me.CR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "CR", "{0:#,###.00}")})
         Me.CR.Visible = True
         Me.CR.VisibleIndex = 4
         Me.CR.Width = 150

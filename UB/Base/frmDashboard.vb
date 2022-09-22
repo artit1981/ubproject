@@ -1,6 +1,7 @@
 ﻿
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraEditors.Controls
+Imports DevExpress.XtraSplashScreen
 
 Public Class frmDashboard
     Private mYearList As String
@@ -17,6 +18,29 @@ Public Class frmDashboard
     Private Sub frmNotify_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             InitCondition()
+
+            ' Add a title to the chart and hide the legend.
+            Dim chartTitle1 As New ChartTitle With {
+                .Text = "Total Sale by Catagoly",
+                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+            }
+            ChartTotalSellByCatalog.Titles.Add(chartTitle1)
+
+            ' Add a title to the chart and hide the legend.
+            chartTitle1 = New ChartTitle With {
+                .Text = "Total Sale and COGS",
+                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+            }
+            ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
+
+            ' Add a title to the chart and hide the legend.
+            chartTitle1 = New ChartTitle With {
+                .Text = "Total Sale and Profit",
+                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+            }
+            ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
+
+
             LoadData()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -24,24 +48,33 @@ Public Class frmDashboard
     End Sub
     Private Sub LoadData()
         Try
+
+            Me.Cursor = Cursors.WaitCursor
+
             GetCondition()
             InitChartTotalSellByCatalog()
             InitChartTotalSellCOGSByYear()
             InitChartTotalSellProfitByYear()
+
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
     Private Sub InitCondition()
         Dim lYear As Integer = Now.Year
 
-        Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
-        ListYear.Items.Add(lCheckedListBoxItem)
 
-        lYear -= 1
         For i = 0 To 10
-            lCheckedListBoxItem = New CheckedListBoxItem(lYear, False)
-            ListYear.Items.Add(lCheckedListBoxItem)
+            If i <= 2 Then
+                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
+                ListYear.Items.Add(lCheckedListBoxItem)
+            Else
+                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, False)
+                ListYear.Items.Add(lCheckedListBoxItem)
+            End If
+
             lYear -= 1
         Next
 
@@ -98,6 +131,7 @@ Public Class frmDashboard
             For Each pRow In dataTable.Rows
                 series1.Points.Add(New SeriesPoint(pRow("ProductCategory").ToString, ConvertNullToZero(pRow("TotalAmount"))))
             Next
+            ChartTotalSellByCatalog.Series.Clear()
 
             ' Add the series to the chart.
             ChartTotalSellByCatalog.Series.Add(series1)
@@ -114,12 +148,7 @@ Public Class frmDashboard
             '' Specify the behavior of series labels.
             CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
 
-            ' Add a title to the chart and hide the legend.
-            Dim chartTitle1 As New ChartTitle With {
-                .Text = "Total Sale by Catagoly",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
-            }
-            ChartTotalSellByCatalog.Titles.Add(chartTitle1)
+
             ChartTotalSellByCatalog.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
             ChartTotalSellByCatalog.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
@@ -145,6 +174,7 @@ Public Class frmDashboard
                 seriesCOGS.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Cost"))))
             Next
 
+            ChartTotalSellCOGSByYear.Series.Clear()
             ' Add the series to the chart.
             ChartTotalSellCOGSByYear.Series.Add(seriesSale)
             ChartTotalSellCOGSByYear.Series.Add(seriesCOGS)
@@ -191,12 +221,7 @@ Public Class frmDashboard
             CType(seriesSale.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.Top
             CType(seriesCOGS.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.Top
 
-            ' Add a title to the chart and hide the legend.
-            Dim chartTitle1 As New ChartTitle With {
-                .Text = "Total Sale and COGS",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
-            }
-            ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
+
             ChartTotalSellCOGSByYear.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
             ChartTotalSellCOGSByYear.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
@@ -222,6 +247,7 @@ Public Class frmDashboard
                 seriesProfit.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Profit"))))
             Next
 
+            ChartTotalSellProfitByYear.Series.Clear()
             ' Add the series to the chart.
             ChartTotalSellProfitByYear.Series.Add(seriesSale)
             ChartTotalSellProfitByYear.Series.Add(seriesProfit)
@@ -266,12 +292,7 @@ Public Class frmDashboard
             CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions.GridSpacing = 1
 
 
-            ' Add a title to the chart and hide the legend.
-            Dim chartTitle1 As New ChartTitle With {
-                .Text = "Total Sale and Profit",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
-            }
-            ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
+
             ChartTotalSellProfitByYear.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
             ChartTotalSellProfitByYear.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
@@ -281,6 +302,16 @@ Public Class frmDashboard
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
+    End Sub
+
+    'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged
+
+    'End Sub
+
+    Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles ListYear.ItemCheck
+        If ListYear.CheckedItems.Count > 0 Then
+            LoadData()
+        End If
     End Sub
 
     'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged

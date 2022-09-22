@@ -113,6 +113,7 @@ Module modGlobal
         Notifi = 104
         OrderHis2 = 105
         BankAccountRecord = 106
+        Overdue = 107
     End Enum
 
     Public Enum DataMode

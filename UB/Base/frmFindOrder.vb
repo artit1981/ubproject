@@ -494,7 +494,7 @@ Public Class frmFindOrder
             Case MasterType.Receipt, MasterType.Bill, MasterType.ReceiptCut, MasterType.ReceiptBuy, MasterType.ReduceCreditBuy, MasterType.AddCreditBuy
                 ProductTabPage.PageVisible = False
             Case Else
-                LoadProListData(cboOrderType.EditValue)
+                'LoadProListData(cboOrderType.EditValue)
         End Select
 
 
