@@ -80,10 +80,10 @@ Public Class PledgeDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT  PledgeID AS ID,RefOrderID,OrderCode,OrderDate,Total,Remark"
-            SQL = SQL & " FROM Pledge"
-            SQL = SQL & " WHERE RefOrderID =" & pRefOrderID
-            SQL = SQL & " AND Pledge.IsDelete =0   "
-            SQL = SQL & " ORDER BY PledgeID"
+            SQL &=  " FROM Pledge"
+            SQL &=  " WHERE RefOrderID =" & pRefOrderID
+            SQL &=  " AND Pledge.IsDelete =0   "
+            SQL &=  " ORDER BY PledgeID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "PledgeDAO.GetDataTable : " & e.Message)
@@ -111,25 +111,25 @@ Public Class PledgeDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("PledgeID", "Pledge", tr)
                     SQL = " INSERT INTO Pledge (PledgeID,RefOrderID,OrderCode,OrderDate,Total,Remark,IsDelete )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @RefOrderID"
-                    SQL = SQL & " ,  @OrderCode"
-                    SQL = SQL & " ,  @OrderDate"
-                    SQL = SQL & " ,  @Total"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @RefOrderID"
+                    SQL &=  " ,  @OrderCode"
+                    SQL &=  " ,  @OrderDate"
+                    SQL &=  " ,  @Total"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Pledge SET"
-                    SQL = SQL & " OrderCode=@OrderCode"
-                    SQL = SQL & " ,OrderDate=@OrderDate"
-                    SQL = SQL & " ,Total=@Total"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " WHERE PledgeID= @ID"
+                    SQL &=  " OrderCode=@OrderCode"
+                    SQL &=  " ,OrderDate=@OrderDate"
+                    SQL &=  " ,Total=@Total"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " WHERE PledgeID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Pledge SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE PledgeID= @ID"
+                    SQL &=  " WHERE PledgeID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -164,7 +164,7 @@ Public Class PledgeDAO
         SQL = ""
         Try
             SQL = " UPDATE Pledge SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefOrderID=@RefOrderID "
+            SQL &=  " WHERE RefOrderID=@RefOrderID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

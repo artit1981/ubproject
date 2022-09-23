@@ -364,8 +364,8 @@ Public Class CustomerDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM Customer "
-            SQL = SQL & " WITH (NOLOCK)"
-            SQL = SQL & " where CustomerType='" & TableName & "' ;"
+            SQL &=  " WITH (NOLOCK)"
+            SQL &=  " where CustomerType='" & TableName & "' ;"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -388,16 +388,16 @@ Public Class CustomerDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Customer"
+            SQL &=  " FROM Customer"
             If pName <> "" Then
-                SQL = SQL & " WHERE Firstname LIKE '%" & pName & "%'"
+                SQL &=  " WHERE Firstname LIKE '%" & pName & "%'"
             Else
-                SQL = SQL & " WHERE CustomerID=" & pID
+                SQL &=  " WHERE CustomerID=" & pID
             End If
             If TableName <> "" And TableName <> "0" Then
-                SQL = SQL & " and CustomerType ='" & TableName & "'"
+                SQL &=  " and CustomerType ='" & TableName & "'"
             End If
-            SQL = SQL & " ORDER BY CustomerCode"
+            SQL &=  " ORDER BY CustomerCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -541,58 +541,58 @@ Public Class CustomerDAO
             SQL = "SELECT A.CustomerID AS ID"
 
             If mTableID = MasterType.Lead Then
-                SQL = SQL & " ,A.Subject"
+                SQL &=  " ,A.Subject"
             End If
             If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Or mTableID = MasterType.Agency Then
-                SQL = SQL & " ,A.CustomerCode AS Code"
+                SQL &=  " ,A.CustomerCode AS Code"
             End If
             If mTableID = MasterType.Contacts Or mTableID = MasterType.Lead Then
-                SQL = SQL & " ,A.Title + A.Firstname + ' ' + A.LastName AS NAME"
+                SQL &=  " ,A.Title + A.Firstname + ' ' + A.LastName AS NAME"
             End If
 
-            SQL = SQL & " ,A.CompanyName "
+            SQL &=  " ,A.CompanyName "
             If mTableID = MasterType.Lead Then
-                SQL = SQL & " ,A.LeadStatus"
+                SQL &=  " ,A.LeadStatus"
             End If
             If mTableID = MasterType.Agency Or mTableID = MasterType.Lead Or mTableID = MasterType.Accounts Then
-                SQL = SQL & " ,A.Rating"
+                SQL &=  " ,A.Rating"
             End If
             If mTableID = MasterType.Accounts Then
-                SQL = SQL & " ,Contact.Title + Contact.Firstname + ' ' + Contact.LastName as ContactPerson"
+                SQL &=  " ,Contact.Title + Contact.Firstname + ' ' + Contact.LastName as ContactPerson"
             ElseIf mTableID = MasterType.Agency Then
-                SQL = SQL & " ,Address.ContactName as ContactPerson"
+                SQL &=  " ,Address.ContactName as ContactPerson"
             End If
-            SQL = SQL & " ,A.IsQuick "
-            SQL = SQL & " ,Address.Phone1,Address.Fax,Address.Email1 "
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
-            SQL = SQL & " ,A.ModifiedTime"
-            SQL = SQL & " FROM Customer A"
+            SQL &=  " ,A.IsQuick "
+            SQL &=  " ,Address.Phone1,Address.Fax,Address.Email1 "
+            SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
+            SQL &=  " ,A.ModifiedTime"
+            SQL &=  " FROM Customer A"
             If mTableID = MasterType.Accounts Or mTableID = MasterType.Agency Then
-                SQL = SQL & " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=A.ContactPersonID  "
+                SQL &=  " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=A.ContactPersonID  "
             End If
-            SQL = SQL & " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
-            SQL = SQL & " WHERE A.IsDelete =0   "
+            SQL &=  " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
+            SQL &=  " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
+            SQL &=  " WHERE A.IsDelete =0   "
             If TableName <> "" And TableName <> "0" Then
-                SQL = SQL & "  AND A.CustomerType='" & TableName & "'"
+                SQL &=  "  AND A.CustomerType='" & TableName & "'"
             End If
 
             If pID > 0 Then
-                SQL = SQL & "  AND A.CustomerID=" & pID
+                SQL &=  "  AND A.CustomerID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND A.IsInActive= 0"
+                SQL &=  "  AND A.IsInActive= 0"
             End If
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND A.TerritoryID=" & gTerritoryID
+                SQL &=  "  AND A.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND A.EmpID=" & gEmpID
+                SQL &=  "  AND A.EmpID=" & gEmpID
             End If
 
             If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Or mTableID = MasterType.Agency Then
-                SQL = SQL & " ORDER BY A.CustomerCode"
+                SQL &=  " ORDER BY A.CustomerCode"
             ElseIf mTableID = MasterType.Lead Then
-                SQL = SQL & " ORDER BY A.Subject"
+                SQL &=  " ORDER BY A.Subject"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -609,51 +609,51 @@ Public Class CustomerDAO
         Try
             SQL = "SELECT A.CustomerID AS ID,A.CustomerCode AS Code"
             If pCus_Agency = True Then
-                SQL = SQL & " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
-                SQL = SQL & " ,CustomerType AS Type "
+                SQL &=  " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
+                SQL &=  " ,CustomerType AS Type "
             ElseIf pSelectBoth = False Then
                 Select Case mTableID
                     Case MasterType.Accounts, MasterType.Agency
-                        SQL = SQL & " ,A.CompanyName AS CusName"
+                        SQL &=  " ,A.CompanyName AS CusName"
                     Case MasterType.Contacts
-                        SQL = SQL & " ,A.Title + A.Firstname + ' ' + A.LastName AS CusName,A.CompanyName"
+                        SQL &=  " ,A.Title + A.Firstname + ' ' + A.LastName AS CusName,A.CompanyName"
                 End Select
 
             ElseIf pSelectBoth = True Then
-                SQL = SQL & " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
+                SQL &=  " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
                 If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Then
-                    SQL = SQL & " ,CustomerType AS Type "
+                    SQL &=  " ,CustomerType AS Type "
                 ElseIf MasterType.Agency Then
-                    SQL = SQL & " ,'เจ้าหนี้' AS Type"
+                    SQL &=  " ,'เจ้าหนี้' AS Type"
                 End If
             End If
-            SQL = SQL & " ,Address.Phone1,Address.Fax,Address.Email1 "
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
-            SQL = SQL & " FROM Customer A"
-            SQL = SQL & " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
-            SQL = SQL & " WHERE A.IsDelete =0   "
+            SQL &=  " ,Address.Phone1,Address.Fax,Address.Email1 "
+            SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
+            SQL &=  " FROM Customer A"
+            SQL &=  " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
+            SQL &=  " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
+            SQL &=  " WHERE A.IsDelete =0   "
             If pOnlyActive = True Then
-                SQL = SQL & "  AND A.IsInActive= 0"
+                SQL &=  "  AND A.IsInActive= 0"
             End If
             If pCus_Agency = True Then
-                SQL = SQL & " AND A.CustomerType in('Contacts','Accounts','Agency')"
+                SQL &=  " AND A.CustomerType in('Contacts','Accounts','Agency')"
             ElseIf pSelectBoth = True Then
                 If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Then
-                    SQL = SQL & " AND A.CustomerType in('Contacts','Accounts')"
+                    SQL &=  " AND A.CustomerType in('Contacts','Accounts')"
                 ElseIf MasterType.Agency Then
-                    SQL = SQL & " AND A.CustomerType in('Agency')"
+                    SQL &=  " AND A.CustomerType in('Agency')"
                 End If
             Else
-                SQL = SQL & " AND A.CustomerType in('" & TableName & "')"
+                SQL &=  " AND A.CustomerType in('" & TableName & "')"
             End If
 
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND A.TerritoryID=" & gTerritoryID
+                SQL &=  "  AND A.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND A.EmpID=" & gEmpID
+                SQL &=  "  AND A.EmpID=" & gEmpID
             End If
-            SQL = SQL & " ORDER BY Code "
+            SQL &=  " ORDER BY Code "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CustomerDAO.GetDataTableForCombo : " & e.Message)
@@ -696,135 +696,135 @@ Public Class CustomerDAO
                     LeadStatus = "New"
                     ID = GenNewID("CustomerID", "Customer", tr)
                     SQL = " INSERT INTO Customer (CustomerID,CustomerCode,Remark "
-                    SQL = SQL & " ,Rating,DecisionMakerID,ContactRole,NoOfEmployee,AnnualRevenue "
-                    SQL = SQL & " ,HistoryID,SourceID,LeadID,IndustryTypeID,BusinessTypeID "
-                    SQL = SQL & " ,EstimatedBudjet,IsHoldButget,CreditAmount,BuyingTimeFrame,CreditRuleID,CurrencyID ,VatTypeID,BillDay,BillDayTo,ChqDay,ChqDayTo"
-                    SQL = SQL & " ,IsQuick,TerritoryID,AddressID,AddressIDShip,EmpID,CriterionPriceID,CompanyTypeID,CompanyRelateID"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,CustomerZoneID,SendBy,CreditGroupID "
-                    SQL = SQL & " ,Title,Firstname,LastName,CompanyName,Position,Subject,LeadType,LeadStatus,DisqualifyStatus"
-                    SQL = SQL & " ,RelateAccountID,IsConvert,Capital,CustomerType,ContactPersonID,CustomerGroupID,IsCorporation,Branch,ImportTXID,IsMainCompany"
-                    SQL = SQL & " ,BankAccountID1,BankAccountID2,BankAccountID3"
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @CustomerCode"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @Rating"
-                    SQL = SQL & " ,  @DecisionMakerID"
-                    SQL = SQL & " ,  @ContactRole"
-                    SQL = SQL & " ,  @NoOfEmployee"
-                    SQL = SQL & " ,  @AnnualRevenue"
-                    SQL = SQL & " ,  @HistoryID"
-                    SQL = SQL & " ,  @SourceID"
-                    SQL = SQL & " ,  @LeadID"
-                    SQL = SQL & " ,  @IndustryTypeID"
-                    SQL = SQL & " ,  @BusinessTypeID"
-                    SQL = SQL & " ,  @EstimatedBudjet"
-                    SQL = SQL & " ,  @IsHoldButget"
-                    SQL = SQL & " ,  @CreditAmount"
-                    SQL = SQL & " ,  @BuyingTimeFrame"
-                    SQL = SQL & " ,  @CreditRuleID"
-                    SQL = SQL & " ,  @CurrencyID"
-                    SQL = SQL & " ,  @VatTypeID"
-                    SQL = SQL & " ,  @BillDay"
-                    SQL = SQL & " ,  @BillDayTo"
-                    SQL = SQL & " ,  @ChqDay"
-                    SQL = SQL & " ,  @ChqDayTo"
-                    SQL = SQL & " ,  @IsQuick"
-                    SQL = SQL & " ,  @TerritoryID"
-                    SQL = SQL & " ,  @AddressID"
-                    SQL = SQL & " ,  @AddressIDShip "
-                    SQL = SQL & " ,  @EmpID"
-                    SQL = SQL & " ,  @CriterionPriceID"
-                    SQL = SQL & " ,  @CompanyTypeID"
-                    SQL = SQL & " ,  @CompanyRelateID"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @CustomerZoneID"
-                    SQL = SQL & " ,  @SendBy"
-                    SQL = SQL & " ,  @CreditGroupID"
-                    SQL = SQL & " ,  @Title"
-                    SQL = SQL & " ,  @FirstName"
-                    SQL = SQL & " ,  @LastName"
-                    SQL = SQL & " ,  @CompanyName"
-                    SQL = SQL & " ,  @Position"
-                    SQL = SQL & " ,  @mSubject"
-                    SQL = SQL & " ,  @LeadType"
-                    SQL = SQL & " ,  @LeadStatus"
-                    SQL = SQL & " ,  @DisqualifyStatus"
-                    SQL = SQL & " ,  @RelateAccountID"
-                    SQL = SQL & " ,  @IsConvert"
-                    SQL = SQL & " ,  @Capital"
-                    SQL = SQL & " ,  @CustomerType"
-                    SQL = SQL & " ,  @ContactPersonID"
-                    SQL = SQL & " ,  @CustomerGroupID"
-                    SQL = SQL & " ,  @IsCorporation"
-                    SQL = SQL & " ,  @Branch"
-                    SQL = SQL & " ,  @ImportTXID"
-                    SQL = SQL & " ,  @IsMainCompany"
-                    SQL = SQL & " ,  @BankAccountID1,@BankAccountID2,@BankAccountID3"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,Rating,DecisionMakerID,ContactRole,NoOfEmployee,AnnualRevenue "
+                    SQL &=  " ,HistoryID,SourceID,LeadID,IndustryTypeID,BusinessTypeID "
+                    SQL &=  " ,EstimatedBudjet,IsHoldButget,CreditAmount,BuyingTimeFrame,CreditRuleID,CurrencyID ,VatTypeID,BillDay,BillDayTo,ChqDay,ChqDayTo"
+                    SQL &=  " ,IsQuick,TerritoryID,AddressID,AddressIDShip,EmpID,CriterionPriceID,CompanyTypeID,CompanyRelateID"
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,CustomerZoneID,SendBy,CreditGroupID "
+                    SQL &=  " ,Title,Firstname,LastName,CompanyName,Position,Subject,LeadType,LeadStatus,DisqualifyStatus"
+                    SQL &=  " ,RelateAccountID,IsConvert,Capital,CustomerType,ContactPersonID,CustomerGroupID,IsCorporation,Branch,ImportTXID,IsMainCompany"
+                    SQL &=  " ,BankAccountID1,BankAccountID2,BankAccountID3"
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @CustomerCode"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @Rating"
+                    SQL &=  " ,  @DecisionMakerID"
+                    SQL &=  " ,  @ContactRole"
+                    SQL &=  " ,  @NoOfEmployee"
+                    SQL &=  " ,  @AnnualRevenue"
+                    SQL &=  " ,  @HistoryID"
+                    SQL &=  " ,  @SourceID"
+                    SQL &=  " ,  @LeadID"
+                    SQL &=  " ,  @IndustryTypeID"
+                    SQL &=  " ,  @BusinessTypeID"
+                    SQL &=  " ,  @EstimatedBudjet"
+                    SQL &=  " ,  @IsHoldButget"
+                    SQL &=  " ,  @CreditAmount"
+                    SQL &=  " ,  @BuyingTimeFrame"
+                    SQL &=  " ,  @CreditRuleID"
+                    SQL &=  " ,  @CurrencyID"
+                    SQL &=  " ,  @VatTypeID"
+                    SQL &=  " ,  @BillDay"
+                    SQL &=  " ,  @BillDayTo"
+                    SQL &=  " ,  @ChqDay"
+                    SQL &=  " ,  @ChqDayTo"
+                    SQL &=  " ,  @IsQuick"
+                    SQL &=  " ,  @TerritoryID"
+                    SQL &=  " ,  @AddressID"
+                    SQL &=  " ,  @AddressIDShip "
+                    SQL &=  " ,  @EmpID"
+                    SQL &=  " ,  @CriterionPriceID"
+                    SQL &=  " ,  @CompanyTypeID"
+                    SQL &=  " ,  @CompanyRelateID"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @CustomerZoneID"
+                    SQL &=  " ,  @SendBy"
+                    SQL &=  " ,  @CreditGroupID"
+                    SQL &=  " ,  @Title"
+                    SQL &=  " ,  @FirstName"
+                    SQL &=  " ,  @LastName"
+                    SQL &=  " ,  @CompanyName"
+                    SQL &=  " ,  @Position"
+                    SQL &=  " ,  @mSubject"
+                    SQL &=  " ,  @LeadType"
+                    SQL &=  " ,  @LeadStatus"
+                    SQL &=  " ,  @DisqualifyStatus"
+                    SQL &=  " ,  @RelateAccountID"
+                    SQL &=  " ,  @IsConvert"
+                    SQL &=  " ,  @Capital"
+                    SQL &=  " ,  @CustomerType"
+                    SQL &=  " ,  @ContactPersonID"
+                    SQL &=  " ,  @CustomerGroupID"
+                    SQL &=  " ,  @IsCorporation"
+                    SQL &=  " ,  @Branch"
+                    SQL &=  " ,  @ImportTXID"
+                    SQL &=  " ,  @IsMainCompany"
+                    SQL &=  " ,  @BankAccountID1,@BankAccountID2,@BankAccountID3"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Customer"
-                    SQL = SQL & " SET CustomerCode=@CustomerCode"
-                    SQL = SQL & " ,Rating=@Rating"
-                    SQL = SQL & " ,DecisionMakerID=@DecisionMakerID"
-                    SQL = SQL & " ,CompanyName=@CompanyName"
-                    SQL = SQL & " ,NoOfEmployee=@NoOfEmployee"
-                    SQL = SQL & " ,AnnualRevenue=@AnnualRevenue"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ContactRole=@ContactRole"
-                    SQL = SQL & " ,SourceID=@SourceID "
-                    SQL = SQL & " ,LeadID=@LeadID "
-                    SQL = SQL & " ,IndustryTypeID=@IndustryTypeID "
-                    SQL = SQL & " ,BusinessTypeID=@BusinessTypeID "
-                    SQL = SQL & " ,EstimatedBudjet=@EstimatedBudjet "
-                    SQL = SQL & " ,IsHoldButget=@IsHoldButget "
-                    SQL = SQL & " ,CreditAmount=@CreditAmount "
-                    SQL = SQL & " ,BuyingTimeFrame=@BuyingTimeFrame "
-                    SQL = SQL & " ,CreditRuleID=@CreditRuleID "
-                    SQL = SQL & " ,CurrencyID=@CurrencyID "
-                    SQL = SQL & " ,TerritoryID=@TerritoryID "
-                    SQL = SQL & " ,EmpID=@EmpID "
-                    SQL = SQL & " ,CriterionPriceID=@CriterionPriceID "
-                    SQL = SQL & " ,CompanyTypeID=@CompanyTypeID "
-                    SQL = SQL & " ,CompanyRelateID=@CompanyRelateID "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " ,VatTypeID=@VatTypeID "
-                    SQL = SQL & " ,BillDay=@BillDay "
-                    SQL = SQL & " ,BillDayTo=@BillDayTo "
-                    SQL = SQL & " ,ChqDay=@ChqDay "
-                    SQL = SQL & " ,ChqDayTo=@ChqDayTo "
-                    SQL = SQL & " ,CustomerZoneID=@CustomerZoneID "
-                    SQL = SQL & " ,SendBy=@SendBy "
-                    SQL = SQL & " ,CreditGroupID=@CreditGroupID "
-                    SQL = SQL & " ,Title=@Title"
-                    SQL = SQL & " ,Firstname=@FirstName"
-                    SQL = SQL & " ,LastName=@LastName"
-                    SQL = SQL & " ,Position=@Position"
-                    SQL = SQL & " ,Subject=@mSubject"
-                    SQL = SQL & " ,LeadType=@LeadType"
-                    SQL = SQL & " ,DisqualifyStatus= @DisqualifyStatus"
-                    SQL = SQL & " ,RelateAccountID= @RelateAccountID"
-                    SQL = SQL & " ,Capital= @Capital"
-                    SQL = SQL & " ,LeadStatus= @LeadStatus"
-                    SQL = SQL & " ,ContactPersonID= @ContactPersonID"
-                    SQL = SQL & " ,CustomerGroupID= @CustomerGroupID"
-                    SQL = SQL & " ,IsCorporation= @IsCorporation"
-                    SQL = SQL & " ,Branch= @Branch"
-                    SQL = SQL & " ,IsMainCompany= @IsMainCompany"
-                    SQL = SQL & " ,BankAccountID1= @BankAccountID1"
-                    SQL = SQL & " ,BankAccountID2= @BankAccountID2"
-                    SQL = SQL & " ,BankAccountID3= @BankAccountID3"
-                    SQL = SQL & " WHERE CustomerID= @mIDs"
+                    SQL &=  " SET CustomerCode=@CustomerCode"
+                    SQL &=  " ,Rating=@Rating"
+                    SQL &=  " ,DecisionMakerID=@DecisionMakerID"
+                    SQL &=  " ,CompanyName=@CompanyName"
+                    SQL &=  " ,NoOfEmployee=@NoOfEmployee"
+                    SQL &=  " ,AnnualRevenue=@AnnualRevenue"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ContactRole=@ContactRole"
+                    SQL &=  " ,SourceID=@SourceID "
+                    SQL &=  " ,LeadID=@LeadID "
+                    SQL &=  " ,IndustryTypeID=@IndustryTypeID "
+                    SQL &=  " ,BusinessTypeID=@BusinessTypeID "
+                    SQL &=  " ,EstimatedBudjet=@EstimatedBudjet "
+                    SQL &=  " ,IsHoldButget=@IsHoldButget "
+                    SQL &=  " ,CreditAmount=@CreditAmount "
+                    SQL &=  " ,BuyingTimeFrame=@BuyingTimeFrame "
+                    SQL &=  " ,CreditRuleID=@CreditRuleID "
+                    SQL &=  " ,CurrencyID=@CurrencyID "
+                    SQL &=  " ,TerritoryID=@TerritoryID "
+                    SQL &=  " ,EmpID=@EmpID "
+                    SQL &=  " ,CriterionPriceID=@CriterionPriceID "
+                    SQL &=  " ,CompanyTypeID=@CompanyTypeID "
+                    SQL &=  " ,CompanyRelateID=@CompanyRelateID "
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " ,VatTypeID=@VatTypeID "
+                    SQL &=  " ,BillDay=@BillDay "
+                    SQL &=  " ,BillDayTo=@BillDayTo "
+                    SQL &=  " ,ChqDay=@ChqDay "
+                    SQL &=  " ,ChqDayTo=@ChqDayTo "
+                    SQL &=  " ,CustomerZoneID=@CustomerZoneID "
+                    SQL &=  " ,SendBy=@SendBy "
+                    SQL &=  " ,CreditGroupID=@CreditGroupID "
+                    SQL &=  " ,Title=@Title"
+                    SQL &=  " ,Firstname=@FirstName"
+                    SQL &=  " ,LastName=@LastName"
+                    SQL &=  " ,Position=@Position"
+                    SQL &=  " ,Subject=@mSubject"
+                    SQL &=  " ,LeadType=@LeadType"
+                    SQL &=  " ,DisqualifyStatus= @DisqualifyStatus"
+                    SQL &=  " ,RelateAccountID= @RelateAccountID"
+                    SQL &=  " ,Capital= @Capital"
+                    SQL &=  " ,LeadStatus= @LeadStatus"
+                    SQL &=  " ,ContactPersonID= @ContactPersonID"
+                    SQL &=  " ,CustomerGroupID= @CustomerGroupID"
+                    SQL &=  " ,IsCorporation= @IsCorporation"
+                    SQL &=  " ,Branch= @Branch"
+                    SQL &=  " ,IsMainCompany= @IsMainCompany"
+                    SQL &=  " ,BankAccountID1= @BankAccountID1"
+                    SQL &=  " ,BankAccountID2= @BankAccountID2"
+                    SQL &=  " ,BankAccountID3= @BankAccountID3"
+                    SQL &=  " WHERE CustomerID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Customer SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE CustomerID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE CustomerID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -931,15 +931,15 @@ Public Class CustomerDAO
         Try
             SQL = "SELECT CustomerID  FROM Customer"
             If TableID = MasterType.Lead Then
-                SQL = SQL & " WHERE IsDelete=0 AND Subject='" & Trim(Code) & "'"
+                SQL &=  " WHERE IsDelete=0 AND Subject='" & Trim(Code) & "'"
             Else
-                SQL = SQL & " WHERE IsDelete=0 AND CustomerCode='" & Trim(Code) & "'"
+                SQL &=  " WHERE IsDelete=0 AND CustomerCode='" & Trim(Code) & "'"
             End If
 
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND CustomerID <> " & ID
+                SQL &=  " AND CustomerID <> " & ID
             End If
-            SQL = SQL & " AND CustomerType='" & TableName & "' ;"
+            SQL &=  " AND CustomerType='" & TableName & "' ;"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
         Catch e As Exception
@@ -957,16 +957,16 @@ Public Class CustomerDAO
 
         Try
             SQL = "SELECT CustomerID  FROM Orders"
-            SQL = SQL & " WHERE IsDelete =0  "
-            SQL = SQL & " and CustomerID=" & ID
+            SQL &=  " WHERE IsDelete =0  "
+            SQL &=  " and CustomerID=" & ID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 Return True
             End If
 
             SQL = "SELECT CustomerID  FROM CustomerList"
-            SQL = SQL & " WHERE IsDelete =0  "
-            SQL = SQL & " and CustomerID=" & ID
+            SQL &=  " WHERE IsDelete =0  "
+            SQL &=  " and CustomerID=" & ID
             dataTable = New DataTable()
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then

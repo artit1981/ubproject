@@ -71,23 +71,23 @@ Public Class frmSNList
         Try
 
             SQL = "  select Product.ProductCode,Product.ProductName,SerialNumber.SerialNumberNo"
-            SQL = SQL & "  ,Orders.OrderCode as InCode,Orders.OrderDate as InDate"
-            SQL = SQL & "  ,sell.OrderCode as OutCode,sell.OrderDate as OutDate,SerialNumber.Status"
-            SQL = SQL & "  "
-            SQL = SQL & "  from SerialNumber"
-            SQL = SQL & "  inner join Orders on Orders.OrderID=SerialNumber.OrderID and Orders.TableID in(40,69)"
-            SQL = SQL & "  inner join Product on Product.ProductID=SerialNumber.ProductID and Product.IsDelete=0"
-            SQL = SQL & "  left outer join SerialNumber as sellsn on sellsn.SerialNumberNo=SerialNumber.SerialNumberNo "
-            SQL = SQL & "  and sellsn.IsDelete=0 and sellsn.OrderID in (select OrderID from Orders where TableID in(34,54,55,61,62) and Orders.IsDelete=0)"
-            SQL = SQL & "  and sellsn.ProductID=Product.ProductID"
-            SQL = SQL & "  left outer join Orders as sell on sell.OrderID=sellsn.OrderID   and sell.IsDelete=0"
-            SQL = SQL & "  where SerialNumber.IsDelete=0 and Orders.IsDelete=0 "
-            SQL = SQL & " and Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+            SQL &=  "  ,Orders.OrderCode as InCode,Orders.OrderDate as InDate"
+            SQL &=  "  ,sell.OrderCode as OutCode,sell.OrderDate as OutDate,SerialNumber.Status"
+            SQL &=  "  "
+            SQL &=  "  from SerialNumber"
+            SQL &=  "  inner join Orders on Orders.OrderID=SerialNumber.OrderID and Orders.TableID in(40,69)"
+            SQL &=  "  inner join Product on Product.ProductID=SerialNumber.ProductID and Product.IsDelete=0"
+            SQL &=  "  left outer join SerialNumber as sellsn on sellsn.SerialNumberNo=SerialNumber.SerialNumberNo "
+            SQL &=  "  and sellsn.IsDelete=0 and sellsn.OrderID in (select OrderID from Orders where TableID in(34,54,55,61,62) and Orders.IsDelete=0)"
+            SQL &=  "  and sellsn.ProductID=Product.ProductID"
+            SQL &=  "  left outer join Orders as sell on sell.OrderID=sellsn.OrderID   and sell.IsDelete=0"
+            SQL &=  "  where SerialNumber.IsDelete=0 and Orders.IsDelete=0 "
+            SQL &=  " and Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
             'If chkShowDelete.Checked = False Then
-            '    SQL = SQL & "  AND Orders.IsDelete = 0"
-            '    SQL = SQL & "  AND Orders.IsCancel = 0"
+            '    SQL &=  "  AND Orders.IsDelete = 0"
+            '    SQL &=  "  AND Orders.IsCancel = 0"
             'End If
-            SQL = SQL & " order by Product.ProductCode,SerialNumber.SerialNumberNo "
+            SQL &=  " order by Product.ProductCode,SerialNumber.SerialNumberNo "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             If dataTable.Rows.Count > 0 Then

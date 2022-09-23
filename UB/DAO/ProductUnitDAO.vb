@@ -114,20 +114,20 @@ Public Class ProductUnitDAO
 
         Try
             SQL = "SELECT Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName ,Product_UOM.Rate"
-            SQL = SQL & " , Product_UOM.UOMID AS ID,Product_UOM.SEQ,Product_UOM.UnitID, Product_UOM.Remark,Product_UOM.RefID,Product_UOM.IsInActive"
-            SQL = SQL & " FROM Product_UOM"
-            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_UOM.UnitID "
-            SQL = SQL & " WHERE Product_UOM.RefID =" & pRefID
-            SQL = SQL & " AND Product_UOM.IsDelete =0   "
-            SQL = SQL & " AND BuyOrSell =" & plngBuyOrSell
+            SQL &=  " , Product_UOM.UOMID AS ID,Product_UOM.SEQ,Product_UOM.UnitID, Product_UOM.Remark,Product_UOM.RefID,Product_UOM.IsInActive"
+            SQL &=  " FROM Product_UOM"
+            SQL &=  " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_UOM.UnitID "
+            SQL &=  " WHERE Product_UOM.RefID =" & pRefID
+            SQL &=  " AND Product_UOM.IsDelete =0   "
+            SQL &=  " AND BuyOrSell =" & plngBuyOrSell
             If pUnitID > 0 Then
-                SQL = SQL & " AND Product_UOM.UnitID =" & pUnitID
+                SQL &=  " AND Product_UOM.UnitID =" & pUnitID
             End If
             If pUnitName <> "" Then
-                SQL = SQL & " AND Product_Unit.CodeThai ='" & pUnitName & "'"
+                SQL &=  " AND Product_Unit.CodeThai ='" & pUnitName & "'"
             End If
 
-            SQL = SQL & " ORDER BY Product_UOM.SEQ"
+            SQL &=  " ORDER BY Product_UOM.SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductUnitDAO.GetDataTable : " & e.Message)
@@ -157,28 +157,28 @@ Public Class ProductUnitDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("UOMID", "Product_UOM", tr)
                     SQL = " INSERT INTO Product_UOM  (UOMID,SEQ,RefID,BuyOrSell,UnitID,Rate,Remark,IsDelete,IsInActive )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @SEQ"
-                    SQL = SQL & " ,  @RefID"
-                    SQL = SQL & " ,  @BuyOrSell"
-                    SQL = SQL & " ,  @UnitID"
-                    SQL = SQL & " ,  @Rate"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @SEQ"
+                    SQL &=  " ,  @RefID"
+                    SQL &=  " ,  @BuyOrSell"
+                    SQL &=  " ,  @UnitID"
+                    SQL &=  " ,  @Rate"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Product_UOM   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " UnitID=@UnitID"
-                    SQL = SQL & " ,Rate= @Rate"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " ,IsInActive=@IsInActive"
-                    SQL = SQL & " WHERE UOMID= @ID"
+                    SQL &=  " SET"
+                    SQL &=  " UnitID=@UnitID"
+                    SQL &=  " ,Rate= @Rate"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " ,IsInActive=@IsInActive"
+                    SQL &=  " WHERE UOMID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Product_UOM SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE UOMID= @ID"
+                    SQL &=  " WHERE UOMID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -215,10 +215,10 @@ Public Class ProductUnitDAO
         SQL = ""
         Try
             SQL = " UPDATE Product_UOM SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE UOMID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND RefID=@RefID "
-            SQL = SQL & " AND BuyOrSell=@BuyOrSell "
-            SQL = SQL & " AND IsDelete =0  "
+            SQL &=  " WHERE UOMID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND RefID=@RefID "
+            SQL &=  " AND BuyOrSell=@BuyOrSell "
+            SQL &=  " AND IsDelete =0  "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 
@@ -240,8 +240,8 @@ Public Class ProductUnitDAO
         SQL = ""
         Try
             SQL = " UPDATE Product_UOM SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefID=@RefID "
-            SQL = SQL & " AND BuyOrSell=@BuyOrSell "
+            SQL &=  " WHERE RefID=@RefID "
+            SQL &=  " AND BuyOrSell=@BuyOrSell "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

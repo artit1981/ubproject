@@ -49,22 +49,22 @@ Public Class frmTaxReport
             Dim SQL As String
 
             SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Customer.IsMainCompany, History.TaxID as CustomerTaxID,Customer.Branch, Orders.TableID"
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN History ON History.HistoryID=Customer.HistoryID  "
-            SQL = SQL & " WHERE Orders.IsDelete =0   "
-            SQL = SQL & " and Orders.VatAmount > 0 "
-            SQL = SQL & " and Month(Orders.TaxMonthYear) =" & Month(OrderDate.EditValue)
-            SQL = SQL & " and Year(Orders.TaxMonthYear) =" & IIf(Year(OrderDate.EditValue) > 2500, Year(OrderDate.EditValue) - 543, Year(OrderDate.EditValue))
-            SQL = SQL & " and Orders.IsInActive = 0"
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &=  " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Customer.IsMainCompany, History.TaxID as CustomerTaxID,Customer.Branch, Orders.TableID"
+            SQL &=  " FROM Orders  "
+            SQL &=  " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN History ON History.HistoryID=Customer.HistoryID  "
+            SQL &=  " WHERE Orders.IsDelete =0   "
+            SQL &=  " and Orders.VatAmount > 0 "
+            SQL &=  " and Month(Orders.TaxMonthYear) =" & Month(OrderDate.EditValue)
+            SQL &=  " and Year(Orders.TaxMonthYear) =" & IIf(Year(OrderDate.EditValue) > 2500, Year(OrderDate.EditValue) - 543, Year(OrderDate.EditValue))
+            SQL &=  " and Orders.IsInActive = 0"
             If OrderType.EditValue = "B" Then 'buy
-                SQL = SQL & " and Orders.TableID in (" & MasterType.InvoiceBuy & "," & MasterType.Asset & "," & MasterType.ReduceCreditBuy & ")"
+                SQL &=  " and Orders.TableID in (" & MasterType.InvoiceBuy & "," & MasterType.Asset & "," & MasterType.ReduceCreditBuy & ")"
             Else
-                SQL = SQL & " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.ReduceCredit & ")"
+                SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.ReduceCredit & ")"
             End If
-            SQL = SQL & " ORDER BY Orders.OrderDate ,Orders.OrderCode"
+            SQL &=  " ORDER BY Orders.OrderDate ,Orders.OrderCode"
             lTableOrder = gConnection.executeSelectQuery(SQL, Nothing)
             If lTableOrder.Rows.Count > 0 Then
                 lclsTmpProList.ClearTemp()

@@ -36,18 +36,20 @@ Partial Class frmDebtAnalystReport
         Me.chkRedue = New DevExpress.XtraEditors.CheckEdit()
         Me.chkAddCre = New DevExpress.XtraEditors.CheckEdit()
         Me.UcMoverItem1 = New UB.ucMoverItem()
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.chkInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkBorrow.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateAsOf.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateAsOf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateAsOf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkRedue.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkAddCre.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DateFrom
@@ -60,12 +62,12 @@ Partial Class frmDebtAnalystReport
         Me.DateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateFrom.Properties.Appearance.Options.UseFont = True
         Me.DateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateFrom.Properties.EditFormat.FormatString = "dd MMMM yyyy"
         Me.DateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateFrom.Properties.Mask.EditMask = "dd MMMM yyyy"
-        Me.DateFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Size = New System.Drawing.Size(149, 20)
         Me.DateFrom.TabIndex = 4
         '
@@ -96,16 +98,16 @@ Partial Class frmDebtAnalystReport
         Me.chkInvoice.Location = New System.Drawing.Point(137, 175)
         Me.chkInvoice.Name = "chkInvoice"
         Me.chkInvoice.Properties.Caption = "ใบกำกับภาษี"
-        Me.chkInvoice.Size = New System.Drawing.Size(128, 19)
+        Me.chkInvoice.Size = New System.Drawing.Size(95, 20)
         Me.chkInvoice.TabIndex = 196
         '
         'chkShiping
         '
         Me.chkShiping.EditValue = True
-        Me.chkShiping.Location = New System.Drawing.Point(234, 175)
+        Me.chkShiping.Location = New System.Drawing.Point(371, 175)
         Me.chkShiping.Name = "chkShiping"
         Me.chkShiping.Properties.Caption = "ใบส่งของ"
-        Me.chkShiping.Size = New System.Drawing.Size(152, 19)
+        Me.chkShiping.Size = New System.Drawing.Size(152, 20)
         Me.chkShiping.TabIndex = 194
         '
         'DateTo
@@ -118,12 +120,12 @@ Partial Class frmDebtAnalystReport
         Me.DateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateTo.Properties.Appearance.Options.UseFont = True
         Me.DateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateTo.Properties.EditFormat.FormatString = "dd MMMM yyyy"
         Me.DateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateTo.Properties.Mask.EditMask = "dd MMMM yyyy"
-        Me.DateTo.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Size = New System.Drawing.Size(148, 20)
         Me.DateTo.TabIndex = 193
         '
@@ -174,10 +176,10 @@ Partial Class frmDebtAnalystReport
         'chkBorrow
         '
         Me.chkBorrow.EditValue = True
-        Me.chkBorrow.Location = New System.Drawing.Point(318, 175)
+        Me.chkBorrow.Location = New System.Drawing.Point(371, 200)
         Me.chkBorrow.Name = "chkBorrow"
         Me.chkBorrow.Properties.Caption = "ใบยืมสินค้า"
-        Me.chkBorrow.Size = New System.Drawing.Size(152, 19)
+        Me.chkBorrow.Size = New System.Drawing.Size(152, 20)
         Me.chkBorrow.TabIndex = 209
         '
         'DateAsOf
@@ -190,12 +192,12 @@ Partial Class frmDebtAnalystReport
         Me.DateAsOf.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateAsOf.Properties.Appearance.Options.UseFont = True
         Me.DateAsOf.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateAsOf.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateAsOf.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DateAsOf.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateAsOf.Properties.EditFormat.FormatString = "dd MMMM yyyy"
         Me.DateAsOf.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.DateAsOf.Properties.Mask.EditMask = "dd MMMM yyyy"
-        Me.DateAsOf.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateAsOf.Size = New System.Drawing.Size(149, 20)
         Me.DateAsOf.TabIndex = 210
         '
@@ -216,7 +218,7 @@ Partial Class frmDebtAnalystReport
         Me.chkRedue.Location = New System.Drawing.Point(137, 200)
         Me.chkRedue.Name = "chkRedue"
         Me.chkRedue.Properties.Caption = "ใบลดหนี้"
-        Me.chkRedue.Size = New System.Drawing.Size(128, 19)
+        Me.chkRedue.Size = New System.Drawing.Size(128, 20)
         Me.chkRedue.TabIndex = 212
         '
         'chkAddCre
@@ -225,7 +227,7 @@ Partial Class frmDebtAnalystReport
         Me.chkAddCre.Location = New System.Drawing.Point(234, 200)
         Me.chkAddCre.Name = "chkAddCre"
         Me.chkAddCre.Properties.Caption = "ใบเพิ่มหนี้"
-        Me.chkAddCre.Size = New System.Drawing.Size(128, 19)
+        Me.chkAddCre.Size = New System.Drawing.Size(78, 20)
         Me.chkAddCre.TabIndex = 213
         '
         'UcMoverItem1
@@ -237,11 +239,21 @@ Partial Class frmDebtAnalystReport
         Me.UcMoverItem1.Size = New System.Drawing.Size(500, 199)
         Me.UcMoverItem1.TabIndex = 214
         '
+        'chkInvoiceOnline
+        '
+        Me.chkInvoiceOnline.EditValue = True
+        Me.chkInvoiceOnline.Location = New System.Drawing.Point(234, 175)
+        Me.chkInvoiceOnline.Name = "chkInvoiceOnline"
+        Me.chkInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
+        Me.chkInvoiceOnline.Size = New System.Drawing.Size(131, 20)
+        Me.chkInvoiceOnline.TabIndex = 215
+        '
         'frmDebtAnalystReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(889, 442)
+        Me.Controls.Add(Me.chkInvoiceOnline)
         Me.Controls.Add(Me.UcMoverItem1)
         Me.Controls.Add(Me.chkAddCre)
         Me.Controls.Add(Me.chkRedue)
@@ -258,7 +270,7 @@ Partial Class frmDebtAnalystReport
         Me.Controls.Add(Me.chkShiping)
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.chkInvoice)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmDebtAnalystReport.IconOptions.Icon"), System.Drawing.Icon)
         Me.Name = "frmDebtAnalystReport"
         Me.Text = "รายงานวิเคราะห์ยอดขาย"
         Me.Controls.SetChildIndex(Me.chkInvoice, 0)
@@ -277,18 +289,20 @@ Partial Class frmDebtAnalystReport
         Me.Controls.SetChildIndex(Me.chkRedue, 0)
         Me.Controls.SetChildIndex(Me.chkAddCre, 0)
         Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Controls.SetChildIndex(Me.chkInvoiceOnline, 0)
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkShiping.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkBorrow.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateAsOf.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateAsOf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateAsOf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkRedue.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkAddCre.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -309,5 +323,5 @@ Partial Class frmDebtAnalystReport
     Friend WithEvents chkRedue As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents chkAddCre As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents UcMoverItem1 As UB.ucMoverItem
-
+    Friend WithEvents chkInvoiceOnline As DevExpress.XtraEditors.CheckEdit
 End Class

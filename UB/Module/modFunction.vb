@@ -599,10 +599,10 @@ Module modFunction
             Else
                 SQL = "SELECT MasterID AS ID,CodeThai,case when  MasterID in (" & pProGroupIDList & ") Then 1 else 0 end Flag"
             End If
-            SQL = SQL & " FROM " & pTable
-            SQL = SQL & " WHERE IsDelete= 0   "
-            SQL = SQL & " AND IsInActive = 0"
-            SQL = SQL & " ORDER BY CodeThai"
+            SQL &=  " FROM " & pTable
+            SQL &=  " WHERE IsDelete= 0   "
+            SQL &=  " AND IsInActive = 0"
+            SQL &=  " ORDER BY CodeThai"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             pProduct.DataSource = dataTable
@@ -636,10 +636,10 @@ Module modFunction
             Else
                 SQL = "SELECT ProductTypeID AS ID,NameThai,case when  ProductTypeID in (" & pProTypeIDList & ") Then 1 else 0 end Flag"
             End If
-            SQL = SQL & " FROM ProductType"
-            SQL = SQL & " WHERE IsDelete= 0   "
-            SQL = SQL & " AND IsInActive = 0"
-            SQL = SQL & " ORDER BY NameThai"
+            SQL &=  " FROM ProductType"
+            SQL &=  " WHERE IsDelete= 0   "
+            SQL &=  " AND IsInActive = 0"
+            SQL &=  " ORDER BY NameThai"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             pProductTypeID.DataSource = dataTable
@@ -673,10 +673,10 @@ Module modFunction
             Else
                 SQL = "SELECT ProductBrandID AS ID,NameThai,case when  ProductBrandID in (" & pProBrandIDList & ") Then 1 else 0 end Flag"
             End If
-            SQL = SQL & " FROM ProductBrand"
-            SQL = SQL & " WHERE IsDelete= 0   "
-            SQL = SQL & " AND IsInActive = 0"
-            SQL = SQL & " ORDER BY NameThai"
+            SQL &=  " FROM ProductBrand"
+            SQL &=  " WHERE IsDelete= 0   "
+            SQL &=  " AND IsInActive = 0"
+            SQL &=  " ORDER BY NameThai"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             pProductBrandID.DataSource = dataTable
@@ -709,11 +709,11 @@ Module modFunction
 
             SQL = "SELECT b.LocationDTLID AS ID,b.NameThai, 0 as Flag"
 
-            SQL = SQL & " FROM Product_LocationDTL b"
-            SQL = SQL & " Inner join Product_Location a on a.LocationID=b.RefID"
-            SQL = SQL & " WHERE a.IsDelete= 0   "
-            SQL = SQL & " AND a.IsInActive = 0"
-            SQL = SQL & " ORDER BY NameThai"
+            SQL &=  " FROM Product_LocationDTL b"
+            SQL &=  " Inner join Product_Location a on a.LocationID=b.RefID"
+            SQL &=  " WHERE a.IsDelete= 0   "
+            SQL &=  " AND a.IsInActive = 0"
+            SQL &=  " ORDER BY NameThai"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             pProductLocation.DataSource = dataTable
@@ -745,10 +745,10 @@ Module modFunction
             'Condition for Up Stock
             If TableID = MasterType.SellOrders Then
                 Return 1
-            ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Then
+            ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Or (TableID = MasterType.InvoiceOnline) Then
                 Return 2
                 If IsNothing(RefToOrderID) = False Then
-                    If RefToOrderID.Count > 0 And TableID = MasterType.Invoice Then
+                    If RefToOrderID.Count > 0 And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
                         For Each pOrderID As Long In RefToOrderID
                             lclsOrder = New OrderSDAO
                             If lclsOrder.InitailData(pOrderID, , tr) Then
@@ -805,8 +805,8 @@ Module modFunction
         Try
             GetOrderTypeFromID = 0
             SQL = "SELECT TableID  "
-            SQL = SQL & " FROM  Orders  "
-            SQL = SQL & " WHERE Orders.OrderID=" & pOrderID
+            SQL &=  " FROM  Orders  "
+            SQL &=  " WHERE Orders.OrderID=" & pOrderID
             dataTable = gConnection.executeSelectQuery(SQL, tr)
 
             If dataTable.Rows.Count > 0 Then

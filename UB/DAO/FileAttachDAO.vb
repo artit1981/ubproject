@@ -138,10 +138,10 @@ Public Class FileAttachDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT A.FileName,A.FileData,A.FileType,A.FileSize,A.CreateBy"
-            SQL = SQL & " ,A.CreateTime,A.FileID ,A.RefID,A.RefTable "
-            SQL = SQL & " FROM AttachFile A "
-            SQL = SQL & " WHERE  A.FileID =" & pID
-            SQL = SQL & " ORDER BY A.FileID"
+            SQL &=  " ,A.CreateTime,A.FileID ,A.RefID,A.RefTable "
+            SQL &=  " FROM AttachFile A "
+            SQL &=  " WHERE  A.FileID =" & pID
+            SQL &=  " ORDER BY A.FileID"
 
             dataTable = gConnection.executeSelectQuery(SQL, pTr)
             If dataTable.Rows.Count > 0 Then
@@ -249,12 +249,12 @@ Public Class FileAttachDAO
 
         Try
             SQL = "SELECT A.FileName AS FileName ,A.FileType AS FileType,A.FileSize AS FileSize,B.USERNAME AS CreateBy "
-            SQL = SQL & " ,A.CreateTime AS CreateTime,A.FileID AS ID,A.RefID AS RefID ,A.RefTable AS RefTable ,'' AS FilePath ,0 AS ModeData"
-            SQL = SQL & " FROM AttachFile A "
-            SQL = SQL & " LEFT OUTER JOIN Admin_User B ON A.CreateBy=B.UserID "
-            SQL = SQL & " WHERE RefTable = '" & pTable & "' "
-            SQL = SQL & " AND RefID =" & pRefID
-            SQL = SQL & " ORDER BY FileID"
+            SQL &=  " ,A.CreateTime AS CreateTime,A.FileID AS ID,A.RefID AS RefID ,A.RefTable AS RefTable ,'' AS FilePath ,0 AS ModeData"
+            SQL &=  " FROM AttachFile A "
+            SQL &=  " LEFT OUTER JOIN Admin_User B ON A.CreateBy=B.UserID "
+            SQL &=  " WHERE RefTable = '" & pTable & "' "
+            SQL &=  " AND RefID =" & pRefID
+            SQL &=  " ORDER BY FileID"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "FileAttachDAO.GetDataTable : " & e.Message)
@@ -274,40 +274,40 @@ Public Class FileAttachDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("FileID", "AttachFile", tr)
                     SQL = " INSERT INTO AttachFile  (FileID,RefID,RefTable,FileName,FileType,FileSize,FilePath,FileData,CreateBy,CreateTime )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @mRefID"
-                    SQL = SQL & " ,  @mRefTable"
-                    SQL = SQL & " ,  @mFileName"
-                    SQL = SQL & " ,  @mFileType"
-                    SQL = SQL & " ,  @mFileSize"
-                    SQL = SQL & " ,  @mFilePath"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @mRefID"
+                    SQL &=  " ,  @mRefTable"
+                    SQL &=  " ,  @mFileName"
+                    SQL &=  " ,  @mFileType"
+                    SQL &=  " ,  @mFileSize"
+                    SQL &=  " ,  @mFilePath"
                     If ConvertNullToString(mFilePath) = "" Then
-                        SQL = SQL & " ,  Null"
+                        SQL &=  " ,  Null"
                     Else
-                        SQL = SQL & " ,  @imageData"
+                        SQL &=  " ,  @imageData"
                     End If
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE AttachFile SET  "
-                    SQL = SQL & " RefID=@mRefID"
-                    SQL = SQL & " ,RefTable=@mRefTable"
-                    SQL = SQL & " ,FileName=@mFileName"
-                    SQL = SQL & " ,FileType=@mFileType"
-                    SQL = SQL & " ,FileSize=@mFileSize"
-                    SQL = SQL & " ,FilePath=@mFilePath"
+                    SQL &=  " RefID=@mRefID"
+                    SQL &=  " ,RefTable=@mRefTable"
+                    SQL &=  " ,FileName=@mFileName"
+                    SQL &=  " ,FileType=@mFileType"
+                    SQL &=  " ,FileSize=@mFileSize"
+                    SQL &=  " ,FilePath=@mFilePath"
                     If ConvertNullToString(mFilePath) = "" Then
-                        SQL = SQL & " ,FileData=Null"
+                        SQL &=  " ,FileData=Null"
                     Else
-                        SQL = SQL & " ,FileData=@imageData"
+                        SQL &=  " ,FileData=@imageData"
                     End If
-                    SQL = SQL & " ,CreateBy=@gUserID"
-                    SQL = SQL & " ,CreateTime=@CreateTime"
-                    SQL = SQL & " WHERE FileID= @mIDs"
+                    SQL &=  " ,CreateBy=@gUserID"
+                    SQL &=  " ,CreateTime=@CreateTime"
+                    SQL &=  " WHERE FileID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " DELETE FROM AttachFile  "
-                    SQL = SQL & " WHERE FileID= @mIDs"
+                    SQL &=  " WHERE FileID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -359,9 +359,9 @@ Public Class FileAttachDAO
 
     '        Try
     '            SQL = "SELECT PREFIXID  FROM Prefix"
-    '            SQL = SQL & " WHERE CodeThai='" & Trim(mCodeThai) & "'"
+    '            SQL &=  " WHERE CodeThai='" & Trim(mCodeThai) & "'"
     '            If mMode = DataMode.ModeEdit Then
-    '                SQL = SQL & " AND PREFIXID <> " & mIDs
+    '                SQL &=  " AND PREFIXID <> " & mIDs
     '            End If
     '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
     '            Return dataTable.Rows.Count > 0

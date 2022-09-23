@@ -73,27 +73,27 @@ Public Class frmOrderHis2
 
 
             SQL = " select Orders.OrderID,Cheque.ChequeDateReceive  ,Cheque.ChequePay as OrderTotal,BankAccountCode,Orders.OrderDate ,Orders.OrderCode   "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,Orders.GrandTotal as ReceiptTotal "
-            SQL = SQL & " ,isnull(Orders.DiscountAmount,0)+ isnull(TaxOrder.TaxAmount,0) DiscountAmount"
-            SQL = SQL & " ,Receipt.OrderCode AS ReceiptCode,Receipt.OrderDate as ReceiptDate,BankDocType,ChequeNo,Orders.IsDelete"
-            SQL = SQL & " ,case when Receipt.ModifiedTime is not null then Receipt.ModifiedTime else Receipt.CreateTime end CreateTime"
-            SQL = SQL & " from Orders"
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &=  " ,Orders.GrandTotal as ReceiptTotal "
+            SQL &=  " ,isnull(Orders.DiscountAmount,0)+ isnull(TaxOrder.TaxAmount,0) DiscountAmount"
+            SQL &=  " ,Receipt.OrderCode AS ReceiptCode,Receipt.OrderDate as ReceiptDate,BankDocType,ChequeNo,Orders.IsDelete"
+            SQL &=  " ,case when Receipt.ModifiedTime is not null then Receipt.ModifiedTime else Receipt.CreateTime end CreateTime"
+            SQL &=  " from Orders"
             'SQL = SQL & " left outer join Menu on Orders.TableID=Menu.MenuID"
-            SQL = SQL & " inner join Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 " 'and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
-            SQL = SQL & " LEFT OUTER JOIN Cheque  ON Cheque.RefOrderID=Receipt.OrderID  "
+            SQL &=  " inner join Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 " 'and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+            SQL &=  " LEFT OUTER JOIN Cheque  ON Cheque.RefOrderID=Receipt.OrderID  "
             'SQL = SQL & " LEFT OUTER JOIN OrdersDetail  ON OrdersDetail.BillID=Receipt.OrderID and OrdersDetail.OrderID=Orders.OrderID  and OrdersDetail.IsDelete=0  "
-            SQL = SQL & " LEFT OUTER JOIN TaxOrder  ON TaxOrder.RefOrderID=Receipt.OrderID   "
-            SQL = SQL & " LEFT OUTER JOIN BankAccount  ON BankAccount.BankAccountID=Cheque.BankAccountID   "
-            SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-            SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
+            SQL &=  " LEFT OUTER JOIN TaxOrder  ON TaxOrder.RefOrderID=Receipt.OrderID   "
+            SQL &=  " LEFT OUTER JOIN BankAccount  ON BankAccount.BankAccountID=Cheque.BankAccountID   "
+            SQL &=  " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+            SQL &=  "  AND Orders.TableID in (" & lstrOrderType & ")"
 
             If chkShowDelete.Checked = False Then
-                SQL = SQL & "  AND Orders.IsDelete = 0"
-                SQL = SQL & "  AND Orders.IsCancel = 0"
+                SQL &=  "  AND Orders.IsDelete = 0"
+                SQL &=  "  AND Orders.IsCancel = 0"
             End If
-            SQL = SQL & " ORDER BY  Orders.OrderID,Orders.OrderDate"
+            SQL &=  " ORDER BY  Orders.OrderID,Orders.OrderDate"
 
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -126,6 +126,9 @@ Public Class frmOrderHis2
 
             If CheckInvoice.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.Invoice
+            End If
+            If CheckInvoiceOnline.Checked = True Then
+                lstrOrderType = lstrOrderType & "," & MasterType.InvoiceOnline
             End If
             If CheckInvoiceBuy.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.InvoiceBuy

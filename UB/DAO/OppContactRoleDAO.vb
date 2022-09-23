@@ -75,13 +75,13 @@ Public Class OppContactRoleDAO
 
         Try
             SQL = "SELECT  OppContactRole.OppContactRoleID AS ID,OppContactRole.ContactID,OppContactRole.ContactRole"
-            SQL = SQL & " ,Contact.Title + Contact.Firstname + ' ' + Contact.LastName AS ContactName,Address.Email1 ,Address.Phone1,Address.Fax"
-            SQL = SQL & " FROM OppContactRole"
-            SQL = SQL & " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=OppContactRole.ContactID "
-            SQL = SQL & " LEFT OUTER JOIN Address ON Contact.AddressID=Address.AddressID  "
-            SQL = SQL & " WHERE OppContactRole.OppID =" & pRefID
-            SQL = SQL & " AND OppContactRole.IsDelete =0   "
-            SQL = SQL & " ORDER BY OppContactRole.OppContactRoleID"
+            SQL &=  " ,Contact.Title + Contact.Firstname + ' ' + Contact.LastName AS ContactName,Address.Email1 ,Address.Phone1,Address.Fax"
+            SQL &=  " FROM OppContactRole"
+            SQL &=  " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=OppContactRole.ContactID "
+            SQL &=  " LEFT OUTER JOIN Address ON Contact.AddressID=Address.AddressID  "
+            SQL &=  " WHERE OppContactRole.OppID =" & pRefID
+            SQL &=  " AND OppContactRole.IsDelete =0   "
+            SQL &=  " ORDER BY OppContactRole.OppContactRoleID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OppContactRoleDAO.GetDataTable : " & e.Message)
@@ -109,23 +109,23 @@ Public Class OppContactRoleDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("OppContactRoleID", "OppContactRole", tr)
                     SQL = " INSERT INTO OppContactRole  (OppContactRoleID,ContactID,OppID,ContactRole,IsDelete )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @ContactID"
-                    SQL = SQL & " ,  @OppID"
-                    SQL = SQL & " ,  @ContactRole"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @ContactID"
+                    SQL &=  " ,  @OppID"
+                    SQL &=  " ,  @ContactRole"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update OppContactRole   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " ContactID=@ContactID"
-                    SQL = SQL & " ,OppID= @OppID"
-                    SQL = SQL & " ,ContactRole=@ContactRole"
-                    SQL = SQL & " WHERE OppContactRoleID= @ID"
+                    SQL &=  " SET"
+                    SQL &=  " ContactID=@ContactID"
+                    SQL &=  " ,OppID= @OppID"
+                    SQL &=  " ,ContactRole=@ContactRole"
+                    SQL &=  " WHERE OppContactRoleID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE OppContactRole SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE OppContactRoleID= @ID"
+                    SQL &=  " WHERE OppContactRoleID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -158,9 +158,9 @@ Public Class OppContactRoleDAO
         SQL = ""
         Try
             SQL = " UPDATE OppContactRole SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE OppContactRoleID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND OppID=@RefID "
-            SQL = SQL & " AND IsDelete =0  "
+            SQL &=  " WHERE OppContactRoleID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND OppID=@RefID "
+            SQL &=  " AND IsDelete =0  "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 
@@ -181,7 +181,7 @@ Public Class OppContactRoleDAO
         SQL = ""
         Try
             SQL = " UPDATE OppContactRole SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE OppID=@RefID "
+            SQL &=  " WHERE OppID=@RefID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

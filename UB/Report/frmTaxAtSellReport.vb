@@ -63,16 +63,16 @@ Public Class frmTaxAtSellReport
         Try
             ShowProgress(True, "Loading...")
             SQL = "SELECT Orders.OrderID ,Orders.TaxNumber ,sum(TaxOrder.TaxTotal) as TaxTotal,sum(TaxOrder.TaxAmount) as TaxAmount,Orders.OrderCode  "
-            SQL = SQL & " FROM Orders"
-            SQL = SQL & " Inner join TaxOrder on TaxOrder.RefOrderID=Orders.OrderID "
-            SQL = SQL & " WHERE Orders.IsDelete =0   "
+            SQL &=  " FROM Orders"
+            SQL &=  " Inner join TaxOrder on TaxOrder.RefOrderID=Orders.OrderID "
+            SQL &=  " WHERE Orders.IsDelete =0   "
             If ConvertNullToZero(CustomerID.EditValue) > 0 Then
-                SQL = SQL & " AND Orders.CustomerID =" & ConvertNullToZero(CustomerID.EditValue)
+                SQL &=  " AND Orders.CustomerID =" & ConvertNullToZero(CustomerID.EditValue)
             End If
-            SQL = SQL & " AND Orders.OrderDate Between '" & formatSQLDate(DateFrom.EditValue) & "'"
-            SQL = SQL & "                      AND   '" & formatSQLDate(DateTo.EditValue) & "'"
-            SQL = SQL & " Group BY Orders.OrderID ,Orders.TaxNumber,Orders.OrderCode "
-            SQL = SQL & " ORDER BY Orders.TaxNumber,Orders.OrderCode"
+            SQL &=  " AND Orders.OrderDate Between '" & formatSQLDate(DateFrom.EditValue) & "'"
+            SQL &=  "                      AND   '" & formatSQLDate(DateTo.EditValue) & "'"
+            SQL &=  " Group BY Orders.OrderID ,Orders.TaxNumber,Orders.OrderCode "
+            SQL &=  " ORDER BY Orders.TaxNumber,Orders.OrderCode"
 
             lTable = gConnection.executeSelectQuery(SQL, Nothing)
             For Each pRow As DataRow In lTable.Rows

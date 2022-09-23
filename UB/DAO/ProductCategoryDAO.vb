@@ -77,13 +77,13 @@ Public Class ProductCategoryDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM ProductCategory"
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM ProductCategory"
+            SQL &=  " WHERE 1=1 "
             If pID > 0 Then
-                SQL = SQL & " and CategoryID=" & pID
+                SQL &=  " and CategoryID=" & pID
             End If
             If pCode <> "" Then
-                SQL = SQL & " and NameThai='" & pCode & "'"
+                SQL &=  " and NameThai='" & pCode & "'"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -168,18 +168,18 @@ Public Class ProductCategoryDAO
 
         Try
             SQL = "SELECT CategoryID AS ID,IDCode,NameThai "
-            SQL = SQL & " FROM ProductCategory  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM ProductCategory  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND CategoryID=" & pID
+                SQL &=  "  AND CategoryID=" & pID
             End If
             'If pProGroupID > 0 Then
-            '    SQL = SQL & "  AND ProductGroupID=" & pProGroupID
+            '    SQL &=  "  AND ProductGroupID=" & pProGroupID
             'End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode,NameThai"
+            SQL &=  " ORDER BY IDCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductCategoryDAO.GetDataTable : " & e.Message)
@@ -193,16 +193,16 @@ Public Class ProductCategoryDAO
 
     '    Try
     '        SQL = "SELECT CategoryID AS ID,IDCode,NameThai"
-    '        SQL = SQL & " FROM ProductCategory "
+    '        SQL &=  " FROM ProductCategory "
 
-    '        SQL = SQL & " WHERE IsDelete =0   "
+    '        SQL &=  " WHERE IsDelete =0   "
     '        If pID > 0 Then
-    '            SQL = SQL & "  AND CategoryID=" & pID
+    '            SQL &=  "  AND CategoryID=" & pID
     '        End If
     '        If pOnlyActive = True Then
-    '            SQL = SQL & "  AND IsInActive = 0"
+    '            SQL &=  "  AND IsInActive = 0"
     '        End If
-    '        SQL = SQL & " ORDER BY IDCode,NameThai"
+    '        SQL &=  " ORDER BY IDCode,NameThai"
     '        dataTable = gConnection.executeSelectQuery(SQL, Nothing)
     '    Catch e As Exception
     '        Err.Raise(Err.Number, e.Source, "ProductCategoryDAO.GetDataTable : " & e.Message)
@@ -225,41 +225,41 @@ Public Class ProductCategoryDAO
 
                     ID = GenNewID("CategoryID", "ProductCategory", tr)
                     SQL = " INSERT INTO ProductCategory  (CategoryID,IDCode,NameThai,NameEng"
-                    SQL = SQL & " ,Remark,ProductGroupID,ProductBrandID,ProductTypeID "
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete "
+                    SQL &=  " ,Remark,ProductGroupID,ProductBrandID,ProductTypeID "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete "
 
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @IDCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @ProductGroupID"
-                    SQL = SQL & " ,  @ProductBrandID"
-                    SQL = SQL & " ,  @ProductTypeID"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @IDCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @ProductGroupID"
+                    SQL &=  " ,  @ProductBrandID"
+                    SQL &=  " ,  @ProductTypeID"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE ProductCategory SET "
-                    SQL = SQL & " IDCode=@IDCode"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " ,ProductGroupID=@ProductGroupID"
-                    SQL = SQL & " ,ProductBrandID=@ProductBrandID"
-                    SQL = SQL & " ,ProductTypeID=@ProductTypeID"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE CategoryID= @mIDs"
+                    SQL &=  " IDCode=@IDCode"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " ,ProductGroupID=@ProductGroupID"
+                    SQL &=  " ,ProductBrandID=@ProductBrandID"
+                    SQL &=  " ,ProductTypeID=@ProductTypeID"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE CategoryID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductCategory SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE CategoryID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE CategoryID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -304,10 +304,10 @@ Public Class ProductCategoryDAO
 
         Try
             SQL = "SELECT CategoryID  FROM ProductCategory"
-            SQL = SQL & " WHERE IsDelete =0  "
-            SQL = SQL & "  AND IDCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0  "
+            SQL &=  "  AND IDCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND CategoryID <> " & ID
+                SQL &=  " AND CategoryID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -329,7 +329,7 @@ Public Class ProductCategoryDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

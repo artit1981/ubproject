@@ -93,8 +93,8 @@ Public Class UserDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -119,11 +119,11 @@ Public Class UserDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
+            SQL &=  " FROM  " & TableName
             If pByID Then
-                SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+                SQL &=  " WHERE " & ColumnKey & "=" & pID
             Else
-                SQL = SQL & " WHERE UserName='" & Trim(pName) & "'"
+                SQL &=  " WHERE UserName='" & Trim(pName) & "'"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
@@ -201,16 +201,16 @@ Public Class UserDAO
 
         Try
             SQL = "SELECT Admin_User.UserID AS ID,Admin_User.UserName,Employee.Title+Employee.Firstname + ' ' + Employee.LastName AS EmpName,Admin_User.Remark"
-            SQL = SQL & " FROM Admin_User  "
-            SQL = SQL & " LEFT OUTER JOIN  Employee ON Employee.EmpID=Admin_User.EmpID"
-            SQL = SQL & " WHERE Admin_User.IsDelete =0   "
+            SQL &=  " FROM Admin_User  "
+            SQL &=  " LEFT OUTER JOIN  Employee ON Employee.EmpID=Admin_User.EmpID"
+            SQL &=  " WHERE Admin_User.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Admin_User.UserID=" & pID
+                SQL &=  "  AND Admin_User.UserID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Admin_User.IsInActive = 0"
+                SQL &=  "  AND Admin_User.IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY Admin_User.UserName,Admin_User.Remark"
+            SQL &=  " ORDER BY Admin_User.UserName,Admin_User.Remark"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -224,16 +224,16 @@ Public Class UserDAO
 
         Try
             SQL = "SELECT Admin_User.UserID AS ID,Admin_User.UserName,Employee.Title+Employee.Firstname + ' ' + Employee.LastName AS EmpName,Admin_User.Remark"
-            SQL = SQL & " FROM Admin_User  "
-            SQL = SQL & " LEFT OUTER JOIN  Employee ON Employee.EmpID=Admin_User.EmpID"
-            SQL = SQL & " WHERE Admin_User.IsDelete =0   "
+            SQL &=  " FROM Admin_User  "
+            SQL &=  " LEFT OUTER JOIN  Employee ON Employee.EmpID=Admin_User.EmpID"
+            SQL &=  " WHERE Admin_User.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Admin_User.UserID=" & pID
+                SQL &=  "  AND Admin_User.UserID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Admin_User.IsInActive = 0"
+                SQL &=  "  AND Admin_User.IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY Admin_User.UserName,Admin_User.Remark"
+            SQL &=  " ORDER BY Admin_User.UserName,Admin_User.Remark"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTableForCombo : " & e.Message)
@@ -253,34 +253,34 @@ Public Class UserDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO Admin_User  (UserID,UserName,Password,EmpID,PrivilegeID,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @UserName"
-                    SQL = SQL & " ,  @Password"
-                    SQL = SQL & " ,  @EmpID"
-                    SQL = SQL & " ,  @PrivilegeID"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @UserName"
+                    SQL &=  " ,  @Password"
+                    SQL &=  " ,  @EmpID"
+                    SQL &=  " ,  @PrivilegeID"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Admin_User SET "
-                    SQL = SQL & " UserName=@UserName"
-                    SQL = SQL & " ,Password=@Password"
-                    SQL = SQL & " ,EmpID=@EmpID"
-                    SQL = SQL & " ,PrivilegeID=@PrivilegeID"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE UserID= @mIDs"
+                    SQL &=  " UserName=@UserName"
+                    SQL &=  " ,Password=@Password"
+                    SQL &=  " ,EmpID=@EmpID"
+                    SQL &=  " ,PrivilegeID=@PrivilegeID"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE UserID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Admin_User SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE UserID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE UserID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -334,9 +334,9 @@ Public Class UserDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND UserName='" & Trim(UserName) & "'"
+            SQL &=  " WHERE IsDelete =0 AND UserName='" & Trim(UserName) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -358,7 +358,7 @@ Public Class UserDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

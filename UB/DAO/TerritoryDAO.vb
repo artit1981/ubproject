@@ -49,8 +49,8 @@ Public Class TerritoryDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -75,8 +75,8 @@ Public Class TerritoryDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE " & ColumnKey & "=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -154,15 +154,15 @@ Public Class TerritoryDAO
 
         Try
             SQL = "SELECT TerritoryID AS ID,TerritoryCode,NameThai"
-            SQL = SQL & " FROM Territory  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Territory  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND TerritoryID=" & pID
+                SQL &=  "  AND TerritoryID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY TerritoryCode,NameThai"
+            SQL &=  " ORDER BY TerritoryCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -184,34 +184,34 @@ Public Class TerritoryDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO Territory  (TerritoryID,ManagerID,TerritoryCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @ManagerID"
-                    SQL = SQL & " ,  @TerritoryCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @ManagerID"
+                    SQL &=  " ,  @TerritoryCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Territory SET "
-                    SQL = SQL & " TerritoryCode=@TerritoryCode"
-                    SQL = SQL & " ,ManagerID=@ManagerID"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE TerritoryID= @mIDs"
+                    SQL &=  " TerritoryCode=@TerritoryCode"
+                    SQL &=  " ,ManagerID=@ManagerID"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE TerritoryID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Territory SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE TerritoryID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE TerritoryID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -258,9 +258,9 @@ Public Class TerritoryDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND TerritoryCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND TerritoryCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -282,7 +282,7 @@ Public Class TerritoryDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

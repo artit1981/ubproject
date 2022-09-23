@@ -83,8 +83,8 @@ Public Class MenuADO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM " & TableName
-            SQL = SQL & " WHERE MenuID=" & pID
+            SQL &=  " FROM " & TableName
+            SQL &=  " WHERE MenuID=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -116,10 +116,10 @@ Public Class MenuADO
 
         Try
             SQL = "SELECT MenuID,ShowMode,System,Module,MenuName,MenuDisplay"
-            SQL = SQL & " ,IsVisible,IsEnable,IsAdd,IsEdit,IsDelete,IsPrint,IsImport"
-            SQL = SQL & " ,IsCreateQuick,IsCopy,IsAssign,IsConvert "
-            SQL = SQL & " FROM Menu  "
-            SQL = SQL & " ORDER BY System,Module,MenuName,MenuDisplay"
+            SQL &=  " ,IsVisible,IsEnable,IsAdd,IsEdit,IsDelete,IsPrint,IsImport"
+            SQL &=  " ,IsCreateQuick,IsCopy,IsAssign,IsConvert "
+            SQL &=  " FROM Menu  "
+            SQL &=  " ORDER BY System,Module,MenuName,MenuDisplay"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "MenuADO.GetDataTable : " & e.Message)
@@ -134,8 +134,8 @@ Public Class MenuADO
 
         Try
             SQL = "SELECT MenuID,MenuDisplay"
-            SQL = SQL & " FROM Menu  "
-            SQL = SQL & " ORDER BY MenuDisplay "
+            SQL &=  " FROM Menu  "
+            SQL &=  " ORDER BY MenuDisplay "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "MenuADO.GetDataTableForCombo : " & e.Message)

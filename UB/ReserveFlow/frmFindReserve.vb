@@ -151,9 +151,13 @@ Public Class frmFindReserve
                     rec.ProductListRefID = pProLIst.ID
                     rec.ProductListRefID2 = 0
                     rec.ProductListRefID3 = 0
+                    rec.ProductListRefID4 = 0
+                    rec.ProductListRefID5 = 0
                     rec.ProductListUnitRef1 = pProLIst.Units
                     rec.ProductListUnitRef2 = 0
                     rec.ProductListUnitRef3 = 0
+                    rec.ProductListUnitRef4 = 0
+                    rec.ProductListUnitRef5 = 0
                     mProductSubList.Add(rec)
                     lRefOrderID = pProLIst.RefID
                     If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
@@ -195,9 +199,13 @@ Public Class frmFindReserve
                             rec.ProductListRefID = pProLIst.ID
                             rec.ProductListRefID2 = 0
                             rec.ProductListRefID3 = 0
+                            rec.ProductListRefID4 = 0
+                            rec.ProductListRefID5 = 0
                             rec.ProductListUnitRef1 = pProLIst.Units
                             rec.ProductListUnitRef2 = 0
                             rec.ProductListUnitRef3 = 0
+                            rec.ProductListUnitRef4 = 0
+                            rec.ProductListUnitRef5 = 0
                             mProductSubList.Add(rec)
                             lRefOrderID = pProLIst.RefID
                             If mOrderIDList.FindIndex(Function(m As Long) m = lRefOrderID) < 0 Then
@@ -220,9 +228,15 @@ Public Class frmFindReserve
                         If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID
                             mProductSubList.Item(lIndex).ProductListUnitRef2 = pProLIst.Units
-                        Else
+                        ElseIf mProductSubList.Item(lIndex).ProductListRefID3 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID3 = pProLIst.ID
                             mProductSubList.Item(lIndex).ProductListUnitRef3 = pProLIst.Units
+                        ElseIf mProductSubList.Item(lIndex).ProductListRefID4 = 0 Then
+                            mProductSubList.Item(lIndex).ProductListRefID4 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef4 = pProLIst.Units
+                        Else
+                            mProductSubList.Item(lIndex).ProductListRefID5 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef5 = pProLIst.Units
                             lCanNotMerge = True   'Ref slot full
                         End If
                         lRefOrderID = pProLIst.RefID
@@ -420,17 +434,17 @@ Public Class frmFindReserve
 
             If pProID > 0 And mFormLoad = False Then
                 SQL = "SELECT top 3  Orders.OrderDate ,CASE WHEN ProductList.UnitID=ProductList.UnitMainID THEN ProductList.Price ELSE ProductList.Price/ProductList.RateUnit END Price "
-                SQL = SQL & " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " FROM Orders  "
-                SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
-                SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-                SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
-                SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+                SQL &= " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &= " FROM Orders  "
+                SQL &= " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL &= " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+                SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+                SQL &= " and Orders.TableID =" & MasterType.PurchaseOrder
+                SQL &= " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
                 If lCusID > 0 Then
-                    SQL = SQL & " and Orders.CustomerID =" & lCusID
+                    SQL &= " and Orders.CustomerID =" & lCusID
                 End If
-                SQL = SQL & " ORDER BY Orders.OrderID desc "
+                SQL &= " ORDER BY Orders.OrderID desc "
                 dataTable = New DataTable()
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
                 Dim i As Integer = 1
@@ -465,20 +479,20 @@ Public Class frmFindReserve
 
                 'Lower Price
                 SQL = "SELECT top 1  OrderDate ,Price,Units,Customer "
-                SQL = SQL & " FROM ("
-                SQL = SQL & "SELECT Orders.OrderDate ,CASE WHEN ProductList.UnitID=ProductList.UnitMainID THEN ProductList.Price ELSE ProductList.Price/ProductList.RateUnit END Price "
-                SQL = SQL & " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " FROM Orders  "
-                SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
-                SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-                SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
-                SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+                SQL &= " FROM ("
+                SQL &= "SELECT Orders.OrderDate ,CASE WHEN ProductList.UnitID=ProductList.UnitMainID THEN ProductList.Price ELSE ProductList.Price/ProductList.RateUnit END Price "
+                SQL &= " ,ProductList.Units,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &= " FROM Orders  "
+                SQL &= " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL &= " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+                SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+                SQL &= " and Orders.TableID =" & MasterType.PurchaseOrder
+                SQL &= " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
                 If lCusID > 0 Then
-                    SQL = SQL & " and Orders.CustomerID =" & lCusID
+                    SQL &= " and Orders.CustomerID =" & lCusID
                 End If
-                SQL = SQL & " ) AS TMP "
-                SQL = SQL & " ORDER BY Price "
+                SQL &= " ) AS TMP "
+                SQL &= " ORDER BY Price "
                 dataTable = New DataTable()
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
                 If dataTable.Rows.Count > 0 And pIsSetText = True Then
@@ -542,14 +556,14 @@ Public Class frmFindReserve
     '        If pProID > 0 And mFormLoad = False Then
 
     '            SQL = "SELECT top 1  Orders.OrderID AS ID, Orders.OrderCode ,Orders.OrderDate ,ProductList.Price,ProductList.Units "
-    '            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-    '            SQL = SQL & " FROM Orders  "
-    '            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-    '            SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
-    '            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-    '            SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
-    '            SQL = SQL & "  AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
-    '            SQL = SQL & " ORDER BY Orders.OrderID desc "
+    '            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+    '            SQL &=  " FROM Orders  "
+    '            SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+    '            SQL &=  " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+    '            SQL &=  " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+    '            SQL &=  " and Orders.TableID =" & MasterType.PurchaseOrder
+    '            SQL &=  "  AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+    '            SQL &=  " ORDER BY Orders.OrderID desc "
     '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
     '            If dataTable.Rows.Count > 0 Then
     '                For Each dr As DataRow In dataTable.Rows
@@ -562,19 +576,19 @@ Public Class frmFindReserve
     '            End If
 
     '            SQL = "SELECT top 3  Orders.OrderDate ,ProductList.Price,ProductList.Units "
-    '            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-    '            SQL = SQL & " FROM Orders  "
-    '            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-    '            SQL = SQL & " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
-    '            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-    '            SQL = SQL & " and Orders.TableID =" & MasterType.PurchaseOrder
-    '            SQL = SQL & " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
+    '            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+    '            SQL &=  " FROM Orders  "
+    '            SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+    '            SQL &=  " INNER JOIN ProductList ON Orders.OrderID=ProductList.RefID and ProductList.IsDelete =0  "
+    '            SQL &=  " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+    '            SQL &=  " and Orders.TableID =" & MasterType.PurchaseOrder
+    '            SQL &=  " AND Orders.IsInActive = 0 AND Orders.IsCancel= 0 AND ProductList.ProductID =" & pProID
     '            If pIsSetText = False Then
-    '                SQL = SQL & " and Orders.CustomerID =" & ConvertNullToZero(cboCustomerID.EditValue)
+    '                SQL &=  " and Orders.CustomerID =" & ConvertNullToZero(cboCustomerID.EditValue)
     '            End If
-    '            SQL = SQL & " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
-    '            SQL = SQL & " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
-    '            SQL = SQL & " ORDER BY ProductList.Price   "
+    '            SQL &=  " group BY Orders.OrderDate ,ProductList.Price,ProductList.Units"
+    '            SQL &=  " ,Customer.CompanyName,Customer.Title, Customer.Firstname, Customer.LastName"
+    '            SQL &=  " ORDER BY ProductList.Price   "
     '            dataTable = New DataTable()
     '            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
     '            Dim i As Integer = 1

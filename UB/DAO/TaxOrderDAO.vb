@@ -81,12 +81,12 @@ Public Class TaxOrderDAO
 
         Try
             SQL = "SELECT  TaxOrderID  ,TaxTypeID,TaxTotal,TaxRate,TaxAmount,OtherTax "
-            SQL = SQL & " FROM TaxOrder"
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM TaxOrder"
+            SQL &=  " WHERE IsDelete =0   "
             If pIsSelectAll = False Then
-                SQL = SQL & " AND RefOrderID =" & pRefOrderID
+                SQL &=  " AND RefOrderID =" & pRefOrderID
             End If
-            SQL = SQL & " ORDER BY TaxOrderID"
+            SQL &=  " ORDER BY TaxOrderID"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -101,12 +101,12 @@ Public Class TaxOrderDAO
 
         Try
             SQL = "SELECT TaxOrder.TaxTypeID,MAX(Orders.OrderDate) as OrderDate,MAX(TaxOrder.OtherTax) as OtherTax "
-            SQL = SQL & ",sum(TaxOrder.TaxTotal) as TaxTotal,sum(TaxOrder.TaxAmount) as TaxAmount"
-            SQL = SQL & " FROM Orders"
-            SQL = SQL & " Inner join TaxOrder on TaxOrder.RefOrderID=Orders.OrderID "
-            SQL = SQL & " WHERE Orders.IsDelete =0 and Orders.TaxNumber='" & pTaxNo & "'"
-            SQL = SQL & " Group BY TaxOrder.TaxTypeID"
-            SQL = SQL & " ORDER BY TaxOrder.TaxTypeID"
+            SQL &=  ",sum(TaxOrder.TaxTotal) as TaxTotal,sum(TaxOrder.TaxAmount) as TaxAmount"
+            SQL &=  " FROM Orders"
+            SQL &=  " Inner join TaxOrder on TaxOrder.RefOrderID=Orders.OrderID "
+            SQL &=  " WHERE Orders.IsDelete =0 and Orders.TaxNumber='" & pTaxNo & "'"
+            SQL &=  " Group BY TaxOrder.TaxTypeID"
+            SQL &=  " ORDER BY TaxOrder.TaxTypeID"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -133,27 +133,27 @@ Public Class TaxOrderDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("TaxOrderID", "TaxOrder", tr)
                     SQL = " INSERT INTO TaxOrder (TaxOrderID,TaxTypeID,TaxTotal,TaxRate,TaxAmount,RefOrderID,IsDelete,OtherTax )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @TaxOrderID"
-                    SQL = SQL & " ,  @TaxTypeID"
-                    SQL = SQL & " ,  @TaxTotal"
-                    SQL = SQL & " ,  @TaxRate"
-                    SQL = SQL & " ,  @TaxAmount"
-                    SQL = SQL & " ,  @RefOrderID"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @OtherTax"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @TaxOrderID"
+                    SQL &=  " ,  @TaxTypeID"
+                    SQL &=  " ,  @TaxTotal"
+                    SQL &=  " ,  @TaxRate"
+                    SQL &=  " ,  @TaxAmount"
+                    SQL &=  " ,  @RefOrderID"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @OtherTax"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update TaxOrder SET"
-                    SQL = SQL & " TaxTypeID=@TaxTypeID"
-                    SQL = SQL & " ,TaxTotal=@TaxTotal"
-                    SQL = SQL & " ,TaxRate=@TaxRate"
-                    SQL = SQL & " ,TaxAmount=@TaxAmount"
-                    SQL = SQL & " ,OtherTax=@OtherTax"
-                    SQL = SQL & " WHERE TaxOrderID= @TaxOrderID"
+                    SQL &=  " TaxTypeID=@TaxTypeID"
+                    SQL &=  " ,TaxTotal=@TaxTotal"
+                    SQL &=  " ,TaxRate=@TaxRate"
+                    SQL &=  " ,TaxAmount=@TaxAmount"
+                    SQL &=  " ,OtherTax=@OtherTax"
+                    SQL &=  " WHERE TaxOrderID= @TaxOrderID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE TaxOrder SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE TaxOrderID= @TaxOrderID"
+                    SQL &=  " WHERE TaxOrderID= @TaxOrderID"
                 Case Else
                     Return False
                     Exit Function
@@ -188,7 +188,7 @@ Public Class TaxOrderDAO
         SQL = ""
         Try
             SQL = " UPDATE TaxOrder SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefOrderID=@RefOrderID "
+            SQL &=  " WHERE RefOrderID=@RefOrderID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

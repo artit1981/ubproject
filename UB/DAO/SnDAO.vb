@@ -92,28 +92,28 @@ Public Class SnDAO
         Dim lRefOrderList As String = ConvertListToString(pOrderID)
         Try
             SQL = "SELECT  SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID,IsDelete"
-            SQL = SQL & " FROM SerialNumber"
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM SerialNumber"
+            SQL &=  " WHERE 1=1 "
             If lRefOrderList <> "" Then
-                SQL = SQL & " AND OrderID in(" & lRefOrderList & ")"
+                SQL &=  " AND OrderID in(" & lRefOrderList & ")"
             End If
             If pProductListID > 0 Then
-                SQL = SQL & " AND ProductListID=" & pProductListID
+                SQL &=  " AND ProductListID=" & pProductListID
             End If
             If pProductID > 0 Then
-                SQL = SQL & " AND ProductID =" & pProductID
+                SQL &=  " AND ProductID =" & pProductID
             End If
             If pStatus <> "" Then
-                SQL = SQL & " AND Status in(" & pStatus & ")"
+                SQL &=  " AND Status in(" & pStatus & ")"
             End If
             If pExcludeSnID <> "" Then ' กันกรณีขายสินค้าเดี่ยวกันใน 1 บิล จะตัด SN ซ้ำเพราะ DB ยังไม่ Commit
-                SQL = SQL & " AND SerialNumberID not in(" & pExcludeSnID & ")"
+                SQL &=  " AND SerialNumberID not in(" & pExcludeSnID & ")"
             End If
             If pIsDelete = False Then
-                SQL = SQL & " and SerialNumber.IsDelete =0   "
+                SQL &=  " and SerialNumber.IsDelete =0   "
             End If
 
-            SQL = SQL & " ORDER BY SerialNumberID"
+            SQL &=  " ORDER BY SerialNumberID"
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
         Catch e As Exception
@@ -127,10 +127,10 @@ Public Class SnDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT  SerialNumberID "
-            SQL = SQL & " FROM SerialNumber"
-            SQL = SQL & " WHERE ProductID =" & pProductID
-            SQL = SQL & " AND SerialNumberNo ='" & pSN & "'"
-            SQL = SQL & " AND Status in(" & pSTatus & ") and IsDelete=0"
+            SQL &=  " FROM SerialNumber"
+            SQL &=  " WHERE ProductID =" & pProductID
+            SQL &=  " AND SerialNumberNo ='" & pSN & "'"
+            SQL &=  " AND Status in(" & pSTatus & ") and IsDelete=0"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             Return dataTable.Rows.Count > 0
         Catch e As Exception
@@ -154,24 +154,24 @@ Public Class SnDAO
                 Case DataMode.ModeNew
                     SerialNumberID = GenNewID("SerialNumberID", "SerialNumber", tr)
                     SQL = " INSERT INTO SerialNumber  (SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID ,IsDelete)"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @SerialNumberID"
-                    SQL = SQL & " ,  @SerialNumberNo"
-                    SQL = SQL & " ,  @OrderID"
-                    SQL = SQL & " ,  @ProductID"
-                    SQL = SQL & " ,  @Status"
-                    SQL = SQL & " ,  @ProductListID"
-                    SQL = SQL & " , 0 "
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @SerialNumberID"
+                    SQL &=  " ,  @SerialNumberNo"
+                    SQL &=  " ,  @OrderID"
+                    SQL &=  " ,  @ProductID"
+                    SQL &=  " ,  @Status"
+                    SQL &=  " ,  @ProductListID"
+                    SQL &=  " , 0 "
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update SerialNumber   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " Status=@Status"
-                    SQL = SQL & " ,SerialNumberNo=@SerialNumberNo"
-                    SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
+                    SQL &=  " SET"
+                    SQL &=  " Status=@Status"
+                    SQL &=  " ,SerialNumberNo=@SerialNumberNo"
+                    SQL &=  " WHERE SerialNumberID= @SerialNumberID"
                 Case DataMode.ModeDelete
                     SQL = " Update SerialNumber Set IsDelete=1 "
-                    SQL = SQL & " WHERE SerialNumberID= @SerialNumberID"
+                    SQL &=  " WHERE SerialNumberID= @SerialNumberID"
                 Case Else
                     Return False
                     Exit Function
@@ -200,12 +200,12 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber   "
-            SQL = SQL & " SET Status='" & pStatus & "'"
-            SQL = SQL & " WHERE SerialNumberNo='" & pSN & "'"
-            SQL = SQL & " AND ProductID=" & pProductID
-            SQL = SQL & " AND Status <> 'None'  and IsDelete=0"
+            SQL &=  " SET Status='" & pStatus & "'"
+            SQL &=  " WHERE SerialNumberNo='" & pSN & "'"
+            SQL &=  " AND ProductID=" & pProductID
+            SQL &=  " AND Status <> 'None'  and IsDelete=0"
             If pSNID > 0 Then
-                SQL = SQL & " AND SerialNumberID=" & pSNID
+                SQL &=  " AND SerialNumberID=" & pSNID
             End If
             gConnection.executeInsertQuery(SQL, tr)
         Catch e As Exception
@@ -220,12 +220,12 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber   "
-            SQL = SQL & " SET Status='" & pStatus & "'"
-            SQL = SQL & " WHERE SerialNumberNo in ( "
-            SQL = SQL & "      select SerialNumberNo from SerialNumber where SerialNumberID not in (" & pSnIDList & ")"
-            SQL = SQL & "      AND ProductID=" & pProductID & " AND OrderID=" & pOrderID & " and IsDelete=0  AND ProductListID=" & pProductListID & " ) "
-            SQL = SQL & " AND ProductID=" & pProductID
-            SQL = SQL & " AND Status <> 'None'  and IsDelete=0 "
+            SQL &=  " SET Status='" & pStatus & "'"
+            SQL &=  " WHERE SerialNumberNo in ( "
+            SQL &=  "      select SerialNumberNo from SerialNumber where SerialNumberID not in (" & pSnIDList & ")"
+            SQL &=  "      AND ProductID=" & pProductID & " AND OrderID=" & pOrderID & " and IsDelete=0  AND ProductListID=" & pProductListID & " ) "
+            SQL &=  " AND ProductID=" & pProductID
+            SQL &=  " AND Status <> 'None'  and IsDelete=0 "
             gConnection.executeInsertQuery(SQL, tr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "SnDAO.SetStatusBySN : " & e.Message)
@@ -240,10 +240,10 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber set IsDelete=1  "
-            SQL = SQL & " WHERE SerialNumberID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND OrderID=" & pOrderID
-            SQL = SQL & " AND ProductListID=" & pProductListID
-            SQL = SQL & " and IsDelete=0  AND ProductID=" & pProductID
+            SQL &=  " WHERE SerialNumberID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND OrderID=" & pOrderID
+            SQL &=  " AND ProductListID=" & pProductListID
+            SQL &=  " and IsDelete=0  AND ProductID=" & pProductID
             gConnection.executeInsertQuery(SQL, tr)
             Return True
         Catch e As Exception
@@ -258,9 +258,9 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber set IsDelete=1  "
-            SQL = SQL & " WHERE  OrderID=" & pOrderID
+            SQL &=  " WHERE  OrderID=" & pOrderID
             If pProductListID > 0 Then
-                SQL = SQL & " AND ProductListID=" & pProductListID
+                SQL &=  " AND ProductListID=" & pProductListID
             End If
 
             gConnection.executeInsertQuery(SQL, tr)
@@ -277,11 +277,11 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber   "
-            SQL = SQL & " SET Status='" & pStatus & "'"
-            SQL = SQL & " WHERE SerialNumberNo in ( "
-            SQL = SQL & "      select SerialNumberNo from SerialNumber where ProductListID not in (" & pProductListIDRemove & ")"
-            SQL = SQL & "      AND OrderID=" & pOrderID & " and IsDelete=0 )"
-            SQL = SQL & " AND Status <> 'None' and IsDelete=0 "
+            SQL &=  " SET Status='" & pStatus & "'"
+            SQL &=  " WHERE SerialNumberNo in ( "
+            SQL &=  "      select SerialNumberNo from SerialNumber where ProductListID not in (" & pProductListIDRemove & ")"
+            SQL &=  "      AND OrderID=" & pOrderID & " and IsDelete=0 )"
+            SQL &=  " AND Status <> 'None' and IsDelete=0 "
             gConnection.executeInsertQuery(SQL, tr)
             Return True
         Catch e As Exception
@@ -297,8 +297,8 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber set IsDelete=1  "
-            SQL = SQL & " WHERE  OrderID=" & pOrderID
-            SQL = SQL & " AND ProductListID not in (" & pProductListRemove & ") and IsDelete=0 "
+            SQL &=  " WHERE  OrderID=" & pOrderID
+            SQL &=  " AND ProductListID not in (" & pProductListRemove & ") and IsDelete=0 "
             gConnection.executeInsertQuery(SQL, tr)
             Return True
         Catch e As Exception

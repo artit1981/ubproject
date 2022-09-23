@@ -45,15 +45,15 @@ Public Class EmployeeListDAO
         ''Dim lFileAttach As New FileAttachDAO
         'Try
         '    SQL = "SELECT *   "
-        '    SQL = SQL & " FROM Employee "
-        '    SQL = SQL & " WHERE 1=1"
+        '    SQL &=  " FROM Employee "
+        '    SQL &=  " WHERE 1=1"
         '    If pID > 0 Then
-        '        SQL = SQL & " and EmpID=" & pID
+        '        SQL &=  " and EmpID=" & pID
         '    End If
         '    If pName <> "" Then
-        '        SQL = SQL & " and Firstname like '%" & pName & "%'"
+        '        SQL &=  " and Firstname like '%" & pName & "%'"
         '    End If
-        '    SQL = SQL & " ORDER BY EmpCode"
+        '    SQL &=  " ORDER BY EmpCode"
         '    dataTable = gConnection.executeSelectQuery(SQL, tr)
         '    If dataTable.Rows.Count > 0 Then
         '        For Each dr As DataRow In dataTable.Rows
@@ -145,20 +145,20 @@ Public Class EmployeeListDAO
 
         Try
             SQL = "SELECT Employee.EmpID ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmpName  "
-            SQL = SQL & " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1"
-            SQL = SQL & " FROM EmployeeList  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Employee.EmpID=EmployeeList.EmpID "
-            SQL = SQL & " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
-            SQL = SQL & " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
+            SQL &=  " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1"
+            SQL &=  " FROM EmployeeList  "
+            SQL &=  " LEFT OUTER JOIN Employee ON Employee.EmpID=EmployeeList.EmpID "
+            SQL &=  " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
+            SQL &=  " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
             'SQL = SQL & " WHERE Employee.IsDelete =0   "
             'If pRefID > 0 Then
-            SQL = SQL & "  WHERE EmployeeList.RefID=" & pRefID
+            SQL &=  "  WHERE EmployeeList.RefID=" & pRefID
             'End If
             'If pRefTableID > 0 Then
-            SQL = SQL & "  AND EmployeeList.RefTableID=" & pRefTableID
+            SQL &=  "  AND EmployeeList.RefTableID=" & pRefTableID
             'End If
-            SQL = SQL & " AND EmployeeList.IsDelete =" & pIsDelete
-            SQL = SQL & " ORDER BY EmpCode,Title,Firstname"
+            SQL &=  " AND EmployeeList.IsDelete =" & pIsDelete
+            SQL &=  " ORDER BY EmpCode,Title,Firstname"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeListDAO.GetDataTable : " & e.Message)
@@ -176,15 +176,15 @@ Public Class EmployeeListDAO
             Select Case ModeData
                 Case DataMode.ModeNew, DataMode.ModeEdit
                     SQL = " INSERT INTO EmployeeList  (RefID,RefTableID,EmpID,IsDelete )"
-                    SQL = SQL & " VALUES (@mRefID"
-                    SQL = SQL & " ,  @mRefTable"
-                    SQL = SQL & " ,  @mEmpID"
-                    SQL = SQL & " ,  0"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES (@mRefID"
+                    SQL &=  " ,  @mRefTable"
+                    SQL &=  " ,  @mEmpID"
+                    SQL &=  " ,  0"
+                    SQL &=  " ) "
                 Case DataMode.ModeDelete
                     SQL = "  Update EmployeeList Set IsDelete=1 "
-                    SQL = SQL & " WHERE RefTableID= @mRefTable"
-                    SQL = SQL & " AND RefID= @mRefID"
+                    SQL &=  " WHERE RefTableID= @mRefTable"
+                    SQL &=  " AND RefID= @mRefID"
                 Case Else
                     Return False
                     Exit Function
@@ -210,8 +210,8 @@ Public Class EmployeeListDAO
         Try
             If RefID > 0 And RefTableID > 0 Then
                 SQL = " DELETE FROM EmployeeList  "
-                SQL = SQL & " WHERE RefTableID= @mRefTable"
-                SQL = SQL & " AND RefID= @mRefID"
+                SQL &=  " WHERE RefTableID= @mRefTable"
+                SQL &=  " AND RefID= @mRefID"
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))
@@ -233,8 +233,8 @@ Public Class EmployeeListDAO
         Try
             If RefID > 0 And RefTableID > 0 Then
                 SQL = " Update EmployeeList Set IsDelete=1 "
-                SQL = SQL & " WHERE RefTableID= @mRefTable"
-                SQL = SQL & " AND RefID= @mRefID"
+                SQL &=  " WHERE RefTableID= @mRefTable"
+                SQL &=  " AND RefID= @mRefID"
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))

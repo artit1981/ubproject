@@ -57,8 +57,8 @@ Public Class frmProductSN
                 For lRow = 0 To gridView.RowCount
                     If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ProductID")) > 0 Then
                         SQL = " Update Product"
-                        SQL = SQL & " Set IsSN=" & ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsSN"))
-                        SQL = SQL & " where ProductID=" & ConvertNullToZero(gridView.GetRowCellValue(lRow, "ProductID"))
+                        SQL &=  " Set IsSN=" & ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsSN"))
+                        SQL &=  " where ProductID=" & ConvertNullToZero(gridView.GetRowCellValue(lRow, "ProductID"))
                         gConnection.executeInsertQuery(SQL, tr)
                     End If
                 Next
@@ -210,22 +210,22 @@ Public Class frmProductSN
             lProBrand = ConvertNullToZero(ProductBrandID.EditValue)
             'bindingSource1.DataSource = Nothing
 
-            SQL = SQL & "SELECT ProductID , ProductCode, ProductName,Remark,IsSN" ',case when IsSN=0 then False else True end IsSN"
-            SQL = SQL & " FROM   Product  "
-            SQL = SQL & " WHERE  Product.IsDelete =0   "
+            SQL &=  "SELECT ProductID , ProductCode, ProductName,Remark,IsSN" ',case when IsSN=0 then False else True end IsSN"
+            SQL &=  " FROM   Product  "
+            SQL &=  " WHERE  Product.IsDelete =0   "
             If lProGroupID > 0 Then
-                SQL = SQL & " AND Product.ProductGroupID =" & lProGroupID
+                SQL &=  " AND Product.ProductGroupID =" & lProGroupID
             End If
             If lProCateID > 0 Then
-                SQL = SQL & " AND Product.ProductCategoryID =" & lProCateID
+                SQL &=  " AND Product.ProductCategoryID =" & lProCateID
             End If
             If lProType > 0 Then
-                SQL = SQL & " AND Product.ProductTypeID =" & lProType
+                SQL &=  " AND Product.ProductTypeID =" & lProType
             End If
             If lProBrand > 0 Then
-                SQL = SQL & " AND Product.ProductBrandID =" & lProBrand
+                SQL &=  " AND Product.ProductBrandID =" & lProBrand
             End If
-            SQL = SQL & " ORDER BY ProductCode,ProductName"
+            SQL &=  " ORDER BY ProductCode,ProductName"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 

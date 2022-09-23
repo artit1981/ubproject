@@ -142,16 +142,16 @@ Public Class EmployeeDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
             SQL = "SELECT E.* ,U.UserID  "
-            SQL = SQL & " FROM Employee E"
-            SQL = SQL & " Left outer join Admin_User U ON U.EmpID=E.EmpID"
-            SQL = SQL & " WHERE 1=1"
+            SQL &=  " FROM Employee E"
+            SQL &=  " Left outer join Admin_User U ON U.EmpID=E.EmpID"
+            SQL &=  " WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & " and E.EmpID=" & pID
+                SQL &=  " and E.EmpID=" & pID
             End If
             If pName <> "" Then
-                SQL = SQL & " and E.Firstname like '%" & pName & "%'"
+                SQL &=  " and E.Firstname like '%" & pName & "%'"
             End If
-            SQL = SQL & " ORDER BY E.EmpCode"
+            SQL &=  " ORDER BY E.EmpCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -269,15 +269,15 @@ Public Class EmployeeDAO
 
         Try
             SQL = "SELECT EmpID AS ID,EmpCode,Title + Firstname + ' ' + LastName AS NAME "
-            SQL = SQL & " FROM Employee  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Employee  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND EmpID=" & pID
+                SQL &=  "  AND EmpID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY EmpCode,Title,Firstname"
+            SQL &=  " ORDER BY EmpCode,Title,Firstname"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeDAO.GetDataTable : " & e.Message)
@@ -291,15 +291,15 @@ Public Class EmployeeDAO
 
         Try
             SQL = "SELECT EmpID AS ID,EmpCode,Title + Firstname + ' ' + LastName AS NAME "
-            SQL = SQL & " FROM Employee  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Employee  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND EmpID=" & pID
+                SQL &=  "  AND EmpID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY EmpCode,Title,Firstname"
+            SQL &=  " ORDER BY EmpCode,Title,Firstname"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeDAO.GetDataTableForCombo : " & e.Message)
@@ -313,21 +313,21 @@ Public Class EmployeeDAO
 
         Try
             SQL = "SELECT Employee.EmpID AS ID,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmpName  "
-            SQL = SQL & " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1"
-            SQL = SQL & " FROM Employee  "
-            SQL = SQL & " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
-            SQL = SQL & " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
-            SQL = SQL & " WHERE Employee.IsDelete =0   "
+            SQL &=  " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1"
+            SQL &=  " FROM Employee  "
+            SQL &=  " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
+            SQL &=  " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
+            SQL &=  " WHERE Employee.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Employee.EmpID=" & pID
+                SQL &=  "  AND Employee.EmpID=" & pID
             End If
             If pEmpName.trim <> "" Then
-                SQL = SQL & "  AND Employee.Firstname Like'%" & pEmpName.Trim & "%'"
+                SQL &=  "  AND Employee.Firstname Like'%" & pEmpName.Trim & "%'"
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Employee.IsInActive = 0"
+                SQL &=  "  AND Employee.IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY Employee.EmpCode,Employee.Title,Employee.Firstname"
+            SQL &=  " ORDER BY Employee.EmpCode,Employee.Title,Employee.Firstname"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeDAO.GetDataTableForCombo2 : " & e.Message)
@@ -360,61 +360,61 @@ Public Class EmployeeDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("EmpID", TableName, tr)
                     SQL = " INSERT INTO Employee  (EmpID,EmpCode "
-                    SQL = SQL & " ,Title,Firstname,LastName,TitleEng,FirstnameEng,LastNameEng,NickName,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,AddressID,PositionID,TerritoryID,HistoryID "
-                    SQL = SQL & " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission "
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @EmpCode"
-                    SQL = SQL & " ,  @Title"
-                    SQL = SQL & " ,  @FirstName"
-                    SQL = SQL & " ,  @LastName"
-                    SQL = SQL & " ,  @TitleEng"
-                    SQL = SQL & " ,  @FirstNameEng"
-                    SQL = SQL & " ,  @LastNameEng"
-                    SQL = SQL & " ,  @NickName"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @AddressID"
-                    SQL = SQL & " ,  @PositionID"
-                    SQL = SQL & " ,  @TerritoryID"
-                    SQL = SQL & " ,  @HistoryID"
-                    SQL = SQL & " ,  @StartDate"
-                    SQL = SQL & " ,  @WorkingStatus"
-                    SQL = SQL & " ,  @EmpGroupID"
-                    SQL = SQL & " ,  @ViewLevel"
-                    SQL = SQL & " ,  @Commission"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,Title,Firstname,LastName,TitleEng,FirstnameEng,LastNameEng,NickName,Remark"
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,AddressID,PositionID,TerritoryID,HistoryID "
+                    SQL &=  " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission "
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @EmpCode"
+                    SQL &=  " ,  @Title"
+                    SQL &=  " ,  @FirstName"
+                    SQL &=  " ,  @LastName"
+                    SQL &=  " ,  @TitleEng"
+                    SQL &=  " ,  @FirstNameEng"
+                    SQL &=  " ,  @LastNameEng"
+                    SQL &=  " ,  @NickName"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @AddressID"
+                    SQL &=  " ,  @PositionID"
+                    SQL &=  " ,  @TerritoryID"
+                    SQL &=  " ,  @HistoryID"
+                    SQL &=  " ,  @StartDate"
+                    SQL &=  " ,  @WorkingStatus"
+                    SQL &=  " ,  @EmpGroupID"
+                    SQL &=  " ,  @ViewLevel"
+                    SQL &=  " ,  @Commission"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Employee SET "
-                    SQL = SQL & " EmpCode=@EmpCode"
-                    SQL = SQL & " ,Title=@Title"
-                    SQL = SQL & " ,Firstname=@FirstName"
-                    SQL = SQL & " ,LastName=@LastName"
-                    SQL = SQL & " ,TitleEng=@TitleEng"
-                    SQL = SQL & " ,FirstnameEng=@FirstNameEng"
-                    SQL = SQL & " ,LastNameEng=@LastNameEng"
-                    SQL = SQL & " ,NickName=@NickName"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " ,PositionID= @PositionID"
-                    SQL = SQL & " ,TerritoryID= @TerritoryID"
-                    SQL = SQL & " ,StartDate= @StartDate"
-                    SQL = SQL & " ,WorkingStatus= @WorkingStatus"
-                    SQL = SQL & " ,EmpGroupID= @EmpGroupID"
-                    SQL = SQL & " ,ViewLevel= @ViewLevel"
-                    SQL = SQL & " ,Commission= @Commission"
-                    SQL = SQL & " WHERE EmpID= @mIDs"
+                    SQL &=  " EmpCode=@EmpCode"
+                    SQL &=  " ,Title=@Title"
+                    SQL &=  " ,Firstname=@FirstName"
+                    SQL &=  " ,LastName=@LastName"
+                    SQL &=  " ,TitleEng=@TitleEng"
+                    SQL &=  " ,FirstnameEng=@FirstNameEng"
+                    SQL &=  " ,LastNameEng=@LastNameEng"
+                    SQL &=  " ,NickName=@NickName"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " ,PositionID= @PositionID"
+                    SQL &=  " ,TerritoryID= @TerritoryID"
+                    SQL &=  " ,StartDate= @StartDate"
+                    SQL &=  " ,WorkingStatus= @WorkingStatus"
+                    SQL &=  " ,EmpGroupID= @EmpGroupID"
+                    SQL &=  " ,ViewLevel= @ViewLevel"
+                    SQL &=  " ,Commission= @Commission"
+                    SQL &=  " WHERE EmpID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Employee SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE EmpID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE EmpID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -478,9 +478,9 @@ Public Class EmployeeDAO
 
         Try
             SQL = "SELECT EmpID  FROM Employee"
-            SQL = SQL & " WHERE IsDelete =0 AND EmpCode='" & Trim(EmpCode) & "'"
+            SQL &=  " WHERE IsDelete =0 AND EmpCode='" & Trim(EmpCode) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND EmpID <> " & ID
+                SQL &=  " AND EmpID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -502,7 +502,7 @@ Public Class EmployeeDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

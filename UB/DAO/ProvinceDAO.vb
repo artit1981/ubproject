@@ -55,10 +55,10 @@ Public Class ProvinceDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Province "
-            SQL = SQL & " WHERE ProvinceID=" & pID
+            SQL &=  " FROM Province "
+            SQL &=  " WHERE ProvinceID=" & pID
 
-            SQL = SQL & " ORDER BY ProvinceName"
+            SQL &=  " ORDER BY ProvinceName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -114,8 +114,8 @@ Public Class ProvinceDAO
 
         Try
             SQL = "SELECT ProvinceID AS ID, ProvinceCode, ProvinceName,ProvinceNameEng "
-            SQL = SQL & " FROM Province   "
-            SQL = SQL & " WHERE IsDelete=0 ORDER BY ProvinceName"
+            SQL &=  " FROM Province   "
+            SQL &=  " WHERE IsDelete=0 ORDER BY ProvinceName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProvinceDAO.GetDataTable : " & e.Message)
@@ -136,34 +136,34 @@ Public Class ProvinceDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProvinceID", "Province", tr)
                     SQL = " INSERT INTO Province  (ProvinceID,GeoID,ProvinceCode,ProvinceName,ProvinceNameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @GeoID"
-                    SQL = SQL & " ,  @mIDCode"
-                    SQL = SQL & " ,  @mNameThai"
-                    SQL = SQL & " ,  @mNameEng"
-                    SQL = SQL & " ,  @mRemark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @GeoID"
+                    SQL &=  " ,  @mIDCode"
+                    SQL &=  " ,  @mNameThai"
+                    SQL &=  " ,  @mNameEng"
+                    SQL &=  " ,  @mRemark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Province SET "
-                    SQL = SQL & " GeoID=@GeoID"
-                    SQL = SQL & " ,ProvinceCode=@mIDCode"
-                    SQL = SQL & " ,ProvinceName=@mNameThai"
-                    SQL = SQL & " ,ProvinceNameEng=@mNameEng"
-                    SQL = SQL & " ,Remark= @mRemark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE ProvinceID= @mIDs"
+                    SQL &=  " GeoID=@GeoID"
+                    SQL &=  " ,ProvinceCode=@mIDCode"
+                    SQL &=  " ,ProvinceName=@mNameThai"
+                    SQL &=  " ,ProvinceNameEng=@mNameEng"
+                    SQL &=  " ,Remark= @mRemark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE ProvinceID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Province SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE ProvinceID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE ProvinceID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -202,9 +202,9 @@ Public Class ProvinceDAO
 
         Try
             SQL = "SELECT ProvinceID  FROM Province"
-            SQL = SQL & " WHERE IsDelete =0 AND ProvinceName='" & Trim(NameThai) & "'"
+            SQL &=  " WHERE IsDelete =0 AND ProvinceName='" & Trim(NameThai) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND ProvinceID <> " & ID
+                SQL &=  " AND ProvinceID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -224,7 +224,7 @@ Public Class ProvinceDAO
 
         'Try
         '    SQL = "SELECT DepartmentID  FROM Position"
-        '    SQL = SQL & " WHERE IsDelete =0 AND DepartmentID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND DepartmentID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count = 0
         'Catch e As Exception

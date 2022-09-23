@@ -97,12 +97,12 @@ Public Class NoteDAO
 
         Try
             SQL = "SELECT  A.Description,A.Description AS DescriptionORG ,B.USERNAME AS CreateBy "
-            SQL = SQL & " ,A.CreateTime ,A.NoteID AS ID  ,A.RefID ,A.RefTable,A.SEQ ,2 AS ModeData"
-            SQL = SQL & " FROM Note A "
-            SQL = SQL & " LEFT OUTER JOIN Admin_User B ON A.CreateBy=B.UserID "
-            SQL = SQL & " WHERE RefTable = '" & pTable & "' "
-            SQL = SQL & " AND RefID =" & pRefID
-            SQL = SQL & " ORDER BY A.SEQ"
+            SQL &=  " ,A.CreateTime ,A.NoteID AS ID  ,A.RefID ,A.RefTable,A.SEQ ,2 AS ModeData"
+            SQL &=  " FROM Note A "
+            SQL &=  " LEFT OUTER JOIN Admin_User B ON A.CreateBy=B.UserID "
+            SQL &=  " WHERE RefTable = '" & pTable & "' "
+            SQL &=  " AND RefID =" & pRefID
+            SQL &=  " ORDER BY A.SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "NoteDAO.GetDataTable : " & e.Message)
@@ -130,24 +130,24 @@ Public Class NoteDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("NoteID", "Note", tr)
                     SQL = " INSERT INTO Note  (NoteID,RefID,RefTable,Description,CreateBy,CreateTime )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @mRefID"
-                    SQL = SQL & " ,  @mRefTable"
-                    SQL = SQL & " ,  @mDescription"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @mRefID"
+                    SQL &=  " ,  @mRefTable"
+                    SQL &=  " ,  @mDescription"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Note   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " Description=@mDescription"
-                    SQL = SQL & " ,CreateBy= @gUserID"
-                    SQL = SQL & " ,CreateTime=@CreateTime"
-                    SQL = SQL & " ,SEQ=@SEQ"
-                    SQL = SQL & " WHERE NoteID= @mIDs"
+                    SQL &=  " SET"
+                    SQL &=  " Description=@mDescription"
+                    SQL &=  " ,CreateBy= @gUserID"
+                    SQL &=  " ,CreateTime=@CreateTime"
+                    SQL &=  " ,SEQ=@SEQ"
+                    SQL &=  " WHERE NoteID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " DELETE FROM Note  "
-                    SQL = SQL & " WHERE NoteID= @mIDs"
+                    SQL &=  " WHERE NoteID= @mIDs"
                 Case Else
                     Return False
                     Exit Function
@@ -175,8 +175,8 @@ Public Class NoteDAO
         SQL = ""
         Try
             SQL = " DELETE FROM Note  "
-            SQL = SQL & " WHERE RefTable= @mRefTable"
-            SQL = SQL & " AND RefID= @mRefID"
+            SQL &=  " WHERE RefTable= @mRefTable"
+            SQL &=  " AND RefID= @mRefID"
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))

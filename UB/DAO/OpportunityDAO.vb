@@ -200,15 +200,15 @@ Public Class OpportunityDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Opportunity "
-            SQL = SQL & " WHERE 1=1"
+            SQL &=  " FROM Opportunity "
+            SQL &=  " WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & " and OppID=" & pID
+                SQL &=  " and OppID=" & pID
             End If
             If pName.Trim <> "" Then
-                SQL = SQL & " and OppName='" & pName.Trim & "'"
+                SQL &=  " and OppName='" & pName.Trim & "'"
             End If
-            SQL = SQL & " ORDER BY OppName"
+            SQL &=  " ORDER BY OppName"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -305,27 +305,27 @@ Public Class OpportunityDAO
 
         Try
             SQL = "SELECT Opportunity.OppID AS ID,Opportunity.OppName  "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer  "
-            SQL = SQL & " ,OppStartDate,OppExpireDate,EstimateRevenue,ExpectRevenue,OpportunityStage.NameThai,Opportunity.IsClose,Opportunity.CloseDate"
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Opportunity.ModifiedTime"
-            SQL = SQL & " FROM Opportunity  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Opportunity.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Opportunity.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=Opportunity.OpportunityStageID  "
-            SQL = SQL & " WHERE Opportunity.IsDelete =0   "
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer  "
+            SQL &=  " ,OppStartDate,OppExpireDate,EstimateRevenue,ExpectRevenue,OpportunityStage.NameThai,Opportunity.IsClose,Opportunity.CloseDate"
+            SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Opportunity.ModifiedTime"
+            SQL &=  " FROM Opportunity  "
+            SQL &=  " LEFT OUTER JOIN Employee ON Opportunity.EmpID=Employee.EmpID  "
+            SQL &=  " LEFT OUTER JOIN Customer ON Opportunity.CustomerID=Customer.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=Opportunity.OpportunityStageID  "
+            SQL &=  " WHERE Opportunity.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Opportunity.OppID=" & pID
+                SQL &=  "  AND Opportunity.OppID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Opportunity.IsInActive = 0"
+                SQL &=  "  AND Opportunity.IsInActive = 0"
             End If
             ''Set View level
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND Employee.TerritoryID=" & gTerritoryID
+                SQL &=  "  AND Employee.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND Employee.EmpID=" & gEmpID
+                SQL &=  "  AND Employee.EmpID=" & gEmpID
             End If
-            SQL = SQL & " ORDER BY Opportunity.OppName"
+            SQL &=  " ORDER BY Opportunity.OppName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OpportunityDAO.GetDataTable : " & e.Message)
@@ -339,28 +339,28 @@ Public Class OpportunityDAO
 
         Try
             SQL = "SELECT Opportunity.OppID AS ID,Opportunity.OppName  "
-            SQL = SQL & " ,OppStartDate,OppExpireDate,Opportunity.CloseDate,EstimateRevenue,ExpectRevenue,OpportunityStage.NameThai"
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME"
-            SQL = SQL & " FROM Opportunity  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Opportunity.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=Opportunity.OpportunityStageID  "
-            SQL = SQL & " WHERE Opportunity.IsDelete =0   "
-            SQL = SQL & "  AND Opportunity.IsInActive = 0   "
+            SQL &=  " ,OppStartDate,OppExpireDate,Opportunity.CloseDate,EstimateRevenue,ExpectRevenue,OpportunityStage.NameThai"
+            SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME"
+            SQL &=  " FROM Opportunity  "
+            SQL &=  " LEFT OUTER JOIN Employee ON Opportunity.EmpID=Employee.EmpID  "
+            SQL &=  " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=Opportunity.OpportunityStageID  "
+            SQL &=  " WHERE Opportunity.IsDelete =0   "
+            SQL &=  "  AND Opportunity.IsInActive = 0   "
             If pCustomerID > 0 Then
-                SQL = SQL & "  AND Opportunity.CustomerID=" & pCustomerID
+                SQL &=  "  AND Opportunity.CustomerID=" & pCustomerID
             End If
-            SQL = SQL & "  AND OppStartDate <= '" & formatSQLDate(pEffectDate) & "'"
-            SQL = SQL & "  AND OppExpireDate > '" & formatSQLDate(pEffectDate) & "'"
-            SQL = SQL & "  AND ( IsClose= 0  "
-            SQL = SQL & "           OR ( IsClose= 1 AND  CloseDate >  '" & formatSQLDate(pEffectDate) & "' )"
-            SQL = SQL & "       )"
+            SQL &=  "  AND OppStartDate <= '" & formatSQLDate(pEffectDate) & "'"
+            SQL &=  "  AND OppExpireDate > '" & formatSQLDate(pEffectDate) & "'"
+            SQL &=  "  AND ( IsClose= 0  "
+            SQL &=  "           OR ( IsClose= 1 AND  CloseDate >  '" & formatSQLDate(pEffectDate) & "' )"
+            SQL &=  "       )"
             ''Set View level
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND Employee.TerritoryID=" & gTerritoryID
+                SQL &=  "  AND Employee.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND Employee.EmpID=" & gEmpID
+                SQL &=  "  AND Employee.EmpID=" & gEmpID
             End If
-            SQL = SQL & " ORDER BY Opportunity.OppName"
+            SQL &=  " ORDER BY Opportunity.OppName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OpportunityDAO.GetDataTableForCombo : " & e.Message)
@@ -375,15 +375,15 @@ Public Class OpportunityDAO
 
         Try
             SQL = "SELECT OppHistory.ModifiedTime "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer  "
-            SQL = SQL & " ,OpportunityStage.NameThai,EstimateRevenue,ExpectRevenue,OppHistory.IsClose,OppHistory.CloseDate"
-            SQL = SQL & " ,Admin_User.UserName "
-            SQL = SQL & " FROM OppHistory  "
-            SQL = SQL & " LEFT OUTER JOIN Admin_User ON Admin_User.UserID=OppHistory.ModifiedBy  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON OppHistory.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=OppHistory.OpportunityStageID  "
-            SQL = SQL & " WHERE  OppHistory.OppID=" & pID
-            SQL = SQL & " ORDER BY OppHistory.ModifiedTime "
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer  "
+            SQL &=  " ,OpportunityStage.NameThai,EstimateRevenue,ExpectRevenue,OppHistory.IsClose,OppHistory.CloseDate"
+            SQL &=  " ,Admin_User.UserName "
+            SQL &=  " FROM OppHistory  "
+            SQL &=  " LEFT OUTER JOIN Admin_User ON Admin_User.UserID=OppHistory.ModifiedBy  "
+            SQL &=  " LEFT OUTER JOIN Customer ON OppHistory.CustomerID=Customer.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN OpportunityStage ON OpportunityStage.OpportunityStageID=OppHistory.OpportunityStageID  "
+            SQL &=  " WHERE  OppHistory.OppID=" & pID
+            SQL &=  " ORDER BY OppHistory.ModifiedTime "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OpportunityDAO.GetHistoryTable : " & e.Message)
@@ -407,62 +407,62 @@ Public Class OpportunityDAO
                     EmpID = gEmpID
                     ID = GenNewID("OppID", "Opportunity", tr)
                     SQL = " INSERT INTO Opportunity  (OppID,OppName,CustomerID,OpportunityTypeID,OpportunityStageID,CampaignID"
-                    SQL = SQL & " ,OppStartDate,OppExpireDate,IsSysRevenue,EstimateRevenue,ExpectRevenue,SourceID "
-                    SQL = SQL & " ,Remark,IsClose,CloseDate,EmpID"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete "
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @IDs"
-                    SQL = SQL & " ,  @OppName"
-                    SQL = SQL & " ,  @CustomerID"
-                    SQL = SQL & " ,  @OpportunityTypeID"
-                    SQL = SQL & " ,  @OpportunityStageID"
-                    SQL = SQL & " ,  @CampaignID"
-                    SQL = SQL & " ,  @OppStartDate"
-                    SQL = SQL & " ,  @OppExpireDate "
-                    SQL = SQL & " ,  @IsSysRevenue "
-                    SQL = SQL & " ,  @EstimateRevenue "
-                    SQL = SQL & " ,  @ExpectRevenue "
-                    SQL = SQL & " ,  @SourceID "
-                    SQL = SQL & " ,  @Remark "
-                    SQL = SQL & " ,  @IsClose "
-                    SQL = SQL & " ,  @CloseDate "
-                    SQL = SQL & " ,  @EmpID "
+                    SQL &=  " ,OppStartDate,OppExpireDate,IsSysRevenue,EstimateRevenue,ExpectRevenue,SourceID "
+                    SQL &=  " ,Remark,IsClose,CloseDate,EmpID"
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete "
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @IDs"
+                    SQL &=  " ,  @OppName"
+                    SQL &=  " ,  @CustomerID"
+                    SQL &=  " ,  @OpportunityTypeID"
+                    SQL &=  " ,  @OpportunityStageID"
+                    SQL &=  " ,  @CampaignID"
+                    SQL &=  " ,  @OppStartDate"
+                    SQL &=  " ,  @OppExpireDate "
+                    SQL &=  " ,  @IsSysRevenue "
+                    SQL &=  " ,  @EstimateRevenue "
+                    SQL &=  " ,  @ExpectRevenue "
+                    SQL &=  " ,  @SourceID "
+                    SQL &=  " ,  @Remark "
+                    SQL &=  " ,  @IsClose "
+                    SQL &=  " ,  @CloseDate "
+                    SQL &=  " ,  @EmpID "
 
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
 
-                    SQL = SQL & " ) "
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Opportunity SET "
-                    SQL = SQL & " OppName=@OppName"
-                    SQL = SQL & " , CustomerID=@CustomerID "
-                    SQL = SQL & " , OpportunityTypeID=@OpportunityTypeID "
-                    SQL = SQL & " , OpportunityStageID=@OpportunityStageID "
-                    SQL = SQL & " , CampaignID=@CampaignID "
-                    SQL = SQL & " , OppStartDate=@OppStartDate "
-                    SQL = SQL & " , OppExpireDate=@OppExpireDate "
-                    SQL = SQL & " , IsSysRevenue=@IsSysRevenue "
-                    SQL = SQL & " , EstimateRevenue=@EstimateRevenue "
-                    SQL = SQL & " , ExpectRevenue=@ExpectRevenue "
-                    SQL = SQL & " , SourceID=@SourceID "
-                    SQL = SQL & " , Remark=@Remark "
-                    SQL = SQL & " , IsClose=@IsClose "
-                    SQL = SQL & " , CloseDate=@CloseDate "
-                    SQL = SQL & " , EmpID=@EmpID "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " ,RealRevenue= @RealRevenue"
-                    SQL = SQL & " ,CloseResult= @CloseResult"
-                    SQL = SQL & " ,CloseRemark= @CloseRemark"
-                    SQL = SQL & " WHERE OppID= @IDs"
+                    SQL &=  " OppName=@OppName"
+                    SQL &=  " , CustomerID=@CustomerID "
+                    SQL &=  " , OpportunityTypeID=@OpportunityTypeID "
+                    SQL &=  " , OpportunityStageID=@OpportunityStageID "
+                    SQL &=  " , CampaignID=@CampaignID "
+                    SQL &=  " , OppStartDate=@OppStartDate "
+                    SQL &=  " , OppExpireDate=@OppExpireDate "
+                    SQL &=  " , IsSysRevenue=@IsSysRevenue "
+                    SQL &=  " , EstimateRevenue=@EstimateRevenue "
+                    SQL &=  " , ExpectRevenue=@ExpectRevenue "
+                    SQL &=  " , SourceID=@SourceID "
+                    SQL &=  " , Remark=@Remark "
+                    SQL &=  " , IsClose=@IsClose "
+                    SQL &=  " , CloseDate=@CloseDate "
+                    SQL &=  " , EmpID=@EmpID "
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " ,RealRevenue= @RealRevenue"
+                    SQL &=  " ,CloseResult= @CloseResult"
+                    SQL &=  " ,CloseRemark= @CloseRemark"
+                    SQL &=  " WHERE OppID= @IDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Opportunity SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE OppID= @IDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE OppID= @IDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -575,20 +575,20 @@ Public Class OpportunityDAO
         SQL = ""
         Try
             SQL = " INSERT INTO OppHistory (OppID,CustomerID,OpportunityStageID"
-            SQL = SQL & " ,EstimateRevenue,ExpectRevenue,IsClose,CloseDate,EmpID "
-            SQL = SQL & " ,ModifiedBy,ModifiedTime "
-            SQL = SQL & " )"
-            SQL = SQL & " VALUES ( @IDs"
-            SQL = SQL & " ,  @CustomerID"
-            SQL = SQL & " ,  @OpportunityStageID"
-            SQL = SQL & " ,  @EstimateRevenue "
-            SQL = SQL & " ,  @ExpectRevenue "
-            SQL = SQL & " ,  @IsClose "
-            SQL = SQL & " ,  @CloseDate "
-            SQL = SQL & " ,  @EmpID "
-            SQL = SQL & " ,  @gUserID"
-            SQL = SQL & " ,  @CreateTime"
-            SQL = SQL & " ) "
+            SQL &=  " ,EstimateRevenue,ExpectRevenue,IsClose,CloseDate,EmpID "
+            SQL &=  " ,ModifiedBy,ModifiedTime "
+            SQL &=  " )"
+            SQL &=  " VALUES ( @IDs"
+            SQL &=  " ,  @CustomerID"
+            SQL &=  " ,  @OpportunityStageID"
+            SQL &=  " ,  @EstimateRevenue "
+            SQL &=  " ,  @ExpectRevenue "
+            SQL &=  " ,  @IsClose "
+            SQL &=  " ,  @CloseDate "
+            SQL &=  " ,  @EmpID "
+            SQL &=  " ,  @gUserID"
+            SQL &=  " ,  @CreateTime"
+            SQL &=  " ) "
 
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -622,9 +622,9 @@ Public Class OpportunityDAO
 
         Try
             SQL = "SELECT OppID  FROM Opportunity"
-            SQL = SQL & " WHERE IsDelete =0 AND OppName='" & Trim(mSubject) & "'"
+            SQL &=  " WHERE IsDelete =0 AND OppName='" & Trim(mSubject) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND OppID <> " & ID
+                SQL &=  " AND OppID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -646,7 +646,7 @@ Public Class OpportunityDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

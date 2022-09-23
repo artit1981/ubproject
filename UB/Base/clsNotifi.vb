@@ -106,8 +106,8 @@ Public Class clsNotifi
         Dim lclsNotifi As clsNotifi
         Try
             SQL = "SELECT * "
-            SQL = SQL & " FROM NotifiData  "
-            SQL = SQL & " WHERE IsClose=0 and UserID =" & pUserID
+            SQL &=  " FROM NotifiData  "
+            SQL &=  " WHERE IsClose=0 and UserID =" & pUserID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -177,10 +177,10 @@ Public Class clsNotifi
         Try
 
             SQL = " UPDATE NotifiData SET IsClose=1  "
-            SQL = SQL & " WHERE UserID=" & gUserID
-            SQL = SQL & " AND RefTable='" & pRefTable & "'"
-            SQL = SQL & " AND RefID=" & pRefID
-            SQL = SQL & " AND IsClose=0"
+            SQL &=  " WHERE UserID=" & gUserID
+            SQL &=  " AND RefTable='" & pRefTable & "'"
+            SQL &=  " AND RefID=" & pRefID
+            SQL &=  " AND IsClose=0"
             gConnection.executeInsertQuery(SQL, Nothing)
 
         Catch e As Exception
@@ -194,16 +194,16 @@ Public Class clsNotifi
         Try
             If IsNotExist(gUserID, pRefID, pRefTable, ptr) Then
                 SQL = " INSERT INTO NotifiData  (IsClose,NotifyLevel,System,MenuDisplay,ValueDate,RefTable,RefID,UserID,Remark)"
-                SQL = SQL & " VALUES (0"
-                SQL = SQL & " , " & pNotifyLevel
-                SQL = SQL & " ,'" & pSystem & "'"
-                SQL = SQL & " ,'" & pMenuDisplay & "'"
-                SQL = SQL & " ,'" & formatSQLDate(pValueDate) & "'"
-                SQL = SQL & " ,'" & pRefTable & "'"
-                SQL = SQL & " , " & pRefID
-                SQL = SQL & " , " & pUserID
-                SQL = SQL & " ,'" & pRemark & "'"
-                SQL = SQL & " ) "
+                SQL &=  " VALUES (0"
+                SQL &=  " , " & pNotifyLevel
+                SQL &=  " ,'" & pSystem & "'"
+                SQL &=  " ,'" & pMenuDisplay & "'"
+                SQL &=  " ,'" & formatSQLDate(pValueDate) & "'"
+                SQL &=  " ,'" & pRefTable & "'"
+                SQL &=  " , " & pRefID
+                SQL &=  " , " & pUserID
+                SQL &=  " ,'" & pRemark & "'"
+                SQL &=  " ) "
                 gConnection.executeInsertQuery(SQL, ptr)
 
             End If
@@ -217,10 +217,10 @@ Public Class clsNotifi
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT RefID  "
-            SQL = SQL & " FROM NotifiData"
-            SQL = SQL & " where UserID=" & pUserID
-            SQL = SQL & " and RefID=" & pRefID
-            SQL = SQL & " and RefTable='" & pRefTable & "'"
+            SQL &=  " FROM NotifiData"
+            SQL &=  " where UserID=" & pUserID
+            SQL &=  " and RefID=" & pRefID
+            SQL &=  " and RefTable='" & pRefTable & "'"
             dataTable = gConnection.executeSelectQuery(SQL, ptr)
             Return dataTable.Rows.Count = 0
         Catch e As Exception

@@ -22,7 +22,6 @@ Public Class frmOrderS
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
-            'DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden
 
             mMode = pMode
             mOrderType = pOrderType
@@ -217,7 +216,7 @@ Public Class frmOrderS
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                Case MasterType.Invoice, MasterType.Borrow
+                Case MasterType.Invoice, MasterType.Borrow, MasterType.InvoiceOnline
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -230,7 +229,7 @@ Public Class frmOrderS
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    If mOrderType = MasterType.Invoice Then
+                    If mOrderType = MasterType.Invoice Or mOrderType = MasterType.InvoiceOnline Then
                         LayoutCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                         LayoutbtnCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     End If
@@ -354,15 +353,15 @@ Public Class frmOrderS
                     UcNote2.ClearControl()
                     UcProductLists1.ClearControl()
                     UcPledge1.ClearControl()
-                    'OrderCode.Properties.ReadOnly = False
+
                     OrderDate.Properties.ReadOnly = False
-                    'CustomerID.Properties.ReadOnly = False
+
             End Select
             XtraTabControl1.SelectedTabPage = GeneralTabPage
             OrderCode.Select()
             TaxMonthYear.EditValue = OrderDate.EditValue
             'default
-            'ExpireDate.EditValue = DateAdd(DateInterval.Month, 1, GetCurrentDate(Nothing))
+
             ShipingDate.EditValue = OrderDate.EditValue
             UcAdmin1.CheckInAcive.Enabled = False
         Catch e As Exception
@@ -438,13 +437,7 @@ Public Class frmOrderS
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.IsMakePO = mIsMakePO
 
-            ''Check Approve stock
-            'Dim lIsApproveStock As Boolean = (CheckIsUseStock(mcls.TableID, Nothing, mcls.StockType, Nothing) > 0)
-            'If lIsApproveStock And CheckIsWaitApproveStock() Then
-            '    ShowProgress(False, "")
-            '    XtraMessageBox.Show(Me, "ไม่สามารถทำรายการได้ เนื่องจากระบบมีการคำนวนสต๊อกใหม่ กรุณาทำการอนุมัติสต๊อก ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1)
-            '    Return False
-            'End If
+
 
             If TaxGroup.Enabled = True Then
                 mcls.TaxOrderDAOs = GetTaxOrderList()
@@ -470,27 +463,16 @@ Public Class frmOrderS
 
             mcls.PledgeDAOs = UcPledge1.GetDAOs()
 
-
-            'mcls.TaxOrderDAOs = GetTaxOrderList()
             If Verify() = True Then
 
                 Call mcls.SaveData()
                 ShowProgress(False, "")
-                'If mcls.ModeData = DataMode.ModeNew And (mcls.OrderStatus = EnumStatus.Open.ToString Or mcls.OrderStatus = EnumStatus.Approve.ToString) Then
-                '    If XtraMessageBox.Show(Me, "ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                '        modReport.PrintOrder(mcls.ID)
-                '    End If
                 If (mcls.OrderStatus = EnumStatus.WaitApprove.ToString) Then
-                    'ShowProgress(False, "")
+
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                    'If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                    '    modReport.PrintReportOrder(mOrderType, mcls.ID)
-                    'End If
                 Else
-                    'XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                    'ShowProgress(False, "")
                     Select Case mOrderType
-                        Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
+                        Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                             , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy _
                             , MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
                             If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
@@ -514,22 +496,7 @@ Public Class frmOrderS
         End Try
     End Function
 
-    'Protected Overrides Sub CloseReserve(ByVal pID As Long)
-    '    Dim Sql As String = ""
-    '    Try
-    '        If XtraMessageBox.Show(Me, "ต้องการปิดสถานะการสร้างใบสั่งซื้อใช่หรือไม่ [Ordered]", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-    '            Sql = " UPDATE Orders SET "
-    '            Sql = Sql & " where OrderID=" & pID
-    '            gConnection.executeInsertQuery(Sql, Nothing)
-    '            XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-    '        End If
 
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    Finally
-    '        'ShowProgress(False, "")
-    '    End Try
-    'End Sub
     Protected Overrides Sub MakeOrder(ByVal pID As Long)
         Dim lFormEdit As frmOrderS = Nothing
         Try
@@ -901,7 +868,6 @@ Public Class frmOrderS
                                 InitialRefOrder(rec.OrderID, "", lIsInitProduct)
                             Next
                             ShowProductListBySource(mMode, mProductList, mRefOrderID)
-                            'Calculation()
                         End If
                     End If
 
@@ -926,7 +892,7 @@ Public Class frmOrderS
                     Case MasterType.SellOrders
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Reserve) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Quotation) Then Return True
-                    Case MasterType.Invoice
+                    Case MasterType.Invoice, MasterType.InvoiceOnline
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.SellOrders) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Borrow) Then Return True
                     Case MasterType.Shiping, MasterType.Borrow
@@ -935,6 +901,7 @@ Public Class frmOrderS
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.SellOrders) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceOnline) Then Return True
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ClaimResult)
                     Case MasterType.Reserve
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Quotation)
@@ -942,6 +909,7 @@ Public Class frmOrderS
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.PurchaseOrder)
                     Case MasterType.Claim
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceOnline) Then Return True
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping)
                     Case MasterType.ClaimOut
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Claim)
@@ -1005,7 +973,7 @@ Public Class frmOrderS
             If (plngOppID > 0 Or pstrOrderCode.Trim <> "") And mIsFromLoad = False Then
                 lcls = New OpportunityDAO
                 If lcls.InitailData(plngOppID, pstrOrderCode.Trim) = True Then
-                    'txtRefOrder.Text = lcls.Subject
+
                     If txtRefOrder.Text = "" Then
                         txtRefOrder.Text = lcls.Subject
                     Else
@@ -1014,8 +982,7 @@ Public Class frmOrderS
                     If pInitProduct Then
                         gCustomerID = ConvertNullToZero(CustomerID.EditValue)
                         LoadProList(plngOppID, MasterType.Opportunity)
-                        'UcProductLists1.ShowControl(mMode, lcls.ID, lcls.TableName, GetColData, False, True, Me, True, mOrderType.ToString)
-                        'Calculation()
+
                     End If
                     Return True
                 End If
@@ -1033,7 +1000,7 @@ Public Class frmOrderS
             If (plngOrderID > 0 Or pstrOrderCode.Trim <> "") Then
                 lcls = New OrderSDAO
                 lcls.TableID = pOrderType
-                'ShipingDate.EditValue = Nothing
+
                 If lcls.InitailData(plngOrderID, pstrOrderCode.Trim) = True Then
                     If txtRefOrder.Text = "" Then
                         txtRefOrder.Text = lcls.Code
@@ -1142,9 +1109,13 @@ Public Class frmOrderS
                             rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                             rec.ProductListRefID2 = 0
                             rec.ProductListRefID3 = 0
+                            rec.ProductListRefID4 = 0
+                            rec.ProductListRefID5 = 0
                             rec.ProductListUnitRef1 = lCalcUnit
                             rec.ProductListUnitRef2 = 0
                             rec.ProductListUnitRef3 = 0
+                            rec.ProductListUnitRef4 = 0
+                            rec.ProductListUnitRef5 = 0
                             If rec.IsSN = 1 Then
                                 rec.SNList = New List(Of SnDAO)
                                 For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
@@ -1196,9 +1167,14 @@ Public Class frmOrderS
                                     rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                                     rec.ProductListRefID2 = 0
                                     rec.ProductListRefID3 = 0
+                                    rec.ProductListRefID4 = 0
+                                    rec.ProductListRefID5 = 0
                                     rec.ProductListUnitRef1 = lCalcUnit
                                     rec.ProductListUnitRef2 = 0
                                     rec.ProductListUnitRef3 = 0
+                                    rec.ProductListUnitRef4 = 0
+                                    rec.ProductListUnitRef5 = 0
+
                                     If rec.IsSN = 1 Then
                                         rec.SNList = New List(Of SnDAO)
                                         For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
@@ -1221,9 +1197,16 @@ Public Class frmOrderS
                                 If mProductList.Item(lIndex).ProductListRefID2 = 0 Then
                                     mProductList.Item(lIndex).ProductListRefID2 = ConvertNullToZero(dr("ID"))
                                     mProductList.Item(lIndex).ProductListUnitRef2 = ConvertNullToZero(dr("Units"))
-                                Else
+                                ElseIf mProductList.Item(lIndex).ProductListRefID3 = 0 Then
                                     mProductList.Item(lIndex).ProductListRefID3 = ConvertNullToZero(dr("ID"))
                                     mProductList.Item(lIndex).ProductListUnitRef3 = ConvertNullToZero(dr("Units"))
+                                ElseIf mProductList.Item(lIndex).ProductListRefID4 = 0 Then
+                                    mProductList.Item(lIndex).ProductListRefID4 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef4 = ConvertNullToZero(dr("Units"))
+                                Else
+                                    mProductList.Item(lIndex).ProductListRefID5 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef5 = ConvertNullToZero(dr("Units"))
+
                                     lCanNotMerge = True   'Ref slot full
                                 End If
                                 mProductList.Item(lIndex).IsMerge = 1
@@ -1794,36 +1777,10 @@ Public Class frmOrderS
     End Function
 
     Private Sub MakeReserve(ByVal pProList As List(Of ProductListDAO))
-        'Dim lcls As ProductListDAO
-        'Dim lProductList As New List(Of ProductListDAO)
+
         Try
             ShowProgress(True, "Loading...")
 
-            'For Each pProID As ProductListDAO In pProList
-            '    lcls = New ProductListDAO
-            '    lcls.IsSelect = True
-            '    lcls.Cost = pProID.Cost
-            '    lcls.ID = pProID.ID
-            '    lcls.LocationDTLID = pProID.LocationDTLID
-            '    lcls.Price = pProID.Price
-            '    lcls.PriceMain = pProID.PriceMain
-            '    lcls.ProductCode = pProID.ProductCode
-            '    lcls.ProductID = pProID.ProductID
-            '    lcls.ProductNameExt = pProID.ProductNameExt
-            '    lcls.ProductName = pProID.ProductName
-            '    lcls.Remark = pProID.Remark
-            '    lcls.SEQ = pProID.SEQ
-            '    lcls.Total = pProID.Total
-            '    lcls.UnitID = pProID.UnitID
-            '    lcls.UnitMainID = pProID.UnitMainID
-            '    lcls.UnitName = pProID.UnitName
-            '    lcls.Units = pProID.Units
-            '    lcls.RateUnit = pProID.RateUnit
-            '    lcls.AdjustUnit = pProID.AdjustUnit
-            '    lcls.Units_Old = pProID.Units_Old
-            '    lcls.AdjustUnit_Old = pProID.AdjustUnit_Old
-            '    lProductList.Add(lcls)
-            'Next
 
             Dim lFormEdit As New frmOrderS
             With lFormEdit
@@ -1959,11 +1916,9 @@ Public Class frmOrderS
         Dim dataTable As New DataTable()
         Try
             If TaxGroup.Enabled = True Then
-                'gridView.OptionsBehavior.ReadOnly = mIsReaOnly
                 dataTable = lcls.GetDataTable(pRefOrderID, False)
                 GridTaxOrder.DataSource = dataTable
                 LoadTaxTypeIDLookUp()
-                'GridStyle()
             End If
 
         Catch e As Exception
@@ -2054,13 +2009,6 @@ Public Class frmOrderS
 
             ElseIf GridView3.FocusedColumn.FieldName = "TaxAmount" Then
                 GridView3.SetFocusedRowCellValue("TaxAmount", e.Value * (ConvertNullToZero(GridView3.GetRowCellValue(rowHandle, "TaxRate")) / 100))
-                'ElseIf GridView3.FocusedColumn.FieldName = "TaxTypeID" Then
-                '    If ConvertNullToZero(GridView3.GetRowCellValue(rowHandle, "TaxTypeID")) = 12 Then
-                '        Dim lstrMsg As String = InputBox("ระบุประเภทเงินได้", "ประเภทเงินได้", "").Trim
-                '        If lstrMsg <> "" Then
-
-                '        End If
-                '    End If
 
             End If
 

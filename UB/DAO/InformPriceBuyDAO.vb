@@ -38,8 +38,8 @@ Public Class InformPriceBuyDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  InformPriceBuy"
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  InformPriceBuy"
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -62,19 +62,19 @@ Public Class InformPriceBuyDAO
 
         Try
             SQL = "SELECT  ID ,Customer "
-            SQL = SQL & " FROM ("
-            SQL = SQL & " SELECT InformPrice.CustomerID AS ID "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &=  " FROM ("
+            SQL &=  " SELECT InformPrice.CustomerID AS ID "
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             'SQL = SQL & " ,InformPrice.CreateTime AS ModifiedTime"
-            SQL = SQL & " FROM InformPriceBuy as InformPrice  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON InformPrice.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " WHERE InformPrice.IsDelete =0   "
+            SQL &=  " FROM InformPriceBuy as InformPrice  "
+            SQL &=  " LEFT OUTER JOIN Customer ON InformPrice.CustomerID=Customer.CustomerID  "
+            SQL &=  " WHERE InformPrice.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND InformPrice.CustomerID=" & pID
+                SQL &=  "  AND InformPrice.CustomerID=" & pID
             End If
-            SQL = SQL & "  ) AS A "
-            SQL = SQL & " GROUP BY ID ,Customer "
-            SQL = SQL & " ORDER BY Customer"
+            SQL &=  "  ) AS A "
+            SQL &=  " GROUP BY ID ,Customer "
+            SQL &=  " ORDER BY Customer"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "InformPriceBuyDAO.GetDataTable : " & e.Message)
@@ -90,64 +90,64 @@ Public Class InformPriceBuyDAO
             'mProductDAOs = Nothing
             'mProductDAOs = New List(Of frmInformPriceBuy.InformPriceBuyDAOSub)
 
-            SQL = SQL & "SELECT  Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy"
-            SQL = SQL & " ,Inform.ProductCode,Inform.ProductName,Inform.PriceStandard,Inform.Price1,Inform.Price2 "
-            SQL = SQL & " ,Inform.Price3,Inform.PriceInform,Inform.PriceInform as PriceInformOld"
-            SQL = SQL & " ,Inform.Discount,Inform.Discount as DiscountOld,sum(Stock.Units) as Unit    "
-            SQL = SQL & " FROM ( "
+            SQL &=  "SELECT  Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy"
+            SQL &=  " ,Inform.ProductCode,Inform.ProductName,Inform.PriceStandard,Inform.Price1,Inform.Price2 "
+            SQL &=  " ,Inform.Price3,Inform.PriceInform,Inform.PriceInform as PriceInformOld"
+            SQL &=  " ,Inform.Discount,Inform.Discount as DiscountOld,sum(Stock.Units) as Unit    "
+            SQL &=  " FROM ( "
             If pAccountID > 0 Then
-                SQL = SQL & "SELECT  InformPrice.InformPriceID,Product.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
-                SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Product.Price1,Product.Price2 "
-                SQL = SQL & " ,Product.Price3,InformPrice.PriceInform,InformPrice.Discount   "
-                SQL = SQL & " FROM InformPriceBuy as InformPrice "
-                SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=InformPrice.ProductID "
-                SQL = SQL & " WHERE InformPrice.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
+                SQL &=  "SELECT  InformPrice.InformPriceID,Product.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
+                SQL &=  " ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Product.Price1,Product.Price2 "
+                SQL &=  " ,Product.Price3,InformPrice.PriceInform,InformPrice.Discount   "
+                SQL &=  " FROM InformPriceBuy as InformPrice "
+                SQL &=  " LEFT OUTER JOIN Product ON Product.ProductID=InformPrice.ProductID "
+                SQL &=  " WHERE InformPrice.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
                 If pProID > 0 Then
-                    SQL = SQL & " AND InformPrice.ProductID =" & pProID
+                    SQL &=  " AND InformPrice.ProductID =" & pProID
                 End If
                 If pProGroupID > 0 Then
-                    SQL = SQL & " AND Product.ProductGroupID =" & pProGroupID
+                    SQL &=  " AND Product.ProductGroupID =" & pProGroupID
                 End If
                 If pProCategID > 0 Then
-                    SQL = SQL & " AND Product.ProductCategoryID =" & pProCategID
+                    SQL &=  " AND Product.ProductCategoryID =" & pProCategID
                 End If
                 If pProTypeID > 0 Then
-                    SQL = SQL & " AND Product.ProductTypeID =" & pProTypeID
+                    SQL &=  " AND Product.ProductTypeID =" & pProTypeID
                 End If
                 If pProBandID > 0 Then
-                    SQL = SQL & " AND Product.ProductBrandID =" & pProBandID
+                    SQL &=  " AND Product.ProductBrandID =" & pProBandID
                 End If
-                SQL = SQL & " UNION ALL "
+                SQL &=  " UNION ALL "
             End If
-            SQL = SQL & " SELECT 0 as InformPriceID, Product.ProductID ,Product.CreateTime,Product.CreateBy"
-            SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Product.Price1,Product.Price2 "
-            SQL = SQL & " ,Product.Price3,0 AS PriceInform,0 AS Discount    "
-            SQL = SQL & " FROM Product "
-            SQL = SQL & " WHERE Product.IsDelete =0 "
+            SQL &=  " SELECT 0 as InformPriceID, Product.ProductID ,Product.CreateTime,Product.CreateBy"
+            SQL &=  " ,Product.ProductCode,Product.ProductName,Product.PriceStandard,Product.Price1,Product.Price2 "
+            SQL &=  " ,Product.Price3,0 AS PriceInform,0 AS Discount    "
+            SQL &=  " FROM Product "
+            SQL &=  " WHERE Product.IsDelete =0 "
             If pProID > 0 Then
-                SQL = SQL & " AND Product.ProductID =" & pProID
+                SQL &=  " AND Product.ProductID =" & pProID
             End If
             If pProGroupID > 0 Then
-                SQL = SQL & " AND Product.ProductGroupID =" & pProGroupID
+                SQL &=  " AND Product.ProductGroupID =" & pProGroupID
             End If
             If pProCategID > 0 Then
-                SQL = SQL & " AND Product.ProductCategoryID =" & pProCategID
+                SQL &=  " AND Product.ProductCategoryID =" & pProCategID
             End If
             If pProTypeID > 0 Then
-                SQL = SQL & " AND Product.ProductTypeID =" & pProTypeID
+                SQL &=  " AND Product.ProductTypeID =" & pProTypeID
             End If
             If pProBandID > 0 Then
-                SQL = SQL & " AND Product.ProductBrandID =" & pProBandID
+                SQL &=  " AND Product.ProductBrandID =" & pProBandID
             End If
             If pAccountID > 0 Then
-                SQL = SQL & " AND Product.ProductID NOT IN (SELECT ProductID FROM InformPriceBuy WHERE CustomerID=" & pAccountID & " )"
+                SQL &=  " AND Product.ProductID NOT IN (SELECT ProductID FROM InformPriceBuy WHERE CustomerID=" & pAccountID & " )"
             End If
-            SQL = SQL & " ) AS Inform"
-            SQL = SQL & " LEFT OUTER JOIN Product_Stock Stock ON Stock.ProductID=Inform.ProductID and IsSumStock=1"
+            SQL &=  " ) AS Inform"
+            SQL &=  " LEFT OUTER JOIN Product_Stock Stock ON Stock.ProductID=Inform.ProductID and IsSumStock=1"
 
-            SQL = SQL & " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
-            SQL = SQL & " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3,Inform.PriceInform,Inform.Discount "
-            SQL = SQL & " ORDER BY Inform.ProductCode,Inform.ProductName"
+            SQL &=  " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
+            SQL &=  " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3,Inform.PriceInform,Inform.Discount "
+            SQL &=  " ORDER BY Inform.ProductCode,Inform.ProductName"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             mProductTable = dataTable
@@ -173,8 +173,8 @@ Public Class InformPriceBuyDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM InformPriceBuy"
-            SQL = SQL & " WHERE IsInActive = 0 AND CustomerID=" & pCusID
+            SQL &=  " FROM InformPriceBuy"
+            SQL &=  " WHERE IsInActive = 0 AND CustomerID=" & pCusID
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
@@ -226,22 +226,22 @@ Public Class InformPriceBuyDAO
                             If ConvertNullToZero(rec.ProductID) > 0 Then
                                 If ConvertNullToZero(rec.InformPriceID) = 0 Then
                                     SQL = " INSERT INTO InformPriceBuy (CustomerID,ProductID,PriceInform,Discount"
-                                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete "
-                                    SQL = SQL & " )"
-                                    SQL = SQL & " VALUES ( @mIDs"
-                                    SQL = SQL & " ,  @ProductID"
-                                    SQL = SQL & " ,  @PriceInform"
-                                    SQL = SQL & " ,  @Discount"
-                                    SQL = SQL & " ,  @gUserID"
-                                    SQL = SQL & " ,  @CreateTime"
-                                    SQL = SQL & " ,  @IsInActive"
-                                    SQL = SQL & " ,  @IsDelete"
-                                    SQL = SQL & " ) "
+                                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete "
+                                    SQL &=  " )"
+                                    SQL &=  " VALUES ( @mIDs"
+                                    SQL &=  " ,  @ProductID"
+                                    SQL &=  " ,  @PriceInform"
+                                    SQL &=  " ,  @Discount"
+                                    SQL &=  " ,  @gUserID"
+                                    SQL &=  " ,  @CreateTime"
+                                    SQL &=  " ,  @IsInActive"
+                                    SQL &=  " ,  @IsDelete"
+                                    SQL &=  " ) "
                                 Else
                                     SQL = " Update InformPriceBuy "
-                                    SQL = SQL & " Set PriceInform=@PriceInform"
-                                    SQL = SQL & " , Discount=@Discount"
-                                    SQL = SQL & " where InformPriceID=@InformPriceID"
+                                    SQL &=  " Set PriceInform=@PriceInform"
+                                    SQL &=  " , Discount=@Discount"
+                                    SQL &=  " where InformPriceID=@InformPriceID"
                                 End If
 
                                 myCommand = New SqlCommand
@@ -263,7 +263,7 @@ Public Class InformPriceBuyDAO
 
                     Case DataMode.ModeDelete
                         SQL = " DELETE FROM InformPriceBuy "
-                        SQL = SQL & " WHERE CustomerID =" & ID
+                        SQL &=  " WHERE CustomerID =" & ID
                         myCommand = New SqlCommand
                         myCommand.CommandText = SQL
                         gConnection.executeInsertSqlCommand(myCommand, tr)
@@ -290,9 +290,9 @@ Public Class InformPriceBuyDAO
 
         Try
             SQL = "SELECT CustomerID  FROM InformPriceBuy"
-            SQL = SQL & " WHERE IsDelete =0 AND CustomerID=" & ConvertNullToZero(ID)
+            SQL &=  " WHERE IsDelete =0 AND CustomerID=" & ConvertNullToZero(ID)
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND CustomerID <> " & ID
+                SQL &=  " AND CustomerID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0

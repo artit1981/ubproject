@@ -38,8 +38,8 @@ Public Class frmConvertLead
         '    Dim lDataTable As DBConnection.DataTableList
 
         '    SQL = "SELECT Orders.* "
-        '    SQL = SQL & " FROM Orders  "
-        '    SQL = SQL & " WHERE Orders.OrderID=7"
+        '    SQL &=  " FROM Orders  "
+        '    SQL &=  " WHERE Orders.OrderID=7"
         '    lDataTable = New DBConnection.DataTableList
         '    lDataTable.SQL = SQL
         '    lDataTable.TableName = "Orders"
@@ -47,8 +47,8 @@ Public Class frmConvertLead
 
 
         '    SQL = "SELECT ProductList.* "
-        '    SQL = SQL & " FROM ProductList  "
-        '    SQL = SQL & " WHERE ProductList.RefTable='Orders' AND ProductList.RefID=7"
+        '    SQL &=  " FROM ProductList  "
+        '    SQL &=  " WHERE ProductList.RefTable='Orders' AND ProductList.RefID=7"
         '    lDataTable = New DBConnection.DataTableList
         '    lDataTable.SQL = SQL
         '    lDataTable.TableName = "ProductList"

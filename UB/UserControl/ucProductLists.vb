@@ -132,9 +132,13 @@ Public Class ucProductLists
                 rec.ProductListRefID = pPro.ID
                 rec.ProductListRefID2 = pPro.ProductListRefID2
                 rec.ProductListRefID3 = pPro.ProductListRefID3
+                rec.ProductListRefID4 = pPro.ProductListRefID4
+                rec.ProductListRefID5 = pPro.ProductListRefID5
                 rec.ProductListUnitRef1 = pPro.ProductListUnitRef1
                 rec.ProductListUnitRef2 = pPro.ProductListUnitRef2
                 rec.ProductListUnitRef3 = pPro.ProductListUnitRef3
+                rec.ProductListUnitRef4 = pPro.ProductListUnitRef4
+                rec.ProductListUnitRef5 = pPro.ProductListUnitRef5
                 rec.ClaimRemark = pPro.ClaimRemark
                 rec.ClaimResult = pPro.ClaimResult
                 rec.UnitID = pPro.UnitID
@@ -255,9 +259,13 @@ Public Class ucProductLists
                         lDataDAO.ProductListRefID = pProSub.ProductListRefID
                         lDataDAO.ProductListRefID2 = pProSub.ProductListRefID2
                         lDataDAO.ProductListRefID3 = pProSub.ProductListRefID3
-
+                        lDataDAO.ProductListRefID4 = pProSub.ProductListRefID4
+                        lDataDAO.ProductListRefID5 = pProSub.ProductListRefID5
+                        lDataDAO.ProductListUnitRef1 = pProSub.ProductListUnitRef1
                         lDataDAO.ProductListUnitRef2 = pProSub.ProductListUnitRef2
                         lDataDAO.ProductListUnitRef3 = pProSub.ProductListUnitRef3
+                        lDataDAO.ProductListUnitRef4 = pProSub.ProductListUnitRef4
+                        lDataDAO.ProductListUnitRef5 = pProSub.ProductListUnitRef5
                         lDataDAO.ClaimRemark = pProSub.ClaimRemark
                         lDataDAO.ClaimResult = pProSub.ClaimResult
                         If pLocationDtlID > 0 Then

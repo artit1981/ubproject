@@ -2,6 +2,7 @@
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraSplashScreen
+Imports DevExpress.XtraTreeMap
 
 Public Class frmDashboard
     Private mYearList As String
@@ -55,6 +56,7 @@ Public Class frmDashboard
             InitChartTotalSellByCatalog()
             InitChartTotalSellCOGSByYear()
             InitChartTotalSellProfitByYear()
+            InitChartBankBalance()
 
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -67,7 +69,7 @@ Public Class frmDashboard
 
 
         For i = 0 To 10
-            If i <= 2 Then
+            If i <= 1 Then
                 Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
                 ListYear.Items.Add(lCheckedListBoxItem)
             Else
@@ -304,9 +306,31 @@ Public Class frmDashboard
         End Try
     End Sub
 
-    'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged
+    Private Sub InitChartBankBalance()
+        Try
+            Dim SQL = " EXEC [dbo].[spBankBalance]"
+            SQL &= " @YearList = '" & mYearList & "'"
+            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
-    'End Sub
+
+            Dim storage As New TreeMapItemStorage()
+            BankAccTreeMap.DataAdapter = storage
+
+            Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
+
+            For Each pRow In dataTable.Rows
+                BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
+            Next
+
+            storage.Items.Add(BankGroup)
+
+            BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
+            BankAccTreeMap.LeafTextPattern = "{L} {V} M"
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 
     Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles ListYear.ItemCheck
         If ListYear.CheckedItems.Count > 0 Then

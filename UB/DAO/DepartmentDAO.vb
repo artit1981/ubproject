@@ -69,10 +69,10 @@ Public Class DepartmentDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Department "
-            SQL = SQL & " WHERE DepartmentID=" & pID
+            SQL &=  " FROM Department "
+            SQL &=  " WHERE DepartmentID=" & pID
 
-            SQL = SQL & " ORDER BY IDCode"
+            SQL &=  " ORDER BY IDCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -152,15 +152,15 @@ Public Class DepartmentDAO
 
         Try
             SQL = "SELECT DepartmentID AS ID,IDCode,NameThai"
-            SQL = SQL & " FROM Department  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Department  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND DepartmentID=" & pID
+                SQL &=  "  AND DepartmentID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode"
+            SQL &=  " ORDER BY IDCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "DepartmentDAO.GetDataTable : " & e.Message)
@@ -182,34 +182,34 @@ Public Class DepartmentDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("DepartmentID", "Department", tr)
                     SQL = " INSERT INTO Department  (DepartmentID,ManagerID,IDCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @ManagerID"
-                    SQL = SQL & " ,  @mIDCode"
-                    SQL = SQL & " ,  @mNameThai"
-                    SQL = SQL & " ,  @mNameEng"
-                    SQL = SQL & " ,  @mRemark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @ManagerID"
+                    SQL &=  " ,  @mIDCode"
+                    SQL &=  " ,  @mNameThai"
+                    SQL &=  " ,  @mNameEng"
+                    SQL &=  " ,  @mRemark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Department SET "
-                    SQL = SQL & " IDCode=@mIDCode"
-                    SQL = SQL & " ,NameThai=@mNameThai"
-                    SQL = SQL & " ,ManagerID=@ManagerID"
-                    SQL = SQL & " ,NameEng=@mNameEng"
-                    SQL = SQL & " ,Remark= @mRemark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE DepartmentID= @mIDs"
+                    SQL &=  " IDCode=@mIDCode"
+                    SQL &=  " ,NameThai=@mNameThai"
+                    SQL &=  " ,ManagerID=@ManagerID"
+                    SQL &=  " ,NameEng=@mNameEng"
+                    SQL &=  " ,Remark= @mRemark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE DepartmentID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Department SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE DepartmentID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE DepartmentID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -255,9 +255,9 @@ Public Class DepartmentDAO
 
         Try
             SQL = "SELECT DepartmentID  FROM Department"
-            SQL = SQL & " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND DepartmentID <> " & ID
+                SQL &=  " AND DepartmentID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -277,7 +277,7 @@ Public Class DepartmentDAO
 
         'Try
         '    SQL = "SELECT DepartmentID  FROM Position"
-        '    SQL = SQL & " WHERE IsDelete =0 AND DepartmentID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND DepartmentID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count = 0
         'Catch e As Exception

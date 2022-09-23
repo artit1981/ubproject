@@ -58,13 +58,13 @@ Public Class ProductCostDAO
             Select Case mCostType
                 Case CostTypes.Average
                     SQL = "SELECT *   "
-                    SQL = SQL & " FROM Product_CostAVG"
-                    SQL = SQL & " WHERE ProductID=" & pProID
-                    SQL = SQL & " AND IsDelete=0 "
+                    SQL &=  " FROM Product_CostAVG"
+                    SQL &=  " WHERE ProductID=" & pProID
+                    SQL &=  " AND IsDelete=0 "
                     'If pProListID > 0 Then
-                    '    SQL = SQL & " AND ProductListID=" & pProListID
+                    '    SQL &=  " AND ProductListID=" & pProListID
                     'End If
-                    SQL = SQL & " Order by CostID Desc"
+                    SQL &=  " Order by CostID Desc"
             End Select
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
@@ -110,8 +110,8 @@ Public Class ProductCostDAO
                             If InitailData(pProID, pCostType, pProListID, ptr) Then
                                 mCost = Math.Round((mCost + pNewCost) / 2, 2)
                                 SQL = " UPDATE Product_CostAVG SET "
-                                SQL = SQL & " IsDelete=1"
-                                SQL = SQL & " WHERE CostID=" & CostID
+                                SQL &=  " IsDelete=1"
+                                SQL &=  " WHERE CostID=" & CostID
                                 myCommand = New SqlCommand
                                 myCommand.CommandText = SQL
                                 gConnection.executeInsertSqlCommand(myCommand, tr)
@@ -120,10 +120,10 @@ Public Class ProductCostDAO
                             End If
 
                             SQL = " INSERT INTO Product_CostAVG (ProductID,Cost,ProductListID ,IsDelete )"
-                            SQL = SQL & " VALUES ( " & pProID
-                            SQL = SQL & " ," & ConvertNullToZero(mCost)
-                            SQL = SQL & " ," & pProListID
-                            SQL = SQL & " ,0) "
+                            SQL &=  " VALUES ( " & pProID
+                            SQL &=  " ," & ConvertNullToZero(mCost)
+                            SQL &=  " ," & pProListID
+                            SQL &=  " ,0) "
                             myCommand = New SqlCommand
                             myCommand.CommandText = SQL
                             gConnection.executeInsertSqlCommand(myCommand, tr)
@@ -135,8 +135,8 @@ Public Class ProductCostDAO
                     'If InitailData(pProID, pCostType, pProListID, ptr) Then
                     '    mCost = Math.Round((mCost + pNewCost) / 2, 2)
                     '    SQL = " UPDATE Product_CostAVG SET "
-                    '    SQL = SQL & " IsDelete=1"
-                    '    SQL = SQL & " WHERE CostID=" & CostID
+                    '    SQL &=  " IsDelete=1"
+                    '    SQL &=  " WHERE CostID=" & CostID
                     '    myCommand = New SqlCommand
                     '    myCommand.CommandText = SQL
                     '    gConnection.executeInsertSqlCommand(myCommand, tr)

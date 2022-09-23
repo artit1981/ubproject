@@ -44,27 +44,27 @@ Public Class InformPriceProDAO
         Dim dataTable As New DataTable()
         Try
 
-            SQL = SQL & " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName"
-            SQL = SQL & " ,MAX(Product.PriceStandard) AS PriceStandard,MAX(Cost.Cost) AS Cost,MAX(Product.Price1) AS Price1"
-            SQL = SQL & " ,MAX(Product.Price2) AS Price2 ,MAX(Product.Price3) AS Price3,MAX(Product.Price4) AS Price4"
-            SQL = SQL & " ,MAX(Product.Price5) AS Price5 ,MAX(Product.Price6) AS Price6,Product.Remark as ProductRemark "
-            SQL = SQL & " FROM Product "
-            SQL = SQL & " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
-            SQL = SQL & " WHERE Product.IsDelete =0 "
+            SQL &=  " SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName"
+            SQL &=  " ,MAX(Product.PriceStandard) AS PriceStandard,MAX(Cost.Cost) AS Cost,MAX(Product.Price1) AS Price1"
+            SQL &=  " ,MAX(Product.Price2) AS Price2 ,MAX(Product.Price3) AS Price3,MAX(Product.Price4) AS Price4"
+            SQL &=  " ,MAX(Product.Price5) AS Price5 ,MAX(Product.Price6) AS Price6,Product.Remark as ProductRemark "
+            SQL &=  " FROM Product "
+            SQL &=  " left outer join Product_CostAVG Cost on Cost.ProductID=Product.ProductID and Cost.IsDelete=0"
+            SQL &=  " WHERE Product.IsDelete =0 "
             If pProGroupID > 0 Then
-                SQL = SQL & " AND Product.ProductGroupID =" & pProGroupID
+                SQL &=  " AND Product.ProductGroupID =" & pProGroupID
             End If
             If pProCategID > 0 Then
-                SQL = SQL & " AND Product.ProductCategoryID =" & pProCategID
+                SQL &=  " AND Product.ProductCategoryID =" & pProCategID
             End If
             If pProTypeID > 0 Then
-                SQL = SQL & " AND Product.ProductTypeID =" & pProTypeID
+                SQL &=  " AND Product.ProductTypeID =" & pProTypeID
             End If
             If pProBandID > 0 Then
-                SQL = SQL & " AND Product.ProductBrandID =" & pProBandID
+                SQL &=  " AND Product.ProductBrandID =" & pProBandID
             End If
-            SQL = SQL & " GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark "
-            SQL = SQL & " ORDER BY ProductCode,ProductName"
+            SQL &=  " GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark "
+            SQL &=  " ORDER BY ProductCode,ProductName"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             mProductTable = dataTable
@@ -102,14 +102,14 @@ Public Class InformPriceProDAO
                         For Each rec As InformPriceSubDAO In mProductDAOs
                             If ConvertNullToZero(rec.ProductID) > 0 Then
                                 SQL = " Update Product"
-                                SQL = SQL & " Set PriceStandard=" & ConvertNullToZero(rec.PriceStandard)
-                                SQL = SQL & " , Price1=" & ConvertNullToZero(rec.Price1)
-                                SQL = SQL & " , Price2=" & ConvertNullToZero(rec.Price2)
-                                SQL = SQL & " , Price3=" & ConvertNullToZero(rec.Price3)
-                                SQL = SQL & " , Price4=" & ConvertNullToZero(rec.Price4)
-                                SQL = SQL & " , Price5=" & ConvertNullToZero(rec.Price5)
-                                SQL = SQL & " , Price6=" & ConvertNullToZero(rec.Price6)
-                                SQL = SQL & " where ProductID=" & ConvertNullToZero(rec.ProductID)
+                                SQL &=  " Set PriceStandard=" & ConvertNullToZero(rec.PriceStandard)
+                                SQL &=  " , Price1=" & ConvertNullToZero(rec.Price1)
+                                SQL &=  " , Price2=" & ConvertNullToZero(rec.Price2)
+                                SQL &=  " , Price3=" & ConvertNullToZero(rec.Price3)
+                                SQL &=  " , Price4=" & ConvertNullToZero(rec.Price4)
+                                SQL &=  " , Price5=" & ConvertNullToZero(rec.Price5)
+                                SQL &=  " , Price6=" & ConvertNullToZero(rec.Price6)
+                                SQL &=  " where ProductID=" & ConvertNullToZero(rec.ProductID)
                                 myCommand = New SqlCommand
                                 myCommand.CommandText = SQL
                                 gConnection.executeInsertSqlCommand(myCommand, tr)

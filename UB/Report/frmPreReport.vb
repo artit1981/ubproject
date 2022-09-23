@@ -43,7 +43,7 @@ Public Class frmPreReport
     Public Sub PrintReportOrder(ByVal pClaimLoop As Long)
         Try
             Select Case mOrderType
-                Case MasterType.SellOrders, MasterType.Invoice, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
+                Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                     , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
                     Call PrintOrder(mOrderID, pClaimLoop)
                 Case MasterType.Bill, MasterType.Receipt, MasterType.ReceiptBuy
@@ -330,7 +330,7 @@ Public Class frmPreReport
                 End If
 
                 Select Case mOrderType
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
                         lSnCodeList = ""
                         lSN = New SnDAO
                         lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
@@ -630,14 +630,14 @@ Public Class frmPreReport
 
                 'Insert blank row    
                 SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxType_Desc,TaxDate1,TaxDate2,TaxDate3,TaxDate4,TaxDate5,TaxDate6,TaxDate7,TaxDate8,TaxDate9,TaxDate10,TaxDate11,TaxDate12"
-                SQL = SQL & " ,TaxTotal1,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9,TaxTotal10,TaxTotal11,TaxTotal12 "
-                SQL = SQL & " ,TaxAmount1,TaxAmount2,TaxAmount3,TaxAmount4,TaxAmount5,TaxAmount6,TaxAmount7,TaxAmount8,TaxAmount9,TaxAmount10,TaxAmount11,TaxAmount12 )"
-                SQL = SQL & " VALUES ( " & gUserID
-                SQL = SQL & " ,1,''" 'TaxType_Desc
-                SQL = SQL & " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxDate
-                SQL = SQL & " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxTotal
-                SQL = SQL & " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxAmount
-                SQL = SQL & " ) "
+                SQL &=  " ,TaxTotal1,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7,TaxTotal8,TaxTotal9,TaxTotal10,TaxTotal11,TaxTotal12 "
+                SQL &=  " ,TaxAmount1,TaxAmount2,TaxAmount3,TaxAmount4,TaxAmount5,TaxAmount6,TaxAmount7,TaxAmount8,TaxAmount9,TaxAmount10,TaxAmount11,TaxAmount12 )"
+                SQL &=  " VALUES ( " & gUserID
+                SQL &=  " ,1,''" 'TaxType_Desc
+                SQL &=  " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxDate
+                SQL &=  " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxTotal
+                SQL &=  " ,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null" 'TaxAmount
+                SQL &=  " ) "
 
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
@@ -647,11 +647,11 @@ Public Class frmPreReport
                 lTableProList = lclsProList.GetDataTableByTaxNo(mTaxNo)
                 For Each pRow As DataRow In lTableProList.Rows
                     SQL = " Update TmpTax Set "
-                    SQL = SQL & " TaxDate" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "='" & formatSQLDate(ldtpOrderDate) & "'"
-                    SQL = SQL & " ,TaxTotal" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "=" & ConvertNullToZero(pRow.Item("TaxTotal"))
-                    SQL = SQL & " ,TaxAmount" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "=" & ConvertNullToZero(pRow.Item("TaxAmount"))
+                    SQL &=  " TaxDate" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "='" & formatSQLDate(ldtpOrderDate) & "'"
+                    SQL &=  " ,TaxTotal" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "=" & ConvertNullToZero(pRow.Item("TaxTotal"))
+                    SQL &=  " ,TaxAmount" & ConvertNullToZero(pRow.Item("TaxTypeID")) & "=" & ConvertNullToZero(pRow.Item("TaxAmount"))
                     If ConvertNullToZero(pRow.Item("TaxTypeID")) = 12 Then ' Other
-                        SQL = SQL & " ,TaxType_Desc ='" & ConvertNullToString(pRow.Item("OtherTax")) & "'"
+                        SQL &=  " ,TaxType_Desc ='" & ConvertNullToString(pRow.Item("OtherTax")) & "'"
                     End If
                     lTotal = lTotal + ConvertNullToZero(pRow.Item("TaxTotal"))
                     lTaxTotal = lTaxTotal + ConvertNullToZero(pRow.Item("TaxAmount"))
@@ -706,16 +706,16 @@ Public Class frmPreReport
                     End If
 
                     SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxDate1,TaxText3,TaxAmount1,TaxText4,TaxText5 )"
-                    SQL = SQL & " VALUES ( " & gUserID
-                    SQL = SQL & ", " & lSEQ
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("BankDocType")) & "'"   'TaxText1
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("ChequeNo")) & "'"      'TaxText2
-                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("ChequeDateReceive")) & "'"          'TaxDate1
-                    SQL = SQL & " ,'" & lstrBank & "'"                                        'TaxText3
-                    SQL = SQL & " ," & ConvertNullToZero(pRow.Item("ChequePay"))              'TaxAmount1    
-                    SQL = SQL & " ,'" & ChangeToThaibathWord(ConvertNullToZero(pRow.Item("ChequePay"))) & "'"        'TaxText4 
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("ChequeOwnerTH")) & "'"   'TaxText5
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( " & gUserID
+                    SQL &=  ", " & lSEQ
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("BankDocType")) & "'"   'TaxText1
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("ChequeNo")) & "'"      'TaxText2
+                    SQL &=  " ,'" & formatSQLDate(pRow.Item("ChequeDateReceive")) & "'"          'TaxDate1
+                    SQL &=  " ,'" & lstrBank & "'"                                        'TaxText3
+                    SQL &=  " ," & ConvertNullToZero(pRow.Item("ChequePay"))              'TaxAmount1    
+                    SQL &=  " ,'" & ChangeToThaibathWord(ConvertNullToZero(pRow.Item("ChequePay"))) & "'"        'TaxText4 
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("ChequeOwnerTH")) & "'"   'TaxText5
+                    SQL &=  " ) "
                     myCommand = New SqlCommand
                     myCommand.CommandText = SQL
                     gConnection.executeInsertSqlCommand(myCommand, Nothing)
@@ -727,16 +727,16 @@ Public Class frmPreReport
                 End If
 
                 SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText2,TaxDate1,TaxText3,TaxAmount1,TaxText4,TaxText5 )"
-                SQL = SQL & " VALUES ( " & gUserID
-                SQL = SQL & ", " & lSEQ
-                SQL = SQL & " ,'" & ConvertNullToString(mclsCheque.BankDocType) & "'"   'TaxText1
-                SQL = SQL & " ,'" & ConvertNullToString(mclsCheque.ChequeNo) & "'"      'TaxText2
-                SQL = SQL & " ,'" & formatSQLDate(mclsCheque.ChequeDateReceive) & "'"          'TaxDate1
-                SQL = SQL & " ,'" & lstrBank & "'"                                        'TaxText3
-                SQL = SQL & " ," & ConvertNullToZero(mclsCheque.ChequePay)              'TaxAmount1    
-                SQL = SQL & " ,'" & ChangeToThaibathWord(ConvertNullToZero(mclsCheque.ChequePay)) & "'"        'TaxText4 
-                SQL = SQL & " ,'" & ConvertNullToString(mclsCheque.ChequeOwnerTH) & "'"   'TaxText5
-                SQL = SQL & " ) "
+                SQL &=  " VALUES ( " & gUserID
+                SQL &=  ", " & lSEQ
+                SQL &=  " ,'" & ConvertNullToString(mclsCheque.BankDocType) & "'"   'TaxText1
+                SQL &=  " ,'" & ConvertNullToString(mclsCheque.ChequeNo) & "'"      'TaxText2
+                SQL &=  " ,'" & formatSQLDate(mclsCheque.ChequeDateReceive) & "'"          'TaxDate1
+                SQL &=  " ,'" & lstrBank & "'"                                        'TaxText3
+                SQL &=  " ," & ConvertNullToZero(mclsCheque.ChequePay)              'TaxAmount1    
+                SQL &=  " ,'" & ChangeToThaibathWord(ConvertNullToZero(mclsCheque.ChequePay)) & "'"        'TaxText4 
+                SQL &=  " ,'" & ConvertNullToString(mclsCheque.ChequeOwnerTH) & "'"   'TaxText5
+                SQL &=  " ) "
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 gConnection.executeInsertSqlCommand(myCommand, Nothing)
@@ -798,11 +798,11 @@ Public Class frmPreReport
                 If pBarcode.IsDelete = 0 Then
                     lSN = pBarcode.SerialNumberNo
                     SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText6,TaxImage  )"
-                    SQL = SQL & " VALUES (@UserID "
-                    SQL = SQL & ",@SEQ "
-                    SQL = SQL & " ,@TaxText1"
-                    SQL = SQL & " ,@TaxText6 "
-                    SQL = SQL & " ,@TaxImage) "
+                    SQL &=  " VALUES (@UserID "
+                    SQL &=  ",@SEQ "
+                    SQL &=  " ,@TaxText1"
+                    SQL &=  " ,@TaxText6 "
+                    SQL &=  " ,@TaxImage) "
                     myCommand = New SqlCommand
                     myCommand.CommandText = SQL
                     myCommand.Parameters.Add(New SqlParameter("@UserID", gUserID))
@@ -918,12 +918,12 @@ Public Class frmPreReport
     '        For Each pBarcode As SnDAO In mBarCodeList
     '            lSN = pBarcode.SerialNumberNo
     '            SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxText6  )"
-    '            SQL = SQL & " VALUES ( " & gUserID
-    '            SQL = SQL & ", " & lSEQ
-    '            SQL = SQL & "  ,'" & ConvertNullToString(lSN) & "'"
+    '            SQL &=  " VALUES ( " & gUserID
+    '            SQL &=  ", " & lSEQ
+    '            SQL &=  "  ,'" & ConvertNullToString(lSN) & "'"
     '            'SQL = SQL & "  ,'*" & ConvertNullToString(lSN) & "*'"
-    '            SQL = SQL & "  ,'" & mProName & "'"
-    '            SQL = SQL & " ) "
+    '            SQL &=  "  ,'" & mProName & "'"
+    '            SQL &=  " ) "
     '            gConnection.executeInsertQuery(SQL, Nothing)
     '            lSEQ = lSEQ + 1
     '        Next
@@ -982,17 +982,17 @@ Public Class frmPreReport
         Dim lDataTableList As New List(Of DBConnection.DataTableList)
         Try
             SQL = "SELECT TmpOrders.* "
-            SQL = SQL & " FROM TmpOrders  "
-            SQL = SQL & " WHERE UserID= " & gUserID
+            SQL &=  " FROM TmpOrders  "
+            SQL &=  " WHERE UserID= " & gUserID
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
             lDataTable.TableName = "TmpOrders"
             lDataTableList.Add(lDataTable)
 
             SQL = "SELECT TmpProductList.* "
-            SQL = SQL & " FROM TmpProductList  "
-            SQL = SQL & " WHERE UserID= " & gUserID
-            SQL = SQL & " Order by SEQ"
+            SQL &=  " FROM TmpProductList  "
+            SQL &=  " WHERE UserID= " & gUserID
+            SQL &=  " Order by SEQ"
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
             lDataTable.TableName = "TmpProductList"
@@ -1021,16 +1021,16 @@ Public Class frmPreReport
         Dim lDataTableList As New List(Of DBConnection.DataTableList)
         Try
             SQL = "SELECT TmpOrders.* "
-            SQL = SQL & " FROM TmpOrders  "
-            SQL = SQL & " WHERE UserID= " & gUserID
+            SQL &=  " FROM TmpOrders  "
+            SQL &=  " WHERE UserID= " & gUserID
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
             lDataTable.TableName = "TmpOrders"
             lDataTableList.Add(lDataTable)
 
             SQL = "SELECT TmpTax.* "
-            SQL = SQL & " FROM TmpTax  "
-            SQL = SQL & " WHERE UserID= " & gUserID
+            SQL &=  " FROM TmpTax  "
+            SQL &=  " WHERE UserID= " & gUserID
             'SQL = SQL & " Order by SEQ"
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
@@ -1057,8 +1057,8 @@ Public Class frmPreReport
         Try
 
             SQL = "SELECT TmpTax.* "
-            SQL = SQL & " FROM TmpTax  "
-            SQL = SQL & " WHERE UserID= " & gUserID
+            SQL &=  " FROM TmpTax  "
+            SQL &=  " WHERE UserID= " & gUserID
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
             lDataTable.TableName = "TmpTax"

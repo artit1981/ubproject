@@ -53,11 +53,11 @@ Module modApprove
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT * "
-            SQL = SQL & " FROM ApproveTX  "
-            SQL = SQL & " WHERE ApproveStatus='WaitApprove'  "
-            SQL = SQL & " AND OrderTable='" & pOrderTable.Trim & "'"
-            SQL = SQL & " AND OrderID=" & pOrderID
-            SQL = SQL & " AND ApproveType <> " & pApproveType
+            SQL &=  " FROM ApproveTX  "
+            SQL &=  " WHERE ApproveStatus='WaitApprove'  "
+            SQL &=  " AND OrderTable='" & pOrderTable.Trim & "'"
+            SQL &=  " AND OrderID=" & pOrderID
+            SQL &=  " AND ApproveType <> " & pApproveType
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             Return dataTable.Rows.Count > 0
         Catch e As Exception

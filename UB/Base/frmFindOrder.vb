@@ -322,12 +322,19 @@ Public Class frmFindOrder
                         End If
 
                         mProductSubList.Item(lIndex).IsMerge = 1
+
                         If mProductSubList.Item(lIndex).ProductListRefID2 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID2 = pProLIst.ID
                             mProductSubList.Item(lIndex).ProductListUnitRef2 = pProLIst.Units
-                        Else
+                        ElseIf mProductSubList.Item(lIndex).ProductListRefID3 = 0 Then
                             mProductSubList.Item(lIndex).ProductListRefID3 = pProLIst.ID
                             mProductSubList.Item(lIndex).ProductListUnitRef3 = pProLIst.Units
+                        ElseIf mProductSubList.Item(lIndex).ProductListRefID4 = 0 Then
+                            mProductSubList.Item(lIndex).ProductListRefID4 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef4 = pProLIst.Units
+                        Else
+                            mProductSubList.Item(lIndex).ProductListRefID5 = pProLIst.ID
+                            mProductSubList.Item(lIndex).ProductListUnitRef5 = pProLIst.Units
                             lCanNotMerge = True   'Ref slot full
                         End If
                         lRefOrder = New SubOrder
@@ -427,7 +434,7 @@ Public Class frmFindOrder
             Case MasterType.Shiping, MasterType.Borrow
                 cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cboOrderType.EditValue = MasterType.SellOrders
-            Case MasterType.Invoice
+            Case MasterType.Invoice, MasterType.InvoiceOnline
                 cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cList.Add(New OrderType("ยืมสินค้า (ขาย)", MasterType.Borrow))
                 cboOrderType.EditValue = MasterType.SellOrders
@@ -437,11 +444,13 @@ Public Class frmFindOrder
             Case MasterType.AddCredit, MasterType.ReduceCredit
                 cList.Add(New OrderType("ใบสั่งขาย", MasterType.SellOrders))
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
+                cList.Add(New OrderType("ใบกำกับภาษีออนไลน์", MasterType.InvoiceOnline))
                 cList.Add(New OrderType("ใบส่งของ (ขาย)", MasterType.Shiping))
                 cList.Add(New OrderType("ผลการเคลม Supplier", MasterType.ClaimResult))
                 cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.Receipt, MasterType.Bill
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
+                cList.Add(New OrderType("ใบกำกับภาษีออนไลน์", MasterType.InvoiceOnline))
                 cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
                 cList.Add(New OrderType("บันทึกเพิ่มหนี้", MasterType.AddCredit))
                 cList.Add(New OrderType("บันทึกลดหนี้", MasterType.ReduceCredit))
@@ -456,6 +465,7 @@ Public Class frmFindOrder
                 cboOrderType.EditValue = MasterType.PurchaseOrder
             Case MasterType.Claim
                 cList.Add(New OrderType("ใบกำกับภาษี (ขาย)", MasterType.Invoice))
+                cList.Add(New OrderType("ใบกำกับภาษีออนไลน์", MasterType.InvoiceOnline))
                 cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
                 cboOrderType.EditValue = MasterType.Invoice
             Case MasterType.ClaimOut

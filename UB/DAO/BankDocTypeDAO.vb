@@ -27,8 +27,8 @@ Public Class BankDocTypeDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -53,8 +53,8 @@ Public Class BankDocTypeDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE " & ColumnKey & "=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, ptr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -125,15 +125,15 @@ Public Class BankDocTypeDAO
 
         Try
             SQL = "SELECT BankDocTypeID AS ID,BankDocTypeCode as Code,NameThai "
-            SQL = SQL & " FROM BankDocType  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM BankDocType  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND BankDocTypeID=" & pID
+                SQL &=  "  AND BankDocTypeID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY BankDocTypeCode,NameThai"
+            SQL &=  " ORDER BY BankDocTypeCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -155,32 +155,32 @@ Public Class BankDocTypeDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO " & TableName & "(BankDocTypeID,BankDocTypeCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @Code"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @Code"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE " & TableName & " SET "
-                    SQL = SQL & " BankDocTypeCode=@Code"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE BankDocTypeID= @mIDs"
+                    SQL &=  " BankDocTypeCode=@Code"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE BankDocTypeID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE " & TableName & " SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE BankDocTypeID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE BankDocTypeID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -226,9 +226,9 @@ Public Class BankDocTypeDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND BankDocTypeCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND BankDocTypeCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -250,7 +250,7 @@ Public Class BankDocTypeDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

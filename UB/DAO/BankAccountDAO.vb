@@ -56,8 +56,8 @@ Public Class BankAccountDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -81,25 +81,25 @@ Public Class BankAccountDAO
 
         Try
             SQL = "SELECT BankAccountID AS ID,BankAccount.BankAccountCode,BankAccount.BankAccountNo,Bank.NameThai as BankName"
-            SQL = SQL & ",case when Customer.CompanyName='' then Customer.Title + Customer.Firstname + ' ' + Customer.LastName else Customer.CompanyName end CusName"
-            SQL = SQL & ",BankAccountCode + ' : ' + BankAccountNo AS ACCNAME "
-            SQL = SQL & " FROM BankAccount  "
-            SQL = SQL & " left outer join Bank on Bank.BankID=BankAccount.BankID"
-            SQL = SQL & " left outer join Customer on BankAccount.CustomerID=Customer.CustomerID"
-            SQL = SQL & " WHERE BankAccount.IsDelete =0   "
+            SQL &=  ",case when Customer.CompanyName='' then Customer.Title + Customer.Firstname + ' ' + Customer.LastName else Customer.CompanyName end CusName"
+            SQL &=  ",BankAccountCode + ' : ' + BankAccountNo AS ACCNAME "
+            SQL &=  " FROM BankAccount  "
+            SQL &=  " left outer join Bank on Bank.BankID=BankAccount.BankID"
+            SQL &=  " left outer join Customer on BankAccount.CustomerID=Customer.CustomerID"
+            SQL &=  " WHERE BankAccount.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND BankAccount.BankAccountID=" & pID
+                SQL &=  "  AND BankAccount.BankAccountID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND BankAccount.IsInActive = 0"
+                SQL &=  "  AND BankAccount.IsInActive = 0"
             End If
             If pCusID > 0 Then
                 'SQL = SQL & "  AND BankAccount.CustomerID=" & pCusID
             End If
             If pBankID > 0 Then
-                SQL = SQL & "  AND BankAccount.BankID=" & pBankID
+                SQL &=  "  AND BankAccount.BankID=" & pBankID
             End If
-            SQL = SQL & " ORDER BY BankAccount.BankAccountCode,BankAccount.BankAccountNo"
+            SQL &=  " ORDER BY BankAccount.BankAccountCode,BankAccount.BankAccountNo"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -114,8 +114,8 @@ Public Class BankAccountDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE " & ColumnKey & "=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, ptr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -187,21 +187,21 @@ Public Class BankAccountDAO
 
     '    Try
     '        SQL = "SELECT BankAccountID AS ID,BankAccountCode as Code,BankAccountNo "
-    '        SQL = SQL & " FROM BankAccount  "
-    '        SQL = SQL & " WHERE IsDelete =0   "
+    '        SQL &=  " FROM BankAccount  "
+    '        SQL &=  " WHERE IsDelete =0   "
     '        If pID > 0 Then
-    '            SQL = SQL & "  AND BankAccountID=" & pID
+    '            SQL &=  "  AND BankAccountID=" & pID
     '        End If
     '        If pCusID > 0 Then
-    '            SQL = SQL & "  AND CustomerID=" & pID
+    '            SQL &=  "  AND CustomerID=" & pID
     '        End If
     '        If pBankID > 0 Then
-    '            SQL = SQL & "  AND BankID=" & pID
+    '            SQL &=  "  AND BankID=" & pID
     '        End If
     '        If pOnlyActive = True Then
-    '            SQL = SQL & "  AND IsInActive = 0"
+    '            SQL &=  "  AND IsInActive = 0"
     '        End If
-    '        SQL = SQL & " ORDER BY BankAccountCode,BankAccountNo"
+    '        SQL &=  " ORDER BY BankAccountCode,BankAccountNo"
     '        dataTable = gConnection.executeSelectQuery(SQL, Nothing)
     '    Catch e As Exception
     '        Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -223,34 +223,34 @@ Public Class BankAccountDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO " & TableName & "(BankAccountID,BankID,CustomerID,BankAccountCode,BankAccountNo,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @BankID"
-                    SQL = SQL & " ,  @CustomerID"
-                    SQL = SQL & " ,  @BankAccountCode"
-                    SQL = SQL & " ,  @BankAccountNo"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @BankID"
+                    SQL &=  " ,  @CustomerID"
+                    SQL &=  " ,  @BankAccountCode"
+                    SQL &=  " ,  @BankAccountNo"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE " & TableName & " SET "
-                    SQL = SQL & " BankAccountCode=@BankAccountCode"
-                    SQL = SQL & " ,BankID=@BankID"
-                    SQL = SQL & " ,CustomerID=@CustomerID"
-                    SQL = SQL & " ,BankAccountNo=@BankAccountNo"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE BankAccountID= @mIDs"
+                    SQL &=  " BankAccountCode=@BankAccountCode"
+                    SQL &=  " ,BankID=@BankID"
+                    SQL &=  " ,CustomerID=@CustomerID"
+                    SQL &=  " ,BankAccountNo=@BankAccountNo"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE BankAccountID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE " & TableName & " SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE BankAccountID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE BankAccountID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -297,9 +297,9 @@ Public Class BankAccountDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND BankAccountCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND BankAccountCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -321,7 +321,7 @@ Public Class BankAccountDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

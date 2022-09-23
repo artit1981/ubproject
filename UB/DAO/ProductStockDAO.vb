@@ -102,26 +102,26 @@ Public Class ProductStockDAO
             Call CheckSumStock(tr, pIsSumLocation)
 
             SQL = "SELECT Product_Stock.ProductID,Product_Stock.Units,Product.CostType,Product_Stock.Cost,Product_Stock.Lot "
-            SQL = SQL & " FROM Product_Stock"
-            SQL = SQL & " LEFT OUTER JOIN Product ON Product_Stock.ProductID=Product.ProductID  "
-            SQL = SQL & " WHERE Product_Stock.ProductID =" & ProductID
+            SQL &=  " FROM Product_Stock"
+            SQL &=  " LEFT OUTER JOIN Product ON Product_Stock.ProductID=Product.ProductID  "
+            SQL &=  " WHERE Product_Stock.ProductID =" & ProductID
             If UnitID > 0 Then
-                SQL = SQL & " AND Product_Stock.UnitID =" & UnitID
+                SQL &=  " AND Product_Stock.UnitID =" & UnitID
             End If
             If pIsSumLocation = True Then
                 If SumStockLocationDTLID > 0 Then
-                    SQL = SQL & " AND Product_Stock.LocationDTLID =" & SumStockLocationDTLID
+                    SQL &=  " AND Product_Stock.LocationDTLID =" & SumStockLocationDTLID
                 End If
             Else
                 If LocationDTLID > 0 Then
-                    SQL = SQL & " AND Product_Stock.LocationDTLID =" & LocationDTLID
+                    SQL &=  " AND Product_Stock.LocationDTLID =" & LocationDTLID
                 End If
             End If
 
             If SumStockLocationDTLID = LocationDTLID Then
-                SQL = SQL & " AND Product_Stock.IsSumStock =1"
+                SQL &=  " AND Product_Stock.IsSumStock =1"
             Else
-                SQL = SQL & " AND Product_Stock.IsSumStock =0"
+                SQL &=  " AND Product_Stock.IsSumStock =0"
             End If
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
@@ -151,8 +151,8 @@ Public Class ProductStockDAO
         CheckSumStock = False
         Try
             SQL = "SELECT LocationDTLID  "
-            SQL = SQL & " FROM RunningFormat"
-            SQL = SQL & " WHERE MenuID =" & MasterType.SellOrders
+            SQL &=  " FROM RunningFormat"
+            SQL &=  " WHERE MenuID =" & MasterType.SellOrders
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
@@ -184,28 +184,28 @@ Public Class ProductStockDAO
 
         Try
             SQL = "SELECT  Product_Stock.ProductID,Product_Stock.UnitID,Product_Stock.LocationDTLID,Product_Stock.Units "
-            SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product_Unit.CodeThai AS UnitName,Product_LocationS.KeepMin "
-            SQL = SQL & " FROM Product_Stock"
-            SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=Product_Stock.ProductID "
-            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
-            SQL = SQL & " LEFT OUTER JOIN Product_LocationS ON Product_LocationS.RefID=Product_Stock.ProductID "
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " ,Product.ProductCode,Product.ProductName,Product_Unit.CodeThai AS UnitName,Product_LocationS.KeepMin "
+            SQL &=  " FROM Product_Stock"
+            SQL &=  " LEFT OUTER JOIN Product ON Product.ProductID=Product_Stock.ProductID "
+            SQL &=  " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=Product_Stock.UnitID "
+            SQL &=  " LEFT OUTER JOIN Product_LocationS ON Product_LocationS.RefID=Product_Stock.ProductID "
+            SQL &=  " WHERE 1=1 "
             If pProductID > 0 Then
-                SQL = SQL & " AND Product_Stock.ProductID =" & pProductID
+                SQL &=  " AND Product_Stock.ProductID =" & pProductID
             End If
             If pProductCategoryID > 0 Then
-                SQL = SQL & " AND Product.ProductCategoryID =" & pProductCategoryID
+                SQL &=  " AND Product.ProductCategoryID =" & pProductCategoryID
             End If
             If pProductTypeID > 0 Then
-                SQL = SQL & " AND Product.ProductTypeID =" & pProductTypeID
+                SQL &=  " AND Product.ProductTypeID =" & pProductTypeID
             End If
             If pProductGroupID > 0 Then
-                SQL = SQL & " AND Product.ProductGroupID =" & pProductGroupID
+                SQL &=  " AND Product.ProductGroupID =" & pProductGroupID
             End If
             If pProductBrandID > 0 Then
-                SQL = SQL & " AND Product.ProductBrandID =" & pProductBrandID
+                SQL &=  " AND Product.ProductBrandID =" & pProductBrandID
             End If
-            SQL = SQL & " ORDER BY Product.ProductCode,Product.ProductName "
+            SQL &=  " ORDER BY Product.ProductCode,Product.ProductName "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductStockDAO.GetDataTable : " & e.Message)
@@ -222,24 +222,24 @@ Public Class ProductStockDAO
         Try
             SQL = " EXEC	 [dbo].[spCheckStock]"
             If pProductCategoryID = 0 Then
-                SQL = SQL & " @pProductCategoryID = '0',"
+                SQL &=  " @pProductCategoryID = '0',"
             Else
-                SQL = SQL & " @pProductCategoryID = '" & pProductCategoryID & "',"
+                SQL &=  " @pProductCategoryID = '" & pProductCategoryID & "',"
             End If
             If pProductTypeID = 0 Then
-                SQL = SQL & " @pProductTypeID = '0',"
+                SQL &=  " @pProductTypeID = '0',"
             Else
-                SQL = SQL & " @pProductTypeID = '" & pProductTypeID & "',"
+                SQL &=  " @pProductTypeID = '" & pProductTypeID & "',"
             End If
             If pProductGroupID = 0 Then
-                SQL = SQL & " @pProductGroupID = '0',"
+                SQL &=  " @pProductGroupID = '0',"
             Else
-                SQL = SQL & " @pProductGroupID = '" & pProductGroupID & "',"
+                SQL &=  " @pProductGroupID = '" & pProductGroupID & "',"
             End If
             If pProductBrandID = 0 Then
-                SQL = SQL & " @pProductBrandID = '0'"
+                SQL &=  " @pProductBrandID = '0'"
             Else
-                SQL = SQL & " @pProductBrandID = '" & pProductBrandID & "'"
+                SQL &=  " @pProductBrandID = '" & pProductBrandID & "'"
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -265,18 +265,18 @@ Public Class ProductStockDAO
 
             SQL &= "  "
             If pProductCategoryID > 0 Then
-                SQL = SQL & " and b.ProductCategoryID = '" & pProductCategoryID & "',"
+                SQL &=  " and b.ProductCategoryID = '" & pProductCategoryID & "',"
             End If
             If pProductTypeID > 0 Then
-                SQL = SQL & " and b.ProductTypeID = '" & pProductTypeID & "',"
+                SQL &=  " and b.ProductTypeID = '" & pProductTypeID & "',"
             End If
             If pProductGroupID > 0 Then
-                SQL = SQL & " and b.ProductGroupID = '" & pProductGroupID & "',"
+                SQL &=  " and b.ProductGroupID = '" & pProductGroupID & "',"
             End If
             If pProductBrandID > 0 Then
-                SQL = SQL & " and b.ProductBrandID = '" & pProductBrandID & "'"
+                SQL &=  " and b.ProductBrandID = '" & pProductBrandID & "'"
             End If
-            SQL = SQL & " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
+            SQL &=  " ORDER BY b.ProductCode,b.ProductName,c.NameThai,d.CodeThai "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductStockDAO.GetDataStockByLocation2 : " & e.Message)
@@ -292,38 +292,38 @@ Public Class ProductStockDAO
 
             If IsExist_Initial(tr, pIsSumLocation) = False Then
                 SQL = " INSERT INTO Product_Stock(ProductID,UnitID,LocationDTLID,Units,CostType,Lot,Cost "
-                SQL = SQL & ",IsSumStock"
-                SQL = SQL & " )"
-                SQL = SQL & " VALUES ( "
-                SQL = SQL & "   @ProductID"
-                SQL = SQL & " ,  @UnitID"
-                SQL = SQL & " ,  @LocationDTLID"
-                SQL = SQL & " ,  @Units"
-                SQL = SQL & " ,  @CostType"
-                SQL = SQL & " ,  @Lot"
-                SQL = SQL & " ,  @Cost"
+                SQL &=  ",IsSumStock"
+                SQL &=  " )"
+                SQL &=  " VALUES ( "
+                SQL &=  "   @ProductID"
+                SQL &=  " ,  @UnitID"
+                SQL &=  " ,  @LocationDTLID"
+                SQL &=  " ,  @Units"
+                SQL &=  " ,  @CostType"
+                SQL &=  " ,  @Lot"
+                SQL &=  " ,  @Cost"
                 If SumStockLocationDTLID = LocationDTLID Then
-                    SQL = SQL & ",1"
+                    SQL &=  ",1"
                 Else
-                    SQL = SQL & ",0"
+                    SQL &=  ",0"
                 End If
-                SQL = SQL & " ) "
+                SQL &=  " ) "
             Else
                 SQL = " Update Product_Stock   "
-                SQL = SQL & " SET"
+                SQL &=  " SET"
                 If pIsSetUnit = True Then
-                    SQL = SQL & " Units=@Units"
+                    SQL &=  " Units=@Units"
                 Else
-                    SQL = SQL & " Units=Units+@Units"
+                    SQL &=  " Units=Units+@Units"
                 End If
 
-                SQL = SQL & " WHERE ProductID= @ProductID"
-                SQL = SQL & " AND UnitID= @UnitID"
-                SQL = SQL & " AND LocationDTLID=@LocationDTLID"
+                SQL &=  " WHERE ProductID= @ProductID"
+                SQL &=  " AND UnitID= @UnitID"
+                SQL &=  " AND LocationDTLID=@LocationDTLID"
                 If SumStockLocationDTLID = LocationDTLID Then
-                    SQL = SQL & " and IsSumStock=1"
+                    SQL &=  " and IsSumStock=1"
                 Else
-                    SQL = SQL & " and IsSumStock=0"
+                    SQL &=  " and IsSumStock=0"
                 End If
             End If
             myCommand = New SqlCommand
@@ -340,25 +340,25 @@ Public Class ProductStockDAO
             If Units <> 0 Then
                 'Insert Log
                 SQL = " INSERT INTO  Product_Stock_Log (ProductID,UnitID,LocationDTLID,Units,CostType,Lot,Cost "
-                SQL = SQL & ",IsSumStock,OrderID,OrderCode,OrderBy "
-                SQL = SQL & " )"
-                SQL = SQL & " VALUES ( "
-                SQL = SQL & "  " & ProductID
-                SQL = SQL & " , " & UnitID
-                SQL = SQL & " , " & IIf(pIsSumLocation = True, SumStockLocationDTLID, LocationDTLID)
-                SQL = SQL & " , " & Units
-                SQL = SQL & " , " & CostType
-                SQL = SQL & " , " & Lot
-                SQL = SQL & " , " & Cost
+                SQL &=  ",IsSumStock,OrderID,OrderCode,OrderBy "
+                SQL &=  " )"
+                SQL &=  " VALUES ( "
+                SQL &=  "  " & ProductID
+                SQL &=  " , " & UnitID
+                SQL &=  " , " & IIf(pIsSumLocation = True, SumStockLocationDTLID, LocationDTLID)
+                SQL &=  " , " & Units
+                SQL &=  " , " & CostType
+                SQL &=  " , " & Lot
+                SQL &=  " , " & Cost
                 If SumStockLocationDTLID = LocationDTLID Then
-                    SQL = SQL & ",1"
+                    SQL &=  ",1"
                 Else
-                    SQL = SQL & ",0"
+                    SQL &=  ",0"
                 End If
-                SQL = SQL & " , " & pOrderID
-                SQL = SQL & " , '" & pOrderCode & "'"
-                SQL = SQL & " , '" & gUserName & "'"
-                SQL = SQL & " ) "
+                SQL &=  " , " & pOrderID
+                SQL &=  " , '" & pOrderCode & "'"
+                SQL &=  " , '" & gUserName & "'"
+                SQL &=  " ) "
                 gConnection.executeInsertQuery(SQL, tr)
             End If
 

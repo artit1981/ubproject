@@ -74,12 +74,12 @@ Public Class frmOrderHis
             lstrOrderType = InitialOrderType()
 
             SQL = " select Orders.OrderID "
-            SQL = SQL & " from Orders"
-            SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-            SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
+            SQL &=  " from Orders"
+            SQL &=  " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+            SQL &=  "  AND Orders.TableID in (" & lstrOrderType & ")"
             If chkShowDelete.Checked = False Then
-                SQL = SQL & "  AND Orders.IsDelete = 0"
-                SQL = SQL & "  AND Orders.IsCancel = 0"
+                SQL &=  "  AND Orders.IsDelete = 0"
+                SQL &=  "  AND Orders.IsCancel = 0"
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
@@ -92,40 +92,40 @@ Public Class frmOrderHis
             End If
             If lToCont = True Then
                 SQL = " select Orders.OrderID,Orders.OrderDate,Orders.OrderCode ,Menu.MenuDisplay "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product.Remark"
-                SQL = SQL & " ,ProductList.AdjustUnit AS Units,ProductList.Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName ,Orders.IsDelete,Orders.OrderStatus"
-                SQL = SQL & " from Orders"
-                SQL = SQL & " inner join ProductList on Orders.OrderID=ProductList.RefID"
-                SQL = SQL & " inner join Product on Product.ProductID= ProductList.ProductID"
-                SQL = SQL & " left outer join Menu on Orders.TableID=Menu.MenuID"
-                SQL = SQL & " left outer join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
-                SQL = SQL & " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
-                SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-                SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
-                SQL = SQL & "  AND ProductList.IsShow = 1"
+                SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &=  " ,Product.ProductCode,Product.ProductName,Product.Remark"
+                SQL &=  " ,ProductList.AdjustUnit AS Units,ProductList.Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName ,Orders.IsDelete,Orders.OrderStatus"
+                SQL &=  " from Orders"
+                SQL &=  " inner join ProductList on Orders.OrderID=ProductList.RefID"
+                SQL &=  " inner join Product on Product.ProductID= ProductList.ProductID"
+                SQL &=  " left outer join Menu on Orders.TableID=Menu.MenuID"
+                SQL &=  " left outer join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
+                SQL &=  " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL &=  " left outer join Product_Unit on Product_Unit.UnitID=ProductList.UnitID   "
+                SQL &=  " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+                SQL &=  "  AND Orders.TableID in (" & lstrOrderType & ")"
+                SQL &=  "  AND ProductList.IsShow = 1"
                 If chkShowDelete.Checked = False Then
-                    SQL = SQL & "  AND Orders.IsDelete = 0"
-                    SQL = SQL & "  AND Orders.IsCancel = 0"
-                    SQL = SQL & "  AND ProductList.IsDelete = 0"
+                    SQL &=  "  AND Orders.IsDelete = 0"
+                    SQL &=  "  AND Orders.IsCancel = 0"
+                    SQL &=  "  AND ProductList.IsDelete = 0"
                 End If
 
                 'If chkUpdateStock.Checked = True Then
-                '    SQL = SQL & "   union all "
-                '    SQL = SQL & "  select 0 as OrderID,Product_Stock_Log.LogTime AS OrderDate,'' AS OrderCode ,'UpdateStock' AS MenuDisplay  "
-                '    SQL = SQL & "  ,OrderBy AS Customer  ,Product.ProductCode,Product.ProductName,Product.Remark "
-                '    SQL = SQL & "  ,Product_Stock_Log.Units AS Units,0 AS Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
-                '    SQL = SQL & "  ,0 AS IsDelete,'' AS OrderStatus "
-                '    SQL = SQL & "  from Product_Stock_Log"
-                '    SQL = SQL & "  inner join Product on Product.ProductID= Product_Stock_Log.ProductID "
-                '    SQL = SQL & "  inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID "
-                '    SQL = SQL & "  left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID    "
-                '    SQL = SQL & "  WHERE Product_Stock_Log.LogTime between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-                '    SQL = SQL & "  and Product_Stock_Log.OrderCode='UpdateStock'"
-                '    SQL = SQL & "  ORDER BY  OrderDate "
+                '    SQL &=  "   union all "
+                '    SQL &=  "  select 0 as OrderID,Product_Stock_Log.LogTime AS OrderDate,'' AS OrderCode ,'UpdateStock' AS MenuDisplay  "
+                '    SQL &=  "  ,OrderBy AS Customer  ,Product.ProductCode,Product.ProductName,Product.Remark "
+                '    SQL &=  "  ,Product_Stock_Log.Units AS Units,0 AS Price,Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
+                '    SQL &=  "  ,0 AS IsDelete,'' AS OrderStatus "
+                '    SQL &=  "  from Product_Stock_Log"
+                '    SQL &=  "  inner join Product on Product.ProductID= Product_Stock_Log.ProductID "
+                '    SQL &=  "  inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID "
+                '    SQL &=  "  left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID    "
+                '    SQL &=  "  WHERE Product_Stock_Log.LogTime between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+                '    SQL &=  "  and Product_Stock_Log.OrderCode='UpdateStock'"
+                '    SQL &=  "  ORDER BY  OrderDate "
                 'Else
-                SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
+                SQL &=  " ORDER BY  Orders.OrderID,Product.ProductName"
                 'End If
 
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -182,6 +182,9 @@ Public Class frmOrderHis
             End If
             If CheckInvoice.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.Invoice
+            End If
+            If CheckInvoiceOnline.Checked = True Then
+                lstrOrderType = lstrOrderType & "," & MasterType.InvoiceOnline
             End If
             If CheckInvoiceBuy.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.InvoiceBuy

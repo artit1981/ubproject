@@ -165,14 +165,7 @@ Public Class frmMain
             lblEmp.Caption = gEmpName
             lblCompany.Caption = gCompanyName
 
-            Dim mCtlForm = New frmDashboard
-            With mCtlForm
-                .Text = "Dashboard"
-                .MdiParent = Me
-                .Show()
 
-
-            End With
             'ShowNotifi(True)
             'ShowOverdue(True)
         Catch ex As Exception
@@ -984,5 +977,47 @@ Public Class frmMain
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
+    End Sub
+
+    Private Sub CashItemBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles CashItemBar.ItemClick
+        ShowMaster(MasterType.CashItem)
+        InsertActivity(DataMode.ModeOpen, MasterType.CashItem, "", Nothing)
+    End Sub
+
+    Private Sub CashRecordBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles CashRecordBar.ItemClick
+        Try
+
+            Dim lFormEdit As New frmCashRecord
+            With lFormEdit
+                .MdiParent = Me
+                .Show()
+                InsertActivity(DataMode.ModeOpen, MasterType.CashRecord, "", Nothing)
+            End With
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DashboardBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles DashboardBar.ItemClick
+        Try
+
+            Dim mCtlForm = New frmDashboard
+            With mCtlForm
+                .Text = "Dashboard"
+                .MdiParent = Me
+                .Show()
+            End With
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub InvoiceOnlineBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles InvoiceOnlineBar.ItemClick
+        Dim lcls As New OrderControl
+        ShowDataOnControl(lcls, MasterType.InvoiceOnline)
+        InsertActivity(DataMode.ModeOpen, MasterType.InvoiceOnline, "", Nothing)
     End Sub
 End Class

@@ -212,13 +212,13 @@ Public Class CampaignDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Campaign "
-            SQL = SQL & " WHERE 1=1"
+            SQL &=  " FROM Campaign "
+            SQL &=  " WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & " and CampaignID=" & pID
+                SQL &=  " and CampaignID=" & pID
             End If
             If pName.Trim <> "" Then
-                SQL = SQL & " and Subject='" & pName.Trim & "'"
+                SQL &=  " and Subject='" & pName.Trim & "'"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
@@ -313,20 +313,20 @@ Public Class CampaignDAO
 
         Try
             SQL = "SELECT CampaignID,Subject  "
-            SQL = SQL & "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
-            SQL = SQL & " ,case when EvaluateBy=1 then 'จำนวนลูกค้า'  when EvaluateBy=2 then 'ยอดขาย' else 'กำไร' end  EvaluateBy"
-            SQL = SQL & " ,Budget,EvaluateTarget,IsDelete"
-            SQL = SQL & " FROM Campaign  "
-            SQL = SQL & " WHERE 0=0   "
+            SQL &=  "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
+            SQL &=  " ,case when EvaluateBy=1 then 'จำนวนลูกค้า'  when EvaluateBy=2 then 'ยอดขาย' else 'กำไร' end  EvaluateBy"
+            SQL &=  " ,Budget,EvaluateTarget,IsDelete"
+            SQL &=  " FROM Campaign  "
+            SQL &=  " WHERE 0=0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Campaign.CampaignID=" & pID
+                SQL &=  "  AND Campaign.CampaignID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & " AND Campaign.IsDelete =0   "
-                SQL = SQL & " AND Campaign.IsInActive = 0"
+                SQL &=  " AND Campaign.IsDelete =0   "
+                SQL &=  " AND Campaign.IsInActive = 0"
             End If
 
-            SQL = SQL & " ORDER BY Campaign.CampaignID"
+            SQL &=  " ORDER BY Campaign.CampaignID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CampaignDAO.GetDataTable : " & e.Message)
@@ -341,22 +341,22 @@ Public Class CampaignDAO
 
         Try
             SQL = "SELECT Campaign.CampaignID,Campaign.Subject  "
-            SQL = SQL & "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
-            SQL = SQL & " FROM Campaign  "
-            SQL = SQL & " WHERE Campaign.IsDelete =0   "
+            SQL &=  "  , StartDate, ExpireDate,Case when CampaignStatus=3 then 'Fail' when CampaignStatus=2 then 'Success' else 'Open' end CampaignStatus "
+            SQL &=  " FROM Campaign  "
+            SQL &=  " WHERE Campaign.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Campaign.CampaignID=" & pID
+                SQL &=  "  AND Campaign.CampaignID=" & pID
             End If
             If pOnlyActive = True And pLoadAll = False Then
-                SQL = SQL & "  AND Campaign.IsInActive = 0"
+                SQL &=  "  AND Campaign.IsInActive = 0"
             End If
             If pLoadAll = False Then
-                SQL = SQL & "  AND Campaign.StartDate <= '" & formatSQLDate(pStartDate) & "'"
-                SQL = SQL & "  AND Campaign.ExpireDate >= '" & formatSQLDate(pExpireDate) & "'"
+                SQL &=  "  AND Campaign.StartDate <= '" & formatSQLDate(pStartDate) & "'"
+                SQL &=  "  AND Campaign.ExpireDate >= '" & formatSQLDate(pExpireDate) & "'"
             End If
 
 
-            SQL = SQL & " ORDER BY Campaign.CampaignID"
+            SQL &=  " ORDER BY Campaign.CampaignID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CampaignDAO.GetDataTableCombo : " & e.Message)
@@ -380,58 +380,58 @@ Public Class CampaignDAO
                     EmpID = gEmpID
                     ID = GenNewID("CampaignID", "Campaign", tr)
                     SQL = " INSERT INTO Campaign (CampaignID,Subject,Budget,MinimumAmount,StartDate ,ExpireDate "
-                    SQL = SQL & " ,CampaignType ,EvaluateBy,EvaluateTarget , CampaignStatus,StatusDesc , Remark "
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete,MinimumUnit,CpTypeCont1,CpTypeCont2,CpTypeCont3_1,CpTypeCont3_2 "
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @IDs"
-                    SQL = SQL & " ,  @Subject"
-                    SQL = SQL & " ,  @Budget"
-                    SQL = SQL & " ,  @MinimumAmount"
-                    SQL = SQL & " ,  @StartDate"
-                    SQL = SQL & " ,  @ExpireDate"
-                    SQL = SQL & " ,  @CampaignType"
-                    SQL = SQL & " ,  @EvaluateBy "
-                    SQL = SQL & " ,  @EvaluateTarget "
-                    SQL = SQL & " ,  @CampaignStatus "
-                    SQL = SQL & " ,  @StatusDesc "
-                    SQL = SQL & " ,  @Remark "
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @MinimumUnit"
-                    SQL = SQL & " ,  @CpTypeCont1"
-                    SQL = SQL & " ,  @CpTypeCont2"
-                    SQL = SQL & " ,  @CpTypeCont3_1"
-                    SQL = SQL & " ,  @CpTypeCont3_2"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CampaignType ,EvaluateBy,EvaluateTarget , CampaignStatus,StatusDesc , Remark "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,MinimumUnit,CpTypeCont1,CpTypeCont2,CpTypeCont3_1,CpTypeCont3_2 "
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @IDs"
+                    SQL &=  " ,  @Subject"
+                    SQL &=  " ,  @Budget"
+                    SQL &=  " ,  @MinimumAmount"
+                    SQL &=  " ,  @StartDate"
+                    SQL &=  " ,  @ExpireDate"
+                    SQL &=  " ,  @CampaignType"
+                    SQL &=  " ,  @EvaluateBy "
+                    SQL &=  " ,  @EvaluateTarget "
+                    SQL &=  " ,  @CampaignStatus "
+                    SQL &=  " ,  @StatusDesc "
+                    SQL &=  " ,  @Remark "
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @MinimumUnit"
+                    SQL &=  " ,  @CpTypeCont1"
+                    SQL &=  " ,  @CpTypeCont2"
+                    SQL &=  " ,  @CpTypeCont3_1"
+                    SQL &=  " ,  @CpTypeCont3_2"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Campaign SET "
-                    SQL = SQL & " Subject=@Subject"
-                    SQL = SQL & " , Budget=@Budget "
-                    SQL = SQL & " , MinimumAmount=@MinimumAmount "
-                    SQL = SQL & " , MinimumUnit=@MinimumUnit "
-                    SQL = SQL & " , CpTypeCont1=@CpTypeCont1 "
-                    SQL = SQL & " , CpTypeCont2=@CpTypeCont2 "
-                    SQL = SQL & " , CpTypeCont3_1=@CpTypeCont3_1 "
-                    SQL = SQL & " , CpTypeCont3_2=@CpTypeCont3_2 "
-                    SQL = SQL & " , StartDate=@StartDate "
-                    SQL = SQL & " , ExpireDate=@ExpireDate "
-                    SQL = SQL & " , CampaignType=@CampaignType "
-                    SQL = SQL & " , EvaluateBy=@EvaluateBy "
-                    SQL = SQL & " , EvaluateTarget=@EvaluateTarget "
-                    SQL = SQL & " , CampaignStatus=@CampaignStatus "
-                    SQL = SQL & " , StatusDesc=@StatusDesc "
-                    SQL = SQL & " , Remark=@Remark "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE CampaignID= @IDs"
+                    SQL &=  " Subject=@Subject"
+                    SQL &=  " , Budget=@Budget "
+                    SQL &=  " , MinimumAmount=@MinimumAmount "
+                    SQL &=  " , MinimumUnit=@MinimumUnit "
+                    SQL &=  " , CpTypeCont1=@CpTypeCont1 "
+                    SQL &=  " , CpTypeCont2=@CpTypeCont2 "
+                    SQL &=  " , CpTypeCont3_1=@CpTypeCont3_1 "
+                    SQL &=  " , CpTypeCont3_2=@CpTypeCont3_2 "
+                    SQL &=  " , StartDate=@StartDate "
+                    SQL &=  " , ExpireDate=@ExpireDate "
+                    SQL &=  " , CampaignType=@CampaignType "
+                    SQL &=  " , EvaluateBy=@EvaluateBy "
+                    SQL &=  " , EvaluateTarget=@EvaluateTarget "
+                    SQL &=  " , CampaignStatus=@CampaignStatus "
+                    SQL &=  " , StatusDesc=@StatusDesc "
+                    SQL &=  " , Remark=@Remark "
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE CampaignID= @IDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Campaign SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE CampaignID= @IDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE CampaignID= @IDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -496,9 +496,9 @@ Public Class CampaignDAO
 
         Try
             SQL = "SELECT CampaignID  FROM Campaign"
-            SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
+            SQL &=  " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND CampaignID <> " & ID
+                SQL &=  " AND CampaignID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -517,8 +517,8 @@ Public Class CampaignDAO
 
         Try
             SQL = "SELECT CampaignID  FROM Orders"
-            SQL = SQL & " WHERE IsDelete =0  "
-            SQL = SQL & " and CampaignID=" & ID
+            SQL &=  " WHERE IsDelete =0  "
+            SQL &=  " and CampaignID=" & ID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 Return True

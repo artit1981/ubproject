@@ -51,8 +51,8 @@ Public Class PositionDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -77,10 +77,10 @@ Public Class PositionDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE " & ColumnKey & "=" & pID
 
-            SQL = SQL & " ORDER BY IDCode"
+            SQL &=  " ORDER BY IDCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -158,15 +158,15 @@ Public Class PositionDAO
 
         Try
             SQL = "SELECT PositionID AS ID,IDCode,NameThai"
-            SQL = SQL & " FROM Position  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Position  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND PositionID=" & pID
+                SQL &=  "  AND PositionID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode"
+            SQL &=  " ORDER BY IDCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -181,15 +181,15 @@ Public Class PositionDAO
 
         Try
             SQL = "SELECT PositionID AS ID,IDCode,NameThai"
-            SQL = SQL & " FROM Position  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Position  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND PositionID=" & pID
+                SQL &=  "  AND PositionID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode"
+            SQL &=  " ORDER BY IDCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTableForCombo : " & e.Message)
@@ -211,34 +211,34 @@ Public Class PositionDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO Position  (PositionID,DepartmentID,IDCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @mDepartmentID"
-                    SQL = SQL & " ,  @mIDCode"
-                    SQL = SQL & " ,  @mNameThai"
-                    SQL = SQL & " ,  @mNameEng"
-                    SQL = SQL & " ,  @mRemark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @mDepartmentID"
+                    SQL &=  " ,  @mIDCode"
+                    SQL &=  " ,  @mNameThai"
+                    SQL &=  " ,  @mNameEng"
+                    SQL &=  " ,  @mRemark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Position SET "
-                    SQL = SQL & " IDCode=@mIDCode"
-                    SQL = SQL & " ,DepartmentID=@mDepartmentID"
-                    SQL = SQL & " ,NameThai=@mNameThai"
-                    SQL = SQL & " ,NameEng=@mNameEng"
-                    SQL = SQL & " ,Remark= @mRemark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE PositionID= @mIDs"
+                    SQL &=  " IDCode=@mIDCode"
+                    SQL &=  " ,DepartmentID=@mDepartmentID"
+                    SQL &=  " ,NameThai=@mNameThai"
+                    SQL &=  " ,NameEng=@mNameEng"
+                    SQL &=  " ,Remark= @mRemark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE PositionID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Position SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE PositionID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE PositionID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -284,9 +284,9 @@ Public Class PositionDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -308,7 +308,7 @@ Public Class PositionDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

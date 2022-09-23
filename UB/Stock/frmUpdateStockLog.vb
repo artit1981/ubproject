@@ -39,20 +39,20 @@ Public Class frmUpdateStockLog
         Try
             If Not mProductListDAO Is Nothing Then
                 SQL = " select Product_LocationDTL.IDCode as Location,Product_Unit.CodeThai AS UnitName "
-                SQL = SQL & "  ,Product_Stock_Log.Units,Product_Stock_Log.OrderBy,Product_Stock_Log.LogTime  "
-                SQL = SQL & " from Product_Stock_Log"
-                SQL = SQL & " inner join Product on Product.ProductID= Product_Stock_Log.ProductID"
-                SQL = SQL & " inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID"
-                SQL = SQL & " left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID   "
-                SQL = SQL & " WHERE Product_Stock_Log.OrderCode='UpdateStock'"
-                SQL = SQL & " AND Product_Stock_Log.ProductID=" & mProductListDAO.ProductID
+                SQL &=  "  ,Product_Stock_Log.Units,Product_Stock_Log.OrderBy,Product_Stock_Log.LogTime  "
+                SQL &=  " from Product_Stock_Log"
+                SQL &=  " inner join Product on Product.ProductID= Product_Stock_Log.ProductID"
+                SQL &=  " inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_Stock_Log.LocationDTLID"
+                SQL &=  " left outer join Product_Unit on Product_Unit.UnitID=Product_Stock_Log.UnitID   "
+                SQL &=  " WHERE Product_Stock_Log.OrderCode='UpdateStock'"
+                SQL &=  " AND Product_Stock_Log.ProductID=" & mProductListDAO.ProductID
                 If mProductListDAO.UnitID > 0 Then
-                    SQL = SQL & " AND Product_Stock_Log.UnitID=" & mProductListDAO.UnitID
+                    SQL &=  " AND Product_Stock_Log.UnitID=" & mProductListDAO.UnitID
                 End If
                 If mProductListDAO.LocationDTLID > 0 Then
-                    SQL = SQL & " AND Product_Stock_Log.LocationDTLID=" & mProductListDAO.LocationDTLID
+                    SQL &=  " AND Product_Stock_Log.LocationDTLID=" & mProductListDAO.LocationDTLID
                 End If
-                SQL = SQL & " Order By Product_Stock_Log.LogTime Desc "
+                SQL &=  " Order By Product_Stock_Log.LogTime Desc "
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
                 If dataTable.Rows.Count > 0 Then

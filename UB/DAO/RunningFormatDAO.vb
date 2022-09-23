@@ -173,35 +173,35 @@ Public Class RunningFormatDAO
 
             'Get Last no
             Select Case lTableID
-                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.Bill, MasterType.AddCredit _
+                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Bill, MasterType.AddCredit _
                     , MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.Quotation, MasterType.PurchaseOrder _
                     , MasterType.Asset, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut _
                     , MasterType.ReceiptBuy, MasterType.ShipingBuy, MasterType.Borrow, MasterType.ClaimOut, MasterType.StockIn, MasterType.UpdateStock _
                     , MasterType.ReceiptCut, MasterType.Expose, MasterType.CancelPO, MasterType.Quotation2, MasterType.ClaimResult, MasterType.ClaimReturn
                     SQL = " select top 2 right(OrderCode ," & RunningCount & ") AS ID"
-                    SQL = SQL & " FROM Orders"
-                    SQL = SQL & " WHERE IsDelete=0 and TableID=" & pTableID
-                    SQL = SQL & " order by year(OrderDate) desc, right(OrderCode ," & RunningCount & ") Desc"
+                    SQL &=  " FROM Orders"
+                    SQL &=  " WHERE IsDelete=0 and TableID=" & pTableID
+                    SQL &=  " order by year(OrderDate) desc, right(OrderCode ," & RunningCount & ") Desc"
                 Case MasterType.Employee
                     SQL = " select  right(EmpCode ," & RunningCount & ") AS ID"
-                    SQL = SQL & " FROM Employee"
-                    SQL = SQL & " WHERE  IsDelete=0 "
-                    SQL = SQL & " order by right(EmpCode ," & RunningCount & ") Desc"
+                    SQL &=  " FROM Employee"
+                    SQL &=  " WHERE  IsDelete=0 "
+                    SQL &=  " order by right(EmpCode ," & RunningCount & ") Desc"
                 Case MasterType.Product
                     SQL = " select  right(ProductCode ," & RunningCount & ") AS ID"
-                    SQL = SQL & " FROM Product"
-                    SQL = SQL & " WHERE  IsDelete=0 "
-                    SQL = SQL & " order by right(ProductCode ," & RunningCount & ") Desc"
+                    SQL &=  " FROM Product"
+                    SQL &=  " WHERE  IsDelete=0 "
+                    SQL &=  " order by right(ProductCode ," & RunningCount & ") Desc"
                 Case MasterType.Lead, MasterType.Accounts, MasterType.Contacts, MasterType.Agency
                     SQL = " select  right(CustomerCode ," & RunningCount & ") AS ID"
-                    SQL = SQL & " FROM Customer"
-                    SQL = SQL & " WHERE  IsDelete=0 and CustomerType='" & lTableID.ToString & "'"
-                    SQL = SQL & " order by right(CustomerCode ," & RunningCount & ") Desc"
+                    SQL &=  " FROM Customer"
+                    SQL &=  " WHERE  IsDelete=0 and CustomerType='" & lTableID.ToString & "'"
+                    SQL &=  " order by right(CustomerCode ," & RunningCount & ") Desc"
                 Case MasterType.TaxNumber
                     SQL = " select top 2 right(TaxNumber ," & RunningCount & ") AS ID"
-                    SQL = SQL & " FROM Orders"
-                    SQL = SQL & " WHERE IsDelete=0 and TaxNumber <> ''"
-                    SQL = SQL & " order by OrderDate desc, right(TaxNumber ," & RunningCount & ") Desc"
+                    SQL &=  " FROM Orders"
+                    SQL &=  " WHERE IsDelete=0 and TaxNumber <> ''"
+                    SQL &=  " order by OrderDate desc, right(TaxNumber ," & RunningCount & ") Desc"
             End Select
 
             If IsReset = True Then
@@ -235,8 +235,8 @@ Public Class RunningFormatDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -260,8 +260,8 @@ Public Class RunningFormatDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM " & TableName
-            SQL = SQL & " WHERE MenuID=" & pID
+            SQL &=  " FROM " & TableName
+            SQL &=  " WHERE MenuID=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count = 0 Then
 
@@ -313,8 +313,8 @@ Public Class RunningFormatDAO
 
         Try
             SQL = "SELECT MenuID AS ID, System ,MenuDisplay"
-            SQL = SQL & " FROM RunningFormat  "
-            SQL = SQL & " ORDER BY  System ,MenuDisplay"
+            SQL &=  " FROM RunningFormat  "
+            SQL &=  " ORDER BY  System ,MenuDisplay"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "RunningFormatDAO.GetDataTable : " & e.Message)
@@ -334,16 +334,16 @@ Public Class RunningFormatDAO
 
                 Case DataMode.ModeEdit
                     SQL = " UPDATE RunningFormat SET "
-                    SQL = SQL & " FormatFront=@FormatFront"
-                    SQL = SQL & " ,FormatDate=@FormatDate"
-                    SQL = SQL & " ,FormatMidle=@FormatMidle"
-                    SQL = SQL & " ,RunningCount=@RunningCount"
-                    SQL = SQL & " ,FormatYear= @FormatYear"
-                    SQL = SQL & " ,IsReset= " & IIf(IsReset = True, 1, 0)
-                    SQL = SQL & " ,LocationDTLID= @LocationDTLID"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE MenuID= @mIDs"
+                    SQL &=  " FormatFront=@FormatFront"
+                    SQL &=  " ,FormatDate=@FormatDate"
+                    SQL &=  " ,FormatMidle=@FormatMidle"
+                    SQL &=  " ,RunningCount=@RunningCount"
+                    SQL &=  " ,FormatYear= @FormatYear"
+                    SQL &=  " ,IsReset= " & IIf(IsReset = True, 1, 0)
+                    SQL &=  " ,LocationDTLID= @LocationDTLID"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE MenuID= @mIDs"
                 Case DataMode.ModeDelete
             End Select
             myCommand = New SqlCommand
@@ -386,8 +386,8 @@ Public Class RunningFormatDAO
             If IsReset = True And ID > 0 Then
 
                 SQL = " UPDATE RunningFormat SET "
-                SQL = SQL & " IsReset=0"
-                SQL = SQL & " WHERE MenuID= " & ID
+                SQL &=  " IsReset=0"
+                SQL &=  " WHERE MenuID= " & ID
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 gConnection.executeInsertSqlCommand(myCommand, tr)

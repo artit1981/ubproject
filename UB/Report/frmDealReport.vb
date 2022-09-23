@@ -62,48 +62,48 @@ Public Class frmDealReport
             Dim i As Integer = 1
             Dim SQL As String
             SQL = "SELECT TMP.OrderID,TMP.BillCode ,TMP.BillDate,TMP.OrderCode,TMP.InvoiceSuplierID "
-            SQL = SQL & " ,TMP.Total ,TMP.VatAmount,TMP.GrandTotal,TMP.OrderDate,TMP.DiscountAmount  "
-            SQL = SQL & " ,TMP.Customer,TableID "
-            SQL = SQL & " FROM ("
+            SQL &=  " ,TMP.Total ,TMP.VatAmount,TMP.GrandTotal,TMP.OrderDate,TMP.DiscountAmount  "
+            SQL &=  " ,TMP.Customer,TableID "
+            SQL &=  " FROM ("
             If OrderType2.EditValue = "S" Then
-                SQL = SQL & "SELECT Orders.OrderID,Orders.OrderCode AS BillCode ,Orders.OrderDate AS BillDate,OD.OrderCode,OD.InvoiceSuplierID "
-                SQL = SQL & " ,OD.Total ,OD.VatAmount,OD.GrandTotal,OD.OrderDate,OD.DiscountAmount,OD.TableID  "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " FROM Orders  "
-                SQL = SQL & " INNER JOIN OrdersDetail ON Orders.OrderID=OrdersDetail.BillID AND OrdersDetail.IsDelete=0 "
-                SQL = SQL & " INNER JOIN Orders OD ON OD.OrderID=OrdersDetail.OrderID  "
-                SQL = SQL & " INNER JOIN Customer ON OD.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " WHERE Orders.IsDelete =0   "
-                SQL = SQL & " and Year(Orders.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, Year(OrderDate.EditValue) - 543, Year(OrderDate.EditValue))
-                SQL = SQL & " and Year(OD.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, (Year(OrderDate.EditValue) - 543) - 1, (Year(OrderDate.EditValue) - 1))
-                SQL = SQL & " and Orders.IsInActive = 0 and OD.VatAmount > 0"
+                SQL &=  "SELECT Orders.OrderID,Orders.OrderCode AS BillCode ,Orders.OrderDate AS BillDate,OD.OrderCode,OD.InvoiceSuplierID "
+                SQL &=  " ,OD.Total ,OD.VatAmount,OD.GrandTotal,OD.OrderDate,OD.DiscountAmount,OD.TableID  "
+                SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &=  " FROM Orders  "
+                SQL &=  " INNER JOIN OrdersDetail ON Orders.OrderID=OrdersDetail.BillID AND OrdersDetail.IsDelete=0 "
+                SQL &=  " INNER JOIN Orders OD ON OD.OrderID=OrdersDetail.OrderID  "
+                SQL &=  " INNER JOIN Customer ON OD.CustomerID=Customer.CustomerID  "
+                SQL &=  " WHERE Orders.IsDelete =0   "
+                SQL &=  " and Year(Orders.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, Year(OrderDate.EditValue) - 543, Year(OrderDate.EditValue))
+                SQL &=  " and Year(OD.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, (Year(OrderDate.EditValue) - 543) - 1, (Year(OrderDate.EditValue) - 1))
+                SQL &=  " and Orders.IsInActive = 0 and OD.VatAmount > 0"
                 If OrderType.EditValue = "B" Then 'buy
-                    SQL = SQL & " and Orders.TableID in (" & MasterType.ReceiptBuy & ")"
+                    SQL &=  " and Orders.TableID in (" & MasterType.ReceiptBuy & ")"
                 Else
-                    SQL = SQL & " and Orders.TableID in (" & MasterType.Receipt & ")"
+                    SQL &=  " and Orders.TableID in (" & MasterType.Receipt & ")"
                 End If
             Else
-                SQL = SQL & "SELECT Orders.OrderID,Orders.OrderCode AS BillCode ,Orders.OrderDate AS BillDate,Orders.OrderCode,Orders.InvoiceSuplierID "
-                SQL = SQL & " ,Orders.Total ,Orders.VatAmount,Orders.GrandTotal,Orders.OrderDate ,Orders.DiscountAmount,Orders.TableID "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " FROM Orders  "
-                SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " WHERE Orders.IsDelete =0   "
-                SQL = SQL & " and Year(Orders.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, (Year(OrderDate.EditValue) - 543) - 1, (Year(OrderDate.EditValue) - 1))
-                SQL = SQL & " and Orders.IsInActive = 0 and Orders.RefReceiptID=0 and Orders.VatAmount > 0"
+                SQL &=  "SELECT Orders.OrderID,Orders.OrderCode AS BillCode ,Orders.OrderDate AS BillDate,Orders.OrderCode,Orders.InvoiceSuplierID "
+                SQL &=  " ,Orders.Total ,Orders.VatAmount,Orders.GrandTotal,Orders.OrderDate ,Orders.DiscountAmount,Orders.TableID "
+                SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &=  " FROM Orders  "
+                SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL &=  " WHERE Orders.IsDelete =0   "
+                SQL &=  " and Year(Orders.OrderDate) =" & IIf(Year(OrderDate.EditValue) > 2500, (Year(OrderDate.EditValue) - 543) - 1, (Year(OrderDate.EditValue) - 1))
+                SQL &=  " and Orders.IsInActive = 0 and Orders.RefReceiptID=0 and Orders.VatAmount > 0"
                 If OrderType.EditValue = "B" Then 'buy
-                    SQL = SQL & " and Orders.TableID in (" & MasterType.InvoiceBuy & ")"
+                    SQL &=  " and Orders.TableID in (" & MasterType.InvoiceBuy & ")"
                 Else
-                    SQL = SQL & " and Orders.TableID in (" & MasterType.Invoice & ")"
+                    SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & ")"
                 End If
             End If
 
-            SQL = SQL & " ) as TMP"
+            SQL &=  " ) as TMP"
 
             If OrderType.EditValue = "S" Then 'Sell
-                SQL = SQL & "  ORDER BY  BillDate,Customer ,OrderDate"
+                SQL &=  "  ORDER BY  BillDate,Customer ,OrderDate"
             Else
-                SQL = SQL & "  ORDER BY Customer ,OrderDate"
+                SQL &=  "  ORDER BY Customer ,OrderDate"
             End If
 
             lTableOrder = gConnection.executeSelectQuery(SQL, Nothing)
@@ -120,26 +120,26 @@ Public Class frmDealReport
 
                 For Each pRow As DataRow In lTableOrder.Rows
                     SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxDate1,TaxDate2,TaxText1,TaxText2,TaxAmount1,TaxAmount2 ,TaxAmount3)"
-                    SQL = SQL & " VALUES ( " & gUserID
-                    SQL = SQL & ", " & lSEQ
-                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("BillDate")) & "'"          'TaxDate1
-                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"          'TaxDate2
+                    SQL &=  " VALUES ( " & gUserID
+                    SQL &=  ", " & lSEQ
+                    SQL &=  " ,'" & formatSQLDate(pRow.Item("BillDate")) & "'"          'TaxDate1
+                    SQL &=  " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"          'TaxDate2
                     If ConvertNullToString(pRow.Item("InvoiceSuplierID")) <> "" Then         'TaxText1
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("InvoiceSuplierID")) & "'"
+                        SQL &=  " ,'" & ConvertNullToString(pRow.Item("InvoiceSuplierID")) & "'"
                     Else
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"
+                        SQL &=  " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"
                     End If
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"      'TaxText2
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"      'TaxText2
                     If ConvertNullToZero(pRow.Item("TableID")) = MasterType.ReduceCredit Or ConvertNullToZero(pRow.Item("TableID")) = MasterType.ReduceCreditBuy Then
-                        SQL = SQL & " ," & (ConvertNullToZero(pRow.Item("Total") - ConvertNullToZero(pRow.Item("DiscountAmount")))) * -1           'TaxAmount1    
-                        SQL = SQL & " ," & ConvertNullToZero(pRow.Item("VatAmount")) * -1         'TaxAmount2   
-                        SQL = SQL & " ," & ConvertNullToZero(pRow.Item("GrandTotal")) * -1            'TaxAmount3    
+                        SQL &=  " ," & (ConvertNullToZero(pRow.Item("Total") - ConvertNullToZero(pRow.Item("DiscountAmount")))) * -1           'TaxAmount1    
+                        SQL &=  " ," & ConvertNullToZero(pRow.Item("VatAmount")) * -1         'TaxAmount2   
+                        SQL &=  " ," & ConvertNullToZero(pRow.Item("GrandTotal")) * -1            'TaxAmount3    
                     Else
-                        SQL = SQL & " ," & ConvertNullToZero(pRow.Item("Total") - ConvertNullToZero(pRow.Item("DiscountAmount")))              'TaxAmount1    
-                        SQL = SQL & " ," & ConvertNullToZero(pRow.Item("VatAmount"))              'TaxAmount2   
-                        SQL = SQL & " ," & ConvertNullToZero(pRow.Item("GrandTotal"))              'TaxAmount3    
+                        SQL &=  " ," & ConvertNullToZero(pRow.Item("Total") - ConvertNullToZero(pRow.Item("DiscountAmount")))              'TaxAmount1    
+                        SQL &=  " ," & ConvertNullToZero(pRow.Item("VatAmount"))              'TaxAmount2   
+                        SQL &=  " ," & ConvertNullToZero(pRow.Item("GrandTotal"))              'TaxAmount3    
                     End If
-                    SQL = SQL & " ) "
+                    SQL &=  " ) "
                     myCommand = New SqlCommand
                     myCommand.CommandText = SQL
                     gConnection.executeInsertSqlCommand(myCommand, Nothing)

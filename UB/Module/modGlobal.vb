@@ -114,6 +114,10 @@ Module modGlobal
         OrderHis2 = 105
         BankAccountRecord = 106
         Overdue = 107
+        CashItem = 108
+        CashRecord = 109
+        Dashboard = 110
+        InvoiceOnline = 111
     End Enum
 
     Public Enum DataMode

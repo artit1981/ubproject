@@ -134,10 +134,10 @@ Public Class ApproveTX
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM ApproveTX "
-            SQL = SQL & " WHERE ApproveTXID=" & pID
+            SQL &=  " FROM ApproveTX "
+            SQL &=  " WHERE ApproveTXID=" & pID
 
-            SQL = SQL & " ORDER BY ApproveTXID"
+            SQL &=  " ORDER BY ApproveTXID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -214,19 +214,19 @@ Public Class ApproveTX
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT * "
-            SQL = SQL & " FROM ApproveTX  "
-            SQL = SQL & " WHERE ApproveStatus='WaitApprove'  "
+            SQL &=  " FROM ApproveTX  "
+            SQL &=  " WHERE ApproveStatus='WaitApprove'  "
 
             If gIsApproveLimitUser = False And gIsApproveOrderUser = False Then
                 SQL &= " and 1>2 "
             ElseIf gIsApproveLimitUser = True And gIsApproveOrderUser = True Then
 
             ElseIf gIsApproveOrderUser = True Then
-                SQL = SQL & " AND ApproveType =1   "
+                SQL &=  " AND ApproveType =1   "
             ElseIf gIsApproveLimitUser = True Then
-                SQL = SQL & " AND ApproveType=2   "
+                SQL &=  " AND ApproveType=2   "
             End If
-            SQL = SQL & " ORDER BY ApproveTXID"
+            SQL &=  " ORDER BY ApproveTXID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ApproveTX.GetDataTable : " & e.Message)
@@ -252,29 +252,29 @@ Public Class ApproveTX
                 Case DataMode.ModeNew
                     ID = GenNewID("ApproveTXID", "ApproveTX", tr)
                     SQL = " INSERT INTO ApproveTX  (ApproveTXID,OrderID,OrderType,OrderTable,OrderCode,OrderDate"
-                    SQL = SQL & " ,OrderAmount,ApproveStatus ,Remark,OrderBy,ApproveType"
-                    SQL = SQL & " ,CreateBy,CreateTime )"
-                    SQL = SQL & " VALUES ( @ApproveTXID"
-                    SQL = SQL & " ,  @OrderID"
-                    SQL = SQL & " ,  @OrderType"
-                    SQL = SQL & " ,  @OrderTable"
-                    SQL = SQL & " ,  @OrderCode"
-                    SQL = SQL & " ,  @OrderDate"
-                    SQL = SQL & " ,  @OrderAmount"
-                    SQL = SQL & " ,  @ApproveStatus"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @OrderBy"
-                    SQL = SQL & " ,  @ApproveType"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,OrderAmount,ApproveStatus ,Remark,OrderBy,ApproveType"
+                    SQL &=  " ,CreateBy,CreateTime )"
+                    SQL &=  " VALUES ( @ApproveTXID"
+                    SQL &=  " ,  @OrderID"
+                    SQL &=  " ,  @OrderType"
+                    SQL &=  " ,  @OrderTable"
+                    SQL &=  " ,  @OrderCode"
+                    SQL &=  " ,  @OrderDate"
+                    SQL &=  " ,  @OrderAmount"
+                    SQL &=  " ,  @ApproveStatus"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @OrderBy"
+                    SQL &=  " ,  @ApproveType"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE ApproveTX SET "
-                    SQL = SQL & " Remark=@Remark"
-                    SQL = SQL & " ,ApproveStatus= @ApproveStatus"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE ApproveTXID= @ApproveTXID"
+                    SQL &=  " Remark=@Remark"
+                    SQL &=  " ,ApproveStatus= @ApproveStatus"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE ApproveTXID= @ApproveTXID"
                 Case DataMode.ModeDelete
                     'SQL = " UPDATE ApproveUser SET IsDelete=@mIsDelete "
                     'SQL = SQL & " ,ModifiedBy= @gUserID"
@@ -327,7 +327,7 @@ Public Class ApproveTX
         '    'SQL = "SELECT DepartmentID  FROM Department"
         '    'SQL = SQL & " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
         '    'If ModeData = DataMode.ModeEdit Then
-        '    '    SQL = SQL & " AND DepartmentID <> " & ID
+        '    '    SQL &=  " AND DepartmentID <> " & ID
         '    'End If
         '    'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    'Return dataTable.Rows.Count > 0
@@ -348,7 +348,7 @@ Public Class ApproveTX
 
         'Try
         '    SQL = "SELECT DepartmentID  FROM Position"
-        '    SQL = SQL & " WHERE IsDelete =0 AND DepartmentID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND DepartmentID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count = 0
         'Catch e As Exception

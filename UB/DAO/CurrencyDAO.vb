@@ -38,8 +38,8 @@ Public Class CurrencyDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -64,8 +64,8 @@ Public Class CurrencyDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE " & ColumnKey & "=" & pID
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE " & ColumnKey & "=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -140,15 +140,15 @@ Public Class CurrencyDAO
 
         Try
             SQL = "SELECT CurrencyID AS ID,CurrencyCode AS Code,NameThai,ExchangeRate"
-            SQL = SQL & " FROM Currency  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Currency  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND CurrencyID=" & pID
+                SQL &=  "  AND CurrencyID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY CurrencyCode,NameThai "
+            SQL &=  " ORDER BY CurrencyCode,NameThai "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -170,34 +170,34 @@ Public Class CurrencyDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO " & TableName & "(CurrencyID,ExchangeRate,CurrencyCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @ExchangeRate"
-                    SQL = SQL & " ,  @CurrencyCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @ExchangeRate"
+                    SQL &=  " ,  @CurrencyCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE " & TableName & " SET "
-                    SQL = SQL & " ExchangeRate=@ExchangeRate"
-                    SQL = SQL & " ,CurrencyCode=@CurrencyCode"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE CurrencyID= @mIDs"
+                    SQL &=  " ExchangeRate=@ExchangeRate"
+                    SQL &=  " ,CurrencyCode=@CurrencyCode"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE CurrencyID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE " & TableName & " SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE CurrencyID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE CurrencyID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -244,9 +244,9 @@ Public Class CurrencyDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND CurrencyCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND CurrencyCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -268,7 +268,7 @@ Public Class CurrencyDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

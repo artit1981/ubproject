@@ -319,6 +319,24 @@ Public Class ProductListDAO
             mProductListRefID3 = Value
         End Set
     End Property
+    Private mProductListRefID4 As Long
+    Public Property ProductListRefID4() As Long
+        Get
+            Return mProductListRefID4
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID4 = Value
+        End Set
+    End Property
+    Private mProductListRefID5 As Long
+    Public Property ProductListRefID5() As Long
+        Get
+            Return mProductListRefID5
+        End Get
+        Set(ByVal Value As Long)
+            mProductListRefID5 = Value
+        End Set
+    End Property
     Public Property ProductListUnitRef1() As Long
         Get
             Return mProductListUnitRef1
@@ -345,6 +363,25 @@ Public Class ProductListDAO
         End Set
     End Property
 
+    Private mProductListUnitRef4 As Long
+    Public Property ProductListUnitRef4() As Long
+        Get
+            Return mProductListUnitRef4
+        End Get
+        Set(ByVal Value As Long)
+            mProductListUnitRef4 = Value
+        End Set
+    End Property
+
+    Private mProductListUnitRef5 As Long
+    Public Property ProductListUnitRef5() As Long
+        Get
+            Return mProductListUnitRef5
+        End Get
+        Set(ByVal Value As Long)
+            mProductListUnitRef5 = Value
+        End Set
+    End Property
     Public Property SNList() As List(Of SnDAO)
         Get
             Return mSNList
@@ -456,44 +493,44 @@ Public Class ProductListDAO
         'lCheckType = pCheckType
         Try 'ใช้ชื่อสินค้าจาก Table Product
             SQL = "SELECT  ProductList.ProductID,ProductList.ProductListID AS ID,ProductList.SEQ,Product.Remark,ProductList.RefID,ProductList.RefTable"
-            SQL = SQL & " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
-            SQL = SQL & " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
-            SQL = SQL & " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
-            SQL = SQL & " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy,ProductList.ClaimRemark,ProductList.ClaimResult"
-            SQL = SQL & " FROM ProductList"
-            SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
-            SQL = SQL & " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
-            SQL = SQL & " WHERE 1=1   "
+            SQL &= " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
+            SQL &= " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
+            SQL &= " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
+            SQL &= " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy,ProductList.ClaimRemark,ProductList.ClaimResult"
+            SQL &= " FROM ProductList"
+            SQL &= " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
+            SQL &= " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
+            SQL &= " WHERE 1=1   "
             If pIsDelete = False Then
-                SQL = SQL & " and ProductList.IsDelete =0   "
+                SQL &= " and ProductList.IsDelete =0   "
             End If
 
             If pRefTable <> "" Then
-                SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
+                SQL &= " AND ProductList.RefTable ='" & pRefTable & "'"
                 If pRefTable = "PurchaseOrder" And pCheckType = MasterType.StockIn.ToString Then  ' And pCheckToStockIn = True Then 'ดูว่า PO ต้องไม่เคยโดนรับสินค้าโดย Stockin 
-                    SQL = SQL & " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
-                    SQL = SQL & "   WHERE p2.IsDelete =0  "
-                    SQL = SQL & "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
+                    SQL &= " AND ProductList.ProductListID not in( select p2.ProductListRefID from ProductList p2 "
+                    SQL &= "   WHERE p2.IsDelete =0  "
+                    SQL &= "   AND p2.RefTable ='StockIn' and p2.ProductListRefID > 0)"
                 End If
             End If
             If pExcludeProListID <> "" Then
-                SQL = SQL & " AND ProductList.ProductListID not in(" & pExcludeProListID & ")"
+                SQL &= " AND ProductList.ProductListID not in(" & pExcludeProListID & ")"
             End If
 
             If pIsCheckConfirm = True Then
-                SQL = SQL & " AND ProductList.IsConfirm =0 "
+                SQL &= " AND ProductList.IsConfirm =0 "
                 If lRefOrderList <> "" Then
-                    SQL = SQL & " AND ProductList.RefID in(" & lRefOrderList & ")"
+                    SQL &= " AND ProductList.RefID in(" & lRefOrderList & ")"
                 End If
             End If
             If pIsShowALL = False Then
-                SQL = SQL & " AND ProductList.IsShow=1 "
+                SQL &= " AND ProductList.IsShow=1 "
             End If
             If lRefOrderList <> "" Then
-                SQL = SQL & " AND ProductList.RefID in(" & lRefOrderList & ")"
-                SQL = SQL & " ORDER BY ProductList.IsShow desc, ProductList.SEQ"
+                SQL &= " AND ProductList.RefID in(" & lRefOrderList & ")"
+                SQL &= " ORDER BY ProductList.IsShow desc, ProductList.SEQ"
             Else
-                SQL = SQL & " ORDER BY Product.ProductCode"
+                SQL &= " ORDER BY Product.ProductCode"
             End If
 
 
@@ -510,19 +547,19 @@ Public Class ProductListDAO
 
         Try 'ใช้ชื่อสินค้าจาก Table Product
             SQL = "SELECT count( ProductList.ProductID) as SEQ  "
-            SQL = SQL & " FROM ProductList"
-            SQL = SQL & " WHERE ProductList.IsDelete =0 and SEQ=1  "
+            SQL &= " FROM ProductList"
+            SQL &= " WHERE ProductList.IsDelete =0 and SEQ=1  "
 
             If pRefTable <> "" Then
-                SQL = SQL & " AND ProductList.RefTable ='" & pRefTable & "'"
+                SQL &= " AND ProductList.RefTable ='" & pRefTable & "'"
             End If
             If pIsCheckConfirm = True Then
-                SQL = SQL & " AND ProductList.IsConfirm =0 "
+                SQL &= " AND ProductList.IsConfirm =0 "
                 If pRefID > 0 Then
-                    SQL = SQL & " AND ProductList.RefID =" & pRefID
+                    SQL &= " AND ProductList.RefID =" & pRefID
                 End If
             Else
-                SQL = SQL & " AND ProductList.RefID =" & pRefID
+                SQL &= " AND ProductList.RefID =" & pRefID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             For Each pRow As DataRow In dataTable.Rows
@@ -557,67 +594,74 @@ Public Class ProductListDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductListID", "ProductList", tr)
                     SQL = " INSERT INTO ProductList  (ProductListID,SEQ,RefID,RefTable,ProductID,UnitID,KeepMin,Units,Cost,Price,PriceMain,Total,Remark,IsDelete"
-                    SQL = SQL & " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID,ProductListRefID,ProductListRefID2,ProductListRefID3,IsShow,IsMerge  "
-                    SQL = SQL & " ,UnitMainID,AdjustUnit,RateUnit,ProductListUnitRef1,ProductListUnitRef2,ProductListUnitRef3,ClaimRemark,ClaimResult)"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @SEQ"
-                    SQL = SQL & " ,  @RefID"
-                    SQL = SQL & " ,  @RefTable"
-                    SQL = SQL & " ,  @ProductID"
-                    SQL = SQL & " ,  @UnitID"
-                    SQL = SQL & " ,  @KeepMin"
-                    SQL = SQL & " ,  @Units"
-                    SQL = SQL & " ,  @Cost"
-                    SQL = SQL & " ,  @Price"
-                    SQL = SQL & " ,  @PriceMain"
-                    SQL = SQL & " ,  @Total"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @ProductName"
-                    SQL = SQL & " ,  @ProductNameExt"
-                    SQL = SQL & " ,  @Discount"
-                    SQL = SQL & " ,  0"
-                    SQL = SQL & " ,  @LocationDTLID"
-                    SQL = SQL & " ,  @ProductListRefID"
-                    SQL = SQL & " ,  @ProductListRefID2"
-                    SQL = SQL & " ,  @ProductListRefID3"
-                    SQL = SQL & " ,  @IsShow"
-                    SQL = SQL & " ,  @IsMerge"
-                    SQL = SQL & " ,  @UnitMainID"
-                    SQL = SQL & " ,  @AdjustUnit"
-                    SQL = SQL & " ,  @RateUnit"
-                    SQL = SQL & " ,  @ProductListUnitRef1"
-                    SQL = SQL & " ,  @ProductListUnitRef2"
-                    SQL = SQL & " ,  @ProductListUnitRef3"
-                    SQL = SQL & " ,  @ClaimRemark"
-                    SQL = SQL & " ,  @ClaimResult"
-                    SQL = SQL & " ) "
+                    SQL &= " ,ProductName,ProductNameExt,Discount,IsConfirm,LocationDTLID  "
+                    SQL &= " ,ProductListRefID,ProductListRefID2,ProductListRefID3,ProductListRefID4,ProductListRefID5"
+                    SQL &= " ,IsShow,IsMerge,UnitMainID,AdjustUnit,RateUnit"
+                    SQL &= " ,ProductListUnitRef1,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef4,ProductListUnitRef5"
+                    SQL &= " ,ClaimRemark,ClaimResult)"
+                    SQL &= " VALUES ( "
+                    SQL &= "   @ID"
+                    SQL &= " ,  @SEQ"
+                    SQL &= " ,  @RefID"
+                    SQL &= " ,  @RefTable"
+                    SQL &= " ,  @ProductID"
+                    SQL &= " ,  @UnitID"
+                    SQL &= " ,  @KeepMin"
+                    SQL &= " ,  @Units"
+                    SQL &= " ,  @Cost"
+                    SQL &= " ,  @Price"
+                    SQL &= " ,  @PriceMain"
+                    SQL &= " ,  @Total"
+                    SQL &= " ,  @Remark"
+                    SQL &= " ,  @IsDelete"
+                    SQL &= " ,  @ProductName"
+                    SQL &= " ,  @ProductNameExt"
+                    SQL &= " ,  @Discount"
+                    SQL &= " ,  0"
+                    SQL &= " ,  @LocationDTLID"
+                    SQL &= " ,  @ProductListRefID"
+                    SQL &= " ,  @ProductListRefID2"
+                    SQL &= " ,  @ProductListRefID3"
+                    SQL &= " ,  @ProductListRefID4"
+                    SQL &= " ,  @ProductListRefID5"
+                    SQL &= " ,  @IsShow"
+                    SQL &= " ,  @IsMerge"
+                    SQL &= " ,  @UnitMainID"
+                    SQL &= " ,  @AdjustUnit"
+                    SQL &= " ,  @RateUnit"
+                    SQL &= " ,  @ProductListUnitRef1"
+                    SQL &= " ,  @ProductListUnitRef2"
+                    SQL &= " ,  @ProductListUnitRef3"
+                    SQL &= " ,  @ProductListUnitRef4"
+                    SQL &= " ,  @ProductListUnitRef5"
+                    SQL &= " ,  @ClaimRemark"
+                    SQL &= " ,  @ClaimResult"
+                    SQL &= " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update ProductList   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " UnitID=@UnitID"
-                    SQL = SQL & " ,SEQ=@SEQ"
-                    SQL = SQL & " ,KeepMin=@KeepMin"
-                    SQL = SQL & " ,Units=@Units"
-                    SQL = SQL & " ,Cost=@Cost"
-                    SQL = SQL & " ,Price=@Price"
-                    SQL = SQL & " ,PriceMain=@PriceMain"
-                    SQL = SQL & " ,Total=@Total"
-                    SQL = SQL & " ,ProductID= @ProductID"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " ,ProductName=@ProductName"
-                    SQL = SQL & " ,ProductNameExt=@ProductNameExt"
-                    SQL = SQL & " ,Discount=@Discount"
-                    SQL = SQL & " ,LocationDTLID=@LocationDTLID"
-                    SQL = SQL & " ,AdjustUnit=@AdjustUnit"
-                    SQL = SQL & " ,RateUnit=@RateUnit"
-                    SQL = SQL & " ,ClaimRemark=@ClaimRemark"
-                    SQL = SQL & " ,ClaimResult=@ClaimResult"
-                    SQL = SQL & " WHERE ProductListID= @ID"
+                    SQL &= " SET"
+                    SQL &= " UnitID=@UnitID"
+                    SQL &= " ,SEQ=@SEQ"
+                    SQL &= " ,KeepMin=@KeepMin"
+                    SQL &= " ,Units=@Units"
+                    SQL &= " ,Cost=@Cost"
+                    SQL &= " ,Price=@Price"
+                    SQL &= " ,PriceMain=@PriceMain"
+                    SQL &= " ,Total=@Total"
+                    SQL &= " ,ProductID= @ProductID"
+                    SQL &= " ,Remark=@Remark"
+                    SQL &= " ,ProductName=@ProductName"
+                    SQL &= " ,ProductNameExt=@ProductNameExt"
+                    SQL &= " ,Discount=@Discount"
+                    SQL &= " ,LocationDTLID=@LocationDTLID"
+                    SQL &= " ,AdjustUnit=@AdjustUnit"
+                    SQL &= " ,RateUnit=@RateUnit"
+                    SQL &= " ,ClaimRemark=@ClaimRemark"
+                    SQL &= " ,ClaimResult=@ClaimResult"
+                    SQL &= " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE ProductListID= @ID"
+                    SQL &= " WHERE ProductListID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -645,9 +689,13 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@ProductListRefID", ProductListRefID))
             myCommand.Parameters.Add(New SqlParameter("@ProductListRefID2", ProductListRefID2))
             myCommand.Parameters.Add(New SqlParameter("@ProductListRefID3", ProductListRefID3))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListRefID4", ProductListRefID4))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListRefID5", ProductListRefID5))
             myCommand.Parameters.Add(New SqlParameter("@ProductListUnitRef1", ProductListUnitRef1))
             myCommand.Parameters.Add(New SqlParameter("@ProductListUnitRef2", ProductListUnitRef2))
             myCommand.Parameters.Add(New SqlParameter("@ProductListUnitRef3", ProductListUnitRef3))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListUnitRef4", ProductListUnitRef4))
+            myCommand.Parameters.Add(New SqlParameter("@ProductListUnitRef5", ProductListUnitRef5))
             myCommand.Parameters.Add(New SqlParameter("@IsShow", IsShow))
             myCommand.Parameters.Add(New SqlParameter("@IsMerge", IsMerge))
             myCommand.Parameters.Add(New SqlParameter("@AdjustUnit", AdjustUnit))
@@ -663,7 +711,7 @@ Public Class ProductListDAO
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
             'Keep data detail log
-            InsertLog(tr, pLogTime)
+            'InsertLog(tr, pLogTime)
 
             Return True
         Catch e As Exception
@@ -672,25 +720,25 @@ Public Class ProductListDAO
         End Try
     End Function
 
-    Private Sub InsertLog(ByRef ptr As SqlTransaction, ByVal pLogTime As Date)
-        Dim Sql As String = ""
-        Try
-            Sql = " INSERT INTO ProductListLog  (LogTime,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
-            Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID "
-            Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
-            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1 ,ClaimRemark,ClaimResult )"
-            Sql &= " SELECT '" & formatSQLDateTime(pLogTime) & "'"
-            Sql &= " ,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
-            Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID"
-            Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
-            Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1,ClaimRemark,ClaimResult"
-            Sql &= " FROM ProductList"
-            Sql &= " WHERE ProductListID=" & ID
-            gConnection.executeInsertQuery(Sql, ptr)
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "ProductListDAO.InsertLog : " & e.Message)
-        End Try
-    End Sub
+    'Private Sub InsertLog(ByRef ptr As SqlTransaction, ByVal pLogTime As Date)
+    '    Dim Sql As String = ""
+    '    Try
+    '        Sql = " INSERT INTO ProductListLog  (LogTime,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
+    '        Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID "
+    '        Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
+    '        Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1 ,ClaimRemark,ClaimResult )"
+    '        Sql &= " SELECT '" & formatSQLDateTime(pLogTime) & "'"
+    '        Sql &= " ,ProductListID,SEQ,RefID,RefTable,ProductID,ProductName,ProductNameExt,LocationDTLID,UnitID"
+    '        Sql &= " ,KeepMin,Units,Cost,Price,Discount,Total,Remark,IsDelete,IsConfirm,ProductListRefID"
+    '        Sql &= " ,IsShow,IsMerge,AdjustUnit,RateUnit,UnitMainID,PriceMain,ProductListRefID2,ProductListRefID3 "
+    '        Sql &= " ,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef1,ClaimRemark,ClaimResult"
+    '        Sql &= " FROM ProductList"
+    '        Sql &= " WHERE ProductListID=" & ID
+    '        gConnection.executeInsertQuery(Sql, ptr)
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "ProductListDAO.InsertLog : " & e.Message)
+    '    End Try
+    'End Sub
 
 
     Public Function SaveToConfirm(ByVal pRefID As Long, ByVal pProductListID As Long, ByVal pIsConfirm As Boolean, ByVal tr As SqlTransaction) As Boolean
@@ -701,13 +749,13 @@ Public Class ProductListDAO
         Try
             If pRefID > 0 Or pProductListID > 0 Then
                 SQL = " Update ProductList   "
-                SQL = SQL & " SET IsConfirm=" & IIf(pIsConfirm = True, 1, 0)
-                SQL = SQL & " WHERE 1=1 "
+                SQL &= " SET IsConfirm=" & IIf(pIsConfirm = True, 1, 0)
+                SQL &= " WHERE 1=1 "
                 If pRefID > 0 Then
-                    SQL = SQL & " and RefID=" & pRefID
+                    SQL &= " and RefID=" & pRefID
                 End If
                 If pProductListID > 0 Then
-                    SQL = SQL & " and ProductListID=" & pProductListID
+                    SQL &= " and ProductListID=" & pProductListID
                 End If
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
@@ -730,10 +778,10 @@ Public Class ProductListDAO
         SQL = ""
         Try
             SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE ProductListID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND RefID=@RefID "
-            SQL = SQL & " AND RefTable=@RefTable "
-            SQL = SQL & " AND IsDelete =0  "
+            SQL &= " WHERE ProductListID NOT IN( " & pstrStayID & ")"
+            SQL &= " AND RefID=@RefID "
+            SQL &= " AND RefTable=@RefTable "
+            SQL &= " AND IsDelete =0  "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 
@@ -757,8 +805,8 @@ Public Class ProductListDAO
         SQL = ""
         Try
             SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefID=@RefID "
-            SQL = SQL & " AND RefTable=@RefTable "
+            SQL &= " WHERE RefID=@RefID "
+            SQL &= " AND RefTable=@RefTable "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

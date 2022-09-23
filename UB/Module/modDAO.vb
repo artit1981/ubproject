@@ -818,7 +818,7 @@ Module modDAO
         Try
             SQL = "SELECT MAX(" & pFiledName & ") AS ID FROM " & pTableName
             If lstrWhere <> "" Then
-                SQL = SQL & lstrWhere
+                SQL &=  lstrWhere
             End If
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then

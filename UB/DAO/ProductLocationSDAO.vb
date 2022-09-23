@@ -115,10 +115,10 @@ Public Class ProductLocationSDAO
 
         Try
             SQL = "SELECT  ID,SEQ,LocationID ,LocationDTLID, KeepMin,KeepMax,IsInActive,IsMain"
-            SQL = SQL & " FROM Product_LocationS"
-            SQL = SQL & " WHERE RefID =" & pRefID
-            SQL = SQL & " AND IsDelete =0   "
-            SQL = SQL & " ORDER BY SEQ"
+            SQL &=  " FROM Product_LocationS"
+            SQL &=  " WHERE RefID =" & pRefID
+            SQL &=  " AND IsDelete =0   "
+            SQL &=  " ORDER BY SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductLocationSDAO.GetDataTable : " & e.Message)
@@ -133,45 +133,45 @@ Public Class ProductLocationSDAO
         Try
             If pRefTable = MasterType.SellOrders.ToString Then
                 SQL = "SELECT 0 as ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-                SQL = SQL & " FROM Product_LocationDTL D  "
-                SQL = SQL & " where  D.LocationDTLID=(select LocationDTLID from RunningFormat where MenuID=" & MasterType.SellOrders & ")"
-                SQL = SQL & " group BY D.NameThai,D.LocationDTLID"
-                SQL = SQL & " ORDER BY D.NameThai"
-            ElseIf pRefTable = MasterType.Invoice.ToString Or pRefTable = MasterType.Borrow.ToString _
+                SQL &= " FROM Product_LocationDTL D  "
+                SQL &= " where  D.LocationDTLID=(select LocationDTLID from RunningFormat where MenuID=" & MasterType.SellOrders & ")"
+                SQL &= " group BY D.NameThai,D.LocationDTLID"
+                SQL &= " ORDER BY D.NameThai"
+            ElseIf pRefTable = MasterType.Invoice.ToString Or pRefTable = MasterType.InvoiceOnline.ToString Or pRefTable = MasterType.Borrow.ToString _
                 Or pRefTable = MasterType.ReduceCredit.ToString Or pRefTable = MasterType.ReduceCreditBuy.ToString _
                 Or pRefTable = MasterType.AddCredit.ToString Or pRefTable = MasterType.AddCreditBuy.ToString Or pRefTable = MasterType.StockIn.ToString Then
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-                SQL = SQL & " FROM Product_LocationS P"
-                SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
-                SQL = SQL & " WHERE P.IsMain ='Y' AND P.IsInActive = 0 AND P.IsDelete = 0"
+                SQL &=  " FROM Product_LocationS P"
+                SQL &=  " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
+                SQL &=  " WHERE P.IsMain ='Y' AND P.IsInActive = 0 AND P.IsDelete = 0"
                 If pProductID > 0 Then
-                    SQL = SQL & " and P.RefID =" & pProductID
+                    SQL &=  " and P.RefID =" & pProductID
                 End If
             ElseIf pRefTable = MasterType.Shiping.ToString Then
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-                SQL = SQL & " FROM Product_LocationS P"
-                SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
-                SQL = SQL & " WHERE P.IsMain <>'Y' AND P.IsInActive = 0 AND P.IsDelete = 0"
+                SQL &=  " FROM Product_LocationS P"
+                SQL &=  " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
+                SQL &=  " WHERE P.IsMain <>'Y' AND P.IsInActive = 0 AND P.IsDelete = 0"
                 If pProductID > 0 Then
-                    SQL = SQL & " and P.RefID =" & pProductID
+                    SQL &=  " and P.RefID =" & pProductID
                 End If
                 'SQL = SQL & " group BY P.RefID ,D.NameThai,D.LocationDTLID"
-                SQL = SQL & " ORDER BY IsMain "
+                SQL &=  " ORDER BY IsMain "
             ElseIf pProductID > 0 Then
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-                SQL = SQL & " FROM Product_LocationS P"
-                SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
-                SQL = SQL & " WHERE P.IsInActive = 0 AND P.IsDelete = 0"
-                SQL = SQL & " and P.RefID =" & pProductID
-                SQL = SQL & " group BY P.RefID ,D.NameThai,D.LocationDTLID"
-                SQL = SQL & " ORDER BY P.RefID,D.NameThai"
+                SQL &=  " FROM Product_LocationS P"
+                SQL &=  " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
+                SQL &=  " WHERE P.IsInActive = 0 AND P.IsDelete = 0"
+                SQL &=  " and P.RefID =" & pProductID
+                SQL &=  " group BY P.RefID ,D.NameThai,D.LocationDTLID"
+                SQL &=  " ORDER BY P.RefID,D.NameThai"
             Else
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-                SQL = SQL & " FROM Product_LocationS P"
-                SQL = SQL & " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
-                SQL = SQL & " WHERE    P.IsInActive = 0 AND P.IsDelete = 0"
+                SQL &=  " FROM Product_LocationS P"
+                SQL &=  " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "
+                SQL &=  " WHERE    P.IsInActive = 0 AND P.IsDelete = 0"
                 'SQL = SQL & " group BY P.RefID ,D.NameThai,D.LocationDTLID"
-                SQL = SQL & " ORDER BY IsMain"
+                SQL &=  " ORDER BY IsMain"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -201,31 +201,31 @@ Public Class ProductLocationSDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("ID", "Product_LocationS", tr)
                     SQL = " INSERT INTO Product_LocationS  (ID,SEQ,RefID,LocationID,LocationDTLID,KeepMin,KeepMax,IsDelete,IsInActive,IsMain )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @SEQ"
-                    SQL = SQL & " ,  @RefID"
-                    SQL = SQL & " ,  @LocationID"
-                    SQL = SQL & " ,  @LocationDTLID"
-                    SQL = SQL & " ,  @KeepMin"
-                    SQL = SQL & " ,  @KeepMax"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsMain"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @SEQ"
+                    SQL &=  " ,  @RefID"
+                    SQL &=  " ,  @LocationID"
+                    SQL &=  " ,  @LocationDTLID"
+                    SQL &=  " ,  @KeepMin"
+                    SQL &=  " ,  @KeepMax"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsMain"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Product_LocationS   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " LocationID=@LocationID"
-                    SQL = SQL & " ,LocationDTLID= @LocationDTLID"
-                    SQL = SQL & " ,KeepMin=@KeepMin"
-                    SQL = SQL & " ,KeepMax=@KeepMax"
-                    SQL = SQL & " ,IsInActive=@IsInActive"
-                    SQL = SQL & " ,IsMain=@IsMain"
-                    SQL = SQL & " WHERE ID= @ID"
+                    SQL &=  " SET"
+                    SQL &=  " LocationID=@LocationID"
+                    SQL &=  " ,LocationDTLID= @LocationDTLID"
+                    SQL &=  " ,KeepMin=@KeepMin"
+                    SQL &=  " ,KeepMax=@KeepMax"
+                    SQL &=  " ,IsInActive=@IsInActive"
+                    SQL &=  " ,IsMain=@IsMain"
+                    SQL &=  " WHERE ID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Product_LocationS SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE ID= @ID"
+                    SQL &=  " WHERE ID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -264,9 +264,9 @@ Public Class ProductLocationSDAO
         SQL = ""
         Try
             SQL = " UPDATE Product_LocationS SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE ID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND IsDelete =0  "
-            SQL = SQL & " AND RefID=@RefID "
+            SQL &=  " WHERE ID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND IsDelete =0  "
+            SQL &=  " AND RefID=@RefID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 
@@ -287,7 +287,7 @@ Public Class ProductLocationSDAO
         SQL = ""
         Try
             SQL = " UPDATE Product_LocationS SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefID=@RefID "
+            SQL &=  " WHERE RefID=@RefID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

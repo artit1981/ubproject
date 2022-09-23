@@ -81,6 +81,7 @@ Public Class BankAccountControl
             .Columns("ID").Width = 0
             .Columns("ID").Caption = ""
             .Columns("ID").Visible = False
+            .Columns("ACCNAME").Visible = False
 
             .Columns("BankAccountCode").Caption = "รหัสบัญชี"
             .Columns("BankAccountCode").Width = 400

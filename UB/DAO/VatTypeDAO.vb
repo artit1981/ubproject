@@ -49,8 +49,8 @@ Public Class VatTypeDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WITH (NOLOCK);"
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WITH (NOLOCK);"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -75,13 +75,13 @@ Public Class VatTypeDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM  " & TableName
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM  " & TableName
+            SQL &=  " WHERE 1=1 "
             If pID > 0 Then
-                SQL = SQL & " and VatTypeID=" & pID
+                SQL &=  " and VatTypeID=" & pID
             End If
             If pCode <> "" Then
-                SQL = SQL & " and VatTypeCode like '%" & pCode & "%'"
+                SQL &=  " and VatTypeCode like '%" & pCode & "%'"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -159,15 +159,15 @@ Public Class VatTypeDAO
 
         Try
             SQL = "SELECT VatTypeID AS ID,VatTypeCode AS Code,NameThai,VatRate"
-            SQL = SQL & " FROM VatType  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM VatType  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND VatTypeID=" & pID
+                SQL &=  "  AND VatTypeID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY VatTypeCode,NameThai "
+            SQL &=  " ORDER BY VatTypeCode,NameThai "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)
@@ -189,36 +189,36 @@ Public Class VatTypeDAO
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
                     SQL = " INSERT INTO " & TableName & "(VatTypeID,VatType,VatRate,VatTypeCode,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @VatType"
-                    SQL = SQL & " ,  @VatRate"
-                    SQL = SQL & " ,  @VatTypeCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @IsInActive"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @VatType"
+                    SQL &=  " ,  @VatRate"
+                    SQL &=  " ,  @VatTypeCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @IsInActive"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE " & TableName & " SET "
-                    SQL = SQL & " VatType=@VatType"
-                    SQL = SQL & " ,VatRate=@VatRate"
-                    SQL = SQL & " ,VatTypeCode=@VatTypeCode"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @IsInActive"
-                    SQL = SQL & " WHERE VatTypeID= @mIDs"
+                    SQL &=  " VatType=@VatType"
+                    SQL &=  " ,VatRate=@VatRate"
+                    SQL &=  " ,VatTypeCode=@VatTypeCode"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @IsInActive"
+                    SQL &=  " WHERE VatTypeID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE " & TableName & " SET IsDelete=@IsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE VatTypeID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE VatTypeID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -266,9 +266,9 @@ Public Class VatTypeDAO
 
         Try
             SQL = "SELECT " & ColumnKey & "  FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0 AND NameThai='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND NameThai='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND " & ColumnKey & " <> " & ID
+                SQL &=  " AND " & ColumnKey & " <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -290,7 +290,7 @@ Public Class VatTypeDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

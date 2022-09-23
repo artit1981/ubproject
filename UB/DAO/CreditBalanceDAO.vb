@@ -18,8 +18,8 @@ Public Class CreditBalanceDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT Sum(OrderAmount) AS OrderAmount   "
-            SQL = SQL & " FROM  CreditBalance"
-            SQL = SQL & " WHERE CustomerID=" & pCusID
+            SQL &=  " FROM  CreditBalance"
+            SQL &=  " WHERE CustomerID=" & pCusID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -47,14 +47,14 @@ Public Class CreditBalanceDAO
             End If
 
             SQL = " INSERT INTO CreditBalance (CustomerID,OrderID,OrderDate,OrderAmount,Remark,CreateBy,CreateTime )"
-            SQL = SQL & " VALUES ( @CustomerID"
-            SQL = SQL & " ,  @OrderID"
-            SQL = SQL & " ,  @OrderDate"
-            SQL = SQL & " ,  @OrderAmount"
-            SQL = SQL & " ,  @Remark"
-            SQL = SQL & " ,  @gUserID"
-            SQL = SQL & " ,  @CreateTime"
-            SQL = SQL & " ) "
+            SQL &=  " VALUES ( @CustomerID"
+            SQL &=  " ,  @OrderID"
+            SQL &=  " ,  @OrderDate"
+            SQL &=  " ,  @OrderAmount"
+            SQL &=  " ,  @Remark"
+            SQL &=  " ,  @gUserID"
+            SQL &=  " ,  @CreateTime"
+            SQL &=  " ) "
 
             myCommand = New SqlCommand
             myCommand.CommandText = SQL

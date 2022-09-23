@@ -33,16 +33,16 @@ Public Class PrivilegeDAO
 
         Try
             SQL = "SELECT PrivilegeID AS ID,PrivilegeCode,Remark "
-            SQL = SQL & " FROM Privilege  "
-            SQL = SQL & " WHERE  IsDelete =0"
+            SQL &=  " FROM Privilege  "
+            SQL &=  " WHERE  IsDelete =0"
             If pID > 0 Then
-                SQL = SQL & "  AND PrivilegeID=" & pID
+                SQL &=  "  AND PrivilegeID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " GROUP BY PrivilegeID,PrivilegeCode,Remark "
-            SQL = SQL & " ORDER BY PrivilegeCode,Remark "
+            SQL &=  " GROUP BY PrivilegeID,PrivilegeCode,Remark "
+            SQL &=  " ORDER BY PrivilegeCode,Remark "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "PrivilegeDAO.GetDataTable : " & e.Message)
@@ -58,23 +58,23 @@ Public Class PrivilegeDAO
         Try
             If pID > 0 Then
                 SQL = "SELECT Privilege.MenuID,Menu.ShowMode,Menu.System,Menu.Module,Menu.MenuDisplay"
-                SQL = SQL & " ,Menu.IsVisible,Menu.IsEnable,Menu.IsAdd,Menu.IsEdit"
-                SQL = SQL & " ,Menu.IsDelete,Menu.IsPrint,Menu.IsImport"
-                SQL = SQL & " ,Menu.IsCreateQuick,Menu.IsCopy,Menu.IsAssign,Menu.IsConvert ,Privilege.PrivilegeData,'N' AS IsNew "
-                SQL = SQL & " FROM Privilege  "
-                SQL = SQL & " LEFT OUTER JOIN Menu ON Privilege.MenuID=Menu.MenuID"
-                SQL = SQL & " WHERE Privilege.PrivilegeID=" & pID
-                SQL = SQL & " UNION ALL "
+                SQL &=  " ,Menu.IsVisible,Menu.IsEnable,Menu.IsAdd,Menu.IsEdit"
+                SQL &=  " ,Menu.IsDelete,Menu.IsPrint,Menu.IsImport"
+                SQL &=  " ,Menu.IsCreateQuick,Menu.IsCopy,Menu.IsAssign,Menu.IsConvert ,Privilege.PrivilegeData,'N' AS IsNew "
+                SQL &=  " FROM Privilege  "
+                SQL &=  " LEFT OUTER JOIN Menu ON Privilege.MenuID=Menu.MenuID"
+                SQL &=  " WHERE Privilege.PrivilegeID=" & pID
+                SQL &=  " UNION ALL "
             End If
-            SQL = SQL & " SELECT Menu.MenuID,Menu.ShowMode,Menu.System,Menu.Module,Menu.MenuDisplay"
-            SQL = SQL & " ,Menu.IsVisible,Menu.IsEnable,Menu.IsAdd,Menu.IsEdit"
-            SQL = SQL & " ,Menu.IsDelete,Menu.IsPrint,Menu.IsImport"
-            SQL = SQL & " ,Menu.IsCreateQuick,Menu.IsCopy,Menu.IsAssign,Menu.IsConvert ,0 AS PrivilegeData,'Y' AS IsNew"
-            SQL = SQL & " FROM Menu  "
+            SQL &=  " SELECT Menu.MenuID,Menu.ShowMode,Menu.System,Menu.Module,Menu.MenuDisplay"
+            SQL &=  " ,Menu.IsVisible,Menu.IsEnable,Menu.IsAdd,Menu.IsEdit"
+            SQL &=  " ,Menu.IsDelete,Menu.IsPrint,Menu.IsImport"
+            SQL &=  " ,Menu.IsCreateQuick,Menu.IsCopy,Menu.IsAssign,Menu.IsConvert ,0 AS PrivilegeData,'Y' AS IsNew"
+            SQL &=  " FROM Menu  "
             If pID > 0 Then
-                SQL = SQL & " WHERE Menu.MenuID NOT IN (SELECT Privilege.MenuID FROM Privilege WHERE Privilege.PrivilegeID=" & pID & " )"
+                SQL &=  " WHERE Menu.MenuID NOT IN (SELECT Privilege.MenuID FROM Privilege WHERE Privilege.PrivilegeID=" & pID & " )"
             End If
-            SQL = SQL & " ORDER BY System,Module,MenuDisplay"
+            SQL &=  " ORDER BY System,Module,MenuDisplay"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "PrivilegeDAO.GetDataPrivilege : " & e.Message)
@@ -90,10 +90,10 @@ Public Class PrivilegeDAO
         'Dim lFileAttach As New NoteDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Privilege "
-            SQL = SQL & " WHERE PrivilegeID=" & pID
+            SQL &=  " FROM Privilege "
+            SQL &=  " WHERE PrivilegeID=" & pID
             If pMenuID > 0 Then
-                SQL = SQL & " AND MenuID=" & pMenuID
+                SQL &=  " AND MenuID=" & pMenuID
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -178,27 +178,27 @@ Public Class PrivilegeDAO
                     If pGrid.GetRowCellDisplayText(lLoop, "MenuID").Trim <> "" Then
                         If ModeData = DataMode.ModeNew Or pGrid.GetRowCellDisplayText(lLoop, "IsNew").Trim = "Y" Then
                             SQL = " INSERT INTO Privilege  (PrivilegeID,PrivilegeCode,Remark,MenuID,PrivilegeData"
-                            SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                            SQL = SQL & " VALUES ( @mIDs"
-                            SQL = SQL & " ,  @mPrivilegeCode"
-                            SQL = SQL & " ,  @mRemark"
-                            SQL = SQL & " ,  @mMenuID"
-                            SQL = SQL & " ,  @mPrivilegeData"
-                            SQL = SQL & " ,  @gUserID"
-                            SQL = SQL & " ,  @CreateTime"
-                            SQL = SQL & " ,  @mIsInActive"
-                            SQL = SQL & " ,  @mIsDelete"
-                            SQL = SQL & " ) "
+                            SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                            SQL &=  " VALUES ( @mIDs"
+                            SQL &=  " ,  @mPrivilegeCode"
+                            SQL &=  " ,  @mRemark"
+                            SQL &=  " ,  @mMenuID"
+                            SQL &=  " ,  @mPrivilegeData"
+                            SQL &=  " ,  @gUserID"
+                            SQL &=  " ,  @CreateTime"
+                            SQL &=  " ,  @mIsInActive"
+                            SQL &=  " ,  @mIsDelete"
+                            SQL &=  " ) "
                         ElseIf ModeData = DataMode.ModeEdit Then
                             SQL = " UPDATE Privilege SET "
-                            SQL = SQL & " PrivilegeCode=@mPrivilegeCode"
-                            SQL = SQL & " ,Remark= @mRemark"
-                            SQL = SQL & " ,PrivilegeData= @mPrivilegeData"
-                            SQL = SQL & " ,ModifiedBy= @gUserID"
-                            SQL = SQL & " ,ModifiedTime= @CreateTime"
-                            SQL = SQL & " ,IsInActive= @mIsInActive"
-                            SQL = SQL & " WHERE PrivilegeID= @mIDs"
-                            SQL = SQL & " AND MenuID= @mMenuID"
+                            SQL &=  " PrivilegeCode=@mPrivilegeCode"
+                            SQL &=  " ,Remark= @mRemark"
+                            SQL &=  " ,PrivilegeData= @mPrivilegeData"
+                            SQL &=  " ,ModifiedBy= @gUserID"
+                            SQL &=  " ,ModifiedTime= @CreateTime"
+                            SQL &=  " ,IsInActive= @mIsInActive"
+                            SQL &=  " WHERE PrivilegeID= @mIDs"
+                            SQL &=  " AND MenuID= @mMenuID"
 
                         End If
 
@@ -222,9 +222,9 @@ Public Class PrivilegeDAO
 
             Else ''Delete
                 SQL = " UPDATE Privilege SET IsDelete=@mIsDelete "
-                SQL = SQL & " ,ModifiedBy= @gUserID"
-                SQL = SQL & " ,ModifiedTime= @CreateTime"
-                SQL = SQL & " WHERE PrivilegeID= @mIDs"
+                SQL &=  " ,ModifiedBy= @gUserID"
+                SQL &=  " ,ModifiedTime= @CreateTime"
+                SQL &=  " WHERE PrivilegeID= @mIDs"
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))
@@ -253,9 +253,9 @@ Public Class PrivilegeDAO
 
         Try
             SQL = "SELECT PrivilegeID  FROM Privilege"
-            SQL = SQL & " WHERE IsDelete =0 AND PrivilegeCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND PrivilegeCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND PrivilegeID <> " & ID
+                SQL &=  " AND PrivilegeID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -276,7 +276,7 @@ Public Class PrivilegeDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

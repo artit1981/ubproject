@@ -387,6 +387,12 @@
     <Compile Include="CRM\frmBankAccountRec.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CRM\frmCashRecord.Designer.vb">
+      <DependentUpon>frmCashRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmCashRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmOrderHis2.Designer.vb">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </Compile>
@@ -396,6 +402,7 @@
     <Compile Include="DAO\BankAccountRecordSDAO.vb" />
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
+    <Compile Include="DAO\CashRecordSDAO.vb" />
     <Compile Include="Master\frmProvince.Designer.vb">
       <DependentUpon>frmProvince.vb</DependentUpon>
     </Compile>
@@ -432,6 +439,12 @@
     </Compile>
     <Compile Include="Report\frmDebtAnalystReport.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rptInvoiceOnline.Designer.vb">
+      <DependentUpon>rptInvoiceOnline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptInvoiceOnline.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptSellByCusPO.Designer.vb">
       <DependentUpon>rptSellByCusPO.vb</DependentUpon>
@@ -1249,6 +1262,9 @@
     <EmbeddedResource Include="CRM\frmBankAccountRec.resx">
       <DependentUpon>frmBankAccountRec.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmCashRecord.resx">
+      <DependentUpon>frmCashRecord.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </EmbeddedResource>
@@ -1269,6 +1285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
       <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInvoiceOnline.resx">
+      <DependentUpon>rptInvoiceOnline.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptSellByCusPO.resx">
       <DependentUpon>rptSellByCusPO.vb</DependentUpon>

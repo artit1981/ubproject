@@ -112,6 +112,9 @@ Public Class frmCommReport
             If chkInvoice.Checked = True Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Invoice
             End If
+            If chkInvoiceOnline.Checked = True Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.InvoiceOnline
+            End If
             If chkShiping.Checked = True Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Shiping
             End If
@@ -121,28 +124,28 @@ Public Class frmCommReport
             Dim lEmployeeList As String = UcMoverItem1.GetSelectItem
 
             SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID ,Orders.PO"
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Orders.GrandTotal, Orders.TableID"
-            SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  "
-            SQL = SQL & " WHERE Orders.IsDelete =0   "
-            SQL = SQL & " and Orders.OrderDate between '" & formatSQLDate(DateFrom.EditValue) & "'"
-            SQL = SQL & "                      and '" & formatSQLDate(DateTo.EditValue) & "'"
-            SQL = SQL & " and Orders.IsInActive = 0"
-            SQL = SQL & " and Orders.TableID in " & lOrderTypeList
+            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &=  " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Orders.GrandTotal, Orders.TableID"
+            SQL &=  " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
+            SQL &=  " FROM Orders  "
+            SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  "
+            SQL &=  " WHERE Orders.IsDelete =0   "
+            SQL &=  " and Orders.OrderDate between '" & formatSQLDate(DateFrom.EditValue) & "'"
+            SQL &=  "                      and '" & formatSQLDate(DateTo.EditValue) & "'"
+            SQL &=  " and Orders.IsInActive = 0"
+            SQL &=  " and Orders.TableID in " & lOrderTypeList
             Select Case ReportType.EditValue
                 Case 1
-                    SQL = SQL & " and Customer.CustomerID in (" & lEmployeeList & ")"
+                    SQL &=  " and Customer.CustomerID in (" & lEmployeeList & ")"
                 Case 2
-                    SQL = SQL & " and Customer.EmpID in (" & lEmployeeList & ")"
+                    SQL &=  " and Customer.EmpID in (" & lEmployeeList & ")"
             End Select
             Select Case ReportType.EditValue
                 Case 1
-                    SQL = SQL & " ORDER BY Customer.Title,Customer.Firstname,Orders.OrderDate ,Orders.OrderCode"
+                    SQL &=  " ORDER BY Customer.Title,Customer.Firstname,Orders.OrderDate ,Orders.OrderCode"
                 Case 2
-                    SQL = SQL & " ORDER BY Employee.Title,Employee.Firstname,Orders.OrderDate ,Orders.OrderCode"
+                    SQL &=  " ORDER BY Employee.Title,Employee.Firstname,Orders.OrderDate ,Orders.OrderCode"
             End Select
 
 
@@ -164,25 +167,25 @@ Public Class frmCommReport
                     End If
 
                     SQL = " INSERT INTO TmpTax (UserID,SEQ,TaxText1,TaxDate1,TaxText2,TaxText3,TaxText4,TaxTotal2,TaxTotal3,TaxTotal4,TaxTotal5,TaxTotal6,TaxTotal7  "
-                    SQL = SQL & "  )"
-                    SQL = SQL & " VALUES ( " & gUserID
-                    SQL = SQL & " ," & i                                                                    'SEQ
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("EmployeeName")) & "'"                'TaxText1
-                    SQL = SQL & " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1
+                    SQL &=  "  )"
+                    SQL &=  " VALUES ( " & gUserID
+                    SQL &=  " ," & i                                                                    'SEQ
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("EmployeeName")) & "'"                'TaxText1
+                    SQL &=  " ,'" & formatSQLDate(pRow.Item("OrderDate")) & "'"                         'TaxDate1
                     If ConvertNullToString(pRow.Item("InvoiceSuplierID")) <> "" Then
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("InvoiceSuplierID")) & "'"        'TaxText2
+                        SQL &=  " ,'" & ConvertNullToString(pRow.Item("InvoiceSuplierID")) & "'"        'TaxText2
                     Else
-                        SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"               'TaxText2
+                        SQL &=  " ,'" & ConvertNullToString(pRow.Item("OrderCode")) & "'"               'TaxText2
                     End If
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText3
-                    SQL = SQL & " ,'" & ConvertNullToString(pRow.Item("PO")) & "'"                    'TaxText4
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("Total"))                               'TaxTotal2
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("DiscountAmount"))                      'TaxTotal3
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("VatAmount"))                           'TaxTotal4
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal5
-                    SQL = SQL & " , " & ConvertNullToZero(pRow.Item("Commission"))                          'TaxTotal6
-                    SQL = SQL & " , " & lCommissionAMT                                                      'TaxTotal7
-                    SQL = SQL & " ) "
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("Customer")) & "'"                    'TaxText3
+                    SQL &=  " ,'" & ConvertNullToString(pRow.Item("PO")) & "'"                    'TaxText4
+                    SQL &=  " , " & ConvertNullToZero(pRow.Item("Total"))                               'TaxTotal2
+                    SQL &=  " , " & ConvertNullToZero(pRow.Item("DiscountAmount"))                      'TaxTotal3
+                    SQL &=  " , " & ConvertNullToZero(pRow.Item("VatAmount"))                           'TaxTotal4
+                    SQL &=  " , " & ConvertNullToZero(pRow.Item("GrandTotal"))                          'TaxTotal5
+                    SQL &=  " , " & ConvertNullToZero(pRow.Item("Commission"))                          'TaxTotal6
+                    SQL &=  " , " & lCommissionAMT                                                      'TaxTotal7
+                    SQL &=  " ) "
                     myCommand = New SqlCommand
                     myCommand.CommandText = SQL
                     gConnection.executeInsertSqlCommand(myCommand, Nothing)

@@ -98,8 +98,8 @@ Public Class frmSellOrderHis
             'SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
             'SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
             'If chkShowDelete.Checked = False Then
-            '    SQL = SQL & "  AND Orders.IsDelete = 0"
-            '    SQL = SQL & "  AND Orders.IsCancel = 0"
+            '    SQL &=  "  AND Orders.IsDelete = 0"
+            '    SQL &=  "  AND Orders.IsCancel = 0"
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
@@ -112,27 +112,27 @@ Public Class frmSellOrderHis
             'End If
             If lToCont = True Then
                 SQL = " select Orders.OrderDate,Orders.OrderCode ,Menu.MenuDisplay "
-                SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-                SQL = SQL & " ,Product.ProductCode,Product.ProductName,Product.Remark"
-                SQL = SQL & " ,ProductList.Units,ProductList.Price ,Orders.IsDelete,Orders.OrderStatus"
+                SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                SQL &=  " ,Product.ProductCode,Product.ProductName,Product.Remark"
+                SQL &=  " ,ProductList.Units,ProductList.Price ,Orders.IsDelete,Orders.OrderStatus"
                 'SQL = SQL & " ,Product_LocationDTL.IDCode as Location "
-                SQL = SQL & " from Orders"
-                SQL = SQL & " inner join ProductList on Orders.OrderID=ProductList.RefID"
-                SQL = SQL & " inner join Product on Product.ProductID= ProductList.ProductID"
-                SQL = SQL & " left outer join Menu on Orders.TableID=Menu.MenuID"
+                SQL &=  " from Orders"
+                SQL &=  " inner join ProductList on Orders.OrderID=ProductList.RefID"
+                SQL &=  " inner join Product on Product.ProductID= ProductList.ProductID"
+                SQL &=  " left outer join Menu on Orders.TableID=Menu.MenuID"
                 'SQL = SQL & " inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=ProductList.LocationDTLID"
-                SQL = SQL & " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
-                SQL = SQL & " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
-                SQL = SQL & "  AND Orders.TableID in (" & lstrOrderType & ")"
+                SQL &=  " left outer join Customer ON Orders.CustomerID=Customer.CustomerID  "
+                SQL &=  " WHERE Orders.OrderDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'" & "  and '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+                SQL &=  "  AND Orders.TableID in (" & lstrOrderType & ")"
                 If chkShowDelete.Checked = False Then
-                    SQL = SQL & "  AND Orders.IsDelete = 0"
-                    SQL = SQL & "  AND Orders.IsCancel = 0"
-                    SQL = SQL & "  AND ProductList.IsDelete = 0"
+                    SQL &=  "  AND Orders.IsDelete = 0"
+                    SQL &=  "  AND Orders.IsCancel = 0"
+                    SQL &=  "  AND ProductList.IsDelete = 0"
                 End If
-                SQL = SQL & "  AND ProductList.IsShow = 1"
-                SQL = SQL & "  AND Orders.CustomerID in (" & lstrCusList & ")"
-                SQL = SQL & "  AND ProductList.ProductID in (" & lstrProList & ")"
-                SQL = SQL & " ORDER BY  Orders.OrderID,Product.ProductName"
+                SQL &=  "  AND ProductList.IsShow = 1"
+                SQL &=  "  AND Orders.CustomerID in (" & lstrCusList & ")"
+                SQL &=  "  AND ProductList.ProductID in (" & lstrProList & ")"
+                SQL &=  " ORDER BY  Orders.OrderID,Product.ProductName"
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
                 If dataTable.Rows.Count > 0 Then
@@ -164,6 +164,9 @@ Public Class frmSellOrderHis
             End If
             If CheckInvoice.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.Invoice
+            End If
+            If CheckInvoiceOnline.Checked = True Then
+                lstrOrderType = lstrOrderType & "," & MasterType.InvoiceOnline
             End If
             If CheckQuotation.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.Quotation

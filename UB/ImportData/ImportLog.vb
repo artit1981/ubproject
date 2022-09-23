@@ -58,8 +58,8 @@ Public Class ImportLog
         InitailData = False
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM ImportLog "
-            SQL = SQL & " WHERE ImportTXID=" & pID
+            SQL &=  " FROM ImportLog "
+            SQL &=  " WHERE ImportTXID=" & pID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -96,12 +96,12 @@ Public Class ImportLog
 
             ImportTXID = GenNewID("ImportTXID", "ImportLog", tr)
             SQL = " INSERT INTO ImportLog  (ImportTXID,TableID,ImportRow,UserID,ImportDate  )"
-            SQL = SQL & " VALUES ( @ImportTXID"
-            SQL = SQL & " ,  @TableID"
-            SQL = SQL & " ,  @ImportRow"
-            SQL = SQL & " ,  @UserID"
-            SQL = SQL & " ,  @ImportDate"
-            SQL = SQL & " ) "
+            SQL &=  " VALUES ( @ImportTXID"
+            SQL &=  " ,  @TableID"
+            SQL &=  " ,  @ImportRow"
+            SQL &=  " ,  @UserID"
+            SQL &=  " ,  @ImportDate"
+            SQL &=  " ) "
 
             myCommand = New SqlCommand
             myCommand.CommandText = SQL

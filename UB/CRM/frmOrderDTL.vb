@@ -111,20 +111,7 @@ Public Class frmOrderDTL
             gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False
             gridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False
             gridView.OptionsBehavior.ReadOnly = True
-            'If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
-            'If .Columns("UnitName").Visible Then .Columns("UnitName").OptionsColumn.ReadOnly = True
-            'If .Columns("Remark").Visible Then .Columns("Remark").OptionsColumn.ReadOnly = True
-            'If .Columns("Units").Visible Then .Columns("Units").OptionsColumn.ReadOnly = True
-            'If .Columns("KeepMin").Visible Then .Columns("KeepMin").OptionsColumn.ReadOnly = True
-            'If .Columns("Price").Visible Then .Columns("Price").OptionsColumn.ReadOnly = True
-            'If .Columns("Cost").Visible Then .Columns("Cost").OptionsColumn.ReadOnly = True
-            'If .Columns("Total").Visible Then .Columns("Total").OptionsColumn.ReadOnly = True
-            'If .Columns("Discount").Visible Then .Columns("Discount").OptionsColumn.ReadOnly = True
-            'If .Columns("LocationDTLID").Visible Then .Columns("LocationDTLID").OptionsColumn.ReadOnly = True
-            '.Columns("ProductCode").OptionsColumn.ReadOnly = True
-            '.Columns("ProductName").OptionsColumn.ReadOnly = True
-            '.Columns("UnitName").OptionsColumn.ReadOnly = True
-            '.Columns("ProductCode").OptionsColumn.ReadOnly = True
+
             gridView.Columns("IsShow").FilterInfo = New ColumnFilterInfo("[IsShow]=1 ")
         End With
     End Sub

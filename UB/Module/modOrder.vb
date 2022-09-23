@@ -29,15 +29,15 @@ Module modOrder
 
         SQL = ""
         SQL = "SELECT Sum(p1.Units) as Units  "
-        SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  and IsShow=1"
-        SQL = SQL & " AND p1.RefTable in (" & RefFromTable & " )"
-        SQL = SQL & " AND p1.RefID =" & pRefOrderID
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and IsShow=1"
+        SQL &= " AND p1.RefTable in (" & RefFromTable & " )"
+        SQL &= " AND p1.RefID =" & pRefOrderID
         If pProlistID > 0 Then
-            SQL = SQL & " AND p1.ProductListID =" & pProlistID
+            SQL &= " AND p1.ProductListID =" & pProlistID
         End If
         If pProductID > 0 Then
-            SQL = SQL & " AND p1.ProductID =" & pProductID
+            SQL &= " AND p1.ProductID =" & pProductID
         End If
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
@@ -47,21 +47,21 @@ Module modOrder
         Next
 
         SQL = "SELECT Sum(p1.ProductListUnitRef1) as Units  "
-        SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
-        SQL = SQL & " AND  p1.ProductListRefID in ( "
-        SQL = SQL & "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
+        SQL &= " AND  p1.ProductListRefID in ( "
+        SQL &= "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
         If pProlistID > 0 Then
-            SQL = SQL & "   AND p2.ProductListID =" & pProlistID
+            SQL &= "   AND p2.ProductListID =" & pProlistID
         End If
         If pProductID > 0 Then
-            SQL = SQL & "   AND p2.ProductID =" & pProductID
+            SQL &= "   AND p2.ProductID =" & pProductID
         End If
-        SQL = SQL & "       AND p2.RefID =" & pRefOrderID
-        SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
+        SQL &= "       AND p2.RefID =" & pRefOrderID
+        SQL &= "       AND p2.RefTable in (" & RefFromTable & ") )"
 
-        SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
+        SQL &= " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
+        SQL &= " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -70,21 +70,21 @@ Module modOrder
         Next
 
         SQL = "SELECT Sum(p1.ProductListUnitRef2) as Units  "
-        SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
-        SQL = SQL & " AND  p1.ProductListRefID2 in ( "
-        SQL = SQL & "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
+        SQL &= " AND  p1.ProductListRefID2 in ( "
+        SQL &= "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
         If pProlistID > 0 Then
-            SQL = SQL & "   AND p2.ProductListID =" & pProlistID
+            SQL &= "   AND p2.ProductListID =" & pProlistID
         End If
         If pProductID > 0 Then
-            SQL = SQL & "   AND p2.ProductID =" & pProductID
+            SQL &= "   AND p2.ProductID =" & pProductID
         End If
-        SQL = SQL & "       AND p2.RefID =" & pRefOrderID
-        SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
+        SQL &= "       AND p2.RefID =" & pRefOrderID
+        SQL &= "       AND p2.RefTable in (" & RefFromTable & ") )"
 
-        SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
+        SQL &= " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
+        SQL &= " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -93,21 +93,67 @@ Module modOrder
         Next
 
         SQL = "SELECT Sum(p1.ProductListUnitRef3) as Units  "
-        SQL = SQL & " FROM ProductList p1"
-        SQL = SQL & " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
-        SQL = SQL & " AND  p1.ProductListRefID3 in ( "
-        SQL = SQL & "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
+        SQL &= " AND  p1.ProductListRefID3 in ( "
+        SQL &= "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
         If pProlistID > 0 Then
-            SQL = SQL & "   AND p2.ProductListID =" & pProlistID
+            SQL &= "   AND p2.ProductListID =" & pProlistID
         End If
         If pProductID > 0 Then
-            SQL = SQL & "   AND p2.ProductID =" & pProductID
+            SQL &= "   AND p2.ProductID =" & pProductID
         End If
-        SQL = SQL & "       AND p2.RefID =" & pRefOrderID
-        SQL = SQL & "       AND p2.RefTable in (" & RefFromTable & ") )"
+        SQL &= "       AND p2.RefID =" & pRefOrderID
+        SQL &= "       AND p2.RefTable in (" & RefFromTable & ") )"
 
-        SQL = SQL & " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
-        SQL = SQL & " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
+        SQL &= " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
+        SQL &= " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
+        DataTable = New DataTable
+        DataTable = gConnection.executeSelectQuery(SQL, ptr)
+        For Each pRow In DataTable.Rows
+            pRefToUnit = pRefToUnit + ConvertNullToZero(pRow("Units"))
+            Exit For
+        Next
+
+        SQL = "SELECT Sum(p1.ProductListUnitRef4) as Units  "
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
+        SQL &= " AND  p1.ProductListRefID4 in ( "
+        SQL &= "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
+        If pProlistID > 0 Then
+            SQL &= "   AND p2.ProductListID =" & pProlistID
+        End If
+        If pProductID > 0 Then
+            SQL &= "   AND p2.ProductID =" & pProductID
+        End If
+        SQL &= "       AND p2.RefID =" & pRefOrderID
+        SQL &= "       AND p2.RefTable in (" & RefFromTable & ") )"
+
+        SQL &= " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
+        SQL &= " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
+        DataTable = New DataTable
+        DataTable = gConnection.executeSelectQuery(SQL, ptr)
+        For Each pRow In DataTable.Rows
+            pRefToUnit = pRefToUnit + ConvertNullToZero(pRow("Units"))
+            Exit For
+        Next
+
+        SQL = "SELECT Sum(p1.ProductListUnitRef5) as Units  "
+        SQL &= " FROM ProductList p1"
+        SQL &= " WHERE p1.IsDelete =0  and p1.IsShow=1 AND p1.RefTable in (" & pRefToTable & " )"
+        SQL &= " AND  p1.ProductListRefID5 in ( "
+        SQL &= "       select p2.ProductListID from ProductList p2 WHERE p2.IsDelete =0  and p2.IsShow=1"
+        If pProlistID > 0 Then
+            SQL &= "   AND p2.ProductListID =" & pProlistID
+        End If
+        If pProductID > 0 Then
+            SQL &= "   AND p2.ProductID =" & pProductID
+        End If
+        SQL &= "       AND p2.RefID =" & pRefOrderID
+        SQL &= "       AND p2.RefTable in (" & RefFromTable & ") )"
+
+        SQL &= " AND p1.RefID IN( select OrderID from Orders where TableID in (" & RefToTableIDList & " )"
+        SQL &= " and IsDelete=0  and  OrderStatus in('Open','Close','WaitApprove','Approve','Ordering','Ordered','Receive','Billed','Waiting'))"
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, ptr)
         For Each pRow In DataTable.Rows
@@ -156,9 +202,18 @@ Module modOrder
                 Else
                     lStatus = EnumStatus.Close.ToString
                 End If
-            ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Then 'Ref from Sell
-                lRefStatus = GetUnitNotRef(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping'" _
-                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping, tr, pProListID, pProID, pUnitNotRef)
+            ElseIf pOrderType = MasterType.InvoiceOnline And lRefOrderType = MasterType.Borrow Then
+                lRefStatus = GetUnitNotRef(pRefOrderID, "'Borrow'", "'InvoiceOnline'", MasterType.InvoiceOnline, tr, pProListID, pProID, pUnitNotRef)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = EnumStatus.Open.ToString
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = EnumStatus.Waiting.ToString
+                Else
+                    lStatus = EnumStatus.Close.ToString
+                End If
+            ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Or pOrderType = MasterType.InvoiceOnline Then 'Ref from Sell
+                lRefStatus = GetUnitNotRef(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping','InvoiceOnline'" _
+                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping & "," & MasterType.InvoiceOnline, tr, pProListID, pProID, pUnitNotRef)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then
@@ -291,8 +346,8 @@ Module modOrder
 
                 If lStatus <> "" Then
                     SQL = " UPDATE Orders SET "
-                    SQL = SQL & " OrderStatus='" & lStatus & "'"
-                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pRefOrderID)
+                    SQL &= " OrderStatus='" & lStatus & "'"
+                    SQL &= " where OrderID=" & ConvertNullToZero(pRefOrderID)
                     gConnection.executeInsertQuery(SQL, tr)
 
                     If pOrderType = MasterType.StockIn And lStatus = EnumStatus.Receive.ToString Then 'Ref from PO
@@ -343,8 +398,8 @@ Module modOrder
 
                 If pOrderType = MasterType.PurchaseOrder Or pOrderType = MasterType.CancelPO Then
                     SQL = " UPDATE Orders SET "
-                    SQL = SQL & " MakePOStatus='" & lStatus & "'"
-                    SQL = SQL & " where OrderID=" & ConvertNullToZero(pOrderID)
+                    SQL &= " MakePOStatus='" & lStatus & "'"
+                    SQL &= " where OrderID=" & ConvertNullToZero(pOrderID)
                     gConnection.executeInsertQuery(SQL, tr)
 
                     'Add notifi
@@ -542,9 +597,9 @@ Module modOrder
 
         Try
             SQL = "SELECT  OrdersRef.OrderID,OrdersRef.RefReserveID, Orders.OrderCode  "
-            SQL = SQL & " FROM OrdersRef,Orders  "
-            SQL = SQL & " WHERE OrdersRef.RefReserveID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
-            SQL = SQL & " ORDER BY Orders.OrderCode"
+            SQL &= " FROM OrdersRef,Orders  "
+            SQL &= " WHERE OrdersRef.RefReserveID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
+            SQL &= " ORDER BY Orders.OrderCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If Not pRefToReserveID Is Nothing Then
                 pRefToReserveID.Clear()

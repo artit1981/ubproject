@@ -19,6 +19,8 @@ Partial Class frmDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim HatchFillStyle1 As DevExpress.XtraTreeMap.HatchFillStyle = New DevExpress.XtraTreeMap.HatchFillStyle()
+        Dim HatchFillStyle2 As DevExpress.XtraTreeMap.HatchFillStyle = New DevExpress.XtraTreeMap.HatchFillStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
@@ -33,6 +35,7 @@ Partial Class frmDashboard
         Me.ChartTotalSellCOGSByYear = New DevExpress.XtraCharts.ChartControl()
         Me.GroupControl12 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl11 = New DevExpress.XtraEditors.GroupControl()
+        Me.BankAccTreeMap = New DevExpress.XtraTreeMap.TreeMapControl()
         Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl7 = New DevExpress.XtraEditors.GroupControl()
         Me.ChartTotalSellProfitByYear = New DevExpress.XtraCharts.ChartControl()
@@ -74,6 +77,8 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl11.SuspendLayout()
+        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl7.SuspendLayout()
@@ -229,11 +234,24 @@ Partial Class frmDashboard
         '
         'GroupControl11
         '
+        Me.GroupControl11.Controls.Add(Me.BankAccTreeMap)
         Me.GroupControl11.Location = New System.Drawing.Point(213, 472)
         Me.GroupControl11.Name = "GroupControl11"
+        Me.GroupControl11.ShowCaption = False
         Me.GroupControl11.Size = New System.Drawing.Size(512, 302)
         Me.GroupControl11.TabIndex = 0
         Me.GroupControl11.Text = "GroupControl11"
+        '
+        'BankAccTreeMap
+        '
+        Me.BankAccTreeMap.Appearance.GroupStyle.TextGlowColor = System.Drawing.Color.Empty
+        Me.BankAccTreeMap.Appearance.HighlightedLeafStyle.FillStyle = HatchFillStyle1
+        Me.BankAccTreeMap.Appearance.SelectedLeafStyle.FillStyle = HatchFillStyle2
+        Me.BankAccTreeMap.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BankAccTreeMap.Location = New System.Drawing.Point(2, 2)
+        Me.BankAccTreeMap.Name = "BankAccTreeMap"
+        Me.BankAccTreeMap.Size = New System.Drawing.Size(508, 298)
+        Me.BankAccTreeMap.TabIndex = 0
         '
         'GroupControl10
         '
@@ -476,6 +494,8 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellCOGSByYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl11.ResumeLayout(False)
+        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl7.ResumeLayout(False)
@@ -543,4 +563,5 @@ Partial Class frmDashboard
     Friend WithEvents ChartTotalSellProfitByYear As DevExpress.XtraCharts.ChartControl
     Friend WithEvents ListMonth As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents ListYear As DevExpress.XtraEditors.CheckedListBoxControl
+    Friend WithEvents BankAccTreeMap As DevExpress.XtraTreeMap.TreeMapControl
 End Class

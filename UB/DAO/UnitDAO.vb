@@ -41,15 +41,15 @@ Public Class UnitDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Product_Unit "
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM Product_Unit "
+            SQL &=  " WHERE 1=1 "
             If pID > 0 Then
-                SQL = SQL & " AND UnitID=" & pID
+                SQL &=  " AND UnitID=" & pID
             End If
             If pName <> "" Then
-                SQL = SQL & " AND CodeThai='" & pName & "'"
+                SQL &=  " AND CodeThai='" & pName & "'"
             End If
-            SQL = SQL & " ORDER BY UnitCode"
+            SQL &=  " ORDER BY UnitCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -120,21 +120,21 @@ Public Class UnitDAO
 
         Try
             SQL = "SELECT UnitID AS ID,UnitCode,CodeThai"
-            SQL = SQL & " FROM Product_Unit  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Product_Unit  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND UnitID=" & pID
+                SQL &=  "  AND UnitID=" & pID
             End If
             If pCode <> "" Then
-                SQL = SQL & "  AND UnitCode='" & pCode.Trim & "'"
+                SQL &=  "  AND UnitCode='" & pCode.Trim & "'"
             End If
             If pName <> "" Then
-                SQL = SQL & "  AND CodeThai='" & pName.Trim & "'"
+                SQL &=  "  AND CodeThai='" & pName.Trim & "'"
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY UnitCode"
+            SQL &=  " ORDER BY UnitCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "UnitDAO.GetDataTable : " & e.Message)
@@ -156,32 +156,32 @@ Public Class UnitDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("UnitID", "Product_Unit", tr)
                     SQL = " INSERT INTO Product_Unit  (UnitID,UnitCode,CodeThai,CodeEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @UnitCode"
-                    SQL = SQL & " ,  @mNameThai"
-                    SQL = SQL & " ,  @mNameEng"
-                    SQL = SQL & " ,  @mRemark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @UnitCode"
+                    SQL &=  " ,  @mNameThai"
+                    SQL &=  " ,  @mNameEng"
+                    SQL &=  " ,  @mRemark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Product_Unit SET "
-                    SQL = SQL & " UnitCode=@UnitCode"
-                    SQL = SQL & " ,CodeThai=@mNameThai"
-                    SQL = SQL & " ,CodeEng=@mNameEng"
-                    SQL = SQL & " ,Remark= @mRemark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE UnitID= @mIDs"
+                    SQL &=  " UnitCode=@UnitCode"
+                    SQL &=  " ,CodeThai=@mNameThai"
+                    SQL &=  " ,CodeEng=@mNameEng"
+                    SQL &=  " ,Remark= @mRemark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE UnitID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Product_Unit SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE UnitID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE UnitID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -226,9 +226,9 @@ Public Class UnitDAO
 
         Try
             SQL = "SELECT UnitID  FROM Product_Unit"
-            SQL = SQL & " WHERE IsDelete =0 AND UnitCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND UnitCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND UnitID <> " & ID
+                SQL &=  " AND UnitID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -248,7 +248,7 @@ Public Class UnitDAO
 
         'Try
         '    SQL = "SELECT UnitID  FROM Product_UOM"
-        '    SQL = SQL & " WHERE IsDelete =0 AND UnitID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND UnitID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count > 0
         'Catch e As Exception

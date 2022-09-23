@@ -65,10 +65,10 @@ Public Class ApproveUserDAO
         'Dim lFileAttach As New FileAttachDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM ApproveUser "
-            SQL = SQL & " WHERE ApproveUserID=" & pID
+            SQL &=  " FROM ApproveUser "
+            SQL &=  " WHERE ApproveUserID=" & pID
 
-            SQL = SQL & " ORDER BY ApproveUserID"
+            SQL &=  " ORDER BY ApproveUserID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -142,15 +142,15 @@ Public Class ApproveUserDAO
 
         Try
             SQL = "SELECT ApproveUserID AS ID,Remark "
-            SQL = SQL & " FROM ApproveUser  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM ApproveUser  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND ApproveUserID=" & pID
+                SQL &=  "  AND ApproveUserID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY ApproveUserID"
+            SQL &=  " ORDER BY ApproveUserID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ApproveUserDAO.GetDataTable : " & e.Message)
@@ -172,26 +172,26 @@ Public Class ApproveUserDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ApproveUserID", "ApproveUser", tr)
                     SQL = " INSERT INTO ApproveUser  (ApproveUserID,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @ApproveUserID"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @ApproveUserID"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE ApproveUser SET "
-                    SQL = SQL & " Remark=@Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE ApproveUserID= @ApproveUserID"
+                    SQL &=  " Remark=@Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE ApproveUserID= @ApproveUserID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ApproveUser SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE ApproveUserID= @ApproveUserID"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE ApproveUserID= @ApproveUserID"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -232,7 +232,7 @@ Public Class ApproveUserDAO
         '    'SQL = "SELECT DepartmentID  FROM Department"
         '    'SQL = SQL & " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
         '    'If ModeData = DataMode.ModeEdit Then
-        '    '    SQL = SQL & " AND DepartmentID <> " & ID
+        '    '    SQL &=  " AND DepartmentID <> " & ID
         '    'End If
         '    'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    'Return dataTable.Rows.Count > 0
@@ -253,7 +253,7 @@ Public Class ApproveUserDAO
 
         'Try
         '    SQL = "SELECT DepartmentID  FROM Position"
-        '    SQL = SQL & " WHERE IsDelete =0 AND DepartmentID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND DepartmentID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count = 0
         'Catch e As Exception

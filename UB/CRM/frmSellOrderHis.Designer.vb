@@ -55,6 +55,7 @@ Partial Class frmSellOrderHis
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatePanel.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,9 +77,9 @@ Partial Class frmSellOrderHis
         CType(Me.CheckShowInfo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkShowDelete.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dtpDateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dtpDateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,6 +87,7 @@ Partial Class frmSellOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatePanel
@@ -163,13 +165,14 @@ Partial Class frmSellOrderHis
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckAll, True)
         Me.CheckAll.Name = "CheckAll"
         Me.CheckAll.Properties.Caption = ""
-        Me.CheckAll.Size = New System.Drawing.Size(27, 19)
+        Me.CheckAll.Size = New System.Drawing.Size(27, 20)
         Me.CheckAll.TabIndex = 299
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckAll, "Checked")
         '
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
+        Me.PanelControl2.Controls.Add(Me.CheckInvoiceOnline)
         Me.PanelControl2.Controls.Add(Me.CheckShiping)
         Me.PanelControl2.Controls.Add(Me.CheckInvoice)
         Me.PanelControl2.Controls.Add(Me.CheckQuotation)
@@ -184,11 +187,11 @@ Partial Class frmSellOrderHis
         'CheckShiping
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShiping, "CheckedChanged")
-        Me.CheckShiping.Location = New System.Drawing.Point(386, 5)
+        Me.CheckShiping.Location = New System.Drawing.Point(566, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShiping, True)
         Me.CheckShiping.Name = "CheckShiping"
         Me.CheckShiping.Properties.Caption = "ใบส่งของ(ขาย)"
-        Me.CheckShiping.Size = New System.Drawing.Size(102, 19)
+        Me.CheckShiping.Size = New System.Drawing.Size(102, 20)
         Me.CheckShiping.TabIndex = 301
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShiping, "Checked")
         '
@@ -199,7 +202,7 @@ Partial Class frmSellOrderHis
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoice, True)
         Me.CheckInvoice.Name = "CheckInvoice"
         Me.CheckInvoice.Properties.Caption = "ใบกำกับภาษี(ขาย)"
-        Me.CheckInvoice.Size = New System.Drawing.Size(107, 19)
+        Me.CheckInvoice.Size = New System.Drawing.Size(107, 20)
         Me.CheckInvoice.TabIndex = 299
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoice, "Checked")
         '
@@ -210,7 +213,7 @@ Partial Class frmSellOrderHis
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckQuotation, True)
         Me.CheckQuotation.Name = "CheckQuotation"
         Me.CheckQuotation.Properties.Caption = "ใบเสนอราคา"
-        Me.CheckQuotation.Size = New System.Drawing.Size(95, 19)
+        Me.CheckQuotation.Size = New System.Drawing.Size(95, 20)
         Me.CheckQuotation.TabIndex = 298
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckQuotation, "Checked")
         '
@@ -221,7 +224,7 @@ Partial Class frmSellOrderHis
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckOrders, True)
         Me.CheckOrders.Name = "CheckOrders"
         Me.CheckOrders.Properties.Caption = "ใบสั่งขาย"
-        Me.CheckOrders.Size = New System.Drawing.Size(75, 19)
+        Me.CheckOrders.Size = New System.Drawing.Size(75, 20)
         Me.CheckOrders.TabIndex = 297
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckOrders, "Checked")
         '
@@ -302,7 +305,7 @@ Partial Class frmSellOrderHis
         Me.CheckIsRefresh.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckIsRefresh.Properties.Appearance.Options.UseFont = True
         Me.CheckIsRefresh.Properties.Caption = "Refresh"
-        Me.CheckIsRefresh.Size = New System.Drawing.Size(72, 19)
+        Me.CheckIsRefresh.Size = New System.Drawing.Size(72, 20)
         Me.CheckIsRefresh.TabIndex = 113
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckIsRefresh, "Checked")
         Me.CheckIsRefresh.Visible = False
@@ -324,6 +327,7 @@ Partial Class frmSellOrderHis
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.LabelControl1, "")
         Me.LabelControl1.Location = New System.Drawing.Point(331, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LabelControl1, True)
@@ -344,7 +348,7 @@ Partial Class frmSellOrderHis
         Me.CheckShowInfo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckShowInfo.Properties.Appearance.Options.UseFont = True
         Me.CheckShowInfo.Properties.Caption = "Show Information"
-        Me.CheckShowInfo.Size = New System.Drawing.Size(126, 19)
+        Me.CheckShowInfo.Size = New System.Drawing.Size(126, 20)
         Me.CheckShowInfo.TabIndex = 116
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShowInfo, "Checked")
         Me.CheckShowInfo.Visible = False
@@ -385,8 +389,8 @@ Partial Class frmSellOrderHis
         Me.btnFind.Appearance.Options.UseFont = True
         Me.btnFind.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnFind, "")
-        Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
-        Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnFind.Location = New System.Drawing.Point(515, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnFind, True)
         Me.btnFind.Name = "btnFind"
@@ -407,7 +411,7 @@ Partial Class frmSellOrderHis
         Me.chkShowDelete.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkShowDelete.Properties.Appearance.Options.UseFont = True
         Me.chkShowDelete.Properties.Caption = "แสดงรายการที่ลบ"
-        Me.chkShowDelete.Size = New System.Drawing.Size(122, 19)
+        Me.chkShowDelete.Size = New System.Drawing.Size(122, 20)
         Me.chkShowDelete.TabIndex = 123
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkShowDelete, "Checked")
         '
@@ -437,12 +441,12 @@ Partial Class frmSellOrderHis
         Me.dtpDateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpDateTo.Properties.Appearance.Options.UseFont = True
         Me.dtpDateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.dtpDateTo.Properties.DisplayFormat.FormatString = "D"
         Me.dtpDateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateTo.Properties.EditFormat.FormatString = "D"
         Me.dtpDateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateTo.Properties.Mask.EditMask = "D"
-        Me.dtpDateTo.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.dtpDateTo.Size = New System.Drawing.Size(139, 20)
         Me.dtpDateTo.TabIndex = 121
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.dtpDateTo, "Text")
@@ -473,12 +477,12 @@ Partial Class frmSellOrderHis
         Me.dtpDateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpDateFrom.Properties.Appearance.Options.UseFont = True
         Me.dtpDateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.dtpDateFrom.Properties.DisplayFormat.FormatString = "D"
         Me.dtpDateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateFrom.Properties.EditFormat.FormatString = "D"
         Me.dtpDateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateFrom.Properties.Mask.EditMask = "D"
-        Me.dtpDateFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.dtpDateFrom.Size = New System.Drawing.Size(139, 20)
         Me.dtpDateFrom.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.dtpDateFrom, "Text")
@@ -542,6 +546,17 @@ Partial Class frmSellOrderHis
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
+        'CheckInvoiceOnline
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
+        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(408, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
+        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
+        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
+        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(134, 20)
+        Me.CheckInvoiceOnline.TabIndex = 302
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
+        '
         'frmSellOrderHis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -549,7 +564,7 @@ Partial Class frmSellOrderHis
         Me.ClientSize = New System.Drawing.Size(1087, 581)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.DatePanel)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmSellOrderHis.IconOptions.Icon"), System.Drawing.Icon)
         Me.Name = "frmSellOrderHis"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ประวัติการซื้อ-ขายสินค้า"
@@ -578,9 +593,9 @@ Partial Class frmSellOrderHis
         CType(Me.CheckShowInfo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkShowDelete.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dtpDateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dtpDateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -588,7 +603,9 @@ Partial Class frmSellOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
@@ -626,4 +643,5 @@ Partial Class frmSellOrderHis
     Friend WithEvents UcProductLists1 As UB.ucProductLists
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents UcCustomer1 As UB.ucCustomer
+    Friend WithEvents CheckInvoiceOnline As DevExpress.XtraEditors.CheckEdit
 End Class

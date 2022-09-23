@@ -528,16 +528,16 @@ Public Class ProductDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM " & TableName
-            SQL = SQL & " WHERE 1=1"
+            SQL &=  " FROM " & TableName
+            SQL &=  " WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & "  AND ProductID=" & pID
+                SQL &=  "  AND ProductID=" & pID
             End If
             If pProductCode.Trim <> "" Then
-                SQL = SQL & "  AND ProductCode='" & pProductCode.Trim & "'"
+                SQL &=  "  AND ProductCode='" & pProductCode.Trim & "'"
             End If
             If pProductName.Trim <> "" Then
-                SQL = SQL & "  AND ProductName='" & pProductName.Trim & "'"
+                SQL &=  "  AND ProductName='" & pProductName.Trim & "'"
             End If
             dataTable = gConnection.executeSelectQuery(SQL, ptr)
             If dataTable.Rows.Count > 0 Then
@@ -722,18 +722,18 @@ Public Class ProductDAO
 
         Try
             SQL = "SELECT ProductID AS ID,ProductCode,ProductName,PriceStandard AS Price,Remark"
-            SQL = SQL & " FROM " & TableName
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM " & TableName
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND ProductID=" & pID
+                SQL &=  "  AND ProductID=" & pID
             End If
             If pProductCode.Trim <> "" Then
-                SQL = SQL & "  AND ProductCode='" & pProductCode.Trim & "'"
+                SQL &=  "  AND ProductCode='" & pProductCode.Trim & "'"
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY ProductCode"
+            SQL &=  " ORDER BY ProductCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductDAO.GetDataTable : " & e.Message)
@@ -748,29 +748,29 @@ Public Class ProductDAO
         Try
             SQL = "SELECT Product.ProductID AS ID,Product.ProductCode,Product.ProductName,Product.Remark"
             If pCustomerID = 0 Then
-                SQL = SQL & ",Product.PriceStandard AS Price "
+                SQL &=  ",Product.PriceStandard AS Price "
             Else
-                SQL = SQL & ",CASE WHEN InformPrice.PriceInform > 0 THEN InformPrice.PriceInform  "
-                SQL = SQL & " ELSE Product.PriceStandard END Price "
+                SQL &=  ",CASE WHEN InformPrice.PriceInform > 0 THEN InformPrice.PriceInform  "
+                SQL &=  " ELSE Product.PriceStandard END Price "
             End If
-            SQL = SQL & " FROM Product"
+            SQL &=  " FROM Product"
             If pCustomerID > 0 Then
-                SQL = SQL & " LEFT OUTER JOIN InformPrice ON Product.ProductID=InformPrice.ProductID AND InformPrice.CustomerID=" & pCustomerID
+                SQL &=  " LEFT OUTER JOIN InformPrice ON Product.ProductID=InformPrice.ProductID AND InformPrice.CustomerID=" & pCustomerID
             End If
-            SQL = SQL & " WHERE Product.IsDelete =0   "
+            SQL &=  " WHERE Product.IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND Product.ProductID=" & pID
+                SQL &=  "  AND Product.ProductID=" & pID
             End If
             If pProductCode.Trim <> "" Then
-                SQL = SQL & "  AND Product.ProductCode='" & pProductCode.Trim & "'"
+                SQL &=  "  AND Product.ProductCode='" & pProductCode.Trim & "'"
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Product.IsInActive = 0"
+                SQL &=  "  AND Product.IsInActive = 0"
             End If
 
-            SQL = SQL & pSQL
+            SQL &=  pSQL
 
-            SQL = SQL & " ORDER BY Product.ProductCode"
+            SQL &=  " ORDER BY Product.ProductCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductDAO.GetDataTableForCombo : " & e.Message)
@@ -797,106 +797,106 @@ Public Class ProductDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("ProductID", TableName, tr)
                     SQL = " INSERT INTO Product  (ProductID,ProductCode,ProductName,ProductNameEng "
-                    SQL = SQL & " ,CostType,PriceStandard,Price1,Price2,Price3,Price4,Price5,Price6"
-                    SQL = SQL & " ,TaxType,IsSN,IsProductSet,UnitMainID,UnitMainIDBuy,UnitSecondID,ProductFomulaID "
-                    SQL = SQL & " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
-                    SQL = SQL & " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
-                    SQL = SQL & " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
-                    SQL = SQL & " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,GuaranteeDay)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @Code"
-                    SQL = SQL & " ,  @ProductName"
-                    SQL = SQL & " ,  @ProductNameEng"
-                    SQL = SQL & " ,  @CostType"
-                    SQL = SQL & " ,  @PriceStandard"
-                    SQL = SQL & " ,  @Price1"
-                    SQL = SQL & " ,  @Price2"
-                    SQL = SQL & " ,  @Price3"
-                    SQL = SQL & " ,  @Price4"
-                    SQL = SQL & " ,  @Price5"
-                    SQL = SQL & " ,  @Price6"
-                    SQL = SQL & " ,  @TaxType"
-                    SQL = SQL & " ,  @IsSN"
-                    SQL = SQL & " ,  @IsProductSet"
-                    SQL = SQL & " ,  @UnitMainID"
-                    SQL = SQL & " ,  @UnitMainIDBuy"
-                    SQL = SQL & " ,  @UnitSecondID"
-                    SQL = SQL & " ,  @ProductFomulaID"
-                    SQL = SQL & " ,  @ProductCategoryID"
-                    SQL = SQL & " ,  @ProductBrandID"
-                    SQL = SQL & " ,  @ProductTypeID"
-                    SQL = SQL & " ,  @ProductGroupID"
-                    SQL = SQL & " ,  @ProductGroup1"
-                    SQL = SQL & " ,  @ProductGroup2"
-                    SQL = SQL & " ,  @ProductGroup3"
-                    SQL = SQL & " ,  @ProductGroup4"
-                    SQL = SQL & " ,  @ProductGroup5"
-                    SQL = SQL & " ,  @ProductDimension1"
-                    SQL = SQL & " ,  @ProductDimension2"
-                    SQL = SQL & " ,  @ProductDimension3"
-                    SQL = SQL & " ,  @ProductDimension4"
-                    SQL = SQL & " ,  @ProductDimension5"
-                    SQL = SQL & " ,  @Weight"
-                    SQL = SQL & " ,  @Size"
-                    SQL = SQL & " ,  @Generation"
-                    SQL = SQL & " ,  @Color"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ,  @ImportTXID"
-                    SQL = SQL & " ,  @GuaranteeDay"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CostType,PriceStandard,Price1,Price2,Price3,Price4,Price5,Price6"
+                    SQL &=  " ,TaxType,IsSN,IsProductSet,UnitMainID,UnitMainIDBuy,UnitSecondID,ProductFomulaID "
+                    SQL &=  " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
+                    SQL &=  " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
+                    SQL &=  " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
+                    SQL &=  " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,GuaranteeDay)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @Code"
+                    SQL &=  " ,  @ProductName"
+                    SQL &=  " ,  @ProductNameEng"
+                    SQL &=  " ,  @CostType"
+                    SQL &=  " ,  @PriceStandard"
+                    SQL &=  " ,  @Price1"
+                    SQL &=  " ,  @Price2"
+                    SQL &=  " ,  @Price3"
+                    SQL &=  " ,  @Price4"
+                    SQL &=  " ,  @Price5"
+                    SQL &=  " ,  @Price6"
+                    SQL &=  " ,  @TaxType"
+                    SQL &=  " ,  @IsSN"
+                    SQL &=  " ,  @IsProductSet"
+                    SQL &=  " ,  @UnitMainID"
+                    SQL &=  " ,  @UnitMainIDBuy"
+                    SQL &=  " ,  @UnitSecondID"
+                    SQL &=  " ,  @ProductFomulaID"
+                    SQL &=  " ,  @ProductCategoryID"
+                    SQL &=  " ,  @ProductBrandID"
+                    SQL &=  " ,  @ProductTypeID"
+                    SQL &=  " ,  @ProductGroupID"
+                    SQL &=  " ,  @ProductGroup1"
+                    SQL &=  " ,  @ProductGroup2"
+                    SQL &=  " ,  @ProductGroup3"
+                    SQL &=  " ,  @ProductGroup4"
+                    SQL &=  " ,  @ProductGroup5"
+                    SQL &=  " ,  @ProductDimension1"
+                    SQL &=  " ,  @ProductDimension2"
+                    SQL &=  " ,  @ProductDimension3"
+                    SQL &=  " ,  @ProductDimension4"
+                    SQL &=  " ,  @ProductDimension5"
+                    SQL &=  " ,  @Weight"
+                    SQL &=  " ,  @Size"
+                    SQL &=  " ,  @Generation"
+                    SQL &=  " ,  @Color"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ,  @ImportTXID"
+                    SQL &=  " ,  @GuaranteeDay"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Product SET "
-                    SQL = SQL & "  ProductCode=@Code"
-                    SQL = SQL & " ,  ProductName=@ProductName"
-                    SQL = SQL & " ,  ProductNameEng=@ProductNameEng"
-                    SQL = SQL & " ,  CostType=@CostType"
-                    SQL = SQL & " ,  PriceStandard=@PriceStandard"
-                    SQL = SQL & " ,  Price1=@Price1"
-                    SQL = SQL & " ,  Price2=@Price2"
-                    SQL = SQL & " ,  Price3=@Price3"
-                    SQL = SQL & " ,  Price4=@Price4"
-                    SQL = SQL & " ,  Price5=@Price5"
-                    SQL = SQL & " ,  Price6=@Price6"
-                    SQL = SQL & " ,  TaxType=@TaxType"
-                    SQL = SQL & " ,  IsSN=@IsSN"
-                    SQL = SQL & " ,  IsProductSet=@IsProductSet"
-                    SQL = SQL & " ,  UnitSecondID=@UnitSecondID"
-                    SQL = SQL & " ,  UnitMainID=@UnitMainID"
-                    SQL = SQL & " ,  UnitMainIDBuy=@UnitMainIDBuy"
-                    SQL = SQL & " ,  ProductFomulaID=@ProductFomulaID"
-                    SQL = SQL & " ,  ProductCategoryID=@ProductCategoryID"
-                    SQL = SQL & " ,  ProductBrandID=@ProductBrandID"
-                    SQL = SQL & " ,  ProductTypeID=@ProductTypeID"
-                    SQL = SQL & " ,  ProductGroupID=@ProductGroupID"
-                    SQL = SQL & " ,  ProductGroup1=@ProductGroup1"
-                    SQL = SQL & " ,  ProductGroup2=@ProductGroup2"
-                    SQL = SQL & " ,  ProductGroup3=@ProductGroup3"
-                    SQL = SQL & " ,  ProductGroup4=@ProductGroup4"
-                    SQL = SQL & " ,  ProductGroup5=@ProductGroup5"
-                    SQL = SQL & " ,  ProductDimension1=@ProductDimension1"
-                    SQL = SQL & " ,  ProductDimension2=@ProductDimension2"
-                    SQL = SQL & " ,  ProductDimension3=@ProductDimension3"
-                    SQL = SQL & " ,  ProductDimension4=@ProductDimension4"
-                    SQL = SQL & " ,  ProductDimension5=@ProductDimension5"
-                    SQL = SQL & " ,  Weight=@Weight"
-                    SQL = SQL & " ,  Size=@Size"
-                    SQL = SQL & " ,  Generation=@Generation"
-                    SQL = SQL & " ,  Color=@Color"
-                    SQL = SQL & " ,  GuaranteeDay=@GuaranteeDay"
-                    SQL = SQL & " ,Remark= @Remark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE ProductID= @mIDs"
+                    SQL &=  "  ProductCode=@Code"
+                    SQL &=  " ,  ProductName=@ProductName"
+                    SQL &=  " ,  ProductNameEng=@ProductNameEng"
+                    SQL &=  " ,  CostType=@CostType"
+                    SQL &=  " ,  PriceStandard=@PriceStandard"
+                    SQL &=  " ,  Price1=@Price1"
+                    SQL &=  " ,  Price2=@Price2"
+                    SQL &=  " ,  Price3=@Price3"
+                    SQL &=  " ,  Price4=@Price4"
+                    SQL &=  " ,  Price5=@Price5"
+                    SQL &=  " ,  Price6=@Price6"
+                    SQL &=  " ,  TaxType=@TaxType"
+                    SQL &=  " ,  IsSN=@IsSN"
+                    SQL &=  " ,  IsProductSet=@IsProductSet"
+                    SQL &=  " ,  UnitSecondID=@UnitSecondID"
+                    SQL &=  " ,  UnitMainID=@UnitMainID"
+                    SQL &=  " ,  UnitMainIDBuy=@UnitMainIDBuy"
+                    SQL &=  " ,  ProductFomulaID=@ProductFomulaID"
+                    SQL &=  " ,  ProductCategoryID=@ProductCategoryID"
+                    SQL &=  " ,  ProductBrandID=@ProductBrandID"
+                    SQL &=  " ,  ProductTypeID=@ProductTypeID"
+                    SQL &=  " ,  ProductGroupID=@ProductGroupID"
+                    SQL &=  " ,  ProductGroup1=@ProductGroup1"
+                    SQL &=  " ,  ProductGroup2=@ProductGroup2"
+                    SQL &=  " ,  ProductGroup3=@ProductGroup3"
+                    SQL &=  " ,  ProductGroup4=@ProductGroup4"
+                    SQL &=  " ,  ProductGroup5=@ProductGroup5"
+                    SQL &=  " ,  ProductDimension1=@ProductDimension1"
+                    SQL &=  " ,  ProductDimension2=@ProductDimension2"
+                    SQL &=  " ,  ProductDimension3=@ProductDimension3"
+                    SQL &=  " ,  ProductDimension4=@ProductDimension4"
+                    SQL &=  " ,  ProductDimension5=@ProductDimension5"
+                    SQL &=  " ,  Weight=@Weight"
+                    SQL &=  " ,  Size=@Size"
+                    SQL &=  " ,  Generation=@Generation"
+                    SQL &=  " ,  Color=@Color"
+                    SQL &=  " ,  GuaranteeDay=@GuaranteeDay"
+                    SQL &=  " ,Remark= @Remark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE ProductID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Product SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE ProductID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE ProductID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -986,9 +986,9 @@ Public Class ProductDAO
 
         Try
             SQL = "SELECT ProductID  FROM Product"
-            SQL = SQL & " WHERE IsDelete =0 AND ProductCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND ProductCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND ProductID <> " & ID
+                SQL &=  " AND ProductID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -1007,7 +1007,7 @@ Public Class ProductDAO
         IsSerialNumber = 0
         Try
             SQL = "SELECT IsSN  FROM Product"
-            SQL = SQL & " WHERE ProductID =" & pProductID
+            SQL &=  " WHERE ProductID =" & pProductID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             For Each dr2 As DataRow In dataTable.Rows
                 Return ConvertNullToZero(dr2("IsSN"))
@@ -1027,8 +1027,8 @@ Public Class ProductDAO
 
         Try
             SQL = "SELECT ProductID  FROM ProductList"
-            SQL = SQL & " WHERE IsDelete =0 AND RefID in ( select OrderID from  Orders  WHERE IsDelete =0  " & ")"
-            SQL = SQL & " and ProductID=" & ID
+            SQL &=  " WHERE IsDelete =0 AND RefID in ( select OrderID from  Orders  WHERE IsDelete =0  " & ")"
+            SQL &=  " and ProductID=" & ID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
         Catch e As Exception

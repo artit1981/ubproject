@@ -45,15 +45,15 @@ Public Class CustomerListDAO
         ''Dim lFileAttach As New FileAttachDAO
         'Try
         '    SQL = "SELECT *   "
-        '    SQL = SQL & " FROM Employee "
-        '    SQL = SQL & " WHERE 1=1"
+        '    SQL &=  " FROM Employee "
+        '    SQL &=  " WHERE 1=1"
         '    If pID > 0 Then
-        '        SQL = SQL & " and EmpID=" & pID
+        '        SQL &=  " and EmpID=" & pID
         '    End If
         '    If pName <> "" Then
-        '        SQL = SQL & " and Firstname like '%" & pName & "%'"
+        '        SQL &=  " and Firstname like '%" & pName & "%'"
         '    End If
-        '    SQL = SQL & " ORDER BY EmpCode"
+        '    SQL &=  " ORDER BY EmpCode"
         '    dataTable = gConnection.executeSelectQuery(SQL, tr)
         '    If dataTable.Rows.Count > 0 Then
         '        For Each dr As DataRow In dataTable.Rows
@@ -145,22 +145,22 @@ Public Class CustomerListDAO
 
         Try
             SQL = "SELECT CustomerList.CustomerID ,Customer.CustomerCode "
-            SQL = SQL & " ,case when Customer.CompanyName='' then Customer.Title + Customer.Firstname "
-            SQL = SQL & " + ' ' + Customer.LastName else Customer.CompanyName end CusName"
-            SQL = SQL & " ,CustomerType "
-            SQL = SQL & " ,Address.Phone1,Address.Email1 "
+            SQL &=  " ,case when Customer.CompanyName='' then Customer.Title + Customer.Firstname "
+            SQL &=  " + ' ' + Customer.LastName else Customer.CompanyName end CusName"
+            SQL &=  " ,CustomerType "
+            SQL &=  " ,Address.Phone1,Address.Email1 "
 
-            SQL = SQL & " FROM CustomerList  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Customer.CustomerID=CustomerList.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Address ON Customer.AddressID=Address.AddressID  "
+            SQL &=  " FROM CustomerList  "
+            SQL &=  " LEFT OUTER JOIN Customer ON Customer.CustomerID=CustomerList.CustomerID  "
+            SQL &=  " LEFT OUTER JOIN Address ON Customer.AddressID=Address.AddressID  "
             'If pRefID > 0 Then
-            SQL = SQL & "  where CustomerList.RefID=" & pRefID
+            SQL &=  "  where CustomerList.RefID=" & pRefID
             'End If
             'If pRefTableID > 0 Then
-            SQL = SQL & "  AND CustomerList.RefTableID=" & pRefTableID
+            SQL &=  "  AND CustomerList.RefTableID=" & pRefTableID
             'End If
-            SQL = SQL & " AND CustomerList.IsDelete =" & pIsDelete
-            SQL = SQL & " ORDER BY Customer.CustomerCode "
+            SQL &=  " AND CustomerList.IsDelete =" & pIsDelete
+            SQL &=  " ORDER BY Customer.CustomerCode "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CustomerListDAO.GetDataTable : " & e.Message)
@@ -178,15 +178,15 @@ Public Class CustomerListDAO
             Select Case ModeData
                 Case DataMode.ModeNew, DataMode.ModeEdit
                     SQL = " INSERT INTO CustomerList  (RefID,RefTableID,CustomerID,IsDelete )"
-                    SQL = SQL & " VALUES ( @mRefID"
-                    SQL = SQL & " ,  @mRefTable"
-                    SQL = SQL & " ,  @mCustomerID"
-                    SQL = SQL & " ,  0"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( @mRefID"
+                    SQL &=  " ,  @mRefTable"
+                    SQL &=  " ,  @mCustomerID"
+                    SQL &=  " ,  0"
+                    SQL &=  " ) "
                 Case DataMode.ModeDelete
                     SQL = "  Update CustomerList Set IsDelete=1 "
-                    SQL = SQL & " WHERE RefTableID= @mRefTable"
-                    SQL = SQL & " AND RefID= @mRefID"
+                    SQL &=  " WHERE RefTableID= @mRefTable"
+                    SQL &=  " AND RefID= @mRefID"
                 Case Else
                     Return False
                     Exit Function
@@ -211,8 +211,8 @@ Public Class CustomerListDAO
         Try
             If RefID > 0 And RefTableID > 0 Then
                 SQL = " Delete from  CustomerList  "
-                SQL = SQL & " WHERE RefTableID= @mRefTable"
-                SQL = SQL & " AND RefID= @mRefID"
+                SQL &=  " WHERE RefTableID= @mRefTable"
+                SQL &=  " AND RefID= @mRefID"
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))
@@ -235,8 +235,8 @@ Public Class CustomerListDAO
         Try
             If RefID > 0 And RefTableID > 0 Then
                 SQL = " Update CustomerList Set IsDelete=1 "
-                SQL = SQL & " WHERE RefTableID= @mRefTable"
-                SQL = SQL & " AND RefID= @mRefID"
+                SQL &=  " WHERE RefTableID= @mRefTable"
+                SQL &=  " AND RefID= @mRefID"
                 myCommand = New SqlCommand
                 myCommand.CommandText = SQL
                 myCommand.Parameters.Add(New SqlParameter("@mRefID", RefID))

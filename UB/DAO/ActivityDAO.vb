@@ -10,18 +10,18 @@ Public Class ActivityDAO
 
         Try
             SQL = "SELECT A.ActivityDate AS Date,A.ActivityDate AS Time,A.Action,B.MenuDisplay,C.UserName,A.ComputerName,A.Remark"
-            SQL = SQL & " FROM Activity A"
-            SQL = SQL & " LEFT OUTER JOIN Menu B ON B.MenuID=A.MenuID "
-            SQL = SQL & " LEFT OUTER JOIN Admin_User C ON C.UserID=A.UserID  "
-            SQL = SQL & " WHERE  ActivityDate between '" & formatSQLDateTime(pFromDate) & "' AND '" & formatSQLDateTime(pToDate) & "'"
+            SQL &= " FROM Activity A"
+            SQL &= " LEFT OUTER JOIN Menu B ON B.MenuID=A.MenuID "
+            SQL &= " LEFT OUTER JOIN Admin_User C ON C.UserID=A.UserID  "
+            SQL &= " WHERE  ActivityDate between '" & formatSQLDateTime(pFromDate) & "' AND '" & formatSQLDateTime(pToDate) & "'"
             If pUserID > 0 Then
-                SQL = SQL & "  AND A.UserID=" & pUserID
+                SQL &= "  AND A.UserID=" & pUserID
             End If
 
             If pMenuID > 0 Then
-                SQL = SQL & "  AND A.MenuID=" & pMenuID
+                SQL &= "  AND A.MenuID=" & pMenuID
             End If
-            SQL = SQL & " ORDER BY A.ActivityDate,A.Action,B.MenuDisplay,C.UserName"
+            SQL &= " ORDER BY A.ActivityDate,A.Action,B.MenuDisplay,C.UserName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ActivityDAO.GetDataTable : " & e.Message)
@@ -44,13 +44,13 @@ Public Class ActivityDAO
                 tr = ptr
             End If
             SQL = " INSERT INTO Activity  (ActivityDate,MenuID,UserID,Action,ComputerName,Remark)"
-            SQL = SQL & " VALUES ( @ActivityDate"
-            SQL = SQL & " ,  @MenuID"
-            SQL = SQL & " ,  @UserID"
-            SQL = SQL & " ,  @Action"
-            SQL = SQL & " ,  @ComputerName"
-            SQL = SQL & " ,  @Remark"
-            SQL = SQL & " ) "
+            SQL &= " VALUES ( @ActivityDate"
+            SQL &= " ,  @MenuID"
+            SQL &= " ,  @UserID"
+            SQL &= " ,  @Action"
+            SQL &= " ,  @ComputerName"
+            SQL &= " ,  @Remark"
+            SQL &= " ) "
 
             myCommand = New SqlCommand
             myCommand.CommandText = SQL

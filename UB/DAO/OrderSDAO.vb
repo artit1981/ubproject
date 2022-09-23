@@ -25,18 +25,18 @@ Public Class OrderSDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Orders WHERE 1=1"
+            SQL &= " FROM Orders WHERE 1=1"
             If pID > 0 Then
-                SQL = SQL & " and OrderID=" & pID
+                SQL &= " and OrderID=" & pID
             End If
             If TableID > 0 Then
-                SQL = SQL & " and  TableID=" & TableID
+                SQL &= " and  TableID=" & TableID
             End If
             If pOrderCode.Trim <> "" Then
-                SQL = SQL & " and  OrderCode='" & pOrderCode.Trim & "'"
-                SQL = SQL & " and  IsCancel=0 and  IsDelete=0 "
+                SQL &= " and  OrderCode='" & pOrderCode.Trim & "'"
+                SQL &= " and  IsCancel=0 and  IsDelete=0 "
             End If
-            SQL = SQL & " ORDER BY OrderCode"
+            SQL &= " ORDER BY OrderCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -199,7 +199,7 @@ Public Class OrderSDAO
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveBuyOrder And TableID = MasterType.PurchaseOrder Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
-                    ElseIf gIsApproveInvoice And TableID = MasterType.Invoice Then
+                    ElseIf gIsApproveInvoice And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveShiping And TableID = MasterType.Shiping Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
@@ -243,7 +243,7 @@ Public Class OrderSDAO
 
                     '*** Check Under LimitS amount
                     lIsCheckOver = False
-                    If gIsCheckLimitInvoice = True And TableID = MasterType.Invoice Then
+                    If gIsCheckLimitInvoice = True And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
                         lIsCheckOver = True
                     ElseIf gIsCheckLimitShiping = True And TableID = MasterType.Shiping Then
                         lIsCheckOver = True
@@ -351,7 +351,7 @@ Public Class OrderSDAO
             'Ref Order Status
             If IsNothing(RefToOrderID) = False Then
                 Select Case TableID
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
                         , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn
                         If RefToOrderID.Count > 0 Then
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
@@ -403,85 +403,85 @@ Public Class OrderSDAO
 
         Try
             Select Case pTableID
-                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.Borrow, MasterType.Bill _
+                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Borrow, MasterType.Bill _
                     , MasterType.AddCredit, MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.ReceiptCut _
                     , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose, MasterType.ClaimReturn
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    SQL = SQL & ",Customer.CustomerCode ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL &= ",Customer.CustomerCode ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 Case MasterType.Quotation, MasterType.Quotation2
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate,Orders.ExpireDate  "
-                    SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL &= " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
                 Case MasterType.PurchaseOrder, MasterType.Asset, MasterType.ShipingBuy, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy _
                     , MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.CancelPO, MasterType.ClaimResult
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL &= " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             End Select
 
             If TableID = MasterType.StockIn Or TableID = MasterType.UpdateStock Then
                 If TableID = MasterType.StockIn Then
-                    SQL = SQL & " ,PO.OrderCode AS PO "
+                    SQL &= " ,PO.OrderCode AS PO "
                 End If
-                SQL = SQL & " ,'' as OrderStatus "
+                SQL &= " ,'' as OrderStatus "
             Else
-                SQL = SQL & " ,Orders.OrderStatus "
+                SQL &= " ,Orders.OrderStatus "
             End If
             If TableID = MasterType.Reserve Then
-                SQL = SQL & " ,Orders.MakePOStatus "
-                SQL = SQL & " ,PO2.OrderCode AS POCode "
+                SQL &= " ,Orders.MakePOStatus "
+                SQL &= " ,PO2.OrderCode AS POCode "
             End If
             If TableID = MasterType.Quotation Then
-                SQL = SQL & ",RefOrder.OrderCode AS RefCode  "
+                SQL &= ",RefOrder.OrderCode AS RefCode  "
             End If
-            SQL = SQL & "  ,Orders.GrandTotal"
+            SQL &= "  ,Orders.GrandTotal"
             If TableID = MasterType.SellOrders Then
-                SQL = SQL & ",Invoice.OrderCode AS InvoiceCode,Shiping.OrderCode AS ShipingCode,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
+                SQL &= ",Invoice.OrderCode AS InvoiceCode,Shiping.OrderCode AS ShipingCode,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
-            If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Then
-                SQL = SQL & ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
+            If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Or TableID = MasterType.InvoiceOnline Then
+                SQL &= ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
             If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy _
                 Or TableID = MasterType.AddCredit Or TableID = MasterType.ReduceCredit Then
-                SQL = SQL & ",Orders.InvoiceSuplierID "
+                SQL &= ",Orders.InvoiceSuplierID "
             End If
-            SQL = SQL & ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
+            SQL &= ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
 
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime "
-            SQL = SQL & " ,(select max(ChequeID) from Cheque where Cheque.RefOrderID=Orders.OrderID and Cheque.IsDelete=0 ) as ChequeID"
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Orders AS Invoice ON Invoice.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Invoice.IsDelete=0 and Invoice.TableID=" & MasterType.Invoice
-            SQL = SQL & " LEFT OUTER JOIN Orders AS Shiping ON Shiping.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Shiping.IsDelete=0 and Shiping.TableID=" & MasterType.Shiping
-            SQL = SQL & " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
-            SQL = SQL & " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill
+            SQL &= " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime "
+            SQL &= " ,(select max(ChequeID) from Cheque where Cheque.RefOrderID=Orders.OrderID and Cheque.IsDelete=0 ) as ChequeID"
+            SQL &= " FROM Orders  "
+            SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &= " LEFT OUTER JOIN Orders AS Invoice ON Invoice.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Invoice.IsDelete=0 and Invoice.TableID in(" & MasterType.Invoice & "," & MasterType.InvoiceOnline & ")"
+            SQL &= " LEFT OUTER JOIN Orders AS Shiping ON Shiping.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Shiping.IsDelete=0 and Shiping.TableID=" & MasterType.Shiping
+            SQL &= " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+            SQL &= " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill
             If TableID = MasterType.Quotation Then
-                SQL = SQL & " LEFT OUTER JOIN Orders AS RefOrder ON Orders.OrderStatus in('Close','Receive') and RefOrder.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and RefOrder.IsDelete=0  "
+                SQL &= " LEFT OUTER JOIN Orders AS RefOrder ON Orders.OrderStatus in('Close','Receive') and RefOrder.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and RefOrder.IsDelete=0  "
             End If
             If TableID = MasterType.Reserve Then
-                SQL = SQL & " LEFT OUTER JOIN Orders AS PO2 ON PO2.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefReserveID=Orders.OrderID  ) and PO2.IsDelete=0 and PO2.TableID in(" & MasterType.PurchaseOrder & "," & MasterType.CancelPO & ")"
+                SQL &= " LEFT OUTER JOIN Orders AS PO2 ON PO2.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefReserveID=Orders.OrderID  ) and PO2.IsDelete=0 and PO2.TableID in(" & MasterType.PurchaseOrder & "," & MasterType.CancelPO & ")"
             End If
-            SQL = SQL & " LEFT OUTER JOIN Orders AS PO ON PO.OrderID=(select max(RefOrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.OrderID=Orders.OrderID  ) and PO.IsDelete=0  "
+            SQL &= " LEFT OUTER JOIN Orders AS PO ON PO.OrderID=(select max(RefOrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.OrderID=Orders.OrderID  ) and PO.IsDelete=0  "
 
-            SQL = SQL & " WHERE Orders.TableID =" & TableID
+            SQL &= " WHERE Orders.TableID =" & TableID
             If pID > 0 Then
-                SQL = SQL & "  AND Orders.OrderID=" & pID
+                SQL &= "  AND Orders.OrderID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND Orders.IsDelete = 0"
-                SQL = SQL & "  AND Orders.IsCancel = 0"
+                SQL &= "  AND Orders.IsDelete = 0"
+                SQL &= "  AND Orders.IsCancel = 0"
             Else
                 'SQL = SQL & "  AND Orders.IsDelete = 0"
             End If
             ''Set View level
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND Employee.TerritoryID=" & gTerritoryID
+                SQL &= "  AND Employee.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND Employee.EmpID=" & gEmpID
+                SQL &= "  AND Employee.EmpID=" & gEmpID
             End If
             If pOtherCondition <> "" Then
-                SQL = SQL & pOtherCondition
+                SQL &= pOtherCondition
             End If
-            SQL = SQL & " ORDER BY Orders.OrderCode"
+            SQL &= " ORDER BY Orders.OrderCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTable : " & e.Message)
@@ -498,54 +498,54 @@ Public Class OrderSDAO
             SQL = "SELECT Orders.OrderID AS ID, Orders.OrderCode  Code,Orders.CustomerID"
             'Select Case pTableID
             '    Case MasterType.Quotation
-            SQL = SQL & " ,Orders.OrderDate,Orders.ExpireDate  "
+            SQL &= " ,Orders.OrderDate,Orders.ExpireDate  "
             'Case Else
-            '    SQL = SQL & " ,Orders.OrderDate  "
+            '    SQL &=  " ,Orders.OrderDate  "
             'End Select
-            SQL = SQL & ",Orders.InvoiceSuplierID "
-            SQL = SQL & " ,Orders.OrderStatus,Orders.GrandTotal,Orders.PayTotal "
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-            SQL = SQL & " and Orders.TableID =" & pTableID
+            SQL &= ",Orders.InvoiceSuplierID "
+            SQL &= " ,Orders.OrderStatus,Orders.GrandTotal,Orders.PayTotal "
+            SQL &= " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
+            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " FROM Orders  "
+            SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL &= " and Orders.TableID =" & pTableID
             If pSQL <> "" Then
-                SQL = SQL & pSQL
+                SQL &= pSQL
             End If
 
             If pCustomerID > 0 Then
-                SQL = SQL & "  AND Orders.CustomerID=" & pCustomerID
+                SQL &= "  AND Orders.CustomerID=" & pCustomerID
             End If
-            SQL = SQL & "  AND Orders.IsInActive = 0"
-            SQL = SQL & "  AND Orders.IsCancel= 0"
-            SQL = SQL & "  AND Orders.OrderDate <= '" & formatSQLDate(pEffectDate) & "'"
+            SQL &= "  AND Orders.IsInActive = 0"
+            SQL &= "  AND Orders.IsCancel= 0"
+            SQL &= "  AND Orders.OrderDate <= '" & formatSQLDate(pEffectDate) & "'"
             If pTableID = MasterType.Quotation Then
-                SQL = SQL & "  AND ExpireDate > '" & formatSQLDate(pEffectDate) & "'"
+                SQL &= "  AND ExpireDate > '" & formatSQLDate(pEffectDate) & "'"
             End If
 
             If pIsOpenOnly Then
                 If pTableID = MasterType.PurchaseOrder And pTXOrderType = MasterType.StockIn Then
-                    SQL = SQL & "  AND Orders.OrderStatus In ('Open','Approve','Waiting' ) "
+                    SQL &= "  AND Orders.OrderStatus In ('Open','Approve','Waiting' ) "
                 ElseIf pTableID = MasterType.PurchaseOrder Then
-                    SQL = SQL & "  AND Orders.OrderStatus In ('Open','Approve','Waiting','Receive' ) "
+                    SQL &= "  AND Orders.OrderStatus In ('Open','Approve','Waiting','Receive' ) "
                 ElseIf pTXOrderType = MasterType.Bill Then
-                    SQL = SQL & "  AND Orders.OrderStatus In ('Open','Approve'  ) "
+                    SQL &= "  AND Orders.OrderStatus In ('Open','Approve'  ) "
                 ElseIf pTXOrderType = MasterType.Receipt Or pTXOrderType = MasterType.ReceiptCut Then
-                    SQL = SQL & "  AND Orders.OrderStatus In ('Open','Approve','Billed' ) "
+                    SQL &= "  AND Orders.OrderStatus In ('Open','Approve','Billed' ) "
                 Else
-                    SQL = SQL & "  AND Orders.OrderStatus In ('Open','Approve','Waiting') "
+                    SQL &= "  AND Orders.OrderStatus In ('Open','Approve','Waiting') "
                 End If
 
             End If
             ''Set View level
             If gViewLevel = eViewLevel.Group Then
-                SQL = SQL & "  AND Employee.TerritoryID=" & gTerritoryID
+                SQL &= "  AND Employee.TerritoryID=" & gTerritoryID
             ElseIf gViewLevel = eViewLevel.OnlyOwner Then
-                SQL = SQL & "  AND Employee.EmpID=" & gEmpID
+                SQL &= "  AND Employee.EmpID=" & gEmpID
             End If
-            SQL = SQL & " ORDER BY Orders.OrderCode"
+            SQL &= " ORDER BY Orders.OrderCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
 
@@ -561,25 +561,25 @@ Public Class OrderSDAO
 
         Try
             SQL = " SELECT Orders.OrderID,Orders.OrderCode,Orders.OrderDate,Orders.ExpireDate,Orders.GrandTotal"
-            SQL = SQL & " ,case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
-            SQL = SQL & " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' "
-            SQL = SQL & " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
-            SQL = SQL & " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
-            SQL = SQL & " ,Orders.RefReceiptID AS ReceiptID"
-            SQL = SQL & " "
+            SQL &= " ,case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
+            SQL &= " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' "
+            SQL &= " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
+            SQL &= " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
+            SQL &= " ,Orders.RefReceiptID AS ReceiptID"
+            SQL &= " "
 
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            SQL &= " FROM Orders  "
+            SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
             'SQL = SQL & " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
 
-            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-            SQL = SQL & " and Orders.TableID in(" & pOrderType & ")"
-            SQL = SQL & "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
-            SQL = SQL & "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
-            SQL = SQL & " AND Orders.CustomerID in(" & pCusList & ")"
-            SQL = SQL & " ORDER BY Customer.CustomerCode,Orders.OrderDate"
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL &= " and Orders.TableID in(" & pOrderType & ")"
+            SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
+            SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
+            SQL &= " AND Orders.CustomerID in(" & pCusList & ")"
+            SQL &= " ORDER BY Customer.CustomerCode,Orders.OrderDate"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForDebtAnalyst : " & e.Message)
@@ -593,17 +593,17 @@ Public Class OrderSDAO
 
         Try
             SQL = " SELECT Orders.OrderID,Orders.CustomerID,Orders.OrderCode,Product.ProductName "
-            SQL = SQL & " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL = SQL & " ,SUM((ProductList.PriceMain-ProductList.Cost) * ProductList.RateUnit) AS TotalGain,SUM(ProductList.Total) AS TotalAmount"
-            SQL = SQL & " FROM Orders  "
-            SQL = SQL & " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL = SQL & " LEFT OUTER JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  "
-            SQL = SQL & " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
-            SQL = SQL & " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-            SQL = SQL & " and Orders.CampaignID =" & pCampaignID
-            SQL = SQL & "  AND Orders.OrderStatus Not In ('NotApprove','Cancel') "
-            SQL = SQL & " group by Orders.OrderID,Orders.CustomerID,Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName "
-            SQL = SQL & " ORDER BY Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName"
+            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " ,SUM((ProductList.PriceMain-ProductList.Cost) * ProductList.RateUnit) AS TotalGain,SUM(ProductList.Total) AS TotalAmount"
+            SQL &= " FROM Orders  "
+            SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &= " LEFT OUTER JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  "
+            SQL &= " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL &= " and Orders.CampaignID =" & pCampaignID
+            SQL &= "  AND Orders.OrderStatus Not In ('NotApprove','Cancel') "
+            SQL &= " group by Orders.OrderID,Orders.CustomerID,Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName "
+            SQL &= " ORDER BY Orders.OrderCode,Customer.CompanyName,Customer.Title,Customer.Firstname,Customer.LastName,Product.ProductName"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForCampaign : " & e.Message)
@@ -617,9 +617,9 @@ Public Class OrderSDAO
 
         Try
             SQL = "SELECT  OrdersRef.OrderID,OrdersRef.RefOrderID, Orders.OrderCode  "
-            SQL = SQL & " FROM OrdersRef,Orders  "
-            SQL = SQL & " WHERE OrdersRef.RefOrderID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
-            SQL = SQL & " ORDER BY Orders.OrderCode"
+            SQL &= " FROM OrdersRef,Orders  "
+            SQL &= " WHERE OrdersRef.RefOrderID=Orders.OrderID and Orders.IsDelete=0 and OrdersRef.IsDelete=0  and OrdersRef.OrderID=" & pParentOrderID
+            SQL &= " ORDER BY Orders.OrderCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
 
             RefToOrderID.Clear()
@@ -646,10 +646,10 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT OrderID  FROM Orders"
-            SQL = SQL & " WHERE IsDelete =0 AND OrderCode='" & Trim(Code) & "'"
-            SQL = SQL & " and TableID=" & TableID
+            SQL &= " WHERE IsDelete =0 AND OrderCode='" & Trim(Code) & "'"
+            SQL &= " and TableID=" & TableID
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND OrderID <> " & ID
+                SQL &= " AND OrderID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -672,9 +672,9 @@ Public Class OrderSDAO
             'SQL = SQL & " and Orders.IsDelete=0"
 
             'If TableID = MasterType.Quotation Then
-            '    SQL = SQL & " and Orders.TableID in(" & MasterType.Reserve & ")"
+            '    SQL &=  " and Orders.TableID in(" & MasterType.Reserve & ")"
             'ElseIf TableID = MasterType.Reserve Then
-            '    SQL = SQL & " and Orders.TableID in(" & MasterType.SellOrders & ")"
+            '    SQL &=  " and Orders.TableID in(" & MasterType.SellOrders & ")"
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'If dataTable.Rows.Count > 0 Then
@@ -696,9 +696,9 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*))  "
-            SQL = SQL & " FROM Orders"
-            SQL = SQL & " WITH (NOLOCK)"
-            SQL = SQL & " where TableID=" & TableID & " ;"
+            SQL &= " FROM Orders"
+            SQL &= " WITH (NOLOCK)"
+            SQL &= " where TableID=" & TableID & " ;"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -1194,7 +1194,7 @@ Public Class OrderSDAO
             gConnection.executeInsertQuery(Sql, ptr)
 
             'Keep data detail log
-            InsertOrderLog(ptr)
+            'InsertOrderLog(ptr)
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrder : " & e.Message)

@@ -226,28 +226,28 @@ Public Class ChequeDAO
 
         Try
             SQL = "SELECT  ChequeID as ID,RefOrderID,BankDocType,CashType,ChequeOwnerTH,ChequeOwnerEN, BankID,BankAccountID "
-            SQL = SQL & " ,ChequeNo,ChequeDate,ChequeBalance,ChequePay,BankBranch,ChequeType,ChequeStep ,ChequeStatus,Cheque.Remark  "
-            SQL = SQL & " ,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,ChequeOwnerTH,Orders.GrandTotal"
-            SQL = SQL & " FROM Cheque"
-            SQL = SQL & " LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 and Orders.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
-            SQL = SQL & " WHERE Cheque.IsDelete =0   "
+            SQL &=  " ,ChequeNo,ChequeDate,ChequeBalance,ChequePay,BankBranch,ChequeType,ChequeStep ,ChequeStatus,Cheque.Remark  "
+            SQL &=  " ,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,ChequeOwnerTH,Orders.GrandTotal"
+            SQL &=  " FROM Cheque"
+            SQL &=  " LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 and Orders.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+            SQL &=  " WHERE Cheque.IsDelete =0   "
             If pChequeID > 0 Then
-                SQL = SQL & " AND Cheque.ChequeID =" & pChequeID
+                SQL &=  " AND Cheque.ChequeID =" & pChequeID
             End If
             If pRefOrderID >= 0 Then
-                SQL = SQL & " AND Cheque.RefOrderID =" & pRefOrderID
+                SQL &=  " AND Cheque.RefOrderID =" & pRefOrderID
             End If
             If pBankID > 0 Then
-                SQL = SQL & " AND BankID =" & pBankID
+                SQL &=  " AND BankID =" & pBankID
             End If
             If pDateFrom > "1990-01-01" And pDateTo > "1990-01-01" Then
-                SQL = SQL & " AND ChequeDate between '" & formatSQLDate(pDateFrom) & "'"
-                SQL = SQL & "                   and  '" & formatSQLDate(pDateTo) & "'"
+                SQL &=  " AND ChequeDate between '" & formatSQLDate(pDateFrom) & "'"
+                SQL &=  "                   and  '" & formatSQLDate(pDateTo) & "'"
             End If
             If pIsNewOnly = True Then
-                SQL = SQL & " AND ChequeStatus ='N'"
+                SQL &=  " AND ChequeStatus ='N'"
             End If
-            SQL = SQL & " ORDER BY ChequeID"
+            SQL &=  " ORDER BY ChequeID"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -277,59 +277,59 @@ Public Class ChequeDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("ChequeID", "Cheque", tr)
                     SQL = " INSERT INTO Cheque (ChequeID,RefOrderID,BankDocType,ChequeNo,ChequeDate,ChequeBalance,ChequePay "
-                    SQL = SQL & " ,CashType,ChequeDateReceive,ChequeDateDue,ChequeOwnerTH,ChequeOwnerEN,BankID,BankBranch "
-                    SQL = SQL & " ,ChequeType,ChequeStep,ChequeStatus,ChequeDatePass,ChequeDateStop,BankAccountID"
-                    SQL = SQL & " ,Remark,IsDelete )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @RefOrderID"
-                    SQL = SQL & " ,  @BankDocType"
-                    SQL = SQL & " ,  @ChequeNo"
-                    SQL = SQL & " ,  @ChequeDate"
-                    SQL = SQL & " ,  @ChequeBalance"
-                    SQL = SQL & " ,  @ChequePay"
-                    SQL = SQL & " ,  @CashType"
-                    SQL = SQL & " ,  @ChequeDateReceive"
-                    SQL = SQL & " ,  @ChequeDateDue"
-                    SQL = SQL & " ,  @ChequeOwnerTH"
-                    SQL = SQL & " ,  @ChequeOwnerEN"
-                    SQL = SQL & " ,  @BankID"
-                    SQL = SQL & " ,  @BankBranch"
-                    SQL = SQL & " ,  @ChequeType"
-                    SQL = SQL & " ,  @ChequeStep"
-                    SQL = SQL & " ,  @ChequeStatus"
-                    SQL = SQL & " ,  @ChequeDatePass"
-                    SQL = SQL & " ,  @ChequeDateStop"
-                    SQL = SQL & " ,  @BankAccountID"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CashType,ChequeDateReceive,ChequeDateDue,ChequeOwnerTH,ChequeOwnerEN,BankID,BankBranch "
+                    SQL &=  " ,ChequeType,ChequeStep,ChequeStatus,ChequeDatePass,ChequeDateStop,BankAccountID"
+                    SQL &=  " ,Remark,IsDelete )"
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @RefOrderID"
+                    SQL &=  " ,  @BankDocType"
+                    SQL &=  " ,  @ChequeNo"
+                    SQL &=  " ,  @ChequeDate"
+                    SQL &=  " ,  @ChequeBalance"
+                    SQL &=  " ,  @ChequePay"
+                    SQL &=  " ,  @CashType"
+                    SQL &=  " ,  @ChequeDateReceive"
+                    SQL &=  " ,  @ChequeDateDue"
+                    SQL &=  " ,  @ChequeOwnerTH"
+                    SQL &=  " ,  @ChequeOwnerEN"
+                    SQL &=  " ,  @BankID"
+                    SQL &=  " ,  @BankBranch"
+                    SQL &=  " ,  @ChequeType"
+                    SQL &=  " ,  @ChequeStep"
+                    SQL &=  " ,  @ChequeStatus"
+                    SQL &=  " ,  @ChequeDatePass"
+                    SQL &=  " ,  @ChequeDateStop"
+                    SQL &=  " ,  @BankAccountID"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Cheque SET"
-                    SQL = SQL & " BankDocType=@BankDocType"
-                    SQL = SQL & " ,ChequeNo=@ChequeNo"
-                    SQL = SQL & " ,ChequeDate=@ChequeDate"
-                    SQL = SQL & " ,ChequeBalance=@ChequeBalance"
-                    SQL = SQL & " ,ChequePay=@ChequePay"
-                    SQL = SQL & " ,CashType=@CashType"
-                    SQL = SQL & " ,ChequeDateReceive=@ChequeDateReceive"
-                    SQL = SQL & " ,ChequeDateDue=@ChequeDateDue"
-                    SQL = SQL & " ,ChequeOwnerTH=@ChequeOwnerTH"
-                    SQL = SQL & " ,ChequeOwnerEN=@ChequeOwnerEN"
-                    SQL = SQL & " ,BankID=@BankID"
-                    SQL = SQL & " ,BankBranch=@BankBranch"
-                    SQL = SQL & " ,ChequeType=@ChequeType"
-                    SQL = SQL & " ,ChequeStep=@ChequeStep"
-                    SQL = SQL & " ,ChequeStatus=@ChequeStatus"
-                    SQL = SQL & " ,ChequeDatePass=@ChequeDatePass"
-                    SQL = SQL & " ,ChequeDateStop=@ChequeDateStop"
-                    SQL = SQL & " ,BankAccountID=@BankAccountID"
-                    SQL = SQL & " ,Remark=@Remark"
+                    SQL &=  " BankDocType=@BankDocType"
+                    SQL &=  " ,ChequeNo=@ChequeNo"
+                    SQL &=  " ,ChequeDate=@ChequeDate"
+                    SQL &=  " ,ChequeBalance=@ChequeBalance"
+                    SQL &=  " ,ChequePay=@ChequePay"
+                    SQL &=  " ,CashType=@CashType"
+                    SQL &=  " ,ChequeDateReceive=@ChequeDateReceive"
+                    SQL &=  " ,ChequeDateDue=@ChequeDateDue"
+                    SQL &=  " ,ChequeOwnerTH=@ChequeOwnerTH"
+                    SQL &=  " ,ChequeOwnerEN=@ChequeOwnerEN"
+                    SQL &=  " ,BankID=@BankID"
+                    SQL &=  " ,BankBranch=@BankBranch"
+                    SQL &=  " ,ChequeType=@ChequeType"
+                    SQL &=  " ,ChequeStep=@ChequeStep"
+                    SQL &=  " ,ChequeStatus=@ChequeStatus"
+                    SQL &=  " ,ChequeDatePass=@ChequeDatePass"
+                    SQL &=  " ,ChequeDateStop=@ChequeDateStop"
+                    SQL &=  " ,BankAccountID=@BankAccountID"
+                    SQL &=  " ,Remark=@Remark"
                     'SQL = SQL & " ,IsDelete=@IsDelete"
-                    SQL = SQL & " WHERE ChequeID= @ID"
+                    SQL &=  " WHERE ChequeID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Cheque SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE ChequeID= @ID"
+                    SQL &=  " WHERE ChequeID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -378,7 +378,7 @@ Public Class ChequeDAO
         SQL = ""
         Try
             SQL = " UPDATE Cheque SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE RefOrderID=@RefOrderID "
+            SQL &=  " WHERE RefOrderID=@RefOrderID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

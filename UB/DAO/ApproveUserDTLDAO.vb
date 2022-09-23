@@ -123,23 +123,23 @@ Public Class ApproveUserDTLDAO
 
         Try
             SQL = "SELECT  ApproveUserDtl.SEQ,ApproveUserDtl.ApproveUserDtlID,ApproveUserDtl.EmpID,ApproveUserDtl.ApproveAmount,ApproveUserDtl.IsCancel,ApproveUserDtl.Remark "
-            SQL = SQL & " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmpName "
-            SQL = SQL & " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1,ApproveType  "
-            SQL = SQL & " FROM ApproveUserDtl"
-            SQL = SQL & " LEFT OUTER JOIN Employee ON Employee.EmpID=ApproveUserDtl.EmpID "
-            SQL = SQL & " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
-            SQL = SQL & " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
-            SQL = SQL & " WHERE ApproveUserDtl.IsDelete =0   "
+            SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmpName "
+            SQL &=  " ,Position.NameThai AS PositionName,Address.Phone1,Address.Email1,ApproveType  "
+            SQL &=  " FROM ApproveUserDtl"
+            SQL &=  " LEFT OUTER JOIN Employee ON Employee.EmpID=ApproveUserDtl.EmpID "
+            SQL &=  " LEFT OUTER JOIN Address ON Employee.AddressID=Address.AddressID "
+            SQL &=  " LEFT OUTER JOIN Position ON Employee.PositionID=Position.PositionID "
+            SQL &=  " WHERE ApproveUserDtl.IsDelete =0   "
             If pTypeID > 0 Then
-                SQL = SQL & " AND ApproveUserDtl.ApproveType =" & pTypeID
+                SQL &=  " AND ApproveUserDtl.ApproveType =" & pTypeID
             End If
             If pEmpID > 0 Then
-                SQL = SQL & " AND ApproveUserDtl.EmpID =" & pEmpID
+                SQL &=  " AND ApproveUserDtl.EmpID =" & pEmpID
             End If
             If pIsActiveOnly > True Then
-                SQL = SQL & " AND ApproveUserDtl.IsCancel =0"
+                SQL &=  " AND ApproveUserDtl.IsCancel =0"
             End If
-            SQL = SQL & " ORDER BY ApproveUserDtl.SEQ"
+            SQL &=  " ORDER BY ApproveUserDtl.SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ApproveUserDTLDAO.GetDataTable : " & e.Message)
@@ -167,27 +167,27 @@ Public Class ApproveUserDTLDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("ApproveUserDtlID", "ApproveUserDtl", tr)
                     SQL = " INSERT INTO ApproveUserDtl  (ApproveUserDtlID,ApproveType,SEQ,EmpID,ApproveAmount,IsCancel,Remark,IsDelete )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @ApproveType"
-                    SQL = SQL & " ,  @SEQ"
-                    SQL = SQL & " ,  @EmpID"
-                    SQL = SQL & " ,  @ApproveAmount"
-                    SQL = SQL & " ,  @IsCancel"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @ApproveType"
+                    SQL &=  " ,  @SEQ"
+                    SQL &=  " ,  @EmpID"
+                    SQL &=  " ,  @ApproveAmount"
+                    SQL &=  " ,  @IsCancel"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update ApproveUserDtl   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " EmpID=@EmpID"
-                    SQL = SQL & " ,ApproveAmount=@ApproveAmount"
-                    SQL = SQL & " ,IsCancel=@IsCancel"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " WHERE ApproveUserDtlID= @ID"
+                    SQL &=  " SET"
+                    SQL &=  " EmpID=@EmpID"
+                    SQL &=  " ,ApproveAmount=@ApproveAmount"
+                    SQL &=  " ,IsCancel=@IsCancel"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " WHERE ApproveUserDtlID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ApproveUserDtl SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE ApproveUserDtlID= @ID"
+                    SQL &=  " WHERE ApproveUserDtlID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -224,9 +224,9 @@ Public Class ApproveUserDTLDAO
         SQL = ""
         Try
             SQL = " UPDATE ApproveUserDtl SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE ApproveUserDtlID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND ApproveType=@ApproveType "
-            SQL = SQL & " AND IsDelete =0  "
+            SQL &=  " WHERE ApproveUserDtlID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND ApproveType=@ApproveType "
+            SQL &=  " AND IsDelete =0  "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 
@@ -249,7 +249,7 @@ Public Class ApproveUserDTLDAO
         SQL = ""
         Try
             SQL = " UPDATE ApproveUserDtl SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE ApproveType=@ApproveType "
+            SQL &=  " WHERE ApproveType=@ApproveType "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

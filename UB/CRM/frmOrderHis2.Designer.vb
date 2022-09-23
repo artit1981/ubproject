@@ -54,6 +54,7 @@ Partial Class frmOrderHis2
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatePanel.SuspendLayout()
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +85,7 @@ Partial Class frmOrderHis2
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatePanel
@@ -102,29 +104,28 @@ Partial Class frmOrderHis2
         Me.DatePanel.Controls.Add(Me.dtpDateTo)
         Me.DatePanel.Controls.Add(Me.Label2)
         Me.DatePanel.Controls.Add(Me.dtpDateFrom)
-        Me.DatePanel.Location = New System.Drawing.Point(0, 48)
-        Me.DatePanel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.DatePanel.Location = New System.Drawing.Point(0, 39)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DatePanel, True)
         Me.DatePanel.Name = "DatePanel"
-        Me.DatePanel.Size = New System.Drawing.Size(1099, 166)
+        Me.DatePanel.Size = New System.Drawing.Size(942, 135)
         Me.DatePanel.TabIndex = 292
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DatePanel, "")
         '
         'CheckAll
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckAll, "CheckedChanged")
-        Me.CheckAll.Location = New System.Drawing.Point(37, 80)
-        Me.CheckAll.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckAll.Location = New System.Drawing.Point(32, 65)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckAll, True)
         Me.CheckAll.Name = "CheckAll"
         Me.CheckAll.Properties.Caption = ""
-        Me.CheckAll.Size = New System.Drawing.Size(31, 24)
+        Me.CheckAll.Size = New System.Drawing.Size(27, 20)
         Me.CheckAll.TabIndex = 299
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckAll, "Checked")
         '
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
+        Me.PanelControl2.Controls.Add(Me.CheckInvoiceOnline)
         Me.PanelControl2.Controls.Add(Me.CheckReceiptCut)
         Me.PanelControl2.Controls.Add(Me.CheckShipingBuy)
         Me.PanelControl2.Controls.Add(Me.CheckReduceCreditBuy)
@@ -132,95 +133,87 @@ Partial Class frmOrderHis2
         Me.PanelControl2.Controls.Add(Me.CheckReduceCredit)
         Me.PanelControl2.Controls.Add(Me.CheckShiping)
         Me.PanelControl2.Controls.Add(Me.CheckInvoice)
-        Me.PanelControl2.Location = New System.Drawing.Point(70, 57)
-        Me.PanelControl2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PanelControl2.Location = New System.Drawing.Point(60, 46)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(649, 105)
+        Me.PanelControl2.Size = New System.Drawing.Size(556, 85)
         Me.PanelControl2.TabIndex = 298
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
         '
         'CheckReceiptCut
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReceiptCut, "CheckedChanged")
-        Me.CheckReceiptCut.Location = New System.Drawing.Point(169, 28)
-        Me.CheckReceiptCut.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckReceiptCut.Location = New System.Drawing.Point(150, 41)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReceiptCut, True)
         Me.CheckReceiptCut.Name = "CheckReceiptCut"
         Me.CheckReceiptCut.Properties.Caption = "ตัดรับชำระ"
-        Me.CheckReceiptCut.Size = New System.Drawing.Size(119, 24)
+        Me.CheckReceiptCut.Size = New System.Drawing.Size(102, 20)
         Me.CheckReceiptCut.TabIndex = 314
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReceiptCut, "Checked")
         '
         'CheckShipingBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShipingBuy, "CheckedChanged")
-        Me.CheckShipingBuy.Location = New System.Drawing.Point(169, 52)
-        Me.CheckShipingBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckShipingBuy.Location = New System.Drawing.Point(150, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShipingBuy, True)
         Me.CheckShipingBuy.Name = "CheckShipingBuy"
         Me.CheckShipingBuy.Properties.Caption = "ใบส่งของ(ซื้อ)"
-        Me.CheckShipingBuy.Size = New System.Drawing.Size(119, 24)
+        Me.CheckShipingBuy.Size = New System.Drawing.Size(102, 20)
         Me.CheckShipingBuy.TabIndex = 313
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShipingBuy, "Checked")
         '
         'CheckReduceCreditBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReduceCreditBuy, "CheckedChanged")
-        Me.CheckReduceCreditBuy.Location = New System.Drawing.Point(18, 74)
-        Me.CheckReduceCreditBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckReduceCreditBuy.Location = New System.Drawing.Point(15, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReduceCreditBuy, True)
         Me.CheckReduceCreditBuy.Name = "CheckReduceCreditBuy"
         Me.CheckReduceCreditBuy.Properties.Caption = "บันทึกลดหนี้(ซื้อ)"
-        Me.CheckReduceCreditBuy.Size = New System.Drawing.Size(135, 24)
+        Me.CheckReduceCreditBuy.Size = New System.Drawing.Size(116, 20)
         Me.CheckReduceCreditBuy.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReduceCreditBuy, "Checked")
         '
         'CheckInvoiceBuy
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceBuy, "CheckedChanged")
-        Me.CheckInvoiceBuy.Location = New System.Drawing.Point(18, 52)
-        Me.CheckInvoiceBuy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckInvoiceBuy.Location = New System.Drawing.Point(15, 42)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceBuy, True)
         Me.CheckInvoiceBuy.Name = "CheckInvoiceBuy"
         Me.CheckInvoiceBuy.Properties.Caption = "ใบกำกับภาษี(ซื้อ)"
-        Me.CheckInvoiceBuy.Size = New System.Drawing.Size(135, 24)
+        Me.CheckInvoiceBuy.Size = New System.Drawing.Size(116, 20)
         Me.CheckInvoiceBuy.TabIndex = 307
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceBuy, "Checked")
         '
         'CheckReduceCredit
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckReduceCredit, "CheckedChanged")
-        Me.CheckReduceCredit.Location = New System.Drawing.Point(18, 28)
-        Me.CheckReduceCredit.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckReduceCredit.Location = New System.Drawing.Point(15, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckReduceCredit, True)
         Me.CheckReduceCredit.Name = "CheckReduceCredit"
         Me.CheckReduceCredit.Properties.Caption = "บันทึกลดหนี้(ขาย)"
-        Me.CheckReduceCredit.Size = New System.Drawing.Size(135, 24)
+        Me.CheckReduceCredit.Size = New System.Drawing.Size(116, 20)
         Me.CheckReduceCredit.TabIndex = 306
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckReduceCredit, "Checked")
         '
         'CheckShiping
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShiping, "CheckedChanged")
-        Me.CheckShiping.Location = New System.Drawing.Point(169, 6)
-        Me.CheckShiping.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckShiping.Location = New System.Drawing.Point(150, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShiping, True)
         Me.CheckShiping.Name = "CheckShiping"
         Me.CheckShiping.Properties.Caption = "ใบส่งของ(ขาย)"
-        Me.CheckShiping.Size = New System.Drawing.Size(119, 24)
+        Me.CheckShiping.Size = New System.Drawing.Size(102, 20)
         Me.CheckShiping.TabIndex = 301
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShiping, "Checked")
         '
         'CheckInvoice
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoice, "CheckedChanged")
-        Me.CheckInvoice.Location = New System.Drawing.Point(18, 6)
-        Me.CheckInvoice.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckInvoice.Location = New System.Drawing.Point(15, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoice, True)
         Me.CheckInvoice.Name = "CheckInvoice"
         Me.CheckInvoice.Properties.Caption = "ใบกำกับภาษี(ขาย)"
-        Me.CheckInvoice.Size = New System.Drawing.Size(125, 24)
+        Me.CheckInvoice.Size = New System.Drawing.Size(107, 20)
         Me.CheckInvoice.TabIndex = 299
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoice, "Checked")
         '
@@ -230,10 +223,10 @@ Partial Class frmOrderHis2
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 59)
+        Me.Label5.Location = New System.Drawing.Point(5, 48)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(64, 18)
+        Me.Label5.Size = New System.Drawing.Size(57, 14)
         Me.Label5.TabIndex = 296
         Me.Label5.Text = "Select All"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label5, "")
@@ -251,11 +244,10 @@ Partial Class frmOrderHis2
         Me.PanelControl1.Controls.Add(Me.cboStatus)
         Me.PanelControl1.Controls.Add(Me.Label4)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl1.Location = New System.Drawing.Point(945, 2)
-        Me.PanelControl1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PanelControl1.Location = New System.Drawing.Point(810, 2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl1, True)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(152, 162)
+        Me.PanelControl1.Size = New System.Drawing.Size(130, 131)
         Me.PanelControl1.TabIndex = 294
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl1, "")
         '
@@ -264,13 +256,12 @@ Partial Class frmOrderHis2
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnExportExcel, "")
         Me.btnExportExcel.EditValue = CType(resources.GetObject("btnExportExcel.EditValue"), Object)
         Me.btnExportExcel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnExportExcel.Location = New System.Drawing.Point(70, 5)
-        Me.btnExportExcel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnExportExcel.Location = New System.Drawing.Point(60, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnExportExcel, True)
         Me.btnExportExcel.Name = "btnExportExcel"
         Me.btnExportExcel.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.btnExportExcel.Properties.Appearance.Options.UseBackColor = True
-        Me.btnExportExcel.Size = New System.Drawing.Size(68, 41)
+        Me.btnExportExcel.Size = New System.Drawing.Size(58, 33)
         Me.btnExportExcel.TabIndex = 118
         Me.btnExportExcel.ToolTip = "Expor to File"
         Me.btnExportExcel.ToolTipTitle = "Expor to File"
@@ -280,8 +271,7 @@ Partial Class frmOrderHis2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboRefreshTime, "TextChanged")
         Me.cboRefreshTime.EditValue = "5"
-        Me.cboRefreshTime.Location = New System.Drawing.Point(329, 4)
-        Me.cboRefreshTime.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cboRefreshTime.Location = New System.Drawing.Point(282, 3)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboRefreshTime, True)
         Me.cboRefreshTime.Name = "cboRefreshTime"
         Me.cboRefreshTime.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -289,7 +279,7 @@ Partial Class frmOrderHis2
         Me.cboRefreshTime.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboRefreshTime.Properties.Items.AddRange(New Object() {"1", "5", "10", "30", "60"})
         Me.cboRefreshTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.cboRefreshTime.Size = New System.Drawing.Size(52, 24)
+        Me.cboRefreshTime.Size = New System.Drawing.Size(45, 20)
         Me.cboRefreshTime.TabIndex = 114
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboRefreshTime, "Text")
         Me.cboRefreshTime.Visible = False
@@ -298,14 +288,13 @@ Partial Class frmOrderHis2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckIsRefresh, "CheckedChanged")
         Me.CheckIsRefresh.EditValue = True
-        Me.CheckIsRefresh.Location = New System.Drawing.Point(323, 5)
-        Me.CheckIsRefresh.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckIsRefresh.Location = New System.Drawing.Point(277, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckIsRefresh, True)
         Me.CheckIsRefresh.Name = "CheckIsRefresh"
         Me.CheckIsRefresh.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckIsRefresh.Properties.Appearance.Options.UseFont = True
         Me.CheckIsRefresh.Properties.Caption = "Refresh"
-        Me.CheckIsRefresh.Size = New System.Drawing.Size(84, 24)
+        Me.CheckIsRefresh.Size = New System.Drawing.Size(72, 20)
         Me.CheckIsRefresh.TabIndex = 113
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckIsRefresh, "Checked")
         Me.CheckIsRefresh.Visible = False
@@ -316,10 +305,10 @@ Partial Class frmOrderHis2
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label1, "")
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 7)
+        Me.Label1.Location = New System.Drawing.Point(3, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label1, True)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 18)
+        Me.Label1.Size = New System.Drawing.Size(51, 14)
         Me.Label1.TabIndex = 119
         Me.Label1.Text = "Export :"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label1, "")
@@ -329,11 +318,10 @@ Partial Class frmOrderHis2
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.LabelControl1.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.LabelControl1, "")
-        Me.LabelControl1.Location = New System.Drawing.Point(386, 7)
-        Me.LabelControl1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LabelControl1.Location = New System.Drawing.Point(331, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LabelControl1, True)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(33, 17)
+        Me.LabelControl1.Size = New System.Drawing.Size(25, 13)
         Me.LabelControl1.TabIndex = 115
         Me.LabelControl1.Text = "วินาที"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LabelControl1, "")
@@ -343,14 +331,13 @@ Partial Class frmOrderHis2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShowInfo, "CheckedChanged")
         Me.CheckShowInfo.EditValue = True
-        Me.CheckShowInfo.Location = New System.Drawing.Point(287, 2)
-        Me.CheckShowInfo.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CheckShowInfo.Location = New System.Drawing.Point(246, 2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShowInfo, True)
         Me.CheckShowInfo.Name = "CheckShowInfo"
         Me.CheckShowInfo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckShowInfo.Properties.Appearance.Options.UseFont = True
         Me.CheckShowInfo.Properties.Caption = "Show Information"
-        Me.CheckShowInfo.Size = New System.Drawing.Size(147, 24)
+        Me.CheckShowInfo.Size = New System.Drawing.Size(126, 20)
         Me.CheckShowInfo.TabIndex = 116
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShowInfo, "Checked")
         Me.CheckShowInfo.Visible = False
@@ -358,15 +345,14 @@ Partial Class frmOrderHis2
         'cboStatus
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboStatus, "TextChanged")
-        Me.cboStatus.Location = New System.Drawing.Point(325, 5)
-        Me.cboStatus.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cboStatus.Location = New System.Drawing.Point(279, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboStatus, True)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.cboStatus.Properties.Appearance.Options.UseFont = True
         Me.cboStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.cboStatus.Size = New System.Drawing.Size(48, 24)
+        Me.cboStatus.Size = New System.Drawing.Size(41, 20)
         Me.cboStatus.TabIndex = 112
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboStatus, "Text")
         Me.cboStatus.Visible = False
@@ -377,10 +363,10 @@ Partial Class frmOrderHis2
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label4, "")
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label4.Location = New System.Drawing.Point(271, 6)
+        Me.Label4.Location = New System.Drawing.Point(232, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(49, 18)
+        Me.Label4.Size = New System.Drawing.Size(39, 14)
         Me.Label4.TabIndex = 111
         Me.Label4.Text = "สถานะ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
@@ -394,11 +380,10 @@ Partial Class frmOrderHis2
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnFind, "")
         Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
         Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnFind.Location = New System.Drawing.Point(601, 7)
-        Me.btnFind.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnFind.Location = New System.Drawing.Point(515, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnFind, True)
         Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(118, 30)
+        Me.btnFind.Size = New System.Drawing.Size(101, 24)
         Me.btnFind.TabIndex = 293
         Me.btnFind.TabStop = False
         Me.btnFind.Text = "ค้นหา"
@@ -409,14 +394,13 @@ Partial Class frmOrderHis2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkShowDelete, "CheckedChanged")
         Me.chkShowDelete.EditValue = True
-        Me.chkShowDelete.Location = New System.Drawing.Point(451, 14)
-        Me.chkShowDelete.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.chkShowDelete.Location = New System.Drawing.Point(387, 11)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkShowDelete, True)
         Me.chkShowDelete.Name = "chkShowDelete"
         Me.chkShowDelete.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkShowDelete.Properties.Appearance.Options.UseFont = True
         Me.chkShowDelete.Properties.Caption = "แสดงรายการที่ลบ"
-        Me.chkShowDelete.Size = New System.Drawing.Size(142, 24)
+        Me.chkShowDelete.Size = New System.Drawing.Size(122, 20)
         Me.chkShowDelete.TabIndex = 123
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkShowDelete, "Checked")
         '
@@ -426,10 +410,10 @@ Partial Class frmOrderHis2
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label3, "")
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label3.Location = New System.Drawing.Point(241, 17)
+        Me.Label3.Location = New System.Drawing.Point(207, 14)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label3, True)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(24, 18)
+        Me.Label3.Size = New System.Drawing.Size(20, 14)
         Me.Label3.TabIndex = 122
         Me.Label3.Text = "ถึง"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label3, "")
@@ -439,8 +423,7 @@ Partial Class frmOrderHis2
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.dtpDateTo, "TextChanged")
         Me.dtpDateTo.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.dtpDateTo.EnterMoveNextControl = True
-        Me.dtpDateTo.Location = New System.Drawing.Point(269, 12)
-        Me.dtpDateTo.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.dtpDateTo.Location = New System.Drawing.Point(231, 10)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.dtpDateTo, True)
         Me.dtpDateTo.Name = "dtpDateTo"
         Me.dtpDateTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -453,7 +436,7 @@ Partial Class frmOrderHis2
         Me.dtpDateTo.Properties.EditFormat.FormatString = "D"
         Me.dtpDateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateTo.Properties.Mask.EditMask = "D"
-        Me.dtpDateTo.Size = New System.Drawing.Size(162, 24)
+        Me.dtpDateTo.Size = New System.Drawing.Size(139, 20)
         Me.dtpDateTo.TabIndex = 121
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.dtpDateTo, "Text")
         '
@@ -463,10 +446,10 @@ Partial Class frmOrderHis2
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label2, "")
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.Location = New System.Drawing.Point(8, 18)
+        Me.Label2.Location = New System.Drawing.Point(7, 15)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label2, True)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 18)
+        Me.Label2.Size = New System.Drawing.Size(49, 14)
         Me.Label2.TabIndex = 120
         Me.Label2.Text = "ช่วงวันที่"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label2, "")
@@ -476,8 +459,7 @@ Partial Class frmOrderHis2
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.dtpDateFrom, "TextChanged")
         Me.dtpDateFrom.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.dtpDateFrom.EnterMoveNextControl = True
-        Me.dtpDateFrom.Location = New System.Drawing.Point(70, 12)
-        Me.dtpDateFrom.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.dtpDateFrom.Location = New System.Drawing.Point(60, 10)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.dtpDateFrom, True)
         Me.dtpDateFrom.Name = "dtpDateFrom"
         Me.dtpDateFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -490,7 +472,7 @@ Partial Class frmOrderHis2
         Me.dtpDateFrom.Properties.EditFormat.FormatString = "D"
         Me.dtpDateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.dtpDateFrom.Properties.Mask.EditMask = "D"
-        Me.dtpDateFrom.Size = New System.Drawing.Size(162, 24)
+        Me.dtpDateFrom.Size = New System.Drawing.Size(139, 20)
         Me.dtpDateFrom.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.dtpDateFrom, "Text")
         '
@@ -503,21 +485,18 @@ Partial Class frmOrderHis2
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.gridControl.Location = New System.Drawing.Point(0, 222)
+        Me.gridControl.Location = New System.Drawing.Point(0, 180)
         Me.gridControl.MainView = Me.gridView
-        Me.gridControl.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1})
-        Me.gridControl.Size = New System.Drawing.Size(1099, 352)
+        Me.gridControl.Size = New System.Drawing.Size(942, 286)
         Me.gridControl.TabIndex = 294
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
         '
         'gridView
         '
-        Me.gridView.DetailHeight = 431
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -554,19 +533,29 @@ Partial Class frmOrderHis2
         '
         'GridView1
         '
-        Me.GridView1.DetailHeight = 431
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
+        'CheckInvoiceOnline
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
+        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(150, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
+        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
+        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
+        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(137, 20)
+        Me.CheckInvoiceOnline.TabIndex = 315
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
+        '
         'frmOrderHis2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1099, 578)
+        Me.ClientSize = New System.Drawing.Size(942, 470)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.DatePanel)
         Me.IconOptions.Icon = CType(resources.GetObject("frmOrderHis2.IconOptions.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmOrderHis2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ประวัติการซื้อ-ขายสินค้า"
@@ -604,6 +593,7 @@ Partial Class frmOrderHis2
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -642,4 +632,5 @@ Partial Class frmOrderHis2
     Friend WithEvents CheckShiping As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckInvoice As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CheckInvoiceOnline As DevExpress.XtraEditors.CheckEdit
 End Class

@@ -135,10 +135,10 @@ Public Class frmStockReport
             SQL &= " left outer join ProList P on P.ProductID=a.ProductID and P.LocationDTLID=a.LocationDTLID and P.UnitID=a.UnitID"
             SQL &= " where  1=1 "
             If lProductList <> "" Then
-                SQL = SQL & " and a.ProductID in(" & lProductList & ")"
+                SQL &=  " and a.ProductID in(" & lProductList & ")"
             End If
             If sQN <> "" Then
-                SQL = SQL & " and a.LocationDTLID in(" & sQN & ")"
+                SQL &=  " and a.LocationDTLID in(" & sQN & ")"
             End If
             SQL &= " group by a.ProductID,b.ProductCode,c.NameThai,d.CodeThai,b.ProductName"
             gConnection.executeInsertQuery(SQL, Nothing)

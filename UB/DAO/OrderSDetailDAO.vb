@@ -166,13 +166,13 @@ Public Class OrderSDetailDAO
         Dim dataTable As New DataTable()
         Try
             SQL = "SELECT  OrdersDetail.OrdersDetailID AS ID,0 as SEQ,OrdersDetail.BillID,OrdersDetail.TableID,OrdersDetail.OrderID "
-            SQL = SQL & " ,Orders.OrderCode,OrdersDetail.OrderDate,OrdersDetail.CusName,OrdersDetail.EmpName,OrdersDetail.GrandTotal "
-            SQL = SQL & " ,OrdersDetail.BillTotal,OrdersDetail.Remark,OrdersDetail.BillType" ',Orders.ExpireDate"
-            SQL = SQL & " FROM OrdersDetail"
-            SQL = SQL & " Left outer join Orders on Orders.OrderID=OrdersDetail.OrderID"
-            SQL = SQL & " WHERE OrdersDetail.BillID =" & pBillID
-            SQL = SQL & " AND OrdersDetail.IsDelete =0   "
-            SQL = SQL & " ORDER BY OrdersDetail.OrdersDetailID"
+            SQL &=  " ,Orders.OrderCode,OrdersDetail.OrderDate,OrdersDetail.CusName,OrdersDetail.EmpName,OrdersDetail.GrandTotal "
+            SQL &=  " ,OrdersDetail.BillTotal,OrdersDetail.Remark,OrdersDetail.BillType" ',Orders.ExpireDate"
+            SQL &=  " FROM OrdersDetail"
+            SQL &=  " Left outer join Orders on Orders.OrderID=OrdersDetail.OrderID"
+            SQL &=  " WHERE OrdersDetail.BillID =" & pBillID
+            SQL &=  " AND OrdersDetail.IsDelete =0   "
+            SQL &=  " ORDER BY OrdersDetail.OrdersDetailID"
             dataTable = gConnection.executeSelectQuery(SQL, ptr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrdersDetailDAO.GetDataTable : " & e.Message)
@@ -200,21 +200,21 @@ Public Class OrderSDetailDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("OrdersDetailID", "OrdersDetail", tr)
                     SQL = " INSERT INTO OrdersDetail (OrdersDetailID,BillID,TableID,OrderID,OrderCode,OrderDate,CusName,EmpName,GrandTotal,BillTotal,Remark,BillType,IsDelete )"
-                    SQL = SQL & " VALUES ( "
-                    SQL = SQL & "   @ID"
-                    SQL = SQL & " ,  @BillID"
-                    SQL = SQL & " ,  @TableID"
-                    SQL = SQL & " ,  @OrderID"
-                    SQL = SQL & " ,  @OrderCode"
-                    SQL = SQL & " ,  @OrderDate"
-                    SQL = SQL & " ,  @CusName"
-                    SQL = SQL & " ,  @EmpName"
-                    SQL = SQL & " ,  @GrandTotal"
-                    SQL = SQL & " ,  @BillTotal"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @BillType"
-                    SQL = SQL & " ,  @IsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( "
+                    SQL &=  "   @ID"
+                    SQL &=  " ,  @BillID"
+                    SQL &=  " ,  @TableID"
+                    SQL &=  " ,  @OrderID"
+                    SQL &=  " ,  @OrderCode"
+                    SQL &=  " ,  @OrderDate"
+                    SQL &=  " ,  @CusName"
+                    SQL &=  " ,  @EmpName"
+                    SQL &=  " ,  @GrandTotal"
+                    SQL &=  " ,  @BillTotal"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @BillType"
+                    SQL &=  " ,  @IsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     'SQL = " Update OrdersDetail   "
                     'SQL = SQL & " SET"
@@ -230,7 +230,7 @@ Public Class OrderSDetailDAO
                     'SQL = SQL & " WHERE OrdersDetailID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE OrdersDetail SET IsDelete=@IsDelete "
-                    SQL = SQL & " WHERE OrdersDetailID= @ID"
+                    SQL &=  " WHERE OrdersDetailID= @ID"
                 Case Else
                     Return False
                     Exit Function
@@ -271,7 +271,7 @@ Public Class OrderSDetailDAO
         SQL = ""
         Try
             SQL = " UPDATE OrdersDetail SET IsDelete=@IsDelete "
-            SQL = SQL & " WHERE BillID=@BillID "
+            SQL &=  " WHERE BillID=@BillID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

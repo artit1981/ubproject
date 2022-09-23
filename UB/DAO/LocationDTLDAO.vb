@@ -79,11 +79,11 @@ Public Class LocationDTLDAO
 
         Try
             SQL = "SELECT  LocationDTLID AS ID,IDCode,NameThai,Remark"
-            SQL = SQL & " FROM Product_LocationDTL"
+            SQL &=  " FROM Product_LocationDTL"
             If pRefID > 0 Then
-                SQL = SQL & " WHERE RefID =" & pRefID
+                SQL &=  " WHERE RefID =" & pRefID
             End If
-            SQL = SQL & " ORDER BY IDCode,NameThai"
+            SQL &=  " ORDER BY IDCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, pTr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "LocationDTLDAO.GetDataTable : " & e.Message)
@@ -97,13 +97,13 @@ Public Class LocationDTLDAO
 
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM Product_LocationDTL"
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM Product_LocationDTL"
+            SQL &=  " WHERE 1=1 "
             If pID > 0 Then
-                SQL = SQL & " AND LocationDTLID=" & pID
+                SQL &=  " AND LocationDTLID=" & pID
             End If
             If pName.Trim <> "" Then
-                SQL = SQL & " AND NameThai='" & pName.Trim & "'"
+                SQL &=  " AND NameThai='" & pName.Trim & "'"
             End If
             dataTable = gConnection.executeSelectQuery(SQL, pTr)
             If dataTable.Rows.Count > 0 Then
@@ -135,10 +135,10 @@ Public Class LocationDTLDAO
         Try
             'SQL = "SELECT D.LocationDTLID,P.NameThai AS Location,D.NameThai AS LocationDTL  "
             SQL = "SELECT D.LocationDTLID as ID,D.NameThai "
-            SQL = SQL & " FROM Product_LocationDTL D  "
-            SQL = SQL & " LEFT OUTER JOIN Product_Location P ON D.RefID=P.LocationID AND P.IsDelete =0   "
+            SQL &=  " FROM Product_LocationDTL D  "
+            SQL &=  " LEFT OUTER JOIN Product_Location P ON D.RefID=P.LocationID AND P.IsDelete =0   "
             'SQL = SQL & " ORDER BY P.NameThai,D.NameThai"
-            SQL = SQL & " ORDER BY  D.LocationDTLID"
+            SQL &=  " ORDER BY  D.LocationDTLID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "LocationDTLDAO.GetDataTableDTL : " & e.Message)
@@ -168,22 +168,22 @@ Public Class LocationDTLDAO
                 Case DataMode.ModeNew
                     mIDs = GenNewID("LocationDTLID", "Product_LocationDTL", tr)
                     SQL = " INSERT INTO Product_LocationDTL  (LocationDTLID,RefID,IDCode,NameThai,Remark )"
-                    SQL = SQL & " VALUES ( @LocationDTLID"
-                    SQL = SQL & " ,  @RefID"
-                    SQL = SQL & " ,  @IDCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( @LocationDTLID"
+                    SQL &=  " ,  @RefID"
+                    SQL &=  " ,  @IDCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update Product_LocationDTL   "
-                    SQL = SQL & " SET"
-                    SQL = SQL & " IDCode=@IDCode"
-                    SQL = SQL & " ,NameThai= @NameThai"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " WHERE LocationDTLID= @LocationDTLID"
+                    SQL &=  " SET"
+                    SQL &=  " IDCode=@IDCode"
+                    SQL &=  " ,NameThai= @NameThai"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " WHERE LocationDTLID= @LocationDTLID"
                 Case DataMode.ModeDelete
                     SQL = " DELETE FROM Product_LocationDTL  "
-                    SQL = SQL & " WHERE LocationDTLID= @LocationDTLID"
+                    SQL &=  " WHERE LocationDTLID= @LocationDTLID"
                 Case Else
                     Return False
                     Exit Function
@@ -213,8 +213,8 @@ Public Class LocationDTLDAO
         SQL = ""
         Try
             SQL = " DELETE FROM Product_LocationDTL  "
-            SQL = SQL & " WHERE LocationDTLID NOT IN( " & pstrStayID & ")"
-            SQL = SQL & " AND RefID=@RefID "
+            SQL &=  " WHERE LocationDTLID NOT IN( " & pstrStayID & ")"
+            SQL &=  " AND RefID=@RefID "
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
 

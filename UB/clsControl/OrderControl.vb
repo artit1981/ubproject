@@ -41,6 +41,9 @@ Public Class OrderControl
             Case MasterType.Invoice
                 mCaption = "ใบกำกับภาษี(ขาย)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+            Case MasterType.InvoiceOnline
+                mCaption = "ใบกำกับภาษีออนไลน์"
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Borrow
                 mCaption = "ยืมสินค้า (ขาย)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
@@ -178,7 +181,7 @@ Public Class OrderControl
                     .Columns("ShipingCode").Caption = "เลขที่ใบส่งของ"
                     .Columns("ShipingCode").Width = 90
                     .Columns("ShipingCode").MaxWidth = 90
-                Case MasterType.Invoice, MasterType.Shiping
+                Case MasterType.Invoice, MasterType.Shiping, MasterType.InvoiceOnline
                     .Columns("ReceiptCode").Caption = "เลขที่ใบเสร็จ"
                     .Columns("ReceiptCode").Width = 90
                     .Columns("ReceiptCode").MaxWidth = 100

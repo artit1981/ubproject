@@ -54,10 +54,10 @@ Public Class OpportunityStageDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM dbo.OpportunityStage "
-            SQL = SQL & " WHERE OpportunityStageID=" & pID
+            SQL &=  " FROM dbo.OpportunityStage "
+            SQL &=  " WHERE OpportunityStageID=" & pID
 
-            SQL = SQL & " ORDER BY NameThai"
+            SQL &=  " ORDER BY NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -130,15 +130,15 @@ Public Class OpportunityStageDAO
 
         Try
             SQL = "SELECT OpportunityStageID AS ID,NameThai,Percents"
-            SQL = SQL & " FROM OpportunityStage  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM OpportunityStage  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND OpportunityStageID=" & pID
+                SQL &=  "  AND OpportunityStageID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY NameThai"
+            SQL &=  " ORDER BY NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OpportunityStageDAO.GetDataTable : " & e.Message)
@@ -160,32 +160,32 @@ Public Class OpportunityStageDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("OpportunityStageID", "OpportunityStage", tr)
                     SQL = " INSERT INTO OpportunityStage  (OpportunityStageID,Percents,NameThai,NameEng,Remark"
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete)"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @Percents"
-                    SQL = SQL & " ,  @mNameThai"
-                    SQL = SQL & " ,  @mNameEng"
-                    SQL = SQL & " ,  @mRemark"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @Percents"
+                    SQL &=  " ,  @mNameThai"
+                    SQL &=  " ,  @mNameEng"
+                    SQL &=  " ,  @mRemark"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE OpportunityStage SET "
-                    SQL = SQL & " ,NameThai=@mNameThai"
-                    SQL = SQL & " ,Percents=@Percents"
-                    SQL = SQL & " ,NameEng=@mNameEng"
-                    SQL = SQL & " ,Remark= @mRemark"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE OpportunityStageID= @mIDs"
+                    SQL &=  " ,NameThai=@mNameThai"
+                    SQL &=  " ,Percents=@Percents"
+                    SQL &=  " ,NameEng=@mNameEng"
+                    SQL &=  " ,Remark= @mRemark"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE OpportunityStageID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE OpportunityStage SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE OpportunityStageID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE OpportunityStageID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -230,9 +230,9 @@ Public Class OpportunityStageDAO
 
         Try
             SQL = "SELECT DepartmentID  FROM Department"
-            SQL = SQL & " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0 AND IDCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND DepartmentID <> " & ID
+                SQL &=  " AND DepartmentID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -252,7 +252,7 @@ Public Class OpportunityStageDAO
 
         'Try
         '    SQL = "SELECT DepartmentID  FROM Position"
-        '    SQL = SQL & " WHERE IsDelete =0 AND DepartmentID=" & ID
+        '    SQL &=  " WHERE IsDelete =0 AND DepartmentID=" & ID
         '    dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         '    Return dataTable.Rows.Count = 0
         'Catch e As Exception

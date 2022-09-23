@@ -499,15 +499,14 @@ Public Class frmStockIn
                             rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                             rec.ProductListRefID2 = 0
                             rec.ProductListRefID3 = 0
+                            rec.ProductListRefID4 = 0
+                            rec.ProductListRefID5 = 0
                             rec.ProductListUnitRef1 = lCalcUnit
                             rec.ProductListUnitRef2 = 0
                             rec.ProductListUnitRef3 = 0
-                            ''If rec.IsSN = 1 Then
-                            ''    rec.SNList = New List(Of SnDAO)
-                            ''    For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                            ''        rec.SNList.Add(pSN)
-                            ''    Next
-                            ''End If
+                            rec.ProductListUnitRef4 = 0
+                            rec.ProductListUnitRef5 = 0
+
                             rec.IsMerge = 0
                             rec.ModePro = DataMode.ModeNew
                             mProductList.Add(rec)
@@ -549,15 +548,14 @@ Public Class frmStockIn
                                     rec.ProductListRefID = ConvertNullToZero(dr("ID"))
                                     rec.ProductListRefID2 = 0
                                     rec.ProductListRefID3 = 0
+                                    rec.ProductListRefID4 = 0
+                                    rec.ProductListRefID5 = 0
                                     rec.ProductListUnitRef1 = lCalcUnit
                                     rec.ProductListUnitRef2 = 0
                                     rec.ProductListUnitRef3 = 0
-                                    'If rec.IsSN = 1 Then
-                                    '    rec.SNList = New List(Of SnDAO)
-                                    '    For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                                    '        rec.SNList.Add(pSN)
-                                    '    Next
-                                    'End If
+                                    rec.ProductListUnitRef4 = 0
+                                    rec.ProductListUnitRef5 = 0
+
                                     mProductList.Add(rec)
                                 End If
                             End If
@@ -566,17 +564,18 @@ Public Class frmStockIn
                                 mProductList.Item(lIndex).AdjustUnit = mProductList.Item(lIndex).AdjustUnit + lCalcAdjustUnit
                                 mProductList.Item(lIndex).Total = mProductList.Item(lIndex).Total + lCalcTotal
 
-                                'If ConvertNullToZero(dr("IsSN")) = 1 Then
-                                '    For Each pSN As SnDAO In LoadSN(lOrderList, dr("ID"), dr("ProductID"))
-                                '        mProductList.Item(lIndex).SNList.Add(pSN)
-                                '    Next
-                                'End If
                                 If mProductList.Item(lIndex).ProductListRefID2 = 0 Then
                                     mProductList.Item(lIndex).ProductListRefID2 = ConvertNullToZero(dr("ID"))
                                     mProductList.Item(lIndex).ProductListUnitRef2 = ConvertNullToZero(dr("Units"))
-                                Else
+                                ElseIf mProductList.Item(lIndex).ProductListRefID3 = 0 Then
                                     mProductList.Item(lIndex).ProductListRefID3 = ConvertNullToZero(dr("ID"))
                                     mProductList.Item(lIndex).ProductListUnitRef3 = ConvertNullToZero(dr("Units"))
+                                ElseIf mProductList.Item(lIndex).ProductListRefID4 = 0 Then
+                                    mProductList.Item(lIndex).ProductListRefID4 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef4 = ConvertNullToZero(dr("Units"))
+                                Else
+                                    mProductList.Item(lIndex).ProductListRefID5 = ConvertNullToZero(dr("ID"))
+                                    mProductList.Item(lIndex).ProductListUnitRef5 = ConvertNullToZero(dr("Units"))
                                     lCanNotMerge = True   'Ref slot full
                                 End If
                                 mProductList.Item(lIndex).IsMerge = 1

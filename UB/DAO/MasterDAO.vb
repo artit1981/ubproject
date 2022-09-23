@@ -9,13 +9,13 @@ Public Class MasterDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM " & GetMasterTableName(pMasterType)
-            SQL = SQL & " WHERE 1=1 "
+            SQL &=  " FROM " & GetMasterTableName(pMasterType)
+            SQL &=  " WHERE 1=1 "
             If pID > 0 Then
-                SQL = SQL & " AND MasterID=" & pID
+                SQL &=  " AND MasterID=" & pID
             End If
             If pCode.Trim <> "" Then
-                SQL = SQL & " AND CodeThai='" & pCode.Trim & "'"
+                SQL &=  " AND CodeThai='" & pCode.Trim & "'"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -74,8 +74,8 @@ Public Class MasterDAO
         Try
             If pProCategoryID > 0 And pTable = "ProductGroup" Then
                 SQL = "SELECT ProductGroupID"
-                SQL = SQL & " FROM ProductCategory  "
-                SQL = SQL & " WHERE CategoryID =" & pProCategoryID
+                SQL &=  " FROM ProductCategory  "
+                SQL &=  " WHERE CategoryID =" & pProCategoryID
                 dataTable = gConnection.executeSelectQuery(SQL, Nothing)
                 If dataTable.Rows.Count > 0 Then
                     For Each dr As DataRow In dataTable.Rows
@@ -85,21 +85,21 @@ Public Class MasterDAO
             End If
 
             SQL = "SELECT MasterID AS ID,CodeThai,CodeEng,Remark"
-            SQL = SQL & " FROM " & pTable
-            SQL = SQL & " WHERE IsDelete= 0   "
+            SQL &=  " FROM " & pTable
+            SQL &=  " WHERE IsDelete= 0   "
             If pID > 0 Then
-                SQL = SQL & "AND MasterID=" & pID
+                SQL &=  "AND MasterID=" & pID
             End If
             If lstrProGroup <> "" Then
-                SQL = SQL & "AND MasterID in (" & lstrProGroup & ")"
+                SQL &=  "AND MasterID in (" & lstrProGroup & ")"
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
             If pSortByID = True Then
-                SQL = SQL & " ORDER BY MasterID"
+                SQL &=  " ORDER BY MasterID"
             Else
-                SQL = SQL & " ORDER BY CodeThai"
+                SQL &=  " ORDER BY CodeThai"
             End If
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -117,29 +117,29 @@ Public Class MasterDAO
                 Case DataMode.ModeNew
                     ID = GenNewID("MasterID", pTable, Nothing)
                     SQL = " INSERT INTO " & pTable & "  (MasterID,CodeThai,CodeEng,Remark,CreateBy,CreateTime,IsInActive,IsDelete )"
-                    SQL = SQL & " VALUES ( " & ID
-                    SQL = SQL & " , '" & Trim(NameThai) & "'"
-                    SQL = SQL & " , '" & Trim(NameEng) & "'"
-                    SQL = SQL & " , '" & Trim(Remark) & "'"
-                    SQL = SQL & " , " & gUserID
-                    SQL = SQL & " , '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
-                    SQL = SQL & " ,0 "
-                    SQL = SQL & " ,0 "
-                    SQL = SQL & " ) "
+                    SQL &=  " VALUES ( " & ID
+                    SQL &=  " , '" & Trim(NameThai) & "'"
+                    SQL &=  " , '" & Trim(NameEng) & "'"
+                    SQL &=  " , '" & Trim(Remark) & "'"
+                    SQL &=  " , " & gUserID
+                    SQL &=  " , '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
+                    SQL &=  " ,0 "
+                    SQL &=  " ,0 "
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE " & pTable & " SET "
-                    SQL = SQL & " CodeThai= '" & Trim(NameThai) & "'"
-                    SQL = SQL & " ,CodeEng= '" & Trim(NameEng) & "'"
-                    SQL = SQL & " ,Remark= '" & Trim(Remark) & "'"
-                    SQL = SQL & " ,ModifiedBy= " & gUserID
-                    SQL = SQL & " ,ModifiedTime=  '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
-                    SQL = SQL & " ,IsInActive=   " & IIf(IsInActive = True, 1, 0)
-                    SQL = SQL & " WHERE MasterID= " & ID
+                    SQL &=  " CodeThai= '" & Trim(NameThai) & "'"
+                    SQL &=  " ,CodeEng= '" & Trim(NameEng) & "'"
+                    SQL &=  " ,Remark= '" & Trim(Remark) & "'"
+                    SQL &=  " ,ModifiedBy= " & gUserID
+                    SQL &=  " ,ModifiedTime=  '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
+                    SQL &=  " ,IsInActive=   " & IIf(IsInActive = True, 1, 0)
+                    SQL &=  " WHERE MasterID= " & ID
                 Case DataMode.ModeDelete
                     SQL = " UPDATE " & pTable & "  SET IsDelete = 1"
-                    SQL = SQL & " ,ModifiedBy= " & gUserID
-                    SQL = SQL & " ,ModifiedTime=  '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
-                    SQL = SQL & " WHERE MasterID= " & ID
+                    SQL &=  " ,ModifiedBy= " & gUserID
+                    SQL &=  " ,ModifiedTime=  '" & formatSQLDateTime(GetCurrentDate(Nothing)) & "'"
+                    SQL &=  " WHERE MasterID= " & ID
             End Select
             Return gConnection.executeInsertQuery(SQL, Nothing)
         Catch e As Exception
@@ -155,10 +155,10 @@ Public Class MasterDAO
 
         Try
             SQL = "SELECT MasterID  FROM " & pTable & ""
-            SQL = SQL & " WHERE CodeThai='" & Trim(NameThai) & "'"
-            SQL = SQL & " AND IsDelete =0  "
+            SQL &=  " WHERE CodeThai='" & Trim(NameThai) & "'"
+            SQL &=  " AND IsDelete =0  "
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & "  AND MasterID <> " & ID
+                SQL &=  "  AND MasterID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -180,7 +180,7 @@ Public Class MasterDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0

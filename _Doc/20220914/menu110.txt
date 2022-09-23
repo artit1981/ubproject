@@ -1,0 +1,1 @@
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (110,35,'Report','ฝ่ายขาย' ,'DashboardBar','Dashboard' ,'Dashboard',1 ,1 ,0,0,0,1,0,0,0,0,0);

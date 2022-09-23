@@ -115,8 +115,8 @@ Public Class LocatonDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL = SQL & " FROM " & TableName
-            SQL = SQL & " WHERE LocationID=" & pID
+            SQL &=  " FROM " & TableName
+            SQL &=  " WHERE LocationID=" & pID
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
@@ -232,15 +232,15 @@ Public Class LocatonDAO
 
         Try
             SQL = "SELECT LocationID AS ID,IDCode,NameThai,PrivilegeBy "
-            SQL = SQL & " FROM Product_Location  "
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " FROM Product_Location  "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND LocationID=" & pID
+                SQL &=  "  AND LocationID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode,NameThai"
+            SQL &=  " ORDER BY IDCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "LocatonDAO.GetDataTable : " & e.Message)
@@ -254,16 +254,16 @@ Public Class LocatonDAO
 
         Try
             SQL = "SELECT LocationID AS ID,IDCode,NameThai"
-            SQL = SQL & " FROM Product_Location "
+            SQL &=  " FROM Product_Location "
 
-            SQL = SQL & " WHERE IsDelete =0   "
+            SQL &=  " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL = SQL & "  AND LocationID=" & pID
+                SQL &=  "  AND LocationID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
-            SQL = SQL & " ORDER BY IDCode,NameThai"
+            SQL &=  " ORDER BY IDCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "LocatonDAO.GetDataTable : " & e.Message)
@@ -277,12 +277,12 @@ Public Class LocatonDAO
 
         Try
             SQL = "SELECT P.LocationID AS LocationID,D.NameThai AS LocationDTL,D.LocationDTLID  "
-            SQL = SQL & " FROM Product_LocationDTL D"
-            SQL = SQL & " LEFT OUTER JOIN Product_Location P ON D.RefID=P.LocationID AND P.IsDelete =0   "
+            SQL &=  " FROM Product_LocationDTL D"
+            SQL &=  " LEFT OUTER JOIN Product_Location P ON D.RefID=P.LocationID AND P.IsDelete =0   "
             'SQL = SQL & " WHERE D.IsDelete =0   "
 
             If pOnlyActive = True Then
-                SQL = SQL & "  AND IsInActive = 0"
+                SQL &=  "  AND IsInActive = 0"
             End If
             'SQL = SQL & " ORDER BY P.NameThai ,D.NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -310,41 +310,41 @@ Public Class LocatonDAO
 
                     ID = GenNewID("LocationID", "Product_Location", tr)
                     SQL = " INSERT INTO Product_Location  (LocationID,IDCode,NameThai,NameEng"
-                    SQL = SQL & " ,Remark,EmpID,PrivilegeBy,EmpGroupID "
-                    SQL = SQL & " ,CreateBy,CreateTime,IsInActive,IsDelete "
+                    SQL &=  " ,Remark,EmpID,PrivilegeBy,EmpGroupID "
+                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete "
 
-                    SQL = SQL & " )"
-                    SQL = SQL & " VALUES ( @mIDs"
-                    SQL = SQL & " ,  @IDCode"
-                    SQL = SQL & " ,  @NameThai"
-                    SQL = SQL & " ,  @NameEng"
-                    SQL = SQL & " ,  @Remark"
-                    SQL = SQL & " ,  @EmpID"
-                    SQL = SQL & " ,  @PrivilegeBy"
-                    SQL = SQL & " ,  @EmpGroupID"
-                    SQL = SQL & " ,  @gUserID"
-                    SQL = SQL & " ,  @CreateTime"
-                    SQL = SQL & " ,  @mIsInActive"
-                    SQL = SQL & " ,  @mIsDelete"
-                    SQL = SQL & " ) "
+                    SQL &=  " )"
+                    SQL &=  " VALUES ( @mIDs"
+                    SQL &=  " ,  @IDCode"
+                    SQL &=  " ,  @NameThai"
+                    SQL &=  " ,  @NameEng"
+                    SQL &=  " ,  @Remark"
+                    SQL &=  " ,  @EmpID"
+                    SQL &=  " ,  @PrivilegeBy"
+                    SQL &=  " ,  @EmpGroupID"
+                    SQL &=  " ,  @gUserID"
+                    SQL &=  " ,  @CreateTime"
+                    SQL &=  " ,  @mIsInActive"
+                    SQL &=  " ,  @mIsDelete"
+                    SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Product_Location SET "
-                    SQL = SQL & " IDCode=@IDCode"
-                    SQL = SQL & " ,NameThai=@NameThai"
-                    SQL = SQL & " ,NameEng=@NameEng"
-                    SQL = SQL & " ,Remark=@Remark"
-                    SQL = SQL & " ,EmpID=@EmpID"
-                    SQL = SQL & " ,PrivilegeBy=@PrivilegeBy"
-                    SQL = SQL & " ,EmpGroupID=@EmpGroupID"
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " ,IsInActive= @mIsInActive"
-                    SQL = SQL & " WHERE LocationID= @mIDs"
+                    SQL &=  " IDCode=@IDCode"
+                    SQL &=  " ,NameThai=@NameThai"
+                    SQL &=  " ,NameEng=@NameEng"
+                    SQL &=  " ,Remark=@Remark"
+                    SQL &=  " ,EmpID=@EmpID"
+                    SQL &=  " ,PrivilegeBy=@PrivilegeBy"
+                    SQL &=  " ,EmpGroupID=@EmpGroupID"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " ,IsInActive= @mIsInActive"
+                    SQL &=  " WHERE LocationID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Product_Location SET IsDelete=@mIsDelete "
-                    SQL = SQL & " ,ModifiedBy= @gUserID"
-                    SQL = SQL & " ,ModifiedTime= @CreateTime"
-                    SQL = SQL & " WHERE LocationID= @mIDs"
+                    SQL &=  " ,ModifiedBy= @gUserID"
+                    SQL &=  " ,ModifiedTime= @CreateTime"
+                    SQL &=  " WHERE LocationID= @mIDs"
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
@@ -442,10 +442,10 @@ Public Class LocatonDAO
 
         Try
             SQL = "SELECT LocationID  FROM Product_Location"
-            SQL = SQL & " WHERE IsDelete =0  "
-            SQL = SQL & "  AND IDCode='" & Trim(Code) & "'"
+            SQL &=  " WHERE IsDelete =0  "
+            SQL &=  "  AND IDCode='" & Trim(Code) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL = SQL & " AND LocationID <> " & ID
+                SQL &=  " AND LocationID <> " & ID
             End If
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
@@ -467,7 +467,7 @@ Public Class LocatonDAO
             'SQL = "SELECT LeadID  FROM Lead"
             'SQL = SQL & " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             'If mMode = DataMode.ModeEdit Then
-            '    SQL = SQL & " AND LeadID <> " & mIDs
+            '    SQL &=  " AND LeadID <> " & mIDs
             'End If
             'dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             'Return dataTable.Rows.Count > 0
