@@ -449,6 +449,8 @@ Partial Public Class TmpOrders
         
         Private columnEmployeePosition As Global.System.Data.DataColumn
         
+        Private columnCustomerEmail As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -869,6 +871,14 @@ Partial Public Class TmpOrders
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property CustomerEmailColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCustomerEmail
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -953,9 +963,10 @@ Partial Public Class TmpOrders
                     ByVal RefOrderCode As String,  _
                     ByVal EmployeePhone As String,  _
                     ByVal CompanyBankAccount As String,  _
-                    ByVal EmployeePosition As String) As TmpOrdersRow
+                    ByVal EmployeePosition As String,  _
+                    ByVal CustomerEmail As String) As TmpOrdersRow
             Dim rowTmpOrdersRow As TmpOrdersRow = CType(Me.NewRow,TmpOrdersRow)
-            Dim columnValuesArray() As Object = New Object() {UserID, OrderCode, OrderDate, ExpireDate, ShipingDate, CustomerCode, CustomerName, AddressBill, AddressShip, CustomerPhone, CustomerFAX, CustomerType, CustomerTax, Company, CompanyOwner, CompanyAddress, CompanyPhone, CompanyFax, CompanyTax, CompanyBranch, CompanyMail, CompanyWeb, PO, CreditRule, SendBy, ShipingMethod, ShipingRule, Employee, Total, DiscountPercen, DiscountAmount, VatPercen, VatAmount, GrandTotal, GrandTotalSTR, Remark, Header1, Header2, Header3, Logo, QuotationDays, ContactPerson, IsMainCompany, Institute, RefOrderCode, EmployeePhone, CompanyBankAccount, EmployeePosition}
+            Dim columnValuesArray() As Object = New Object() {UserID, OrderCode, OrderDate, ExpireDate, ShipingDate, CustomerCode, CustomerName, AddressBill, AddressShip, CustomerPhone, CustomerFAX, CustomerType, CustomerTax, Company, CompanyOwner, CompanyAddress, CompanyPhone, CompanyFax, CompanyTax, CompanyBranch, CompanyMail, CompanyWeb, PO, CreditRule, SendBy, ShipingMethod, ShipingRule, Employee, Total, DiscountPercen, DiscountAmount, VatPercen, VatAmount, GrandTotal, GrandTotalSTR, Remark, Header1, Header2, Header3, Logo, QuotationDays, ContactPerson, IsMainCompany, Institute, RefOrderCode, EmployeePhone, CompanyBankAccount, EmployeePosition, CustomerEmail}
             rowTmpOrdersRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTmpOrdersRow)
             Return rowTmpOrdersRow
@@ -1026,6 +1037,7 @@ Partial Public Class TmpOrders
             Me.columnEmployeePhone = MyBase.Columns("EmployeePhone")
             Me.columnCompanyBankAccount = MyBase.Columns("CompanyBankAccount")
             Me.columnEmployeePosition = MyBase.Columns("EmployeePosition")
+            Me.columnCustomerEmail = MyBase.Columns("CustomerEmail")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1127,6 +1139,8 @@ Partial Public Class TmpOrders
             MyBase.Columns.Add(Me.columnCompanyBankAccount)
             Me.columnEmployeePosition = New Global.System.Data.DataColumn("EmployeePosition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEmployeePosition)
+            Me.columnCustomerEmail = New Global.System.Data.DataColumn("CustomerEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCustomerEmail)
             Me.columnUserID.AllowDBNull = false
             Me.columnOrderCode.MaxLength = 100
             Me.columnOrderDate.MaxLength = 10
@@ -3508,6 +3522,21 @@ Partial Public Class TmpOrders
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property CustomerEmail() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTmpOrders.CustomerEmailColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CustomerEmail' in table 'TmpOrders' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTmpOrders.CustomerEmailColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsOrderCodeNull() As Boolean
             Return Me.IsNull(Me.tableTmpOrders.OrderCodeColumn)
         End Function
@@ -4068,6 +4097,18 @@ Partial Public Class TmpOrders
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetEmployeePositionNull()
             Me(Me.tableTmpOrders.EmployeePositionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsCustomerEmailNull() As Boolean
+            Return Me.IsNull(Me.tableTmpOrders.CustomerEmailColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetCustomerEmailNull()
+            Me(Me.tableTmpOrders.CustomerEmailColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

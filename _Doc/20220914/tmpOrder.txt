@@ -1,0 +1,1 @@
+alter table TmpOrders add CustomerEmail nvarchar(50);

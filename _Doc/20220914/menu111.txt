@@ -1,0 +1,1 @@
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (111,287,'CRM','ฝ่ายขาย' ,'InvoiceOnlineBar','ใบกำกับภาษีออนไลน์' ,'InvoiceOnline',1 ,1 ,1,1,1,0,0,0,1,0,0);

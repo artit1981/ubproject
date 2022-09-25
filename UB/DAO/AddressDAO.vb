@@ -291,41 +291,41 @@ Public Class AddressDAO
             lstrAddress = AddressNo
             If pIsLong Then
                 If mGroupNo.Trim <> "" Then
-                    lstrAddress = lstrAddress & " หมู่ที่ " & mGroupNo.Trim
+                    lstrAddress &= " หมู่ที่ " & mGroupNo.Trim
                 End If
                 If mBuilding.Trim <> "" Then
-                    lstrAddress = lstrAddress & " หมู่บ้าน/อาคาร " & mBuilding.Trim
+                    lstrAddress &= " หมู่บ้าน/อาคาร " & mBuilding.Trim
                 End If
                 If mLane.Trim <> "" Then
-                    lstrAddress = lstrAddress & " ซอย " & mLane.Trim
+                    lstrAddress &= " ซอย " & mLane.Trim
                 End If
                 If mStreet.Trim <> "" Then
-                    lstrAddress = lstrAddress & " ถนน " & mStreet.Trim
+                    lstrAddress &= " ถนน " & mStreet.Trim
                 End If
                 If mDistrict.Trim <> "" Then
-                    lstrAddress = lstrAddress & vbNewLine & " ตำบล/แขวง " & mDistrict.Trim
+                    lstrAddress &= vbNewLine & " ตำบล/แขวง " & mDistrict.Trim
                 End If
                 If mAmphur.Trim <> "" Then
-                    lstrAddress = lstrAddress & " อำเภอ/เขต " & mAmphur.Trim
+                    lstrAddress &= " อำเภอ/เขต " & mAmphur.Trim
                 End If
 
-                lstrAddress = lstrAddress & vbNewLine & " จังหวัด " & mProvince.Trim
-                lstrAddress = lstrAddress & " " & mPostalCode.Trim
+                lstrAddress &= vbNewLine & " จังหวัด " & mProvince.Trim
+                lstrAddress &= " " & mPostalCode.Trim
             Else
                 If mGroupNo.Trim <> "" Then
-                    lstrAddress = lstrAddress & " หมู่ " & mGroupNo.Trim
+                    lstrAddress &= " หมู่ " & mGroupNo.Trim
                 End If
                 If mLane.Trim <> "" Then
-                    lstrAddress = lstrAddress & " ซ." & mLane.Trim
+                    lstrAddress &= " ซ." & mLane.Trim
                 End If
                 If mStreet.Trim <> "" Then
-                    lstrAddress = lstrAddress & " ถ." & mStreet.Trim
+                    lstrAddress &= " ถ." & mStreet.Trim
                 End If
 
-                lstrAddress = lstrAddress & " ต." & mDistrict.Trim
-                lstrAddress = lstrAddress & " อ." & mAmphur.Trim
-                lstrAddress = lstrAddress & vbNewLine & " จ." & mProvince.Trim
-                lstrAddress = lstrAddress & " " & mPostalCode.Trim
+                lstrAddress &= " ต." & mDistrict.Trim
+                lstrAddress &= " อ." & mAmphur.Trim
+                lstrAddress &= vbNewLine & " จ." & mProvince.Trim
+                lstrAddress &= " " & mPostalCode.Trim
             End If
         End If
 

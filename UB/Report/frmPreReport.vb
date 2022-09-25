@@ -75,6 +75,8 @@ Public Class frmPreReport
                 Select Case mOrderType
                     Case MasterType.PurchaseOrder
                         report = New rptPOOrders
+                    Case MasterType.InvoiceOnline
+                        report = New rptInvoiceOnline
                     Case MasterType.SellOrders
                         report = New rptSellOrders
                         lclsReport.Header1 = "ใบสั่งขาย\Sell Order"
@@ -232,6 +234,7 @@ Public Class frmPreReport
                 If IsNothing(lclsOrder.CustomerDAO.AddressS) = False Then
                     lclsReport.CustomerPhone = lclsOrder.CustomerDAO.AddressS.Phone1
                     lclsReport.CustomerFAX = lclsOrder.CustomerDAO.AddressS.Fax
+                    lclsReport.CustomerEmail = lclsOrder.CustomerDAO.AddressS.Email1
                 End If
                 If IsNothing(lclsOrder.CustomerDAO.HistoryDAO) = False Then
                     lclsReport.CustomerTax = lclsOrder.CustomerDAO.HistoryDAO.TaxID
