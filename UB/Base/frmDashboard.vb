@@ -8,15 +8,15 @@ Public Class frmDashboard
     Private mYearList As String
     Private mMonthList As String
 
-    Private Sub frmNotify_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
     End Sub
 
-    Private Sub frmNotify_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub frmDashboard_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
     End Sub
 
-    Private Sub frmNotify_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmDashboard_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             InitCondition()
 
@@ -57,7 +57,7 @@ Public Class frmDashboard
             InitChartTotalSellCOGSByYear()
             InitChartTotalSellProfitByYear()
             InitChartBankBalance()
-
+            InitGridBrand()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
 
@@ -332,6 +332,19 @@ Public Class frmDashboard
         End Try
     End Sub
 
+    Private Sub InitGridBrand()
+        Try
+            Dim SQL = " EXEC [dbo].[spTotalSellByBrand]"
+            SQL &= " @YearList = '" & mYearList & "'"
+            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+
+            GridControl1.DataSource = dataTable
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
     Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles ListYear.ItemCheck
         If ListYear.CheckedItems.Count > 0 Then
             LoadData()
@@ -341,4 +354,5 @@ Public Class frmDashboard
     'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged
     '    LoadData()
     'End Sub
+
 End Class

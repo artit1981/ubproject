@@ -1618,6 +1618,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Images\Thumbs.db" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -1654,6 +1655,56 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\1394817194_stock_insert-slide.png" />
+    <Content Include="Images\1403254588_173153.ico" />
+    <Content Include="Images\1403276180_button_cancel.png" />
+    <Content Include="Images\1403625569_58483.ico" />
+    <Content Include="Images\1403625633_Button Load.png" />
+    <Content Include="Images\1403625820_stock_reload.png" />
+    <Content Include="Images\1444050589_production_copyleft.png" />
+    <Content Include="Images\1444050623_production_copyleft.ico" />
+    <Content Include="Images\1444121631_11.ico" />
+    <Content Include="Images\1444121721_11.png" />
+    <Content Include="Images\1444248199_001_06.png" />
+    <Content Include="Images\1456231463_agt_announcements.ico" />
+    <Content Include="Images\1458813069_clock_history_frame.ico" />
+    <Content Include="Images\1464351835_calculator.png" />
+    <Content Include="Images\Aha-Soft-Free-3d-Glossy-Interface-Create.ico" />
+    <Content Include="Images\Calendar_16x16.png" />
+    <Content Include="Images\Drafts_16x16.png" />
+    <Content Include="Images\export-excel-icon.png" />
+    <Content Include="Images\Inbox_16x16.png" />
+    <Content Include="Images\Mail_16x16.png" />
+    <Content Include="Images\Organizer_16x16.png" />
+    <Content Include="Images\Outbox_16x16.png" />
+    <Content Include="Images\Redshop-icon-supplier.png" />
+    <Content Include="Images\ReportHeader.png" />
+    <Content Include="Images\Ribbon_AlignCenter_16x16.png" />
+    <Content Include="Images\Ribbon_AlignLeft_16x16.png" />
+    <Content Include="Images\Ribbon_AlignRight_16x16.png" />
+    <Content Include="Images\Ribbon_Bold_16x16.png" />
+    <Content Include="Images\Ribbon_Close_16x16.png" />
+    <Content Include="Images\Ribbon_Close_32x32.png" />
+    <Content Include="Images\Ribbon_Content_16x16.png" />
+    <Content Include="Images\Ribbon_Content_32x32.png" />
+    <Content Include="Images\Ribbon_Exit_16x16.png" />
+    <Content Include="Images\Ribbon_Exit_32x32.png" />
+    <Content Include="Images\Ribbon_Find_16x16.png" />
+    <Content Include="Images\Ribbon_Find_32x32.png" />
+    <Content Include="Images\Ribbon_Info_16x16.png" />
+    <Content Include="Images\Ribbon_Info_32x32.png" />
+    <Content Include="Images\Ribbon_Italic_16x16.png" />
+    <Content Include="Images\Ribbon_New_16x16.png" />
+    <Content Include="Images\Ribbon_New_32x32.png" />
+    <Content Include="Images\Ribbon_Open_16x16.png" />
+    <Content Include="Images\Ribbon_Open_32x32.png" />
+    <Content Include="Images\Ribbon_SaveAs_16x16.png" />
+    <Content Include="Images\Ribbon_SaveAs_32x32.png" />
+    <Content Include="Images\Ribbon_Save_16x16.png" />
+    <Content Include="Images\Ribbon_Save_32x32.png" />
+    <Content Include="Images\Ribbon_Underline_16x16.png" />
+    <Content Include="Images\Tasks_16x16.png" />
+    <Content Include="Images\Trash_16x16.png" />
     <Content Include="Shopping cart.ico" />
   </ItemGroup>
   <ItemGroup>

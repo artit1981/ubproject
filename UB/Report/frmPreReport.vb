@@ -350,18 +350,18 @@ Public Class frmPreReport
                                 If Len(lclsTmpProList.ProductName) > 25 Then
                                     lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 25)
                                 End If
-                            Case MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
-                                If Len(lclsTmpProList.ProductName) > 40 Then
-                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 40)
-                                End If
+                            'Case MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                            '    If Len(lclsTmpProList.ProductName) > 40 Then
+                            '        lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 40)
+                            '    End If
                             Case MasterType.PurchaseOrder
                                 If Len(lclsTmpProList.ProductName) > 120 Then
                                     lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 120)
                                 End If
 
                             Case Else
-                                If Len(lclsTmpProList.ProductName) > 60 Then
-                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 60)
+                                If Len(lclsTmpProList.ProductName) > 500 Then
+                                    lclsTmpProList.ProductName = lclsTmpProList.ProductName.Substring(0, 500)
                                 End If
                         End Select
                         If lSnCodeList <> "" Then
@@ -389,12 +389,12 @@ Public Class frmPreReport
 
             lTableNote = lclsNote.GetDataTable(mOrderType.ToString & "_PRO", pOrderID)
             For Each pRow As DataRow In lTableNote.Rows
-                lclsTmpProList.SEQ = pSEQ
+                lclsTmpProList.SEQ = 999
                 lclsTmpProList.ProductID = 0
                 lclsTmpProList.ProductCode = ""
                 lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("Description"))
                 lclsTmpProList.SaveData()
-                pSEQ = pSEQ + 1
+                'pSEQ = pSEQ + 1
             Next
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, "modReport.InitialProductRemark : " & ex.Message)
