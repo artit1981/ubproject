@@ -84,7 +84,7 @@ Public Class frmPreReport
                         report = New rptSellOrders
                         lclsReport.Header1 = "ใบสั่งจอง"
                     Case MasterType.Quotation
-                        report = New rptQuotation
+                        report = New rptQuotation2
                     Case MasterType.Claim
                         report = New rptClaimMain
                         lclsReport.Header1 = "รับแจ้งเคลม"
@@ -256,7 +256,7 @@ Public Class frmPreReport
                 lclsReport.VatPercen = lclsOrder.VatPercen
                 lclsReport.DiscountPercen = lclsOrder.DiscountPercen
                 lclsReport.GrandTotal = lclsOrder.GrandTotal
-                lclsReport.GrandTotalSTR = ChangeToThaibathWord(lclsOrder.GrandTotal.ToString)
+                lclsReport.GrandTotalSTR = "(" & ChangeToThaibathWord(lclsOrder.GrandTotal.ToString) & ")"
                 If mOrderType = MasterType.Quotation Then
                     If lclsOrder.QuotationRemarkID > 0 Then
                         lclsMaster = New MasterDAO
@@ -335,15 +335,17 @@ Public Class frmPreReport
                 Select Case mOrderType
                     Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
                         lSnCodeList = ""
-                        lSN = New SnDAO
-                        lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
-                        For Each pRowSn As DataRow In lSNTable.Rows
-                            If lSnCodeList = "" Then
-                                lSnCodeList = ConvertNullToString(pRowSn.Item("SerialNumberNo"))
-                            Else
-                                lSnCodeList = lSnCodeList & "," & ConvertNullToString(pRowSn.Item("SerialNumberNo"))
-                            End If
-                        Next
+                        If chkSN.Checked = True Then
+                            lSN = New SnDAO
+                            lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
+                            For Each pRowSn As DataRow In lSNTable.Rows
+                                If lSnCodeList = "" Then
+                                    lSnCodeList = ConvertNullToString(pRowSn.Item("SerialNumberNo"))
+                                Else
+                                    lSnCodeList = lSnCodeList & "," & ConvertNullToString(pRowSn.Item("SerialNumberNo"))
+                                End If
+                            Next
+                        End If
 
                         Select Case mOrderType
                             Case MasterType.SellOrders
@@ -1085,6 +1087,7 @@ Public Class frmPreReport
         Try
             ShowProgress(True, "Printing...")
             gShowDateReport = chkDate.Checked
+            gShowShipingDateReport = chkShiping.Checked
 
             If mOrderType = 1000 Then
                 PrintPayment(mOrderID)

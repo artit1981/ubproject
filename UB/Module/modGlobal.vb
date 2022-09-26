@@ -197,7 +197,7 @@ Module modGlobal
     Public gIsCheckError As Boolean = False
     Public gConnectionError As Boolean = False
     Public gShowDateReport As Boolean = True
-
+    Public gShowShipingDateReport As Boolean = True
     'Calc
     Public gGrandAmount As Decimal = 0
 

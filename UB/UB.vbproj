@@ -446,6 +446,12 @@
     <Compile Include="Report\rptInvoiceOnline.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\rptQuotation2.Designer.vb">
+      <DependentUpon>rptQuotation2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptQuotation2.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptSellByCusPO.Designer.vb">
       <DependentUpon>rptSellByCusPO.vb</DependentUpon>
     </Compile>
@@ -1288,6 +1294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptInvoiceOnline.resx">
       <DependentUpon>rptInvoiceOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptQuotation2.resx">
+      <DependentUpon>rptQuotation2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptSellByCusPO.resx">
       <DependentUpon>rptSellByCusPO.vb</DependentUpon>
