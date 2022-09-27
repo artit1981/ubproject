@@ -1,12 +1,17 @@
 ﻿
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraEditors.Controls
+Imports DevExpress.XtraGauges.Core.Model
+Imports DevExpress.XtraGauges.Win.Gauges.Circular
 Imports DevExpress.XtraSplashScreen
 Imports DevExpress.XtraTreeMap
 
 Public Class frmDashboard
     Private mYearList As String
     Private mMonthList As String
+    Private mFromDate As Date
+    Private mToDate As Date
+    Private mTotalSell As Double
 
     Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -19,6 +24,7 @@ Public Class frmDashboard
     Private Sub frmDashboard_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             InitCondition()
+            LoadData()
 
             ' Add a title to the chart and hide the legend.
             Dim chartTitle1 As New ChartTitle With {
@@ -27,22 +33,25 @@ Public Class frmDashboard
             }
             ChartTotalSellByCatalog.Titles.Add(chartTitle1)
 
-            ' Add a title to the chart and hide the legend.
             chartTitle1 = New ChartTitle With {
                 .Text = "Total Sale and COGS",
                 .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
             }
             ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
 
-            ' Add a title to the chart and hide the legend.
             chartTitle1 = New ChartTitle With {
                 .Text = "Total Sale and Profit",
                 .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
             }
             ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
 
+            chartTitle1 = New ChartTitle With {
+                .Text = "ยอดขายรวม :" & mTotalSell & " M",
+                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+            }
+            overdueChart.Titles.Add(chartTitle1)
 
-            LoadData()
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -58,6 +67,7 @@ Public Class frmDashboard
             InitChartTotalSellProfitByYear()
             InitChartBankBalance()
             InitGridBrand()
+            InitOverdueGauge()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
 
@@ -113,6 +123,23 @@ Public Class frmDashboard
         Next
         mMonthList = lMonthList
 
+        'Init From To Date
+        Dim lMonthFrom As Integer, lMonthTo As Integer, lYearFrom As Integer, lYearTo As Integer
+        If ListYear.CheckedItems.Count > 0 Then
+            lYearTo = ListYear.CheckedItems(0).ToString
+            lYearFrom = ListYear.CheckedItems(ListYear.CheckedItems.Count - 1).ToString
+        End If
+
+        If ListMonth.CheckedItems.Count > 0 Then
+            lMonthFrom = GetMonthNumber(ListMonth.CheckedItems(0).ToString)
+            lMonthTo = GetMonthNumber(ListMonth.CheckedItems(ListMonth.CheckedItems.Count - 1).ToString)
+        End If
+        'If Now.Year > 2500 Then
+        lYearFrom += 543
+        lYearTo += 543
+        'End If
+        mFromDate = DateSerial(lYearFrom, lMonthFrom, 1)
+        mToDate = DateSerial(lYearTo, lMonthTo, Date.DaysInMonth(lYearTo, lMonthTo))
     End Sub
 
     Private Function GetMonthNumber(ByVal pMonthName As String) As Integer
@@ -150,6 +177,9 @@ Public Class frmDashboard
             '' Specify the behavior of series labels.
             CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
 
+            Dim totalLabel As PieTotalLabel = CType(ChartTotalSellByCatalog.Series("Series 1").View, DoughnutSeriesView).TotalLabel
+            totalLabel.Visible = True
+            totalLabel.TextPattern = "Total" & vbLf & "{V:F3}M".ToString()
 
             ChartTotalSellByCatalog.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
             ChartTotalSellByCatalog.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
@@ -164,6 +194,8 @@ Public Class frmDashboard
 
     Private Sub InitChartTotalSellCOGSByYear()
         Try
+            Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
+
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
@@ -174,7 +206,16 @@ Public Class frmDashboard
             For Each pRow In dataTable.Rows
                 seriesSale.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("TotalAmount"))))
                 seriesCOGS.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Cost"))))
+
+                lTotalSell += ConvertNullToZero(pRow("TotalAmount"))
+                lTotalCOGS += ConvertNullToZero(pRow("Cost"))
+                lTotalProfit += ConvertNullToZero(pRow("Profit"))
             Next
+            mTotalSell = lTotalSell
+            txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " M"
+            txtCOGS.Text = lTotalCOGS.ToString("#,##0.00") & " M"
+            txtProfit.Text = lTotalProfit.ToString("#,##0.00") & " M"
+            txtProfitPercen.Text = ((lTotalProfit / lTotalSell) * 100).ToString("#,##0.00") & " %"
 
             ChartTotalSellCOGSByYear.Series.Clear()
             ' Add the series to the chart.
@@ -308,6 +349,8 @@ Public Class frmDashboard
 
     Private Sub InitChartBankBalance()
         Try
+            Dim lTotalCash As Double = 0
+
             Dim SQL = " EXEC [dbo].[spBankBalance]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
@@ -321,7 +364,10 @@ Public Class frmDashboard
 
             For Each pRow In dataTable.Rows
                 BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
+                lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
             Next
+
+            txtCash.Text = lTotalCash.ToString("#,##0.00") & " M"
 
             storage.Items.Add(BankGroup)
 
@@ -340,6 +386,58 @@ Public Class frmDashboard
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
 
             GridControl1.DataSource = dataTable
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InitOverdueGauge()
+        Try
+            Dim series1 As New Series("Series 1", ViewType.Pie3D)
+
+            'Overdue
+            Dim SQL = " EXEC [dbo].spOverdueTX"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+
+            If dataTable.Rows.Count > 0 Then
+                Dim lsumPayTotal = Double.Parse((dataTable.Compute("SUM(PayTotal)", "")))
+                lsumPayTotal /= 1000000
+                series1.Points.Add(New SeriesPoint("ยอดหนี้คงค้าง", lsumPayTotal))
+
+                'Total sell
+
+                series1.Points.Add(New SeriesPoint("ยอดชำระ", mTotalSell - lsumPayTotal))
+                overdueChart.Series.Clear()
+
+                ' Add the series to the chart.
+                overdueChart.Series.Add(series1)
+
+                ' Specify the text pattern of series labels.
+                series1.Label.TextPattern = "{A} {VP:P0} ({V:F3}M)"
+                series1.LegendTextPattern = "{A}"
+
+                ' Specify how series points are sorted.
+                series1.SeriesPointsSorting = SortingMode.Ascending
+                series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+                series1.ShowInLegend = True
+                '' Specify the behavior of series labels.
+                CType(series1.Label, Pie3DSeriesLabel).Position = PieSeriesLabelPosition.Inside
+
+                'Dim totalLabel As PieTotalLabel = CType(overdueChart.Series("Series 1").View, Pie3DSeriesView)
+                'totalLabel.Visible = True
+                'totalLabel.TextPattern = "Total" & vbLf & "{V:F3}M".ToString()
+
+                overdueChart.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
+                overdueChart.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+                ' Add the chart to the form.
+                overdueChart.Dock = DockStyle.Fill
+            End If
+
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try

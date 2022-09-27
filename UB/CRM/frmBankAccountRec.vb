@@ -16,13 +16,14 @@ Public Class frmBankAccountRec
         Try
 
             InitialCombo()
-            dtpDateFrom.EditValue = DateSerial(Now.Year, 1, 1)
+            dtpDateFrom.EditValue = DateSerial(Now.Year + 543, 1, 1)
             dtpDateTo.EditValue = Now
 
 
 
             Call LoadData()
             Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
         End Try
@@ -126,13 +127,14 @@ Public Class frmBankAccountRec
 
     Private Sub LoadDataBankAccount()
         Dim lcls As New BankAccountDAO
-        Dim dataTable As New DataTable()
+
 
         Try
-            dataTable = lcls.GetDataTable(0, True, 0, 0)
+            Dim dataTable = lcls.GetDataTable(0, True, 0, 0)
             BankAccountIDLookUpEdit.DataSource = dataTable
 
-            Dim drNewRow As DataRow = dataTable.NewRow
+            Dim dataTable2 = dataTable.Clone
+            Dim drNewRow As DataRow = dataTable2.NewRow
 
             'specify the information of the new row.
             drNewRow("ID") = 0
@@ -142,9 +144,9 @@ Public Class frmBankAccountRec
             drNewRow("CusName") = "ALL"
             drNewRow("ACCNAME") = "ALL"
 
-            dataTable.Rows.Add(drNewRow)
+            dataTable2.Rows.Add(drNewRow)
 
-            BankAccID.Properties.DataSource = dataTable
+            BankAccID.Properties.DataSource = dataTable2
             BankAccID.Properties.DisplayMember = "ACCNAME"
             BankAccID.Properties.ValueMember = "ID"
             BankAccID.EditValue = 0
@@ -152,7 +154,7 @@ Public Class frmBankAccountRec
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucProductLocation.LoadDataLocaton : " & e.Message)
         Finally
-            dataTable = Nothing
+
             lcls = Nothing
         End Try
     End Sub

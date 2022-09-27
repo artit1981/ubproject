@@ -341,7 +341,7 @@ Partial Class frmCashRecord
         Me.CashItemIDLookUpEdit.AutoHeight = False
         Me.CashItemIDLookUpEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.CashItemIDLookUpEdit.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo(" ID", " ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "รายการเงินสดย่อย", 200, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.CashItemIDLookUpEdit.DisplayMember = "ACCNAME"
+        Me.CashItemIDLookUpEdit.DisplayMember = "CodeThai"
         Me.CashItemIDLookUpEdit.DropDownRows = 10
         Me.CashItemIDLookUpEdit.Name = "CashItemIDLookUpEdit"
         Me.CashItemIDLookUpEdit.NullText = ""

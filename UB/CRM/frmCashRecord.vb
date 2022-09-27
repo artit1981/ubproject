@@ -16,12 +16,13 @@ Public Class frmCashRecord
         Try
 
             InitialCombo()
-            dtpDateFrom.EditValue = DateSerial(Now.Year, 1, 1)
+            dtpDateFrom.EditValue = DateSerial(Now.Year + 543, 1, 1)
             dtpDateTo.EditValue = Now
 
 
             Call LoadData()
             Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            PrintBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
         End Try
@@ -132,15 +133,16 @@ Public Class frmCashRecord
             Dim dataTable = lcls.GetDataTable(0, pTable, True)
             CashItemIDLookUpEdit.DataSource = dataTable
 
-            Dim drNewRow As DataRow = dataTable.NewRow
+            Dim dataTable2 = dataTable.Clone
+            Dim drNewRow As DataRow = dataTable2.NewRow
 
             'specify the information of the new row.
             drNewRow("ID") = 0
             drNewRow("CodeThai") = "ALL"
 
-            dataTable.Rows.Add(drNewRow)
+            dataTable2.Rows.Add(drNewRow)
 
-            CashItemID.Properties.DataSource = dataTable
+            CashItemID.Properties.DataSource = dataTable2
             CashItemID.Properties.DisplayMember = "CodeThai"
             CashItemID.Properties.ValueMember = "ID"
             CashItemID.EditValue = 0
