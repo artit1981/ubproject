@@ -66,7 +66,6 @@ Partial Class frmBill
         Me.LayoutOrderCode = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutGenID = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.SplitterItem1 = New DevExpress.XtraLayout.SplitterItem()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutbtnCustomerID = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
@@ -77,7 +76,6 @@ Partial Class frmBill
         Me.LayoutbtnShipingMethod = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutPayType = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.SplitterItem2 = New DevExpress.XtraLayout.SplitterItem()
         Me.LayoutCreditBalance = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
@@ -170,6 +168,8 @@ Partial Class frmBill
         Me.txtUnits = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -203,7 +203,6 @@ Partial Class frmBill
         CType(Me.LayoutOrderCode, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutGenID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SplitterItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutbtnCustomerID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -214,7 +213,6 @@ Partial Class frmBill
         CType(Me.LayoutbtnShipingMethod, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutPayType, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SplitterItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutCreditBalance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -281,6 +279,8 @@ Partial Class frmBill
         Me.Panel1.SuspendLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -295,7 +295,7 @@ Partial Class frmBill
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1158, 708)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1013, 689)
         Me.XtraTabControl1.TabIndex = 10
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.VatTabPage, Me.ChequeTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -309,7 +309,7 @@ Partial Class frmBill
         Me.GeneralTabPage.Controls.Add(Me.LayoutControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1156, 683)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -344,9 +344,9 @@ Partial Class frmBill
         Me.LayoutControl1.Location = New System.Drawing.Point(20, 13)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LayoutControl1, True)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(-571, 211, 424, 350)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(1120, 245, 424, 350)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(806, 659)
+        Me.LayoutControl1.Size = New System.Drawing.Size(840, 640)
         Me.LayoutControl1.TabIndex = 306
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
@@ -355,7 +355,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalTax, "TextChanged")
         Me.TotalTax.EnterMoveNextControl = True
-        Me.TotalTax.Location = New System.Drawing.Point(635, 603)
+        Me.TotalTax.Location = New System.Drawing.Point(657, 584)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalTax, True)
         Me.TotalTax.Name = "TotalTax"
         Me.TotalTax.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -369,7 +369,7 @@ Partial Class frmBill
         Me.TotalTax.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.TotalTax.Properties.Precision = 2
         Me.TotalTax.Properties.ReadOnly = True
-        Me.TotalTax.Size = New System.Drawing.Size(159, 20)
+        Me.TotalTax.Size = New System.Drawing.Size(171, 20)
         Me.TotalTax.StyleController = Me.LayoutControl1
         Me.TotalTax.TabIndex = 308
         Me.TotalTax.TabStop = False
@@ -379,7 +379,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountAmount, "TextChanged")
         Me.DiscountAmount.EnterMoveNextControl = True
-        Me.DiscountAmount.Location = New System.Drawing.Point(399, 579)
+        Me.DiscountAmount.Location = New System.Drawing.Point(411, 560)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountAmount, True)
         Me.DiscountAmount.Name = "DiscountAmount"
         Me.DiscountAmount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -392,7 +392,7 @@ Partial Class frmBill
         Me.DiscountAmount.Properties.Mask.EditMask = "n2"
         Me.DiscountAmount.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.DiscountAmount.Properties.Precision = 2
-        Me.DiscountAmount.Size = New System.Drawing.Size(134, 20)
+        Me.DiscountAmount.Size = New System.Drawing.Size(144, 20)
         Me.DiscountAmount.StyleController = Me.LayoutControl1
         Me.DiscountAmount.TabIndex = 307
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DiscountAmount, "Text")
@@ -401,7 +401,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GrandTotal, "TextChanged")
         Me.GrandTotal.EnterMoveNextControl = True
-        Me.GrandTotal.Location = New System.Drawing.Point(635, 627)
+        Me.GrandTotal.Location = New System.Drawing.Point(657, 608)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GrandTotal, True)
         Me.GrandTotal.Name = "GrandTotal"
         Me.GrandTotal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -415,7 +415,7 @@ Partial Class frmBill
         Me.GrandTotal.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.GrandTotal.Properties.Precision = 2
         Me.GrandTotal.Properties.ReadOnly = True
-        Me.GrandTotal.Size = New System.Drawing.Size(159, 20)
+        Me.GrandTotal.Size = New System.Drawing.Size(171, 20)
         Me.GrandTotal.StyleController = Me.LayoutControl1
         Me.GrandTotal.TabIndex = 307
         Me.GrandTotal.TabStop = False
@@ -425,7 +425,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Exchange, "TextChanged")
         Me.Exchange.EnterMoveNextControl = True
-        Me.Exchange.Location = New System.Drawing.Point(399, 627)
+        Me.Exchange.Location = New System.Drawing.Point(411, 608)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Exchange, True)
         Me.Exchange.Name = "Exchange"
         Me.Exchange.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -438,7 +438,7 @@ Partial Class frmBill
         Me.Exchange.Properties.Mask.EditMask = "n2"
         Me.Exchange.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.Exchange.Properties.Precision = 2
-        Me.Exchange.Size = New System.Drawing.Size(134, 20)
+        Me.Exchange.Size = New System.Drawing.Size(144, 20)
         Me.Exchange.StyleController = Me.LayoutControl1
         Me.Exchange.TabIndex = 317
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Exchange, "Text")
@@ -448,7 +448,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.cboCurrency, "TextChanged")
         Me.cboCurrency.EditValue = "0"
         Me.cboCurrency.EnterMoveNextControl = True
-        Me.cboCurrency.Location = New System.Drawing.Point(183, 627)
+        Me.cboCurrency.Location = New System.Drawing.Point(186, 608)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.cboCurrency, True)
         Me.cboCurrency.Name = "cboCurrency"
         Me.cboCurrency.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -464,7 +464,7 @@ Partial Class frmBill
         Me.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboCurrency.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
         Me.cboCurrency.Properties.UseCtrlScroll = True
-        Me.cboCurrency.Size = New System.Drawing.Size(114, 20)
+        Me.cboCurrency.Size = New System.Drawing.Size(123, 20)
         Me.cboCurrency.StyleController = Me.LayoutControl1
         Me.cboCurrency.TabIndex = 307
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboCurrency, "Text")
@@ -473,7 +473,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TotalAfterDis, "TextChanged")
         Me.TotalAfterDis.EnterMoveNextControl = True
-        Me.TotalAfterDis.Location = New System.Drawing.Point(635, 579)
+        Me.TotalAfterDis.Location = New System.Drawing.Point(657, 560)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TotalAfterDis, True)
         Me.TotalAfterDis.Name = "TotalAfterDis"
         Me.TotalAfterDis.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -487,7 +487,7 @@ Partial Class frmBill
         Me.TotalAfterDis.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.TotalAfterDis.Properties.Precision = 2
         Me.TotalAfterDis.Properties.ReadOnly = True
-        Me.TotalAfterDis.Size = New System.Drawing.Size(159, 20)
+        Me.TotalAfterDis.Size = New System.Drawing.Size(171, 20)
         Me.TotalAfterDis.StyleController = Me.LayoutControl1
         Me.TotalAfterDis.TabIndex = 307
         Me.TotalAfterDis.TabStop = False
@@ -497,7 +497,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.DiscountPercen, "TextChanged")
         Me.DiscountPercen.EnterMoveNextControl = True
-        Me.DiscountPercen.Location = New System.Drawing.Point(183, 579)
+        Me.DiscountPercen.Location = New System.Drawing.Point(186, 560)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.DiscountPercen, True)
         Me.DiscountPercen.Name = "DiscountPercen"
         Me.DiscountPercen.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -510,7 +510,7 @@ Partial Class frmBill
         Me.DiscountPercen.Properties.Mask.EditMask = "n2"
         Me.DiscountPercen.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.DiscountPercen.Properties.Precision = 2
-        Me.DiscountPercen.Size = New System.Drawing.Size(114, 20)
+        Me.DiscountPercen.Size = New System.Drawing.Size(123, 20)
         Me.DiscountPercen.StyleController = Me.LayoutControl1
         Me.DiscountPercen.TabIndex = 307
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.DiscountPercen, "Text")
@@ -519,7 +519,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Total, "TextChanged")
         Me.Total.EnterMoveNextControl = True
-        Me.Total.Location = New System.Drawing.Point(635, 555)
+        Me.Total.Location = New System.Drawing.Point(657, 536)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Total, True)
         Me.Total.Name = "Total"
         Me.Total.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -533,7 +533,7 @@ Partial Class frmBill
         Me.Total.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.Total.Properties.Precision = 2
         Me.Total.Properties.ReadOnly = True
-        Me.Total.Size = New System.Drawing.Size(159, 20)
+        Me.Total.Size = New System.Drawing.Size(171, 20)
         Me.Total.StyleController = Me.LayoutControl1
         Me.Total.TabIndex = 307
         Me.Total.TabStop = False
@@ -544,11 +544,11 @@ Partial Class frmBill
         Me.UcOrderList1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcOrderList1, "")
-        Me.UcOrderList1.Location = New System.Drawing.Point(12, 180)
+        Me.UcOrderList1.Location = New System.Drawing.Point(12, 179)
         Me.UcOrderList1.Margin = New System.Windows.Forms.Padding(4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcOrderList1, True)
         Me.UcOrderList1.Name = "UcOrderList1"
-        Me.UcOrderList1.Size = New System.Drawing.Size(782, 371)
+        Me.UcOrderList1.Size = New System.Drawing.Size(816, 353)
         Me.UcOrderList1.TabIndex = 304
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcOrderList1, "")
         '
@@ -556,7 +556,7 @@ Partial Class frmBill
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CreditBalance, "TextChanged")
         Me.CreditBalance.EnterMoveNextControl = True
-        Me.CreditBalance.Location = New System.Drawing.Point(543, 36)
+        Me.CreditBalance.Location = New System.Drawing.Point(560, 36)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CreditBalance, True)
         Me.CreditBalance.Name = "CreditBalance"
         Me.CreditBalance.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -570,7 +570,7 @@ Partial Class frmBill
         Me.CreditBalance.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.CreditBalance.Properties.Precision = 0
         Me.CreditBalance.Properties.ReadOnly = True
-        Me.CreditBalance.Size = New System.Drawing.Size(251, 20)
+        Me.CreditBalance.Size = New System.Drawing.Size(268, 20)
         Me.CreditBalance.StyleController = Me.LayoutControl1
         Me.CreditBalance.TabIndex = 307
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CreditBalance, "Text")
@@ -594,7 +594,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ContactName, "TextChanged")
         Me.ContactName.EditValue = ""
         Me.ContactName.EnterMoveNextControl = True
-        Me.ContactName.Location = New System.Drawing.Point(543, 108)
+        Me.ContactName.Location = New System.Drawing.Point(560, 108)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ContactName, True)
         Me.ContactName.Name = "ContactName"
         Me.ContactName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -604,7 +604,7 @@ Partial Class frmBill
         Me.ContactName.Properties.MaxLength = 50
         Me.ContactName.Properties.ReadOnly = True
         Me.ContactName.Properties.ValidateOnEnterKey = True
-        Me.ContactName.Size = New System.Drawing.Size(251, 20)
+        Me.ContactName.Size = New System.Drawing.Size(268, 20)
         Me.ContactName.StyleController = Me.LayoutControl1
         Me.ContactName.TabIndex = 6
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ContactName, "Text")
@@ -614,7 +614,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PayDate, "TextChanged")
         Me.PayDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.PayDate.EnterMoveNextControl = True
-        Me.PayDate.Location = New System.Drawing.Point(543, 60)
+        Me.PayDate.Location = New System.Drawing.Point(560, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PayDate, True)
         Me.PayDate.Name = "PayDate"
         Me.PayDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -627,7 +627,7 @@ Partial Class frmBill
         Me.PayDate.Properties.EditFormat.FormatString = "D"
         Me.PayDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.PayDate.Properties.Mask.EditMask = "D"
-        Me.PayDate.Size = New System.Drawing.Size(251, 20)
+        Me.PayDate.Size = New System.Drawing.Size(268, 20)
         Me.PayDate.StyleController = Me.LayoutControl1
         Me.PayDate.TabIndex = 3
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PayDate, "Text")
@@ -639,10 +639,10 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnShipingMethod, "")
         Me.btnShipingMethod.ImageOptions.Image = CType(resources.GetObject("btnShipingMethod.ImageOptions.Image"), System.Drawing.Image)
         Me.btnShipingMethod.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnShipingMethod.Location = New System.Drawing.Point(406, 90)
+        Me.btnShipingMethod.Location = New System.Drawing.Point(406, 84)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnShipingMethod, True)
         Me.btnShipingMethod.Name = "btnShipingMethod"
-        Me.btnShipingMethod.Size = New System.Drawing.Size(25, 22)
+        Me.btnShipingMethod.Size = New System.Drawing.Size(35, 22)
         Me.btnShipingMethod.StyleController = Me.LayoutControl1
         Me.btnShipingMethod.TabIndex = 297
         Me.btnShipingMethod.TabStop = False
@@ -701,7 +701,7 @@ Partial Class frmBill
         Me.btnGenID.Location = New System.Drawing.Point(406, 12)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnGenID, True)
         Me.btnGenID.Name = "btnGenID"
-        Me.btnGenID.Size = New System.Drawing.Size(25, 22)
+        Me.btnGenID.Size = New System.Drawing.Size(35, 20)
         Me.btnGenID.StyleController = Me.LayoutControl1
         Me.btnGenID.TabIndex = 241
         Me.btnGenID.TabStop = False
@@ -713,7 +713,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.OrderDate, "TextChanged")
         Me.OrderDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.OrderDate.EnterMoveNextControl = True
-        Me.OrderDate.Location = New System.Drawing.Point(543, 12)
+        Me.OrderDate.Location = New System.Drawing.Point(560, 12)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.OrderDate, True)
         Me.OrderDate.Name = "OrderDate"
         Me.OrderDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -726,7 +726,7 @@ Partial Class frmBill
         Me.OrderDate.Properties.EditFormat.FormatString = "D"
         Me.OrderDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.OrderDate.Properties.Mask.EditMask = "D"
-        Me.OrderDate.Size = New System.Drawing.Size(251, 20)
+        Me.OrderDate.Size = New System.Drawing.Size(268, 20)
         Me.OrderDate.StyleController = Me.LayoutControl1
         Me.OrderDate.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.OrderDate, "Text")
@@ -863,10 +863,10 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCustomerID, "")
         Me.btnCustomerID.ImageOptions.Image = CType(resources.GetObject("btnCustomerID.ImageOptions.Image"), System.Drawing.Image)
         Me.btnCustomerID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnCustomerID.Location = New System.Drawing.Point(406, 38)
+        Me.btnCustomerID.Location = New System.Drawing.Point(406, 36)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCustomerID, True)
         Me.btnCustomerID.Name = "btnCustomerID"
-        Me.btnCustomerID.Size = New System.Drawing.Size(25, 22)
+        Me.btnCustomerID.Size = New System.Drawing.Size(35, 20)
         Me.btnCustomerID.StyleController = Me.LayoutControl1
         Me.btnCustomerID.TabIndex = 3
         Me.btnCustomerID.TabStop = False
@@ -878,7 +878,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Territory, "TextChanged")
         Me.Territory.EditValue = ""
         Me.Territory.EnterMoveNextControl = True
-        Me.Territory.Location = New System.Drawing.Point(543, 84)
+        Me.Territory.Location = New System.Drawing.Point(560, 84)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Territory, True)
         Me.Territory.Name = "Territory"
         Me.Territory.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
@@ -888,7 +888,7 @@ Partial Class frmBill
         Me.Territory.Properties.MaxLength = 50
         Me.Territory.Properties.ReadOnly = True
         Me.Territory.Properties.ValidateOnEnterKey = True
-        Me.Territory.Size = New System.Drawing.Size(251, 20)
+        Me.Territory.Size = New System.Drawing.Size(268, 20)
         Me.Territory.StyleController = Me.LayoutControl1
         Me.Territory.TabIndex = 259
         Me.Territory.TabStop = False
@@ -948,10 +948,10 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnEmpID, "")
         Me.btnEmpID.ImageOptions.Image = CType(resources.GetObject("btnEmpID.ImageOptions.Image"), System.Drawing.Image)
         Me.btnEmpID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnEmpID.Location = New System.Drawing.Point(406, 64)
+        Me.btnEmpID.Location = New System.Drawing.Point(406, 60)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnEmpID, True)
         Me.btnEmpID.Name = "btnEmpID"
-        Me.btnEmpID.Size = New System.Drawing.Size(25, 22)
+        Me.btnEmpID.Size = New System.Drawing.Size(35, 20)
         Me.btnEmpID.StyleController = Me.LayoutControl1
         Me.btnEmpID.TabIndex = 249
         Me.btnEmpID.TabStop = False
@@ -963,9 +963,9 @@ Partial Class frmBill
         Me.LayoutControlGroup1.CustomizationFormText = "Root"
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutOrderCode, Me.LayoutGenID, Me.LayoutControlItem3, Me.SplitterItem1, Me.LayoutControlItem4, Me.LayoutbtnCustomerID, Me.LayoutControlItem6, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutBillMethod, Me.LayoutbtnShipingMethod, Me.LayoutPayType, Me.LayoutControlItem13, Me.SplitterItem2, Me.LayoutCreditBalance, Me.EmptySpaceItem1, Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem5, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.EmptySpaceItem4, Me.LayoutControlItem16, Me.EmptySpaceItem5, Me.EmptySpaceItem6})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutOrderCode, Me.LayoutGenID, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutbtnCustomerID, Me.LayoutControlItem6, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutBillMethod, Me.LayoutbtnShipingMethod, Me.LayoutPayType, Me.LayoutControlItem13, Me.LayoutCreditBalance, Me.EmptySpaceItem1, Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem5, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.EmptySpaceItem4, Me.LayoutControlItem16, Me.EmptySpaceItem5, Me.EmptySpaceItem6, Me.EmptySpaceItem7, Me.EmptySpaceItem8})
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(806, 659)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(840, 640)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutOrderCode
@@ -985,8 +985,11 @@ Partial Class frmBill
         Me.LayoutGenID.Control = Me.btnGenID
         Me.LayoutGenID.CustomizationFormText = "LayoutGenID"
         Me.LayoutGenID.Location = New System.Drawing.Point(394, 0)
+        Me.LayoutGenID.MaxSize = New System.Drawing.Size(39, 24)
+        Me.LayoutGenID.MinSize = New System.Drawing.Size(39, 24)
         Me.LayoutGenID.Name = "LayoutGenID"
-        Me.LayoutGenID.Size = New System.Drawing.Size(29, 26)
+        Me.LayoutGenID.Size = New System.Drawing.Size(39, 24)
+        Me.LayoutGenID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutGenID.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutGenID.TextVisible = False
         '
@@ -994,20 +997,11 @@ Partial Class frmBill
         '
         Me.LayoutControlItem3.Control = Me.OrderDate
         Me.LayoutControlItem3.CustomizationFormText = "วันที่เอกสาร"
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(433, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(450, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(353, 24)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(370, 24)
         Me.LayoutControlItem3.Text = "วันที่เอกสาร"
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(86, 13)
-        '
-        'SplitterItem1
-        '
-        Me.SplitterItem1.AllowHotTrack = True
-        Me.SplitterItem1.CustomizationFormText = "SplitterItem1"
-        Me.SplitterItem1.Location = New System.Drawing.Point(423, 0)
-        Me.SplitterItem1.Name = "SplitterItem1"
-        Me.SplitterItem1.Size = New System.Drawing.Size(10, 146)
-        Me.SplitterItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
         '
         'LayoutControlItem4
         '
@@ -1025,9 +1019,12 @@ Partial Class frmBill
         '
         Me.LayoutbtnCustomerID.Control = Me.btnCustomerID
         Me.LayoutbtnCustomerID.CustomizationFormText = "LayoutbtnCustomerID"
-        Me.LayoutbtnCustomerID.Location = New System.Drawing.Point(394, 26)
+        Me.LayoutbtnCustomerID.Location = New System.Drawing.Point(394, 24)
+        Me.LayoutbtnCustomerID.MaxSize = New System.Drawing.Size(39, 24)
+        Me.LayoutbtnCustomerID.MinSize = New System.Drawing.Size(39, 24)
         Me.LayoutbtnCustomerID.Name = "LayoutbtnCustomerID"
-        Me.LayoutbtnCustomerID.Size = New System.Drawing.Size(29, 26)
+        Me.LayoutbtnCustomerID.Size = New System.Drawing.Size(39, 24)
+        Me.LayoutbtnCustomerID.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutbtnCustomerID.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutbtnCustomerID.TextVisible = False
         '
@@ -1045,9 +1042,12 @@ Partial Class frmBill
         '
         Me.LayoutControlItem7.Control = Me.btnEmpID
         Me.LayoutControlItem7.CustomizationFormText = "LayoutControlItem7"
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(394, 52)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(394, 48)
+        Me.LayoutControlItem7.MaxSize = New System.Drawing.Size(39, 24)
+        Me.LayoutControlItem7.MinSize = New System.Drawing.Size(39, 24)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(29, 26)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(39, 24)
+        Me.LayoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextVisible = False
         '
@@ -1055,9 +1055,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem8.Control = Me.PayDate
         Me.LayoutControlItem8.CustomizationFormText = "วันนัดชำระ"
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(433, 48)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(450, 48)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(353, 24)
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(370, 24)
         Me.LayoutControlItem8.Text = "วันนัดชำระ"
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1065,9 +1065,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem9.Control = Me.Territory
         Me.LayoutControlItem9.CustomizationFormText = "ทีมขาย"
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(433, 72)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(450, 72)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(353, 24)
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(370, 24)
         Me.LayoutControlItem9.Text = "ทีมขาย"
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1085,9 +1085,9 @@ Partial Class frmBill
         '
         Me.LayoutbtnShipingMethod.Control = Me.btnShipingMethod
         Me.LayoutbtnShipingMethod.CustomizationFormText = "LayoutbtnShipingMethod"
-        Me.LayoutbtnShipingMethod.Location = New System.Drawing.Point(394, 78)
+        Me.LayoutbtnShipingMethod.Location = New System.Drawing.Point(394, 72)
         Me.LayoutbtnShipingMethod.Name = "LayoutbtnShipingMethod"
-        Me.LayoutbtnShipingMethod.Size = New System.Drawing.Size(29, 26)
+        Me.LayoutbtnShipingMethod.Size = New System.Drawing.Size(39, 26)
         Me.LayoutbtnShipingMethod.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutbtnShipingMethod.TextVisible = False
         '
@@ -1108,28 +1108,19 @@ Partial Class frmBill
         '
         Me.LayoutControlItem13.Control = Me.ContactName
         Me.LayoutControlItem13.CustomizationFormText = "ชื่อผู้ติดต่อ"
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(433, 96)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(450, 96)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
-        Me.LayoutControlItem13.Size = New System.Drawing.Size(353, 50)
+        Me.LayoutControlItem13.Size = New System.Drawing.Size(370, 50)
         Me.LayoutControlItem13.Text = "ชื่อผู้ติดต่อ"
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(86, 13)
-        '
-        'SplitterItem2
-        '
-        Me.SplitterItem2.AllowHotTrack = True
-        Me.SplitterItem2.CustomizationFormText = "SplitterItem2"
-        Me.SplitterItem2.Location = New System.Drawing.Point(384, 0)
-        Me.SplitterItem2.Name = "SplitterItem2"
-        Me.SplitterItem2.Size = New System.Drawing.Size(10, 146)
-        Me.SplitterItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
         '
         'LayoutCreditBalance
         '
         Me.LayoutCreditBalance.Control = Me.CreditBalance
         Me.LayoutCreditBalance.CustomizationFormText = "ยอดหนี้"
-        Me.LayoutCreditBalance.Location = New System.Drawing.Point(433, 24)
+        Me.LayoutCreditBalance.Location = New System.Drawing.Point(450, 24)
         Me.LayoutCreditBalance.Name = "LayoutCreditBalance"
-        Me.LayoutCreditBalance.Size = New System.Drawing.Size(353, 24)
+        Me.LayoutCreditBalance.Size = New System.Drawing.Size(370, 24)
         Me.LayoutCreditBalance.Text = "ยอดหนี้"
         Me.LayoutCreditBalance.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1139,16 +1130,16 @@ Partial Class frmBill
         Me.EmptySpaceItem1.CustomizationFormText = "EmptySpaceItem1"
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 146)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(786, 22)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(820, 21)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.UcOrderList1
         Me.LayoutControlItem1.CustomizationFormText = "LayoutControlItem1"
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 168)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 167)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(786, 375)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(820, 357)
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem1.TextVisible = False
         '
@@ -1156,9 +1147,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem2.Control = Me.Total
         Me.LayoutControlItem2.CustomizationFormText = "LayoutControlItem2"
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(525, 543)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(547, 524)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(261, 24)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(273, 24)
         Me.LayoutControlItem2.Text = "ยอดรวม"
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1166,9 +1157,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem5.Control = Me.DiscountPercen
         Me.LayoutControlItem5.CustomizationFormText = "LayoutControlItem5"
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(73, 567)
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(76, 548)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(216, 24)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(225, 24)
         Me.LayoutControlItem5.Text = "ส่วนลด %"
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1176,27 +1167,27 @@ Partial Class frmBill
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
         Me.EmptySpaceItem2.CustomizationFormText = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 543)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 524)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(525, 24)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(547, 24)
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.AllowHotTrack = False
         Me.EmptySpaceItem3.CustomizationFormText = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 567)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 548)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(73, 24)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(76, 24)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem10
         '
         Me.LayoutControlItem10.Control = Me.TotalAfterDis
         Me.LayoutControlItem10.CustomizationFormText = "ยอดหลังหักส่วนลด"
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(525, 567)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(547, 548)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(261, 24)
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(273, 24)
         Me.LayoutControlItem10.Text = "ยอดหลังหักส่วนลด"
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1204,9 +1195,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem11.Control = Me.cboCurrency
         Me.LayoutControlItem11.CustomizationFormText = "สกุลเงิน"
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(73, 615)
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(76, 596)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(216, 24)
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(225, 24)
         Me.LayoutControlItem11.Text = "สกุลเงิน"
         Me.LayoutControlItem11.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1214,9 +1205,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem12.Control = Me.Exchange
         Me.LayoutControlItem12.CustomizationFormText = "อัตราแลกเปลี่ยน"
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(289, 615)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(301, 596)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
-        Me.LayoutControlItem12.Size = New System.Drawing.Size(236, 24)
+        Me.LayoutControlItem12.Size = New System.Drawing.Size(246, 24)
         Me.LayoutControlItem12.Text = "อัตราแลกเปลี่ยน"
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1224,9 +1215,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem14.Control = Me.GrandTotal
         Me.LayoutControlItem14.CustomizationFormText = "ยอดรวมทั้งสิ้น"
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(525, 615)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(547, 596)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(261, 24)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(273, 24)
         Me.LayoutControlItem14.Text = "ยอดรวมทั้งสิ้น"
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1234,9 +1225,9 @@ Partial Class frmBill
         '
         Me.LayoutControlItem15.Control = Me.DiscountAmount
         Me.LayoutControlItem15.CustomizationFormText = "ส่วนลด"
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(289, 567)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(301, 548)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
-        Me.LayoutControlItem15.Size = New System.Drawing.Size(236, 24)
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(246, 24)
         Me.LayoutControlItem15.Text = "ส่วนลด"
         Me.LayoutControlItem15.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1244,18 +1235,18 @@ Partial Class frmBill
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
         Me.EmptySpaceItem4.CustomizationFormText = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 615)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 596)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(73, 24)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(76, 24)
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.TotalTax
         Me.LayoutControlItem16.CustomizationFormText = "หัก ภาษี"
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(525, 591)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(547, 572)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(261, 24)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(273, 24)
         Me.LayoutControlItem16.Text = "หัก ภาษี"
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(86, 13)
         '
@@ -1263,18 +1254,18 @@ Partial Class frmBill
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
         Me.EmptySpaceItem5.CustomizationFormText = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 591)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 572)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(525, 24)
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(547, 24)
         Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem6
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
         Me.EmptySpaceItem6.CustomizationFormText = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(394, 104)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(394, 98)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Size = New System.Drawing.Size(29, 42)
+        Me.EmptySpaceItem6.Size = New System.Drawing.Size(39, 48)
         Me.EmptySpaceItem6.TextSize = New System.Drawing.Size(0, 0)
         '
         'VatTabPage
@@ -2410,11 +2401,27 @@ Partial Class frmBill
         Me.DockManager1.HiddenPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
+        'EmptySpaceItem7
+        '
+        Me.EmptySpaceItem7.AllowHotTrack = False
+        Me.EmptySpaceItem7.Location = New System.Drawing.Point(384, 0)
+        Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
+        Me.EmptySpaceItem7.Size = New System.Drawing.Size(10, 146)
+        Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem8
+        '
+        Me.EmptySpaceItem8.AllowHotTrack = False
+        Me.EmptySpaceItem8.Location = New System.Drawing.Point(433, 0)
+        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
+        Me.EmptySpaceItem8.Size = New System.Drawing.Size(17, 146)
+        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
+        '
         'frmBill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1158, 738)
+        Me.ClientSize = New System.Drawing.Size(1013, 719)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmBill"
@@ -2453,7 +2460,6 @@ Partial Class frmBill
         CType(Me.LayoutOrderCode, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutGenID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SplitterItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutbtnCustomerID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2464,7 +2470,6 @@ Partial Class frmBill
         CType(Me.LayoutbtnShipingMethod, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutPayType, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SplitterItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutCreditBalance, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2539,6 +2544,8 @@ Partial Class frmBill
         Me.Panel1.PerformLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2584,7 +2591,6 @@ Partial Class frmBill
     Friend WithEvents LayoutOrderCode As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutGenID As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents SplitterItem1 As DevExpress.XtraLayout.SplitterItem
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutbtnCustomerID As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
@@ -2595,7 +2601,6 @@ Partial Class frmBill
     Friend WithEvents LayoutbtnShipingMethod As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutPayType As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem13 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents SplitterItem2 As DevExpress.XtraLayout.SplitterItem
     Friend WithEvents CreditBalance As DevExpress.XtraEditors.CalcEdit
     Friend WithEvents LayoutCreditBalance As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
@@ -2692,4 +2697,6 @@ Partial Class frmBill
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
     Friend WithEvents RepositoryItemMemoEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents EmptySpaceItem7 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
 End Class

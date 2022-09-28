@@ -495,6 +495,7 @@ Public Class frmBill
                 lcls.InitailData(plngCustomerID)
                 InitialCusTaxInfo(plngCustomerID, lcls)
                 cboCurrency.EditValue = lcls.CurrencyID
+                InitialCurrency(ConvertNullToZero(cboCurrency.EditValue))
                 EmpID.EditValue = lcls.EmpID
                 lclsCredit = New CreditBalanceDAO
                 lclsCredit.InitailCreditBalance(plngCustomerID)

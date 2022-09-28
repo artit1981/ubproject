@@ -43,13 +43,13 @@ Public Class frmDashboard
             }
             ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
 
-            chartTitle1 = New ChartTitle With {
-                .Text = "ยอดขายรวม :" & mTotalSell & " M",
-                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
-            }
-            chartTitle1.Dock = ChartTitleDockStyle.Bottom
+            'chartTitle1 = New ChartTitle With {
+            '    .Text = "ยอดขายรวม :" & mTotalSell & " M",
+            '    .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+            '}
+            'chartTitle1.Dock = ChartTitleDockStyle.Bottom
 
-            overdueChart.Titles.Add(chartTitle1)
+            'overdueChart.Titles.Add(chartTitle1)
 
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -432,9 +432,10 @@ Public Class frmDashboard
                 overdueChart.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
                 overdueChart.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
-                If overdueChart.Titles.Count > 0 Then
-                    overdueChart.Titles(0).Text = "ยอดขายรวม :" & mTotalSell & " M"
-                End If
+                txtSellTotal.Text = "ยอดขายรวม :" & mTotalSell & " M"
+                'If overdueChart.Titles.Count > 0 Then
+                '    overdueChart.Titles(0).Text = "ยอดขายรวม :" & mTotalSell & " M"
+                'End If
 
             End If
 

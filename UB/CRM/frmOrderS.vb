@@ -1704,11 +1704,12 @@ Public Class frmOrderS
                     lcls.InitailData(plngCustomerID)
                     InitialCusTaxInfo(plngCustomerID, lcls)
                     VatTypeID.EditValue = lcls.VatTypeID
+                    InitialVatType(ConvertNullToZero(VatTypeID.EditValue))
                     CreditRuleID.EditValue = lcls.CreditRuleID
                     SendBy.EditValue = lcls.SendBy
                     EmpID.EditValue = lcls.EmpID
                     cboCurrency.EditValue = lcls.CurrencyID
-
+                    InitialCurrency(ConvertNullToZero(cboCurrency.EditValue))
                     lclsCredit = New CreditBalanceDAO
                     lclsCredit.InitailCreditBalance(plngCustomerID)
                     CreditBalance.EditValue = lclsCredit.CreditAmount

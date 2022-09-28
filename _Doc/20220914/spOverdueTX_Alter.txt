@@ -1,3 +1,6 @@
+USE [BS]
+GO
+/****** Object:  StoredProcedure [dbo].[spOverdueTX]    Script Date: 9/28/2022 10:29:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -20,22 +23,22 @@ WHERE Orders.IsDelete =0
 AND Orders.IsCancel = 0   
 and Orders.TableID in(39,41) --invoice,Shaiping
 AND Orders.OrderDate Between @FromDate AND @ToDate 
-AND ExpireDate = @ToDate  AND Orders.IsInActive = 0  AND Orders.IsCancel= 0  
-AND Orders.OrderDate = @ToDate  
+AND ExpireDate <= @ToDate  AND Orders.IsInActive = 0  AND Orders.IsCancel= 0  
+AND Orders.OrderDate <= @ToDate  
 )
 
 SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
 ,Orders.OrderStatus,Orders.GrandTotal,PayTotal  
 ,TableName,MenuDisplay
 FROM OverdueTX Orders     
-WHERE Orders.RefReceiptID0  AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )  	 
+WHERE Orders.RefReceiptID=0  AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )  	 
 union all
 SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
 ,Orders.OrderStatus,Orders.GrandTotal,PayTotal
 ,TableName,MenuDisplay
 FROM OverdueTX Orders     
 WHERE Orders.RefReceiptID=0
-AND Orders.RefBillID0  AND Orders.RefBillID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )   
+AND Orders.RefBillID=0  AND Orders.RefBillID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )   
 union all
 SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
 ,Orders.OrderStatus,Orders.GrandTotal,PayTotal
