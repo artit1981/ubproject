@@ -1,9 +1,7 @@
 ﻿
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraEditors.Controls
-Imports DevExpress.XtraGauges.Core.Model
-Imports DevExpress.XtraGauges.Win.Gauges.Circular
-Imports DevExpress.XtraSplashScreen
+Imports DevExpress.XtraGauges.Core.Base
 Imports DevExpress.XtraTreeMap
 
 Public Class frmDashboard
@@ -29,28 +27,29 @@ Public Class frmDashboard
             ' Add a title to the chart and hide the legend.
             Dim chartTitle1 As New ChartTitle With {
                 .Text = "Total Sale by Catagoly",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
             }
             ChartTotalSellByCatalog.Titles.Add(chartTitle1)
 
             chartTitle1 = New ChartTitle With {
                 .Text = "Total Sale and COGS",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
             }
             ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
 
             chartTitle1 = New ChartTitle With {
                 .Text = "Total Sale and Profit",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
             }
             ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
 
             chartTitle1 = New ChartTitle With {
                 .Text = "ยอดขายรวม :" & mTotalSell & " M",
-                .Font = New Drawing.Font("Segoe UI", 12, FontStyle.Bold)
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
             }
-            overdueChart.Titles.Add(chartTitle1)
+            chartTitle1.Dock = ChartTitleDockStyle.Bottom
 
+            overdueChart.Titles.Add(chartTitle1)
 
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)

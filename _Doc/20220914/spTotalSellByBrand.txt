@@ -1,3 +1,10 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 
 
 CREATE PROCEDURE [dbo].[spTotalSellByBrand] 
@@ -28,7 +35,7 @@ with SellByBrand as (
 ) 
 
 SELECT   ProductBrand,ProductName,ROUND(TotalAmount/1000000,3)TotalAmount
-,ROUND(TotalCost/1000000,3)TotalCost,ROUND(TotalUnits/1000000,3)TotalUnits,ROUND(TotalGain/1000000,3)TotalGain
+,ROUND(TotalCost/1000000,3)TotalCost,ROUND(TotalUnits,3)TotalUnits,ROUND(TotalGain/1000000,3)TotalGain
 FROM(
 	SELECT ProductBrandID,ProductBrand,ProductName,TotalUnits,TotalAmount,TotalCost,TotalGain,rowrank
 	FROM SellByBrand
@@ -39,4 +46,3 @@ order by  ProductBrand,ProductName,TotalAmount desc
 
 END
 GO
-
