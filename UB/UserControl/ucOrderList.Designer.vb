@@ -23,6 +23,7 @@ Partial Class ucOrderList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucOrderList))
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.IsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -41,6 +42,7 @@ Partial Class ucOrderList
         Me.OrderID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TableID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,18 +50,19 @@ Partial Class ucOrderList
         CType(Me.btnOrderCode, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GridControl
         '
         Me.GridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GridControl.Location = New System.Drawing.Point(0, 0)
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
         Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.IsSelectCheckEdit, Me.RepositoryItemCalcEdit1, Me.btnOrderCode})
-        Me.GridControl.Size = New System.Drawing.Size(814, 388)
+        Me.GridControl.Size = New System.Drawing.Size(778, 383)
         Me.GridControl.TabIndex = 19
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -278,6 +281,14 @@ Partial Class ucOrderList
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
+        'ImageCollection1
+        '
+        Me.ImageCollection1.ImageStream = CType(resources.GetObject("ImageCollection1.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollection1.Images.SetKeyName(0, "_active__no.png")
+        Me.ImageCollection1.Images.SetKeyName(1, "1394817194_stock_insert-slide.png")
+        Me.ImageCollection1.Images.SetKeyName(2, "1432214789_Stock Index Up.png")
+        Me.ImageCollection1.Images.SetKeyName(3, "1432214798_Stock Index Down.png")
+        '
         'ControlNavigator1
         '
         Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -285,14 +296,16 @@ Partial Class ucOrderList
         Me.ControlNavigator1.Buttons.CancelEdit.Visible = False
         Me.ControlNavigator1.Buttons.Edit.Visible = False
         Me.ControlNavigator1.Buttons.EndEdit.Visible = False
+        Me.ControlNavigator1.Buttons.ImageList = Me.ImageCollection1
         Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
         Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
         Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
-        Me.ControlNavigator1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003
-        Me.ControlNavigator1.Location = New System.Drawing.Point(0, 388)
+        Me.ControlNavigator1.Buttons.Remove.Visible = False
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, True, "Insert", "Insert"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 2, True, True, "Move Up", "MoveUp"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 3, True, True, "Move Down", "MoveDown")})
+        Me.ControlNavigator1.Location = New System.Drawing.Point(0, 383)
         Me.ControlNavigator1.Name = "ControlNavigator1"
         Me.ControlNavigator1.NavigatableControl = Me.GridControl
-        Me.ControlNavigator1.Size = New System.Drawing.Size(250, 24)
+        Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
         Me.ControlNavigator1.TabIndex = 20
         Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
         '
@@ -303,13 +316,14 @@ Partial Class ucOrderList
         Me.Controls.Add(Me.ControlNavigator1)
         Me.Controls.Add(Me.GridControl)
         Me.Name = "ucOrderList"
-        Me.Size = New System.Drawing.Size(814, 412)
+        Me.Size = New System.Drawing.Size(778, 407)
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.IsSelectCheckEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnOrderCode, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -324,7 +338,6 @@ Partial Class ucOrderList
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GrandTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
-    Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
     Friend WithEvents BillTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCalcEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Friend WithEvents Remark As DevExpress.XtraGrid.Columns.GridColumn
@@ -332,5 +345,6 @@ Partial Class ucOrderList
     Friend WithEvents OrderID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TableID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnOrderCode As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
-
+    Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
+    Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
 End Class

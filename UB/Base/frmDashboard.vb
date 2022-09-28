@@ -422,7 +422,7 @@ Public Class frmDashboard
                 series1.SeriesPointsSorting = SortingMode.Ascending
                 series1.SeriesPointsSortingKey = SeriesPointKey.Argument
 
-                series1.ShowInLegend = True
+                series1.ShowInLegend = False
                 '' Specify the behavior of series labels.
                 CType(series1.Label, Pie3DSeriesLabel).Position = PieSeriesLabelPosition.Inside
 
@@ -433,8 +433,10 @@ Public Class frmDashboard
                 overdueChart.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
                 overdueChart.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
-                ' Add the chart to the form.
-                overdueChart.Dock = DockStyle.Fill
+                If overdueChart.Titles.Count > 0 Then
+                    overdueChart.Titles(0).Text = "ยอดขายรวม :" & mTotalSell & " M"
+                End If
+
             End If
 
 
@@ -449,8 +451,10 @@ Public Class frmDashboard
         End If
     End Sub
 
-    'Private Sub ListYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListYear.SelectedValueChanged
-    '    LoadData()
-    'End Sub
+    Private Sub ListMonth_ItemCheck(sender As Object, e As EventArgs) Handles ListMonth.ItemCheck
+        If ListMonth.CheckedItems.Count > 0 Then
+            LoadData()
+        End If
+    End Sub
 
 End Class

@@ -40,6 +40,9 @@ Public Class frmBill
             End If
             Call LoadData(pMode, pID)
 
+
+
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
         Finally
@@ -375,8 +378,8 @@ Public Class frmBill
             gCustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcCheque1.ShowControl(False, pID)
             UcNote1.ShowControl(mcls.TableName, pID)
-            UcOrderList1.ShowControl(Nothing, mcls.ID, mcls.OrderDate, mMode <> DataMode.ModeNew, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True)
-            'UcOrderList1.ShowControl(Nothing, mcls.ID, mcls.OrderDate, False, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True)
+            UcOrderList1.ShowControl(Nothing, mcls.ID, mcls.OrderDate, mMode <> DataMode.ModeNew, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True, pMode)
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False

@@ -231,10 +231,11 @@ Module modDAO
 
         Try
             dataTable = lcls.GetDataTable(0, True)
+            dataTable.DefaultView.Sort = "ID"
             pCombo.Properties.DataSource = dataTable
             pCombo.Properties.DisplayMember = "NameThai"
             pCombo.Properties.ValueMember = "ID"
-            pCombo.EditValue = DBNull.Value
+            pCombo.ItemIndex = 0
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.SetLookUpVatType : " & e.Message)
         Finally
@@ -461,9 +462,11 @@ Module modDAO
         Dim dataTable As New DataTable()
         Try
             dataTable = lcls.GetDataTable(0, True)
+            dataTable.DefaultView.Sort = "ID"
             pCombo.Properties.DataSource = dataTable
             pCombo.Properties.DisplayMember = "Code"
             pCombo.Properties.ValueMember = "ID"
+            pCombo.ItemIndex = 0
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modDAO.SetLookUpCurrency : " & e.Message)
         Finally

@@ -64,6 +64,11 @@ Public Class ucProductLists
                                 , ByVal pIsUsePriceSell As Boolean, ByVal mParentTable As String, ByVal pIsLoadFromRefOrder As Boolean _
                                 , ByVal pIsDelete As Boolean, ByVal pStockType As String) As Boolean
         Try
+            ControlNavigator1.CustomButtons(0).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(1).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(2).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(3).Enabled = (pMode = DataMode.ModeNew)
+
             mColData = pColumnData
             mIsReaOnly = pIsReaOnly
             btnFind.Enabled = (pIsReaOnly = False)
@@ -1100,10 +1105,10 @@ Public Class ucProductLists
                         gridView.DeleteSelectedRows()
                         gridView.RefreshData()
                         gridControl.RefreshDataSource()
-                    Else
-                        gridView.SetRowCellValue(index, "IsDelete", 1)
-                        gridView.RefreshData()
-                        gridControl.RefreshDataSource()
+                        'Else
+                        '    gridView.SetRowCellValue(index, "IsDelete", 1)
+                        '    gridView.RefreshData()
+                        '    gridControl.RefreshDataSource()
                     End If
                 End If
             Case "MoveUp"

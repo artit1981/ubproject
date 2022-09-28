@@ -12,6 +12,7 @@ Public Class ucOrderList
     Private mFormOrder As frmBill
     Private mOrderType As MasterType
     Shared mColData As OrdColumn
+    Private mMode As DataMode
 
     Public ReadOnly Property IsError() As Boolean
         Get
@@ -32,7 +33,8 @@ Public Class ucOrderList
     End Property
 #Region "Public"
     Public Function ShowControl(ByVal pSource As BindingSource, ByVal pBillID As Long, ByVal pEffectDate As Date, ByVal pIsReadOnly As Boolean _
-                                , ByVal pColumnData As OrdColumn, ByVal pShowFooter As Boolean, ByVal pFormOrder As frmBill, ByVal pOrderType As Long, ByVal pCanFind As Boolean) As Boolean
+                                , ByVal pColumnData As OrdColumn, ByVal pShowFooter As Boolean, ByVal pFormOrder As frmBill, ByVal pOrderType As Long _
+                                , ByVal pCanFind As Boolean, ByVal pMode As Long) As Boolean
         Try
             If pSource Is Nothing Then
                 bindingSource1 = New BindingSource
@@ -43,6 +45,11 @@ Public Class ucOrderList
             Else
                 bindingSource1 = pSource
             End If
+            ControlNavigator1.CustomButtons(0).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(1).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(2).Enabled = (pMode = DataMode.ModeNew)
+            ControlNavigator1.CustomButtons(3).Enabled = (pMode = DataMode.ModeNew)
+            mMode = pMode
             mEffectDate = pEffectDate
             mIsReadOnly = pIsReadOnly
             mColData = pColumnData
@@ -346,6 +353,53 @@ Public Class ucOrderList
             LoadDataProduct("", False)
         End If
 
+    End Sub
+
+    Private Sub ControlNavigator1_ButtonClick(sender As System.Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridView
+        view.GridControl.Focus()
+        Dim index As Integer = view.FocusedRowHandle
+        Dim rec As New SubOrder, rec2 As New SubOrder
+        Select Case e.Button.Tag
+            Case "Insert"
+                bindingSource1.Insert(index, rec)
+                GridControl.DataSource = bindingSource1
+                GridView.RefreshData()
+                GridControl.RefreshDataSource()
+            Case "Remove"
+                If XtraMessageBox.Show(Me, "ยืนยันการลบรายการใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                    If mMode = DataMode.ModeNew Or ConvertNullToZero(GridView.GetRowCellValue(index, "ID")) = 0 Then
+                        GridView.DeleteSelectedRows()
+                        GridView.RefreshData()
+                        GridControl.RefreshDataSource()
+                        'Else
+                        '    GridView.SetRowCellValue(index, "IsDelete", 1)
+                        '    GridView.RefreshData()
+                        '    GridControl.RefreshDataSource()
+                    End If
+                End If
+            Case "MoveUp"
+                If index > 0 Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index - 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index - 1) = rec
+                    GridView.RefreshData()
+                    GridControl.RefreshDataSource()
+                End If
+            Case "MoveDown"
+                If index < (bindingSource1.Count - 1) Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index + 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index + 1) = rec
+                    GridView.RefreshData()
+                    GridControl.RefreshDataSource()
+                End If
+
+        End Select
     End Sub
 
 End Class

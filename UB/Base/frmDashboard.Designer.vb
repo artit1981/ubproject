@@ -180,27 +180,29 @@ Partial Class frmDashboard
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(-650, 319, 650, 543)
         Me.LayoutControl1.Root = Me.Root
-        Me.LayoutControl1.Size = New System.Drawing.Size(1305, 712)
+        Me.LayoutControl1.Size = New System.Drawing.Size(1305, 700)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
         'GroupControl19
         '
         Me.GroupControl19.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl19.Location = New System.Drawing.Point(813, 12)
+        Me.GroupControl19.Location = New System.Drawing.Point(905, 12)
+        Me.GroupControl19.MaximumSize = New System.Drawing.Size(27, 0)
         Me.GroupControl19.Name = "GroupControl19"
         Me.GroupControl19.ShowCaption = False
-        Me.GroupControl19.Size = New System.Drawing.Size(30, 113)
+        Me.GroupControl19.Size = New System.Drawing.Size(27, 113)
         Me.GroupControl19.TabIndex = 2
         Me.GroupControl19.Text = "GroupControl19"
         '
         'GroupControl18
         '
         Me.GroupControl18.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl18.Location = New System.Drawing.Point(1032, 12)
+        Me.GroupControl18.Location = New System.Drawing.Point(1107, 12)
+        Me.GroupControl18.MaximumSize = New System.Drawing.Size(26, 0)
         Me.GroupControl18.Name = "GroupControl18"
         Me.GroupControl18.ShowCaption = False
-        Me.GroupControl18.Size = New System.Drawing.Size(19, 113)
+        Me.GroupControl18.Size = New System.Drawing.Size(26, 113)
         Me.GroupControl18.TabIndex = 3
         Me.GroupControl18.Text = "GroupControl18"
         '
@@ -209,10 +211,10 @@ Partial Class frmDashboard
         Me.GroupControl8.AppearanceCaption.Options.UseTextOptions = True
         Me.GroupControl8.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GroupControl8.Controls.Add(Me.txtCash)
-        Me.GroupControl8.Location = New System.Drawing.Point(1055, 12)
+        Me.GroupControl8.Location = New System.Drawing.Point(1137, 12)
         Me.GroupControl8.MinimumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl8.Name = "GroupControl8"
-        Me.GroupControl8.Size = New System.Drawing.Size(180, 113)
+        Me.GroupControl8.Size = New System.Drawing.Size(98, 113)
         Me.GroupControl8.TabIndex = 6
         Me.GroupControl8.Text = "Cash"
         '
@@ -231,7 +233,7 @@ Partial Class frmDashboard
         Me.txtCash.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.txtCash.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.txtCash.Properties.ReadOnly = True
-        Me.txtCash.Size = New System.Drawing.Size(176, 88)
+        Me.txtCash.Size = New System.Drawing.Size(94, 88)
         Me.txtCash.TabIndex = 1
         '
         'GroupControl17
@@ -249,10 +251,11 @@ Partial Class frmDashboard
         'GroupControl16
         '
         Me.GroupControl16.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl16.Location = New System.Drawing.Point(613, 12)
+        Me.GroupControl16.Location = New System.Drawing.Point(701, 12)
+        Me.GroupControl16.MaximumSize = New System.Drawing.Size(26, 0)
         Me.GroupControl16.Name = "GroupControl16"
         Me.GroupControl16.ShowCaption = False
-        Me.GroupControl16.Size = New System.Drawing.Size(21, 113)
+        Me.GroupControl16.Size = New System.Drawing.Size(26, 113)
         Me.GroupControl16.TabIndex = 2
         Me.GroupControl16.Text = "GroupControl16"
         '
@@ -261,10 +264,11 @@ Partial Class frmDashboard
         Me.GroupControl15.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.GroupControl15.Appearance.Options.UseBackColor = True
         Me.GroupControl15.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl15.Location = New System.Drawing.Point(415, 12)
+        Me.GroupControl15.Location = New System.Drawing.Point(501, 12)
+        Me.GroupControl15.MaximumSize = New System.Drawing.Size(28, 0)
         Me.GroupControl15.Name = "GroupControl15"
         Me.GroupControl15.ShowCaption = False
-        Me.GroupControl15.Size = New System.Drawing.Size(20, 113)
+        Me.GroupControl15.Size = New System.Drawing.Size(28, 113)
         Me.GroupControl15.TabIndex = 2
         Me.GroupControl15.Text = "GroupControl15"
         '
@@ -276,11 +280,11 @@ Partial Class frmDashboard
         Me.GroupControl1.AppearanceCaption.Options.UseTextOptions = True
         Me.GroupControl1.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GroupControl1.Controls.Add(Me.txtTotalSell)
-        Me.GroupControl1.Location = New System.Drawing.Point(254, 12)
+        Me.GroupControl1.Location = New System.Drawing.Point(324, 12)
         Me.GroupControl1.MaximumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl1.MinimumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(157, 113)
+        Me.GroupControl1.Size = New System.Drawing.Size(173, 113)
         Me.GroupControl1.TabIndex = 4
         Me.GroupControl1.Text = "Total Sell"
         '
@@ -299,7 +303,7 @@ Partial Class frmDashboard
         Me.txtTotalSell.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.txtTotalSell.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.txtTotalSell.Properties.ReadOnly = True
-        Me.txtTotalSell.Size = New System.Drawing.Size(153, 88)
+        Me.txtTotalSell.Size = New System.Drawing.Size(169, 88)
         Me.txtTotalSell.TabIndex = 0
         '
         'GroupControl13
@@ -307,7 +311,7 @@ Partial Class frmDashboard
         Me.GroupControl13.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.GroupControl13.Appearance.Options.UseBackColor = True
         Me.GroupControl13.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl13.Location = New System.Drawing.Point(196, 12)
+        Me.GroupControl13.Location = New System.Drawing.Point(266, 12)
         Me.GroupControl13.MaximumSize = New System.Drawing.Size(52, 0)
         Me.GroupControl13.MinimumSize = New System.Drawing.Size(54, 0)
         Me.GroupControl13.Name = "GroupControl13"
@@ -319,22 +323,20 @@ Partial Class frmDashboard
         'GroupControl4
         '
         Me.GroupControl4.Controls.Add(Me.ListMonth)
-        Me.GroupControl4.Location = New System.Drawing.Point(12, 197)
-        Me.GroupControl4.MaximumSize = New System.Drawing.Size(300, 0)
+        Me.GroupControl4.Location = New System.Drawing.Point(12, 165)
+        Me.GroupControl4.MaximumSize = New System.Drawing.Size(250, 250)
         Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(180, 261)
+        Me.GroupControl4.Size = New System.Drawing.Size(250, 232)
         Me.GroupControl4.TabIndex = 14
         Me.GroupControl4.Text = "Select Month"
         '
         'ListMonth
         '
-        Me.ListMonth.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListMonth.CheckOnClick = True
-        Me.ListMonth.Location = New System.Drawing.Point(5, 26)
+        Me.ListMonth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListMonth.Location = New System.Drawing.Point(2, 23)
         Me.ListMonth.Name = "ListMonth"
-        Me.ListMonth.Size = New System.Drawing.Size(173, 230)
+        Me.ListMonth.Size = New System.Drawing.Size(246, 207)
         Me.ListMonth.TabIndex = 203
         '
         'GroupControl3
@@ -342,10 +344,10 @@ Partial Class frmDashboard
         Me.GroupControl3.AppearanceCaption.Options.UseTextOptions = True
         Me.GroupControl3.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GroupControl3.Controls.Add(Me.txtProfitPercen)
-        Me.GroupControl3.Location = New System.Drawing.Point(847, 12)
+        Me.GroupControl3.Location = New System.Drawing.Point(936, 12)
         Me.GroupControl3.MinimumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(181, 113)
+        Me.GroupControl3.Size = New System.Drawing.Size(167, 113)
         Me.GroupControl3.TabIndex = 13
         Me.GroupControl3.Text = "% Profit"
         '
@@ -364,7 +366,7 @@ Partial Class frmDashboard
         Me.txtProfitPercen.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.txtProfitPercen.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.txtProfitPercen.Properties.ReadOnly = True
-        Me.txtProfitPercen.Size = New System.Drawing.Size(177, 88)
+        Me.txtProfitPercen.Size = New System.Drawing.Size(163, 88)
         Me.txtProfitPercen.TabIndex = 1
         '
         'GroupControl14
@@ -372,10 +374,10 @@ Partial Class frmDashboard
         Me.GroupControl14.AppearanceCaption.Options.UseTextOptions = True
         Me.GroupControl14.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GroupControl14.Controls.Add(Me.txtCOGS)
-        Me.GroupControl14.Location = New System.Drawing.Point(439, 12)
+        Me.GroupControl14.Location = New System.Drawing.Point(533, 12)
         Me.GroupControl14.MinimumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl14.Name = "GroupControl14"
-        Me.GroupControl14.Size = New System.Drawing.Size(170, 113)
+        Me.GroupControl14.Size = New System.Drawing.Size(164, 113)
         Me.GroupControl14.TabIndex = 12
         Me.GroupControl14.Text = "Total COGS"
         '
@@ -394,16 +396,16 @@ Partial Class frmDashboard
         Me.txtCOGS.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.txtCOGS.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.txtCOGS.Properties.ReadOnly = True
-        Me.txtCOGS.Size = New System.Drawing.Size(166, 88)
+        Me.txtCOGS.Size = New System.Drawing.Size(160, 88)
         Me.txtCOGS.TabIndex = 1
         '
         'GroupControl9
         '
         Me.GroupControl9.Controls.Add(Me.ChartTotalSellByCatalog)
-        Me.GroupControl9.Location = New System.Drawing.Point(196, 129)
+        Me.GroupControl9.Location = New System.Drawing.Point(266, 129)
         Me.GroupControl9.Name = "GroupControl9"
         Me.GroupControl9.ShowCaption = False
-        Me.GroupControl9.Size = New System.Drawing.Size(371, 208)
+        Me.GroupControl9.Size = New System.Drawing.Size(371, 203)
         Me.GroupControl9.TabIndex = 10
         Me.GroupControl9.Text = "GroupControl9"
         '
@@ -413,16 +415,16 @@ Partial Class frmDashboard
         Me.ChartTotalSellByCatalog.Location = New System.Drawing.Point(2, 2)
         Me.ChartTotalSellByCatalog.Name = "ChartTotalSellByCatalog"
         Me.ChartTotalSellByCatalog.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellByCatalog.Size = New System.Drawing.Size(367, 204)
+        Me.ChartTotalSellByCatalog.Size = New System.Drawing.Size(367, 199)
         Me.ChartTotalSellByCatalog.TabIndex = 0
         '
         'GroupControl6
         '
         Me.GroupControl6.Controls.Add(Me.ChartTotalSellCOGSByYear)
-        Me.GroupControl6.Location = New System.Drawing.Point(571, 129)
+        Me.GroupControl6.Location = New System.Drawing.Point(641, 129)
         Me.GroupControl6.Name = "GroupControl6"
         Me.GroupControl6.ShowCaption = False
-        Me.GroupControl6.Size = New System.Drawing.Size(367, 208)
+        Me.GroupControl6.Size = New System.Drawing.Size(367, 203)
         Me.GroupControl6.TabIndex = 0
         Me.GroupControl6.Text = "GroupControl6"
         '
@@ -432,7 +434,7 @@ Partial Class frmDashboard
         Me.ChartTotalSellCOGSByYear.Location = New System.Drawing.Point(2, 2)
         Me.ChartTotalSellCOGSByYear.Name = "ChartTotalSellCOGSByYear"
         Me.ChartTotalSellCOGSByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(363, 204)
+        Me.ChartTotalSellCOGSByYear.Size = New System.Drawing.Size(363, 199)
         Me.ChartTotalSellCOGSByYear.TabIndex = 1
         '
         'GroupControl12
@@ -440,10 +442,10 @@ Partial Class frmDashboard
         Me.GroupControl12.AppearanceCaption.Options.UseTextOptions = True
         Me.GroupControl12.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GroupControl12.Controls.Add(Me.txtProfit)
-        Me.GroupControl12.Location = New System.Drawing.Point(638, 12)
+        Me.GroupControl12.Location = New System.Drawing.Point(731, 12)
         Me.GroupControl12.MinimumSize = New System.Drawing.Size(0, 113)
         Me.GroupControl12.Name = "GroupControl12"
-        Me.GroupControl12.Size = New System.Drawing.Size(171, 113)
+        Me.GroupControl12.Size = New System.Drawing.Size(170, 113)
         Me.GroupControl12.TabIndex = 9
         Me.GroupControl12.Text = "Total Profit"
         '
@@ -462,16 +464,16 @@ Partial Class frmDashboard
         Me.txtProfit.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.txtProfit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.txtProfit.Properties.ReadOnly = True
-        Me.txtProfit.Size = New System.Drawing.Size(167, 88)
+        Me.txtProfit.Size = New System.Drawing.Size(166, 88)
         Me.txtProfit.TabIndex = 1
         '
         'GroupControl11
         '
         Me.GroupControl11.Controls.Add(Me.BankAccTreeMap)
-        Me.GroupControl11.Location = New System.Drawing.Point(196, 341)
+        Me.GroupControl11.Location = New System.Drawing.Point(266, 336)
         Me.GroupControl11.Name = "GroupControl11"
         Me.GroupControl11.ShowCaption = False
-        Me.GroupControl11.Size = New System.Drawing.Size(553, 335)
+        Me.GroupControl11.Size = New System.Drawing.Size(553, 328)
         Me.GroupControl11.TabIndex = 0
         Me.GroupControl11.Text = "GroupControl11"
         '
@@ -483,16 +485,16 @@ Partial Class frmDashboard
         Me.BankAccTreeMap.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BankAccTreeMap.Location = New System.Drawing.Point(2, 2)
         Me.BankAccTreeMap.Name = "BankAccTreeMap"
-        Me.BankAccTreeMap.Size = New System.Drawing.Size(549, 331)
+        Me.BankAccTreeMap.Size = New System.Drawing.Size(549, 324)
         Me.BankAccTreeMap.TabIndex = 0
         '
         'GroupControl10
         '
         Me.GroupControl10.Controls.Add(Me.GridControl1)
-        Me.GroupControl10.Location = New System.Drawing.Point(753, 341)
+        Me.GroupControl10.Location = New System.Drawing.Point(823, 336)
         Me.GroupControl10.Name = "GroupControl10"
         Me.GroupControl10.ShowCaption = False
-        Me.GroupControl10.Size = New System.Drawing.Size(540, 335)
+        Me.GroupControl10.Size = New System.Drawing.Size(470, 328)
         Me.GroupControl10.TabIndex = 8
         Me.GroupControl10.Text = "GroupControl10"
         '
@@ -502,7 +504,7 @@ Partial Class frmDashboard
         Me.GridControl1.Location = New System.Drawing.Point(2, 2)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(536, 331)
+        Me.GridControl1.Size = New System.Drawing.Size(466, 324)
         Me.GridControl1.TabIndex = 0
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -613,10 +615,10 @@ Partial Class frmDashboard
         'GroupControl7
         '
         Me.GroupControl7.Controls.Add(Me.ChartTotalSellProfitByYear)
-        Me.GroupControl7.Location = New System.Drawing.Point(942, 129)
+        Me.GroupControl7.Location = New System.Drawing.Point(1012, 129)
         Me.GroupControl7.Name = "GroupControl7"
         Me.GroupControl7.ShowCaption = False
-        Me.GroupControl7.Size = New System.Drawing.Size(351, 208)
+        Me.GroupControl7.Size = New System.Drawing.Size(281, 203)
         Me.GroupControl7.TabIndex = 2
         Me.GroupControl7.Text = "GroupControl7"
         '
@@ -626,16 +628,16 @@ Partial Class frmDashboard
         Me.ChartTotalSellProfitByYear.Location = New System.Drawing.Point(2, 2)
         Me.ChartTotalSellProfitByYear.Name = "ChartTotalSellProfitByYear"
         Me.ChartTotalSellProfitByYear.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartTotalSellProfitByYear.Size = New System.Drawing.Size(347, 204)
+        Me.ChartTotalSellProfitByYear.Size = New System.Drawing.Size(277, 199)
         Me.ChartTotalSellProfitByYear.TabIndex = 2
         '
         'GroupControl5
         '
         Me.GroupControl5.Controls.Add(Me.ListYear)
         Me.GroupControl5.Location = New System.Drawing.Point(12, 12)
-        Me.GroupControl5.MaximumSize = New System.Drawing.Size(300, 0)
+        Me.GroupControl5.MaximumSize = New System.Drawing.Size(250, 150)
         Me.GroupControl5.Name = "GroupControl5"
-        Me.GroupControl5.Size = New System.Drawing.Size(180, 181)
+        Me.GroupControl5.Size = New System.Drawing.Size(250, 149)
         Me.GroupControl5.TabIndex = 0
         Me.GroupControl5.Text = "Select Year"
         '
@@ -647,17 +649,17 @@ Partial Class frmDashboard
         Me.ListYear.CheckOnClick = True
         Me.ListYear.Location = New System.Drawing.Point(5, 29)
         Me.ListYear.Name = "ListYear"
-        Me.ListYear.Size = New System.Drawing.Size(173, 147)
+        Me.ListYear.Size = New System.Drawing.Size(243, 115)
         Me.ListYear.TabIndex = 202
         '
         'GroupControl2
         '
         Me.GroupControl2.Controls.Add(Me.overdueChart)
-        Me.GroupControl2.Location = New System.Drawing.Point(12, 462)
-        Me.GroupControl2.MaximumSize = New System.Drawing.Size(300, 0)
+        Me.GroupControl2.Location = New System.Drawing.Point(12, 401)
+        Me.GroupControl2.MaximumSize = New System.Drawing.Size(250, 0)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.ShowCaption = False
-        Me.GroupControl2.Size = New System.Drawing.Size(180, 214)
+        Me.GroupControl2.Size = New System.Drawing.Size(250, 263)
         Me.GroupControl2.TabIndex = 5
         Me.GroupControl2.Text = "GroupControl2"
         '
@@ -667,7 +669,7 @@ Partial Class frmDashboard
         Me.overdueChart.Location = New System.Drawing.Point(2, 2)
         Me.overdueChart.Name = "overdueChart"
         Me.overdueChart.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.overdueChart.Size = New System.Drawing.Size(176, 210)
+        Me.overdueChart.Size = New System.Drawing.Size(246, 259)
         Me.overdueChart.TabIndex = 2
         '
         'Root
@@ -676,15 +678,15 @@ Partial Class frmDashboard
         Me.Root.GroupBordersVisible = False
         Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem2, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutControlItem14, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.LayoutControlItem1, Me.LayoutControlItem15, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem7, Me.LayoutControlItem18, Me.LayoutControlItem19})
         Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(1305, 712)
+        Me.Root.Size = New System.Drawing.Size(1305, 700)
         Me.Root.TextVisible = False
         '
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.GroupControl2
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 450)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 389)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(184, 218)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(254, 267)
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextVisible = False
         '
@@ -693,95 +695,95 @@ Partial Class frmDashboard
         Me.LayoutControlItem5.Control = Me.GroupControl5
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(184, 185)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(254, 153)
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
         '
         'LayoutControlItem6
         '
         Me.LayoutControlItem6.Control = Me.GroupControl7
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(930, 117)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(1000, 117)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(355, 212)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(285, 207)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'LayoutControlItem10
         '
         Me.LayoutControlItem10.Control = Me.GroupControl10
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(741, 329)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(811, 324)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(544, 339)
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(474, 332)
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem10.TextVisible = False
         '
         'LayoutControlItem11
         '
         Me.LayoutControlItem11.Control = Me.GroupControl11
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(184, 329)
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(254, 324)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(557, 339)
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(557, 332)
         Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem11.TextVisible = False
         '
         'LayoutControlItem12
         '
         Me.LayoutControlItem12.Control = Me.GroupControl12
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(626, 0)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(719, 0)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
-        Me.LayoutControlItem12.Size = New System.Drawing.Size(175, 117)
+        Me.LayoutControlItem12.Size = New System.Drawing.Size(174, 117)
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem12.TextVisible = False
         '
         'LayoutControlItem8
         '
         Me.LayoutControlItem8.Control = Me.GroupControl6
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(559, 117)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(629, 117)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(371, 212)
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(371, 207)
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem8.TextVisible = False
         '
         'LayoutControlItem9
         '
         Me.LayoutControlItem9.Control = Me.GroupControl9
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(184, 117)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(254, 117)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(375, 212)
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(375, 207)
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem9.TextVisible = False
         '
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.GroupControl14
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(427, 0)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(521, 0)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(174, 117)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(168, 117)
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem14.TextVisible = False
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.GroupControl3
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(835, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(924, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(185, 117)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(171, 117)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem3.TextVisible = False
         '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.GroupControl4
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 185)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 153)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(184, 265)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(254, 236)
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem4.TextVisible = False
         '
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 668)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 656)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
         Me.EmptySpaceItem2.Size = New System.Drawing.Size(1285, 24)
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
@@ -789,7 +791,7 @@ Partial Class frmDashboard
         'LayoutControlItem13
         '
         Me.LayoutControlItem13.Control = Me.GroupControl13
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(184, 0)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(254, 0)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
         Me.LayoutControlItem13.Size = New System.Drawing.Size(58, 117)
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(0, 0)
@@ -798,27 +800,27 @@ Partial Class frmDashboard
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.GroupControl1
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(242, 0)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(312, 0)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(161, 117)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(177, 117)
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem1.TextVisible = False
         '
         'LayoutControlItem15
         '
         Me.LayoutControlItem15.Control = Me.GroupControl15
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(403, 0)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(489, 0)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
-        Me.LayoutControlItem15.Size = New System.Drawing.Size(24, 117)
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(32, 117)
         Me.LayoutControlItem15.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem15.TextVisible = False
         '
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.GroupControl16
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(601, 0)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(689, 0)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(25, 117)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(30, 117)
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem16.TextVisible = False
         '
@@ -834,33 +836,33 @@ Partial Class frmDashboard
         'LayoutControlItem7
         '
         Me.LayoutControlItem7.Control = Me.GroupControl8
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(1043, 0)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(1125, 0)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(184, 117)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(102, 117)
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextVisible = False
         '
         'LayoutControlItem18
         '
         Me.LayoutControlItem18.Control = Me.GroupControl18
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(1020, 0)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(1095, 0)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
-        Me.LayoutControlItem18.Size = New System.Drawing.Size(23, 117)
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(30, 117)
         Me.LayoutControlItem18.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem18.TextVisible = False
         '
         'LayoutControlItem19
         '
         Me.LayoutControlItem19.Control = Me.GroupControl19
-        Me.LayoutControlItem19.Location = New System.Drawing.Point(801, 0)
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(893, 0)
         Me.LayoutControlItem19.Name = "LayoutControlItem19"
-        Me.LayoutControlItem19.Size = New System.Drawing.Size(34, 117)
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(31, 117)
         Me.LayoutControlItem19.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem19.TextVisible = False
         '
         'frmDashboard
         '
-        Me.ClientSize = New System.Drawing.Size(1305, 712)
+        Me.ClientSize = New System.Drawing.Size(1305, 700)
         Me.Controls.Add(Me.LayoutControl1)
         Me.IconOptions.Icon = CType(resources.GetObject("frmDashboard.IconOptions.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
