@@ -1,4 +1,6 @@
-﻿Public Class rptQuotation2
+﻿Imports DevExpress.XtraReports.UI
+
+Public Class rptQuotation2
 
 
     Private Sub XrLabel10_PrintOnPage(ByVal sender As Object, ByVal e As DevExpress.XtraReports.UI.PrintOnPageEventArgs)
@@ -19,5 +21,9 @@
 
     Private Sub XrLabel6_PrintOnPage(ByVal sender As Object, ByVal e As DevExpress.XtraReports.UI.PrintOnPageEventArgs) Handles XrLabel6.PrintOnPage
         XrLabel6.Visible = gShowDateReport
+    End Sub
+
+    Private Sub lblShippingDate_PrintOnPage(sender As Object, e As PrintOnPageEventArgs) Handles lblShippingDate.PrintOnPage
+        lblShippingDate.Visible = gShowShipingDateReport
     End Sub
 End Class

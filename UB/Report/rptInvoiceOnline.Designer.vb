@@ -44,6 +44,8 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
+        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel15 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel63 = New DevExpress.XtraReports.UI.XRLabel()
@@ -118,8 +120,9 @@ Partial Public Class rptInvoiceOnline
         Me.XrLine14 = New DevExpress.XtraReports.UI.XRLine()
         Me.DiscountField = New DevExpress.XtraReports.UI.CalculatedField()
         Me.VatField = New DevExpress.XtraReports.UI.CalculatedField()
-        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalTotal = New DevExpress.XtraReports.UI.CalculatedField()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -439,6 +442,30 @@ Partial Public Class rptInvoiceOnline
         Me.PageHeader.HeightF = 359.6225!
         Me.PageHeader.Name = "PageHeader"
         Me.PageHeader.StylePriority.UseFont = False
+        '
+        'XrLabel50
+        '
+        Me.XrLabel50.CanGrow = False
+        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Institute")})
+        Me.XrLabel50.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(577.0832!, 253.2326!)
+        Me.XrLabel50.Name = "XrLabel50"
+        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel50.SizeF = New System.Drawing.SizeF(201.5763!, 22.0!)
+        Me.XrLabel50.StylePriority.UseFont = False
+        '
+        'XrLabel47
+        '
+        Me.XrLabel47.CanGrow = False
+        Me.XrLabel47.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel47.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(500.5001!, 253.2326!)
+        Me.XrLabel47.Name = "XrLabel47"
+        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel47.SizeF = New System.Drawing.SizeF(76.58337!, 22.00002!)
+        Me.XrLabel47.StylePriority.UseFont = False
+        Me.XrLabel47.StylePriority.UseForeColor = False
+        Me.XrLabel47.Text = "หน่วยงาน"
         '
         'XrLabel15
         '
@@ -1294,34 +1321,28 @@ Partial Public Class rptInvoiceOnline
         Me.VatField.Expression = "'ภาษีมูลค่าเพิ่ม ' + FormatString('{0:N0}',[VatPercen])  + '%'" & Global.Microsoft.VisualBasic.ChrW(10)
         Me.VatField.Name = "VatField"
         '
-        'XrLabel47
+        'CalUnit
         '
-        Me.XrLabel47.CanGrow = False
-        Me.XrLabel47.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel47.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(500.5001!, 253.2326!)
-        Me.XrLabel47.Name = "XrLabel47"
-        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel47.SizeF = New System.Drawing.SizeF(76.58337!, 22.00002!)
-        Me.XrLabel47.StylePriority.UseFont = False
-        Me.XrLabel47.StylePriority.UseForeColor = False
-        Me.XrLabel47.Text = "หน่วยงาน"
+        Me.CalUnit.DataMember = "TmpProductList"
+        Me.CalUnit.Expression = "iif([Units]<=0,'',[Units])"
+        Me.CalUnit.Name = "CalUnit"
         '
-        'XrLabel50
+        'CalPrice
         '
-        Me.XrLabel50.CanGrow = False
-        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Institute")})
-        Me.XrLabel50.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(577.0832!, 253.2326!)
-        Me.XrLabel50.Name = "XrLabel50"
-        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel50.SizeF = New System.Drawing.SizeF(201.5763!, 22.0!)
-        Me.XrLabel50.StylePriority.UseFont = False
+        Me.CalPrice.DataMember = "TmpProductList"
+        Me.CalPrice.Expression = "iif([Price]<=0,'',[Price])"
+        Me.CalPrice.Name = "CalPrice"
+        '
+        'CalTotal
+        '
+        Me.CalTotal.DataMember = "TmpProductList"
+        Me.CalTotal.Expression = "iif([Total]<=0,'',[Total])"
+        Me.CalTotal.Name = "CalTotal"
         '
         'rptInvoiceOnline
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader, Me.GroupFooter1})
-        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalUnitSum, Me.DiscountField, Me.VatField})
+        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalUnitSum, Me.DiscountField, Me.VatField, Me.CalUnit, Me.CalPrice, Me.CalTotal})
         Me.DataAdapter = Me.TmpProductListTableAdapter
         Me.DataMember = "TmpProductList"
         Me.DataSource = Me.TmpOrders1
@@ -1439,4 +1460,7 @@ Partial Public Class rptInvoiceOnline
     Friend WithEvents VatField As DevExpress.XtraReports.UI.CalculatedField
     Friend WithEvents XrLabel50 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel47 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents CalUnit As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalPrice As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalTotal As DevExpress.XtraReports.UI.CalculatedField
 End Class

@@ -43,6 +43,43 @@ Partial Public Class rptQuotation2
         Me.XrLabel10 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
+        Me.XrLabel75 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel74 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel73 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel72 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblShippingDate = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel70 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel69 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel68 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel54 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel53 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel36 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine17 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLine16 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLine15 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLabel35 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel34 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel30 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel29 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel27 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel39 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel19 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel28 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine4 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel22 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel24 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel26 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel25 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel43 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel63 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel44 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel41 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel15 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel37 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel33 = New DevExpress.XtraReports.UI.XRLabel()
@@ -87,43 +124,9 @@ Partial Public Class rptQuotation2
         Me.XrLine14 = New DevExpress.XtraReports.UI.XRLine()
         Me.DiscountField = New DevExpress.XtraReports.UI.CalculatedField()
         Me.VatField = New DevExpress.XtraReports.UI.CalculatedField()
-        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel22 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel24 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel26 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel25 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel43 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel63 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel47 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel44 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel41 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine4 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel35 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel34 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel30 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel29 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel27 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel39 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel19 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel28 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine15 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLine16 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLine17 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel36 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel53 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel54 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel68 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel69 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel70 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel71 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel72 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel73 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel74 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel75 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.CalTotal = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -160,7 +163,7 @@ Partial Public Class rptQuotation2
         'XrLabel46
         '
         Me.XrLabel46.CanGrow = False
-        Me.XrLabel46.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Total")})
+        Me.XrLabel46.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalTotal")})
         Me.XrLabel46.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel46.LocationFloat = New DevExpress.Utils.PointFloat(689.2947!, 4.999938!)
         Me.XrLabel46.Name = "XrLabel46"
@@ -168,14 +171,13 @@ Partial Public Class rptQuotation2
         Me.XrLabel46.SizeF = New System.Drawing.SizeF(101.5269!, 23.0!)
         Me.XrLabel46.StylePriority.UseFont = False
         Me.XrLabel46.StylePriority.UseTextAlignment = False
-        Me.XrLabel46.Text = "XrLabel46"
         Me.XrLabel46.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         Me.XrLabel46.TextFormatString = "{0:N2}"
         '
         'XrLabel5
         '
         Me.XrLabel5.CanGrow = False
-        Me.XrLabel5.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Price")})
+        Me.XrLabel5.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalPrice")})
         Me.XrLabel5.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel5.LocationFloat = New DevExpress.Utils.PointFloat(609.3154!, 4.999938!)
         Me.XrLabel5.Name = "XrLabel5"
@@ -183,14 +185,13 @@ Partial Public Class rptQuotation2
         Me.XrLabel5.SizeF = New System.Drawing.SizeF(79.97888!, 23.00002!)
         Me.XrLabel5.StylePriority.UseFont = False
         Me.XrLabel5.StylePriority.UseTextAlignment = False
-        Me.XrLabel5.Text = "XrLabel5"
         Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         Me.XrLabel5.TextFormatString = "{0:N2}"
         '
         'XrLabel13
         '
         Me.XrLabel13.CanGrow = False
-        Me.XrLabel13.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Units")})
+        Me.XrLabel13.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalUnit")})
         Me.XrLabel13.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(548.8859!, 4.999972!)
         Me.XrLabel13.Name = "XrLabel13"
@@ -198,7 +199,6 @@ Partial Public Class rptQuotation2
         Me.XrLabel13.SizeF = New System.Drawing.SizeF(60.42957!, 23.0!)
         Me.XrLabel13.StylePriority.UseFont = False
         Me.XrLabel13.StylePriority.UseTextAlignment = False
-        Me.XrLabel13.Text = "XrLabel13"
         Me.XrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         Me.XrLabel13.TextFormatString = "{0:N0}"
         '
@@ -426,11 +426,467 @@ Partial Public Class rptQuotation2
         '
         'PageHeader
         '
-        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel75, Me.XrLabel74, Me.XrLabel73, Me.XrLabel72, Me.XrLabel71, Me.XrLabel70, Me.XrLabel69, Me.XrLabel68, Me.XrLabel54, Me.XrLabel53, Me.XrLabel36, Me.XrLabel32, Me.XrLine17, Me.XrLine16, Me.XrLine15, Me.XrLabel35, Me.XrLabel34, Me.XrLabel30, Me.XrLabel29, Me.XrLabel27, Me.XrLabel39, Me.XrLabel19, Me.XrLabel28, Me.XrLine4, Me.XrLabel1, Me.XrLabel3, Me.XrLabel22, Me.XrLabel24, Me.XrLabel26, Me.XrLabel20, Me.XrLabel25, Me.XrLabel43, Me.XrLabel63, Me.XrLabel47, Me.XrLabel50, Me.XrLabel44, Me.XrLabel41, Me.XrLabel15, Me.XrLabel37, Me.XrLabel33, Me.XrLabel31, Me.XrLine3, Me.XrLabel23, Me.XrPageInfo1, Me.XrLabel61, Me.XrLabel45, Me.XrLabel42, Me.XrLabel40, Me.XrLine1, Me.XrLabel21, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel2, Me.XrLabel38, Me.XrPictureBox1, Me.XrLabel6, Me.XrPictureBox2})
+        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel75, Me.XrLabel74, Me.XrLabel73, Me.XrLabel72, Me.lblShippingDate, Me.XrLabel70, Me.XrLabel69, Me.XrLabel68, Me.XrLabel54, Me.XrLabel53, Me.XrLabel36, Me.XrLabel32, Me.XrLine17, Me.XrLine16, Me.XrLine15, Me.XrLabel35, Me.XrLabel34, Me.XrLabel30, Me.XrLabel29, Me.XrLabel27, Me.XrLabel39, Me.XrLabel19, Me.XrLabel28, Me.XrLine4, Me.XrLabel1, Me.XrLabel3, Me.XrLabel22, Me.XrLabel24, Me.XrLabel26, Me.XrLabel20, Me.XrLabel25, Me.XrLabel43, Me.XrLabel63, Me.XrLabel47, Me.XrLabel50, Me.XrLabel44, Me.XrLabel41, Me.XrLabel15, Me.XrLabel37, Me.XrLabel33, Me.XrLabel31, Me.XrLine3, Me.XrLabel23, Me.XrPageInfo1, Me.XrLabel61, Me.XrLabel45, Me.XrLabel42, Me.XrLabel40, Me.XrLine1, Me.XrLabel21, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel2, Me.XrLabel38, Me.XrPictureBox1, Me.XrLabel6, Me.XrPictureBox2})
         Me.PageHeader.Font = New System.Drawing.Font("Cordia New", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PageHeader.HeightF = 458.9789!
         Me.PageHeader.Name = "PageHeader"
         Me.PageHeader.StylePriority.UseFont = False
+        '
+        'XrLabel75
+        '
+        Me.XrLabel75.CanGrow = False
+        Me.XrLabel75.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ExpireDate", "{0:dd MMMM yyyy}")})
+        Me.XrLabel75.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel75.LocationFloat = New DevExpress.Utils.PointFloat(677.3456!, 371.0283!)
+        Me.XrLabel75.Name = "XrLabel75"
+        Me.XrLabel75.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel75.SizeF = New System.Drawing.SizeF(113.4757!, 25.50748!)
+        Me.XrLabel75.StylePriority.UseFont = False
+        Me.XrLabel75.StylePriority.UseTextAlignment = False
+        Me.XrLabel75.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel74
+        '
+        Me.XrLabel74.CanGrow = False
+        Me.XrLabel74.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel74.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel74.LocationFloat = New DevExpress.Utils.PointFloat(677.3456!, 341.7784!)
+        Me.XrLabel74.Name = "XrLabel74"
+        Me.XrLabel74.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel74.SizeF = New System.Drawing.SizeF(113.476!, 27.24997!)
+        Me.XrLabel74.StylePriority.UseFont = False
+        Me.XrLabel74.StylePriority.UseForeColor = False
+        Me.XrLabel74.StylePriority.UseTextAlignment = False
+        Me.XrLabel74.Text = "วันที่ชำระเงิน"
+        Me.XrLabel74.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel73
+        '
+        Me.XrLabel73.CanGrow = False
+        Me.XrLabel73.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CreditRule")})
+        Me.XrLabel73.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel73.LocationFloat = New DevExpress.Utils.PointFloat(552.705!, 371.0283!)
+        Me.XrLabel73.Name = "XrLabel73"
+        Me.XrLabel73.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel73.SizeF = New System.Drawing.SizeF(124.6407!, 25.50748!)
+        Me.XrLabel73.StylePriority.UseFont = False
+        '
+        'XrLabel72
+        '
+        Me.XrLabel72.CanGrow = False
+        Me.XrLabel72.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel72.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel72.LocationFloat = New DevExpress.Utils.PointFloat(552.7051!, 341.7784!)
+        Me.XrLabel72.Name = "XrLabel72"
+        Me.XrLabel72.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel72.SizeF = New System.Drawing.SizeF(124.6406!, 27.24997!)
+        Me.XrLabel72.StylePriority.UseFont = False
+        Me.XrLabel72.StylePriority.UseForeColor = False
+        Me.XrLabel72.StylePriority.UseTextAlignment = False
+        Me.XrLabel72.Text = "เงื่อนไขชำระเงิน"
+        Me.XrLabel72.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'lblShippingDate
+        '
+        Me.lblShippingDate.CanGrow = False
+        Me.lblShippingDate.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingDate", "{0:dd MMMM yyyy}")})
+        Me.lblShippingDate.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.lblShippingDate.LocationFloat = New DevExpress.Utils.PointFloat(439.2918!, 371.0283!)
+        Me.lblShippingDate.Name = "lblShippingDate"
+        Me.lblShippingDate.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblShippingDate.SizeF = New System.Drawing.SizeF(113.4131!, 25.50748!)
+        Me.lblShippingDate.StylePriority.UseFont = False
+        Me.lblShippingDate.StylePriority.UseTextAlignment = False
+        Me.lblShippingDate.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel70
+        '
+        Me.XrLabel70.CanGrow = False
+        Me.XrLabel70.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel70.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel70.LocationFloat = New DevExpress.Utils.PointFloat(439.2918!, 341.7784!)
+        Me.XrLabel70.Name = "XrLabel70"
+        Me.XrLabel70.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel70.SizeF = New System.Drawing.SizeF(113.4132!, 27.24997!)
+        Me.XrLabel70.StylePriority.UseFont = False
+        Me.XrLabel70.StylePriority.UseForeColor = False
+        Me.XrLabel70.StylePriority.UseTextAlignment = False
+        Me.XrLabel70.Text = "วันที่ขนส่ง"
+        Me.XrLabel70.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel69
+        '
+        Me.XrLabel69.CanGrow = False
+        Me.XrLabel69.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingMethod")})
+        Me.XrLabel69.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel69.LocationFloat = New DevExpress.Utils.PointFloat(282.8863!, 371.0284!)
+        Me.XrLabel69.Name = "XrLabel69"
+        Me.XrLabel69.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel69.SizeF = New System.Drawing.SizeF(156.4055!, 25.50748!)
+        Me.XrLabel69.StylePriority.UseFont = False
+        '
+        'XrLabel68
+        '
+        Me.XrLabel68.CanGrow = False
+        Me.XrLabel68.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel68.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel68.LocationFloat = New DevExpress.Utils.PointFloat(282.8863!, 341.7784!)
+        Me.XrLabel68.Name = "XrLabel68"
+        Me.XrLabel68.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel68.SizeF = New System.Drawing.SizeF(156.4055!, 27.24997!)
+        Me.XrLabel68.StylePriority.UseFont = False
+        Me.XrLabel68.StylePriority.UseForeColor = False
+        Me.XrLabel68.StylePriority.UseTextAlignment = False
+        Me.XrLabel68.Text = "วิธีการขนส่ง"
+        Me.XrLabel68.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel54
+        '
+        Me.XrLabel54.CanGrow = False
+        Me.XrLabel54.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingRule")})
+        Me.XrLabel54.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel54.LocationFloat = New DevExpress.Utils.PointFloat(139.1718!, 371.0283!)
+        Me.XrLabel54.Name = "XrLabel54"
+        Me.XrLabel54.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel54.SizeF = New System.Drawing.SizeF(143.7145!, 25.50748!)
+        Me.XrLabel54.StylePriority.UseFont = False
+        '
+        'XrLabel53
+        '
+        Me.XrLabel53.CanGrow = False
+        Me.XrLabel53.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel53.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(139.1718!, 341.7784!)
+        Me.XrLabel53.Name = "XrLabel53"
+        Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel53.SizeF = New System.Drawing.SizeF(143.7145!, 27.24997!)
+        Me.XrLabel53.StylePriority.UseFont = False
+        Me.XrLabel53.StylePriority.UseForeColor = False
+        Me.XrLabel53.StylePriority.UseTextAlignment = False
+        Me.XrLabel53.Text = "เงื่อนไขการส่งมอบ"
+        Me.XrLabel53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel36
+        '
+        Me.XrLabel36.CanGrow = False
+        Me.XrLabel36.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerType")})
+        Me.XrLabel36.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel36.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 371.0284!)
+        Me.XrLabel36.Name = "XrLabel36"
+        Me.XrLabel36.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel36.SizeF = New System.Drawing.SizeF(124.801!, 25.50748!)
+        Me.XrLabel36.StylePriority.UseFont = False
+        '
+        'XrLabel32
+        '
+        Me.XrLabel32.CanGrow = False
+        Me.XrLabel32.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel32.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 341.7784!)
+        Me.XrLabel32.Name = "XrLabel32"
+        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel32.SizeF = New System.Drawing.SizeF(124.801!, 27.24997!)
+        Me.XrLabel32.StylePriority.UseFont = False
+        Me.XrLabel32.StylePriority.UseForeColor = False
+        Me.XrLabel32.StylePriority.UseTextAlignment = False
+        Me.XrLabel32.Text = "ประเภท"
+        Me.XrLabel32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLine17
+        '
+        Me.XrLine17.BorderWidth = 0.5!
+        Me.XrLine17.ForeColor = System.Drawing.Color.Gainsboro
+        Me.XrLine17.LocationFloat = New DevExpress.Utils.PointFloat(14.3707!, 369.0284!)
+        Me.XrLine17.Name = "XrLine17"
+        Me.XrLine17.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
+        Me.XrLine17.StylePriority.UseBorderWidth = False
+        Me.XrLine17.StylePriority.UseForeColor = False
+        '
+        'XrLine16
+        '
+        Me.XrLine16.ForeColor = System.Drawing.Color.LightGray
+        Me.XrLine16.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 396.5358!)
+        Me.XrLine16.Name = "XrLine16"
+        Me.XrLine16.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
+        Me.XrLine16.StylePriority.UseForeColor = False
+        '
+        'XrLine15
+        '
+        Me.XrLine15.ForeColor = System.Drawing.Color.LightGray
+        Me.XrLine15.LocationFloat = New DevExpress.Utils.PointFloat(14.37073!, 339.3802!)
+        Me.XrLine15.Name = "XrLine15"
+        Me.XrLine15.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
+        Me.XrLine15.StylePriority.UseForeColor = False
+        '
+        'XrLabel35
+        '
+        Me.XrLabel35.CanGrow = False
+        Me.XrLabel35.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyMail")})
+        Me.XrLabel35.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel35.LocationFloat = New DevExpress.Utils.PointFloat(110.5415!, 53.99997!)
+        Me.XrLabel35.Name = "XrLabel35"
+        Me.XrLabel35.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel35.SizeF = New System.Drawing.SizeF(370.7415!, 14.99998!)
+        Me.XrLabel35.StylePriority.UseFont = False
+        Me.XrLabel35.Text = "XrLabel35"
+        '
+        'XrLabel34
+        '
+        Me.XrLabel34.CanGrow = False
+        Me.XrLabel34.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel34.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 53.99997!)
+        Me.XrLabel34.Name = "XrLabel34"
+        Me.XrLabel34.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel34.SizeF = New System.Drawing.SizeF(23.95827!, 15.0!)
+        Me.XrLabel34.StylePriority.UseFont = False
+        Me.XrLabel34.Text = "อีเมล"
+        '
+        'XrLabel30
+        '
+        Me.XrLabel30.CanGrow = False
+        Me.XrLabel30.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyPhone")})
+        Me.XrLabel30.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(110.5415!, 38.99995!)
+        Me.XrLabel30.Name = "XrLabel30"
+        Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel30.SizeF = New System.Drawing.SizeF(370.7415!, 15.0!)
+        Me.XrLabel30.StylePriority.UseFont = False
+        Me.XrLabel30.Text = "XrLabel30"
+        '
+        'XrLabel29
+        '
+        Me.XrLabel29.CanGrow = False
+        Me.XrLabel29.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 38.99995!)
+        Me.XrLabel29.Name = "XrLabel29"
+        Me.XrLabel29.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel29.SizeF = New System.Drawing.SizeF(23.95828!, 15.0!)
+        Me.XrLabel29.StylePriority.UseFont = False
+        Me.XrLabel29.Text = "โทร"
+        '
+        'XrLabel27
+        '
+        Me.XrLabel27.CanGrow = False
+        Me.XrLabel27.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Company")})
+        Me.XrLabel27.Font = New System.Drawing.Font("Cordia New", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel27.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 0!)
+        Me.XrLabel27.Name = "XrLabel27"
+        Me.XrLabel27.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel27.SizeF = New System.Drawing.SizeF(394.6997!, 23.0!)
+        Me.XrLabel27.StylePriority.UseFont = False
+        Me.XrLabel27.Text = "XrLabel26"
+        '
+        'XrLabel39
+        '
+        Me.XrLabel39.CanGrow = False
+        Me.XrLabel39.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel39.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 68.99997!)
+        Me.XrLabel39.Name = "XrLabel39"
+        Me.XrLabel39.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel39.SizeF = New System.Drawing.SizeF(88.00005!, 15.0!)
+        Me.XrLabel39.StylePriority.UseFont = False
+        Me.XrLabel39.StylePriority.UseTextAlignment = False
+        Me.XrLabel39.Text = "เลขประจำตัวผู้เสียภาษี"
+        Me.XrLabel39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel19
+        '
+        Me.XrLabel19.CanGrow = False
+        Me.XrLabel19.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyTax")})
+        Me.XrLabel19.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(174.5834!, 68.99997!)
+        Me.XrLabel19.Name = "XrLabel19"
+        Me.XrLabel19.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel19.SizeF = New System.Drawing.SizeF(306.6996!, 15.00001!)
+        Me.XrLabel19.StylePriority.UseFont = False
+        Me.XrLabel19.StylePriority.UseTextAlignment = False
+        Me.XrLabel19.Text = "XrLabel19"
+        Me.XrLabel19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel28
+        '
+        Me.XrLabel28.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyAddress")})
+        Me.XrLabel28.Font = New System.Drawing.Font("Cordia New", 9.0!)
+        Me.XrLabel28.LocationFloat = New DevExpress.Utils.PointFloat(86.58325!, 22.99996!)
+        Me.XrLabel28.Name = "XrLabel28"
+        Me.XrLabel28.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel28.SizeF = New System.Drawing.SizeF(394.6997!, 16.0!)
+        Me.XrLabel28.StylePriority.UseFont = False
+        Me.XrLabel28.Text = "XrLabel27"
+        '
+        'XrLine4
+        '
+        Me.XrLine4.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
+        Me.XrLine4.BorderColor = System.Drawing.Color.Gray
+        Me.XrLine4.ForeColor = System.Drawing.Color.LightGray
+        Me.XrLine4.LocationFloat = New DevExpress.Utils.PointFloat(498.8025!, 181.6909!)
+        Me.XrLine4.Name = "XrLine4"
+        Me.XrLine4.SizeF = New System.Drawing.SizeF(282.6391!, 2.000015!)
+        Me.XrLine4.StylePriority.UseBorderColor = False
+        Me.XrLine4.StylePriority.UseForeColor = False
+        '
+        'XrLabel1
+        '
+        Me.XrLabel1.CanGrow = False
+        Me.XrLabel1.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerName")})
+        Me.XrLabel1.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(14.37065!, 147.3808!)
+        Me.XrLabel1.Name = "XrLabel1"
+        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel1.SizeF = New System.Drawing.SizeF(466.9123!, 34.31015!)
+        Me.XrLabel1.StylePriority.UseFont = False
+        Me.XrLabel1.StylePriority.UseTextAlignment = False
+        Me.XrLabel1.Text = "XrLabel1"
+        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel3
+        '
+        Me.XrLabel3.CanGrow = False
+        Me.XrLabel3.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel3.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 122.4642!)
+        Me.XrLabel3.Name = "XrLabel3"
+        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(76.58323!, 24.91663!)
+        Me.XrLabel3.StylePriority.UseFont = False
+        Me.XrLabel3.StylePriority.UseForeColor = False
+        Me.XrLabel3.Text = "ลูกค้า"
+        '
+        'XrLabel22
+        '
+        Me.XrLabel22.CanGrow = False
+        Me.XrLabel22.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.AddressBill")})
+        Me.XrLabel22.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(14.3707!, 181.6909!)
+        Me.XrLabel22.Multiline = True
+        Me.XrLabel22.Name = "XrLabel22"
+        Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel22.SizeF = New System.Drawing.SizeF(466.9123!, 124.7084!)
+        Me.XrLabel22.StylePriority.UseFont = False
+        Me.XrLabel22.Text = "XrLabel22"
+        '
+        'XrLabel24
+        '
+        Me.XrLabel24.CanGrow = False
+        Me.XrLabel24.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerPhone")})
+        Me.XrLabel24.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel24.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 240.3994!)
+        Me.XrLabel24.Name = "XrLabel24"
+        Me.XrLabel24.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel24.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
+        Me.XrLabel24.StylePriority.UseFont = False
+        Me.XrLabel24.Text = "XrLabel24"
+        '
+        'XrLabel26
+        '
+        Me.XrLabel26.CanGrow = False
+        Me.XrLabel26.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerFAX")})
+        Me.XrLabel26.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(577.0835!, 262.3994!)
+        Me.XrLabel26.Name = "XrLabel26"
+        Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel26.SizeF = New System.Drawing.SizeF(198.742!, 21.99997!)
+        Me.XrLabel26.StylePriority.UseFont = False
+        Me.XrLabel26.Text = "XrLabel26"
+        '
+        'XrLabel20
+        '
+        Me.XrLabel20.CanGrow = False
+        Me.XrLabel20.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel20.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 240.3994!)
+        Me.XrLabel20.Name = "XrLabel20"
+        Me.XrLabel20.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel20.SizeF = New System.Drawing.SizeF(76.58337!, 21.99998!)
+        Me.XrLabel20.StylePriority.UseFont = False
+        Me.XrLabel20.StylePriority.UseForeColor = False
+        Me.XrLabel20.Text = "เบอร์โทร"
+        '
+        'XrLabel25
+        '
+        Me.XrLabel25.CanGrow = False
+        Me.XrLabel25.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel25.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 262.3994!)
+        Me.XrLabel25.Name = "XrLabel25"
+        Me.XrLabel25.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel25.SizeF = New System.Drawing.SizeF(76.58337!, 22.0!)
+        Me.XrLabel25.StylePriority.UseFont = False
+        Me.XrLabel25.StylePriority.UseForeColor = False
+        Me.XrLabel25.Text = "แฟกซ์"
+        '
+        'XrLabel43
+        '
+        Me.XrLabel43.CanGrow = False
+        Me.XrLabel43.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel43.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel43.LocationFloat = New DevExpress.Utils.PointFloat(500.5004!, 284.3994!)
+        Me.XrLabel43.Name = "XrLabel43"
+        Me.XrLabel43.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel43.SizeF = New System.Drawing.SizeF(76.58267!, 22.0!)
+        Me.XrLabel43.StylePriority.UseFont = False
+        Me.XrLabel43.StylePriority.UseForeColor = False
+        Me.XrLabel43.Text = "อีเมล"
+        '
+        'XrLabel63
+        '
+        Me.XrLabel63.CanGrow = False
+        Me.XrLabel63.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerEmail")})
+        Me.XrLabel63.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel63.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 284.3994!)
+        Me.XrLabel63.Name = "XrLabel63"
+        Me.XrLabel63.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel63.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
+        Me.XrLabel63.StylePriority.UseFont = False
+        '
+        'XrLabel47
+        '
+        Me.XrLabel47.CanGrow = False
+        Me.XrLabel47.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel47.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(500.5!, 218.3994!)
+        Me.XrLabel47.Name = "XrLabel47"
+        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel47.SizeF = New System.Drawing.SizeF(76.58337!, 22.00002!)
+        Me.XrLabel47.StylePriority.UseFont = False
+        Me.XrLabel47.StylePriority.UseForeColor = False
+        Me.XrLabel47.Text = "หน่วยงาน"
+        '
+        'XrLabel50
+        '
+        Me.XrLabel50.CanGrow = False
+        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Institute")})
+        Me.XrLabel50.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 218.3994!)
+        Me.XrLabel50.Name = "XrLabel50"
+        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel50.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
+        Me.XrLabel50.StylePriority.UseFont = False
+        '
+        'XrLabel44
+        '
+        Me.XrLabel44.CanGrow = False
+        Me.XrLabel44.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ContactPerson")})
+        Me.XrLabel44.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel44.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 196.3994!)
+        Me.XrLabel44.Name = "XrLabel44"
+        Me.XrLabel44.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel44.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
+        Me.XrLabel44.StylePriority.UseFont = False
+        Me.XrLabel44.Text = "XrLabel44"
+        '
+        'XrLabel41
+        '
+        Me.XrLabel41.CanGrow = False
+        Me.XrLabel41.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel41.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel41.LocationFloat = New DevExpress.Utils.PointFloat(500.4998!, 196.3994!)
+        Me.XrLabel41.Name = "XrLabel41"
+        Me.XrLabel41.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel41.SizeF = New System.Drawing.SizeF(76.58365!, 22.0!)
+        Me.XrLabel41.StylePriority.UseFont = False
+        Me.XrLabel41.StylePriority.UseForeColor = False
+        Me.XrLabel41.Text = "ผู้ติดต่อ"
         '
         'XrLabel15
         '
@@ -912,466 +1368,28 @@ Partial Public Class rptQuotation2
         Me.VatField.Expression = "'ภาษีมูลค่าเพิ่ม ' + FormatString('{0:N0}',[VatPercen])  + '%'" & Global.Microsoft.VisualBasic.ChrW(10)
         Me.VatField.Name = "VatField"
         '
-        'XrLabel1
+        'CalTotal
         '
-        Me.XrLabel1.CanGrow = False
-        Me.XrLabel1.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerName")})
-        Me.XrLabel1.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(14.37065!, 147.3808!)
-        Me.XrLabel1.Name = "XrLabel1"
-        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel1.SizeF = New System.Drawing.SizeF(466.9123!, 34.31015!)
-        Me.XrLabel1.StylePriority.UseFont = False
-        Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "XrLabel1"
-        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.CalTotal.DataMember = "TmpProductList"
+        Me.CalTotal.Expression = "iif([Total]<=0,'',[Total])"
+        Me.CalTotal.Name = "CalTotal"
         '
-        'XrLabel3
+        'CalUnit
         '
-        Me.XrLabel3.CanGrow = False
-        Me.XrLabel3.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel3.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 122.4642!)
-        Me.XrLabel3.Name = "XrLabel3"
-        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(76.58323!, 24.91663!)
-        Me.XrLabel3.StylePriority.UseFont = False
-        Me.XrLabel3.StylePriority.UseForeColor = False
-        Me.XrLabel3.Text = "ลูกค้า"
+        Me.CalUnit.DataMember = "TmpProductList"
+        Me.CalUnit.Expression = "iif([Units]<=0,'',[Units])"
+        Me.CalUnit.Name = "CalUnit"
         '
-        'XrLabel22
+        'CalPrice
         '
-        Me.XrLabel22.CanGrow = False
-        Me.XrLabel22.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.AddressBill")})
-        Me.XrLabel22.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(14.3707!, 181.6909!)
-        Me.XrLabel22.Multiline = True
-        Me.XrLabel22.Name = "XrLabel22"
-        Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel22.SizeF = New System.Drawing.SizeF(466.9123!, 124.7084!)
-        Me.XrLabel22.StylePriority.UseFont = False
-        Me.XrLabel22.Text = "XrLabel22"
-        '
-        'XrLabel24
-        '
-        Me.XrLabel24.CanGrow = False
-        Me.XrLabel24.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerPhone")})
-        Me.XrLabel24.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel24.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 240.3994!)
-        Me.XrLabel24.Name = "XrLabel24"
-        Me.XrLabel24.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel24.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
-        Me.XrLabel24.StylePriority.UseFont = False
-        Me.XrLabel24.Text = "XrLabel24"
-        '
-        'XrLabel26
-        '
-        Me.XrLabel26.CanGrow = False
-        Me.XrLabel26.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerFAX")})
-        Me.XrLabel26.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(577.0835!, 262.3994!)
-        Me.XrLabel26.Name = "XrLabel26"
-        Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel26.SizeF = New System.Drawing.SizeF(198.742!, 21.99997!)
-        Me.XrLabel26.StylePriority.UseFont = False
-        Me.XrLabel26.Text = "XrLabel26"
-        '
-        'XrLabel20
-        '
-        Me.XrLabel20.CanGrow = False
-        Me.XrLabel20.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel20.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 240.3994!)
-        Me.XrLabel20.Name = "XrLabel20"
-        Me.XrLabel20.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel20.SizeF = New System.Drawing.SizeF(76.58337!, 21.99998!)
-        Me.XrLabel20.StylePriority.UseFont = False
-        Me.XrLabel20.StylePriority.UseForeColor = False
-        Me.XrLabel20.Text = "เบอร์โทร"
-        '
-        'XrLabel25
-        '
-        Me.XrLabel25.CanGrow = False
-        Me.XrLabel25.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel25.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 262.3994!)
-        Me.XrLabel25.Name = "XrLabel25"
-        Me.XrLabel25.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel25.SizeF = New System.Drawing.SizeF(76.58337!, 22.0!)
-        Me.XrLabel25.StylePriority.UseFont = False
-        Me.XrLabel25.StylePriority.UseForeColor = False
-        Me.XrLabel25.Text = "แฟกซ์"
-        '
-        'XrLabel43
-        '
-        Me.XrLabel43.CanGrow = False
-        Me.XrLabel43.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel43.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel43.LocationFloat = New DevExpress.Utils.PointFloat(500.5004!, 284.3994!)
-        Me.XrLabel43.Name = "XrLabel43"
-        Me.XrLabel43.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel43.SizeF = New System.Drawing.SizeF(76.58267!, 22.0!)
-        Me.XrLabel43.StylePriority.UseFont = False
-        Me.XrLabel43.StylePriority.UseForeColor = False
-        Me.XrLabel43.Text = "อีเมล"
-        '
-        'XrLabel63
-        '
-        Me.XrLabel63.CanGrow = False
-        Me.XrLabel63.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerEmail")})
-        Me.XrLabel63.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel63.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 284.3994!)
-        Me.XrLabel63.Name = "XrLabel63"
-        Me.XrLabel63.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel63.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
-        Me.XrLabel63.StylePriority.UseFont = False
-        '
-        'XrLabel47
-        '
-        Me.XrLabel47.CanGrow = False
-        Me.XrLabel47.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel47.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(500.5!, 218.3994!)
-        Me.XrLabel47.Name = "XrLabel47"
-        Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel47.SizeF = New System.Drawing.SizeF(76.58337!, 22.00002!)
-        Me.XrLabel47.StylePriority.UseFont = False
-        Me.XrLabel47.StylePriority.UseForeColor = False
-        Me.XrLabel47.Text = "หน่วยงาน"
-        '
-        'XrLabel50
-        '
-        Me.XrLabel50.CanGrow = False
-        Me.XrLabel50.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Institute")})
-        Me.XrLabel50.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 218.3994!)
-        Me.XrLabel50.Name = "XrLabel50"
-        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel50.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
-        Me.XrLabel50.StylePriority.UseFont = False
-        '
-        'XrLabel44
-        '
-        Me.XrLabel44.CanGrow = False
-        Me.XrLabel44.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ContactPerson")})
-        Me.XrLabel44.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel44.LocationFloat = New DevExpress.Utils.PointFloat(577.0831!, 196.3994!)
-        Me.XrLabel44.Name = "XrLabel44"
-        Me.XrLabel44.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel44.SizeF = New System.Drawing.SizeF(198.7424!, 22.0!)
-        Me.XrLabel44.StylePriority.UseFont = False
-        Me.XrLabel44.Text = "XrLabel44"
-        '
-        'XrLabel41
-        '
-        Me.XrLabel41.CanGrow = False
-        Me.XrLabel41.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel41.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.XrLabel41.LocationFloat = New DevExpress.Utils.PointFloat(500.4998!, 196.3994!)
-        Me.XrLabel41.Name = "XrLabel41"
-        Me.XrLabel41.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel41.SizeF = New System.Drawing.SizeF(76.58365!, 22.0!)
-        Me.XrLabel41.StylePriority.UseFont = False
-        Me.XrLabel41.StylePriority.UseForeColor = False
-        Me.XrLabel41.Text = "ผู้ติดต่อ"
-        '
-        'XrLine4
-        '
-        Me.XrLine4.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
-        Me.XrLine4.BorderColor = System.Drawing.Color.Gray
-        Me.XrLine4.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine4.LocationFloat = New DevExpress.Utils.PointFloat(498.8025!, 181.6909!)
-        Me.XrLine4.Name = "XrLine4"
-        Me.XrLine4.SizeF = New System.Drawing.SizeF(282.6391!, 2.000015!)
-        Me.XrLine4.StylePriority.UseBorderColor = False
-        Me.XrLine4.StylePriority.UseForeColor = False
-        '
-        'XrLabel35
-        '
-        Me.XrLabel35.CanGrow = False
-        Me.XrLabel35.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyMail")})
-        Me.XrLabel35.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel35.LocationFloat = New DevExpress.Utils.PointFloat(110.5415!, 53.99997!)
-        Me.XrLabel35.Name = "XrLabel35"
-        Me.XrLabel35.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel35.SizeF = New System.Drawing.SizeF(370.7415!, 14.99998!)
-        Me.XrLabel35.StylePriority.UseFont = False
-        Me.XrLabel35.Text = "XrLabel35"
-        '
-        'XrLabel34
-        '
-        Me.XrLabel34.CanGrow = False
-        Me.XrLabel34.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel34.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 53.99997!)
-        Me.XrLabel34.Name = "XrLabel34"
-        Me.XrLabel34.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel34.SizeF = New System.Drawing.SizeF(23.95827!, 15.0!)
-        Me.XrLabel34.StylePriority.UseFont = False
-        Me.XrLabel34.Text = "อีเมล"
-        '
-        'XrLabel30
-        '
-        Me.XrLabel30.CanGrow = False
-        Me.XrLabel30.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyPhone")})
-        Me.XrLabel30.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(110.5415!, 38.99995!)
-        Me.XrLabel30.Name = "XrLabel30"
-        Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel30.SizeF = New System.Drawing.SizeF(370.7415!, 15.0!)
-        Me.XrLabel30.StylePriority.UseFont = False
-        Me.XrLabel30.Text = "XrLabel30"
-        '
-        'XrLabel29
-        '
-        Me.XrLabel29.CanGrow = False
-        Me.XrLabel29.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 38.99995!)
-        Me.XrLabel29.Name = "XrLabel29"
-        Me.XrLabel29.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel29.SizeF = New System.Drawing.SizeF(23.95828!, 15.0!)
-        Me.XrLabel29.StylePriority.UseFont = False
-        Me.XrLabel29.Text = "โทร"
-        '
-        'XrLabel27
-        '
-        Me.XrLabel27.CanGrow = False
-        Me.XrLabel27.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Company")})
-        Me.XrLabel27.Font = New System.Drawing.Font("Cordia New", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel27.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 0!)
-        Me.XrLabel27.Name = "XrLabel27"
-        Me.XrLabel27.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel27.SizeF = New System.Drawing.SizeF(394.6997!, 23.0!)
-        Me.XrLabel27.StylePriority.UseFont = False
-        Me.XrLabel27.Text = "XrLabel26"
-        '
-        'XrLabel39
-        '
-        Me.XrLabel39.CanGrow = False
-        Me.XrLabel39.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel39.LocationFloat = New DevExpress.Utils.PointFloat(86.58327!, 68.99997!)
-        Me.XrLabel39.Name = "XrLabel39"
-        Me.XrLabel39.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel39.SizeF = New System.Drawing.SizeF(88.00005!, 15.0!)
-        Me.XrLabel39.StylePriority.UseFont = False
-        Me.XrLabel39.StylePriority.UseTextAlignment = False
-        Me.XrLabel39.Text = "เลขประจำตัวผู้เสียภาษี"
-        Me.XrLabel39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrLabel19
-        '
-        Me.XrLabel19.CanGrow = False
-        Me.XrLabel19.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyTax")})
-        Me.XrLabel19.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(174.5834!, 68.99997!)
-        Me.XrLabel19.Name = "XrLabel19"
-        Me.XrLabel19.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel19.SizeF = New System.Drawing.SizeF(306.6996!, 15.00001!)
-        Me.XrLabel19.StylePriority.UseFont = False
-        Me.XrLabel19.StylePriority.UseTextAlignment = False
-        Me.XrLabel19.Text = "XrLabel19"
-        Me.XrLabel19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrLabel28
-        '
-        Me.XrLabel28.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CompanyAddress")})
-        Me.XrLabel28.Font = New System.Drawing.Font("Cordia New", 9.0!)
-        Me.XrLabel28.LocationFloat = New DevExpress.Utils.PointFloat(86.58325!, 22.99996!)
-        Me.XrLabel28.Name = "XrLabel28"
-        Me.XrLabel28.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel28.SizeF = New System.Drawing.SizeF(394.6997!, 16.0!)
-        Me.XrLabel28.StylePriority.UseFont = False
-        Me.XrLabel28.Text = "XrLabel27"
-        '
-        'XrLine15
-        '
-        Me.XrLine15.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine15.LocationFloat = New DevExpress.Utils.PointFloat(14.37073!, 339.3802!)
-        Me.XrLine15.Name = "XrLine15"
-        Me.XrLine15.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
-        Me.XrLine15.StylePriority.UseForeColor = False
-        '
-        'XrLine16
-        '
-        Me.XrLine16.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine16.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 396.5358!)
-        Me.XrLine16.Name = "XrLine16"
-        Me.XrLine16.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
-        Me.XrLine16.StylePriority.UseForeColor = False
-        '
-        'XrLine17
-        '
-        Me.XrLine17.BorderWidth = 0.5!
-        Me.XrLine17.ForeColor = System.Drawing.Color.Gainsboro
-        Me.XrLine17.LocationFloat = New DevExpress.Utils.PointFloat(14.3707!, 369.0284!)
-        Me.XrLine17.Name = "XrLine17"
-        Me.XrLine17.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
-        Me.XrLine17.StylePriority.UseBorderWidth = False
-        Me.XrLine17.StylePriority.UseForeColor = False
-        '
-        'XrLabel32
-        '
-        Me.XrLabel32.CanGrow = False
-        Me.XrLabel32.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel32.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 341.7784!)
-        Me.XrLabel32.Name = "XrLabel32"
-        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel32.SizeF = New System.Drawing.SizeF(124.801!, 27.24997!)
-        Me.XrLabel32.StylePriority.UseFont = False
-        Me.XrLabel32.StylePriority.UseForeColor = False
-        Me.XrLabel32.StylePriority.UseTextAlignment = False
-        Me.XrLabel32.Text = "ประเภท"
-        Me.XrLabel32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel36
-        '
-        Me.XrLabel36.CanGrow = False
-        Me.XrLabel36.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerType")})
-        Me.XrLabel36.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel36.LocationFloat = New DevExpress.Utils.PointFloat(14.37076!, 371.0284!)
-        Me.XrLabel36.Name = "XrLabel36"
-        Me.XrLabel36.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel36.SizeF = New System.Drawing.SizeF(124.801!, 25.50748!)
-        Me.XrLabel36.StylePriority.UseFont = False
-        '
-        'XrLabel53
-        '
-        Me.XrLabel53.CanGrow = False
-        Me.XrLabel53.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel53.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(139.1718!, 341.7784!)
-        Me.XrLabel53.Name = "XrLabel53"
-        Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel53.SizeF = New System.Drawing.SizeF(143.7145!, 27.24997!)
-        Me.XrLabel53.StylePriority.UseFont = False
-        Me.XrLabel53.StylePriority.UseForeColor = False
-        Me.XrLabel53.StylePriority.UseTextAlignment = False
-        Me.XrLabel53.Text = "เงื่อนไขการส่งมอบ"
-        Me.XrLabel53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel54
-        '
-        Me.XrLabel54.CanGrow = False
-        Me.XrLabel54.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingRule")})
-        Me.XrLabel54.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel54.LocationFloat = New DevExpress.Utils.PointFloat(139.1718!, 371.0283!)
-        Me.XrLabel54.Name = "XrLabel54"
-        Me.XrLabel54.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel54.SizeF = New System.Drawing.SizeF(143.7145!, 25.50748!)
-        Me.XrLabel54.StylePriority.UseFont = False
-        '
-        'XrLabel68
-        '
-        Me.XrLabel68.CanGrow = False
-        Me.XrLabel68.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel68.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel68.LocationFloat = New DevExpress.Utils.PointFloat(282.8863!, 341.7784!)
-        Me.XrLabel68.Name = "XrLabel68"
-        Me.XrLabel68.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel68.SizeF = New System.Drawing.SizeF(156.4055!, 27.24997!)
-        Me.XrLabel68.StylePriority.UseFont = False
-        Me.XrLabel68.StylePriority.UseForeColor = False
-        Me.XrLabel68.StylePriority.UseTextAlignment = False
-        Me.XrLabel68.Text = "วิธีการขนส่ง"
-        Me.XrLabel68.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel69
-        '
-        Me.XrLabel69.CanGrow = False
-        Me.XrLabel69.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingMethod")})
-        Me.XrLabel69.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel69.LocationFloat = New DevExpress.Utils.PointFloat(282.8863!, 371.0284!)
-        Me.XrLabel69.Name = "XrLabel69"
-        Me.XrLabel69.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel69.SizeF = New System.Drawing.SizeF(156.4055!, 25.50748!)
-        Me.XrLabel69.StylePriority.UseFont = False
-        '
-        'XrLabel70
-        '
-        Me.XrLabel70.CanGrow = False
-        Me.XrLabel70.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel70.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel70.LocationFloat = New DevExpress.Utils.PointFloat(439.2918!, 341.7784!)
-        Me.XrLabel70.Name = "XrLabel70"
-        Me.XrLabel70.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel70.SizeF = New System.Drawing.SizeF(113.4132!, 27.24997!)
-        Me.XrLabel70.StylePriority.UseFont = False
-        Me.XrLabel70.StylePriority.UseForeColor = False
-        Me.XrLabel70.StylePriority.UseTextAlignment = False
-        Me.XrLabel70.Text = "วันที่ขนส่ง"
-        Me.XrLabel70.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel71
-        '
-        Me.XrLabel71.CanGrow = False
-        Me.XrLabel71.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ShipingDate", "{0:dd MMMM yyyy}")})
-        Me.XrLabel71.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel71.LocationFloat = New DevExpress.Utils.PointFloat(439.2918!, 371.0283!)
-        Me.XrLabel71.Name = "XrLabel71"
-        Me.XrLabel71.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel71.SizeF = New System.Drawing.SizeF(113.4131!, 25.50748!)
-        Me.XrLabel71.StylePriority.UseFont = False
-        Me.XrLabel71.StylePriority.UseTextAlignment = False
-        Me.XrLabel71.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel72
-        '
-        Me.XrLabel72.CanGrow = False
-        Me.XrLabel72.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel72.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel72.LocationFloat = New DevExpress.Utils.PointFloat(552.7051!, 341.7784!)
-        Me.XrLabel72.Name = "XrLabel72"
-        Me.XrLabel72.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel72.SizeF = New System.Drawing.SizeF(124.6406!, 27.24997!)
-        Me.XrLabel72.StylePriority.UseFont = False
-        Me.XrLabel72.StylePriority.UseForeColor = False
-        Me.XrLabel72.StylePriority.UseTextAlignment = False
-        Me.XrLabel72.Text = "เงื่อนไขชำระเงิน"
-        Me.XrLabel72.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel73
-        '
-        Me.XrLabel73.CanGrow = False
-        Me.XrLabel73.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CreditRule")})
-        Me.XrLabel73.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel73.LocationFloat = New DevExpress.Utils.PointFloat(552.705!, 371.0283!)
-        Me.XrLabel73.Name = "XrLabel73"
-        Me.XrLabel73.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel73.SizeF = New System.Drawing.SizeF(124.6407!, 25.50748!)
-        Me.XrLabel73.StylePriority.UseFont = False
-        '
-        'XrLabel74
-        '
-        Me.XrLabel74.CanGrow = False
-        Me.XrLabel74.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel74.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel74.LocationFloat = New DevExpress.Utils.PointFloat(677.3456!, 341.7784!)
-        Me.XrLabel74.Name = "XrLabel74"
-        Me.XrLabel74.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel74.SizeF = New System.Drawing.SizeF(113.476!, 27.24997!)
-        Me.XrLabel74.StylePriority.UseFont = False
-        Me.XrLabel74.StylePriority.UseForeColor = False
-        Me.XrLabel74.StylePriority.UseTextAlignment = False
-        Me.XrLabel74.Text = "วันที่ชำระเงิน"
-        Me.XrLabel74.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'XrLabel75
-        '
-        Me.XrLabel75.CanGrow = False
-        Me.XrLabel75.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.ExpireDate", "{0:dd MMMM yyyy}")})
-        Me.XrLabel75.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel75.LocationFloat = New DevExpress.Utils.PointFloat(677.3456!, 371.0283!)
-        Me.XrLabel75.Name = "XrLabel75"
-        Me.XrLabel75.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel75.SizeF = New System.Drawing.SizeF(113.4757!, 25.50748!)
-        Me.XrLabel75.StylePriority.UseFont = False
-        Me.XrLabel75.StylePriority.UseTextAlignment = False
-        Me.XrLabel75.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.CalPrice.DataMember = "TmpProductList"
+        Me.CalPrice.Expression = "iif([Price]<=0,'',[Price])"
+        Me.CalPrice.Name = "CalPrice"
         '
         'rptQuotation2
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader, Me.GroupFooter1})
-        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalUnitSum, Me.DiscountField, Me.VatField})
+        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalUnitSum, Me.DiscountField, Me.VatField, Me.CalTotal, Me.CalUnit, Me.CalPrice})
         Me.DataAdapter = Me.TmpProductListTableAdapter
         Me.DataMember = "TmpProductList"
         Me.DataSource = Me.TmpOrders1
@@ -1488,9 +1506,12 @@ Partial Public Class rptQuotation2
     Friend WithEvents XrLabel68 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel69 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel70 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel71 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblShippingDate As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel73 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel72 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel74 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel75 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents CalTotal As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalUnit As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalPrice As DevExpress.XtraReports.UI.CalculatedField
 End Class

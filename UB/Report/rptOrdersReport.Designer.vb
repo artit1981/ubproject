@@ -68,6 +68,9 @@ Partial Public Class rptOrdersReport
         Me.TmpProductListTableAdapter = New UB.TmpOrdersTableAdapters.TmpProductListTableAdapter()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
         Me.CalSEQ = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalTotal = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -82,7 +85,7 @@ Partial Public Class rptOrdersReport
         'XrLabel15
         '
         Me.XrLabel15.CanGrow = False
-        Me.XrLabel15.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Total", "{0:#,##0.00}")})
+        Me.XrLabel15.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalTotal")})
         Me.XrLabel15.Font = New System.Drawing.Font("Angsana New", 12.0!)
         Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(703.2083!, 0!)
         Me.XrLabel15.Name = "XrLabel15"
@@ -90,27 +93,28 @@ Partial Public Class rptOrdersReport
         Me.XrLabel15.SizeF = New System.Drawing.SizeF(102.0325!, 19.875!)
         Me.XrLabel15.StylePriority.UseFont = False
         Me.XrLabel15.StylePriority.UseTextAlignment = False
-        Me.XrLabel15.Text = "XrLabel15"
         Me.XrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.XrLabel15.TextFormatString = "{0:N2}"
         '
         'XrLabel14
         '
         Me.XrLabel14.CanGrow = False
-        Me.XrLabel14.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Price", "{0:#,##0.00}")})
+        Me.XrLabel14.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalPrice")})
         Me.XrLabel14.Font = New System.Drawing.Font("Angsana New", 12.0!)
         Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(628.2084!, 0!)
         Me.XrLabel14.Name = "XrLabel14"
+        Me.XrLabel14.NullValueText = " "
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel14.SizeF = New System.Drawing.SizeF(85.41656!, 19.87499!)
         Me.XrLabel14.StylePriority.UseFont = False
         Me.XrLabel14.StylePriority.UseTextAlignment = False
-        Me.XrLabel14.Text = "XrLabel14"
         Me.XrLabel14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.XrLabel14.TextFormatString = "{0:N2}"
         '
         'XrLabel13
         '
         Me.XrLabel13.CanGrow = False
-        Me.XrLabel13.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Units", "{0:#,#}")})
+        Me.XrLabel13.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CalUnit")})
         Me.XrLabel13.Font = New System.Drawing.Font("Cordia New", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(602.8287!, 0!)
         Me.XrLabel13.Name = "XrLabel13"
@@ -118,8 +122,8 @@ Partial Public Class rptOrdersReport
         Me.XrLabel13.SizeF = New System.Drawing.SizeF(46.41205!, 19.87499!)
         Me.XrLabel13.StylePriority.UseFont = False
         Me.XrLabel13.StylePriority.UseTextAlignment = False
-        Me.XrLabel13.Text = "XrLabel13"
         Me.XrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.XrLabel13.TextFormatString = "{0:N0}"
         '
         'XrLabel12
         '
@@ -606,10 +610,28 @@ Partial Public Class rptOrdersReport
         Me.CalSEQ.Expression = "Iif([SEQ]=999,''  ,[SEQ] )"
         Me.CalSEQ.Name = "CalSEQ"
         '
+        'CalTotal
+        '
+        Me.CalTotal.DataMember = "TmpProductList"
+        Me.CalTotal.Expression = "iif([Total]<=0,'',[Total])"
+        Me.CalTotal.Name = "CalTotal"
+        '
+        'CalPrice
+        '
+        Me.CalPrice.DataMember = "TmpProductList"
+        Me.CalPrice.Expression = "iif([Price]<=0,'',[Price])"
+        Me.CalPrice.Name = "CalPrice"
+        '
+        'CalUnit
+        '
+        Me.CalUnit.DataMember = "TmpProductList"
+        Me.CalUnit.Expression = "iif([Units]<=0,'',[Units])"
+        Me.CalUnit.Name = "CalUnit"
+        '
         'rptOrdersReport
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader, Me.GroupHeader1})
-        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ})
+        Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalTotal, Me.CalPrice, Me.CalUnit})
         Me.DataAdapter = Me.TmpProductListTableAdapter
         Me.DataMember = "TmpProductList"
         Me.DataSource = Me.TmpOrders1
@@ -672,4 +694,7 @@ Partial Public Class rptOrdersReport
     Friend WithEvents XrLabel31 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel32 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
+    Friend WithEvents CalTotal As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalPrice As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents CalUnit As DevExpress.XtraReports.UI.CalculatedField
 End Class
