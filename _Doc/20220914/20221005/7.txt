@@ -1,0 +1,27 @@
+CREATE VIEW [dbo].[vOrderTotal]
+AS
+
+with ProductCost as (
+	SELECT ProductID,Cost
+	FROM
+	(
+	SELECT Product_CostAVG.ProductID,Product_CostAVG.CostID,Product_CostAVG.Cost
+	,ROW_NUMBER() OVER(PARTITION BY Product_CostAVG.ProductID ORDER BY Product_CostAVG.CostID DESC) AS rank
+	from Product_CostAVG
+	where IsDelete=0
+	) as tmp
+	where rank=1
+)
+
+SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID,ProductList.ProductName
+,ProductList.PriceMain as Price
+--,ProductList.Cost
+,ProductCost.Cost
+,case when Orders.TableID=55 then ProductList.Units * -1 else ProductList.Units end  Units
+,case when Orders.TableID=55 then ProductList.Total *-1 else ProductList.Total end Total
+FROM Orders  
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+inner JOIN ProductCost ON ProductCost.ProductID=ProductList.ProductID  
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55)
+GO

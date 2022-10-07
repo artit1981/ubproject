@@ -1,0 +1,41 @@
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (106,3,'CRM','เช็ค' ,'BankAccountRecordBar','บันทึกยอดธนาคาร' ,'BankAccountRecord',1 ,1 ,0,0,0,0,0,0,0,0,0);
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (108,31,'ข้อมูลเริ่มต้น','ทั่วไป' ,'CashItemBar','รายการเงินสดย่อย' ,'CashItem',1 ,1 ,1,1,1,0,0,0,0,0,0);
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (109,3,'CRM','เช็ค' ,'CashRecordBar','บันทึกเงินสดย่อย' ,'CashRecord',1 ,1 ,0,0,0,0,0,0,0,0,0);
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (110,35,'Report','ฝ่ายขาย' ,'DashboardBar','Dashboard' ,'Dashboard',1 ,1 ,0,0,0,1,0,0,0,0,0);
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (111,287,'CRM','ฝ่ายขาย' ,'InvoiceOnlineBar','ใบกำกับภาษีออนไลน์' ,'InvoiceOnline',1 ,1 ,1,1,1,0,0,0,1,0,0);
+INSERT INTO [dbo].[RunningFormat]
+           ([MenuID]
+           ,[System]
+           ,[Module]
+           ,[MenuDisplay]
+           ,[Name]
+           ,[FormatFront]
+           ,[FormatDate]
+           ,[FormatMidle]
+           ,[RunningCount]
+           ,[FormatYear]
+           ,[LastNo]
+           ,[CreateBy]
+           ,[CreateTime]
+           ,[ModifiedBy]
+           ,[ModifiedTime]
+           ,[LocationDTLID]
+           ,[IsReset])
+     VALUES
+           (111
+           ,'CRM'
+           ,'ฝ่ายขาย'
+           ,'ใบกำกับภาษีออนไลน์'
+           ,''
+           ,''
+           ,'yy'
+           ,'-'
+           ,5
+           ,'TH'
+           ,0
+           ,1
+           ,'2022-09-23 17:41:54.000'
+           ,null
+           ,null
+           ,0
+           ,0);

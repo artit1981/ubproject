@@ -1,0 +1,24 @@
+CREATE PROCEDURE [dbo].[spTotalSellByCatalog] 
+ @YearList NVARCHAR(MAX) 
+ ,@MonthList NVARCHAR(MAX) 
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT top 5 ProductCategory,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
+SELECT 
+Product.ProductCategoryID,ProductCategory.NameThai as ProductCategory
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+inner JOIN Product ON Product.ProductID=Orders.ProductID 
+inner JOIN ProductCategory ON Product.ProductCategoryID=ProductCategory.CategoryID
+--WHERE Orders.TableID in(39,41)
+WHERE year(Orders.OrderDate)in(select val from split(@YearList, ','))
+and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
+and Product.ProductCategoryID>0
+group by Product.ProductCategoryID,ProductCategory.NameThai
+) as tmp
+order by TotalAmount desc
+
+END
+GO

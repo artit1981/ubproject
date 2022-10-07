@@ -1,0 +1,5 @@
+alter table ProductList add ProductListRefID4 bigint default 0;
+alter table ProductList add ProductListRefID5 bigint default 0;
+alter table ProductList add ProductListUnitRef4 bigint default 0;
+alter table ProductList add ProductListUnitRef5 bigint default 0;
+alter table TmpOrders add CustomerEmail nvarchar(50);

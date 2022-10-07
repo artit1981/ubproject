@@ -1,0 +1,39 @@
+CREATE PROCEDURE [dbo].[spTotalSellByBrand] 
+ @YearList NVARCHAR(MAX) 
+ ,@MonthList NVARCHAR(MAX) 
+AS
+BEGIN
+SET NOCOUNT ON;
+
+with SellByBrand as (
+	SELECT ROW_NUMBER() OVER(PARTITION BY Product.ProductBrandID  ORDER BY SUM(Orders.Total) DESC) AS rowrank
+	,Product.ProductBrandID,ProductBrand.NameThai as ProductBrand
+	,Product.ProductName
+	,SUM(Orders.Units) AS TotalUnits
+	,SUM(Orders.Total) AS TotalAmount
+	,SUM(Orders.Cost) AS TotalCost
+	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
+	FROM vOrderTotal as Orders  
+	inner JOIN Product ON Product.ProductID=Orders.ProductID 
+	inner JOIN ProductBrand ON Product.ProductBrandID=ProductBrand.ProductBrandID
+	--WHERE Orders.TableID in(39,41)
+	--and year(Orders.OrderDate)in(2021,2022)
+	--and month(Orders.OrderDate) in(1,2,3,4,5,6)
+	WHERE year(Orders.OrderDate)in(select val from split(@YearList, ','))
+	and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
+	and Product.ProductBrandID>0
+	group by Product.ProductBrandID,ProductBrand.NameThai,Product.ProductName
+) 
+
+SELECT   ProductBrand,ProductName,ROUND(TotalAmount/1000000,3)TotalAmount
+,ROUND(TotalCost/1000000,3)TotalCost,ROUND(TotalUnits,3)TotalUnits,ROUND(TotalGain/1000000,3)TotalGain
+FROM(
+	SELECT ProductBrandID,ProductBrand,ProductName,TotalUnits,TotalAmount,TotalCost,TotalGain,rowrank
+	FROM SellByBrand
+) as tmp
+where rowrank<=3
+and ProductBrandID in(select top 5 ProductBrandID from SellByBrand group by ProductBrandID order by SUM(TotalAmount) desc )
+order by  ProductBrand,ProductName,TotalAmount desc
+
+END
+GO
