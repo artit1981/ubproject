@@ -133,7 +133,7 @@ Public Class frmBankAccountRec
             Dim dataTable = lcls.GetDataTable(0, True, 0, 0)
             BankAccountIDLookUpEdit.DataSource = dataTable
 
-            Dim dataTable2 = dataTable.Clone
+            Dim dataTable2 = lcls.GetDataTable(0, True, 0, 0)
             Dim drNewRow As DataRow = dataTable2.NewRow
 
             'specify the information of the new row.
@@ -165,7 +165,7 @@ Public Class frmBankAccountRec
         Dim dataTable As New DataTable()
 
         Try
-            'bindingSource1 = Nothing
+            bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(MyRecord)
             dataTable = lcls.GetDataTable(BankAccID.EditValue, dtpDateFrom.EditValue, dtpDateTo.EditValue)
             If dataTable.Rows.Count > 0 Then

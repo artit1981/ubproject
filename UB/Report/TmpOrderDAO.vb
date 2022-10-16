@@ -259,6 +259,15 @@ Public Class TmpOrderDAO
             mEmployeePhone = value
         End Set
     End Property
+    Private mEmployeeEmail As String
+    Public Property EmployeeEmail() As String
+        Get
+            Return mEmployeeEmail
+        End Get
+        Set(ByVal value As String)
+            mEmployeeEmail = value
+        End Set
+    End Property
     Public Property Employee() As String
         Get
             Return mEmployee
@@ -468,7 +477,7 @@ Public Class TmpOrderDAO
             SQL &=  " ,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,GrandTotalSTR,Remark"
             SQL &=  " ,CompanyAddress,CompanyPhone,CompanyFAX,CustomerPhone,CustomerFAX,CompanyTax,CompanyBranch,Header1,Header2,Header3"
             SQL &=  " ,CompanyOwner,CompanyMail,CompanyWeb,CustomerType,ShipingRule,QuotationDays,ContactPerson,ShipingMethod,CustomerTax,IsMainCompany"
-            SQL &= " ,Institute, RefOrderCode,EmployeePhone,CompanyBankAccount,EmployeePosition,CustomerEmail "
+            SQL &= " ,Institute, RefOrderCode,EmployeePhone,CompanyBankAccount,EmployeePosition,CustomerEmail,EmployeeEmail "
             SQL &=  " )"
             SQL &=  " VALUES ( @UserID"
             SQL &=  " ,  @OrderCode"
@@ -512,7 +521,7 @@ Public Class TmpOrderDAO
             SQL &=  " ,  @ShipingMethod "
             SQL &=  " ,  @CustomerTax "
             SQL &=  " ,  @IsMainCompany "
-            SQL &= " ,@Institute, @RefOrderCode,@EmployeePhone,  @CompanyBankAccount,  @EmployeePosition ,@CustomerEmail "
+            SQL &= " ,@Institute, @RefOrderCode,@EmployeePhone,  @CompanyBankAccount,  @EmployeePosition ,@CustomerEmail,@EmployeeEmail "
             SQL &=  " ) "
 
             myCommand = New SqlCommand
@@ -565,6 +574,7 @@ Public Class TmpOrderDAO
             myCommand.Parameters.Add(New SqlParameter("@CompanyBankAccount", ConvertNullToString(CompanyBankAccount)))
             myCommand.Parameters.Add(New SqlParameter("@EmployeePosition", ConvertNullToString(EmployeePosition)))
             myCommand.Parameters.Add(New SqlParameter("@CustomerEmail", ConvertNullToString(CustomerEmail)))
+            myCommand.Parameters.Add(New SqlParameter("@EmployeeEmail", ConvertNullToString(EmployeeEmail)))
             gConnection.executeInsertSqlCommand(myCommand, Nothing)
 
             If mLogoID > 0 Then
@@ -634,5 +644,6 @@ Public Class TmpOrderDAO
         mCompanyBankAccount = ""
         mEmployeePosition = ""
         mCustomerEmail = ""
+        mEmployeeEmail = ""
     End Sub
 End Class

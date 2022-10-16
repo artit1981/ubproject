@@ -166,8 +166,8 @@ Public Class frmMain
             lblCompany.Caption = gCompanyName
 
 
-            'ShowNotifi(True)
-            'ShowOverdue(True)
+            ShowNotifi(True)
+            ShowOverdue(True)
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally

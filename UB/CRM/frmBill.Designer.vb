@@ -92,6 +92,8 @@ Partial Class frmBill
         Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem5 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.VatTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.TaxGroup = New DevExpress.XtraEditors.GroupControl()
         Me.GridTaxOrder = New DevExpress.XtraGrid.GridControl()
@@ -168,8 +170,6 @@ Partial Class frmBill
         Me.txtUnits = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
-        Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -229,6 +229,8 @@ Partial Class frmBill
         CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VatTabPage.SuspendLayout()
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TaxGroup.SuspendLayout()
@@ -279,8 +281,6 @@ Partial Class frmBill
         Me.Panel1.SuspendLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -295,7 +295,7 @@ Partial Class frmBill
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1013, 689)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1013, 671)
         Me.XtraTabControl1.TabIndex = 10
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.VatTabPage, Me.ChequeTabPage, Me.RemarkTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -1268,6 +1268,22 @@ Partial Class frmBill
         Me.EmptySpaceItem6.Size = New System.Drawing.Size(39, 48)
         Me.EmptySpaceItem6.TextSize = New System.Drawing.Size(0, 0)
         '
+        'EmptySpaceItem7
+        '
+        Me.EmptySpaceItem7.AllowHotTrack = False
+        Me.EmptySpaceItem7.Location = New System.Drawing.Point(384, 0)
+        Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
+        Me.EmptySpaceItem7.Size = New System.Drawing.Size(10, 146)
+        Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem8
+        '
+        Me.EmptySpaceItem8.AllowHotTrack = False
+        Me.EmptySpaceItem8.Location = New System.Drawing.Point(433, 0)
+        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
+        Me.EmptySpaceItem8.Size = New System.Drawing.Size(17, 146)
+        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
+        '
         'VatTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.VatTabPage, "")
@@ -1275,7 +1291,7 @@ Partial Class frmBill
         Me.VatTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTabPage, True)
         Me.VatTabPage.Name = "VatTabPage"
-        Me.VatTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.VatTabPage.Size = New System.Drawing.Size(1011, 646)
         Me.VatTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.VatTabPage, "")
         '
@@ -1306,7 +1322,7 @@ Partial Class frmBill
         Me.TaxGroup.Location = New System.Drawing.Point(30, 115)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.TaxGroup, True)
         Me.TaxGroup.Name = "TaxGroup"
-        Me.TaxGroup.Size = New System.Drawing.Size(787, 294)
+        Me.TaxGroup.Size = New System.Drawing.Size(787, 520)
         Me.TaxGroup.TabIndex = 1
         Me.TaxGroup.Text = "รายละเอียดการหักภาษี ณ ที่จ่าย"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.TaxGroup, "")
@@ -1321,7 +1337,7 @@ Partial Class frmBill
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GridTaxOrder, True)
         Me.GridTaxOrder.Name = "GridTaxOrder"
         Me.GridTaxOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.TaxTypeIDLookUp, Me.RepositoryItemCalcEdit1, Me.RepositoryItemSpinEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemCalcEdit2, Me.RepositoryItemButtonEdit1})
-        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 93)
+        Me.GridTaxOrder.Size = New System.Drawing.Size(742, 307)
         Me.GridTaxOrder.TabIndex = 281
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GridTaxOrder, "")
         Me.GridTaxOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
@@ -1860,7 +1876,7 @@ Partial Class frmBill
         Me.ChequeTabPage.Controls.Add(Me.UcCheque1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ChequeTabPage, True)
         Me.ChequeTabPage.Name = "ChequeTabPage"
-        Me.ChequeTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.ChequeTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.ChequeTabPage.Text = "รายการรับ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ChequeTabPage, "")
         '
@@ -1872,7 +1888,7 @@ Partial Class frmBill
         Me.UcCheque1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCheque1, True)
         Me.UcCheque1.Name = "UcCheque1"
-        Me.UcCheque1.Size = New System.Drawing.Size(0, 683)
+        Me.UcCheque1.Size = New System.Drawing.Size(1011, 664)
         Me.UcCheque1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCheque1, "")
         '
@@ -1882,7 +1898,7 @@ Partial Class frmBill
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -1908,7 +1924,7 @@ Partial Class frmBill
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.NoteTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1920,7 +1936,7 @@ Partial Class frmBill
         Me.UcNote1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(0, 683)
+        Me.UcNote1.Size = New System.Drawing.Size(1011, 664)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1930,7 +1946,7 @@ Partial Class frmBill
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1942,7 +1958,7 @@ Partial Class frmBill
         Me.UcFileAttach1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(0, 683)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(1011, 664)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1952,7 +1968,7 @@ Partial Class frmBill
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(0, 683)
+        Me.AdminTabPage.Size = New System.Drawing.Size(1011, 664)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -2401,27 +2417,11 @@ Partial Class frmBill
         Me.DockManager1.HiddenPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
-        'EmptySpaceItem7
-        '
-        Me.EmptySpaceItem7.AllowHotTrack = False
-        Me.EmptySpaceItem7.Location = New System.Drawing.Point(384, 0)
-        Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
-        Me.EmptySpaceItem7.Size = New System.Drawing.Size(10, 146)
-        Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem8
-        '
-        Me.EmptySpaceItem8.AllowHotTrack = False
-        Me.EmptySpaceItem8.Location = New System.Drawing.Point(433, 0)
-        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.Size = New System.Drawing.Size(17, 146)
-        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
-        '
         'frmBill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1013, 719)
+        Me.ClientSize = New System.Drawing.Size(1013, 701)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmBill"
@@ -2486,6 +2486,8 @@ Partial Class frmBill
         CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.VatTabPage.ResumeLayout(False)
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TaxGroup.ResumeLayout(False)
@@ -2544,8 +2546,6 @@ Partial Class frmBill
         Me.Panel1.PerformLayout()
         CType(Me.txtUnits.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

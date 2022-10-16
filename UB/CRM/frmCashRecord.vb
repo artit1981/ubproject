@@ -133,7 +133,7 @@ Public Class frmCashRecord
             Dim dataTable = lcls.GetDataTable(0, pTable, True)
             CashItemIDLookUpEdit.DataSource = dataTable
 
-            Dim dataTable2 = dataTable.Clone
+            Dim dataTable2 = lcls.GetDataTable(0, pTable, True)
             Dim drNewRow As DataRow = dataTable2.NewRow
 
             'specify the information of the new row.

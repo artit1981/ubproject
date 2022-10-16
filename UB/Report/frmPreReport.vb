@@ -226,6 +226,7 @@ Public Class frmPreReport
                     lclsReport.Employee = lclsOrder.CustomerDAO.EmployeeDAO.FirstName
                     If IsNothing(lclsOrder.CustomerDAO.EmployeeDAO.AddressS) = False Then
                         lclsReport.EmployeePhone = lclsOrder.CustomerDAO.EmployeeDAO.AddressS.Phone1
+                        lclsReport.EmployeeEmail = lclsOrder.CustomerDAO.EmployeeDAO.AddressS.Email1
                     End If
                     If IsNothing(lclsOrder.CustomerDAO.EmployeeDAO.PositionDAO) = False Then
                         lclsReport.EmployeePosition = lclsOrder.CustomerDAO.EmployeeDAO.PositionDAO.NameThai

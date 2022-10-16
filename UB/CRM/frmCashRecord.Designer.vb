@@ -33,7 +33,6 @@ Partial Class frmCashRecord
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ACCNAME = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BankName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -215,7 +214,7 @@ Partial Class frmCashRecord
         '
         'SearchLookUpEdit1View
         '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.ACCNAME, Me.BankName})
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.ACCNAME})
         Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
@@ -231,25 +230,14 @@ Partial Class frmCashRecord
         '
         'ACCNAME
         '
-        Me.ACCNAME.Caption = "บัญชี"
-        Me.ACCNAME.FieldName = "ACCNAME"
+        Me.ACCNAME.Caption = "รายการ"
+        Me.ACCNAME.FieldName = "CodeThai"
         Me.ACCNAME.MaxWidth = 500
         Me.ACCNAME.MinWidth = 100
         Me.ACCNAME.Name = "ACCNAME"
         Me.ACCNAME.Visible = True
         Me.ACCNAME.VisibleIndex = 0
         Me.ACCNAME.Width = 300
-        '
-        'BankName
-        '
-        Me.BankName.Caption = "ชื่อธนาคาร"
-        Me.BankName.FieldName = "BankName"
-        Me.BankName.MaxWidth = 200
-        Me.BankName.MinWidth = 100
-        Me.BankName.Name = "BankName"
-        Me.BankName.Visible = True
-        Me.BankName.VisibleIndex = 1
-        Me.BankName.Width = 150
         '
         'Label10
         '
@@ -633,6 +621,5 @@ Partial Class frmCashRecord
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ACCNAME As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents BankName As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents Label10 As Label
 End Class

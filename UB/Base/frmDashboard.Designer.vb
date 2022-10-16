@@ -53,6 +53,7 @@ Partial Class frmDashboard
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -551,7 +552,7 @@ Partial Class frmDashboard
         '
         'GridView1
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.GroupCount = 1
         Me.GridView1.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalUnits", Me.GridColumn3, "{0:#,##0.00}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalAmount", Me.GridColumn4, "{0:#,##0.00}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalCost", Me.GridColumn5, "{0:#,##0.00}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalGain", Me.GridColumn6, "{0:#,##0.00}")})
@@ -572,6 +573,20 @@ Partial Class frmDashboard
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 50
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn7.Caption = "sku"
+        Me.GridColumn7.FieldName = "ProductCode"
+        Me.GridColumn7.MaxWidth = 110
+        Me.GridColumn7.MinWidth = 90
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 1
+        Me.GridColumn7.Width = 100
         '
         'GridColumn2
         '
@@ -582,8 +597,8 @@ Partial Class frmDashboard
         Me.GridColumn2.MinWidth = 100
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
-        Me.GridColumn2.Width = 108
+        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.Width = 100
         '
         'GridColumn3
         '
@@ -599,7 +614,7 @@ Partial Class frmDashboard
         Me.GridColumn3.MinWidth = 70
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GridColumn3.VisibleIndex = 3
         Me.GridColumn3.Width = 70
         '
         'GridColumn4
@@ -612,12 +627,12 @@ Partial Class frmDashboard
         Me.GridColumn4.FieldName = "TotalAmount"
         Me.GridColumn4.GroupFormat.FormatString = "n2"
         Me.GridColumn4.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn4.MaxWidth = 120
-        Me.GridColumn4.MinWidth = 100
+        Me.GridColumn4.MaxWidth = 100
+        Me.GridColumn4.MinWidth = 80
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
-        Me.GridColumn4.Width = 100
+        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.Width = 80
         '
         'GridColumn5
         '
@@ -633,7 +648,7 @@ Partial Class frmDashboard
         Me.GridColumn5.MinWidth = 80
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.VisibleIndex = 5
         Me.GridColumn5.Width = 80
         '
         'GridColumn6
@@ -646,12 +661,12 @@ Partial Class frmDashboard
         Me.GridColumn6.FieldName = "TotalGain"
         Me.GridColumn6.GroupFormat.FormatString = "n2"
         Me.GridColumn6.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn6.MaxWidth = 80
-        Me.GridColumn6.MinWidth = 70
+        Me.GridColumn6.MaxWidth = 70
+        Me.GridColumn6.MinWidth = 50
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
-        Me.GridColumn6.Width = 80
+        Me.GridColumn6.VisibleIndex = 6
+        Me.GridColumn6.Width = 50
         '
         'GroupControl7
         '
@@ -1074,4 +1089,5 @@ Partial Class frmDashboard
     Friend WithEvents LayoutControlItem20 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents GroupControl20 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LayoutControlItem21 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
 End Class
