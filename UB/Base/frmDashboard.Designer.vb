@@ -19,6 +19,18 @@ Partial Class frmDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim TrackBarLabel1 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel2 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel3 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel4 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel5 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel6 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel7 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel8 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel9 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel10 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel11 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
+        Dim TrackBarLabel12 As DevExpress.XtraEditors.Repository.TrackBarLabel = New DevExpress.XtraEditors.Repository.TrackBarLabel()
         Dim HatchFillStyle1 As DevExpress.XtraTreeMap.HatchFillStyle = New DevExpress.XtraTreeMap.HatchFillStyle()
         Dim HatchFillStyle2 As DevExpress.XtraTreeMap.HatchFillStyle = New DevExpress.XtraTreeMap.HatchFillStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
@@ -36,7 +48,7 @@ Partial Class frmDashboard
         Me.txtTotalSell = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl13 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
-        Me.ListMonth = New DevExpress.XtraEditors.CheckedListBoxControl()
+        Me.RangeMonth = New DevExpress.XtraEditors.RangeTrackBarControl()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.txtProfitPercen = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl14 = New DevExpress.XtraEditors.GroupControl()
@@ -62,7 +74,6 @@ Partial Class frmDashboard
         Me.GroupControl7 = New DevExpress.XtraEditors.GroupControl()
         Me.ChartTotalSellProfitByYear = New DevExpress.XtraCharts.ChartControl()
         Me.GroupControl5 = New DevExpress.XtraEditors.GroupControl()
-        Me.ListYear = New DevExpress.XtraEditors.CheckedListBoxControl()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.overdueChart = New DevExpress.XtraCharts.ChartControl()
         Me.Root = New DevExpress.XtraLayout.LayoutControlGroup()
@@ -88,6 +99,7 @@ Partial Class frmDashboard
         Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem20 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem21 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.RangeYear = New DevExpress.XtraEditors.RangeTrackBarControl()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.GroupControl20, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,7 +118,8 @@ Partial Class frmDashboard
         CType(Me.GroupControl13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl4.SuspendLayout()
-        CType(Me.ListMonth, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RangeMonth, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RangeMonth.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.txtProfitPercen.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +147,6 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl5.SuspendLayout()
-        CType(Me.ListYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
         CType(Me.overdueChart, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,6 +173,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RangeYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RangeYear.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -364,7 +378,7 @@ Partial Class frmDashboard
         '
         'GroupControl4
         '
-        Me.GroupControl4.Controls.Add(Me.ListMonth)
+        Me.GroupControl4.Controls.Add(Me.RangeMonth)
         Me.GroupControl4.Location = New System.Drawing.Point(12, 316)
         Me.GroupControl4.MaximumSize = New System.Drawing.Size(250, 300)
         Me.GroupControl4.Name = "GroupControl4"
@@ -372,14 +386,47 @@ Partial Class frmDashboard
         Me.GroupControl4.TabIndex = 14
         Me.GroupControl4.Text = "Select Month"
         '
-        'ListMonth
+        'RangeMonth
         '
-        Me.ListMonth.CheckOnClick = True
-        Me.ListMonth.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListMonth.Location = New System.Drawing.Point(2, 23)
-        Me.ListMonth.Name = "ListMonth"
-        Me.ListMonth.Size = New System.Drawing.Size(246, 275)
-        Me.ListMonth.TabIndex = 203
+        Me.RangeMonth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RangeMonth.EditValue = New DevExpress.XtraEditors.Repository.TrackBarRange(1, 12)
+        Me.RangeMonth.Location = New System.Drawing.Point(2, 23)
+        Me.RangeMonth.Name = "RangeMonth"
+        Me.RangeMonth.Properties.LabelAppearance.Options.UseTextOptions = True
+        Me.RangeMonth.Properties.LabelAppearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        TrackBarLabel1.Label = "January"
+        TrackBarLabel1.Value = 1
+        TrackBarLabel2.Label = "February"
+        TrackBarLabel2.Value = 2
+        TrackBarLabel3.Label = "March"
+        TrackBarLabel3.Value = 3
+        TrackBarLabel4.Label = "April"
+        TrackBarLabel4.Value = 4
+        TrackBarLabel5.Label = "May"
+        TrackBarLabel5.Value = 5
+        TrackBarLabel6.Label = "June"
+        TrackBarLabel6.Value = 6
+        TrackBarLabel7.Label = "July"
+        TrackBarLabel7.Value = 7
+        TrackBarLabel8.Label = "August"
+        TrackBarLabel8.Value = 8
+        TrackBarLabel9.Label = "September"
+        TrackBarLabel9.Value = 9
+        TrackBarLabel10.Label = "October"
+        TrackBarLabel10.Value = 10
+        TrackBarLabel11.Label = "November"
+        TrackBarLabel11.Value = 11
+        TrackBarLabel12.Label = "December"
+        TrackBarLabel12.Value = 12
+        Me.RangeMonth.Properties.Labels.AddRange(New DevExpress.XtraEditors.Repository.TrackBarLabel() {TrackBarLabel1, TrackBarLabel2, TrackBarLabel3, TrackBarLabel4, TrackBarLabel5, TrackBarLabel6, TrackBarLabel7, TrackBarLabel8, TrackBarLabel9, TrackBarLabel10, TrackBarLabel11, TrackBarLabel12})
+        Me.RangeMonth.Properties.Maximum = 12
+        Me.RangeMonth.Properties.Minimum = 1
+        Me.RangeMonth.Properties.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.RangeMonth.Properties.ShowLabels = True
+        Me.RangeMonth.Properties.TickStyle = System.Windows.Forms.TickStyle.TopLeft
+        Me.RangeMonth.Size = New System.Drawing.Size(246, 275)
+        Me.RangeMonth.TabIndex = 0
+        Me.RangeMonth.Value = New DevExpress.XtraEditors.Repository.TrackBarRange(1, 12)
         '
         'GroupControl3
         '
@@ -689,22 +736,13 @@ Partial Class frmDashboard
         '
         'GroupControl5
         '
-        Me.GroupControl5.Controls.Add(Me.ListYear)
+        Me.GroupControl5.Controls.Add(Me.RangeYear)
         Me.GroupControl5.Location = New System.Drawing.Point(12, 12)
         Me.GroupControl5.MaximumSize = New System.Drawing.Size(250, 300)
         Me.GroupControl5.Name = "GroupControl5"
         Me.GroupControl5.Size = New System.Drawing.Size(250, 300)
         Me.GroupControl5.TabIndex = 0
         Me.GroupControl5.Text = "Select Year"
-        '
-        'ListYear
-        '
-        Me.ListYear.CheckOnClick = True
-        Me.ListYear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListYear.Location = New System.Drawing.Point(2, 23)
-        Me.ListYear.Name = "ListYear"
-        Me.ListYear.Size = New System.Drawing.Size(246, 275)
-        Me.ListYear.TabIndex = 202
         '
         'GroupControl2
         '
@@ -939,6 +977,23 @@ Partial Class frmDashboard
         Me.LayoutControlItem21.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem21.TextVisible = False
         '
+        'RangeYear
+        '
+        Me.RangeYear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RangeYear.EditValue = New DevExpress.XtraEditors.Repository.TrackBarRange(1, 12)
+        Me.RangeYear.Location = New System.Drawing.Point(2, 23)
+        Me.RangeYear.Name = "RangeYear"
+        Me.RangeYear.Properties.LabelAppearance.Options.UseTextOptions = True
+        Me.RangeYear.Properties.LabelAppearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.RangeYear.Properties.Maximum = 12
+        Me.RangeYear.Properties.Minimum = 1
+        Me.RangeYear.Properties.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.RangeYear.Properties.ShowLabels = True
+        Me.RangeYear.Properties.TickStyle = System.Windows.Forms.TickStyle.TopLeft
+        Me.RangeYear.Size = New System.Drawing.Size(246, 275)
+        Me.RangeYear.TabIndex = 1
+        Me.RangeYear.Value = New DevExpress.XtraEditors.Repository.TrackBarRange(1, 12)
+        '
         'frmDashboard
         '
         Me.ClientSize = New System.Drawing.Size(1305, 1012)
@@ -965,7 +1020,9 @@ Partial Class frmDashboard
         CType(Me.GroupControl13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl4.ResumeLayout(False)
-        CType(Me.ListMonth, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl4.PerformLayout()
+        CType(Me.RangeMonth.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RangeMonth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         CType(Me.txtProfitPercen.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -993,7 +1050,7 @@ Partial Class frmDashboard
         CType(Me.ChartTotalSellProfitByYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl5.ResumeLayout(False)
-        CType(Me.ListYear, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl5.PerformLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
         CType(Me.overdueChart, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1020,6 +1077,8 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RangeYear.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RangeYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1052,8 +1111,6 @@ Partial Class frmDashboard
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents ChartTotalSellCOGSByYear As DevExpress.XtraCharts.ChartControl
     Friend WithEvents ChartTotalSellProfitByYear As DevExpress.XtraCharts.ChartControl
-    Friend WithEvents ListMonth As DevExpress.XtraEditors.CheckedListBoxControl
-    Friend WithEvents ListYear As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents BankAccTreeMap As DevExpress.XtraTreeMap.TreeMapControl
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
@@ -1090,4 +1147,6 @@ Partial Class frmDashboard
     Friend WithEvents GroupControl20 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LayoutControlItem21 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RangeMonth As DevExpress.XtraEditors.RangeTrackBarControl
+    Friend WithEvents RangeYear As DevExpress.XtraEditors.RangeTrackBarControl
 End Class

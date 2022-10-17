@@ -1,7 +1,6 @@
-
 ALTER PROCEDURE [dbo].[spTotalSellByYear] 
- @YearList NVARCHAR(MAX) 
- ,@MonthList NVARCHAR(MAX) 
+ @FromDate date 
+ ,@ToDate date
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -16,8 +15,7 @@ FROM (
 	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS Profit
 	,SUM(Orders.Price * Orders.Units) AS TotalAmount
 	FROM vOrderTotalWithCost as Orders  	
-	WHERE year(Orders.OrderDate)in(select val from split(@YearList, ','))
-	and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
+	WHERE Orders.OrderDate between @FromDate and @ToDate	
 	group by 
 	year(Orders.OrderDate)
 ) as tmp

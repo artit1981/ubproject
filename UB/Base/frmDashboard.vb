@@ -1,16 +1,17 @@
 ﻿
 Imports DevExpress.XtraCharts
 Imports DevExpress.XtraEditors.Controls
+Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraGauges.Core.Base
 Imports DevExpress.XtraTreeMap
 
 Public Class frmDashboard
-    Private mYearList As String
-    Private mMonthList As String
+    'Private mYearList As String
+    'Private mMonthList As String
     Private mFromDate As Date
     Private mToDate As Date
     Private mTotalSell As Double
-
+    Private mIsFormLoad As Boolean = True
     Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
     End Sub
@@ -50,7 +51,7 @@ Public Class frmDashboard
             'chartTitle1.Dock = ChartTitleDockStyle.Bottom
 
             'overdueChart.Titles.Add(chartTitle1)
-
+            mIsFormLoad = False
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -78,65 +79,75 @@ Public Class frmDashboard
 
 
         For i = 0 To 10
-            If i <= 1 Then
-                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
-                ListYear.Items.Add(lCheckedListBoxItem)
-            Else
-                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, False)
-                ListYear.Items.Add(lCheckedListBoxItem)
-            End If
+            Dim lLabel As New TrackBarLabel With {
+                .Label = lYear,
+                .Value = lYear
+            }
+            RangeYear.Properties.Labels.Add(lLabel)
+
 
             lYear -= 1
         Next
+        RangeYear.Properties.Maximum = Now.Year
+        RangeYear.Properties.Maximum = Now.Year - 10
+        RangeYear.Value = New TrackBarRange With {
+            .Maximum = Now.Year,
+            .Minimum = Now.Year - 2}
 
-        Dim items() As CheckedListBoxItem = {
-              New CheckedListBoxItem("January", True), New CheckedListBoxItem("February", True),
-              New CheckedListBoxItem("March", True), New CheckedListBoxItem("April", True),
-              New CheckedListBoxItem("May", True), New CheckedListBoxItem("June", True),
-              New CheckedListBoxItem("July", True), New CheckedListBoxItem("August", True),
-              New CheckedListBoxItem("September", True), New CheckedListBoxItem("October", True),
-              New CheckedListBoxItem("November", True), New CheckedListBoxItem("December", True)}
-        ListMonth.Items.AddRange(items)
+
+        'Dim items() As CheckedListBoxItem = {
+        '      New CheckedListBoxItem("January", True), New CheckedListBoxItem("February", True),
+        '      New CheckedListBoxItem("March", True), New CheckedListBoxItem("April", True),
+        '      New CheckedListBoxItem("May", True), New CheckedListBoxItem("June", True),
+        '      New CheckedListBoxItem("July", True), New CheckedListBoxItem("August", True),
+        '      New CheckedListBoxItem("September", True), New CheckedListBoxItem("October", True),
+        '      New CheckedListBoxItem("November", True), New CheckedListBoxItem("December", True)}
+        'ListMonth.Items.AddRange(items)
     End Sub
 
     Private Sub GetCondition()
-        Dim lYearList As String = ""
-        For Each item As Object In ListYear.CheckedItems
-            'Dim row As DataRowView = CType(item, DataRowView)
-            If lYearList = "" Then
-                lYearList = ConvertNullToZero(item.ToString)
-            Else
-                lYearList += "," & ConvertNullToZero(item.ToString)
-            End If
-        Next
-        mYearList = lYearList
+        'Dim lYearList As String = ""
+        'For Each item As Object In ListYear.CheckedItems
+        '    'Dim row As DataRowView = CType(item, DataRowView)
+        '    If lYearList = "" Then
+        '        lYearList = ConvertNullToZero(item.ToString)
+        '    Else
+        '        lYearList += "," & ConvertNullToZero(item.ToString)
+        '    End If
+        'Next
+        'mYearList = lYearList
 
-        Dim lMonthList As String = ""
-        For Each item As Object In ListMonth.CheckedItems
-            'Dim row As DataRowView = CType(item, DataRowView)
-            If lMonthList = "" Then
-                lMonthList = GetMonthNumber(item.ToString)
-            Else
-                lMonthList += "," & GetMonthNumber(item.ToString)
-            End If
-        Next
-        mMonthList = lMonthList
+        'Dim lMonthList As String = ""
+        'For Each item As Object In ListMonth.CheckedItems
+        '    'Dim row As DataRowView = CType(item, DataRowView)
+        '    If lMonthList = "" Then
+        '        lMonthList = GetMonthNumber(item.ToString)
+        '    Else
+        '        lMonthList += "," & GetMonthNumber(item.ToString)
+        '    End If
+        'Next
+        'mMonthList = lMonthList
 
-        'Init From To Date
+        ''Init From To Date
         Dim lMonthFrom As Integer, lMonthTo As Integer, lYearFrom As Integer, lYearTo As Integer
-        If ListYear.CheckedItems.Count > 0 Then
-            lYearTo = ListYear.CheckedItems(0).ToString
-            lYearFrom = ListYear.CheckedItems(ListYear.CheckedItems.Count - 1).ToString
-        End If
+        'If ListYear.CheckedItems.Count > 0 Then
+        '    lYearTo = ListYear.CheckedItems(0).ToString
+        '    lYearFrom = ListYear.CheckedItems(ListYear.CheckedItems.Count - 1).ToString
+        'End If
 
-        If ListMonth.CheckedItems.Count > 0 Then
-            lMonthFrom = GetMonthNumber(ListMonth.CheckedItems(0).ToString)
-            lMonthTo = GetMonthNumber(ListMonth.CheckedItems(ListMonth.CheckedItems.Count - 1).ToString)
-        End If
+        'If ListMonth.CheckedItems.Count > 0 Then
+        '    lMonthFrom = GetMonthNumber(ListMonth.CheckedItems(0).ToString)
+        '    lMonthTo = GetMonthNumber(ListMonth.CheckedItems(ListMonth.CheckedItems.Count - 1).ToString)
+        'End If
         'If Now.Year > 2500 Then
+        lYearFrom = RangeYear.Value.Minimum
+        lYearTo = RangeYear.Value.Maximum
         lYearFrom += 543
         lYearTo += 543
         'End If
+
+        lMonthFrom = RangeMonth.Value.Minimum
+        lMonthTo = RangeMonth.Value.Maximum
         mFromDate = DateSerial(lYearFrom, lMonthFrom, 1)
         mToDate = DateSerial(lYearTo, lMonthTo, Date.DaysInMonth(lYearTo, lMonthTo))
     End Sub
@@ -151,8 +162,8 @@ Public Class frmDashboard
     Private Sub InitChartTotalSellByCatalog()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByCatalog]"
-            SQL &= " @YearList = '" & mYearList & "'"
-            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
@@ -196,8 +207,8 @@ Public Class frmDashboard
             Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
 
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
-            SQL &= " @YearList = '" & mYearList & "'"
-            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Bar)
@@ -278,8 +289,8 @@ Public Class frmDashboard
     Private Sub InitChartTotalSellProfitByYear()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
-            SQL &= " @YearList = '" & mYearList & "'"
-            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Line)
@@ -351,8 +362,8 @@ Public Class frmDashboard
             Dim lTotalCash As Double = 0
 
             Dim SQL = " EXEC [dbo].[spBankBalance]"
-            SQL &= " @YearList = '" & mYearList & "'"
-            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
 
@@ -380,8 +391,8 @@ Public Class frmDashboard
     Private Sub InitGridBrand()
         Try
             Dim SQL = " EXEC [dbo].[spTotalSellByBrand]"
-            SQL &= " @YearList = '" & mYearList & "'"
-            SQL &= " ,@MonthList = '" & mMonthList & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             GridControl1.DataSource = dataTable
@@ -445,16 +456,28 @@ Public Class frmDashboard
         End Try
     End Sub
 
-    Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles ListYear.ItemCheck
-        If ListYear.CheckedItems.Count > 0 Then
+    'Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs)
+    '    If ListYear.CheckedItems.Count > 0 Then
+    '        LoadData()
+    '    End If
+    'End Sub
+
+    'Private Sub ListMonth_ItemCheck(sender As Object, e As EventArgs) Handles ListMonth.ItemCheck
+    '    If ListMonth.CheckedItems.Count > 0 Then
+    '        LoadData()
+    '    End If
+    'End Sub
+
+    Private Sub RangeMonth_EditValueChanged(sender As Object, e As EventArgs) Handles RangeMonth.EditValueChanged
+        If mIsFormLoad = False Then
+            LoadData()
+        End If
+
+    End Sub
+
+    Private Sub RangeYear_EditValueChanged(sender As Object, e As EventArgs) Handles RangeYear.EditValueChanged
+        If mIsFormLoad = False Then
             LoadData()
         End If
     End Sub
-
-    Private Sub ListMonth_ItemCheck(sender As Object, e As EventArgs) Handles ListMonth.ItemCheck
-        If ListMonth.CheckedItems.Count > 0 Then
-            LoadData()
-        End If
-    End Sub
-
 End Class
