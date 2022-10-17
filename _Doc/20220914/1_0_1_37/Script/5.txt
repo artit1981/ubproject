@@ -1,0 +1,22 @@
+ALTER PROCEDURE [dbo].[spTotalSellProfitByYear] 
+ @YearList NVARCHAR(MAX) 
+ ,@MonthList NVARCHAR(MAX) 
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+SELECT OrderYear,ROUND(TotalGain/1000000,3)TotalGain,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
+SELECT 
+year(Orders.OrderDate) as OrderYear
+,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotalWithCost as Orders 
+WHERE year(Orders.OrderDate)in(select val from split(@YearList, ','))
+and month(Orders.OrderDate) in(select val from split(@MonthList, ','))
+group by 
+year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END

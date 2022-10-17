@@ -153,7 +153,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].[spTotalSellByCatalog]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
             For Each pRow In dataTable.Rows
@@ -198,7 +198,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Bar)
             Dim seriesCOGS As New Series("Total COGS", ViewType.Bar)
@@ -280,7 +280,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Line)
             Dim seriesProfit As New Series("Total Profit", ViewType.Line)
@@ -353,7 +353,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].[spBankBalance]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
 
             Dim storage As New TreeMapItemStorage()
@@ -382,7 +382,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].[spTotalSellByBrand]"
             SQL &= " @YearList = '" & mYearList & "'"
             SQL &= " ,@MonthList = '" & mMonthList & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             GridControl1.DataSource = dataTable
         Catch ex As Exception
@@ -398,7 +398,7 @@ Public Class frmDashboard
             Dim SQL = " EXEC [dbo].spOverdueTX"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             If dataTable.Rows.Count > 0 Then
                 Dim lsumPayTotal = Double.Parse((dataTable.Compute("SUM(PayTotal)", "")))

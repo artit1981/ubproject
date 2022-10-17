@@ -133,7 +133,7 @@ Public Class DBConnection
         End Try
         Return ds
     End Function
-    Public Function executeSelectQuery(ByVal SQl As String, ByRef tr As SqlTransaction) As DataTable
+    Public Function executeSelectQuery(ByVal SQl As String, ByRef tr As SqlTransaction, Optional ByVal pTimeOut As Integer = 0) As DataTable
         Dim myCommand As New SqlCommand()
         Dim dataTable As New DataTable()
         dataTable = Nothing
@@ -146,7 +146,11 @@ Public Class DBConnection
             If Not tr Is Nothing Then
                 myCommand.Transaction = tr
             End If
-
+            If pTimeOut > 0 Then
+                myCommand.CommandTimeout = pTimeOut
+            Else
+                myCommand.ResetCommandTimeout()
+            End If
             Dim myAdapter = New SqlDataAdapter
             myAdapter.SelectCommand = myCommand
             myAdapter.Fill(ds, "TABLE")

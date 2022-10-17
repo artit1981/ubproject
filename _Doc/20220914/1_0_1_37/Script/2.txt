@@ -1,0 +1,12 @@
+ALTER VIEW [dbo].[vOrderTotal]
+AS
+SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID,ProductList.ProductName
+,ProductList.PriceMain as Price
+,case when Orders.TableID=55 then ProductList.Units * -1 else ProductList.Units end  Units
+,case when Orders.TableID=55 then ProductList.Total *-1 else ProductList.Total end Total
+FROM Orders  
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55)
+
+GO
