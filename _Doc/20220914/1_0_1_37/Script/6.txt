@@ -6,25 +6,27 @@ BEGIN
 SET NOCOUNT ON;
 
 with SellByBrand as (
-	SELECT ROW_NUMBER() OVER(PARTITION BY Product.ProductBrandID  ORDER BY SUM(Orders.Total) DESC) AS rowrank
-	,Product.ProductBrandID,ProductBrand.NameThai as ProductBrand
-	,Product.ProductName
+	SELECT ROW_NUMBER() OVER(PARTITION BY Orders.ProductBrandID  ORDER BY SUM(Orders.Total) DESC) AS rowrank
+	,Orders.ProductBrandID,ProductBrand.NameThai as ProductBrand
+	,Orders.ProductCode,Orders.ProductName
 	,SUM(Orders.Units) AS TotalUnits
 	,SUM(Orders.Total) AS TotalAmount
 	,SUM(Orders.Cost) AS TotalCost
 	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
 	FROM vOrderTotalWithCost as Orders  
-	inner JOIN Product ON Product.ProductID=Orders.ProductID 
-	inner JOIN ProductBrand ON Product.ProductBrandID=ProductBrand.ProductBrandID
+	inner JOIN ProductBrand ON Orders.ProductBrandID=ProductBrand.ProductBrandID
+	--WHERE Orders.TableID in(39,41)
+	--and year(Orders.OrderDate)in(2021,2022)
+	--and month(Orders.OrderDate) in(1,2,3,4,5,6)
 	WHERE Orders.OrderDate between @FromDate and @ToDate	
-	and Product.ProductBrandID>0
-	group by Product.ProductBrandID,ProductBrand.NameThai,Product.ProductName
+	and Orders.ProductBrandID>0
+	group by Orders.ProductBrandID,ProductBrand.NameThai,Orders.ProductName,Orders.ProductCode
 ) 
 
-SELECT   ProductBrand,ProductName,ROUND(TotalAmount/1000000,3)TotalAmount
+SELECT   ProductBrand,ProductCode,ProductName,ROUND(TotalAmount/1000000,3)TotalAmount
 ,ROUND(TotalCost/1000000,3)TotalCost,ROUND(TotalUnits,3)TotalUnits,ROUND(TotalGain/1000000,3)TotalGain
 FROM(
-	SELECT ProductBrandID,ProductBrand,ProductName,TotalUnits,TotalAmount,TotalCost,TotalGain,rowrank
+	SELECT ProductBrandID,ProductBrand,ProductCode,ProductName,TotalUnits,TotalAmount,TotalCost,TotalGain,rowrank
 	FROM SellByBrand
 ) as tmp
 where rowrank<=3
