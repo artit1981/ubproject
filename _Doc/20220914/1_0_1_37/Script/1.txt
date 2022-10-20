@@ -1,4 +1,4 @@
-ALTER VIEW [dbo].[vOrderTotalWithCost]
+Create VIEW [dbo].[vOrderTotalWithCost]
 AS
 
 with ProductCost as (
