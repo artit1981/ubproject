@@ -291,8 +291,8 @@ Public Class frmFindReserve
 
     Private Sub frmFindOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mFormLoad = True
-        DateFrom.EditValue = DateAdd(DateInterval.Month, -3, Now)
-        DateTo.EditValue = Now
+        DateFrom.EditValue = DateAdd(DateInterval.Month, -3, GetCurrentDate(Nothing))
+        DateTo.EditValue = GetCurrentDate(Nothing)
         Me.Text = "สร้างใบสั่งซื้อ"
 
 

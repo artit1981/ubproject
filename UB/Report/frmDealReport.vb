@@ -18,7 +18,7 @@ Public Class frmDealReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            OrderDate.EditValue = Now
+            OrderDate.EditValue = GetCurrentDate(Nothing)
             OrderType.EditValue = "S"
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)

@@ -11,7 +11,7 @@ Public Class clsNotifi
     Dim NotifyLevel_ As Integer = eNotifyLevel.Low
     Dim System_ As String = ""
     Dim MenuDisplay_ As String = ""
-    Dim ValueDate_ As Date = Now
+    Dim ValueDate_ As Date = GetCurrentDate(Nothing)
     Dim Remark_ As String = ""
     Dim RefTable_ As String = ""
     Dim RefID_ As Long = 0
@@ -161,8 +161,8 @@ Public Class clsNotifi
 
         Try
             Dim SQL = " EXEC [dbo].[spOverdueTX] "
-            SQL &= " @FromDate = '" & formatSQLDate(Now.Date.AddYears(-2)) & "'"
-            SQL &= " ,@ToDate = '" & formatSQLDate(Now.Date) & "'"
+            SQL &= " @FromDate = '" & formatSQLDate(GetCurrentDate(Nothing).AddYears(-2)) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(GetCurrentDate(Nothing)) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable
 

@@ -17,7 +17,7 @@ Public Class frmTaxReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            OrderDate.EditValue = DateAdd(DateInterval.Month, -1, Now)
+            OrderDate.EditValue = DateAdd(DateInterval.Month, -1, GetCurrentDate(Nothing))
             OrderType.EditValue = "S"
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)

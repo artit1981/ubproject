@@ -412,11 +412,11 @@ Public Class ChequeDAO
         mChequeStatus = "N"
         mBankAccountID = 0
         mRemark = ""
-        mChequeDate = Now
-        mChequeDateReceive = Now
-        mChequeDateDue = Now
-        mChequeDatePass = Now
-        mChequeDateStop = Now
+        mChequeDate = GetCurrentDate(Nothing)
+        mChequeDateReceive = GetCurrentDate(Nothing)
+        mChequeDateDue = GetCurrentDate(Nothing)
+        mChequeDatePass = GetCurrentDate(Nothing)
+        mChequeDateStop = GetCurrentDate(Nothing)
     End Sub
 
 End Class

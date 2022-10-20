@@ -384,11 +384,7 @@ Module modGlobal
 
         Try
             formatSQLDate = pDate.ToString("yyyy-MM-dd", cEN)
-            'If CDec(Format(Now, "yyyy")) > 2500 Then
-            '    formatSQLDate = Year(pDate) & Format(pDate, "-MM-dd")
-            'Else
-            '    formatSQLDate = Format(pDate, "yyyy-MM-dd")
-            'End If
+
         Catch e As Exception
 
             Err.Raise(Err.Number, e.Source, "modGlobal.formatSQLDate : " & e.Message)
@@ -399,11 +395,7 @@ Module modGlobal
     Public Function formatSQLDateTime(ByVal pDate As Date) As String
         Try
             formatSQLDateTime = pDate.ToString("yyyy-MM-dd HH:mm:ss", cEN)
-            'If CDec(Format(Now, "yyyy")) > 2500 Then
-            '    formatSQLDateTime = CDec(Format(Now, "yyyy")) - 543 & Format(pDate, "-MM-dd HH:mm:ss")
-            'Else
-            '    formatSQLDateTime = Format(pDate, "yyyy-MM-dd HH:mm:ss")
-            'End If
+
 
         Catch e As Exception
 

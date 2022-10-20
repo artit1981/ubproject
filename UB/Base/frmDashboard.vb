@@ -74,7 +74,7 @@ Public Class frmDashboard
         End Try
     End Sub
     Private Sub InitCondition()
-        Dim lYear As Integer = Now.Year
+        Dim lYear As Integer = GetCurrentDate(Nothing).Year
 
 
         For i = 0 To 10
@@ -133,12 +133,10 @@ Public Class frmDashboard
             lMonthFrom = GetMonthNumber(ListMonth.CheckedItems(0).ToString)
             lMonthTo = GetMonthNumber(ListMonth.CheckedItems(ListMonth.CheckedItems.Count - 1).ToString)
         End If
-        'If Now.Year > 2500 Then
-        lYearFrom += 543
-        lYearTo += 543
-        'End If
-        mFromDate = DateSerial(lYearFrom, lMonthFrom, 1)
-        mToDate = DateSerial(lYearTo, lMonthTo, Date.DaysInMonth(lYearTo, lMonthTo))
+
+
+        mFromDate = New DateTime(lYearFrom, lMonthFrom, 1)
+        mToDate = New DateTime(lYearTo, lMonthTo, Date.DaysInMonth(lYearTo, lMonthTo))
     End Sub
 
     Private Function GetMonthNumber(ByVal pMonthName As String) As Integer

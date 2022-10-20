@@ -658,7 +658,7 @@ Public Class CompanyDAO
         mTaxID = ""
         mTaxType = ""
         mTaxRate = 0
-        mRegisterDate = Now
+        mRegisterDate = GetCurrentDate(Nothing)
         mRegisterNo = ""
         mRegisterAsset = 0
         mRegisterNum = 0

@@ -1105,10 +1105,10 @@ Public Class ucProductLists
                         gridView.DeleteSelectedRows()
                         gridView.RefreshData()
                         gridControl.RefreshDataSource()
-                        'Else
-                        '    gridView.SetRowCellValue(index, "IsDelete", 1)
-                        '    gridView.RefreshData()
-                        '    gridControl.RefreshDataSource()
+                    Else
+                        gridView.SetRowCellValue(index, "IsDelete", 1)
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
                     End If
                 End If
             Case "MoveUp"

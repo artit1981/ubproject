@@ -383,7 +383,7 @@ Public Class FileAttachDAO
         mFilePath = ""
         mFileSize = 0
         mCreateBy = ""
-        mCreateTime = Now
+        mCreateTime = GetCurrentDate(Nothing)
         mImage = Nothing
     End Sub
 End Class

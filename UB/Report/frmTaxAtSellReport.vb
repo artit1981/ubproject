@@ -38,7 +38,7 @@ Public Class frmTaxAtSellReport
             Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
             Me.DateFrom.EditValue = thisMonth.AddMonths(-1)
             Me.DateTo.EditValue = thisMonth.AddDays(-1)
-            Me.ReportDate.EditValue = Now
+            Me.ReportDate.EditValue = GetCurrentDate(Nothing)
             SetComboCustomer()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".ClearAllForm : " & e.Message)

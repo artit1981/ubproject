@@ -17,8 +17,8 @@ Public Class frmSNList
             chkShowDelete.Checked = False
 
             mIsFromLoad = True
-            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -3, Now)
-            dtpDateTo.EditValue = Now
+            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -3, GetCurrentDate(Nothing))
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
             LoadData()
 
         Catch e As Exception

@@ -517,7 +517,7 @@ Public Class EmployeeDAO
         mPositionDAO = Nothing
         mEmpCode = ""
         mPositionID = 0
-        mStartDate = Now
+        mStartDate = GetCurrentDate(Nothing)
         mWorkingStatus = ""
         mViewLevel = 3
         mCommission = 0

@@ -170,7 +170,7 @@ Public Class CashRecordSDAO
     Public Sub New()
         mMode = DataMode.ModeNone
         CashItemID = 0
-        RecordDate = Now
+        RecordDate = GetCurrentDate(Nothing)
         Remark = ""
         DR = 0
         CR = 0

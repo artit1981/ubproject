@@ -364,7 +364,7 @@ Public Class ApproveTX
         mOrderType = ""
         mOrderTable = ""
         mOrderCode = ""
-        mOrderDate = Now
+        mOrderDate = GetCurrentDate(Nothing)
         mOrderAmount = 0
         mApproveStatus = ""
         mOrderBy = ""

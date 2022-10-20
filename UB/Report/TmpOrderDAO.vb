@@ -596,8 +596,8 @@ Public Class TmpOrderDAO
 
     Public Sub New()
         mOrderCode = ""
-        mOrderDate = Now
-        mShipingDate = Now
+        mOrderDate = GetCurrentDate(Nothing)
+        mShipingDate = GetCurrentDate(Nothing)
         mCustomerCode = ""
         mCustomerName = ""
         mCompany = ""
@@ -618,7 +618,7 @@ Public Class TmpOrderDAO
         mCustomerPhone = ""
         mCustomerFAX = ""
         mPhone = ""
-        mExpireDate = Now
+        mExpireDate = GetCurrentDate(Nothing)
         mShipingMethod = ""
         mCompanyAddress = ""
         mCompanyPhone = ""

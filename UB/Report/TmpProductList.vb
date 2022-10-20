@@ -319,8 +319,8 @@ Public Class TmpProductList
         mTotal = 0
         mRemark = 0
         mProductCode = ""
-        mOrderDate = Now
-        mExpiryDate = Now
+        mOrderDate = GetCurrentDate(Nothing)
+        mExpiryDate = GetCurrentDate(Nothing)
         mCustomer = ""
         mCustomerTaxID = ""
         mIsMainCompany = 1

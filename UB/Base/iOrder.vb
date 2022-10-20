@@ -824,7 +824,7 @@ Public Class iOrder
     Public Sub New()
         mIDs = 0
         mCode = ""
-        mOrderDate = Now
+        mOrderDate = GetCurrentDate(Nothing)
         mShipingDate = mOrderDate
         mSourceID = 0
         mSendBy = ""
@@ -874,7 +874,7 @@ Public Class iOrder
         mExchangeRate = 1
         mTaxCanYes = ""
         mTaxCondition = ""
-        mTaxMonthYear = Now
+        mTaxMonthYear = GetCurrentDate(Nothing)
         mTaxNumber = ""
         mTaxRemark = ""
         mChequeDAOs = Nothing

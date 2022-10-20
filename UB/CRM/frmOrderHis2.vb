@@ -16,8 +16,8 @@ Public Class frmOrderHis2
             chkShowDelete.Checked = False
 
             mIsFromLoad = True
-            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -1, Now)
-            dtpDateTo.EditValue = Now
+            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -1, GetCurrentDate(Nothing))
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
             ExportPrivilege()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)

@@ -16,8 +16,8 @@ Public Class frmCashRecord
         Try
 
             InitialCombo()
-            dtpDateFrom.EditValue = DateSerial(Now.Year + 543, 1, 1)
-            dtpDateTo.EditValue = Now
+            dtpDateFrom.EditValue = New DateTime(GetCurrentDate(Nothing).Year, 1, 1)
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
 
 
             Call LoadData()
@@ -213,7 +213,7 @@ Public Class frmCashRecord
 
         Public Sub New()
             ID = 0
-            RecordDate = Now
+            RecordDate = GetCurrentDate(Nothing)
             DR = 0
             CR = 0
         End Sub

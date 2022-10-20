@@ -7,32 +7,32 @@ Module modReport
     'Private mOrderType As MasterType
     Public Sub PrintReportOrder(ByVal pMasterType As Long, ByVal pOrderID As Long)
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(pMasterType, pOrderID, "", Now, 0, Nothing, "", Nothing, Nothing)
+        lfrmReport.InitialForm(pMasterType, pOrderID, "", GetCurrentDate(Nothing), 0, Nothing, "", Nothing, Nothing)
         lfrmReport.ShowDialog()
         'pReport.ShowPreview()
     End Sub
 
     Public Sub PrintPayment(ByVal pOrderID As Long)
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(1000, pOrderID, "", Now, 0, Nothing, "", Nothing, Nothing)
+        lfrmReport.InitialForm(1000, pOrderID, "", GetCurrentDate(Nothing), 0, Nothing, "", Nothing, Nothing)
         lfrmReport.ShowDialog()
     End Sub
 
     Public Sub PrintCheque(ByVal pChequeID As Long, ByVal pcls As ChequeDAO)
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(1001, 0, "", Now, pChequeID, pcls, "", Nothing, Nothing)
+        lfrmReport.InitialForm(1001, 0, "", GetCurrentDate(Nothing), pChequeID, pcls, "", Nothing, Nothing)
         lfrmReport.ShowDialog()
     End Sub
 
     Public Sub PrintBarCode(ByVal pProName As String, ByVal pBarCodeList As List(Of SnDAO))
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(1002, 0, "", Now, 0, Nothing, pProName, pBarCodeList, Nothing)
+        lfrmReport.InitialForm(1002, 0, "", GetCurrentDate(Nothing), 0, Nothing, pProName, pBarCodeList, Nothing)
         lfrmReport.ShowDialog()
     End Sub
 
     Public Sub ExecuteReportComm(ByVal pReport As XtraReport)
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(1003, 0, "", Now, 0, Nothing, "", Nothing, pReport)
+        lfrmReport.InitialForm(1003, 0, "", GetCurrentDate(Nothing), 0, Nothing, "", Nothing, pReport)
         lfrmReport.ShowDialog()
     End Sub
 
@@ -44,7 +44,7 @@ Module modReport
 
     Public Sub ExecuteReportTax(ByVal pReport As XtraReport)
         Dim lfrmReport As New frmPreReport
-        lfrmReport.InitialForm(1005, 0, "", Now, 0, Nothing, "", Nothing, pReport)
+        lfrmReport.InitialForm(1005, 0, "", GetCurrentDate(Nothing), 0, Nothing, "", Nothing, pReport)
         lfrmReport.ShowDialog()
     End Sub
 

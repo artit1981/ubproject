@@ -16,7 +16,7 @@ Public Class frmStockReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            DateFrom.EditValue = Now
+            DateFrom.EditValue = GetCurrentDate(Nothing)
             ReportType.EditValue = "A"
             SetComboProductType("", ProductTypeID)
             SetComboProductBrand("", ProductBrandID)

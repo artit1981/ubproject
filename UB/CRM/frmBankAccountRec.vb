@@ -3,6 +3,7 @@
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Columns
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
 
@@ -16,8 +17,8 @@ Public Class frmBankAccountRec
         Try
 
             InitialCombo()
-            dtpDateFrom.EditValue = DateSerial(Now.Year + 543, 1, 1)
-            dtpDateTo.EditValue = Now
+            dtpDateFrom.EditValue = New DateTime(GetCurrentDate(Nothing).Year, 1, 1)
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
 
 
 
@@ -56,7 +57,9 @@ Public Class frmBankAccountRec
                         If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
                             Dim lDataDAO = New BankAccountRecordSDAO
                             lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
-                            If lDataDAO.ID = 0 Then
+                            If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ModeData")) = 3 Then
+                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
+                            ElseIf lDataDAO.ID = 0 Then
                                 lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
                             Else
                                 lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
@@ -88,19 +91,22 @@ Public Class frmBankAccountRec
     End Sub
 
 
-    Private Sub gridView_ValidateRow(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs) Handles gridView.ValidateRow
-        Dim info As New ErrorInfo()
-        TryCast(e.Row, MyRecord).GetError(info)
-        e.Valid = info.ErrorText = ""
+    'Private Sub gridView_ValidateRow(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs) Handles gridView.ValidateRow
+    '    Dim info As New ErrorInfo()
+    '    TryCast(e.Row, MyRecord).GetError(info)
+    '    e.Valid = info.ErrorText = ""
 
-    End Sub
+    'End Sub
 
     Private Sub gridView_InvalidRowException(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs) Handles gridView.InvalidRowException
         e.ExceptionMode = ExceptionMode.NoAction
     End Sub
 
     Private Sub gridView_RowUpdated(sender As Object, e As RowObjectEventArgs) Handles gridView.RowUpdated
-        TryCast(e.Row, MyRecord).IsChange = 1
+        If e.Row IsNot Nothing Then
+            TryCast(e.Row, MyRecord).IsChange = 1
+        End If
+
     End Sub
 
     Private Sub gridView_InitNewRow(sender As Object, e As InitNewRowEventArgs) Handles gridView.InitNewRow
@@ -109,6 +115,7 @@ Public Class frmBankAccountRec
         view.SetRowCellValue(e.RowHandle, view.Columns("ID"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("DR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("CR"), 0)
+        view.SetRowCellValue(e.RowHandle, view.Columns("ModeData"), 1)
         view.SetRowCellValue(e.RowHandle, view.Columns("Remark"), "")
     End Sub
 
@@ -152,7 +159,7 @@ Public Class frmBankAccountRec
             BankAccID.EditValue = 0
 
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "ucProductLocation.LoadDataLocaton : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "frmBankAccountRec.LoadDataLocaton : " & e.Message)
         Finally
 
             lcls = Nothing
@@ -178,6 +185,7 @@ Public Class frmBankAccountRec
                     rec.CR = ConvertNullToZero(dr("CR"))
                     rec.Remark = ConvertNullToString(dr("Remark"))
                     rec.IsChange = 0
+                    rec.ModeData = 2
                     bindingSource1.Add(rec)
                 Next
             End If
@@ -185,9 +193,9 @@ Public Class frmBankAccountRec
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
             gridControl.DataSource = bindingSource1
-
+            gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "ucProductLocation.LoadData : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "frmBankAccountRec.LoadData : " & e.Message)
         Finally
             lcls = Nothing
         End Try
@@ -202,6 +210,49 @@ Public Class frmBankAccountRec
             Err.Raise(Err.Number, e.Source, mFormName & ".Verify : " & e.Message)
         End Try
     End Function
+
+    Private Sub ControlNavigator1_ButtonClick(sender As System.Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
+        view.GridControl.Focus()
+        Dim index As Integer = view.FocusedRowHandle
+        Dim rec As New MyRecord, rec2 As New MyRecord
+        Select Case e.Button.Tag
+
+            Case "Remove"
+                If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                    If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
+                        gridView.DeleteSelectedRows()
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    Else
+                        gridView.SetRowCellValue(index, "ModeData", 3)
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    End If
+                End If
+            Case "MoveUp"
+                If index > 0 Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index - 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index - 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+            Case "MoveDown"
+                If index < (bindingSource1.Count - 1) Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index + 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index + 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+
+        End Select
+    End Sub
 
 #End Region
 
@@ -218,7 +269,7 @@ Public Class frmBankAccountRec
 
         Public Sub New()
             ID = 0
-            RecordDate = Now
+            RecordDate = GetCurrentDate(Nothing)
             DR = 0
             CR = 0
         End Sub
@@ -282,6 +333,16 @@ Public Class frmBankAccountRec
             End Get
             Set(ByVal value As Integer)
                 mIsChange = value
+            End Set
+        End Property
+
+        Private mModeData As Integer
+        Public Property ModeData() As Integer
+            Get
+                Return mModeData
+            End Get
+            Set(ByVal value As Integer)
+                mModeData = value
             End Set
         End Property
 #Region "IDXDataErrorInfo Members"

@@ -185,6 +185,6 @@ Public Class PledgeDAO
         mOrderCode = ""
         mTotal = 0
         mRemark = ""
-        mOrderDate = Now.Date
+        mOrderDate = GetCurrentDate(Nothing)
     End Sub
 End Class

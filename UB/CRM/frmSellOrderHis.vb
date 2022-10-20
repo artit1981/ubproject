@@ -21,8 +21,8 @@ Public Class frmSellOrderHis
             chkShowDelete.Checked = False
 
             mIsFromLoad = True
-            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -1, Now)
-            dtpDateTo.EditValue = Now
+            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -1, GetCurrentDate(Nothing))
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
 
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(0)
