@@ -3,6 +3,7 @@
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors.DXErrorProvider
+Imports DevExpress.XtraGrid.Columns
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
 
@@ -50,26 +51,44 @@ Public Class frmCashRecord
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         Try
             If Verify() = True Then
-                If gridView.RowCount > 0 Then
-                    For lRow = 0 To gridView.RowCount
-                        If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
-                            Dim lDataDAO = New CashRecordSDAO
-                            lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
-                            If lDataDAO.ID = 0 Then
-                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
-                            Else
-                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
-                            End If
-                            lDataDAO.RecordDate = gridView.GetRowCellValue(lRow, "RecordDate")
-                            lDataDAO.CashItemID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CashItemID"))
-                            lDataDAO.DR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "DR"))
-                            lDataDAO.CR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "CR"))
-                            lDataDAO.Remark = ConvertNullToString(gridView.GetRowCellDisplayText(lRow, "Remark"))
-                            lDataDAO.SaveData(Nothing)
+                'If gridView.RowCount > 0 Then
+                '    'For lRow = 0 To gridView.RowCount
+                '    '    If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
+                '    '        Dim lDataDAO = New CashRecordSDAO
+                '    '        lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
+                '    '        If lDataDAO.ID = 0 Then
+                '    '            lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
+                '    '        Else
+                '    '            lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
+                '    '        End If
+                '    '        lDataDAO.RecordDate = gridView.GetRowCellValue(lRow, "RecordDate")
+                '    '        lDataDAO.CashItemID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CashItemID"))
+                '    '        lDataDAO.DR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "DR"))
+                '    '        lDataDAO.CR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "CR"))
+                '    '        lDataDAO.Remark = ConvertNullToString(gridView.GetRowCellDisplayText(lRow, "Remark"))
+                '    '        lDataDAO.SaveData(Nothing)
+                '    '    End If
+                '    'Next
+                'End If
+                For Each pDataDAO As MyRecord In bindingSource1
+                    If pDataDAO.IsChange = 1 Then
+                        Dim lDataDAO = New CashRecordSDAO
+                        lDataDAO.ID = pDataDAO.ID
+                        If pDataDAO.ModeData = 3 Then
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
+                        ElseIf lDataDAO.ID = 0 Then
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
+                        Else
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
                         End If
-                    Next
-                End If
-
+                        lDataDAO.RecordDate = pDataDAO.RecordDate
+                        lDataDAO.CashItemID = pDataDAO.CashItemID
+                        lDataDAO.DR = pDataDAO.DR
+                        lDataDAO.CR = pDataDAO.CR
+                        lDataDAO.Remark = pDataDAO.Remark
+                        lDataDAO.SaveData(Nothing)
+                    End If
+                Next
                 Return True
             Else
                 ShowProgress(False, "")
@@ -80,7 +99,49 @@ Public Class frmCashRecord
             Return False
         End Try
     End Function
+    Private Sub ControlNavigator1_ButtonClick(sender As System.Object, e As DevExpress.XtraEditors.NavigatorButtonClickEventArgs) Handles ControlNavigator1.ButtonClick
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = gridView
+        view.GridControl.Focus()
+        Dim index As Integer = view.FocusedRowHandle
+        Dim rec As New MyRecord, rec2 As New MyRecord
+        Select Case e.Button.Tag
 
+            Case "Remove"
+                If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                    If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
+                        gridView.DeleteSelectedRows()
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    Else
+                        gridView.SetRowCellValue(index, "ModeData", 3)
+                        gridView.SetRowCellValue(index, "IsChange", 1)
+                        gridView.RefreshData()
+                        gridControl.RefreshDataSource()
+                    End If
+                End If
+            Case "MoveUp"
+                If index > 0 Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index - 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index - 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+            Case "MoveDown"
+                If index < (bindingSource1.Count - 1) Then
+                    rec = bindingSource1.Item(index)
+                    rec2 = bindingSource1.Item(index + 1)
+
+                    bindingSource1.Item(index) = rec2
+                    bindingSource1.Item(index + 1) = rec
+                    gridView.RefreshData()
+                    gridControl.RefreshDataSource()
+                End If
+
+        End Select
+    End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         LoadData()
@@ -104,11 +165,12 @@ Public Class frmCashRecord
 
     Private Sub gridView_InitNewRow(sender As Object, e As InitNewRowEventArgs) Handles gridView.InitNewRow
         Dim view As GridView = CType(sender, GridView)
-        view.SetRowCellValue(e.RowHandle, view.Columns("RecordDate"), DateTime.Today)
+        view.SetRowCellValue(e.RowHandle, view.Columns("RecordDate"), GetCurrentDate(Nothing))
         view.SetRowCellValue(e.RowHandle, view.Columns("ID"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("DR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("CR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("Remark"), "")
+        view.SetRowCellValue(e.RowHandle, view.Columns("ModeData"), 1)
     End Sub
 
 #End Region
@@ -173,6 +235,7 @@ Public Class frmCashRecord
                     rec.CR = ConvertNullToZero(dr("CR"))
                     rec.Remark = ConvertNullToString(dr("Remark"))
                     rec.IsChange = 0
+                    rec.ModeData = 2
                     bindingSource1.Add(rec)
                 Next
             End If
@@ -180,7 +243,7 @@ Public Class frmCashRecord
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
             gridControl.DataSource = bindingSource1
-
+            gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucProductLocation.LoadData : " & e.Message)
         Finally
@@ -277,6 +340,15 @@ Public Class frmCashRecord
             End Get
             Set(ByVal value As Integer)
                 mIsChange = value
+            End Set
+        End Property
+        Private mModeData As Integer
+        Public Property ModeData() As Integer
+            Get
+                Return mModeData
+            End Get
+            Set(ByVal value As Integer)
+                mModeData = value
             End Set
         End Property
 #Region "IDXDataErrorInfo Members"

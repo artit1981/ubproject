@@ -48,7 +48,6 @@ Partial Class frmDashboard
         Me.GroupControl12 = New DevExpress.XtraEditors.GroupControl()
         Me.txtProfit = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl11 = New DevExpress.XtraEditors.GroupControl()
-        Me.BankAccTreeMap = New DevExpress.XtraTreeMap.TreeMapControl()
         Me.GroupControl10 = New DevExpress.XtraEditors.GroupControl()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -88,6 +87,7 @@ Partial Class frmDashboard
         Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem20 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem21 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.BankAccTreeMap = New DevExpress.XtraTreeMap.TreeMapControl()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.GroupControl20, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,7 +124,6 @@ Partial Class frmDashboard
         CType(Me.txtProfit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl11.SuspendLayout()
-        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl10.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,6 +160,7 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -518,17 +518,6 @@ Partial Class frmDashboard
         Me.GroupControl11.Size = New System.Drawing.Size(553, 550)
         Me.GroupControl11.TabIndex = 0
         Me.GroupControl11.Text = "GroupControl11"
-        '
-        'BankAccTreeMap
-        '
-        Me.BankAccTreeMap.Appearance.GroupStyle.TextGlowColor = System.Drawing.Color.Empty
-        Me.BankAccTreeMap.Appearance.HighlightedLeafStyle.FillStyle = HatchFillStyle1
-        Me.BankAccTreeMap.Appearance.SelectedLeafStyle.FillStyle = HatchFillStyle2
-        Me.BankAccTreeMap.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BankAccTreeMap.Location = New System.Drawing.Point(2, 2)
-        Me.BankAccTreeMap.Name = "BankAccTreeMap"
-        Me.BankAccTreeMap.Size = New System.Drawing.Size(549, 546)
-        Me.BankAccTreeMap.TabIndex = 0
         '
         'GroupControl10
         '
@@ -939,6 +928,16 @@ Partial Class frmDashboard
         Me.LayoutControlItem21.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem21.TextVisible = False
         '
+        'BankAccTreeMap
+        '
+        Me.BankAccTreeMap.Appearance.GroupStyle.TextGlowColor = System.Drawing.Color.Empty
+        Me.BankAccTreeMap.Appearance.HighlightedLeafStyle.FillStyle = HatchFillStyle1
+        Me.BankAccTreeMap.Appearance.SelectedLeafStyle.FillStyle = HatchFillStyle2
+        Me.BankAccTreeMap.Location = New System.Drawing.Point(18, 5)
+        Me.BankAccTreeMap.Name = "BankAccTreeMap"
+        Me.BankAccTreeMap.Size = New System.Drawing.Size(501, 371)
+        Me.BankAccTreeMap.TabIndex = 0
+        '
         'frmDashboard
         '
         Me.ClientSize = New System.Drawing.Size(1305, 1012)
@@ -983,7 +982,6 @@ Partial Class frmDashboard
         CType(Me.txtProfit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl11, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl11.ResumeLayout(False)
-        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl10.ResumeLayout(False)
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1020,6 +1018,7 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BankAccTreeMap, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1054,7 +1053,6 @@ Partial Class frmDashboard
     Friend WithEvents ChartTotalSellProfitByYear As DevExpress.XtraCharts.ChartControl
     Friend WithEvents ListMonth As DevExpress.XtraEditors.CheckedListBoxControl
     Friend WithEvents ListYear As DevExpress.XtraEditors.CheckedListBoxControl
-    Friend WithEvents BankAccTreeMap As DevExpress.XtraTreeMap.TreeMapControl
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
@@ -1090,4 +1088,5 @@ Partial Class frmDashboard
     Friend WithEvents GroupControl20 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LayoutControlItem21 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BankAccTreeMap As DevExpress.XtraTreeMap.TreeMapControl
 End Class

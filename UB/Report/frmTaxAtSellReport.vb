@@ -35,7 +35,7 @@ Public Class frmTaxAtSellReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
+            Dim thisMonth As New Date(GetCurrentDate(Nothing).Year, GetCurrentDate(Nothing).Month, 1)
             Me.DateFrom.EditValue = thisMonth.AddMonths(-1)
             Me.DateTo.EditValue = thisMonth.AddDays(-1)
             Me.ReportDate.EditValue = GetCurrentDate(Nothing)

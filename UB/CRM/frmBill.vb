@@ -389,7 +389,7 @@ Public Class frmBill
     End Function
 
     Private Function Verify(ByVal pChequeAmt As Decimal) As Boolean
-        Dim lTotal As Decimal = 0
+        'Dim lTotal As Decimal = 0
         Dim lstrErr As String = ""
         Try
             DxErrorProvider1.ClearErrors()
@@ -411,11 +411,11 @@ Public Class frmBill
             End If
 
             Call UcOrderList1.GetDAOs()
-            lTotal = UcOrderList1.Totals
-            If lTotal = 0 Then
-                lstrErr = lstrErr & "ระบุยอดชำระ" & vbNewLine
+            'lTotal = UcOrderList1.Totals
+            'If lTotal = 0 Then
+            '    lstrErr = lstrErr & "ระบุยอดชำระ" & vbNewLine
 
-            End If
+            'End If
 
             If lstrErr.Trim <> "" Then
                 lstrErr = "พบข้อผิดพลาดกรุณาตรวจสอบ : " & vbNewLine & lstrErr

@@ -128,7 +128,7 @@ Public Class ucPledge
 
     Private Sub gridView_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles gridView.InitNewRow
         Dim view As GridView = CType(sender, GridView)
-        view.SetRowCellValue(e.RowHandle, view.Columns("OrderDate"), DateTime.Today)
+        view.SetRowCellValue(e.RowHandle, view.Columns("OrderDate"), GetCurrentDate(Nothing))
         view.SetRowCellValue(e.RowHandle, view.Columns("ID"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("Total"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("Remark"), "")

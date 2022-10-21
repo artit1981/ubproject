@@ -48,6 +48,7 @@ Partial Class frmCashRecord
         Me.CR = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CreditCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.IsChange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ModeData = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.repositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.repositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -65,6 +66,8 @@ Partial Class frmCashRecord
         Me.LocationButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.RepositoryItemRadioGroup1 = New DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,6 +103,7 @@ Partial Class frmCashRecord
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DxErrorProvider1
@@ -262,7 +266,7 @@ Partial Class frmCashRecord
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.CashItemIDLookUpEdit, Me.repositoryItemCalcEdit1, Me.repositoryItemSpinEdit1, Me.repositoryItemTextEdit1, Me.KeepMinSpinEdit, Me.LocationDTLIDLookUpEdit1, Me.DebitCalcEdit, Me.CreditCalcEdit, Me.RepositoryItemCheckEdit1, Me.LocationDTLSearchLookUp1, Me.RepositoryItemLookUpEdit1, Me.LocationGrid, Me.LocationIDComboBox, Me.LocationDTLLookUp, Me.RepositoryItemPopupContainerEdit1, Me.LocationButtonEdit, Me.RepositoryItemRadioGroup1, Me.RepositoryItemCheckEdit2, Me.RecordDateDateEdit1, Me.RepositoryItemTextEdit2})
-        Me.gridControl.Size = New System.Drawing.Size(1383, 403)
+        Me.gridControl.Size = New System.Drawing.Size(1383, 380)
         Me.gridControl.TabIndex = 17
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
@@ -270,7 +274,7 @@ Partial Class frmCashRecord
         '
         Me.gridView.Appearance.FooterPanel.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
         Me.gridView.Appearance.FooterPanel.Options.UseFont = True
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.ItemID, Me.Remark, Me.DR, Me.CR, Me.IsChange})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.ItemID, Me.Remark, Me.DR, Me.CR, Me.IsChange, Me.ModeData})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -382,7 +386,8 @@ Partial Class frmCashRecord
         Me.CR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.CR.Caption = "เครดิต"
         Me.CR.ColumnEdit = Me.CreditCalcEdit
-        Me.CR.DisplayFormat.FormatString = "Numeric ""n2"""
+        Me.CR.DisplayFormat.FormatString = "n2"
+        Me.CR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.CR.FieldName = "CR"
         Me.CR.MaxWidth = 200
         Me.CR.MinWidth = 150
@@ -404,6 +409,12 @@ Partial Class frmCashRecord
         Me.IsChange.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.IsChange.FieldName = "IsChange"
         Me.IsChange.Name = "IsChange"
+        '
+        'ModeData
+        '
+        Me.ModeData.Caption = "GridColumn1"
+        Me.ModeData.FieldName = "ModeData"
+        Me.ModeData.Name = "ModeData"
         '
         'repositoryItemCalcEdit1
         '
@@ -527,17 +538,47 @@ Partial Class frmCashRecord
         Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
+        'ImageCollection1
+        '
+        Me.ImageCollection1.ImageStream = CType(resources.GetObject("ImageCollection1.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollection1.Images.SetKeyName(0, "_active__no.png")
+        Me.ImageCollection1.Images.SetKeyName(1, "1394817194_stock_insert-slide.png")
+        Me.ImageCollection1.Images.SetKeyName(2, "1432214789_Stock Index Up.png")
+        Me.ImageCollection1.Images.SetKeyName(3, "1432214798_Stock Index Down.png")
+        '
+        'ControlNavigator1
+        '
+        Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ControlNavigator1.Buttons.Append.Visible = False
+        Me.ControlNavigator1.Buttons.CancelEdit.Visible = False
+        Me.ControlNavigator1.Buttons.Edit.Visible = False
+        Me.ControlNavigator1.Buttons.EndEdit.Visible = False
+        Me.ControlNavigator1.Buttons.ImageList = Me.ImageCollection1
+        Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
+        Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
+        Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
+        Me.ControlNavigator1.Buttons.Remove.Visible = False
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, False, "Insert", "Insert"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 2, True, True, "Move Up", "MoveUp"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 3, True, True, "Move Down", "MoveDown")})
+        Me.ControlNavigator1.Location = New System.Drawing.Point(12, 564)
+        Me.ControlNavigator1.Name = "ControlNavigator1"
+        Me.ControlNavigator1.NavigatableControl = Me.gridControl
+        Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
+        Me.ControlNavigator1.TabIndex = 19
+        Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
+        '
         'frmCashRecord
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1407, 593)
+        Me.Controls.Add(Me.ControlNavigator1)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.GroupControl1)
         Me.Name = "frmCashRecord"
         Me.Text = "บันทึกเงินสดย่อย"
         Me.Controls.SetChildIndex(Me.GroupControl1, 0)
         Me.Controls.SetChildIndex(Me.gridControl, 0)
+        Me.Controls.SetChildIndex(Me.ControlNavigator1, 0)
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -574,6 +615,7 @@ Partial Class frmCashRecord
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -622,4 +664,7 @@ Partial Class frmCashRecord
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ACCNAME As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents Label10 As Label
+    Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
+    Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
+    Friend WithEvents ModeData As DevExpress.XtraGrid.Columns.GridColumn
 End Class

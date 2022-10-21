@@ -52,28 +52,47 @@ Public Class frmBankAccountRec
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         Try
             If Verify() = True Then
-                If gridView.RowCount > 0 Then
-                    For lRow = 0 To gridView.RowCount
-                        If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
-                            Dim lDataDAO = New BankAccountRecordSDAO
-                            lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
-                            If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ModeData")) = 3 Then
-                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
-                            ElseIf lDataDAO.ID = 0 Then
-                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
-                            Else
-                                lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
-                            End If
-                            lDataDAO.RecordDate = gridView.GetRowCellValue(lRow, "RecordDate")
-                            lDataDAO.BankAccountID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "BankAccountID"))
-                            lDataDAO.DR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "DR"))
-                            lDataDAO.CR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "CR"))
-                            lDataDAO.Remark = ConvertNullToString(gridView.GetRowCellDisplayText(lRow, "Remark"))
-                            lDataDAO.SaveData(Nothing)
-                        End If
-                    Next
-                End If
+                'If gridView.RowCount > 0 Then
+                '    For lRow = 0 To gridView.RowCount
+                '        If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
+                '            Dim lDataDAO = New BankAccountRecordSDAO
+                '            lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
+                '            If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ModeData")) = 3 Then
+                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
+                '            ElseIf lDataDAO.ID = 0 Then
+                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
+                '            Else
+                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
+                '            End If
+                '            lDataDAO.RecordDate = gridView.GetRowCellValue(lRow, "RecordDate")
+                '            lDataDAO.BankAccountID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "BankAccountID"))
+                '            lDataDAO.DR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "DR"))
+                '            lDataDAO.CR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "CR"))
+                '            lDataDAO.Remark = ConvertNullToString(gridView.GetRowCellDisplayText(lRow, "Remark"))
+                '            lDataDAO.SaveData(Nothing)
+                '        End If
+                '    Next
+                'End If
 
+                For Each pDataDAO As MyRecord In bindingSource1
+                    If pDataDAO.IsChange = 1 Then
+                        Dim lDataDAO = New BankAccountRecordSDAO
+                        lDataDAO.ID = pDataDAO.ID
+                        If pDataDAO.ModeData = 3 Then
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
+                        ElseIf lDataDAO.ID = 0 Then
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
+                        Else
+                            lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
+                        End If
+                        lDataDAO.RecordDate = pDataDAO.RecordDate
+                        lDataDAO.BankAccountID = pDataDAO.BankAccountID
+                        lDataDAO.DR = pDataDAO.DR
+                        lDataDAO.CR = pDataDAO.CR
+                        lDataDAO.Remark = pDataDAO.Remark
+                        lDataDAO.SaveData(Nothing)
+                    End If
+                Next
                 Return True
             Else
                 ShowProgress(False, "")
@@ -111,7 +130,7 @@ Public Class frmBankAccountRec
 
     Private Sub gridView_InitNewRow(sender As Object, e As InitNewRowEventArgs) Handles gridView.InitNewRow
         Dim view As GridView = CType(sender, GridView)
-        view.SetRowCellValue(e.RowHandle, view.Columns("RecordDate"), DateTime.Today)
+        view.SetRowCellValue(e.RowHandle, view.Columns("RecordDate"), GetCurrentDate(Nothing))
         view.SetRowCellValue(e.RowHandle, view.Columns("ID"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("DR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("CR"), 0)
@@ -226,6 +245,7 @@ Public Class frmBankAccountRec
                         gridControl.RefreshDataSource()
                     Else
                         gridView.SetRowCellValue(index, "ModeData", 3)
+                        gridView.SetRowCellValue(index, "IsChange", 1)
                         gridView.RefreshData()
                         gridControl.RefreshDataSource()
                     End If

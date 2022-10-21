@@ -17,7 +17,7 @@ Public Class frmCommReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            Dim thisMonth As New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
+            Dim thisMonth As New Date(GetCurrentDate(Nothing).Year, GetCurrentDate(Nothing).Month, 1)
             'thisMonth = thisMonth.AddMonths(-1)
             Me.DateFrom.EditValue = thisMonth.AddMonths(-1)
             Me.DateTo.EditValue = thisMonth.AddDays(-1)

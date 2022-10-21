@@ -17,9 +17,9 @@ Public Class frmDebtAnalystReport
 
     Protected Overrides Sub ClearAllForm()
         Try
-            Me.DateFrom.EditValue = DateTime.Today
-            Me.DateTo.EditValue = DateTime.Today
-            Me.DateAsOf.EditValue = DateTime.Today
+            Me.DateFrom.EditValue = GetCurrentDate(Nothing)
+            Me.DateTo.EditValue = GetCurrentDate(Nothing)
+            Me.DateAsOf.EditValue = GetCurrentDate(Nothing)
             SetComboCustomer()
 
         Catch e As Exception

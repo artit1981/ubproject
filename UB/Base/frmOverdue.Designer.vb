@@ -30,6 +30,8 @@ Partial Class frmOverdue
         Me.ExpireDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ImageComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,7 +59,7 @@ Partial Class frmOverdue
         '
         'GridView
         '
-        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.MenuDisplay, Me.OrderCode, Me.PayTotal, Me.ExpireDate})
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.MenuDisplay, Me.OrderCode, Me.GridColumn1, Me.PayTotal, Me.ExpireDate, Me.GridColumn2})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -76,7 +78,7 @@ Partial Class frmOverdue
         Me.MenuDisplay.Name = "MenuDisplay"
         Me.MenuDisplay.Visible = True
         Me.MenuDisplay.VisibleIndex = 0
-        Me.MenuDisplay.Width = 142
+        Me.MenuDisplay.Width = 246
         '
         'OrderCode
         '
@@ -89,7 +91,7 @@ Partial Class frmOverdue
         Me.OrderCode.Name = "OrderCode"
         Me.OrderCode.Visible = True
         Me.OrderCode.VisibleIndex = 1
-        Me.OrderCode.Width = 142
+        Me.OrderCode.Width = 246
         '
         'PayTotal
         '
@@ -105,8 +107,8 @@ Partial Class frmOverdue
         Me.PayTotal.MinWidth = 100
         Me.PayTotal.Name = "PayTotal"
         Me.PayTotal.Visible = True
-        Me.PayTotal.VisibleIndex = 2
-        Me.PayTotal.Width = 100
+        Me.PayTotal.VisibleIndex = 3
+        Me.PayTotal.Width = 148
         '
         'ExpireDate
         '
@@ -122,8 +124,8 @@ Partial Class frmOverdue
         Me.ExpireDate.MinWidth = 100
         Me.ExpireDate.Name = "ExpireDate"
         Me.ExpireDate.Visible = True
-        Me.ExpireDate.VisibleIndex = 3
-        Me.ExpireDate.Width = 114
+        Me.ExpireDate.VisibleIndex = 4
+        Me.ExpireDate.Width = 197
         '
         'ImageComboBox1
         '
@@ -139,6 +141,28 @@ Partial Class frmOverdue
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         Me.RepositoryItemCheckEdit1.ValueGrayed = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "ลูกค้า"
+        Me.GridColumn1.FieldName = "Customer"
+        Me.GridColumn1.MaxWidth = 500
+        Me.GridColumn1.MinWidth = 150
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 2
+        Me.GridColumn1.Width = 150
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "ผู้รับผิดชอบ"
+        Me.GridColumn2.FieldName = "EMPNAME"
+        Me.GridColumn2.MaxWidth = 500
+        Me.GridColumn2.MinWidth = 120
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 5
+        Me.GridColumn2.Width = 150
         '
         'frmOverdue
         '
@@ -164,4 +188,6 @@ Partial Class frmOverdue
     Friend WithEvents MenuDisplay As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ExpireDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PayTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -49,6 +49,7 @@ Partial Class frmBankAccountRec
         Me.CR = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CreditCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.IsChange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.repositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.repositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -66,7 +67,6 @@ Partial Class frmBankAccountRec
         Me.LocationButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.RepositoryItemRadioGroup1 = New DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -398,7 +398,8 @@ Partial Class frmBankAccountRec
         Me.CR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.CR.Caption = "เครดิต"
         Me.CR.ColumnEdit = Me.CreditCalcEdit
-        Me.CR.DisplayFormat.FormatString = "Numeric ""n2"""
+        Me.CR.DisplayFormat.FormatString = "n2"
+        Me.CR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.CR.FieldName = "CR"
         Me.CR.MaxWidth = 200
         Me.CR.MinWidth = 150
@@ -420,6 +421,12 @@ Partial Class frmBankAccountRec
         Me.IsChange.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.IsChange.FieldName = "IsChange"
         Me.IsChange.Name = "IsChange"
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "GridColumn1"
+        Me.GridColumn1.FieldName = "ModeData"
+        Me.GridColumn1.Name = "GridColumn1"
         '
         'repositoryItemCalcEdit1
         '
@@ -542,12 +549,6 @@ Partial Class frmBankAccountRec
         Me.RepositoryItemCheckEdit2.AutoHeight = False
         Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "GridColumn1"
-        Me.GridColumn1.FieldName = "ModeData"
-        Me.GridColumn1.Name = "GridColumn1"
         '
         'ImageCollection1
         '
