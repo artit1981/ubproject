@@ -78,7 +78,7 @@ Public Class frmDashboard
 
 
         For i = 0 To 10
-            If i <= 0 Then
+            If i <= 1 Then
                 Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
                 ListYear.Items.Add(lCheckedListBoxItem)
             Else
@@ -353,42 +353,23 @@ Public Class frmDashboard
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
-            Dim lBankRecList As New List(Of BAnkRecord)
+
+            Dim storage As New TreeMapItemStorage()
+            BankAccTreeMap.DataAdapter = storage
+
+            Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
+
             For Each pRow In dataTable.Rows
-                Dim lBankRec As New BAnkRecord With {
-                    .BankCode = pRow("BankCode").ToString,
-                    .AccountAmount = ConvertNullToZero(pRow("AccountAmount"))
-                }
-                lBankRecList.Add(lBankRec)
+                BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
                 lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
-
-
             Next
-            Dim adapter As TreeMapFlatDataAdapter = New TreeMapFlatDataAdapter With {.DataSource = lBankRecList, .LabelDataMember = "BankCode", .ValueDataMember = "AccountAmount"}
-            adapter.GroupDataMembers.Add("ยอดเงินในธนาคาร")
-            BankAccTreeMap.DataAdapter = adapter
-
-
-
-
-
-            'Dim storage As New TreeMapItemStorage()
-
-
-            'Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
-
-            'For Each pRow In dataTable.Rows
-            '    BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
-            '    lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
-            'Next
 
             txtCash.Text = lTotalCash.ToString("#,##0.00") & " M"
 
-            'storage.Items.Add(BankGroup)
+            storage.Items.Add(BankGroup)
 
-            'BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
-            'BankAccTreeMap.DataAdapter = storage
-            'BankAccTreeMap.LeafTextPattern = "{L} {V} M"
+            BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
+            BankAccTreeMap.LeafTextPattern = "{L} {V} M"
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -473,32 +454,5 @@ Public Class frmDashboard
             LoadData()
         End If
     End Sub
-
-End Class
-
-Public Class BAnkRecord
-
-
-    Dim mBankCode As String
-    Dim mAccountAmount As Double
-
-
-    Public Property BankCode() As String
-        Get
-            Return mBankCode
-        End Get
-        Set(ByVal value As String)
-            mBankCode = value
-        End Set
-    End Property
-
-    Public Property AccountAmount() As Double
-        Get
-            Return mAccountAmount
-        End Get
-        Set(ByVal value As Double)
-            mAccountAmount = value
-        End Set
-    End Property
 
 End Class
