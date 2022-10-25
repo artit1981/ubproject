@@ -196,6 +196,6 @@ Public Class NoteDAO
         mDescription = ""
         mSEQ = 0
         mCreateBy = ""
-        mCreateTime = GetCurrentDate(Nothing)
+        mCreateTime = Now
     End Sub
 End Class

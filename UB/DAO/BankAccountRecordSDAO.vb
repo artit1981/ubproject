@@ -180,7 +180,7 @@ Public Class BankAccountRecordSDAO
     Public Sub New()
         mMode = DataMode.ModeNone
         BankAccountID = 0
-        RecordDate = GetCurrentDate(Nothing)
+        RecordDate = Now
         Remark = ""
         DR = 0
         CR = 0

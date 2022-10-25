@@ -369,9 +369,9 @@ Public Class HistoryDAO
 
         mIdentityCard = ""
         mIdentityCardIssueAt = ""
-        mIdentityCardDate = GetCurrentDate(Nothing)
-        mIdentityCardExpire = GetCurrentDate(Nothing)
-        mBirthDate = GetCurrentDate(Nothing)
+        mIdentityCardDate = Now
+        mIdentityCardExpire = Now
+        mBirthDate = Now
         mGender = ""
         mHeight = 0
         mWeight = 0
