@@ -433,7 +433,7 @@ Module modGlobal
                     ''DirectCast(ctrControl, DevExpress.XtraEditors.LookUpEdit).EditValue = DBNull.Value
                     DirectCast(ctrControl, DevExpress.XtraEditors.LookUpEdit).Text = ""
                 ElseIf Object.ReferenceEquals(ctrControl.[GetType](), GetType(DevExpress.XtraEditors.DateEdit)) Then
-                    DirectCast(ctrControl, DevExpress.XtraEditors.DateEdit).DateTime = GetCurrentDate(Nothing)
+                    DirectCast(ctrControl, DevExpress.XtraEditors.DateEdit).DateTime = Now
                 ElseIf Object.ReferenceEquals(ctrControl.[GetType](), GetType(DevExpress.XtraEditors.CalcEdit)) Then
                     DirectCast(ctrControl, DevExpress.XtraEditors.CalcEdit).Value = 0
                 ElseIf Object.ReferenceEquals(ctrControl.[GetType](), GetType(DevExpress.XtraEditors.CheckEdit)) Then

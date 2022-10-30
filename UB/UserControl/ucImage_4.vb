@@ -96,7 +96,7 @@ Public Class ucImage_4
                 lFileAttachs.FilePath = ""
                 lFileAttachs.FileSize = 0
                 lFileAttachs.CreateBy = gUserName
-                lFileAttachs.CreateTime = GetCurrentDate(Nothing)
+                lFileAttachs.CreateTime = Now
                 lFileAttachs.BuildImage("")
                 mFileAttachs.Add(lFileAttachs)
             Next
@@ -132,7 +132,7 @@ Public Class ucImage_4
             mFileAttachs(pIndex).FilePath = sFileNamePath
             mFileAttachs(pIndex).FileSize = Format((GetSize(sFileNamePath) / 1024), "#,##0.00")
             mFileAttachs(pIndex).CreateBy = gUserName
-            mFileAttachs(pIndex).CreateTime = GetCurrentDate(Nothing)
+            mFileAttachs(pIndex).CreateTime = Now
             mFileAttachs(pIndex).BuildImage("")
             Select Case pIndex
                 Case 0 : picPro1.Image = mFileAttachs(pIndex).Images

@@ -108,7 +108,7 @@ Public Class ucFileAttach
                 currentFiles.FilePath = sFileNamePath
                 currentFiles.FileSize = Format((GetSize(sFileNamePath) / 1024), "#,##0.00")
                 currentFiles.CreateBy = gUserName
-                currentFiles.CreateTime = GetCurrentDate(Nothing)
+                currentFiles.CreateTime = Now
 
                 mFileAttachs.Add(currentFiles)
                 GridControl.DataSource = Nothing

@@ -130,6 +130,7 @@ Partial Public Class rptInvoiceOnline
         '
         Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine6, Me.XrLabel62, Me.XrLabel46, Me.XrLabel5, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel4})
         Me.Detail.HeightF = 41.28971!
+        Me.Detail.KeepTogether = True
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -439,7 +440,7 @@ Partial Public Class rptInvoiceOnline
         '
         Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel50, Me.XrLabel47, Me.XrLabel15, Me.XrLine5, Me.XrLabel63, Me.XrLabel43, Me.XrLabel25, Me.XrLabel41, Me.XrLabel37, Me.XrLabel36, Me.XrLine4, Me.XrLabel33, Me.XrLabel32, Me.XrLabel31, Me.XrLine3, Me.XrLabel23, Me.XrLabel20, Me.XrPageInfo1, Me.XrLabel61, Me.XrLabel28, Me.XrLabel45, Me.XrLabel44, Me.XrLabel42, Me.XrLabel40, Me.XrLabel26, Me.XrLabel24, Me.XrLabel22, Me.XrLabel19, Me.XrLine1, Me.XrLabel21, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel2, Me.XrLabel3, Me.XrLabel39, Me.XrLabel38, Me.XrPictureBox1, Me.XrLabel27, Me.XrLabel29, Me.XrLabel30, Me.XrLabel34, Me.XrLabel35, Me.XrLabel1, Me.XrLabel6, Me.XrPictureBox2})
         Me.PageHeader.Font = New System.Drawing.Font("Cordia New", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PageHeader.HeightF = 359.6225!
+        Me.PageHeader.HeightF = 342.9944!
         Me.PageHeader.Name = "PageHeader"
         Me.PageHeader.StylePriority.UseFont = False
         '
@@ -487,7 +488,7 @@ Partial Public Class rptInvoiceOnline
         'XrLine5
         '
         Me.XrLine5.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 324.3278!)
+        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 309.7444!)
         Me.XrLine5.Name = "XrLine5"
         Me.XrLine5.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
         Me.XrLine5.StylePriority.UseForeColor = False
@@ -681,7 +682,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel61.CanGrow = False
         Me.XrLabel61.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel61.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel61.LocationFloat = New DevExpress.Utils.PointFloat(469.427!, 326.3278!)
+        Me.XrLabel61.LocationFloat = New DevExpress.Utils.PointFloat(469.427!, 311.7444!)
         Me.XrLabel61.Name = "XrLabel61"
         Me.XrLabel61.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel61.SizeF = New System.Drawing.SizeF(79.45898!, 29.24997!)
@@ -707,7 +708,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel45.CanGrow = False
         Me.XrLabel45.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel45.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(689.2944!, 326.3278!)
+        Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(689.2944!, 311.7444!)
         Me.XrLabel45.Name = "XrLabel45"
         Me.XrLabel45.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel45.SizeF = New System.Drawing.SizeF(101.5269!, 29.24994!)
@@ -813,7 +814,7 @@ Partial Public Class rptInvoiceOnline
         'XrLine1
         '
         Me.XrLine1.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(14.37064!, 355.5778!)
+        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(14.37063!, 340.9944!)
         Me.XrLine1.Name = "XrLine1"
         Me.XrLine1.SizeF = New System.Drawing.SizeF(782.6293!, 2.0!)
         Me.XrLine1.StylePriority.UseForeColor = False
@@ -823,7 +824,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel21.CanGrow = False
         Me.XrLabel21.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel21.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(609.3154!, 326.3278!)
+        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(609.3154!, 311.7444!)
         Me.XrLabel21.Name = "XrLabel21"
         Me.XrLabel21.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel21.SizeF = New System.Drawing.SizeF(79.97894!, 29.24995!)
@@ -838,7 +839,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel9.CanGrow = False
         Me.XrLabel9.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel9.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(548.8859!, 326.3278!)
+        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(548.8859!, 311.7444!)
         Me.XrLabel9.Name = "XrLabel9"
         Me.XrLabel9.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel9.SizeF = New System.Drawing.SizeF(59.03656!, 29.24994!)
@@ -853,7 +854,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel8.CanGrow = False
         Me.XrLabel8.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel8.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(174.5833!, 326.3278!)
+        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(174.5833!, 311.7444!)
         Me.XrLabel8.Name = "XrLabel8"
         Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel8.SizeF = New System.Drawing.SizeF(294.8436!, 29.24997!)
@@ -868,7 +869,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel7.CanGrow = False
         Me.XrLabel7.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel7.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(55.66919!, 326.3278!)
+        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(55.66919!, 311.7444!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel7.SizeF = New System.Drawing.SizeF(118.9141!, 29.24997!)
@@ -883,7 +884,7 @@ Partial Public Class rptInvoiceOnline
         Me.XrLabel2.CanGrow = False
         Me.XrLabel2.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel2.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(14.37069!, 326.3279!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(14.37069!, 311.7446!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(41.2669!, 29.24995!)
@@ -1040,7 +1041,8 @@ Partial Public Class rptInvoiceOnline
         'ReportFooter
         '
         Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine2, Me.XrLabel59, Me.XrLabel60, Me.XrLine11, Me.XrLine12, Me.XrLabel66, Me.XrLabel67, Me.XrLine13, Me.XrLine9, Me.XrLabel64, Me.XrLabel65, Me.XrLine10, Me.XrLine8, Me.XrLabel17, Me.XrLabel16, Me.XrLine7})
-        Me.ReportFooter.HeightF = 155.5494!
+        Me.ReportFooter.HeightF = 137.4898!
+        Me.ReportFooter.KeepTogether = True
         Me.ReportFooter.Name = "ReportFooter"
         Me.ReportFooter.PrintAtBottom = True
         '
@@ -1295,6 +1297,7 @@ Partial Public Class rptInvoiceOnline
         '
         Me.GroupFooter1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine14, Me.XrLabel18, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10})
         Me.GroupFooter1.HeightF = 180.4807!
+        Me.GroupFooter1.KeepTogether = True
         Me.GroupFooter1.Name = "GroupFooter1"
         '
         'XrLine14

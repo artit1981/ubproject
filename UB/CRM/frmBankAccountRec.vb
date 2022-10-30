@@ -289,7 +289,7 @@ Public Class frmBankAccountRec
 
         Public Sub New()
             ID = 0
-            RecordDate = GetCurrentDate(Nothing)
+            RecordDate = Now
             DR = 0
             CR = 0
         End Sub

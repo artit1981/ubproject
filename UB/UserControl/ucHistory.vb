@@ -169,7 +169,7 @@ Public Class ucHistory
             mcurrentFiles.FilePath = sFileNamePath
             mcurrentFiles.FileSize = Format((GetSize(sFileNamePath) / 1024), "#,##0.00")
             mcurrentFiles.CreateBy = gUserName
-            mcurrentFiles.CreateTime = GetCurrentDate(Nothing)
+            mcurrentFiles.CreateTime = Now
             mcurrentFiles.BuildImage("")
             picPhoto.Image = mcurrentFiles.Images
         Catch ex As Exception

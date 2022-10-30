@@ -11,7 +11,7 @@ Public Class clsNotifi
     Dim NotifyLevel_ As Integer = eNotifyLevel.Low
     Dim System_ As String = ""
     Dim MenuDisplay_ As String = ""
-    Dim ValueDate_ As Date = GetCurrentDate(Nothing)
+    Dim ValueDate_ As Date = Now
     Dim Remark_ As String = ""
     Dim RefTable_ As String = ""
     Dim RefID_ As Long = 0

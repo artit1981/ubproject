@@ -777,7 +777,7 @@ Module modDAO
         Return pTable
     End Function
 
-    Public Function GetCurrentDate(ByVal tr As SqlTransaction) As DateTime
+    Public Function GetCurrentDate(ByRef tr As SqlTransaction) As DateTime
 
         Dim SQL As String
         Dim dataTable As New DataTable()
