@@ -135,6 +135,8 @@ Partial Public Class rptQuotation2
         Me.CalTotal = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.XrLabel78 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel79 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -435,7 +437,7 @@ Partial Public Class rptQuotation2
         '
         'PageHeader
         '
-        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel75, Me.XrLabel74, Me.XrLabel73, Me.XrLabel72, Me.lblShippingDate, Me.XrLabel70, Me.XrLabel69, Me.XrLabel68, Me.XrLabel54, Me.XrLabel53, Me.XrLabel36, Me.XrLabel32, Me.XrLine17, Me.XrLine16, Me.XrLine15, Me.XrLabel35, Me.XrLabel34, Me.XrLabel30, Me.XrLabel29, Me.XrLabel27, Me.XrLabel39, Me.XrLabel19, Me.XrLabel28, Me.XrLine4, Me.XrLabel1, Me.XrLabel3, Me.XrLabel22, Me.XrLabel24, Me.XrLabel26, Me.XrLabel20, Me.XrLabel25, Me.XrLabel43, Me.XrLabel63, Me.XrLabel47, Me.XrLabel50, Me.XrLabel44, Me.XrLabel41, Me.XrLabel15, Me.XrLabel37, Me.XrLabel33, Me.XrLabel31, Me.XrLine3, Me.XrLabel23, Me.XrPageInfo1, Me.XrLabel61, Me.XrLabel45, Me.XrLabel42, Me.XrLabel40, Me.XrLine1, Me.XrLabel21, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel2, Me.XrLabel38, Me.XrPictureBox1, Me.XrLabel6, Me.XrPictureBox2})
+        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel79, Me.XrLabel78, Me.XrLabel75, Me.XrLabel74, Me.XrLabel73, Me.XrLabel72, Me.lblShippingDate, Me.XrLabel70, Me.XrLabel69, Me.XrLabel68, Me.XrLabel54, Me.XrLabel53, Me.XrLabel36, Me.XrLabel32, Me.XrLine17, Me.XrLine16, Me.XrLine15, Me.XrLabel35, Me.XrLabel34, Me.XrLabel30, Me.XrLabel29, Me.XrLabel27, Me.XrLabel39, Me.XrLabel19, Me.XrLabel28, Me.XrLine4, Me.XrLabel1, Me.XrLabel3, Me.XrLabel22, Me.XrLabel24, Me.XrLabel26, Me.XrLabel20, Me.XrLabel25, Me.XrLabel43, Me.XrLabel63, Me.XrLabel47, Me.XrLabel50, Me.XrLabel44, Me.XrLabel41, Me.XrLabel15, Me.XrLabel37, Me.XrLabel33, Me.XrLabel31, Me.XrLine3, Me.XrLabel23, Me.XrPageInfo1, Me.XrLabel61, Me.XrLabel45, Me.XrLabel42, Me.XrLabel40, Me.XrLine1, Me.XrLabel21, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel2, Me.XrLabel38, Me.XrPictureBox1, Me.XrLabel6, Me.XrPictureBox2})
         Me.PageHeader.Font = New System.Drawing.Font("Cordia New", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PageHeader.HeightF = 437.9375!
         Me.PageHeader.Name = "PageHeader"
@@ -763,14 +765,13 @@ Partial Public Class rptQuotation2
         '
         'XrLabel22
         '
-        Me.XrLabel22.CanGrow = False
         Me.XrLabel22.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.AddressBill")})
         Me.XrLabel22.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(14.3707!, 181.6909!)
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(14.37069!, 206.6075!)
         Me.XrLabel22.Multiline = True
         Me.XrLabel22.Name = "XrLabel22"
         Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel22.SizeF = New System.Drawing.SizeF(466.9123!, 124.7084!)
+        Me.XrLabel22.SizeF = New System.Drawing.SizeF(466.9123!, 111.9393!)
         Me.XrLabel22.StylePriority.UseFont = False
         Me.XrLabel22.Text = "XrLabel22"
         '
@@ -1518,6 +1519,34 @@ Partial Public Class rptQuotation2
         Me.CalPrice.Expression = "iif([Price]<=0,'',[Price])"
         Me.CalPrice.Name = "CalPrice"
         '
+        'XrLabel78
+        '
+        Me.XrLabel78.CanGrow = False
+        Me.XrLabel78.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel78.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.XrLabel78.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 181.6909!)
+        Me.XrLabel78.Name = "XrLabel78"
+        Me.XrLabel78.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel78.SizeF = New System.Drawing.SizeF(130.9764!, 24.91663!)
+        Me.XrLabel78.StylePriority.UseFont = False
+        Me.XrLabel78.StylePriority.UseForeColor = False
+        Me.XrLabel78.StylePriority.UseTextAlignment = False
+        Me.XrLabel78.Text = "เลขประจำตัวผู้เสียภาษี "
+        Me.XrLabel78.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel79
+        '
+        Me.XrLabel79.CanGrow = False
+        Me.XrLabel79.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.CustomerTax")})
+        Me.XrLabel79.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel79.LocationFloat = New DevExpress.Utils.PointFloat(145.3471!, 181.6909!)
+        Me.XrLabel79.Name = "XrLabel79"
+        Me.XrLabel79.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel79.SizeF = New System.Drawing.SizeF(335.9359!, 24.91658!)
+        Me.XrLabel79.StylePriority.UseFont = False
+        Me.XrLabel79.StylePriority.UseTextAlignment = False
+        Me.XrLabel79.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
         'rptQuotation2
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader, Me.GroupFooter1})
@@ -1654,4 +1683,6 @@ Partial Public Class rptQuotation2
     Friend WithEvents XrLabel66 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel65 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel64 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel79 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel78 As DevExpress.XtraReports.UI.XRLabel
 End Class
