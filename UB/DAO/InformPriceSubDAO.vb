@@ -1,6 +1,8 @@
 ﻿Public Class InformPriceSubDAO
     Private mIsSelect As Boolean
     Private mProductID As Long
+    Private mCostID As Long
+
     Private mProductCode As String
     Private mProductName As String
     Private mProductRemark As String
@@ -24,6 +26,14 @@
         End Get
         Set(ByVal Value As Boolean)
             mIsSelect = Value
+        End Set
+    End Property
+    Public Property CostID() As Long
+        Get
+            Return mCostID
+        End Get
+        Set(ByVal Value As Long)
+            mCostID = Value
         End Set
     End Property
     Public Property ProductID() As Long

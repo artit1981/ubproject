@@ -85,6 +85,7 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CostID = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -129,13 +130,13 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.None
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1241, 505)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1241, 512)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -154,7 +155,7 @@ Partial Class frmInformPricePro
         Me.GeneralTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1235, 477)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1239, 487)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -237,7 +238,7 @@ Partial Class frmInformPricePro
         Me.CheckIsRefresh.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckIsRefresh.Properties.Appearance.Options.UseFont = True
         Me.CheckIsRefresh.Properties.Caption = "Refresh"
-        Me.CheckIsRefresh.Size = New System.Drawing.Size(72, 19)
+        Me.CheckIsRefresh.Size = New System.Drawing.Size(72, 20)
         Me.CheckIsRefresh.TabIndex = 113
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckIsRefresh, "Checked")
         Me.CheckIsRefresh.Visible = False
@@ -259,6 +260,7 @@ Partial Class frmInformPricePro
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.LabelControl1, "")
         Me.LabelControl1.Location = New System.Drawing.Point(331, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.LabelControl1, True)
@@ -279,7 +281,7 @@ Partial Class frmInformPricePro
         Me.CheckShowInfo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.CheckShowInfo.Properties.Appearance.Options.UseFont = True
         Me.CheckShowInfo.Properties.Caption = "Show Information"
-        Me.CheckShowInfo.Size = New System.Drawing.Size(126, 19)
+        Me.CheckShowInfo.Size = New System.Drawing.Size(126, 20)
         Me.CheckShowInfo.TabIndex = 116
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckShowInfo, "Checked")
         Me.CheckShowInfo.Visible = False
@@ -372,7 +374,7 @@ Partial Class frmInformPricePro
         Me.btnReset.Appearance.Options.UseFont = True
         Me.btnReset.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnReset, "")
-        Me.btnReset.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnReset.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnReset.Location = New System.Drawing.Point(533, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnReset, True)
         Me.btnReset.Name = "btnReset"
@@ -390,7 +392,7 @@ Partial Class frmInformPricePro
         Me.btnCalc.Appearance.Options.UseFont = True
         Me.btnCalc.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCalc, "")
-        Me.btnCalc.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnCalc.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnCalc.Location = New System.Drawing.Point(615, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCalc, True)
         Me.btnCalc.Name = "btnCalc"
@@ -408,7 +410,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkSelectAll, True)
         Me.chkSelectAll.Name = "chkSelectAll"
         Me.chkSelectAll.Properties.Caption = "Select All"
-        Me.chkSelectAll.Size = New System.Drawing.Size(173, 19)
+        Me.chkSelectAll.Size = New System.Drawing.Size(173, 20)
         Me.chkSelectAll.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkSelectAll, "Checked")
         '
@@ -594,7 +596,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetMonitorForChanges(Me.chkAutoRow, True)
         Me.chkAutoRow.Name = "chkAutoRow"
         Me.chkAutoRow.Properties.Caption = "ปรับความสูงของแถวอัตโนมัติ"
-        Me.chkAutoRow.Size = New System.Drawing.Size(173, 19)
+        Me.chkAutoRow.Size = New System.Drawing.Size(173, 20)
         Me.chkAutoRow.TabIndex = 309
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkAutoRow, "Checked")
         '
@@ -612,14 +614,14 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1, Me.RepositoryItemMemoEdit1, Me.RepositoryItemCheckEdit1, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(1214, 313)
+        Me.gridControl.Size = New System.Drawing.Size(1214, 320)
         Me.gridControl.TabIndex = 290
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Cost, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CostID, Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Cost, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", Me.Price1, "")})
         Me.gridView.Name = "gridView"
@@ -727,7 +729,7 @@ Partial Class frmInformPricePro
         '
         'Cost
         '
-        Me.Cost.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.Cost.AppearanceCell.BackColor = System.Drawing.Color.White
         Me.Cost.AppearanceCell.Options.UseBackColor = True
         Me.Cost.AppearanceCell.Options.UseTextOptions = True
         Me.Cost.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -740,7 +742,6 @@ Partial Class frmInformPricePro
         Me.Cost.MaxWidth = 65
         Me.Cost.MinWidth = 65
         Me.Cost.Name = "Cost"
-        Me.Cost.OptionsColumn.ReadOnly = True
         Me.Cost.Visible = True
         Me.Cost.VisibleIndex = 4
         Me.Cost.Width = 65
@@ -952,8 +953,8 @@ Partial Class frmInformPricePro
         Me.btnBrandRefresh.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnBrandRefresh.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnBrandRefresh, "")
-        Me.btnBrandRefresh.Image = CType(resources.GetObject("btnBrandRefresh.Image"), System.Drawing.Image)
-        Me.btnBrandRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBrandRefresh.ImageOptions.Image = CType(resources.GetObject("btnBrandRefresh.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBrandRefresh.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnBrandRefresh.Location = New System.Drawing.Point(612, 49)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnBrandRefresh, True)
         Me.btnBrandRefresh.Name = "btnBrandRefresh"
@@ -968,8 +969,8 @@ Partial Class frmInformPricePro
         Me.btnProductCategory.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnProductCategory.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnProductCategory, "")
-        Me.btnProductCategory.Image = CType(resources.GetObject("btnProductCategory.Image"), System.Drawing.Image)
-        Me.btnProductCategory.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnProductCategory.ImageOptions.Image = CType(resources.GetObject("btnProductCategory.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnProductCategory.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnProductCategory.Location = New System.Drawing.Point(273, 27)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnProductCategory, True)
         Me.btnProductCategory.Name = "btnProductCategory"
@@ -984,8 +985,8 @@ Partial Class frmInformPricePro
         Me.btnProductType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnProductType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnProductType, "")
-        Me.btnProductType.Image = CType(resources.GetObject("btnProductType.Image"), System.Drawing.Image)
-        Me.btnProductType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnProductType.ImageOptions.Image = CType(resources.GetObject("btnProductType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnProductType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnProductType.Location = New System.Drawing.Point(273, 49)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnProductType, True)
         Me.btnProductType.Name = "btnProductType"
@@ -1001,7 +1002,7 @@ Partial Class frmInformPricePro
         Me.btnFind.Appearance.Options.UseFont = True
         Me.btnFind.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnFind, "")
-        Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnFind.Location = New System.Drawing.Point(640, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnFind, True)
         Me.btnFind.Name = "btnFind"
@@ -1021,7 +1022,7 @@ Partial Class frmInformPricePro
         Me.ProductTypeID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ProductTypeID.Properties.Appearance.Options.UseFont = True
         Me.ProductTypeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", 50, "Code"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 100, "Name")})
+        Me.ProductTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.ProductTypeID.Properties.NullText = ""
         Me.ProductTypeID.Properties.ShowHeader = False
         Me.ProductTypeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
@@ -1038,7 +1039,7 @@ Partial Class frmInformPricePro
         Me.ProductCategoryID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ProductCategoryID.Properties.Appearance.Options.UseFont = True
         Me.ProductCategoryID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductCategoryID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", 50, "Code"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 100, "Name")})
+        Me.ProductCategoryID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.ProductCategoryID.Properties.NullText = ""
         Me.ProductCategoryID.Properties.ShowHeader = False
         Me.ProductCategoryID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
@@ -1051,8 +1052,8 @@ Partial Class frmInformPricePro
         Me.btnProductGroup.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnProductGroup.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnProductGroup, "")
-        Me.btnProductGroup.Image = CType(resources.GetObject("btnProductGroup.Image"), System.Drawing.Image)
-        Me.btnProductGroup.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnProductGroup.ImageOptions.Image = CType(resources.GetObject("btnProductGroup.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnProductGroup.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnProductGroup.Location = New System.Drawing.Point(612, 23)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnProductGroup, True)
         Me.btnProductGroup.Name = "btnProductGroup"
@@ -1071,7 +1072,7 @@ Partial Class frmInformPricePro
         Me.ProductGroupID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ProductGroupID.Properties.Appearance.Options.UseFont = True
         Me.ProductGroupID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "Code"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "Name", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "Remark", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default])})
+        Me.ProductGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "Name", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "Remark", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.ProductGroupID.Properties.NullText = ""
         Me.ProductGroupID.Properties.ShowHeader = False
         Me.ProductGroupID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
@@ -1144,7 +1145,7 @@ Partial Class frmInformPricePro
         Me.ProductBrandID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ProductBrandID.Properties.Appearance.Options.UseFont = True
         Me.ProductBrandID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductBrandID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", 50, "Code"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 100, "Name")})
+        Me.ProductBrandID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.ProductBrandID.Properties.NullText = ""
         Me.ProductBrandID.Properties.ShowHeader = False
         Me.ProductBrandID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
@@ -1154,6 +1155,12 @@ Partial Class frmInformPricePro
         '
         'FormChangedComponent1
         '
+        '
+        'CostID
+        '
+        Me.CostID.Caption = "CostID"
+        Me.CostID.FieldName = "CostID"
+        Me.CostID.Name = "CostID"
         '
         'frmInformPricePro
         '
@@ -1207,6 +1214,7 @@ Partial Class frmInformPricePro
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
@@ -1273,4 +1281,5 @@ Partial Class frmInformPricePro
     Private WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents rdoCalcType As DevExpress.XtraEditors.RadioGroup
     Friend WithEvents Cost As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CostID As DevExpress.XtraGrid.Columns.GridColumn
 End Class

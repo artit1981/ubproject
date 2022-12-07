@@ -69,6 +69,9 @@ Partial Class frmBankAccountRec
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
+        Me.chkShowDelete = New DevExpress.XtraEditors.CheckEdit()
+        Me.lblBalance = New System.Windows.Forms.Label()
+        Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,6 +108,7 @@ Partial Class frmBankAccountRec
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkShowDelete.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DxErrorProvider1
@@ -115,6 +119,8 @@ Partial Class frmBankAccountRec
         '
         Me.GroupControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupControl1.Controls.Add(Me.lblBalance)
+        Me.GroupControl1.Controls.Add(Me.chkShowDelete)
         Me.GroupControl1.Controls.Add(Me.btnFind)
         Me.GroupControl1.Controls.Add(Me.Label1)
         Me.GroupControl1.Controls.Add(Me.dtpDateTo)
@@ -124,7 +130,7 @@ Partial Class frmBankAccountRec
         Me.GroupControl1.Controls.Add(Me.Label10)
         Me.GroupControl1.Location = New System.Drawing.Point(12, 50)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1383, 110)
+        Me.GroupControl1.Size = New System.Drawing.Size(1384, 110)
         Me.GroupControl1.TabIndex = 16
         Me.GroupControl1.Text = "Filter data"
         '
@@ -135,7 +141,7 @@ Partial Class frmBankAccountRec
         Me.btnFind.Appearance.Options.UseImage = True
         Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
         Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnFind.Location = New System.Drawing.Point(455, 46)
+        Me.btnFind.Location = New System.Drawing.Point(453, 41)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(101, 24)
         Me.btnFind.TabIndex = 295
@@ -278,7 +284,7 @@ Partial Class frmBankAccountRec
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BankAccountIDLookUpEdit, Me.repositoryItemCalcEdit1, Me.repositoryItemSpinEdit1, Me.repositoryItemTextEdit1, Me.KeepMinSpinEdit, Me.LocationDTLIDLookUpEdit1, Me.DebitCalcEdit, Me.CreditCalcEdit, Me.RepositoryItemCheckEdit1, Me.LocationDTLSearchLookUp1, Me.RepositoryItemLookUpEdit1, Me.LocationGrid, Me.LocationIDComboBox, Me.LocationDTLLookUp, Me.RepositoryItemPopupContainerEdit1, Me.LocationButtonEdit, Me.RepositoryItemRadioGroup1, Me.RepositoryItemCheckEdit2, Me.RecordDateDateEdit1, Me.RepositoryItemTextEdit2})
-        Me.gridControl.Size = New System.Drawing.Size(1383, 379)
+        Me.gridControl.Size = New System.Drawing.Size(1384, 379)
         Me.gridControl.TabIndex = 17
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
@@ -286,7 +292,7 @@ Partial Class frmBankAccountRec
         '
         Me.gridView.Appearance.FooterPanel.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
         Me.gridView.Appearance.FooterPanel.Options.UseFont = True
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.BankAccountID, Me.Remark, Me.DR, Me.CR, Me.IsChange, Me.GridColumn1})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.BankAccountID, Me.Remark, Me.DR, Me.CR, Me.IsChange, Me.GridColumn1, Me.IsDelete})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -578,11 +584,40 @@ Partial Class frmBankAccountRec
         Me.ControlNavigator1.TabIndex = 18
         Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
         '
+        'chkShowDelete
+        '
+        Me.chkShowDelete.Location = New System.Drawing.Point(453, 73)
+        Me.chkShowDelete.Name = "chkShowDelete"
+        Me.chkShowDelete.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkShowDelete.Properties.Appearance.Options.UseFont = True
+        Me.chkShowDelete.Properties.Caption = "แสดงรายการที่ลบ"
+        Me.chkShowDelete.Size = New System.Drawing.Size(122, 20)
+        Me.chkShowDelete.TabIndex = 297
+        '
+        'lblBalance
+        '
+        Me.lblBalance.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.lblBalance.AutoSize = True
+        Me.lblBalance.BackColor = System.Drawing.Color.Transparent
+        Me.lblBalance.Font = New System.Drawing.Font("Tahoma", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblBalance.ForeColor = System.Drawing.Color.Maroon
+        Me.lblBalance.Location = New System.Drawing.Point(984, 76)
+        Me.lblBalance.Name = "lblBalance"
+        Me.lblBalance.Size = New System.Drawing.Size(120, 25)
+        Me.lblBalance.TabIndex = 298
+        Me.lblBalance.Text = "ยอดคงเหลือ"
+        '
+        'IsDelete
+        '
+        Me.IsDelete.Caption = "GridColumn2"
+        Me.IsDelete.FieldName = "IsDelete"
+        Me.IsDelete.Name = "IsDelete"
+        '
         'frmBankAccountRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1407, 593)
+        Me.ClientSize = New System.Drawing.Size(1408, 593)
         Me.Controls.Add(Me.ControlNavigator1)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.GroupControl1)
@@ -628,6 +663,7 @@ Partial Class frmBankAccountRec
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkShowDelete.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -680,4 +716,7 @@ Partial Class frmBankAccountRec
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
+    Friend WithEvents chkShowDelete As DevExpress.XtraEditors.CheckEdit
+    Private WithEvents lblBalance As Label
+    Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
 End Class

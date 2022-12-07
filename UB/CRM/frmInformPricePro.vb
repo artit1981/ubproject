@@ -311,6 +311,8 @@ Public Class frmInformPricePro
                         lDataDAO.Price5 = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price5"))
                         lDataDAO.Price6 = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Price6"))
                         lDataDAO.PriceStandard = ConvertNullToZero(gridView.GetRowCellValue(lRow, "PriceStandard"))
+                        lDataDAO.CostID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CostID"))
+                        lDataDAO.Cost = ConvertNullToZero(gridView.GetRowCellValue(lRow, "Cost"))
                         lDataDAOs.Add(lDataDAO)
                     End If
                 Next

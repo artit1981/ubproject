@@ -78,7 +78,7 @@ Public Class frmDashboard
 
 
         For i = 0 To 10
-            If i <= 1 Then
+            If i <= 2 Then
                 Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
                 ListYear.Items.Add(lCheckedListBoxItem)
             Else
@@ -364,12 +364,12 @@ Public Class frmDashboard
                 lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
             Next
 
-            txtCash.Text = lTotalCash.ToString("#,##0.00") & " M"
+            txtCash.Text = lTotalCash.ToString("#,##0.00") & " K"
 
             storage.Items.Add(BankGroup)
 
             BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
-            BankAccTreeMap.LeafTextPattern = "{L} {V} M"
+            BankAccTreeMap.LeafTextPattern = "{L} {V} K"
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try

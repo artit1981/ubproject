@@ -1,0 +1,29 @@
+CREATE VIEW [dbo].[vInformPricePro]
+AS
+
+with ProductCost as (
+	SELECT ProductID,Cost,CostID
+	FROM
+	(
+	SELECT Product_CostAVG.ProductID,Product_CostAVG.CostID,Product_CostAVG.Cost
+	,ROW_NUMBER() OVER(PARTITION BY Product_CostAVG.ProductID ORDER BY Product_CostAVG.CostID DESC) AS rank
+	from Product_CostAVG
+	where IsDelete=0
+	) as tmp
+	where rank=1
+)
+
+SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName
+,MAX(Product.PriceStandard) AS PriceStandard,isnull( MAX(Cost.Cost),0) AS Cost,MAX(Product.Price1) AS Price1
+,MAX(Product.Price2) AS Price2 ,MAX(Product.Price3) AS Price3,MAX(Product.Price4) AS Price4
+,MAX(Product.Price5) AS Price5 ,MAX(Product.Price6) AS Price6,Product.Remark as ProductRemark 
+,isnull(Cost.CostID,0) as CostID
+,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
+FROM Product 
+left outer join ProductCost Cost on Cost.ProductID=Product.ProductID  
+WHERE Product.IsDelete =0  
+GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark ,CostID
+,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
+ 
+
+GO

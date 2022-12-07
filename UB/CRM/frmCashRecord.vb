@@ -71,7 +71,7 @@ Public Class frmCashRecord
                 '    'Next
                 'End If
                 For Each pDataDAO As MyRecord In bindingSource1
-                    If pDataDAO.IsChange = 1 Then
+                    If pDataDAO.IsChange = 1 And pDataDAO.IsDelete = 0 Then
                         Dim lDataDAO = New CashRecordSDAO
                         lDataDAO.ID = pDataDAO.ID
                         If pDataDAO.ModeData = 3 Then
@@ -107,18 +107,21 @@ Public Class frmCashRecord
         Select Case e.Button.Tag
 
             Case "Remove"
-                If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                    If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
-                        gridView.DeleteSelectedRows()
-                        gridView.RefreshData()
-                        gridControl.RefreshDataSource()
-                    Else
-                        gridView.SetRowCellValue(index, "ModeData", 3)
-                        gridView.SetRowCellValue(index, "IsChange", 1)
-                        gridView.RefreshData()
-                        gridControl.RefreshDataSource()
+                If ConvertNullToZero(gridView.GetRowCellValue(index, "IsDelete")) = 0 Then
+                    If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                        If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
+                            gridView.DeleteSelectedRows()
+                            gridView.RefreshData()
+                            gridControl.RefreshDataSource()
+                        Else
+                            gridView.SetRowCellValue(index, "ModeData", 3)
+                            gridView.SetRowCellValue(index, "IsChange", 1)
+                            gridView.RefreshData()
+                            gridControl.RefreshDataSource()
+                        End If
                     End If
                 End If
+
             Case "MoveUp"
                 If index > 0 Then
                     rec = bindingSource1.Item(index)
@@ -150,8 +153,11 @@ Public Class frmCashRecord
 
     Private Sub gridView_ValidateRow(ByVal sender As Object, ByVal e As DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs) Handles gridView.ValidateRow
         Dim info As New ErrorInfo()
-        TryCast(e.Row, MyRecord).GetError(info)
-        e.Valid = info.ErrorText = ""
+        If e.Row IsNot Nothing Then
+            TryCast(e.Row, MyRecord).GetError(info)
+            e.Valid = info.ErrorText = ""
+
+        End If
 
     End Sub
 
@@ -171,6 +177,7 @@ Public Class frmCashRecord
         view.SetRowCellValue(e.RowHandle, view.Columns("CR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("Remark"), "")
         view.SetRowCellValue(e.RowHandle, view.Columns("ModeData"), 1)
+        view.SetRowCellValue(e.RowHandle, view.Columns("IsDelete"), 0)
     End Sub
 
 #End Region
@@ -220,11 +227,12 @@ Public Class frmCashRecord
 
     Private Sub LoadData()
         Dim lcls As New CashRecordSDAO
-
+        Dim lBalance As Decimal = 0
         Try
             'bindingSource1 = Nothing
+            bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(MyRecord)
-            Dim dataTable = lcls.GetDataTable(CashItemID.EditValue, dtpDateFrom.EditValue, dtpDateTo.EditValue)
+            Dim dataTable = lcls.GetDataTable(CashItemID.EditValue, dtpDateFrom.EditValue, dtpDateTo.EditValue, chkShowDelete.Checked)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
                     Dim rec As New MyRecord()
@@ -236,14 +244,19 @@ Public Class frmCashRecord
                     rec.Remark = ConvertNullToString(dr("Remark"))
                     rec.IsChange = 0
                     rec.ModeData = 2
+                    rec.IsDelete = ConvertNullToZero(dr("IsDelete"))
                     bindingSource1.Add(rec)
+
+                    lBalance += rec.DR
+                    lBalance -= rec.CR
                 Next
             End If
 
+            lblBalance.Text = "ยอดคงเหลือ  " & lBalance.ToString("#,##0.00")
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
             gridControl.DataSource = bindingSource1
-            gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
+            'gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ucProductLocation.LoadData : " & e.Message)
         Finally
@@ -261,6 +274,29 @@ Public Class frmCashRecord
         End Try
     End Function
 
+    Private Sub gridView_RowStyle(sender As Object, e As RowStyleEventArgs) Handles gridView.RowStyle
+
+        Dim lData As Integer = 0
+        Try
+            If (e.RowHandle >= 0) Then
+
+                lData = gridView.GetRowCellValue(e.RowHandle, gridView.Columns("IsDelete"))
+                If lData = 1 Then
+                    e.Appearance.BackColor = Color.WhiteSmoke
+                    e.Appearance.ForeColor = Color.Red
+                End If
+                lData = gridView.GetRowCellValue(e.RowHandle, gridView.Columns("ModeData"))
+                If lData = 3 Then
+                    e.Appearance.BackColor = Color.WhiteSmoke
+                    e.Appearance.ForeColor = Color.Red
+                End If
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
 #End Region
 
     Public Class MyRecord
@@ -273,7 +309,7 @@ Public Class frmCashRecord
         Dim mDR As Double
         Dim mCR As Double
         Dim mIsChange As Integer
-
+        Dim mIsDelete As Integer
         Public Sub New()
             ID = 0
             RecordDate = Now
@@ -349,6 +385,14 @@ Public Class frmCashRecord
             End Get
             Set(ByVal value As Integer)
                 mModeData = value
+            End Set
+        End Property
+        Public Property IsDelete() As Integer
+            Get
+                Return mIsDelete
+            End Get
+            Set(ByVal value As Integer)
+                mIsDelete = value
             End Set
         End Property
 #Region "IDXDataErrorInfo Members"

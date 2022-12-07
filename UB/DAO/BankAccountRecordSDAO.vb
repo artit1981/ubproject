@@ -80,14 +80,17 @@ Public Class BankAccountRecordSDAO
     End Property
 #End Region
 
-    Public Function GetDataTable(ByVal pBankAccID As Integer, ByVal pFromDate As Date, ByVal pTodate As Date) As DataTable
+    Public Function GetDataTable(ByVal pBankAccID As Integer, ByVal pFromDate As Date, ByVal pTodate As Date, lIsIncludeDelete As Boolean) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT  ID,BankAccountID ,RecordDate,Remark,DR,CR"
+            SQL = "SELECT  ID,BankAccountID ,RecordDate,Remark,DR,CR,IsDelete"
             SQL &= " FROM BankAccountRecord"
-            SQL &= " WHERE IsDelete =0   "
+            SQL &= " WHERE 0=0   "
+            If lIsIncludeDelete = False Then
+                SQL &= " and IsDelete =0   "
+            End If
             If pBankAccID > 0 Then
                 SQL &= " and BankAccountID=" & pBankAccID
             End If

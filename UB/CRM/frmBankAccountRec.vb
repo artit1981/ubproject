@@ -75,7 +75,7 @@ Public Class frmBankAccountRec
                 'End If
 
                 For Each pDataDAO As MyRecord In bindingSource1
-                    If pDataDAO.IsChange = 1 Then
+                    If pDataDAO.IsChange = 1 And pDataDAO.IsDelete = 0 Then
                         Dim lDataDAO = New BankAccountRecordSDAO
                         lDataDAO.ID = pDataDAO.ID
                         If pDataDAO.ModeData = 3 Then
@@ -136,6 +136,7 @@ Public Class frmBankAccountRec
         view.SetRowCellValue(e.RowHandle, view.Columns("CR"), 0)
         view.SetRowCellValue(e.RowHandle, view.Columns("ModeData"), 1)
         view.SetRowCellValue(e.RowHandle, view.Columns("Remark"), "")
+        view.SetRowCellValue(e.RowHandle, view.Columns("IsDelete"), 0)
     End Sub
 
 #End Region
@@ -189,11 +190,11 @@ Public Class frmBankAccountRec
     Private Sub LoadData()
         Dim lcls As New BankAccountRecordSDAO
         Dim dataTable As New DataTable()
-
+        Dim lBalance As Decimal = 0
         Try
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(MyRecord)
-            dataTable = lcls.GetDataTable(BankAccID.EditValue, dtpDateFrom.EditValue, dtpDateTo.EditValue)
+            dataTable = lcls.GetDataTable(BankAccID.EditValue, dtpDateFrom.EditValue, dtpDateTo.EditValue, chkShowDelete.Checked)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
                     Dim rec As New MyRecord()
@@ -205,21 +206,45 @@ Public Class frmBankAccountRec
                     rec.Remark = ConvertNullToString(dr("Remark"))
                     rec.IsChange = 0
                     rec.ModeData = 2
+                    rec.IsDelete = ConvertNullToZero(dr("IsDelete"))
                     bindingSource1.Add(rec)
+                    lBalance += rec.DR
+                    lBalance -= rec.CR
                 Next
             End If
-
+            lblBalance.Text = "ยอดคงเหลือ  " & lBalance.ToString("#,##0.00")
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
             gridControl.DataSource = bindingSource1
-            gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
+            'gridView.Columns("ModeData").FilterInfo = New ColumnFilterInfo("[ModeData]<>3")
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmBankAccountRec.LoadData : " & e.Message)
         Finally
             lcls = Nothing
         End Try
     End Sub
+    Private Sub gridView_RowStyle(sender As Object, e As RowStyleEventArgs) Handles gridView.RowStyle
 
+        Dim lData As Integer = 0
+        Try
+            If (e.RowHandle >= 0) Then
+
+                lData = gridView.GetRowCellValue(e.RowHandle, gridView.Columns("IsDelete"))
+                If lData = 1 Then
+                    e.Appearance.BackColor = Color.WhiteSmoke
+                    e.Appearance.ForeColor = Color.Red
+                End If
+                lData = gridView.GetRowCellValue(e.RowHandle, gridView.Columns("ModeData"))
+                If lData = 3 Then
+                    e.Appearance.BackColor = Color.WhiteSmoke
+                    e.Appearance.ForeColor = Color.Red
+                End If
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
     Private Function Verify() As Boolean
         Try
             DxErrorProvider1.ClearErrors()
@@ -238,16 +263,18 @@ Public Class frmBankAccountRec
         Select Case e.Button.Tag
 
             Case "Remove"
-                If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                    If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
-                        gridView.DeleteSelectedRows()
-                        gridView.RefreshData()
-                        gridControl.RefreshDataSource()
-                    Else
-                        gridView.SetRowCellValue(index, "ModeData", 3)
-                        gridView.SetRowCellValue(index, "IsChange", 1)
-                        gridView.RefreshData()
-                        gridControl.RefreshDataSource()
+                If ConvertNullToZero(gridView.GetRowCellValue(index, "IsDelete")) = 0 Then
+                    If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                        If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
+                            gridView.DeleteSelectedRows()
+                            gridView.RefreshData()
+                            gridControl.RefreshDataSource()
+                        Else
+                            gridView.SetRowCellValue(index, "ModeData", 3)
+                            gridView.SetRowCellValue(index, "IsChange", 1)
+                            gridView.RefreshData()
+                            gridControl.RefreshDataSource()
+                        End If
                     End If
                 End If
             Case "MoveUp"
@@ -286,14 +313,21 @@ Public Class frmBankAccountRec
         Dim mDR As Double
         Dim mCR As Double
         Dim mIsChange As Integer
-
+        Dim mIsDelete As Integer
         Public Sub New()
             ID = 0
             RecordDate = Now
             DR = 0
             CR = 0
         End Sub
-
+        Public Property IsDelete() As Integer
+            Get
+                Return mIsDelete
+            End Get
+            Set(ByVal value As Integer)
+                mIsDelete = value
+            End Set
+        End Property
         Public Property ID() As Long
             Get
                 Return mIDs

@@ -1,0 +1,26 @@
+ALTER PROCEDURE [dbo].[spBankBalance] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT  BankCode,ROUND(AccountAmount/1000,3) as AccountAmount FROM(
+	SELECT Bank.BankCode
+	,SUM(BankAccountRecord.DR-BankAccountRecord.CR) AS AccountAmount
+	FROM BankAccountRecord  
+	inner join BankAccount on BankAccount.BankAccountID=BankAccountRecord.BankAccountID
+	inner join Bank on Bank.BankID=BankAccount.BankID
+	WHERE BankAccountRecord.IsDelete=0
+	and BankAccountRecord.RecordDate between @FromDate and @ToDate	
+	group by Bank.BankCode
+	union all
+	SELECT 'เงินสดย่อย' as BankCode
+	,isnull( SUM(CashRecord.DR-CashRecord.CR),0) AS AccountAmount
+	FROM CashRecord  
+	WHERE CashRecord.IsDelete=0
+	and CashRecord.RecordDate between @FromDate and @ToDate    
+) as tmp
+order by AccountAmount desc
+
+END

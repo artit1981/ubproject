@@ -459,6 +459,7 @@ Public Class frmFindOrder
                 cList.Add(New OrderType("ส่งของ (ขาย)", MasterType.Shiping))
                 cList.Add(New OrderType("บันทึกลดหนี้", MasterType.ReduceCredit))
                 cList.Add(New OrderType("บันทึกเพิ่มหนี้", MasterType.AddCredit))
+                cList.Add(New OrderType("ใบกำกับภาษีออนไลน์", MasterType.InvoiceOnline))
                 cboOrderType.EditValue = MasterType.Shiping
             Case MasterType.StockIn, MasterType.InvoiceBuy, MasterType.ShipingBuy '***** ถ้ามีเพิ่มการดึงรายการแก้ UpdateRefOrderStatus ด้วย
                 cList.Add(New OrderType("ใบสั่งซื้อ", MasterType.PurchaseOrder))

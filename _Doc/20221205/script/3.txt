@@ -1,0 +1,43 @@
+ALTER VIEW [dbo].[vOrderTotalWithCost]
+AS
+
+with ProductCost as (
+
+--SELECT Orders.OrderID,Orders.OrderDate,ProductList.ProductID
+--,ProductList.Cost,SerialNumber.SerialNumberNo
+-- FROM Orders  
+--inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+--inner JOIN SerialNumber ON SerialNumber.ProductListID=ProductList.ProductListID AND SerialNumber.IsDelete =0  
+--WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+	SELECT ProductID,Cost,CostID
+	FROM
+	(
+	SELECT Product_CostAVG.ProductID,Product_CostAVG.CostID,Product_CostAVG.Cost
+	,ROW_NUMBER() OVER(PARTITION BY Product_CostAVG.ProductID ORDER BY Product_CostAVG.CostID DESC) AS rank
+	from Product_CostAVG
+	where IsDelete=0
+	) as tmp
+	where rank=1
+)
+
+SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate
+--,pCost.OrderDate as CostDate
+,ProductList.ProductID
+,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
+,ProductList.PriceMain as Price 
+,pCost.Cost
+,case when Orders.TableID=55 then ProductList.Units * -1 else ProductList.Units end  Units
+,case when Orders.TableID=55 then ProductList.Total *-1 else ProductList.Total end Total
+FROM Orders  
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+inner JOIN Product ON Product.ProductID=ProductList.ProductID 
+inner JOIN SerialNumber ON SerialNumber.ProductListID=ProductList.ProductListID AND SerialNumber.IsDelete =0 
+--left outer join ProductCost pCost on pCost.OrderDate<Orders.OrderDate and pCost.SerialNumberNo=SerialNumber.SerialNumberNo
+left outer join ProductCost pCost on ProductList.ProductID=pCost.ProductID
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55)
+--and pCost.OrderDate = (select max(OrderDate) from ProductCost where ProductCost.ProductID=ProductList.ProductID and ProductCost.OrderDate<=Orders.OrderDate)
+
+GO
+
+
