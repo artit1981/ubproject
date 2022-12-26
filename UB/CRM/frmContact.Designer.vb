@@ -126,11 +126,11 @@ Partial Class frmContact
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(847, 532)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(847, 539)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.CreditTabPage, Me.HiastoryTabPage, Me.AddressTabPage, Me.AddressShipTabPage, Me.SWOTTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -186,7 +186,7 @@ Partial Class frmContact
         Me.GeneralTabPage.Controls.Add(Me.txtRemark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(845, 514)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -195,8 +195,8 @@ Partial Class frmContact
         Me.btnContactPersonID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnContactPersonID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnContactPersonID, "")
-        Me.btnContactPersonID.Image = CType(resources.GetObject("btnContactPersonID.Image"), System.Drawing.Image)
-        Me.btnContactPersonID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnContactPersonID.ImageOptions.Image = CType(resources.GetObject("btnContactPersonID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnContactPersonID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnContactPersonID.Location = New System.Drawing.Point(357, 120)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnContactPersonID, True)
         Me.btnContactPersonID.Name = "btnContactPersonID"
@@ -218,7 +218,7 @@ Partial Class frmContact
         Me.ContactPersonID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.ContactPersonID.Properties.NullText = ""
         Me.ContactPersonID.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.ContactPersonID.Properties.View = Me.SearchLookUpEdit1View
+        Me.ContactPersonID.Properties.PopupView = Me.SearchLookUpEdit1View
         Me.ContactPersonID.Size = New System.Drawing.Size(212, 20)
         Me.ContactPersonID.TabIndex = 6
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ContactPersonID, "Text")
@@ -369,8 +369,8 @@ Partial Class frmContact
         Me.btnGenID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnGenID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnGenID, "")
-        Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
-        Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnGenID.ImageOptions.Image = CType(resources.GetObject("btnGenID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnGenID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnGenID.Location = New System.Drawing.Point(357, 40)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnGenID, True)
         Me.btnGenID.Name = "btnGenID"
@@ -470,11 +470,10 @@ Partial Class frmContact
         Me.cboBusinessType.Properties.Appearance.Options.UseFont = True
         Me.cboBusinessType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboBusinessType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboBusinessType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboBusinessType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboBusinessType.Properties.DropDownRows = 10
         Me.cboBusinessType.Properties.ImmediatePopup = True
         Me.cboBusinessType.Properties.NullText = ""
-        Me.cboBusinessType.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboBusinessType.Properties.PopupWidth = 300
         Me.cboBusinessType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboBusinessType.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -496,11 +495,10 @@ Partial Class frmContact
         Me.cboIndustryType.Properties.Appearance.Options.UseFont = True
         Me.cboIndustryType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboIndustryType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboIndustryType.Properties.DropDownRows = 10
         Me.cboIndustryType.Properties.ImmediatePopup = True
         Me.cboIndustryType.Properties.NullText = ""
-        Me.cboIndustryType.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboIndustryType.Properties.PopupWidth = 300
         Me.cboIndustryType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboIndustryType.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -521,11 +519,10 @@ Partial Class frmContact
         Me.cboSource.Properties.Appearance.Options.UseFont = True
         Me.cboSource.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboSource.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboSource.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboSource.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboSource.Properties.DropDownRows = 10
         Me.cboSource.Properties.ImmediatePopup = True
         Me.cboSource.Properties.NullText = ""
-        Me.cboSource.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboSource.Properties.PopupWidth = 300
         Me.cboSource.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboSource.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -555,8 +552,8 @@ Partial Class frmContact
         Me.btnRefreshBusinessType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshBusinessType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshBusinessType, "")
-        Me.btnRefreshBusinessType.Image = CType(resources.GetObject("btnRefreshBusinessType.Image"), System.Drawing.Image)
-        Me.btnRefreshBusinessType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshBusinessType.ImageOptions.Image = CType(resources.GetObject("btnRefreshBusinessType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshBusinessType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshBusinessType.Location = New System.Drawing.Point(708, 320)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshBusinessType, True)
         Me.btnRefreshBusinessType.Name = "btnRefreshBusinessType"
@@ -623,8 +620,8 @@ Partial Class frmContact
         Me.btnRefreshSource.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshSource.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshSource, "")
-        Me.btnRefreshSource.Image = CType(resources.GetObject("btnRefreshSource.Image"), System.Drawing.Image)
-        Me.btnRefreshSource.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshSource.ImageOptions.Image = CType(resources.GetObject("btnRefreshSource.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshSource.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshSource.Location = New System.Drawing.Point(708, 146)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshSource, True)
         Me.btnRefreshSource.Name = "btnRefreshSource"
@@ -711,8 +708,8 @@ Partial Class frmContact
         Me.btnRefreshIndustryType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshIndustryType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshIndustryType, "")
-        Me.btnRefreshIndustryType.Image = CType(resources.GetObject("btnRefreshIndustryType.Image"), System.Drawing.Image)
-        Me.btnRefreshIndustryType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshIndustryType.ImageOptions.Image = CType(resources.GetObject("btnRefreshIndustryType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshIndustryType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshIndustryType.Location = New System.Drawing.Point(357, 320)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshIndustryType, True)
         Me.btnRefreshIndustryType.Name = "btnRefreshIndustryType"
@@ -727,8 +724,8 @@ Partial Class frmContact
         Me.btnRefreshLeadType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshLeadType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshLeadType, "")
-        Me.btnRefreshLeadType.Image = CType(resources.GetObject("btnRefreshLeadType.Image"), System.Drawing.Image)
-        Me.btnRefreshLeadType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshLeadType.ImageOptions.Image = CType(resources.GetObject("btnRefreshLeadType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshLeadType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshLeadType.Location = New System.Drawing.Point(357, 146)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshLeadType, True)
         Me.btnRefreshLeadType.Name = "btnRefreshLeadType"
@@ -743,8 +740,8 @@ Partial Class frmContact
         Me.btnRefreshTitle.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshTitle.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshTitle, "")
-        Me.btnRefreshTitle.Image = CType(resources.GetObject("btnRefreshTitle.Image"), System.Drawing.Image)
-        Me.btnRefreshTitle.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshTitle.ImageOptions.Image = CType(resources.GetObject("btnRefreshTitle.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshTitle.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshTitle.Location = New System.Drawing.Point(357, 67)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshTitle, True)
         Me.btnRefreshTitle.Name = "btnRefreshTitle"
@@ -799,8 +796,8 @@ Partial Class frmContact
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(623, 14)
         Me.Label29.TabIndex = 121
-        Me.Label29.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label29.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label29, "")
         '
         'Label28
@@ -815,8 +812,8 @@ Partial Class frmContact
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(623, 14)
         Me.Label28.TabIndex = 120
-        Me.Label28.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label28.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label28, "")
         '
         'Label21
@@ -983,7 +980,7 @@ Partial Class frmContact
         Me.CreditTabPage.Controls.Add(Me.UcCreditInfo1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CreditTabPage, True)
         Me.CreditTabPage.Name = "CreditTabPage"
-        Me.CreditTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.CreditTabPage.Size = New System.Drawing.Size(845, 514)
         Me.CreditTabPage.Text = "ข้อมูลทางการเงิน"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CreditTabPage, "")
         '
@@ -994,7 +991,7 @@ Partial Class frmContact
         Me.UcCreditInfo1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCreditInfo1, True)
         Me.UcCreditInfo1.Name = "UcCreditInfo1"
-        Me.UcCreditInfo1.Size = New System.Drawing.Size(841, 504)
+        Me.UcCreditInfo1.Size = New System.Drawing.Size(845, 514)
         Me.UcCreditInfo1.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCreditInfo1, "")
         '
@@ -1004,7 +1001,7 @@ Partial Class frmContact
         Me.HiastoryTabPage.Controls.Add(Me.UcHistory1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.HiastoryTabPage, True)
         Me.HiastoryTabPage.Name = "HiastoryTabPage"
-        Me.HiastoryTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.HiastoryTabPage.Size = New System.Drawing.Size(845, 514)
         Me.HiastoryTabPage.Text = "ข้อมูลส่วนตัว"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.HiastoryTabPage, "")
         '
@@ -1015,7 +1012,7 @@ Partial Class frmContact
         Me.UcHistory1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcHistory1, True)
         Me.UcHistory1.Name = "UcHistory1"
-        Me.UcHistory1.Size = New System.Drawing.Size(841, 504)
+        Me.UcHistory1.Size = New System.Drawing.Size(845, 514)
         Me.UcHistory1.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcHistory1, "")
         '
@@ -1026,7 +1023,7 @@ Partial Class frmContact
         Me.AddressTabPage.Controls.Add(Me.UcAddress1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AddressTabPage, True)
         Me.AddressTabPage.Name = "AddressTabPage"
-        Me.AddressTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.AddressTabPage.Size = New System.Drawing.Size(845, 514)
         Me.AddressTabPage.Text = "ที่อยู่"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AddressTabPage, "")
         '
@@ -1037,7 +1034,7 @@ Partial Class frmContact
         Me.UcAddress1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAddress1, True)
         Me.UcAddress1.Name = "UcAddress1"
-        Me.UcAddress1.Size = New System.Drawing.Size(841, 504)
+        Me.UcAddress1.Size = New System.Drawing.Size(845, 514)
         Me.UcAddress1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAddress1, "")
         '
@@ -1047,7 +1044,7 @@ Partial Class frmContact
         Me.AddressShipTabPage.Controls.Add(Me.UcAddress2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AddressShipTabPage, True)
         Me.AddressShipTabPage.Name = "AddressShipTabPage"
-        Me.AddressShipTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.AddressShipTabPage.Size = New System.Drawing.Size(845, 514)
         Me.AddressShipTabPage.Text = "ที่อยู่สำหรับส่งของ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AddressShipTabPage, "")
         '
@@ -1058,7 +1055,7 @@ Partial Class frmContact
         Me.UcAddress2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAddress2, True)
         Me.UcAddress2.Name = "UcAddress2"
-        Me.UcAddress2.Size = New System.Drawing.Size(841, 504)
+        Me.UcAddress2.Size = New System.Drawing.Size(845, 514)
         Me.UcAddress2.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAddress2, "")
         '
@@ -1069,7 +1066,7 @@ Partial Class frmContact
         Me.SWOTTabPage.Controls.Add(Me.UcSWOT1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.SWOTTabPage, True)
         Me.SWOTTabPage.Name = "SWOTTabPage"
-        Me.SWOTTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.SWOTTabPage.Size = New System.Drawing.Size(845, 507)
         Me.SWOTTabPage.Text = "SWOT"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.SWOTTabPage, "")
         '
@@ -1089,7 +1086,7 @@ Partial Class frmContact
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.NoteTabPage.Size = New System.Drawing.Size(845, 507)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1100,7 +1097,7 @@ Partial Class frmContact
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(841, 504)
+        Me.UcNote1.Size = New System.Drawing.Size(845, 507)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1110,7 +1107,7 @@ Partial Class frmContact
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(845, 507)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1121,7 +1118,7 @@ Partial Class frmContact
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(841, 504)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(845, 507)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1131,7 +1128,7 @@ Partial Class frmContact
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(841, 504)
+        Me.AdminTabPage.Size = New System.Drawing.Size(845, 507)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -1187,6 +1184,7 @@ Partial Class frmContact
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl

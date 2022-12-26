@@ -613,21 +613,29 @@ Public Class ProductDAO
                         If lclsInform.InitailData(pCustomerID, ID, ptr) Then
                             PriceSale = lclsInform.PriceSale
                         End If
+                        ' MasterID    CodeThai	CodeEng	 
+                        '1   ราคามาตรฐาน	Standard price	 
+                        '2   Cost	Cost	ราคา1
+                        '3   Cash	Cash	ราคา2
+                        '4   1-3ชิ้น	1-3ชิ้น	ราคา3
+                        '5   3-6ชิ้น	3-6ชิ้น	ราคา4
+                        '6   6ชิ้น	6ชิ้น	    ราคา5
+                        '7   NV	NV	        ราคา6
                         If PriceSale = 0 Then
                             Select Case lclsCus.CriterionPriceID
-                                Case 0
-                                    PriceSale = PriceStandard
                                 Case 1
-                                    PriceSale = Price1
+                                    PriceSale = PriceStandard
                                 Case 2
-                                    PriceSale = Price2
+                                    PriceSale = Price1
                                 Case 3
-                                    PriceSale = Price3
+                                    PriceSale = Price2
                                 Case 4
-                                    PriceSale = Price4
+                                    PriceSale = Price3
                                 Case 5
-                                    PriceSale = Price5
+                                    PriceSale = Price4
                                 Case 6
+                                    PriceSale = Price5
+                                Case 7
                                     PriceSale = Price6
                                 Case Else
                                     PriceSale = PriceStandard
@@ -641,20 +649,20 @@ Public Class ProductDAO
                         End If
                         If PriceBuy = 0 Then
                             Select Case lclsCus.CriterionPriceID
-                                Case 0
-                                    PriceBuy = PriceStandard
                                 Case 1
-                                    PriceBuy = Price1
+                                    PriceSale = PriceStandard
                                 Case 2
-                                    PriceBuy = Price1
+                                    PriceSale = Price1
                                 Case 3
-                                    PriceBuy = Price1
+                                    PriceSale = Price2
                                 Case 4
-                                    PriceBuy = Price1
+                                    PriceSale = Price3
                                 Case 5
-                                    PriceBuy = Price1
+                                    PriceSale = Price4
                                 Case 6
-                                    PriceBuy = Price1
+                                    PriceSale = Price5
+                                Case 7
+                                    PriceSale = Price6
                                 Case Else
                                     PriceSale = PriceStandard
                             End Select

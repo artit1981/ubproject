@@ -1,0 +1,1 @@
+ เพิ่ม ชื่อ sup / sku เพื่อใช้ import price update 
