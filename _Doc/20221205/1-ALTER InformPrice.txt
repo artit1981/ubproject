@@ -1,0 +1,1 @@
+ALTER TABLE dbo.InformPrice ADD	PriceOnline numeric(18, 2) NULL;

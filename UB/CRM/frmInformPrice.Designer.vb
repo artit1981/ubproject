@@ -46,6 +46,7 @@ Partial Class frmInformPrice
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.ProductRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Unit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Promotion = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceStandard = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -53,6 +54,7 @@ Partial Class frmInformPrice
         Me.Price4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Price6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PriceOnline = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CostAdjust = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceInform = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
@@ -99,8 +101,6 @@ Partial Class frmInformPrice
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Promotion = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -408,7 +408,7 @@ Partial Class frmInformPrice
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Unit, Me.Promotion, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.GridColumn1, Me.CostAdjust, Me.PriceInform, Me.InformPriceID, Me.PriceInformOld, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.IsSelect, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Unit, Me.Promotion, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.PriceOnline, Me.CostAdjust, Me.PriceInform, Me.InformPriceID, Me.PriceInformOld, Me.Image})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -532,6 +532,27 @@ Partial Class frmInformPrice
         Me.Unit.Visible = True
         Me.Unit.VisibleIndex = 4
         Me.Unit.Width = 65
+        '
+        'Promotion
+        '
+        Me.Promotion.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Promotion.AppearanceCell.Options.UseBackColor = True
+        Me.Promotion.AppearanceCell.Options.UseTextOptions = True
+        Me.Promotion.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.Promotion.AppearanceHeader.Options.UseTextOptions = True
+        Me.Promotion.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Promotion.Caption = "Promotion"
+        Me.Promotion.DisplayFormat.FormatString = "n2"
+        Me.Promotion.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Promotion.FieldName = "PricePromotion"
+        Me.Promotion.MaxWidth = 70
+        Me.Promotion.MinWidth = 50
+        Me.Promotion.Name = "Promotion"
+        Me.Promotion.OptionsColumn.ReadOnly = True
+        Me.Promotion.OptionsColumn.TabStop = False
+        Me.Promotion.Visible = True
+        Me.Promotion.VisibleIndex = 5
+        Me.Promotion.Width = 70
         '
         'PriceStandard
         '
@@ -679,6 +700,25 @@ Partial Class frmInformPrice
         Me.Price6.Visible = True
         Me.Price6.VisibleIndex = 12
         Me.Price6.Width = 70
+        '
+        'PriceOnline
+        '
+        Me.PriceOnline.AppearanceCell.BackColor = System.Drawing.Color.White
+        Me.PriceOnline.AppearanceCell.Options.UseBackColor = True
+        Me.PriceOnline.AppearanceCell.Options.UseTextOptions = True
+        Me.PriceOnline.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.PriceOnline.AppearanceHeader.Options.UseTextOptions = True
+        Me.PriceOnline.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.PriceOnline.Caption = "Online"
+        Me.PriceOnline.DisplayFormat.FormatString = "n2"
+        Me.PriceOnline.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.PriceOnline.FieldName = "PriceOnline"
+        Me.PriceOnline.MaxWidth = 70
+        Me.PriceOnline.MinWidth = 50
+        Me.PriceOnline.Name = "PriceOnline"
+        Me.PriceOnline.Visible = True
+        Me.PriceOnline.VisibleIndex = 13
+        Me.PriceOnline.Width = 70
         '
         'CostAdjust
         '
@@ -1197,7 +1237,7 @@ Partial Class frmInformPrice
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(1340, 545)
+        Me.NoteTabPage.Size = New System.Drawing.Size(1282, 545)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1209,7 +1249,7 @@ Partial Class frmInformPrice
         Me.UcNote1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(1340, 545)
+        Me.UcNote1.Size = New System.Drawing.Size(1282, 545)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1219,7 +1259,7 @@ Partial Class frmInformPrice
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(1340, 545)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(1282, 545)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1231,7 +1271,7 @@ Partial Class frmInformPrice
         Me.UcFileAttach1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(1340, 545)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(1282, 545)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1241,7 +1281,7 @@ Partial Class frmInformPrice
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(1340, 545)
+        Me.AdminTabPage.Size = New System.Drawing.Size(1282, 545)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -1258,46 +1298,6 @@ Partial Class frmInformPrice
         '
         'FormChangedComponent1
         '
-        '
-        'Promotion
-        '
-        Me.Promotion.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Promotion.AppearanceCell.Options.UseBackColor = True
-        Me.Promotion.AppearanceCell.Options.UseTextOptions = True
-        Me.Promotion.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.Promotion.AppearanceHeader.Options.UseTextOptions = True
-        Me.Promotion.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.Promotion.Caption = "Promotion"
-        Me.Promotion.DisplayFormat.FormatString = "n2"
-        Me.Promotion.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Promotion.FieldName = "PromotionPrice"
-        Me.Promotion.MaxWidth = 70
-        Me.Promotion.MinWidth = 50
-        Me.Promotion.Name = "Promotion"
-        Me.Promotion.OptionsColumn.ReadOnly = True
-        Me.Promotion.OptionsColumn.TabStop = False
-        Me.Promotion.Visible = True
-        Me.Promotion.VisibleIndex = 5
-        Me.Promotion.Width = 70
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.AppearanceCell.BackColor = System.Drawing.Color.White
-        Me.GridColumn1.AppearanceCell.Options.UseBackColor = True
-        Me.GridColumn1.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn1.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn1.Caption = "Online"
-        Me.GridColumn1.DisplayFormat.FormatString = "n2"
-        Me.GridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn1.FieldName = "OnlinePrice"
-        Me.GridColumn1.MaxWidth = 70
-        Me.GridColumn1.MinWidth = 50
-        Me.GridColumn1.Name = "GridColumn1"
-        Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 13
-        Me.GridColumn1.Width = 70
         '
         'frmInformPrice
         '
@@ -1430,5 +1430,5 @@ Partial Class frmInformPrice
     Friend WithEvents Image As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnImage As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents Promotion As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PriceOnline As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -1,0 +1,22 @@
+INSERT INTO [dbo].[CriterionPrice]
+           ([MasterID]
+           ,[CodeThai]
+           ,[CodeEng]
+           ,[Remark]
+           ,[IsInActive]
+           ,[IsDelete]
+           ,[CreateBy]
+           ,[CreateTime]
+           ,[ModifiedBy]
+           ,[ModifiedTime])
+     VALUES
+           (8
+           ,'Online'
+           ,'Online'
+           ,'Online'
+           ,0
+           ,0
+           ,0
+           ,'2022-12-22 00:00:42.000'
+           ,null
+           ,null);
