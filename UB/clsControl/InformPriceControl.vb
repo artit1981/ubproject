@@ -58,6 +58,16 @@ Public Class InformPriceControl
             .Columns("ID").Visible = False
             .Columns("Customer").Caption = "ลูกค้า"
             .Columns("Customer").Width = 250
+            .Columns("Customer").MaxWidth = 0
+
+            .Columns("CustomerCode").Caption = "รหัส"
+            .Columns("CustomerCode").Width = 200
+            .Columns("CustomerCode").MaxWidth = 250
+
+            .Columns("CustomerType").Caption = "ประเภท"
+            .Columns("CustomerType").Width = 150
+            .Columns("CustomerType").MaxWidth = 200
+
             '.Columns("ModifiedTime").Caption = "แก้ไขล่าสุด"
             '.Columns("ModifiedTime").Width = 150
             '.Columns("ModifiedTime").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom

@@ -25,8 +25,13 @@ Public Class frmInformPrice
             txtListCount.EditValue = "0"
             InitialCombo()
             btnMakeOrder.Enabled = False
-            chkAutoRow.Checked = True
+            chkAutoRow.Checked = False
             mIDs = pID
+
+            dtpDateTo.EditValue = GetCurrentDate(Nothing)
+            dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -3, GetCurrentDate(Nothing))
+
+
             Call LoadData(pMode, pID)
 
         Catch e As Exception
@@ -268,7 +273,7 @@ Public Class frmInformPrice
         Try
             mIsOnLoad = True
 
-            chkSelectAll.Checked = False
+            'chkSelectAll.Checked = False
             lCusID = ConvertNullToZero(CustomerID.EditValue)
 
             InitialGrid(lCusID)
@@ -323,7 +328,7 @@ Public Class frmInformPrice
             bindingSource1.DataSource = Nothing
             'bindingSource1.DataSource = GetType(InformPriceSubDAO)
 
-            Call mcls.InitailData(pID, 0, , lProGroupID, lProCateID, lProType, lProBrand)
+            Call mcls.InitailData(pID, 0, , lProGroupID, lProCateID, lProType, lProBrand, True, dtpDateFrom.EditValue, dtpDateTo.EditValue)
             If IsNothing(mcls.ProductTable) = False Then
                 bindingSource1.DataSource = mcls.ProductTable
             End If
@@ -417,28 +422,31 @@ Public Class frmInformPrice
     End Function
 
 
-    Public Sub SetSelectAll()
-        Dim lRow As Long, lIsSelect As Integer = 0
-        Try
-            If chkSelectAll.Checked Then
-                lIsSelect = 1
-            Else
-                lIsSelect = 0
-            End If
+    'Public Sub SetSelectAll()
+    '    'Dim lRow As Long, lIsSelect As Integer = 0
+    '    Try
+    '        If chkSelectAll.Checked Then
+    '            'lIsSelect = 1
+    '            gridView.SelectAll()
+    '        Else
+    '            gridView.ClearSelection()
+    '            'lIsSelect = 0
+    '        End If
 
-            If gridView.RowCount > 0 Then
-                ShowProgress(True, "Loading...")
-                For lRow = 0 To gridView.RowCount
-                    gridView.SetRowCellValue(lRow, "IsSelect", lIsSelect)
-                Next
-            End If
+    '        'If gridView.RowCount > 0 Then
+    '        '    ShowProgress(True, "Loading...")
+    '        '    For lRow = 0 To gridView.RowCount
+    '        '        gridView.SelectAll()
+    '        '        'gridView.SetRowCellValue(lRow, "IsSelect", lIsSelect)
+    '        '    Next
+    '        'End If
 
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetSelectAll : " & e.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mFormName & ".SetSelectAll : " & e.Message)
+    '    Finally
+    '        ShowProgress(False, "")
+    '    End Try
+    'End Sub
 
 
     Private Sub AddingOrder()
@@ -523,44 +531,44 @@ Public Class frmInformPrice
         gridView.RefreshData()
     End Sub
 
-    Private Sub chkSelectAll_CheckedChanged(sender As Object, e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        If mIsOnLoad = False Then
-            Call SetSelectAll()
-        End If
-    End Sub
+    'Private Sub chkSelectAll_CheckedChanged(sender As Object, e As System.EventArgs)
+    '    If mIsOnLoad = False Then
+    '        Call SetSelectAll()
+    '    End If
+    'End Sub
 
-    Private Sub btnCalc_Click(sender As Object, e As System.EventArgs) Handles btnCalc.Click
-        Dim lRow As Long, lCost As Decimal = 0, lCalc As Decimal = 0
-        Try
-            If gridView.RowCount = 0 Then Exit Sub
-            If gridView.RowCount > 0 Then
-                For lRow = 0 To gridView.RowCount
-                    If gridView.GetRowCellValue(lRow, "IsSelect") = 1 Then
+    'Private Sub btnCalc_Click(sender As Object, e As System.EventArgs)
+    '    Dim lRow As Long, lCost As Decimal = 0, lCalc As Decimal = 0
+    '    Try
+    '        If gridView.RowCount = 0 Then Exit Sub
+    '        If gridView.RowCount > 0 Then
+    '            For lRow = 0 To gridView.RowCount
+    '                If gridView.GetRowCellValue(lRow, "IsSelect") = 1 Then
 
-                        ShowProgress(True, "Loading...")
+    '                    ShowProgress(True, "Loading...")
 
-                        lCost = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CostAdjust"))
-                        If lCost > 0 Then
+    '                    lCost = ConvertNullToZero(gridView.GetRowCellValue(lRow, "CostAdjust"))
+    '                    If lCost > 0 Then
 
-                            If ConvertNullToZero(calcPriceInform.EditValue) <> 0 Then
-                                lCalc = lCost * (ConvertNullToZero(calcPriceInform.EditValue) / 100)
-                                lCalc = Format(ConvertNullToZero(lCost + lCalc), "#,##0.00")
-                                gridView.SetRowCellValue(lRow, "PriceInform", lCalc)
-                            End If
-                        End If
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            ShowProgress(False, "")
-            ShowErrorMsg(False, ex.Message)
+    '                        If ConvertNullToZero(calcPriceInform.EditValue) <> 0 Then
+    '                            lCalc = lCost * (ConvertNullToZero(calcPriceInform.EditValue) / 100)
+    '                            lCalc = Format(ConvertNullToZero(lCost + lCalc), "#,##0.00")
+    '                            gridView.SetRowCellValue(lRow, "PriceInform", lCalc)
+    '                        End If
+    '                    End If
+    '                End If
+    '            Next
+    '        End If
+    '    Catch ex As Exception
+    '        ShowProgress(False, "")
+    '        ShowErrorMsg(False, ex.Message)
 
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
+    '    Finally
+    '        ShowProgress(False, "")
+    '    End Try
+    'End Sub
 
-    Private Sub btnImage_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles btnImage.ButtonClick
+    Private Sub btnImage_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs)
         Dim lfrmView As New frmViewImage
         Dim lclsProduct As ProductDAO
         Dim rowHandle As Integer, llngProID As Long
@@ -582,19 +590,18 @@ Public Class frmInformPrice
         End Try
 
     End Sub
-    Private Sub btnReset_Click(sender As System.Object, e As System.EventArgs) Handles btnReset.Click
-        Try
-            If XtraMessageBox.Show(Me, "ยืนยันรีเซตข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                ShowProgress(True, "Loading...")
-                LoadDataGrid()
-                calcPriceInform.EditValue = 0
-            End If
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
-
+    'Private Sub btnReset_Click(sender As System.Object, e As System.EventArgs)
+    '    Try
+    '        If XtraMessageBox.Show(Me, "ยืนยันรีเซตข้อมูล", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+    '            ShowProgress(True, "Loading...")
+    '            LoadDataGrid()
+    '            calcPriceInform.EditValue = 0
+    '        End If
+    '    Catch ex As Exception
+    '        ShowErrorMsg(False, ex.Message)
+    '    Finally
+    '        ShowProgress(False, "")
+    '    End Try
+    'End Sub
 
 End Class

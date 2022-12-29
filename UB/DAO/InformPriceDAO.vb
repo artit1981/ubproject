@@ -61,10 +61,12 @@ Public Class InformPriceDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT  ID ,Customer "
+            SQL = "SELECT  ID ,CustomerCode,Customer ,CustomerType"
             SQL &=  " FROM ("
-            SQL &=  " SELECT InformPrice.CustomerID AS ID "
-            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " SELECT InformPrice.CustomerID AS ID "
+            SQL &= " ,case when Customer.CompanyName='' then Customer.Title + Customer.Firstname + ' ' + Customer.LastName else Customer.CompanyName end Customer"
+            SQL &= " ,Customer.CustomerCode AS CustomerCode"
+            SQL &= " ,CustomerType AS CustomerType "
             SQL &=  " ,InformPrice.CreateTime AS ModifiedTime"
             SQL &=  " FROM InformPrice  "
             SQL &=  " LEFT OUTER JOIN Customer ON InformPrice.CustomerID=Customer.CustomerID  "
@@ -73,8 +75,8 @@ Public Class InformPriceDAO
                 SQL &=  "  AND InformPrice.CustomerID=" & pID
             End If
             SQL &=  "  ) AS A "
-            SQL &=  " GROUP BY ID ,Customer "
-            SQL &=  " ORDER BY Customer"
+            SQL &= " GROUP BY ID ,CustomerCode,Customer ,CustomerType "
+            SQL &= " ORDER BY CustomerCode,Customer"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "InformPriceDAO.GetDataTable : " & e.Message)
@@ -83,81 +85,89 @@ Public Class InformPriceDAO
     End Function
 
     Private Sub LoadData(ByVal pAccountID As Long, ByVal pProID As Long, Optional ByVal pProGroupID As Long = 0, Optional ByVal pProCategID As Long = 0 _
-                                 , Optional ByVal pProTypeID As Long = 0, Optional ByVal pProBandID As Long = 0)
+                                 , Optional ByVal pProTypeID As Long = 0, Optional ByVal pProBandID As Long = 0 _
+                                 , Optional ByVal pIsUseDate As Boolean = False, Optional ByVal pFromDate As Date = Nothing, Optional ByVal pToDate As Date = Nothing)
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
 
         Try
 
-            SQL &=  "SELECT 0 as IsSelect, Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy"
-            SQL &=  " ,Inform.ProductCode,Inform.ProductName,Inform.CostAdjust,Inform.PriceInform,Inform.PriceInform as PriceInformOld,sum(Stock.Units) as Unit"
+            SQL &= "SELECT 0 as IsSelect, Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy"
+            SQL &= " ,Inform.ProductCode,Inform.ProductName,Inform.CostAdjust,Inform.PriceInform,Inform.PriceInform as PriceInformOld,sum(Stock.Units) as Unit"
             SQL &= " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3 ,Inform.Price4 ,Inform.Price5 ,Inform.Price6,Inform.PriceOnline  "
-            SQL &=  " ,Inform.ProductRemark "
-            SQL &=  " FROM ( "
+            SQL &= " ,Inform.ProductRemark "
+            If pAccountID > 0 And pIsUseDate = True Then
+                SQL &= " ,isnull(MAX(Campaign.Price),0) as PricePromotion  "
+            Else
+                SQL &= " ,0 as PricePromotion  "
+            End If
+            SQL &= " FROM ( "
             If pAccountID > 0 Then
-                SQL &=  "SELECT  InformPrice.InformPriceID,InformPrice.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
-                SQL &=  " ,Product.ProductCode,Product.ProductName ,InformPrice.PriceInform,InformPrice.CostAdjust,Product.Remark as ProductRemark   "
+                SQL &= "SELECT  InformPrice.InformPriceID,InformPrice.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
+                SQL &= " ,Product.ProductCode,Product.ProductName ,InformPrice.PriceInform,InformPrice.CostAdjust,Product.Remark as ProductRemark   "
                 SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6,InformPrice.PriceOnline  "
-                SQL &=  " FROM InformPrice "
-                SQL &=  " Inner join Product ON Product.ProductID=InformPrice.ProductID "
-                SQL &=  " WHERE InformPrice.IsDelete =0 and Product.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
+                SQL &= " FROM InformPrice "
+                SQL &= " Inner join Product ON Product.ProductID=InformPrice.ProductID "
+                SQL &= " WHERE InformPrice.IsDelete =0 and Product.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
                 If pProID > 0 Then
-                    SQL &=  " AND InformPrice.ProductID =" & pProID
+                    SQL &= " AND InformPrice.ProductID =" & pProID
                 End If
                 If pProGroupID > 0 Then
-                    SQL &=  " AND Product.ProductGroupID =" & pProGroupID
+                    SQL &= " AND Product.ProductGroupID =" & pProGroupID
                 End If
                 If pProCategID > 0 Then
-                    SQL &=  " AND Product.ProductCategoryID =" & pProCategID
+                    SQL &= " AND Product.ProductCategoryID =" & pProCategID
                 End If
                 If pProTypeID > 0 Then
-                    SQL &=  " AND Product.ProductTypeID =" & pProTypeID
+                    SQL &= " AND Product.ProductTypeID =" & pProTypeID
                 End If
                 If pProBandID > 0 Then
-                    SQL &=  " AND Product.ProductBrandID =" & pProBandID
+                    SQL &= " AND Product.ProductBrandID =" & pProBandID
                 End If
-                SQL &=  " UNION ALL "
+                SQL &= " UNION ALL "
             End If
-            SQL &=  " SELECT  0 as InformPriceID,Product.ProductID ,Product.CreateTime,Product.CreateBy"
-            SQL &=  " ,Product.ProductCode,Product.ProductName ,0 AS PriceInform,0 as CostAdjust,Product.Remark as ProductRemark "
+            SQL &= " SELECT  0 as InformPriceID,Product.ProductID ,Product.CreateTime,Product.CreateBy"
+            SQL &= " ,Product.ProductCode,Product.ProductName ,0 AS PriceInform,0 as CostAdjust,Product.Remark as ProductRemark "
             SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6 ,0 as PriceOnline "
-            SQL &=  " FROM Product "
-            SQL &=  " WHERE Product.IsDelete =0 "
+            SQL &= " FROM Product "
+            SQL &= " WHERE Product.IsDelete =0 "
             If pProID > 0 Then
-                SQL &=  " AND Product.ProductID =" & pProID
+                SQL &= " AND Product.ProductID =" & pProID
             End If
             If pProGroupID > 0 Then
-                SQL &=  " AND Product.ProductGroupID =" & pProGroupID
+                SQL &= " AND Product.ProductGroupID =" & pProGroupID
             End If
             If pProCategID > 0 Then
-                SQL &=  " AND Product.ProductCategoryID =" & pProCategID
+                SQL &= " AND Product.ProductCategoryID =" & pProCategID
             End If
             If pProTypeID > 0 Then
-                SQL &=  " AND Product.ProductTypeID =" & pProTypeID
+                SQL &= " AND Product.ProductTypeID =" & pProTypeID
             End If
             If pProBandID > 0 Then
-                SQL &=  " AND Product.ProductBrandID =" & pProBandID
+                SQL &= " AND Product.ProductBrandID =" & pProBandID
             End If
             If pAccountID > 0 Then
-                SQL &=  " AND Product.ProductID NOT IN (SELECT ProductID FROM InformPrice WHERE CustomerID=" & pAccountID & " )"
+                SQL &= " AND Product.ProductID NOT IN (SELECT ProductID FROM InformPrice WHERE CustomerID=" & pAccountID & " )"
             End If
-            SQL &=  " ) AS Inform"
-            SQL &=  " LEFT OUTER JOIN Product_Stock Stock ON Stock.ProductID=Inform.ProductID and IsSumStock=1"
-            'SQL = SQL & " LEFT OUTER JOIN ( Select Campaign.CampaignID,Campaign.Subject,ProductList.ProductID,CustomerList.CustomerID "
-            'SQL = SQL & "       from Campaign,ProductList,CustomerList"
-            'SQL = SQL & "       where ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='Campaign' "
-            'SQL = SQL & "       CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= " & MasterType.Campaign
-            'SQL = SQL & " "
-            'SQL = SQL & "  ) CampaignID ON Campaign.ProductID=Inform.ProductID "
-            'If pAccountID > 0 Then
-            '    SQL &=  "       and Campaign.CustomerID=" & pAccountID
-            'End If
+            SQL &= " ) AS Inform"
+            SQL &= " LEFT OUTER JOIN Product_Stock Stock ON Stock.ProductID=Inform.ProductID and IsSumStock=1"
+            If pAccountID > 0 And pIsUseDate = True Then
+                SQL &= " LEFT OUTER JOIN  "
+                SQL &= "    ( Select Campaign.CampaignID,Campaign.Subject,ProductList.ProductID,CustomerList.CustomerID,ProductList.Price"
+                SQL &= "       from Campaign,ProductList,CustomerList"
+                SQL &= "       where ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='Campaign' "
+                SQL &= "       and CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= " & MasterType.Campaign
+                SQL &= "       and CustomerList.CustomerID=" & pAccountID
+                SQL &= "       and Campaign.StartDate between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
+                SQL &= "       And Campaign.ExpireDate >'" & formatSQLDate(pFromDate) & "'"
+                SQL &= "    ) Campaign ON Campaign.ProductID=Inform.ProductID "
+            End If
 
-            SQL &=  " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
-            SQL &=  " ,Inform.PriceInform,Inform.ProductRemark"
-            SQL &=  " ,Inform.CostAdjust"
+            SQL &= " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
+            SQL &= " ,Inform.PriceInform,Inform.ProductRemark"
+            SQL &= " ,Inform.CostAdjust"
             SQL &= " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3 ,Inform.Price4 ,Inform.Price5 ,Inform.Price6,Inform.PriceOnline  "
-            SQL &=  " ORDER BY Inform.ProductCode,Inform.ProductName"
+            SQL &= " ORDER BY Inform.ProductCode,Inform.ProductName"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             mProductTable = dataTable
@@ -177,14 +187,15 @@ Public Class InformPriceDAO
 
     Public Function InitailData(ByVal pCusID As Long, ByVal pProID As Long, Optional ByVal tr As SqlTransaction = Nothing _
                                  , Optional ByVal pProGroupID As Long = 0, Optional ByVal pProCategID As Long = 0 _
-                                 , Optional ByVal pProTypeID As Long = 0, Optional ByVal pProBandID As Long = 0) As Boolean
+                                 , Optional ByVal pProTypeID As Long = 0, Optional ByVal pProBandID As Long = 0 _
+                                 , Optional ByVal pIsUseDate As Boolean = False, Optional ByVal pFromDate As Date = Nothing, Optional ByVal pToDate As Date = Nothing) As Boolean
         Dim SQL As String
         Dim dataTable As New DataTable()
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL &=  " FROM " & TableName
-            SQL &=  " WHERE IsInActive = 0 AND CustomerID=" & pCusID
+            SQL &= " FROM " & TableName
+            SQL &= " WHERE IsInActive = 0 AND CustomerID=" & pCusID
 
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
@@ -200,14 +211,14 @@ Public Class InformPriceDAO
                     End If
                     FileAttachs = LoadFileAttach(ID, TableName, tr)
                     'If pProID <= 0 Then
-                    LoadData(ID, pProID, pProGroupID, pProCategID, pProTypeID, pProBandID)
+                    LoadData(ID, pProID, pProGroupID, pProCategID, pProTypeID, pProBandID, pIsUseDate, pFromDate, pToDate)
                     'End If
 
                     Return True
                     Exit For
                 Next
             Else
-                LoadData(0, pProID, pProGroupID, pProCategID, pProTypeID, pProBandID)
+                LoadData(pCusID, pProID, pProGroupID, pProCategID, pProTypeID, pProBandID)
             End If
 
         Catch e As Exception
