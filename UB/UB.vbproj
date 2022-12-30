@@ -387,6 +387,12 @@
     <Compile Include="CRM\frmBankAccountRec.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CRM\frmCommission.Designer.vb">
+      <DependentUpon>frmCommission.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmCommission.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmCashRecord.Designer.vb">
       <DependentUpon>frmCashRecord.vb</DependentUpon>
     </Compile>
@@ -1267,6 +1273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmBankAccountRec.resx">
       <DependentUpon>frmBankAccountRec.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmCommission.resx">
+      <DependentUpon>frmCommission.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmCashRecord.resx">
       <DependentUpon>frmCashRecord.vb</DependentUpon>

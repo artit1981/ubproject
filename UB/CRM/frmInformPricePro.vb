@@ -327,28 +327,28 @@ Public Class frmInformPricePro
     End Function
 
 
-    Public Sub SetSelectAll()
-        Dim lRow As Long, lIsSelect As Integer = 0
-        Try
-            If chkSelectAll.Checked Then
-                lIsSelect = 1
-            Else
-                lIsSelect = 0
-            End If
+    'Public Sub SetSelectAll()
+    '    Dim lRow As Long, lIsSelect As Integer = 0
+    '    Try
+    '        If chkSelectAll.Checked Then
+    '            lIsSelect = 1
+    '        Else
+    '            lIsSelect = 0
+    '        End If
 
-            If gridView.RowCount > 0 Then
-                ShowProgress(True, "Loading...")
-                For lRow = 0 To gridView.RowCount
-                    gridView.SetRowCellValue(lRow, "IsSelect", lIsSelect)
-                Next
-            End If
+    '        If gridView.RowCount > 0 Then
+    '            ShowProgress(True, "Loading...")
+    '            For lRow = 0 To gridView.RowCount
+    '                gridView.SetRowCellValue(lRow, "IsSelect", lIsSelect)
+    '            Next
+    '        End If
 
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".SetSelectAll : " & e.Message)
-        Finally
-            ShowProgress(False, "")
-        End Try
-    End Sub
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mFormName & ".SetSelectAll : " & e.Message)
+    '    Finally
+    '        ShowProgress(False, "")
+    '    End Try
+    'End Sub
 
 #End Region
 
@@ -389,11 +389,11 @@ Public Class frmInformPricePro
         gridView.RefreshData()
     End Sub
 
-    Private Sub chkSelectAll_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        If mIsOnLoad = False Then
-            Call SetSelectAll()
-        End If
-    End Sub
+    'Private Sub chkSelectAll_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
+    '    If mIsOnLoad = False Then
+    '        Call SetSelectAll()
+    '    End If
+    'End Sub
 
     Private Sub btnCalc_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCalc.Click
         Dim lRow As Long, lBase As Decimal = 0, lCalc As Decimal = 0

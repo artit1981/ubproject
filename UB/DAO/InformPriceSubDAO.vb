@@ -156,6 +156,16 @@
             mDiscount = value
         End Set
     End Property
+
+    Private mPriceOnline As Decimal = 0
+    Public Property PriceOnline() As Decimal
+        Get
+            Return mPriceOnline
+        End Get
+        Set(ByVal value As Decimal)
+            mPriceOnline = value
+        End Set
+    End Property
     Public Property Unit() As Long
         Get
             Return mUnit

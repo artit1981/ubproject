@@ -105,7 +105,7 @@ Public Class InformPriceDAO
             If pAccountID > 0 Then
                 SQL &= "SELECT  InformPrice.InformPriceID,InformPrice.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
                 SQL &= " ,Product.ProductCode,Product.ProductName ,InformPrice.PriceInform,InformPrice.CostAdjust,Product.Remark as ProductRemark   "
-                SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6,InformPrice.PriceOnline  "
+                SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6,isnull(InformPrice.PriceOnline,0) as PriceOnline  "
                 SQL &= " FROM InformPrice "
                 SQL &= " Inner join Product ON Product.ProductID=InformPrice.ProductID "
                 SQL &= " WHERE InformPrice.IsDelete =0 and Product.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
@@ -245,13 +245,14 @@ Public Class InformPriceDAO
                         For Each rec As InformPriceSubDAO In mInformPriceDAOs
                             If ConvertNullToZero(rec.ProductID) > 0 Then
                                 If ConvertNullToZero(rec.InformPriceID) = 0 Then
-                                    SQL = " INSERT INTO " & TableName & " (CustomerID,ProductID,PriceInform,CostAdjust"
+                                    SQL = " INSERT INTO " & TableName & " (CustomerID,ProductID,PriceInform,CostAdjust,PriceOnline"
                                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete "
                                     SQL &=  " )"
                                     SQL &=  " VALUES ( @mIDs"
                                     SQL &=  " ,  @ProductID"
-                                    SQL &=  " ,  @PriceInform"
-                                    SQL &=  " ,  @CostAdjust"
+                                    SQL &= " ,  @PriceInform"
+                                    SQL &= "  ,  @CostAdjust"
+                                    SQL &= "  ,  @PriceOnline"
                                     SQL &=  " ,  @gUserID"
                                     SQL &=  " ,  @CreateTime"
                                     SQL &=  " ,  @IsInActive"
@@ -260,7 +261,8 @@ Public Class InformPriceDAO
                                 Else
                                     SQL = " Update " & TableName
                                     SQL &=  " Set PriceInform=@PriceInform"
-                                    SQL &=  " , CostAdjust=@CostAdjust"
+                                    SQL &= " , CostAdjust=@CostAdjust"
+                                    SQL &= " , PriceOnline=@PriceOnline"
                                     SQL &=  " where InformPriceID=@InformPriceID"
 
                                 End If
@@ -272,6 +274,7 @@ Public Class InformPriceDAO
                                 myCommand.Parameters.Add(New SqlParameter("@ProductID", ConvertNullToZero(rec.ProductID)))
                                 myCommand.Parameters.Add(New SqlParameter("@PriceInform", ConvertNullToZero(rec.PriceInform)))
                                 myCommand.Parameters.Add(New SqlParameter("@CostAdjust", ConvertNullToZero(rec.CostAdjust)))
+                                myCommand.Parameters.Add(New SqlParameter("@PriceOnline", ConvertNullToZero(rec.PriceOnline)))
                                 myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
                                 myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
                                 myCommand.Parameters.Add(New SqlParameter("@IsInActive", IsInActive))
