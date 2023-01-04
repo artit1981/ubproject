@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>44</ApplicationRevision>
-    <ApplicationVersion>1.0.1.44</ApplicationVersion>
+    <ApplicationRevision>46</ApplicationRevision>
+    <ApplicationVersion>1.0.1.46</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -387,16 +387,16 @@
     <Compile Include="CRM\frmBankAccountRec.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CRM\frmCommission.Designer.vb">
-      <DependentUpon>frmCommission.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CRM\frmCommission.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CRM\frmCashRecord.Designer.vb">
       <DependentUpon>frmCashRecord.vb</DependentUpon>
     </Compile>
     <Compile Include="CRM\frmCashRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmCommission.Designer.vb">
+      <DependentUpon>frmCommission.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmCommission.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CRM\frmOrderHis2.Designer.vb">
@@ -405,6 +405,7 @@
     <Compile Include="CRM\frmOrderHis2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DAO\CommissionDtlDAO.vb" />
     <Compile Include="DAO\BankAccountRecordSDAO.vb" />
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
@@ -1274,11 +1275,11 @@
     <EmbeddedResource Include="CRM\frmBankAccountRec.resx">
       <DependentUpon>frmBankAccountRec.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CRM\frmCommission.resx">
-      <DependentUpon>frmCommission.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmCashRecord.resx">
       <DependentUpon>frmCashRecord.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmCommission.resx">
+      <DependentUpon>frmCommission.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>

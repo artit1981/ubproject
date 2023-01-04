@@ -612,6 +612,12 @@ Public Class ProductDAO
                         Dim lclsInform As New InformPriceDAO
                         If lclsInform.InitailData(pCustomerID, ID, ptr) Then
                             PriceSale = lclsInform.PriceSale
+                            If PriceSale = 0 Then
+                                Select Case lclsCus.CriterionPriceID
+                                    Case 8
+                                        PriceSale = lclsInform.PriceOnline
+                                End Select
+                            End If
                         End If
                         ' MasterID    CodeThai	CodeEng	 
                         '1   ราคามาตรฐาน	Standard price	 
@@ -650,21 +656,21 @@ Public Class ProductDAO
                         If PriceBuy = 0 Then
                             Select Case lclsCus.CriterionPriceID
                                 Case 1
-                                    PriceSale = PriceStandard
+                                    PriceBuy = PriceStandard
                                 Case 2
-                                    PriceSale = Price1
+                                    PriceBuy = Price1
                                 Case 3
-                                    PriceSale = Price2
+                                    PriceBuy = Price2
                                 Case 4
-                                    PriceSale = Price3
+                                    PriceBuy = Price3
                                 Case 5
-                                    PriceSale = Price4
+                                    PriceBuy = Price4
                                 Case 6
-                                    PriceSale = Price5
+                                    PriceBuy = Price5
                                 Case 7
-                                    PriceSale = Price6
+                                    PriceBuy = Price6
                                 Case Else
-                                    PriceSale = PriceStandard
+                                    PriceBuy = PriceStandard
                             End Select
                         End If
                         lclsInform = Nothing

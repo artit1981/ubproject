@@ -24,22 +24,8 @@ Partial Class frmCommission
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.CampaignStatus = New DevExpress.XtraEditors.RadioGroup()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Subject = New DevExpress.XtraEditors.TextEdit()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Remark = New DevExpress.XtraEditors.MemoEdit()
-        Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcNote1 = New UB.ucNote()
-        Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcFileAttach1 = New UB.ucFileAttach()
-        Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcAdmin1 = New UB.ucAdmin()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.StartDate = New DevExpress.XtraEditors.DateEdit()
-        Me.ExpireDate = New DevExpress.XtraEditors.DateEdit()
+        Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
+        Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -73,21 +59,26 @@ Partial Class frmCommission
         Me.LocationButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.RepositoryItemRadioGroup1 = New DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
+        Me.CampaignStatus = New DevExpress.XtraEditors.RadioGroup()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.ExpireDate = New DevExpress.XtraEditors.DateEdit()
+        Me.StartDate = New DevExpress.XtraEditors.DateEdit()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Subject = New DevExpress.XtraEditors.TextEdit()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Remark = New DevExpress.XtraEditors.MemoEdit()
+        Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcNote1 = New UB.ucNote()
+        Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcFileAttach1 = New UB.ucFileAttach()
+        Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.UcAdmin1 = New UB.ucAdmin()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
-        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.NoteTabPage.SuspendLayout()
-        Me.AttachmentTabPage.SuspendLayout()
-        Me.AdminTabPage.SuspendLayout()
-        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +104,16 @@ Partial Class frmCommission
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.NoteTabPage.SuspendLayout()
+        Me.AttachmentTabPage.SuspendLayout()
+        Me.AdminTabPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -157,226 +157,36 @@ Partial Class frmCommission
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
-        'CampaignStatus
+        'ControlNavigator1
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CampaignStatus, "")
-        Me.CampaignStatus.EditValue = 1
-        Me.CampaignStatus.EnterMoveNextControl = True
-        Me.CampaignStatus.Location = New System.Drawing.Point(183, 142)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CampaignStatus, True)
-        Me.CampaignStatus.Name = "CampaignStatus"
-        Me.CampaignStatus.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Open"), New DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Success"), New DevExpress.XtraEditors.Controls.RadioGroupItem(3, "Fail")})
-        Me.CampaignStatus.Size = New System.Drawing.Size(587, 30)
-        Me.CampaignStatus.TabIndex = 246
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CampaignStatus, "")
+        Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ControlNavigator1.Buttons.Append.Visible = False
+        Me.ControlNavigator1.Buttons.CancelEdit.Visible = False
+        Me.ControlNavigator1.Buttons.Edit.Visible = False
+        Me.ControlNavigator1.Buttons.EndEdit.Visible = False
+        Me.ControlNavigator1.Buttons.ImageList = Me.ImageCollection1
+        Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
+        Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
+        Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
+        Me.ControlNavigator1.Buttons.Remove.Visible = False
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ControlNavigator1, "")
+        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, False, "Insert", "Insert"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 2, True, True, "Move Up", "MoveUp"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 3, True, True, "Move Down", "MoveDown")})
+        Me.ControlNavigator1.Location = New System.Drawing.Point(48, 534)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ControlNavigator1, True)
+        Me.ControlNavigator1.Name = "ControlNavigator1"
+        Me.ControlNavigator1.NavigatableControl = Me.gridControl
+        Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
+        Me.ControlNavigator1.TabIndex = 248
+        Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ControlNavigator1, "")
         '
-        'Label10
+        'ImageCollection1
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label10, "")
-        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label10.Location = New System.Drawing.Point(45, 149)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(39, 14)
-        Me.Label10.TabIndex = 233
-        Me.Label10.Text = "สถานะ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
-        '
-        'Subject
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Subject, "TextChanged")
-        Me.Subject.EditValue = ""
-        Me.Subject.EnterMoveNextControl = True
-        Me.Subject.Location = New System.Drawing.Point(183, 17)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Subject, True)
-        Me.Subject.Name = "Subject"
-        Me.Subject.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Subject.Properties.Appearance.Options.UseFont = True
-        Me.Subject.Properties.MaxLength = 100
-        Me.Subject.Properties.ValidateOnEnterKey = True
-        Me.Subject.Size = New System.Drawing.Size(586, 20)
-        Me.Subject.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Subject, "Text")
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label4, "")
-        Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(43, 20)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(130, 14)
-        Me.Label4.TabIndex = 108
-        Me.Label4.Text = "ชื่อโปรโมชั่น/ Campaign"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
-        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(43, 72)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 14)
-        Me.Label5.TabIndex = 107
-        Me.Label5.Text = "รายละเอียด"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label5, "")
-        '
-        'Remark
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Remark, "TextChanged")
-        Me.Remark.EditValue = ""
-        Me.Remark.EnterMoveNextControl = True
-        Me.Remark.Location = New System.Drawing.Point(183, 69)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Remark, True)
-        Me.Remark.Name = "Remark"
-        Me.Remark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Remark.Properties.Appearance.Options.UseFont = True
-        Me.Remark.Properties.MaxLength = 100
-        Me.Remark.Size = New System.Drawing.Size(587, 67)
-        Me.Remark.TabIndex = 10
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Remark, "Text")
-        '
-        'NoteTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.NoteTabPage, "")
-        Me.NoteTabPage.Controls.Add(Me.UcNote1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
-        Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(917, 556)
-        Me.NoteTabPage.Text = "บันทึกข้อความ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
-        '
-        'UcNote1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote1, "")
-        Me.UcNote1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcNote1.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
-        Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(917, 556)
-        Me.UcNote1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
-        '
-        'AttachmentTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AttachmentTabPage, "")
-        Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
-        Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(917, 556)
-        Me.AttachmentTabPage.Text = "ไฟล์แนบ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
-        '
-        'UcFileAttach1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcFileAttach1, "")
-        Me.UcFileAttach1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
-        Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(917, 556)
-        Me.UcFileAttach1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
-        '
-        'AdminTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AdminTabPage, "")
-        Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
-        Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(917, 556)
-        Me.AdminTabPage.Text = "ผู้บันทึก"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
-        '
-        'UcAdmin1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcAdmin1, "")
-        Me.UcAdmin1.Location = New System.Drawing.Point(71, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAdmin1, True)
-        Me.UcAdmin1.Name = "UcAdmin1"
-        Me.UcAdmin1.Size = New System.Drawing.Size(665, 223)
-        Me.UcAdmin1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label16, "")
-        Me.Label16.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label16.Location = New System.Drawing.Point(472, 46)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label16, True)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(57, 14)
-        Me.Label16.TabIndex = 113
-        Me.Label16.Text = "วันที่สิ้นสุด"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label16, "")
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label22, "")
-        Me.Label22.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label22.Location = New System.Drawing.Point(43, 46)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label22, True)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(59, 14)
-        Me.Label22.TabIndex = 142
-        Me.Label22.Text = "วันที่เริ่มต้น"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label22, "")
-        '
-        'StartDate
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.StartDate, "TextChanged")
-        Me.StartDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
-        Me.StartDate.EnterMoveNextControl = True
-        Me.StartDate.Location = New System.Drawing.Point(183, 43)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.StartDate, True)
-        Me.StartDate.Name = "StartDate"
-        Me.StartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.StartDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.StartDate.Properties.Appearance.Options.UseFont = True
-        Me.StartDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.StartDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.StartDate.Properties.DisplayFormat.FormatString = "D"
-        Me.StartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.StartDate.Properties.EditFormat.FormatString = "D"
-        Me.StartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.StartDate.Properties.Mask.EditMask = "D"
-        Me.StartDate.Size = New System.Drawing.Size(212, 20)
-        Me.StartDate.TabIndex = 5
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.StartDate, "Text")
-        '
-        'ExpireDate
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ExpireDate, "TextChanged")
-        Me.ExpireDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
-        Me.ExpireDate.EnterMoveNextControl = True
-        Me.ExpireDate.Location = New System.Drawing.Point(557, 43)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ExpireDate, True)
-        Me.ExpireDate.Name = "ExpireDate"
-        Me.ExpireDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ExpireDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.ExpireDate.Properties.Appearance.Options.UseFont = True
-        Me.ExpireDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ExpireDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.ExpireDate.Properties.DisplayFormat.FormatString = "D"
-        Me.ExpireDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.ExpireDate.Properties.EditFormat.FormatString = "D"
-        Me.ExpireDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.ExpireDate.Properties.Mask.EditMask = "D"
-        Me.ExpireDate.Size = New System.Drawing.Size(212, 20)
-        Me.ExpireDate.TabIndex = 7
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ExpireDate, "Text")
+        Me.ImageCollection1.ImageStream = CType(resources.GetObject("ImageCollection1.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollection1.Images.SetKeyName(0, "_active__no.png")
+        Me.ImageCollection1.Images.SetKeyName(1, "1394817194_stock_insert-slide.png")
+        Me.ImageCollection1.Images.SetKeyName(2, "1432214789_Stock Index Up.png")
+        Me.ImageCollection1.Images.SetKeyName(3, "1432214798_Stock Index Down.png")
         '
         'gridControl
         '
@@ -670,36 +480,226 @@ Partial Class frmCommission
         Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
-        'ImageCollection1
+        'CampaignStatus
         '
-        Me.ImageCollection1.ImageStream = CType(resources.GetObject("ImageCollection1.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.ImageCollection1.Images.SetKeyName(0, "_active__no.png")
-        Me.ImageCollection1.Images.SetKeyName(1, "1394817194_stock_insert-slide.png")
-        Me.ImageCollection1.Images.SetKeyName(2, "1432214789_Stock Index Up.png")
-        Me.ImageCollection1.Images.SetKeyName(3, "1432214798_Stock Index Down.png")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CampaignStatus, "")
+        Me.CampaignStatus.EditValue = 1
+        Me.CampaignStatus.EnterMoveNextControl = True
+        Me.CampaignStatus.Location = New System.Drawing.Point(183, 142)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CampaignStatus, True)
+        Me.CampaignStatus.Name = "CampaignStatus"
+        Me.CampaignStatus.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Open"), New DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Success"), New DevExpress.XtraEditors.Controls.RadioGroupItem(3, "Fail")})
+        Me.CampaignStatus.Size = New System.Drawing.Size(587, 30)
+        Me.CampaignStatus.TabIndex = 246
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CampaignStatus, "")
         '
-        'ControlNavigator1
+        'Label10
         '
-        Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ControlNavigator1.Buttons.Append.Visible = False
-        Me.ControlNavigator1.Buttons.CancelEdit.Visible = False
-        Me.ControlNavigator1.Buttons.Edit.Visible = False
-        Me.ControlNavigator1.Buttons.EndEdit.Visible = False
-        Me.ControlNavigator1.Buttons.ImageList = Me.ImageCollection1
-        Me.ControlNavigator1.Buttons.Remove.Hint = "ลบข้อมูล"
-        Me.ControlNavigator1.Buttons.Remove.ImageIndex = 0
-        Me.ControlNavigator1.Buttons.Remove.Tag = " ลบข้อมูล"
-        Me.ControlNavigator1.Buttons.Remove.Visible = False
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ControlNavigator1, "")
-        Me.ControlNavigator1.CustomButtons.AddRange(New DevExpress.XtraEditors.NavigatorCustomButton() {New DevExpress.XtraEditors.NavigatorCustomButton(6, 0, True, True, "Remove", "Remove"), New DevExpress.XtraEditors.NavigatorCustomButton(7, 1, True, False, "Insert", "Insert"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 2, True, True, "Move Up", "MoveUp"), New DevExpress.XtraEditors.NavigatorCustomButton(-1, 3, True, True, "Move Down", "MoveDown")})
-        Me.ControlNavigator1.Location = New System.Drawing.Point(48, 534)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ControlNavigator1, True)
-        Me.ControlNavigator1.Name = "ControlNavigator1"
-        Me.ControlNavigator1.NavigatableControl = Me.gridControl
-        Me.ControlNavigator1.Size = New System.Drawing.Size(261, 24)
-        Me.ControlNavigator1.TabIndex = 248
-        Me.ControlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ControlNavigator1, "")
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label10, "")
+        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label10.Location = New System.Drawing.Point(45, 149)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(39, 14)
+        Me.Label10.TabIndex = 233
+        Me.Label10.Text = "สถานะ"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
+        '
+        'ExpireDate
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ExpireDate, "TextChanged")
+        Me.ExpireDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.ExpireDate.EnterMoveNextControl = True
+        Me.ExpireDate.Location = New System.Drawing.Point(557, 43)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ExpireDate, True)
+        Me.ExpireDate.Name = "ExpireDate"
+        Me.ExpireDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ExpireDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.ExpireDate.Properties.Appearance.Options.UseFont = True
+        Me.ExpireDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ExpireDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.ExpireDate.Properties.DisplayFormat.FormatString = "D"
+        Me.ExpireDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.ExpireDate.Properties.EditFormat.FormatString = "D"
+        Me.ExpireDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.ExpireDate.Properties.Mask.EditMask = "D"
+        Me.ExpireDate.Size = New System.Drawing.Size(212, 20)
+        Me.ExpireDate.TabIndex = 7
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ExpireDate, "Text")
+        '
+        'StartDate
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.StartDate, "TextChanged")
+        Me.StartDate.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.StartDate.EnterMoveNextControl = True
+        Me.StartDate.Location = New System.Drawing.Point(183, 43)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.StartDate, True)
+        Me.StartDate.Name = "StartDate"
+        Me.StartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.StartDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.StartDate.Properties.Appearance.Options.UseFont = True
+        Me.StartDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.StartDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.StartDate.Properties.DisplayFormat.FormatString = "D"
+        Me.StartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.StartDate.Properties.EditFormat.FormatString = "D"
+        Me.StartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.StartDate.Properties.Mask.EditMask = "D"
+        Me.StartDate.Size = New System.Drawing.Size(212, 20)
+        Me.StartDate.TabIndex = 5
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.StartDate, "Text")
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label22, "")
+        Me.Label22.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label22.Location = New System.Drawing.Point(43, 46)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label22, True)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(59, 14)
+        Me.Label22.TabIndex = 142
+        Me.Label22.Text = "วันที่เริ่มต้น"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label22, "")
+        '
+        'Subject
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Subject, "TextChanged")
+        Me.Subject.EditValue = ""
+        Me.Subject.EnterMoveNextControl = True
+        Me.Subject.Location = New System.Drawing.Point(183, 17)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Subject, True)
+        Me.Subject.Name = "Subject"
+        Me.Subject.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Subject.Properties.Appearance.Options.UseFont = True
+        Me.Subject.Properties.MaxLength = 100
+        Me.Subject.Properties.ValidateOnEnterKey = True
+        Me.Subject.Size = New System.Drawing.Size(586, 20)
+        Me.Subject.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Subject, "Text")
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label16, "")
+        Me.Label16.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label16.Location = New System.Drawing.Point(472, 46)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label16, True)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(57, 14)
+        Me.Label16.TabIndex = 113
+        Me.Label16.Text = "วันที่สิ้นสุด"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label16, "")
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label4, "")
+        Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(43, 20)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(130, 14)
+        Me.Label4.TabIndex = 108
+        Me.Label4.Text = "ชื่อโปรโมชั่น/ Campaign"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
+        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label5.Location = New System.Drawing.Point(43, 72)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(62, 14)
+        Me.Label5.TabIndex = 107
+        Me.Label5.Text = "รายละเอียด"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label5, "")
+        '
+        'Remark
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Remark, "TextChanged")
+        Me.Remark.EditValue = ""
+        Me.Remark.EnterMoveNextControl = True
+        Me.Remark.Location = New System.Drawing.Point(183, 69)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Remark, True)
+        Me.Remark.Name = "Remark"
+        Me.Remark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Remark.Properties.Appearance.Options.UseFont = True
+        Me.Remark.Properties.MaxLength = 100
+        Me.Remark.Size = New System.Drawing.Size(587, 67)
+        Me.Remark.TabIndex = 10
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Remark, "Text")
+        '
+        'NoteTabPage
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.NoteTabPage, "")
+        Me.NoteTabPage.Controls.Add(Me.UcNote1)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
+        Me.NoteTabPage.Name = "NoteTabPage"
+        Me.NoteTabPage.Size = New System.Drawing.Size(856, 569)
+        Me.NoteTabPage.Text = "บันทึกข้อความ"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
+        '
+        'UcNote1
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcNote1, "")
+        Me.UcNote1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcNote1.Location = New System.Drawing.Point(0, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
+        Me.UcNote1.Name = "UcNote1"
+        Me.UcNote1.Size = New System.Drawing.Size(856, 569)
+        Me.UcNote1.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
+        '
+        'AttachmentTabPage
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AttachmentTabPage, "")
+        Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
+        Me.AttachmentTabPage.Name = "AttachmentTabPage"
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(856, 569)
+        Me.AttachmentTabPage.Text = "ไฟล์แนบ"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
+        '
+        'UcFileAttach1
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcFileAttach1, "")
+        Me.UcFileAttach1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
+        Me.UcFileAttach1.Name = "UcFileAttach1"
+        Me.UcFileAttach1.Size = New System.Drawing.Size(856, 569)
+        Me.UcFileAttach1.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
+        '
+        'AdminTabPage
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AdminTabPage, "")
+        Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
+        Me.AdminTabPage.Name = "AdminTabPage"
+        Me.AdminTabPage.Size = New System.Drawing.Size(856, 569)
+        Me.AdminTabPage.Text = "ผู้บันทึก"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
+        '
+        'UcAdmin1
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcAdmin1, "")
+        Me.UcAdmin1.Location = New System.Drawing.Point(71, 0)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAdmin1, True)
+        Me.UcAdmin1.Name = "UcAdmin1"
+        Me.UcAdmin1.Size = New System.Drawing.Size(665, 223)
+        Me.UcAdmin1.TabIndex = 0
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
         'frmCommission
         '
@@ -714,16 +714,7 @@ Partial Class frmCommission
         Me.XtraTabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
-        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.NoteTabPage.ResumeLayout(False)
-        Me.AttachmentTabPage.ResumeLayout(False)
-        Me.AdminTabPage.ResumeLayout(False)
-        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -749,7 +740,16 @@ Partial Class frmCommission
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.NoteTabPage.ResumeLayout(False)
+        Me.AttachmentTabPage.ResumeLayout(False)
+        Me.AdminTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

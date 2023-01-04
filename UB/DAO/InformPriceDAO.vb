@@ -21,6 +21,18 @@ Public Class InformPriceDAO
 
     End Property
 
+
+    Dim mPriceOnline As Decimal
+    Public Property PriceOnline() As Decimal
+        Get
+            Return mPriceOnline
+        End Get
+        Set(ByVal value As Decimal)
+            mPriceOnline = value
+        End Set
+
+    End Property
+
     Public ReadOnly Property ProductTable() As DataTable
         Get
             Return mProductTable
@@ -175,6 +187,7 @@ Public Class InformPriceDAO
                 If dataTable.Rows.Count > 0 Then
                     For Each dr As DataRow In dataTable.Rows
                         mPriceSale = ConvertNullToZero(dr("PriceInform"))
+                        mPriceOnline = ConvertNullToZero(dr("PriceOnline"))
                         Exit For
                     Next
                 End If

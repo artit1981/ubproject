@@ -28,7 +28,7 @@ Public Class frmInformPrice
             chkAutoRow.Checked = False
             mIDs = pID
 
-            dtpDateTo.EditValue = GetCurrentDate(Nothing)
+            dtpDateTo.EditValue = DateAdd(DateInterval.Month, 3, GetCurrentDate(Nothing))
             dtpDateFrom.EditValue = DateAdd(DateInterval.Month, -3, GetCurrentDate(Nothing))
 
 

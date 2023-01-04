@@ -2,6 +2,7 @@
 Option Explicit On
 
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class frmCommission
     Inherits iEditForm
@@ -41,10 +42,7 @@ Public Class frmCommission
                     UcFileAttach1.ClearControl()
 
                     UcNote1.ClearControl()
-                    UcProductLists1.ClearControl()
-                    UcProductLists2.ClearControl()
-                    UcEmployee1.ClearControl()
-                    UcCustomer1.ClearControl()
+
             End Select
 
             XtraTabControl1.SelectedTabPage = GeneralTabPage
@@ -63,16 +61,7 @@ Public Class frmCommission
             mcls.ModeData = pMode
             mcls.Subject = Subject.Text.Trim
 
-            mcls.Budget = Budget.EditValue
-            mcls.MinimumAmount = MinimumAmount.EditValue
-            mcls.MinimumUnit = MinimumUnit.EditValue
-            mcls.CpTypeCont1 = CpTypeCont1.EditValue
-            mcls.CpTypeCont2 = CpTypeCont2.EditValue
-            mcls.CpTypeCont3_1 = CpTypeCont3_1.EditValue
-            mcls.CpTypeCont3_2 = CpTypeCont3_2.EditValue
-            mcls.CampaignType = CampaignType.EditValue
-            mcls.EvaluateBy = EvaluateBy.EditValue
-            mcls.EvaluateTarget = EvaluateTarget.EditValue
+
             mcls.CampaignStatus = CampaignStatus.EditValue
             mcls.StartDate = StartDate.EditValue
             mcls.ExpireDate = ExpireDate.EditValue
@@ -80,10 +69,6 @@ Public Class frmCommission
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
-            mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, True, "", pMode, "")
-            mcls.ProductAddDAOs = UcProductLists2.GetDAOs(False, True, False, Nothing, False, 0, True, "", pMode, "")
-            mcls.EmployeeList = UcEmployee1.GetDAOs()
-            mcls.CustomerList = UcCustomer1.GetDAOs()
             If Verify() = True Then
                 Return mcls.SaveData()
             Else
@@ -126,19 +111,8 @@ Public Class frmCommission
             ElseIf pMode = DataMode.ModeEdit Then
                 If mcls.InitailData(pID) Then
                     Subject.Text = mcls.Subject
-                    Budget.EditValue = mcls.Budget
-                    MinimumAmount.EditValue = mcls.MinimumAmount
-                    MinimumUnit.EditValue = mcls.MinimumUnit
-                    CpTypeCont1.EditValue = mcls.CpTypeCont1
-                    CpTypeCont2.EditValue = mcls.CpTypeCont2
-                    CpTypeCont3_1.EditValue = mcls.CpTypeCont3_1
-                    CpTypeCont3_2.EditValue = mcls.CpTypeCont3_2
-                    CampaignType.EditValue = mcls.CampaignType
-                    'InitialCondition(mcls.CampaignType)
-                    EvaluateBy.EditValue = mcls.EvaluateBy
-                    EvaluateTarget.EditValue = mcls.EvaluateTarget
+
                     CampaignStatus.EditValue = mcls.CampaignStatus
-                    StatusDesc.EditValue = mcls.StatusDesc
                     StartDate.EditValue = mcls.StartDate
                     ExpireDate.EditValue = mcls.ExpireDate
 
@@ -160,13 +134,7 @@ Public Class frmCommission
 
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
-            UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount _
-                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
-            UcProductLists2.ShowControl(pMode, lOrderList, mcls.TableName & "_ProAdd", ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total _
-                                       , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
-            UcEmployee1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
-            UcCustomer1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
-            UcCampaignDTL1.ShowControl(mCampaignDtlList)
+
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
             Return False
@@ -189,12 +157,7 @@ Public Class frmCommission
             End If
 
 
-            If DxErrorProvider1.HasErrors = False Then
-                If UcProductLists1.IsError <> "" Then
-                    XtraTabControl1.SelectedTabPage = ProductTabPage
-                    Return False
-                End If
-            End If
+
 
 
             Return DxErrorProvider1.HasErrors = False
@@ -205,30 +168,137 @@ Public Class frmCommission
 
 
 
-    'Private Sub InitialCondition(ByVal pCampaihnType As Integer)
-    '    Try
-    '        CpTypeCont1.Visible = False
-    '        CpTypeCont2.Visible = False
-    '        CpTypeCont3_1.Visible = False
-    '        CpTypeCont3_2.Visible = False
-    '        ProductAddTabPage.PageEnabled = False
-
-    '        Select Case pCampaihnType
-    '            Case 1 : CpTypeCont1.Visible = True
-    '            Case 2 : CpTypeCont2.Visible = True
-    '            Case 3
-    '                CpTypeCont3_1.Visible = True
-    '                CpTypeCont3_2.Visible = True
-    '            Case 4
-    '                ProductAddTabPage.PageEnabled = True
-    '        End Select
-
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mFormName & ".InitialCondition : " & e.Message)
-    '    End Try
-    'End Sub
 
 #End Region
 
 
+End Class
+
+Public Class MyRecord
+    Implements IDXDataErrorInfo
+
+    Dim mIsDelete As Long = 0
+    Public Property IsDelete() As Integer
+        Get
+            Return mIsDelete
+        End Get
+        Set(ByVal value As Integer)
+            mIsDelete = value
+        End Set
+    End Property
+
+    Dim mCommissionDtlID As Long = 0
+    Public Property CommissionDtlID() As Long
+        Get
+            Return mCommissionDtlID
+        End Get
+        Set(ByVal value As Long)
+            mCommissionDtlID = value
+        End Set
+    End Property
+
+    Dim mSEQ As Long = 0
+    Public Property SEQ() As Long
+        Get
+            Return mSEQ
+        End Get
+        Set(ByVal value As Long)
+            mSEQ = value
+        End Set
+    End Property
+
+    Dim mCommissionID As Long = 0
+    Public Property CommissionID() As Long
+        Get
+            Return mCommissionID
+        End Get
+        Set(ByVal value As Long)
+            mCommissionID = value
+        End Set
+    End Property
+
+    Dim mAmountFrom As Double = 0
+    Public Property AmountFrom() As Double
+        Get
+            Return mAmountFrom
+        End Get
+        Set(ByVal value As Double)
+            mAmountFrom = value
+        End Set
+    End Property
+
+    Dim mAmountEnd As Double = 0
+    Public Property AmountEnd() As Double
+        Get
+            Return mAmountEnd
+        End Get
+        Set(ByVal value As Double)
+            mAmountEnd = value
+        End Set
+    End Property
+
+    Dim mComAmount As Double = 0
+    Public Property ComAmount() As Double
+        Get
+            Return mComAmount
+        End Get
+        Set(ByVal value As Double)
+            mComAmount = value
+        End Set
+    End Property
+
+    Dim mComPercen As Double = 0
+    Public Property ComPercen() As Double
+        Get
+            Return mComPercen
+        End Get
+        Set(ByVal value As Double)
+            mComPercen = value
+        End Set
+    End Property
+
+    Dim mIsChange As Integer = 0
+    Public Property IsChange() As Integer
+        Get
+            Return mIsChange
+        End Get
+        Set(ByVal value As Integer)
+            mIsChange = value
+        End Set
+    End Property
+
+    Private mModeData As Integer
+    Public Property ModeData() As Integer
+        Get
+            Return mModeData
+        End Get
+        Set(ByVal value As Integer)
+            mModeData = value
+        End Set
+    End Property
+#Region "IDXDataErrorInfo Members"
+    Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+        'If propertyName = "RecordDate" AndAlso IsDate(RecordDate) = False Then
+        '    info.ErrorText = String.Format("กรุณาวันที่", propertyName)
+        '    info.ErrorType = ErrorType.Critical
+        'End If
+        'If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 Then
+        '    info.ErrorText = String.Format("กรุณาระบุบัญชี", propertyName)
+        '    info.ErrorType = ErrorType.Critical
+        'End If
+
+    End Sub
+
+
+    Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
+        Dim propertyInfo As New ErrorInfo()
+        'GetPropertyError("RecordDate", propertyInfo)
+        'If propertyInfo.ErrorText = "" Then
+        '    GetPropertyError("BankAccountID", propertyInfo)
+        'End If
+        'If propertyInfo.ErrorText <> "" Then
+        '    info.ErrorText = "พบข้อผิดพลาด"
+        'End If
+    End Sub
+#End Region
 End Class
