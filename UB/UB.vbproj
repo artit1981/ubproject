@@ -405,6 +405,7 @@
     <Compile Include="CRM\frmOrderHis2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DAO\CommissionDAO.vb" />
     <Compile Include="DAO\CommissionDtlDAO.vb" />
     <Compile Include="DAO\BankAccountRecordSDAO.vb" />
     <Compile Include="DAO\CampaignDetail.vb" />

@@ -90,22 +90,17 @@ Public Class CommissionDtlDAO
     End Property
 #End Region
 
-    Public Function GetDataTable(ByVal pBankAccID As Integer, ByVal pFromDate As Date, ByVal pTodate As Date, lIsIncludeDelete As Boolean) As DataTable
+    Public Function GetDataTable(ByVal pCommissionID As Long) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT  ID,BankAccountID ,RecordDate,Remark,DR,CR,IsDelete"
-            SQL &= " FROM BankAccountRecord"
+            SQL = "SELECT  CommissionDtlID,SEQ,CommissionID,AmountFrom,AmountEnd,ComAmount,ComPercen"
+            SQL &= " FROM CommissionDtlID"
             SQL &= " WHERE 0=0   "
-            If lIsIncludeDelete = False Then
-                SQL &= " and IsDelete =0   "
-            End If
-            If pBankAccID > 0 Then
-                SQL &= " and BankAccountID=" & pBankAccID
-            End If
-            SQL &= " and RecordDate between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pTodate) & "'"
-            SQL &= " ORDER BY ID"
+
+            SQL &= " and CommissionID =" & pCommissionID
+            SQL &= " ORDER BY SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "CommissionDtlDAO.GetDataTable : " & e.Message)
@@ -138,39 +133,28 @@ Public Class CommissionDtlDAO
                 Case DataMode.ModeEdit
                     SQL = " Update CommissionDtl   "
                     SQL &= " SET"
-                    SQL &= " BankAccountID=@BankAccountID"
-                    SQL &= " ,RecordDate= @RecordDate"
-                    SQL &= " ,Remark=@Remark"
-                    SQL &= " ,DR=@DR"
-                    SQL &= " ,CR=@CR"
-                    SQL &= " ,ModifiedBy= @gUserID"
-                    SQL &= " ,ModifiedTime= @CreateTime"
-                    SQL &= " WHERE ID= @ID"
+                    SQL &= " SEQ=@SEQ"
+                    SQL &= " ,AmountFrom= @AmountFrom"
+                    SQL &= " ,AmountEnd=@AmountEnd"
+                    SQL &= " ,ComAmount=@ComAmount"
+                    SQL &= " ,ComPercen=@ComPercen"
+                    SQL &= " WHERE CommissionDtlID= @CommissionDtlID"
                 Case DataMode.ModeDelete
-                    SQL = " UPDATE BankAccountRecord SET IsDelete=@IsDelete "
-                    SQL &= " ,ModifiedBy= @gUserID"
-                    SQL &= " ,ModifiedTime= @CreateTime"
-                    SQL &= " WHERE ID= @ID"
+                    SQL = " delete from  CommissionDtl  "
+                    SQL &= " WHERE CommissionDtlID= @CommissionDtlID"
                 Case Else
                     Return False
                     Exit Function
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
-            myCommand.Parameters.Add(New SqlParameter("@ID", mIDs))
-            myCommand.Parameters.Add(New SqlParameter("@BankAccountID", BankAccountID))
-            myCommand.Parameters.Add(New SqlParameter("@RecordDate", RecordDate))
-            myCommand.Parameters.Add(New SqlParameter("@Remark", Remark))
-            myCommand.Parameters.Add(New SqlParameter("@DR", DR))
-            myCommand.Parameters.Add(New SqlParameter("@CR", CR))
-            myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
-            myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
-            Select Case ModeData
-                Case DataMode.ModeNew
-                    myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))
-                Case DataMode.ModeDelete
-                    myCommand.Parameters.Add(New SqlParameter("@IsDelete", 1))
-            End Select
+            myCommand.Parameters.Add(New SqlParameter("@CommissionDtlID", CommissionDtlID))
+            myCommand.Parameters.Add(New SqlParameter("@SEQ", SEQ))
+            myCommand.Parameters.Add(New SqlParameter("@CommissionID", CommissionID))
+            myCommand.Parameters.Add(New SqlParameter("@AmountFrom", AmountFrom))
+            myCommand.Parameters.Add(New SqlParameter("@AmountEnd", AmountEnd))
+            myCommand.Parameters.Add(New SqlParameter("@ComAmount", ComAmount))
+            myCommand.Parameters.Add(New SqlParameter("@ComPercen", ComPercen))
             gConnection.executeInsertSqlCommand(myCommand, tr)
             Return True
         Catch e As Exception
@@ -180,13 +164,6 @@ Public Class CommissionDtlDAO
     End Function
 
 
-    Public Sub New()
-        mMode = DataMode.ModeNone
-        BankAccountID = 0
-        RecordDate = Now
-        Remark = ""
-        DR = 0
-        CR = 0
-    End Sub
+
 
 End Class

@@ -28,20 +28,21 @@ Partial Class frmCommission
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.ID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RecordDate = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RecordDateDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
-        Me.BankAccountID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BankAccountIDLookUpEdit = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.DR = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.DebitCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
-        Me.CR = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.CreditCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.CommissionDtlID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CommissionID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AmountFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AmountFromCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.AmountEnd = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AmountEndCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.ComPercen = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ComPercenCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.ComAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ComAmountCalcEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.IsChange = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BankAccountIDLookUpEdit = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.repositoryItemCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.repositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.repositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -59,7 +60,9 @@ Partial Class frmCommission
         Me.LocationButtonEdit = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.RepositoryItemRadioGroup1 = New DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.CampaignStatus = New DevExpress.XtraEditors.RadioGroup()
+        Me.RecordDateDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.CommissionType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ExpireDate = New DevExpress.XtraEditors.DateEdit()
         Me.StartDate = New DevExpress.XtraEditors.DateEdit()
@@ -71,22 +74,21 @@ Partial Class frmCommission
         Me.Remark = New DevExpress.XtraEditors.MemoEdit()
         Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcNote1 = New UB.ucNote()
-        Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
+        Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AmountFromCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AmountEndCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ComPercenCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ComAmountCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BankAccountIDLookUpEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DebitCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CreditCalcEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.repositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,7 +106,10 @@ Partial Class frmCommission
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CommissionType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,8 +117,9 @@ Partial Class frmCommission
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.NoteTabPage.SuspendLayout()
-        Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -130,7 +136,7 @@ Partial Class frmCommission
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.Size = New System.Drawing.Size(858, 594)
         Me.XtraTabControl1.TabIndex = 5
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.NoteTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
         '
         'GeneralTabPage
@@ -141,7 +147,7 @@ Partial Class frmCommission
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
         Me.GeneralTabPage.Controls.Add(Me.ControlNavigator1)
         Me.GeneralTabPage.Controls.Add(Me.gridControl)
-        Me.GeneralTabPage.Controls.Add(Me.CampaignStatus)
+        Me.GeneralTabPage.Controls.Add(Me.CommissionType)
         Me.GeneralTabPage.Controls.Add(Me.Label10)
         Me.GeneralTabPage.Controls.Add(Me.ExpireDate)
         Me.GeneralTabPage.Controls.Add(Me.StartDate)
@@ -200,7 +206,7 @@ Partial Class frmCommission
         Me.gridControl.MainView = Me.gridView
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
-        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BankAccountIDLookUpEdit, Me.repositoryItemCalcEdit1, Me.repositoryItemSpinEdit1, Me.repositoryItemTextEdit1, Me.KeepMinSpinEdit, Me.LocationDTLIDLookUpEdit1, Me.DebitCalcEdit, Me.CreditCalcEdit, Me.RepositoryItemCheckEdit1, Me.LocationDTLSearchLookUp1, Me.RepositoryItemLookUpEdit1, Me.LocationGrid, Me.LocationIDComboBox, Me.LocationDTLLookUp, Me.RepositoryItemPopupContainerEdit1, Me.LocationButtonEdit, Me.RepositoryItemRadioGroup1, Me.RepositoryItemCheckEdit2, Me.RecordDateDateEdit1, Me.RepositoryItemTextEdit2})
+        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BankAccountIDLookUpEdit, Me.repositoryItemCalcEdit1, Me.repositoryItemSpinEdit1, Me.repositoryItemTextEdit1, Me.KeepMinSpinEdit, Me.LocationDTLIDLookUpEdit1, Me.AmountFromCalcEdit, Me.AmountEndCalcEdit, Me.RepositoryItemCheckEdit1, Me.LocationDTLSearchLookUp1, Me.RepositoryItemLookUpEdit1, Me.LocationGrid, Me.LocationIDComboBox, Me.LocationDTLLookUp, Me.RepositoryItemPopupContainerEdit1, Me.LocationButtonEdit, Me.RepositoryItemRadioGroup1, Me.RepositoryItemCheckEdit2, Me.RecordDateDateEdit1, Me.RepositoryItemTextEdit2, Me.ComPercenCalcEdit, Me.ComAmountCalcEdit})
         Me.gridControl.Size = New System.Drawing.Size(721, 335)
         Me.gridControl.TabIndex = 247
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
@@ -210,7 +216,7 @@ Partial Class frmCommission
         '
         Me.gridView.Appearance.FooterPanel.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
         Me.gridView.Appearance.FooterPanel.Options.UseFont = True
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ID, Me.RecordDate, Me.BankAccountID, Me.GridColumn1, Me.DR, Me.CR, Me.IsChange, Me.GridColumn2, Me.IsDelete})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CommissionDtlID, Me.CommissionID, Me.SEQ, Me.AmountFrom, Me.AmountEnd, Me.ComPercen, Me.ComAmount, Me.IsChange, Me.GridColumn2, Me.IsDelete})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -226,118 +232,135 @@ Partial Class frmCommission
         Me.gridView.OptionsView.ShowFooter = True
         Me.gridView.OptionsView.ShowGroupPanel = False
         '
-        'ID
+        'CommissionDtlID
         '
-        Me.ID.Caption = "ID"
-        Me.ID.FieldName = "ID"
-        Me.ID.Name = "ID"
+        Me.CommissionDtlID.Caption = "ID"
+        Me.CommissionDtlID.FieldName = "CommissionDtlID"
+        Me.CommissionDtlID.Name = "CommissionDtlID"
         '
-        'RecordDate
+        'CommissionID
         '
-        Me.RecordDate.Caption = "วันที่"
-        Me.RecordDate.ColumnEdit = Me.RecordDateDateEdit1
-        Me.RecordDate.FieldName = "RecordDate"
-        Me.RecordDate.MaxWidth = 150
-        Me.RecordDate.MinWidth = 100
-        Me.RecordDate.Name = "RecordDate"
-        Me.RecordDate.Visible = True
-        Me.RecordDate.VisibleIndex = 1
-        Me.RecordDate.Width = 150
+        Me.CommissionID.Caption = "GridColumn3"
+        Me.CommissionID.FieldName = "CommissionID"
+        Me.CommissionID.Name = "CommissionID"
         '
-        'RecordDateDateEdit1
+        'SEQ
         '
-        Me.RecordDateDateEdit1.AutoHeight = False
-        Me.RecordDateDateEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RecordDateDateEdit1.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RecordDateDateEdit1.Name = "RecordDateDateEdit1"
+        Me.SEQ.AppearanceCell.Options.UseTextOptions = True
+        Me.SEQ.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.SEQ.AppearanceHeader.Options.UseTextOptions = True
+        Me.SEQ.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.SEQ.Caption = "ลำดับ"
+        Me.SEQ.DisplayFormat.FormatString = "n0"
+        Me.SEQ.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.SEQ.FieldName = "SEQ"
+        Me.SEQ.Name = "SEQ"
+        Me.SEQ.OptionsColumn.ReadOnly = True
+        Me.SEQ.Visible = True
+        Me.SEQ.VisibleIndex = 0
         '
-        'BankAccountID
+        'AmountFrom
         '
-        Me.BankAccountID.Caption = "บัญชี"
-        Me.BankAccountID.ColumnEdit = Me.BankAccountIDLookUpEdit
-        Me.BankAccountID.FieldName = "BankAccountID"
-        Me.BankAccountID.MaxWidth = 500
-        Me.BankAccountID.MinWidth = 300
-        Me.BankAccountID.Name = "BankAccountID"
-        Me.BankAccountID.OptionsFilter.AutoFilterCondition = DevExpress.XtraGrid.Columns.AutoFilterCondition.Equals
-        Me.BankAccountID.Visible = True
-        Me.BankAccountID.VisibleIndex = 0
-        Me.BankAccountID.Width = 300
+        Me.AmountFrom.AppearanceHeader.Options.UseTextOptions = True
+        Me.AmountFrom.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.AmountFrom.Caption = "ตั้งแต่"
+        Me.AmountFrom.ColumnEdit = Me.AmountFromCalcEdit
+        Me.AmountFrom.DisplayFormat.FormatString = "n2"
+        Me.AmountFrom.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountFrom.FieldName = "AmountFrom"
+        Me.AmountFrom.MaxWidth = 200
+        Me.AmountFrom.MinWidth = 200
+        Me.AmountFrom.Name = "AmountFrom"
+        Me.AmountFrom.Visible = True
+        Me.AmountFrom.VisibleIndex = 1
+        Me.AmountFrom.Width = 200
         '
-        'BankAccountIDLookUpEdit
+        'AmountFromCalcEdit
         '
-        Me.BankAccountIDLookUpEdit.AutoHeight = False
-        Me.BankAccountIDLookUpEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.BankAccountIDLookUpEdit.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo(" ID", " ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ACCNAME", "บัญชี", 200, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("BankName", "ธนาคาร", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.BankAccountIDLookUpEdit.DisplayMember = "ACCNAME"
-        Me.BankAccountIDLookUpEdit.DropDownRows = 10
-        Me.BankAccountIDLookUpEdit.Name = "BankAccountIDLookUpEdit"
-        Me.BankAccountIDLookUpEdit.NullText = ""
-        Me.BankAccountIDLookUpEdit.PopupWidth = 220
-        Me.BankAccountIDLookUpEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.BankAccountIDLookUpEdit.ValueMember = "ID"
+        Me.AmountFromCalcEdit.AutoHeight = False
+        Me.AmountFromCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AmountFromCalcEdit.DisplayFormat.FormatString = "n2"
+        Me.AmountFromCalcEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountFromCalcEdit.EditFormat.FormatString = "n2"
+        Me.AmountFromCalcEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountFromCalcEdit.Name = "AmountFromCalcEdit"
         '
-        'GridColumn1
+        'AmountEnd
         '
-        Me.GridColumn1.Caption = "รายละเอียด"
-        Me.GridColumn1.ColumnEdit = Me.RepositoryItemTextEdit2
-        Me.GridColumn1.FieldName = "Remark"
-        Me.GridColumn1.MinWidth = 200
-        Me.GridColumn1.Name = "GridColumn1"
-        Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 2
-        Me.GridColumn1.Width = 277
+        Me.AmountEnd.AppearanceHeader.Options.UseTextOptions = True
+        Me.AmountEnd.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.AmountEnd.Caption = "สิ้นสุด"
+        Me.AmountEnd.ColumnEdit = Me.AmountEndCalcEdit
+        Me.AmountEnd.DisplayFormat.FormatString = "n2"
+        Me.AmountEnd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountEnd.FieldName = "AmountEnd"
+        Me.AmountEnd.MaxWidth = 200
+        Me.AmountEnd.MinWidth = 200
+        Me.AmountEnd.Name = "AmountEnd"
+        Me.AmountEnd.Visible = True
+        Me.AmountEnd.VisibleIndex = 2
+        Me.AmountEnd.Width = 200
         '
-        'RepositoryItemTextEdit2
+        'AmountEndCalcEdit
         '
-        Me.RepositoryItemTextEdit2.AutoHeight = False
-        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        Me.AmountEndCalcEdit.AutoHeight = False
+        Me.AmountEndCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AmountEndCalcEdit.DisplayFormat.FormatString = "n2"
+        Me.AmountEndCalcEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountEndCalcEdit.EditFormat.FormatString = "n2"
+        Me.AmountEndCalcEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountEndCalcEdit.Name = "AmountEndCalcEdit"
         '
-        'DR
+        'ComPercen
         '
-        Me.DR.AppearanceHeader.Options.UseTextOptions = True
-        Me.DR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.DR.Caption = "เดบิท"
-        Me.DR.ColumnEdit = Me.DebitCalcEdit
-        Me.DR.DisplayFormat.FormatString = "n2"
-        Me.DR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.DR.FieldName = "DR"
-        Me.DR.MaxWidth = 200
-        Me.DR.MinWidth = 150
-        Me.DR.Name = "DR"
-        Me.DR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DR", "{0:#,###.00}")})
-        Me.DR.Visible = True
-        Me.DR.VisibleIndex = 3
-        Me.DR.Width = 150
+        Me.ComPercen.AppearanceHeader.Options.UseTextOptions = True
+        Me.ComPercen.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ComPercen.Caption = "อัตรา %"
+        Me.ComPercen.ColumnEdit = Me.ComPercenCalcEdit
+        Me.ComPercen.DisplayFormat.FormatString = "n2"
+        Me.ComPercen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+        Me.ComPercen.FieldName = "ComPercen"
+        Me.ComPercen.MaxWidth = 150
+        Me.ComPercen.MinWidth = 100
+        Me.ComPercen.Name = "ComPercen"
+        Me.ComPercen.Visible = True
+        Me.ComPercen.VisibleIndex = 3
+        Me.ComPercen.Width = 100
         '
-        'DebitCalcEdit
+        'ComPercenCalcEdit
         '
-        Me.DebitCalcEdit.AutoHeight = False
-        Me.DebitCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DebitCalcEdit.Name = "DebitCalcEdit"
+        Me.ComPercenCalcEdit.AutoHeight = False
+        Me.ComPercenCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ComPercenCalcEdit.DisplayFormat.FormatString = "n2"
+        Me.ComPercenCalcEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComPercenCalcEdit.EditFormat.FormatString = "n2"
+        Me.ComPercenCalcEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComPercenCalcEdit.Name = "ComPercenCalcEdit"
         '
-        'CR
+        'ComAmount
         '
-        Me.CR.AppearanceHeader.Options.UseTextOptions = True
-        Me.CR.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.CR.Caption = "เครดิต"
-        Me.CR.ColumnEdit = Me.CreditCalcEdit
-        Me.CR.DisplayFormat.FormatString = "n2"
-        Me.CR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.CR.FieldName = "CR"
-        Me.CR.MaxWidth = 200
-        Me.CR.MinWidth = 150
-        Me.CR.Name = "CR"
-        Me.CR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "CR", "{0:#,###.00}")})
-        Me.CR.Visible = True
-        Me.CR.VisibleIndex = 4
-        Me.CR.Width = 150
+        Me.ComAmount.AppearanceHeader.Options.UseTextOptions = True
+        Me.ComAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ComAmount.Caption = "อัตรา(บาท)"
+        Me.ComAmount.ColumnEdit = Me.ComAmountCalcEdit
+        Me.ComAmount.DisplayFormat.FormatString = "n2"
+        Me.ComAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComAmount.FieldName = "ComAmount"
+        Me.ComAmount.MinWidth = 120
+        Me.ComAmount.Name = "ComAmount"
+        Me.ComAmount.Visible = True
+        Me.ComAmount.VisibleIndex = 4
+        Me.ComAmount.Width = 150
         '
-        'CreditCalcEdit
+        'ComAmountCalcEdit
         '
-        Me.CreditCalcEdit.AutoHeight = False
-        Me.CreditCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CreditCalcEdit.Name = "CreditCalcEdit"
+        Me.ComAmountCalcEdit.AutoHeight = False
+        Me.ComAmountCalcEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ComAmountCalcEdit.DisplayFormat.FormatString = "n2"
+        Me.ComAmountCalcEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComAmountCalcEdit.EditFormat.FormatString = "n2"
+        Me.ComAmountCalcEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComAmountCalcEdit.Name = "ComAmountCalcEdit"
         '
         'IsChange
         '
@@ -357,6 +380,19 @@ Partial Class frmCommission
         Me.IsDelete.Caption = "GridColumn2"
         Me.IsDelete.FieldName = "IsDelete"
         Me.IsDelete.Name = "IsDelete"
+        '
+        'BankAccountIDLookUpEdit
+        '
+        Me.BankAccountIDLookUpEdit.AutoHeight = False
+        Me.BankAccountIDLookUpEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.BankAccountIDLookUpEdit.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo(" ID", " ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ACCNAME", "บัญชี", 200, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("BankName", "ธนาคาร", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
+        Me.BankAccountIDLookUpEdit.DisplayMember = "ACCNAME"
+        Me.BankAccountIDLookUpEdit.DropDownRows = 10
+        Me.BankAccountIDLookUpEdit.Name = "BankAccountIDLookUpEdit"
+        Me.BankAccountIDLookUpEdit.NullText = ""
+        Me.BankAccountIDLookUpEdit.PopupWidth = 220
+        Me.BankAccountIDLookUpEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
+        Me.BankAccountIDLookUpEdit.ValueMember = "ID"
         '
         'repositoryItemCalcEdit1
         '
@@ -480,18 +516,30 @@ Partial Class frmCommission
         Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
-        'CampaignStatus
+        'RecordDateDateEdit1
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CampaignStatus, "")
-        Me.CampaignStatus.EditValue = 1
-        Me.CampaignStatus.EnterMoveNextControl = True
-        Me.CampaignStatus.Location = New System.Drawing.Point(183, 142)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CampaignStatus, True)
-        Me.CampaignStatus.Name = "CampaignStatus"
-        Me.CampaignStatus.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Open"), New DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Success"), New DevExpress.XtraEditors.Controls.RadioGroupItem(3, "Fail")})
-        Me.CampaignStatus.Size = New System.Drawing.Size(587, 30)
-        Me.CampaignStatus.TabIndex = 246
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CampaignStatus, "")
+        Me.RecordDateDateEdit1.AutoHeight = False
+        Me.RecordDateDateEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RecordDateDateEdit1.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RecordDateDateEdit1.Name = "RecordDateDateEdit1"
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        '
+        'CommissionType
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CommissionType, "")
+        Me.CommissionType.EditValue = 1
+        Me.CommissionType.EnterMoveNextControl = True
+        Me.CommissionType.Location = New System.Drawing.Point(183, 142)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CommissionType, True)
+        Me.CommissionType.Name = "CommissionType"
+        Me.CommissionType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(1, "%"), New DevExpress.XtraEditors.Controls.RadioGroupItem(2, "จำนวน (บาท)")})
+        Me.CommissionType.Size = New System.Drawing.Size(587, 30)
+        Me.CommissionType.TabIndex = 246
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CommissionType, "")
         '
         'Label10
         '
@@ -502,9 +550,9 @@ Partial Class frmCommission
         Me.Label10.Location = New System.Drawing.Point(45, 149)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(39, 14)
+        Me.Label10.Size = New System.Drawing.Size(90, 14)
         Me.Label10.TabIndex = 233
-        Me.Label10.Text = "สถานะ"
+        Me.Label10.Text = "การคิดคอมมิชชั่น"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
         '
         'ExpireDate
@@ -605,9 +653,9 @@ Partial Class frmCommission
         Me.Label4.Location = New System.Drawing.Point(43, 20)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label4, True)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(130, 14)
+        Me.Label4.Size = New System.Drawing.Size(73, 14)
         Me.Label4.TabIndex = 108
-        Me.Label4.Text = "ชื่อโปรโมชั่น/ Campaign"
+        Me.Label4.Text = "ชื่อคอมมิชชั่น"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
         '
         'Label5
@@ -660,27 +708,6 @@ Partial Class frmCommission
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
-        'AttachmentTabPage
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AttachmentTabPage, "")
-        Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
-        Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(856, 569)
-        Me.AttachmentTabPage.Text = "ไฟล์แนบ"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
-        '
-        'UcFileAttach1
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcFileAttach1, "")
-        Me.UcFileAttach1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
-        Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(856, 569)
-        Me.UcFileAttach1.TabIndex = 0
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
-        '
         'AdminTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.AdminTabPage, "")
@@ -701,6 +728,10 @@ Partial Class frmCommission
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
+        'DxErrorProvider1
+        '
+        Me.DxErrorProvider1.ContainerControl = Me
+        '
         'frmCommission
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -717,12 +748,11 @@ Partial Class frmCommission
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AmountFromCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AmountEndCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ComPercenCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ComAmountCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BankAccountIDLookUpEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DebitCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CreditCalcEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.repositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -740,7 +770,10 @@ Partial Class frmCommission
         CType(Me.LocationButtonEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemRadioGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CampaignStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RecordDateDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RecordDateDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CommissionType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -748,8 +781,9 @@ Partial Class frmCommission
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.NoteTabPage.ResumeLayout(False)
-        Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -764,29 +798,24 @@ Partial Class frmCommission
     Friend WithEvents Remark As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents NoteTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents UcNote1 As ucNote
-    Friend WithEvents AttachmentTabPage As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents UcFileAttach1 As ucFileAttach
     Friend WithEvents AdminTabPage As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents UcAdmin1 As ucAdmin
     Private WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents CampaignStatus As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents CommissionType As DevExpress.XtraEditors.RadioGroup
     Friend WithEvents ExpireDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents StartDate As DevExpress.XtraEditors.DateEdit
     Private WithEvents Label22 As Label
     Private WithEvents Label16 As Label
     Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
     Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents ID As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RecordDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CommissionDtlID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RecordDateDateEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
-    Friend WithEvents BankAccountID As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents BankAccountIDLookUpEdit As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
-    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
-    Friend WithEvents DR As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents DebitCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
-    Friend WithEvents CR As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents CreditCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents AmountFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents AmountFromCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents AmountEnd As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents AmountEndCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
     Friend WithEvents IsChange As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents IsDelete As DevExpress.XtraGrid.Columns.GridColumn
@@ -809,4 +838,12 @@ Partial Class frmCommission
     Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
+    Friend WithEvents SEQ As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CommissionID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ComPercen As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ComPercenCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Friend WithEvents ComAmount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ComAmountCalcEdit As DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit
+    Private WithEvents bindingSource1 As BindingSource
+    Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
 End Class
