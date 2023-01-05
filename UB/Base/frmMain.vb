@@ -1020,4 +1020,10 @@ Public Class frmMain
         ShowDataOnControl(lcls, MasterType.InvoiceOnline)
         InsertActivity(DataMode.ModeOpen, MasterType.InvoiceOnline, "", Nothing)
     End Sub
+
+    Private Sub CommissionBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles CommissionBar.ItemClick
+        Dim lcls As New CommissionControl
+        ShowDataOnControl(lcls, MasterType.Commission)
+        InsertActivity(DataMode.ModeOpen, MasterType.Commission, "", Nothing)
+    End Sub
 End Class

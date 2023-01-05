@@ -65,8 +65,6 @@ Module modDAO
     Public Sub SetLookUpTerritory(ByVal pCombo As DevExpress.XtraEditors.LookUpEdit)
         Dim lcls As New TerritoryDAO
         Dim dataTable As New DataTable()
-
-
         Try
             dataTable = lcls.GetDataTable(0, True)
             pCombo.Properties.DataSource = dataTable
@@ -79,9 +77,24 @@ Module modDAO
             lcls = Nothing
             dataTable = Nothing
         End Try
-
     End Sub
 
+    Public Sub SetLookUpCommission(ByVal pCombo As DevExpress.XtraEditors.LookUpEdit)
+        Dim lcls As New CommissionDAO
+        Dim dataTable As New DataTable()
+        Try
+            dataTable = lcls.GetDataTable(0, True)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "Subject"
+            pCombo.Properties.ValueMember = "CommissionID"
+            pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetLookUpCommission : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
 
     Public Sub SetLookUpCreditRole(ByVal pCombo As DevExpress.XtraEditors.LookUpEdit)
         Dim lcls As New CreditRoleDAO

@@ -1,0 +1,40 @@
+
+
+with Orders as (
+SELECT [Orders].EmpID,[EmpCode],Title + Firstname + ' ' + LastName AS EmpName,[Employee].CommissionID
+,OrderDate,case when Orders.TableID=55 then Total *-1 else Total end Total 
+FROM [dbo].[Orders]
+INNER JOIN [dbo].[Employee] on [Orders].EmpID = [Employee].EmpID and [Employee].IsDelete=0
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  and Orders.TableID in(39,41,54,55)
+and OrderDate between '2021-01-01' and '2022-12-31'
+)
+
+,Comm as (
+
+
+SELECT [Commission].CommissionID
+,[Commission].CommissionType,[Commission].Subject,[Commission].StartDate,[Commission].ExpireDate
+,[CommissionDtl].SEQ,[CommissionDtl].AmountFrom,[CommissionDtl].AmountEnd,[CommissionDtl].ComPercen,[CommissionDtl].ComAmount
+,isnull(PreComm.AmountEnd,0) as PreAmountEnd
+FROM  [dbo].[Commission] 
+INNER JOIN [dbo].[CommissionDtl] on [Commission].[CommissionID]=[CommissionDtl].[CommissionID]
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl] 				
+			) PreComm on PreComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ-1=PreComm.SEQ
+WHERE [Commission].IsDelete=0 
+--GROUP BY [Commission].CommissionID
+--,[Commission].CommissionType,[Commission].Subject,[Commission].StartDate,[Commission].ExpireDate
+--,[CommissionDtl].SEQ,[CommissionDtl].AmountFrom,[CommissionDtl].AmountEnd,[CommissionDtl].ComPercen,[CommissionDtl].ComAmount
+
+
+)
+
+
+SELECT Orders.EmpID,Orders.EmpCode,Orders.EmpName,SUM([Orders].Total) Total
+,comm.StartDate,comm.ExpireDate
+,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.ComPercen,Comm.ComAmount
+FROM Orders 
+LEFT OUTER JOIN Comm on Orders.CommissionID=Comm.CommissionID  AND [Orders].OrderDate between Comm.StartDate and Comm.ExpireDate
+GROUP BY  Orders.EmpID,Orders.EmpCode,Orders.EmpName
+,comm.StartDate,comm.ExpireDate
+,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.ComPercen,Comm.ComAmount

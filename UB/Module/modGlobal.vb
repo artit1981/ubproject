@@ -118,6 +118,7 @@ Module modGlobal
         CashRecord = 109
         Dashboard = 110
         InvoiceOnline = 111
+        Commission = 112
     End Enum
 
     Public Enum DataMode

@@ -1,0 +1,1 @@
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (112,31,'CRM','ฝ่ายขาย' ,'CommissionBar','คอมมิชชั่น' ,'Commission',1 ,1 ,1,1,1,0,0,0,0,0,0);

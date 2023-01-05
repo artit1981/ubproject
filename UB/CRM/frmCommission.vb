@@ -423,27 +423,24 @@ Public Class MyRecord
     End Property
 #Region "IDXDataErrorInfo Members"
     Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-        'If propertyName = "RecordDate" AndAlso IsDate(RecordDate) = False Then
-        '    info.ErrorText = String.Format("กรุณาวันที่", propertyName)
-        '    info.ErrorType = ErrorType.Critical
-        'End If
-        'If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 Then
-        '    info.ErrorText = String.Format("กรุณาระบุบัญชี", propertyName)
-        '    info.ErrorType = ErrorType.Critical
-        'End If
+        If propertyName = "AmountEnd" AndAlso AmountEnd = 0 Then
+            info.ErrorText = String.Format("ข้อมูลไม่ถูกต้อง", propertyName)
+            info.ErrorType = ErrorType.Critical
+        End If
+
 
     End Sub
 
 
     Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
         Dim propertyInfo As New ErrorInfo()
-        'GetPropertyError("RecordDate", propertyInfo)
-        'If propertyInfo.ErrorText = "" Then
-        '    GetPropertyError("BankAccountID", propertyInfo)
-        'End If
-        'If propertyInfo.ErrorText <> "" Then
-        '    info.ErrorText = "พบข้อผิดพลาด"
-        'End If
+        GetPropertyError("AmountEnd", propertyInfo)
+        If propertyInfo.ErrorText = "" Then
+            GetPropertyError("AmountEnd", propertyInfo)
+        End If
+        If propertyInfo.ErrorText <> "" Then
+            info.ErrorText = "พบข้อผิดพลาด"
+        End If
     End Sub
 #End Region
 End Class

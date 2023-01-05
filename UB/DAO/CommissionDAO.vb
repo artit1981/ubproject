@@ -176,7 +176,7 @@ Public Class CommissionDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT CommissionID,Subject  , StartDate, ExpireDate,IsDelete"
+            SQL = "SELECT CommissionID,Subject, StartDate, ExpireDate,IsDelete"
             SQL &= " FROM Commission  "
             SQL &= " WHERE 0=0   "
             If pID > 0 Then
@@ -294,7 +294,7 @@ Public Class CommissionDAO
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
             For Each pData In DtlList
-                pData.SaveData(tr)
+                pData.SaveData(tr, ID)
             Next
 
 

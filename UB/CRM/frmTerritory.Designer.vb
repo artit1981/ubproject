@@ -34,21 +34,24 @@ Partial Class frmTerritory
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.btnRefreshCommissionID = New DevExpress.XtraEditors.SimpleButton()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.NoteTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcNote1 = New ucNote()
+        Me.UcNote1 = New UB.ucNote()
         Me.AttachmentTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcFileAttach1 = New ucFileAttach()
+        Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.UcAdmin1 = New ucAdmin()
+        Me.UcAdmin1 = New UB.ucAdmin()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.FormChangedComponent1 = New FormChangedComponent(Me.components)
+        Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
+        Me.CommissionID = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.txtNameEng.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNameThai.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,6 +65,7 @@ Partial Class frmTerritory
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.CommissionID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtNameEng
@@ -76,7 +80,7 @@ Partial Class frmTerritory
         Me.txtNameEng.Properties.Appearance.Options.UseFont = True
         Me.txtNameEng.Properties.MaxLength = 50
         Me.txtNameEng.Properties.ValidateOnEnterKey = True
-        Me.txtNameEng.Size = New System.Drawing.Size(273, 21)
+        Me.txtNameEng.Size = New System.Drawing.Size(273, 20)
         Me.txtNameEng.TabIndex = 4
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtNameEng, "Text")
         '
@@ -92,7 +96,7 @@ Partial Class frmTerritory
         Me.txtNameThai.Properties.Appearance.Options.UseFont = True
         Me.txtNameThai.Properties.MaxLength = 50
         Me.txtNameThai.Properties.ValidateOnEnterKey = True
-        Me.txtNameThai.Size = New System.Drawing.Size(273, 21)
+        Me.txtNameThai.Size = New System.Drawing.Size(273, 20)
         Me.txtNameThai.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtNameThai, "Text")
         '
@@ -108,7 +112,7 @@ Partial Class frmTerritory
         Me.txtCode.Properties.Appearance.Options.UseFont = True
         Me.txtCode.Properties.MaxLength = 20
         Me.txtCode.Properties.ValidateOnEnterKey = True
-        Me.txtCode.Size = New System.Drawing.Size(122, 21)
+        Me.txtCode.Size = New System.Drawing.Size(122, 20)
         Me.txtCode.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtCode, "Text")
         '
@@ -117,14 +121,14 @@ Partial Class frmTerritory
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtRemark, "TextChanged")
         Me.txtRemark.EditValue = ""
         Me.txtRemark.EnterMoveNextControl = True
-        Me.txtRemark.Location = New System.Drawing.Point(158, 147)
+        Me.txtRemark.Location = New System.Drawing.Point(158, 185)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.txtRemark, True)
         Me.txtRemark.Name = "txtRemark"
         Me.txtRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtRemark.Properties.Appearance.Options.UseFont = True
         Me.txtRemark.Properties.MaxLength = 100
         Me.txtRemark.Size = New System.Drawing.Size(273, 92)
-        Me.txtRemark.TabIndex = 5
+        Me.txtRemark.TabIndex = 6
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtRemark, "Text")
         '
         'cboIndustryType
@@ -139,10 +143,9 @@ Partial Class frmTerritory
         Me.cboIndustryType.Properties.Appearance.Options.UseFont = True
         Me.cboIndustryType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboIndustryType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboIndustryType.Properties.DropDownRows = 10
         Me.cboIndustryType.Properties.NullText = ""
-        Me.cboIndustryType.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboIndustryType.Properties.PopupWidth = 300
         Me.cboIndustryType.Size = New System.Drawing.Size(273, 21)
         Me.cboIndustryType.TabIndex = 188
@@ -153,8 +156,8 @@ Partial Class frmTerritory
         Me.btnRefreshIndustryType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshIndustryType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshIndustryType, "")
-        Me.btnRefreshIndustryType.Image = CType(resources.GetObject("btnRefreshIndustryType.Image"), System.Drawing.Image)
-        Me.btnRefreshIndustryType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshIndustryType.ImageOptions.Image = CType(resources.GetObject("btnRefreshIndustryType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshIndustryType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshIndustryType.Location = New System.Drawing.Point(432, 93)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshIndustryType, True)
         Me.btnRefreshIndustryType.Name = "btnRefreshIndustryType"
@@ -175,8 +178,8 @@ Partial Class frmTerritory
         Me.cboManager.Properties.Appearance.Options.UseFont = True
         Me.cboManager.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboManager.Properties.NullText = ""
-        Me.cboManager.Properties.View = Me.SearchLookUpEdit1View
-        Me.cboManager.Size = New System.Drawing.Size(273, 21)
+        Me.cboManager.Properties.PopupView = Me.SearchLookUpEdit1View
+        Me.cboManager.Size = New System.Drawing.Size(273, 20)
         Me.cboManager.TabIndex = 3
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.cboManager, "Text")
         '
@@ -214,11 +217,11 @@ Partial Class frmTerritory
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(828, 452)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(828, 459)
         Me.XtraTabControl1.TabIndex = 7
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -229,6 +232,9 @@ Partial Class frmTerritory
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.CommissionID)
+        Me.GeneralTabPage.Controls.Add(Me.btnRefreshCommissionID)
+        Me.GeneralTabPage.Controls.Add(Me.Label17)
         Me.GeneralTabPage.Controls.Add(Me.cboManager)
         Me.GeneralTabPage.Controls.Add(Me.Label10)
         Me.GeneralTabPage.Controls.Add(Me.btnRefreshIndustryType)
@@ -242,9 +248,39 @@ Partial Class frmTerritory
         Me.GeneralTabPage.Controls.Add(Me.txtRemark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(822, 426)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(826, 434)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
+        '
+        'btnRefreshCommissionID
+        '
+        Me.btnRefreshCommissionID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnRefreshCommissionID.Appearance.Options.UseFont = True
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshCommissionID, "")
+        Me.btnRefreshCommissionID.ImageOptions.Image = CType(resources.GetObject("btnRefreshCommissionID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCommissionID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCommissionID.Location = New System.Drawing.Point(432, 145)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshCommissionID, True)
+        Me.btnRefreshCommissionID.Name = "btnRefreshCommissionID"
+        Me.btnRefreshCommissionID.Size = New System.Drawing.Size(21, 21)
+        Me.btnRefreshCommissionID.TabIndex = 220
+        Me.btnRefreshCommissionID.TabStop = False
+        Me.btnRefreshCommissionID.ToolTip = "Refresh"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnRefreshCommissionID, "")
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label17, "")
+        Me.Label17.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label17.Location = New System.Drawing.Point(46, 149)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label17, True)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(58, 14)
+        Me.Label17.TabIndex = 221
+        Me.Label17.Text = "คอมมิชชัน"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label17, "")
         '
         'Label10
         '
@@ -310,7 +346,7 @@ Partial Class frmTerritory
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label5, "")
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(46, 150)
+        Me.Label5.Location = New System.Drawing.Point(46, 186)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label5, True)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 14)
@@ -324,7 +360,7 @@ Partial Class frmTerritory
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(822, 426)
+        Me.NoteTabPage.Size = New System.Drawing.Size(826, 434)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -335,7 +371,7 @@ Partial Class frmTerritory
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(822, 426)
+        Me.UcNote1.Size = New System.Drawing.Size(826, 434)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -345,7 +381,7 @@ Partial Class frmTerritory
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(822, 426)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(826, 434)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -356,7 +392,7 @@ Partial Class frmTerritory
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(822, 426)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(826, 434)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -366,7 +402,7 @@ Partial Class frmTerritory
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(822, 426)
+        Me.AdminTabPage.Size = New System.Drawing.Size(826, 434)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -407,6 +443,26 @@ Partial Class frmTerritory
         'FormChangedComponent1
         '
         '
+        'CommissionID
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CommissionID, "TextChanged")
+        Me.CommissionID.EditValue = ""
+        Me.CommissionID.Location = New System.Drawing.Point(158, 146)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CommissionID, True)
+        Me.CommissionID.Name = "CommissionID"
+        Me.CommissionID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.CommissionID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CommissionID.Properties.Appearance.Options.UseFont = True
+        Me.CommissionID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
+        Me.CommissionID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.CommissionID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CommissionID", "CommissionID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Subject", "คอมมิชชัน", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
+        Me.CommissionID.Properties.DropDownRows = 10
+        Me.CommissionID.Properties.NullText = ""
+        Me.CommissionID.Properties.PopupWidth = 300
+        Me.CommissionID.Size = New System.Drawing.Size(273, 20)
+        Me.CommissionID.TabIndex = 5
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CommissionID, "Text")
+        '
         'frmTerritory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -430,7 +486,9 @@ Partial Class frmTerritory
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.CommissionID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
@@ -461,5 +519,7 @@ Partial Class frmTerritory
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
-
+    Friend WithEvents btnRefreshCommissionID As DevExpress.XtraEditors.SimpleButton
+    Private WithEvents Label17 As Label
+    Private WithEvents CommissionID As DevExpress.XtraEditors.LookUpEdit
 End Class

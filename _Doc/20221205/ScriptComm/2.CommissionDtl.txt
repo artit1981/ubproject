@@ -1,0 +1,15 @@
+CREATE TABLE [dbo].[CommissionDtl](
+	[CommissionDtlID] [bigint] NOT NULL,
+	[CommissionID] [bigint] NOT NULL,
+	[SEQ] [int] NOT NULL,
+	[AmountFrom] [numeric](18, 2) NULL,
+	[AmountEnd] [numeric](18, 2) NULL,
+	[ComAmount] [numeric](18, 2) NULL,
+	[ComPercen] [numeric](18, 2) NULL,
+
+  CONSTRAINT [PK_CommissionDtl] PRIMARY KEY CLUSTERED 
+(
+	[CommissionDtlID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+;

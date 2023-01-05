@@ -96,9 +96,8 @@ Public Class CommissionDtlDAO
 
         Try
             SQL = "SELECT  CommissionDtlID,SEQ,CommissionID,AmountFrom,AmountEnd,ComAmount,ComPercen"
-            SQL &= " FROM CommissionDtlID"
+            SQL &= " FROM CommissionDtl"
             SQL &= " WHERE 0=0   "
-
             SQL &= " and CommissionID =" & pCommissionID
             SQL &= " ORDER BY SEQ"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
@@ -109,7 +108,7 @@ Public Class CommissionDtlDAO
     End Function
 
 
-    Public Function SaveData(ByVal tr As SqlTransaction) As Boolean
+    Public Function SaveData(ByVal tr As SqlTransaction, ByVal pCommissionID As Long) As Boolean
         Dim SQL As String
         Dim myCommand As SqlCommand
 
@@ -150,7 +149,7 @@ Public Class CommissionDtlDAO
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@CommissionDtlID", CommissionDtlID))
             myCommand.Parameters.Add(New SqlParameter("@SEQ", SEQ))
-            myCommand.Parameters.Add(New SqlParameter("@CommissionID", CommissionID))
+            myCommand.Parameters.Add(New SqlParameter("@CommissionID", pCommissionID))
             myCommand.Parameters.Add(New SqlParameter("@AmountFrom", AmountFrom))
             myCommand.Parameters.Add(New SqlParameter("@AmountEnd", AmountEnd))
             myCommand.Parameters.Add(New SqlParameter("@ComAmount", ComAmount))

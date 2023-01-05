@@ -33,6 +33,17 @@ Public Class TerritoryDAO
         End Set
     End Property
 
+    Dim mCommissionID As Long = 0
+    Public Property CommissionID() As Long
+        Get
+            Return mCommissionID
+        End Get
+        Set(ByVal value As Long)
+            mCommissionID = value
+        End Set
+
+    End Property
+
     Public ReadOnly Property Manager() As EmployeeDAO
         Get
             If ManagerID > 0 And mclsManager Is Nothing Then
@@ -106,7 +117,7 @@ Public Class TerritoryDAO
 
                     ' Manager
                     ManagerID = Int32.Parse(dr("ManagerID"))
-
+                    CommissionID = ConvertNullToZero(dr("CommissionID"))
                     'Load FileAttach
                     FileAttachs = LoadFileAttach(ID, TableName, Nothing)
 
@@ -183,10 +194,11 @@ Public Class TerritoryDAO
             Select Case ModeData
                 Case DataMode.ModeNew
                     ID = GenNewID(ColumnKey, TableName, tr)
-                    SQL = " INSERT INTO Territory  (TerritoryID,ManagerID,TerritoryCode,NameThai,NameEng,Remark"
+                    SQL = " INSERT INTO Territory  (TerritoryID,ManagerID,CommissionID,TerritoryCode,NameThai,NameEng,Remark"
                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete)"
                     SQL &=  " VALUES ( @mIDs"
-                    SQL &=  " ,  @ManagerID"
+                    SQL &= " ,  @ManagerID"
+                    SQL &= " ,  @CommissionID"
                     SQL &=  " ,  @TerritoryCode"
                     SQL &=  " ,  @NameThai"
                     SQL &=  " ,  @NameEng"
@@ -199,7 +211,8 @@ Public Class TerritoryDAO
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Territory SET "
                     SQL &=  " TerritoryCode=@TerritoryCode"
-                    SQL &=  " ,ManagerID=@ManagerID"
+                    SQL &= " ,ManagerID=@ManagerID"
+                    SQL &= " ,CommissionID=@CommissionID"
                     SQL &=  " ,NameThai=@NameThai"
                     SQL &=  " ,NameEng=@NameEng"
                     SQL &=  " ,Remark= @Remark"
@@ -217,6 +230,7 @@ Public Class TerritoryDAO
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))
             myCommand.Parameters.Add(New SqlParameter("@ManagerID", ManagerID))
+            myCommand.Parameters.Add(New SqlParameter("@CommissionID", CommissionID))
             myCommand.Parameters.Add(New SqlParameter("@TerritoryCode", Trim(Code)))
             myCommand.Parameters.Add(New SqlParameter("@NameThai", Trim(NameThai)))
             myCommand.Parameters.Add(New SqlParameter("@NameEng", Trim(NameEng)))

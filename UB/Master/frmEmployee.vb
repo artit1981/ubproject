@@ -16,6 +16,7 @@ Public Class frmEmployee
             SetComboPosition()
             SetComboTerritory()
             SetComboEmpGroup()
+            SetComboCommission()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try
@@ -84,6 +85,15 @@ Public Class frmEmployee
             SetComboMasterLook(cboEmpGroup, MasterType.EmpGroup)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmpGroup : " & e.Message)
+        End Try
+    End Sub
+
+    Private Sub SetComboCommission()
+        Try
+            SetLookUpCommission(CommissionID)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCommission : " & e.Message)
+        Finally
         End Try
     End Sub
 
@@ -215,7 +225,7 @@ Public Class frmEmployee
                     TerritoryID.EditValue = mcls.TerritoryID
                     cboEmpGroup.EditValue = mcls.EmpGroupID
                     Commission.EditValue = mcls.Commission
-
+                    CommissionID.EditValue = mcls.CommissionID
                     Remark.Text = mcls.Remark
                     UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
                     UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
@@ -380,7 +390,7 @@ Public Class frmEmployee
             mcls.Remark = Remark.Text.Trim
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.Commission = ConvertNullToZero(Commission.EditValue)
-
+            mcls.CommissionID = ConvertNullToZero(CommissionID.EditValue)
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.AddressS = UcAddress1.GetAddressDAO
@@ -413,11 +423,14 @@ Public Class frmEmployee
 
     End Sub
 
-    Private Sub GroupControl1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles GroupPrivilege.Paint
-
-    End Sub
-
-    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label2.Click
-
+    Private Sub btnRefreshCommissionID_Click(sender As Object, e As EventArgs) Handles btnRefreshCommissionID.Click
+        Try
+            ShowProgress(True, "Loading...")
+            SetComboCommission()
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+            ShowProgress(False, "")
+        End Try
     End Sub
 End Class

@@ -93,6 +93,16 @@ Public Class EmployeeDAO
 
     End Property
 
+    Dim mCommissionID As Long = 0
+    Public Property CommissionID() As Long
+        Get
+            Return mCommissionID
+        End Get
+        Set(ByVal value As Long)
+            mCommissionID = value
+        End Set
+
+    End Property
 
     Public Property Commission() As Decimal
         Get
@@ -204,6 +214,7 @@ Public Class EmployeeDAO
                     EmpGroupID = ConvertNullToZero(dr("EmpGroupID"))
                     Commission = ConvertNullToZero(dr("Commission"))
                     EmpUserID = ConvertNullToZero(dr("UserID"))
+                    CommissionID = ConvertNullToZero(dr("CommissionID"))
 
                     'Load Position
                     PositionID = ConvertNullToZero(dr("PositionID"))
@@ -362,7 +373,7 @@ Public Class EmployeeDAO
                     SQL = " INSERT INTO Employee  (EmpID,EmpCode "
                     SQL &=  " ,Title,Firstname,LastName,TitleEng,FirstnameEng,LastNameEng,NickName,Remark"
                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,AddressID,PositionID,TerritoryID,HistoryID "
-                    SQL &=  " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission "
+                    SQL &= " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission,CommissionID "
                     SQL &=  " )"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @EmpCode"
@@ -386,7 +397,8 @@ Public Class EmployeeDAO
                     SQL &=  " ,  @WorkingStatus"
                     SQL &=  " ,  @EmpGroupID"
                     SQL &=  " ,  @ViewLevel"
-                    SQL &=  " ,  @Commission"
+                    SQL &= " ,  @Commission"
+                    SQL &= " ,  @CommissionID"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Employee SET "
@@ -408,7 +420,8 @@ Public Class EmployeeDAO
                     SQL &=  " ,WorkingStatus= @WorkingStatus"
                     SQL &=  " ,EmpGroupID= @EmpGroupID"
                     SQL &=  " ,ViewLevel= @ViewLevel"
-                    SQL &=  " ,Commission= @Commission"
+                    SQL &= " ,Commission= @Commission"
+                    SQL &= " ,CommissionID= @CommissionID"
                     SQL &=  " WHERE EmpID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Employee SET IsDelete=@IsDelete "
@@ -443,6 +456,7 @@ Public Class EmployeeDAO
             myCommand.Parameters.Add(New SqlParameter("@EmpGroupID", EmpGroupID))
             myCommand.Parameters.Add(New SqlParameter("@ViewLevel", ViewLevel))
             myCommand.Parameters.Add(New SqlParameter("@Commission", ConvertNullToZero(Commission)))
+            myCommand.Parameters.Add(New SqlParameter("@CommissionID", ConvertNullToZero(CommissionID)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

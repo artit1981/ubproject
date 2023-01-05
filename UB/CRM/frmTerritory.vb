@@ -12,6 +12,7 @@ Public Class frmTerritory
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
             Call SetComboManager()
+            SetComboCommission()
             Call LoadData(pMode, pID)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
@@ -47,6 +48,7 @@ Public Class frmTerritory
             mcls.Remark = txtRemark.Text.Trim
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.ManagerID = ConvertNullToZero(cboManager.EditValue)
+            mcls.CommissionID = ConvertNullToZero(CommissionID.EditValue)
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             If Verify() = True Then
@@ -82,7 +84,16 @@ Public Class frmTerritory
         End Try
 
     End Sub
-
+    Private Sub btnRefreshCommissionID_Click(sender As Object, e As EventArgs) Handles btnRefreshCommissionID.Click
+        Try
+            ShowProgress(True, "Loading...")
+            SetComboCommission()
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+            ShowProgress(False, "")
+        End Try
+    End Sub
 #End Region
 
 #Region "Private"
@@ -91,6 +102,14 @@ Public Class frmTerritory
             Call SetComboEmployee(cboManager)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboManager : " & e.Message)
+        End Try
+    End Sub
+    Private Sub SetComboCommission()
+        Try
+            SetLookUpCommission(CommissionID)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCommission : " & e.Message)
+        Finally
         End Try
     End Sub
 
@@ -105,6 +124,7 @@ Public Class frmTerritory
                     txtNameEng.Text = mcls.NameEng
                     txtRemark.Text = mcls.Remark
                     cboManager.EditValue = mcls.ManagerID
+                    CommissionID.EditValue = mcls.CommissionID
                     UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
                     UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
                     UcAdmin1.txtCreateTime.Text = mcls.CreateTime
