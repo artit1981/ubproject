@@ -1,5 +1,4 @@
 
-
 CREATE PROCEDURE [dbo].[spCommission] 
  @FromDate date 
  ,@ToDate date
@@ -9,12 +8,9 @@ SET NOCOUNT ON;
 
 
 with Orders as (
-SELECT [Orders].EmpID,[EmpCode],Title + Firstname + ' ' + LastName AS EmpName,[Employee].CommissionID
-,OrderDate,case when Orders.TableID=55 then Total *-1 else Total end Total 
-FROM [dbo].[Orders]
-INNER JOIN [dbo].[Employee] on [Orders].EmpID = [Employee].EmpID and [Employee].IsDelete=0
-WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  and Orders.TableID in(39,41,54,55)
-and OrderDate between @FromDate and @ToDate
+SELECT vOrderTotal.EmpID,EmpCode,EmpName,CommissionID,OrderDate,Total 
+FROM vOrderTotal
+WHERE CommissionID>0 and OrderDate between @FromDate and @ToDate
 )
 
 ,Comm as (
@@ -34,8 +30,8 @@ LEFT OUTER JOIN (
 WHERE [Commission].IsDelete=0 
 
 )
-SELECT EmpID,EmpCode,EmpName
---,Total
+SELECT CommissionID,Subject,EmpID,EmpCode,EmpName
+,Total as EmpTotal
 --,StartDate
 --,ExpireDate
 --,CommissionType
@@ -46,7 +42,8 @@ when AmountTocal > 0 and CommissionType=2 then ComAmount
 else 0 end )Commisstion
  FROM(
 
-SELECT Orders.EmpID,Orders.EmpCode,Orders.EmpName
+SELECT Orders.CommissionID
+,Orders.EmpID,Orders.EmpCode,Orders.EmpName
 ,SUM([Orders].Total) Total
 ,comm.StartDate,comm.ExpireDate
 ,comm.CommissionType
@@ -59,10 +56,11 @@ SELECT Orders.EmpID,Orders.EmpCode,Orders.EmpName
  else 0 end AmountTocal
 FROM Orders 
 LEFT OUTER JOIN Comm on Orders.CommissionID=Comm.CommissionID  AND [Orders].OrderDate between Comm.StartDate and Comm.ExpireDate
-GROUP BY  Orders.EmpID,Orders.EmpCode,Orders.EmpName
+GROUP BY  Orders.CommissionID,Orders.EmpID,Orders.EmpCode,Orders.EmpName
 ,comm.StartDate,comm.ExpireDate,comm.CommissionType
 ,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.NextAmountEnd,Comm.ComPercen,Comm.ComAmount
 ) as tmp
-group by EmpID,EmpCode,EmpName
-ORDER BY  EmpID,EmpCode,EmpName 
+group by CommissionID,Subject,EmpID,EmpCode,EmpName,Total
+ORDER BY  CommissionID,Subject,EmpID,EmpCode,EmpName 
 END
+GO

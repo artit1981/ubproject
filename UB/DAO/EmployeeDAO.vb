@@ -296,21 +296,24 @@ Public Class EmployeeDAO
         Return dataTable
     End Function
 
-    Public Function GetDataTableForCombo(ByVal pID As Long, ByVal pOnlyActive As Boolean) As DataTable
+    Public Function GetDataTableForCombo(ByVal pID As Long, ByVal pOnlyActive As Boolean, Optional ByVal pSQL As String = "") As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
             SQL = "SELECT EmpID AS ID,EmpCode,Title + Firstname + ' ' + LastName AS NAME "
-            SQL &=  " FROM Employee  "
-            SQL &=  " WHERE IsDelete =0   "
+            SQL &= " FROM Employee  "
+            SQL &= " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL &=  "  AND EmpID=" & pID
+                SQL &= "  AND EmpID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL &=  "  AND IsInActive = 0"
+                SQL &= "  AND IsInActive = 0 "
             End If
-            SQL &=  " ORDER BY EmpCode,Title,Firstname"
+            If pSQL <> "" Then
+                SQL &= pSQL
+            End If
+            SQL &= " ORDER BY EmpCode,Title,Firstname"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "EmployeeDAO.GetDataTableForCombo : " & e.Message)

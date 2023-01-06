@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCheckStock
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmCommissionReport
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,10 +17,18 @@ Partial Class frmCheckStock
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCheckStock))
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCommissionReport))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.GroupConn = New DevExpress.XtraEditors.GroupControl()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpDateTo = New DevExpress.XtraEditors.DateEdit()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpDateFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.rdoCondition = New DevExpress.XtraEditors.RadioGroup()
+        Me.cboCheckedEmployee = New DevExpress.XtraEditors.CheckedComboBoxEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.btnExportExcel = New DevExpress.XtraEditors.PictureEdit()
         Me.cboRefreshTime = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -30,18 +38,6 @@ Partial Class frmCheckStock
         Me.CheckShowInfo = New DevExpress.XtraEditors.CheckEdit()
         Me.cboStatus = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.btnProductType = New DevExpress.XtraEditors.SimpleButton()
-        Me.ProductTypeID = New DevExpress.XtraEditors.LookUpEdit()
-        Me.btnProductCategory = New DevExpress.XtraEditors.SimpleButton()
-        Me.ProductCategoryID = New DevExpress.XtraEditors.LookUpEdit()
-        Me.btnProductGroup = New DevExpress.XtraEditors.SimpleButton()
-        Me.ProductGroupID = New DevExpress.XtraEditors.LookUpEdit()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.btnBrandRefresh = New DevExpress.XtraEditors.SimpleButton()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
@@ -49,8 +45,20 @@ Partial Class frmCheckStock
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.cboCheckedTerritory = New DevExpress.XtraEditors.CheckedComboBoxEdit()
+        Me.cboCheckedCommission = New DevExpress.XtraEditors.CheckedComboBoxEdit()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.GroupConn, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupConn.SuspendLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rdoCondition.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboCheckedEmployee.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.btnExportExcel.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,40 +66,130 @@ Partial Class frmCheckStock
         CType(Me.CheckIsRefresh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckShowInfo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cboStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductTypeID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductCategoryID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboCheckedTerritory.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cboCheckedCommission.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
         '
         Me.PanelControl2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelControl2.Controls.Add(Me.GroupConn)
         Me.PanelControl2.Controls.Add(Me.PanelControl1)
-        Me.PanelControl2.Controls.Add(Me.btnProductType)
-        Me.PanelControl2.Controls.Add(Me.ProductTypeID)
-        Me.PanelControl2.Controls.Add(Me.btnProductCategory)
-        Me.PanelControl2.Controls.Add(Me.ProductCategoryID)
-        Me.PanelControl2.Controls.Add(Me.btnProductGroup)
-        Me.PanelControl2.Controls.Add(Me.ProductGroupID)
-        Me.PanelControl2.Controls.Add(Me.Label33)
-        Me.PanelControl2.Controls.Add(Me.btnBrandRefresh)
-        Me.PanelControl2.Controls.Add(Me.Label19)
-        Me.PanelControl2.Controls.Add(Me.Label18)
-        Me.PanelControl2.Controls.Add(Me.Label10)
-        Me.PanelControl2.Controls.Add(Me.ProductBrandID)
         Me.PanelControl2.Controls.Add(Me.SimpleButton1)
         Me.PanelControl2.Controls.Add(Me.btnFind)
         Me.PanelControl2.Location = New System.Drawing.Point(4, 3)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(944, 115)
+        Me.PanelControl2.Size = New System.Drawing.Size(958, 189)
         Me.PanelControl2.TabIndex = 226
+        '
+        'GroupConn
+        '
+        Me.GroupConn.Controls.Add(Me.Label5)
+        Me.GroupConn.Controls.Add(Me.cboCheckedCommission)
+        Me.GroupConn.Controls.Add(Me.cboCheckedTerritory)
+        Me.GroupConn.Controls.Add(Me.Label3)
+        Me.GroupConn.Controls.Add(Me.dtpDateTo)
+        Me.GroupConn.Controls.Add(Me.Label2)
+        Me.GroupConn.Controls.Add(Me.dtpDateFrom)
+        Me.GroupConn.Controls.Add(Me.rdoCondition)
+        Me.GroupConn.Controls.Add(Me.cboCheckedEmployee)
+        Me.GroupConn.Location = New System.Drawing.Point(17, 12)
+        Me.GroupConn.Name = "GroupConn"
+        Me.GroupConn.Size = New System.Drawing.Size(448, 167)
+        Me.GroupConn.TabIndex = 298
+        Me.GroupConn.Text = "เงื่อนไข"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label3.Location = New System.Drawing.Point(245, 40)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(20, 14)
+        Me.Label3.TabIndex = 301
+        Me.Label3.Text = "ถึง"
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateTo.EnterMoveNextControl = True
+        Me.dtpDateTo.Location = New System.Drawing.Point(271, 37)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateTo.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateTo.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.MaskSettings.Set("mask", "D")
+        Me.dtpDateTo.Size = New System.Drawing.Size(139, 20)
+        Me.dtpDateTo.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label2.Location = New System.Drawing.Point(16, 40)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(49, 14)
+        Me.Label2.TabIndex = 299
+        Me.Label2.Text = "ช่วงวันที่"
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateFrom.EnterMoveNextControl = True
+        Me.dtpDateFrom.Location = New System.Drawing.Point(96, 37)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateFrom.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.MaskSettings.Set("mask", "D")
+        Me.dtpDateFrom.Size = New System.Drawing.Size(139, 20)
+        Me.dtpDateFrom.TabIndex = 0
+        '
+        'rdoCondition
+        '
+        Me.rdoCondition.EditValue = CType(1, Short)
+        Me.rdoCondition.Location = New System.Drawing.Point(15, 103)
+        Me.rdoCondition.Name = "rdoCondition"
+        Me.rdoCondition.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.rdoCondition.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoCondition.Properties.Appearance.Options.UseBackColor = True
+        Me.rdoCondition.Properties.Appearance.Options.UseFont = True
+        Me.rdoCondition.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.rdoCondition.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(1, Short), "บุคคล"), New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(2, Short), "ทีม")})
+        Me.rdoCondition.Size = New System.Drawing.Size(75, 56)
+        Me.rdoCondition.TabIndex = 3
+        '
+        'cboCheckedEmployee
+        '
+        Me.cboCheckedEmployee.Location = New System.Drawing.Point(96, 110)
+        Me.cboCheckedEmployee.Name = "cboCheckedEmployee"
+        Me.cboCheckedEmployee.Properties.AllowMultiSelect = True
+        Me.cboCheckedEmployee.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboCheckedEmployee.Properties.DropDownRows = 20
+        Me.cboCheckedEmployee.Properties.IncrementalSearch = True
+        Me.cboCheckedEmployee.Size = New System.Drawing.Size(314, 20)
+        Me.cboCheckedEmployee.TabIndex = 4
         '
         'PanelControl1
         '
@@ -105,7 +203,7 @@ Partial Class frmCheckStock
         Me.PanelControl1.Controls.Add(Me.CheckShowInfo)
         Me.PanelControl1.Controls.Add(Me.cboStatus)
         Me.PanelControl1.Controls.Add(Me.Label4)
-        Me.PanelControl1.Location = New System.Drawing.Point(821, 71)
+        Me.PanelControl1.Location = New System.Drawing.Point(835, 139)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(123, 40)
         Me.PanelControl1.TabIndex = 295
@@ -207,158 +305,6 @@ Partial Class frmCheckStock
         Me.Label4.Text = "สถานะ"
         Me.Label4.Visible = False
         '
-        'btnProductType
-        '
-        Me.btnProductType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnProductType.Appearance.Options.UseFont = True
-        Me.btnProductType.ImageOptions.Image = CType(resources.GetObject("btnProductType.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnProductType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnProductType.Location = New System.Drawing.Point(326, 62)
-        Me.btnProductType.Name = "btnProductType"
-        Me.btnProductType.Size = New System.Drawing.Size(21, 21)
-        Me.btnProductType.TabIndex = 249
-        Me.btnProductType.TabStop = False
-        Me.btnProductType.ToolTip = "Refresh"
-        '
-        'ProductTypeID
-        '
-        Me.ProductTypeID.Location = New System.Drawing.Point(115, 63)
-        Me.ProductTypeID.Name = "ProductTypeID"
-        Me.ProductTypeID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductTypeID.Properties.Appearance.Options.UseFont = True
-        Me.ProductTypeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.ProductTypeID.Properties.NullText = ""
-        Me.ProductTypeID.Properties.ShowHeader = False
-        Me.ProductTypeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ProductTypeID.Size = New System.Drawing.Size(210, 20)
-        Me.ProductTypeID.TabIndex = 2
-        '
-        'btnProductCategory
-        '
-        Me.btnProductCategory.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnProductCategory.Appearance.Options.UseFont = True
-        Me.btnProductCategory.ImageOptions.Image = CType(resources.GetObject("btnProductCategory.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnProductCategory.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnProductCategory.Location = New System.Drawing.Point(326, 10)
-        Me.btnProductCategory.Name = "btnProductCategory"
-        Me.btnProductCategory.Size = New System.Drawing.Size(21, 21)
-        Me.btnProductCategory.TabIndex = 248
-        Me.btnProductCategory.TabStop = False
-        Me.btnProductCategory.ToolTip = "Refresh"
-        '
-        'ProductCategoryID
-        '
-        Me.ProductCategoryID.Location = New System.Drawing.Point(115, 11)
-        Me.ProductCategoryID.Name = "ProductCategoryID"
-        Me.ProductCategoryID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductCategoryID.Properties.Appearance.Options.UseFont = True
-        Me.ProductCategoryID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductCategoryID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.ProductCategoryID.Properties.NullText = ""
-        Me.ProductCategoryID.Properties.ShowHeader = False
-        Me.ProductCategoryID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ProductCategoryID.Size = New System.Drawing.Size(210, 20)
-        Me.ProductCategoryID.TabIndex = 0
-        '
-        'btnProductGroup
-        '
-        Me.btnProductGroup.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnProductGroup.Appearance.Options.UseFont = True
-        Me.btnProductGroup.ImageOptions.Image = CType(resources.GetObject("btnProductGroup.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnProductGroup.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnProductGroup.Location = New System.Drawing.Point(326, 36)
-        Me.btnProductGroup.Name = "btnProductGroup"
-        Me.btnProductGroup.Size = New System.Drawing.Size(21, 21)
-        Me.btnProductGroup.TabIndex = 247
-        Me.btnProductGroup.TabStop = False
-        Me.btnProductGroup.ToolTip = "Refresh"
-        '
-        'ProductGroupID
-        '
-        Me.ProductGroupID.Location = New System.Drawing.Point(115, 37)
-        Me.ProductGroupID.Name = "ProductGroupID"
-        Me.ProductGroupID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductGroupID.Properties.Appearance.Options.UseFont = True
-        Me.ProductGroupID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductGroupID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "Name", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "Remark", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.ProductGroupID.Properties.NullText = ""
-        Me.ProductGroupID.Properties.ShowHeader = False
-        Me.ProductGroupID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ProductGroupID.Size = New System.Drawing.Size(210, 20)
-        Me.ProductGroupID.TabIndex = 1
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.BackColor = System.Drawing.Color.Transparent
-        Me.Label33.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label33.Location = New System.Drawing.Point(37, 14)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(62, 14)
-        Me.Label33.TabIndex = 246
-        Me.Label33.Text = "หมวดสินค้า"
-        '
-        'btnBrandRefresh
-        '
-        Me.btnBrandRefresh.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnBrandRefresh.Appearance.Options.UseFont = True
-        Me.btnBrandRefresh.ImageOptions.Image = CType(resources.GetObject("btnBrandRefresh.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnBrandRefresh.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnBrandRefresh.Location = New System.Drawing.Point(326, 89)
-        Me.btnBrandRefresh.Name = "btnBrandRefresh"
-        Me.btnBrandRefresh.Size = New System.Drawing.Size(21, 21)
-        Me.btnBrandRefresh.TabIndex = 245
-        Me.btnBrandRefresh.TabStop = False
-        Me.btnBrandRefresh.ToolTip = "Refresh"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.BackColor = System.Drawing.Color.Transparent
-        Me.Label19.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label19.Location = New System.Drawing.Point(37, 66)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(72, 14)
-        Me.Label19.TabIndex = 244
-        Me.Label19.Text = "ประเภทสินค้า"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.BackColor = System.Drawing.Color.Transparent
-        Me.Label18.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label18.Location = New System.Drawing.Point(37, 93)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(56, 14)
-        Me.Label18.TabIndex = 243
-        Me.Label18.Text = "ยี่ห้อสินค้า"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label10.Location = New System.Drawing.Point(37, 40)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(55, 14)
-        Me.Label10.TabIndex = 242
-        Me.Label10.Text = "กลุ่มสินค้า"
-        '
-        'ProductBrandID
-        '
-        Me.ProductBrandID.Location = New System.Drawing.Point(115, 90)
-        Me.ProductBrandID.Name = "ProductBrandID"
-        Me.ProductBrandID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductBrandID.Properties.Appearance.Options.UseFont = True
-        Me.ProductBrandID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductBrandID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("IDCode", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.ProductBrandID.Properties.NullText = ""
-        Me.ProductBrandID.Properties.ShowHeader = False
-        Me.ProductBrandID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ProductBrandID.Size = New System.Drawing.Size(210, 20)
-        Me.ProductBrandID.TabIndex = 3
-        '
         'SimpleButton1
         '
         Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -366,10 +312,10 @@ Partial Class frmCheckStock
         Me.SimpleButton1.Appearance.Options.UseImage = True
         Me.SimpleButton1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
         Me.SimpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.SimpleButton1.Location = New System.Drawing.Point(410, 62)
+        Me.SimpleButton1.Location = New System.Drawing.Point(498, 62)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(101, 37)
-        Me.SimpleButton1.TabIndex = 233
+        Me.SimpleButton1.TabIndex = 7
         Me.SimpleButton1.TabStop = False
         Me.SimpleButton1.Text = "ปิดหน้าจอ"
         Me.SimpleButton1.ToolTip = "ปิดหน้าจอ"
@@ -381,10 +327,10 @@ Partial Class frmCheckStock
         Me.btnFind.Appearance.Options.UseImage = True
         Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
         Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnFind.Location = New System.Drawing.Point(410, 12)
+        Me.btnFind.Location = New System.Drawing.Point(498, 12)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(101, 37)
-        Me.btnFind.TabIndex = 226
+        Me.btnFind.TabIndex = 6
         Me.btnFind.TabStop = False
         Me.btnFind.Text = "ค้นหา"
         Me.btnFind.ToolTip = "ค้นหา"
@@ -397,11 +343,11 @@ Partial Class frmCheckStock
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.Location = New System.Drawing.Point(4, 124)
+        Me.gridControl.Location = New System.Drawing.Point(4, 198)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1})
-        Me.gridControl.Size = New System.Drawing.Size(944, 259)
+        Me.gridControl.Size = New System.Drawing.Size(958, 235)
         Me.gridControl.TabIndex = 295
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
         '
@@ -446,20 +392,65 @@ Partial Class frmCheckStock
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
-        'frmCheckStock
+        'cboCheckedTerritory
+        '
+        Me.cboCheckedTerritory.Location = New System.Drawing.Point(96, 136)
+        Me.cboCheckedTerritory.Name = "cboCheckedTerritory"
+        Me.cboCheckedTerritory.Properties.AllowMultiSelect = True
+        Me.cboCheckedTerritory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboCheckedTerritory.Properties.DropDownRows = 20
+        Me.cboCheckedTerritory.Properties.IncrementalSearch = True
+        Me.cboCheckedTerritory.Size = New System.Drawing.Size(314, 20)
+        Me.cboCheckedTerritory.TabIndex = 5
+        '
+        'cboCheckedCommission
+        '
+        Me.cboCheckedCommission.Location = New System.Drawing.Point(96, 74)
+        Me.cboCheckedCommission.Name = "cboCheckedCommission"
+        Me.cboCheckedCommission.Properties.AllowMultiSelect = True
+        Me.cboCheckedCommission.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cboCheckedCommission.Properties.DropDownRows = 20
+        Me.cboCheckedCommission.Properties.IncrementalSearch = True
+        Me.cboCheckedCommission.Size = New System.Drawing.Size(314, 20)
+        Me.cboCheckedCommission.TabIndex = 2
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label5.Location = New System.Drawing.Point(16, 76)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(58, 14)
+        Me.Label5.TabIndex = 304
+        Me.Label5.Text = "คอมมิชชัน"
+        '
+        'DxErrorProvider1
+        '
+        Me.DxErrorProvider1.ContainerControl = Me
+        '
+        'frmCommissionReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(953, 387)
+        Me.ClientSize = New System.Drawing.Size(967, 437)
         Me.Controls.Add(Me.gridControl)
         Me.Controls.Add(Me.PanelControl2)
-        Me.IconOptions.Icon = CType(resources.GetObject("frmCheckStock.IconOptions.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmCommissionReport.IconOptions.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
-        Me.Name = "frmCheckStock"
-        Me.Text = "ตรวจสอบสต๊อก"
+        Me.Name = "frmCommissionReport"
+        Me.Text = "Commission Report"
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
-        Me.PanelControl2.PerformLayout()
+        CType(Me.GroupConn, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupConn.ResumeLayout(False)
+        Me.GroupConn.PerformLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rdoCondition.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboCheckedEmployee.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -468,33 +459,20 @@ Partial Class frmCheckStock
         CType(Me.CheckIsRefresh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckShowInfo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cboStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductTypeID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductCategoryID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboCheckedTerritory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cboCheckedCommission.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents btnFind As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents btnProductType As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents ProductTypeID As DevExpress.XtraEditors.LookUpEdit
-    Friend WithEvents btnProductCategory As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents ProductCategoryID As DevExpress.XtraEditors.LookUpEdit
-    Friend WithEvents btnProductGroup As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents ProductGroupID As DevExpress.XtraEditors.LookUpEdit
-    Private WithEvents Label33 As System.Windows.Forms.Label
-    Friend WithEvents btnBrandRefresh As DevExpress.XtraEditors.SimpleButton
-    Private WithEvents Label19 As System.Windows.Forms.Label
-    Private WithEvents Label18 As System.Windows.Forms.Label
-    Private WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents ProductBrandID As DevExpress.XtraEditors.LookUpEdit
     Private WithEvents gridControl As DevExpress.XtraGrid.GridControl
     Private WithEvents gridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ProductBtn As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
@@ -509,4 +487,15 @@ Partial Class frmCheckStock
     Friend WithEvents CheckShowInfo As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents cboStatus As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents cboCheckedEmployee As DevExpress.XtraEditors.CheckedComboBoxEdit
+    Friend WithEvents rdoCondition As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents GroupConn As DevExpress.XtraEditors.GroupControl
+    Private WithEvents Label3 As Label
+    Friend WithEvents dtpDateTo As DevExpress.XtraEditors.DateEdit
+    Private WithEvents Label2 As Label
+    Friend WithEvents dtpDateFrom As DevExpress.XtraEditors.DateEdit
+    Private WithEvents Label5 As Label
+    Friend WithEvents cboCheckedCommission As DevExpress.XtraEditors.CheckedComboBoxEdit
+    Friend WithEvents cboCheckedTerritory As DevExpress.XtraEditors.CheckedComboBoxEdit
+    Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
 End Class

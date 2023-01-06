@@ -155,12 +155,65 @@ Public Class DBConnection
             myAdapter.SelectCommand = myCommand
             myAdapter.Fill(ds, "TABLE")
             dataTable = ds.Tables("TABLE")
+
+            If pTimeOut > 0 Then
+                myCommand.ResetCommandTimeout()
+            End If
         Catch e As SqlException
             ShowErrorMsg(True, "การติดต่อฐานข้อมูลผิดพลาด กรุณาตรวจสอบ : " & vbNewLine & e.Message & vbNewLine & " at DBConnection.executeSelectQuery")
             Return Nothing
         Finally
         End Try
         Return dataTable
+    End Function
+
+    Public Function executeSelect(ByVal SQl As String, ByRef tr As SqlTransaction, Optional ByVal pTimeOut As Integer = 0) As DataTable
+        'Dim myCommand As New SqlCommand()
+        'Dim dataTable As New DataTable()
+        'dataTable = Nothing
+        'Dim ds As New DataSet()
+
+        Try
+            'myCommand.Connection = OpenConnection()
+            'myCommand.CommandText = SQl
+            'myCommand.CommandType = CommandType.StoredProcedure
+
+            'Dim myAdapter = New SqlDataAdapter(SQl, OpenConnection())
+            'myAdapter.Fill(dataTable)
+            'Return dataTable
+
+            Dim dtb As New DataTable
+            'Using OpenConnection()
+            'cnn.Open()
+            Using dad As New SqlDataAdapter(SQl, OpenConnection)
+                dad.Fill(dtb)
+            End Using
+            '    cnn.Close()
+            'End Using
+            Return dtb
+
+            'If Not tr Is Nothing Then
+            '    myCommand.Transaction = tr
+            'End If
+            'If pTimeOut > 0 Then
+            '    myCommand.CommandTimeout = pTimeOut
+            'Else
+            '    myCommand.ResetCommandTimeout()
+            'End If
+            'Dim myAdapter = New SqlDataAdapter
+            'myAdapter.SelectCommand = myCommand
+            'myAdapter.Fill(ds, "TABLE")
+            'dataTable = ds.Tables("TABLE")
+
+            'If pTimeOut > 0 Then
+            '    myCommand.ResetCommandTimeout()
+            'End If
+        Catch e As SqlException
+            ShowErrorMsg(True, "การติดต่อฐานข้อมูลผิดพลาด กรุณาตรวจสอบ : " & vbNewLine & e.Message & vbNewLine & " at DBConnection.executeSelectQuery")
+            Return Nothing
+
+        End Try
+        'Return dataTable
     End Function
 
     'Public Function executeInsertQuery(ByVal _query As [String], ByVal sqlParameter As SqlParameter()) As Boolean

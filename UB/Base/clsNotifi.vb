@@ -160,7 +160,7 @@ Public Class clsNotifi
         Dim lcls As New OrderSDAO
 
         Try
-            Dim SQL = " EXEC [dbo].[spOverdueTX] "
+            Dim SQL = " SET ARITHABORT OFF; EXEC [dbo].[spOverdueTX] "
             SQL &= " @FromDate = '" & formatSQLDate(GetCurrentDate(Nothing).AddYears(-2)) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(GetCurrentDate(Nothing)) & "'"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)

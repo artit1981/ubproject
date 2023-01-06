@@ -159,21 +159,24 @@ Public Class TerritoryDAO
     End Function
 
 
-    Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean) As DataTable
+    Public Function GetDataTable(ByVal pID As Long, ByVal pOnlyActive As Boolean, Optional ByVal pSQL As String = "") As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
 
         Try
             SQL = "SELECT TerritoryID AS ID,TerritoryCode,NameThai"
-            SQL &=  " FROM Territory  "
-            SQL &=  " WHERE IsDelete =0   "
+            SQL &= " FROM Territory  "
+            SQL &= " WHERE IsDelete =0   "
             If pID > 0 Then
-                SQL &=  "  AND TerritoryID=" & pID
+                SQL &= "  AND TerritoryID=" & pID
             End If
             If pOnlyActive = True Then
-                SQL &=  "  AND IsInActive = 0"
+                SQL &= "  AND IsInActive = 0"
             End If
-            SQL &=  " ORDER BY TerritoryCode,NameThai"
+            If pSQL <> "" Then
+                SQL &= pSQL
+            End If
+            SQL &= " ORDER BY TerritoryCode,NameThai"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ClassName & ".GetDataTable : " & e.Message)

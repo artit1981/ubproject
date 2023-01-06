@@ -568,6 +568,56 @@ Module modDAO
         End Try
     End Sub
 
+    Public Sub SetComboCheckEmployee(ByVal pCombo As DevExpress.XtraEditors.CheckedComboBoxEdit, Optional ByVal pSQL As String = "")
+        Dim lcls As New EmployeeDAO
+        Dim dataTable As New DataTable()
+        Try
+            dataTable = lcls.GetDataTableForCombo(0, True, pSQL)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "NAME"
+            pCombo.Properties.ValueMember = "ID"
+            'pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetComboEmployee : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
+
+    Public Sub SetComboCheckTerritory(ByVal pCombo As DevExpress.XtraEditors.CheckedComboBoxEdit, Optional ByVal pSQL As String = "")
+        Dim lcls As New TerritoryDAO
+        Dim dataTable As New DataTable()
+        Try
+            dataTable = lcls.GetDataTable(0, True, pSQL)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "NameThai"
+            pCombo.Properties.ValueMember = "ID"
+            'pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetComboCheckTerritory : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
+
+    Public Sub SetComboCheckCommission(ByVal pCombo As DevExpress.XtraEditors.CheckedComboBoxEdit)
+        Dim lcls As New CommissionDAO
+        Dim dataTable As New DataTable()
+        Try
+            dataTable = lcls.GetDataTable(0, True)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "Subject"
+            pCombo.Properties.ValueMember = "CommissionID"
+            'pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetComboCheckCommission : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
     Public Sub SetComboContact(ByVal pCombo As DevExpress.XtraEditors.SearchLookUpEdit)
         Dim lcls As New CustomerDAO
         Dim dataTable As New DataTable()

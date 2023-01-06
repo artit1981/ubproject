@@ -1026,4 +1026,9 @@ Public Class frmMain
         ShowDataOnControl(lcls, MasterType.Commission)
         InsertActivity(DataMode.ModeOpen, MasterType.Commission, "", Nothing)
     End Sub
+
+    Private Sub CommissionReportBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles CommissionReportBar.ItemClick
+        frmCommissionReport.MdiParent = Me
+        frmCommissionReport.Show()
+    End Sub
 End Class
