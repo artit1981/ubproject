@@ -1031,4 +1031,20 @@ Public Class frmMain
         frmCommissionReport.MdiParent = Me
         frmCommissionReport.Show()
     End Sub
+
+    Private Sub DashboardCommissionBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles DashboardCommissionBar.ItemClick
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim mCtlForm = New frmDashboardComm
+            With mCtlForm
+                .Text = "Dashboard Commission"
+                .MdiParent = Me
+                .Show()
+            End With
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+
+    End Sub
 End Class

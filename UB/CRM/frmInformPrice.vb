@@ -25,7 +25,7 @@ Public Class frmInformPrice
             txtListCount.EditValue = "0"
             InitialCombo()
             btnMakeOrder.Enabled = False
-            chkAutoRow.Checked = False
+            chkAutoRow.Checked = True
             mIDs = pID
 
             dtpDateTo.EditValue = DateAdd(DateInterval.Month, 3, GetCurrentDate(Nothing))

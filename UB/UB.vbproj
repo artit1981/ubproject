@@ -252,6 +252,12 @@
     <Compile Include="Base\frmControlCampaign.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Base\frmDashboardComm.Designer.vb">
+      <DependentUpon>frmDashboardComm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmDashboardComm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmFindCustomer.Designer.vb">
       <DependentUpon>frmFindCustomer.vb</DependentUpon>
     </Compile>
@@ -1239,6 +1245,9 @@
     <EmbeddedResource Include="Base\frmControlCampaign.resx">
       <DependentUpon>frmControlCampaign.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmDashboardComm.resx">
+      <DependentUpon>frmDashboardComm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmFindCustomer.resx">
       <DependentUpon>frmFindCustomer.vb</DependentUpon>
