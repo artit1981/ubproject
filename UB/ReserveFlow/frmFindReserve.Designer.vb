@@ -83,15 +83,16 @@ Partial Class frmFindReserve
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
         CType(Me.cboCustomerID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,6 +117,7 @@ Partial Class frmFindReserve
         CType(Me.txtPriceLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDateLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtSupLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -151,7 +153,7 @@ Partial Class frmFindReserve
         '
         Me.btnCancelPO.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancelPO.Appearance.Options.UseFont = True
-        Me.btnCancelPO.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCancelPO.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCancelPO.Location = New System.Drawing.Point(431, 25)
         Me.btnCancelPO.Name = "btnCancelPO"
         Me.btnCancelPO.Size = New System.Drawing.Size(69, 23)
@@ -170,7 +172,8 @@ Partial Class frmFindReserve
         Me.cboCustomerID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cboCustomerID.Properties.NullText = ""
         Me.cboCustomerID.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.cboCustomerID.Properties.View = Me.SearchLookUpEdit1View
+        Me.cboCustomerID.Properties.PopupView = Me.SearchLookUpEdit1View
+        Me.cboCustomerID.Properties.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit1})
         Me.cboCustomerID.Size = New System.Drawing.Size(300, 20)
         Me.cboCustomerID.TabIndex = 297
         '
@@ -181,6 +184,7 @@ Partial Class frmFindReserve
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ColumnAutoWidth = False
+        Me.SearchLookUpEdit1View.OptionsView.RowAutoHeight = True
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         Me.SearchLookUpEdit1View.OptionsView.ShowViewCaption = True
         '
@@ -203,8 +207,8 @@ Partial Class frmFindReserve
         'GridColumn1
         '
         Me.GridColumn1.Caption = "ชื่อ - นามสกุล"
+        Me.GridColumn1.ColumnEdit = Me.RepositoryItemMemoEdit1
         Me.GridColumn1.FieldName = "CusName"
-        Me.GridColumn1.MaxWidth = 200
         Me.GridColumn1.MinWidth = 150
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
@@ -281,7 +285,7 @@ Partial Class frmFindReserve
         '
         Me.btnMakeOrder.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnMakeOrder.Appearance.Options.UseFont = True
-        Me.btnMakeOrder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnMakeOrder.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnMakeOrder.Location = New System.Drawing.Point(356, 24)
         Me.btnMakeOrder.Name = "btnMakeOrder"
         Me.btnMakeOrder.Size = New System.Drawing.Size(69, 23)
@@ -295,8 +299,8 @@ Partial Class frmFindReserve
         Me.btnFind.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnFind.Appearance.Options.UseFont = True
         Me.btnFind.Appearance.Options.UseImage = True
-        Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
-        Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnFind.Location = New System.Drawing.Point(455, 33)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(82, 24)
@@ -315,12 +319,12 @@ Partial Class frmFindReserve
         Me.DateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateTo.Properties.Appearance.Options.UseFont = True
         Me.DateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Properties.DisplayFormat.FormatString = "D"
         Me.DateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DateTo.Properties.EditFormat.FormatString = "D"
         Me.DateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DateTo.Properties.Mask.EditMask = "D"
-        Me.DateTo.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateTo.Size = New System.Drawing.Size(155, 20)
         Me.DateTo.TabIndex = 231
         '
@@ -358,12 +362,12 @@ Partial Class frmFindReserve
         Me.DateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateFrom.Properties.Appearance.Options.UseFont = True
         Me.DateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Properties.DisplayFormat.FormatString = "D"
         Me.DateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DateFrom.Properties.EditFormat.FormatString = "D"
         Me.DateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DateFrom.Properties.Mask.EditMask = "D"
-        Me.DateFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DateFrom.Size = New System.Drawing.Size(155, 20)
         Me.DateFrom.TabIndex = 228
         '
@@ -395,6 +399,7 @@ Partial Class frmFindReserve
         Me.GridView.OptionsMenu.ShowGroupSortSummaryItems = False
         Me.GridView.OptionsMenu.ShowGroupSummaryEditorItem = True
         Me.GridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom
+        Me.GridView.OptionsView.RowAutoHeight = True
         Me.GridView.OptionsView.ShowFooter = True
         Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
@@ -657,6 +662,7 @@ Partial Class frmFindReserve
         'LabelControl6
         '
         Me.LabelControl6.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LabelControl6.Appearance.Options.UseForeColor = True
         Me.LabelControl6.Location = New System.Drawing.Point(5, 100)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(96, 13)
@@ -890,6 +896,7 @@ Partial Class frmFindReserve
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Underline)
+        Me.LabelControl5.Appearance.Options.UseFont = True
         Me.LabelControl5.Location = New System.Drawing.Point(287, 5)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
@@ -899,6 +906,7 @@ Partial Class frmFindReserve
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Underline)
+        Me.LabelControl4.Appearance.Options.UseFont = True
         Me.LabelControl4.Location = New System.Drawing.Point(193, 5)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
@@ -908,6 +916,7 @@ Partial Class frmFindReserve
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Underline)
+        Me.LabelControl3.Appearance.Options.UseFont = True
         Me.LabelControl3.Location = New System.Drawing.Point(144, 5)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
@@ -917,6 +926,7 @@ Partial Class frmFindReserve
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Underline)
+        Me.LabelControl2.Appearance.Options.UseFont = True
         Me.LabelControl2.Location = New System.Drawing.Point(5, 5)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(22, 13)
@@ -926,11 +936,16 @@ Partial Class frmFindReserve
         'LabelControl1
         '
         Me.LabelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LabelControl1.Appearance.Options.UseForeColor = True
         Me.LabelControl1.Location = New System.Drawing.Point(5, 24)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(74, 13)
         Me.LabelControl1.TabIndex = 129
         Me.LabelControl1.Text = "รายการซื้อล่าสุด"
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         '
         'frmFindReserve
         '
@@ -954,9 +969,9 @@ Partial Class frmFindReserve
         Me.GroupControl2.PerformLayout()
         CType(Me.cboCustomerID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateTo.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DateFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -982,6 +997,7 @@ Partial Class frmFindReserve
         CType(Me.txtPriceLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDateLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtSupLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1048,4 +1064,5 @@ Partial Class frmFindReserve
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents btnCancelPO As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
 End Class

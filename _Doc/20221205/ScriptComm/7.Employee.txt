@@ -1,0 +1,1 @@
+ALTER TABLE dbo.Employee ADD	TargetPerMonth numeric(18, 2) NULL;

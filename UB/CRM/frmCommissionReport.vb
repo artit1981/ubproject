@@ -99,7 +99,7 @@ Public Class frmCommissionReport
 
 
 
-            Dim SQL = " SET ARITHABORT OFF; EXEC " & lStoredName
+            Dim SQL = " EXEC " & lStoredName
             SQL &= " @FromDate = '" & formatSQLDate(dtpDateFrom.EditValue) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(dtpDateTo.EditValue) & "';"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)

@@ -226,6 +226,7 @@ Public Class frmEmployee
                     cboEmpGroup.EditValue = mcls.EmpGroupID
                     Commission.EditValue = mcls.Commission
                     CommissionID.EditValue = mcls.CommissionID
+                    TargetPerMonth.EditValue = mcls.TargetPerMonth
                     Remark.Text = mcls.Remark
                     UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
                     UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
@@ -391,6 +392,7 @@ Public Class frmEmployee
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.Commission = ConvertNullToZero(Commission.EditValue)
             mcls.CommissionID = ConvertNullToZero(CommissionID.EditValue)
+            mcls.TargetPerMonth = ConvertNullToZero(TargetPerMonth.EditValue)
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.AddressS = UcAddress1.GetAddressDAO

@@ -104,6 +104,17 @@ Public Class EmployeeDAO
 
     End Property
 
+    Dim mTargetPerMonth As Decimal = 0
+    Public Property TargetPerMonth() As Decimal
+        Get
+            Return mTargetPerMonth
+        End Get
+        Set(ByVal value As Decimal)
+            mTargetPerMonth = value
+        End Set
+
+    End Property
+
     Public Property Commission() As Decimal
         Get
             Return mCommission
@@ -215,6 +226,7 @@ Public Class EmployeeDAO
                     Commission = ConvertNullToZero(dr("Commission"))
                     EmpUserID = ConvertNullToZero(dr("UserID"))
                     CommissionID = ConvertNullToZero(dr("CommissionID"))
+                    TargetPerMonth = ConvertNullToZero(dr("TargetPerMonth"))
 
                     'Load Position
                     PositionID = ConvertNullToZero(dr("PositionID"))
@@ -376,7 +388,7 @@ Public Class EmployeeDAO
                     SQL = " INSERT INTO Employee  (EmpID,EmpCode "
                     SQL &=  " ,Title,Firstname,LastName,TitleEng,FirstnameEng,LastNameEng,NickName,Remark"
                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,AddressID,PositionID,TerritoryID,HistoryID "
-                    SQL &= " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission,CommissionID "
+                    SQL &= " ,StartDate,WorkingStatus,EmpGroupID,ViewLevel,Commission,CommissionID,TargetPerMonth "
                     SQL &=  " )"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @EmpCode"
@@ -402,6 +414,7 @@ Public Class EmployeeDAO
                     SQL &=  " ,  @ViewLevel"
                     SQL &= " ,  @Commission"
                     SQL &= " ,  @CommissionID"
+                    SQL &= " ,  @TargetPerMonth"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Employee SET "
@@ -425,6 +438,7 @@ Public Class EmployeeDAO
                     SQL &=  " ,ViewLevel= @ViewLevel"
                     SQL &= " ,Commission= @Commission"
                     SQL &= " ,CommissionID= @CommissionID"
+                    SQL &= " ,TargetPerMonth= @TargetPerMonth"
                     SQL &=  " WHERE EmpID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Employee SET IsDelete=@IsDelete "
@@ -460,6 +474,7 @@ Public Class EmployeeDAO
             myCommand.Parameters.Add(New SqlParameter("@ViewLevel", ViewLevel))
             myCommand.Parameters.Add(New SqlParameter("@Commission", ConvertNullToZero(Commission)))
             myCommand.Parameters.Add(New SqlParameter("@CommissionID", ConvertNullToZero(CommissionID)))
+            myCommand.Parameters.Add(New SqlParameter("@TargetPerMonth", ConvertNullToZero(TargetPerMonth)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

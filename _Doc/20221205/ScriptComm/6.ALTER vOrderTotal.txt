@@ -1,3 +1,11 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
 ALTER VIEW [dbo].[vOrderTotal]
 AS
 
@@ -6,11 +14,14 @@ SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductL
 ,ProductList.PriceMain as Price
 ,case when Orders.TableID=55 then ProductList.Units * -1 else ProductList.Units end  Units
 ,case when Orders.TableID=55 then ProductList.Total *-1 else ProductList.Total end Total
-,Orders.EmpID,[EmpCode],Title + Firstname + ' ' + LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
+,Orders.EmpID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
+,[Employee].TargetPerMonth
+,Customer.CustomerGroupID
 FROM Orders  
 inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
 inner JOIN Product ON Product.ProductID=ProductList.ProductID 
-INNER JOIN [dbo].[Employee] on [Orders].EmpID = [Employee].EmpID and [Employee].IsDelete=0
+INNER JOIN [Employee] on [Orders].EmpID = [Employee].EmpID and [Employee].IsDelete=0
+INNER JOIN Customer on Customer.CustomerID = [Orders].CustomerID
 WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
 and Orders.TableID in(39,41,54,55)
 GO

@@ -1,3 +1,13 @@
+USE [BS]
+GO
+
+/****** Object:  StoredProcedure [dbo].[spCommissionGroup]    Script Date: 1/11/2023 9:28:05 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 
 CREATE PROCEDURE [dbo].[spCommissionGroup] 
  @FromDate date 
@@ -89,4 +99,5 @@ ORDER BY   Orders.TerritoryID,Orders.TerritoryName,Orders.EmpID
 
 END
 GO
+
 

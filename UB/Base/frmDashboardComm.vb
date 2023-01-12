@@ -9,7 +9,7 @@ Public Class frmDashboardComm
     Private mMonthList As String
     Private mFromDate As Date
     Private mToDate As Date
-    Private mTotalSell As Double
+    'Private mTotalSell As Double
 
     Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -21,11 +21,9 @@ Public Class frmDashboardComm
 
     Private Sub frmDashboard_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            SetComboEmployee()
-            SetComboTerritory()
 
             InitCondition()
-            LoadData()
+            'LoadData()
 
             '' Add a title to the chart and hide the legend.
             'Dim chartTitle1 As New ChartTitle With {
@@ -54,7 +52,8 @@ Public Class frmDashboardComm
 
     Private Sub SetComboEmployee()
         Try '  
-            SetComboCheckEmployee(cboCheckedEmployee, " and [CommissionID]>0 ")
+            SetComboCheckEmployee(cboCheckedEmployee)
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".SetComboEmployee : " & e.Message)
         End Try
@@ -62,7 +61,8 @@ Public Class frmDashboardComm
 
     Private Sub SetComboTerritory()
         Try '  
-            SetComboCheckTerritory(cboCheckedTerritory, " and [CommissionID]>0 ")
+            SetComboTerritoryWithSQL(cboCheckedTerritory, " and [CommissionID]>0 ")
+            cboCheckedTerritory.EditValue = Integer.Parse(6)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".SetComboTerritory : " & e.Message)
         End Try
@@ -76,6 +76,11 @@ Public Class frmDashboardComm
 
             GetCondition()
             InitChartComm()
+            InitChartSellTargetMonthly()
+            InitChartProductTop5()
+            InitChartCusGroupTop5()
+            InitChartSellGrowth()
+            InitGridOverDue()
             'InitChartTotalSellCOGSByYear()
             'InitChartTotalSellProfitByYear()
             'InitChartBankBalance()
@@ -88,20 +93,20 @@ Public Class frmDashboardComm
         End Try
     End Sub
     Private Sub InitCondition()
+        SetComboEmployee()
+        cboCheckedEmployee.CheckAll()
+
+        SetComboTerritory()
+
         Dim lYear As Integer = GetCurrentDate(Nothing).Year
 
-
+        Dim lList As New List(Of Integer)
         For i = 0 To 10
-            If i <= 0 Then
-                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, True)
-                cboYear.Properties.Items.Add(lCheckedListBoxItem)
-            Else
-                Dim lCheckedListBoxItem = New CheckedListBoxItem(lYear, False)
-                cboYear.Properties.Items.Add(lCheckedListBoxItem)
-            End If
-
+            lList.Add(lYear)
             lYear -= 1
         Next
+        cboYear.Properties.DataSource = lList
+        cboYear.EditValue = Integer.Parse(GetCurrentDate(Nothing).Year)
 
         Dim items() As CheckedListBoxItem = {
               New CheckedListBoxItem("January", True), New CheckedListBoxItem("February", True),
@@ -115,15 +120,8 @@ Public Class frmDashboardComm
 
     Private Sub GetCondition()
         Dim lYearList As String = ""
-        For Each item As Object In cboYear.Properties.Items.GetCheckedValues()
-            'Dim row As DataRowView = CType(item, DataRowView)
-            If lYearList = "" Then
-                lYearList = ConvertNullToZero(item.ToString)
-            Else
-                lYearList += "," & ConvertNullToZero(item.ToString)
-            End If
-        Next
-        mYearList = lYearList
+
+        mYearList = cboYear.EditValue
 
         Dim lMonthList As String = ""
         For Each item As Object In cboMonth.Properties.Items.GetCheckedValues()
@@ -139,13 +137,13 @@ Public Class frmDashboardComm
         'Init From To Date
         Dim lMonthFrom As Integer, lMonthTo As Integer, lYearFrom As Integer, lYearTo As Integer
 
-        Dim lArr = lYearList.Split(",")
+        Dim lArr = mYearList.Split(",")
         If lArr.Length > 0 Then
-            lYearFrom = lArr(0)
-            lYearTo = lArr(lArr.Length - 1)
+            lYearTo = lArr(0)
+            lYearFrom = lArr(lArr.Length - 1)
         Else
-            lYearFrom = lYearList
             lYearTo = lYearList
+            lYearFrom = lYearList
         End If
 
         lArr = lMonthList.Split(",")
@@ -184,10 +182,13 @@ Public Class frmDashboardComm
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
 
             'Comm
-            Dim SQL = " SET ARITHABORT OFF;EXEC [dbo].[spCommission]"
+            Dim SQL = " EXEC [dbo].[spCommission]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE"
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            If dataTable.Rows.Count = 0 Then Exit Sub
 
             Dim lEmpID As String = ""
             For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
@@ -208,19 +209,13 @@ Public Class frmDashboardComm
             series1.Points.Add(New SeriesPoint("ค่าคอมส่วนตัว", lTotal))
 
             'Comm Group
-            SQL = " SET ARITHABORT OFF;EXEC [dbo].[spCommissionGroup]"
+            SQL = " EXEC [dbo].[spCommissionGroup]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
-            lEmpID = ""
-            For Each pVaue In cboCheckedTerritory.Properties.Items.GetCheckedValues()
-                lEmpID &= "," & pVaue
-            Next
-            If lEmpID <> "" Then
-                lEmpID = lEmpID.Substring(1)
-            End If
-
+            lEmpID = cboCheckedTerritory.EditValue
             If lEmpID = "" Then Exit Sub
             FilterTable = New DataTable
             FilterTable = dataTable.Select("Commisstion>0 and TerritoryID in(" & lEmpID & ")").CopyToDataTable
@@ -229,6 +224,7 @@ Public Class frmDashboardComm
             For Each pRow In FilterTable.Rows
                 lTotal += ConvertNullToZero(pRow("EmpComm"))
             Next
+
             series1.Points.Add(New SeriesPoint("ค่าคอมทีม", lTotal))
 
 
@@ -238,7 +234,7 @@ Public Class frmDashboardComm
             ChartComm.Series.Add(series1)
 
             ' Specify the text pattern of series labels.
-            series1.Label.TextPattern = "{VP:P0} ({V:F3}M)"
+            series1.Label.TextPattern = "{VP:P0} ({V:#,##0.000}M)"
             series1.LegendTextPattern = "{A}"
 
             ' Specify how series points are sorted.
@@ -250,8 +246,9 @@ Public Class frmDashboardComm
             CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
 
             Dim totalLabel As PieTotalLabel = CType(ChartComm.Series("Series 1").View, DoughnutSeriesView).TotalLabel
-            totalLabel.Visible = True
-            totalLabel.TextPattern = "Total" & vbLf & "{V:F3}M".ToString()
+            totalLabel.Visible = False
+            totalLabel.TextPattern = "Total" & vbLf & "{V:#,##0.000}M".ToString()
+            totalLabel.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
             ChartComm.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
             ChartComm.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
@@ -264,274 +261,343 @@ Public Class frmDashboardComm
         End Try
     End Sub
 
-    Private Sub cboCheckedEmployee_EditValueChanged(sender As Object, e As EventArgs) Handles cboCheckedEmployee.EditValueChanged
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
         LoadData()
     End Sub
 
-    'Private Sub InitChartTotalSellCOGSByYear()
-    '    Try
-    '        Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
-
-    '        Dim SQL = " SET ARITHABORT OFF; EXEC [dbo].[spTotalSellByYear]"
-    '        SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-    '        SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-    '        Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
-
-    '        Dim seriesSale As New Series("Total Sale", ViewType.Bar)
-    '        Dim seriesCOGS As New Series("Total COGS", ViewType.Bar)
-    '        For Each pRow In dataTable.Rows
-    '            seriesSale.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("TotalAmount"))))
-    '            seriesCOGS.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Cost"))))
-
-    '            lTotalSell += ConvertNullToZero(pRow("TotalAmount"))
-    '            lTotalCOGS += ConvertNullToZero(pRow("Cost"))
-    '            lTotalProfit += ConvertNullToZero(pRow("Profit"))
-    '        Next
-    '        mTotalSell = lTotalSell
-    '        txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " M"
-    '        txtCOGS.Text = lTotalCOGS.ToString("#,##0.00") & " M"
-    '        txtProfit.Text = lTotalProfit.ToString("#,##0.00") & " M"
-    '        txtProfitPercen.Text = ((lTotalProfit / lTotalSell) * 100).ToString("#,##0.00") & " %"
-
-    '        ChartTotalSellCOGSByYear.Series.Clear()
-    '        ' Add the series to the chart.
-    '        ChartTotalSellCOGSByYear.Series.Add(seriesSale)
-    '        ChartTotalSellCOGSByYear.Series.Add(seriesCOGS)
-
-    '        ' Specify the text pattern of series labels.
-    '        seriesSale.Label.TextPattern = "{V:#,##0.000,M}"
-    '        seriesCOGS.Label.TextPattern = "{V:#,##0.000,M}"
-
-    '        seriesSale.ArgumentScaleType = ScaleType.Numerical
-    '        seriesSale.ValueScaleType = ScaleType.Numerical
-
-    '        seriesCOGS.ArgumentScaleType = ScaleType.Numerical
-    '        seriesCOGS.ValueScaleType = ScaleType.Numerical
-
-    '        Dim xAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
-    '        xAxisOptions.ScaleMode = ScaleMode.Manual
-    '        xAxisOptions.GridSpacing = 1
-    '        xAxisOptions.GridAlignment = NumericGridAlignment.Ones
-    '        xAxisOptions.AggregateFunction = AggregateFunction.None
-
-    '        Dim diagram As XYDiagram = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram)
-    '        ' Customize the appearance of the X-axis title.
-    '        diagram.AxisX.Title.Visible = True
-    '        diagram.AxisX.Title.Alignment = StringAlignment.Center
-    '        diagram.AxisX.Title.Text = "Year"
-    '        diagram.AxisX.Title.TextColor = Color.Gray
-    '        diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
-
-    '        'xAxisOptions.GridOffset = 100
-    '        'Dim yAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
-    '        'yAxisOptions.MeasureUnit = NumericMeasureUnit.Ones
-    '        ''yAxisOptions.GridSpacing = 500
-    '        ''series1.LegendTextPattern = "{A}"
-
-    '        seriesSale.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
-    '        seriesCOGS.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
-
-    '        ' Specify how series points are sorted.
-    '        'series1.SeriesPointsSorting = SortingMode.Ascending
-    '        'series1.SeriesPointsSortingKey = SeriesPointKey.Argument
-
-    '        'series1.ShowInLegend = True
-    '        '' Specify the behavior of series labels.
-    '        CType(seriesSale.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.Top
-    '        CType(seriesCOGS.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.Top
-
-
-    '        ChartTotalSellCOGSByYear.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
-    '        ChartTotalSellCOGSByYear.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
-
-    '        ' Add the chart to the form.
-    '        ChartTotalSellCOGSByYear.Dock = DockStyle.Fill
-
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
+    'Private Sub cboCheckedEmployee_EditValueChanged(sender As Object, e As EventArgs) Handles cboCheckedEmployee.EditValueChanged
+    '    LoadData()
     'End Sub
 
-    'Private Sub InitChartTotalSellProfitByYear()
-    '    Try
-    '        Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].[spTotalSellByYear]"
-    '        SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-    '        SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-    '        Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
-
-    '        Dim seriesSale As New Series("Total Sale", ViewType.Line)
-    '        Dim seriesProfit As New Series("Total Profit", ViewType.Line)
-    '        For Each pRow In dataTable.Rows
-    '            seriesSale.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("TotalAmount"))))
-    '            seriesProfit.Points.Add(New SeriesPoint(pRow("OrderYear").ToString, ConvertNullToZero(pRow("Profit"))))
-    '        Next
-
-    '        ChartTotalSellProfitByYear.Series.Clear()
-    '        ' Add the series to the chart.
-    '        ChartTotalSellProfitByYear.Series.Add(seriesSale)
-    '        ChartTotalSellProfitByYear.Series.Add(seriesProfit)
-
-    '        ' Specify the text pattern of series labels.
-    '        seriesSale.Label.TextPattern = "{V:#,##0.000,M}"
-    '        seriesProfit.Label.TextPattern = "{V:#,##0.000,M}"
-
-    '        seriesSale.ArgumentScaleType = ScaleType.Numerical
-    '        seriesSale.ValueScaleType = ScaleType.Numerical
-
-    '        seriesProfit.ArgumentScaleType = ScaleType.Numerical
-    '        seriesProfit.ValueScaleType = ScaleType.Numerical
-
-    '        CType(seriesProfit.View, LineSeriesView).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True
-    '        'CType(seriesProfit.View, LineSeriesView).LineMarkerOptions.Size = 20
-    '        'CType(seriesProfit.View, LineSeriesView).LineMarkerOptions.Kind = MarkerKind.
-    '        'CType(seriesProfit.View, LineSeriesView).LineStyle.DashStyle = DashStyle.Dash
-
-    '        CType(seriesSale.View, LineSeriesView).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True
-    '        'CType(seriesSale.View, LineSeriesView).LineMarkerOptions.Size = 20
-    '        'CType(seriesSale.View, LineSeriesView).LineMarkerOptions.Kind = MarkerKind.Triangle
-    '        'CType(seriesSale.View, LineSeriesView).LineStyle.DashStyle = DashStyle.Dash
-
-    '        Dim xAxisOptions As NumericScaleOptions = CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
-    '        xAxisOptions.ScaleMode = ScaleMode.Manual
-    '        xAxisOptions.GridSpacing = 1
-    '        xAxisOptions.GridAlignment = NumericGridAlignment.Ones
-    '        xAxisOptions.AggregateFunction = AggregateFunction.None
-
-    '        Dim diagram As XYDiagram = CType(ChartTotalSellProfitByYear.Diagram, XYDiagram)
-    '        ' Customize the appearance of the X-axis title.
-    '        diagram.AxisX.Title.Visible = True
-    '        diagram.AxisX.Title.Alignment = StringAlignment.Center
-    '        diagram.AxisX.Title.Text = "Year"
-    '        diagram.AxisX.Title.TextColor = Color.Gray
-    '        diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
-
-    '        CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisY.Interlaced = True
-    '        CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisY.InterlacedColor = Color.FromArgb(20, 60, 60, 60)
-    '        CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions.AutoGrid = False
-    '        CType(ChartTotalSellProfitByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions.GridSpacing = 1
+    Private Sub InitChartSellTargetMonthly()
+        Try
+            Dim lTotalSell As Double = 0, lTotalTarget As Double = 0
 
 
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
 
-    '        ChartTotalSellProfitByYear.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
-    '        ChartTotalSellProfitByYear.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+            If lEmpID = "" Then Exit Sub
 
-    '        ' Add the chart to the form.
-    '        ChartTotalSellProfitByYear.Dock = DockStyle.Fill
+            Dim SQL = " EXEC spSellTargetMonthly"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "' "
+            SQL &= " ,@EmpID = '" & lEmpID & "' "
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
-
-    'Private Sub InitChartBankBalance()
-    '    Try
-    '        Dim lTotalCash As Double = 0
-
-    '        Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].[spBankBalance]"
-    '        SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-    '        SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-    '        Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
-
-
-    '        Dim storage As New TreeMapItemStorage()
-    '        BankAccTreeMap.DataAdapter = storage
-
-    '        Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
-
-    '        For Each pRow In dataTable.Rows
-    '            BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
-    '            lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
-    '        Next
-
-    '        txtCash.Text = lTotalCash.ToString("#,##0.00") & " K"
-
-    '        storage.Items.Add(BankGroup)
-
-    '        BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
-    '        BankAccTreeMap.LeafTextPattern = "{L} {V} K"
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
-
-    'Private Sub InitGridBrand()
-    '    Try
-    '        Dim SQL = "SET ARITHABORT OFF;EXEC [dbo].[spTotalSellByBrand]"
-    '        SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-    '        SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-    '        Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
-
-    '        GridControl1.DataSource = dataTable
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
-
-    'Private Sub InitOverdueGauge()
-    '    Try
-    '        Dim series1 As New Series("Series 1", ViewType.Pie3D)
-
-    '        'Overdue
-    '        Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].spOverdueTX"
-    '        SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-    '        SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-    '        Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
-
-    '        If dataTable.Rows.Count > 0 Then
-    '            Dim lsumPayTotal = Double.Parse((dataTable.Compute("SUM(PayTotal)", "")))
-    '            lsumPayTotal /= 1000000
-    '            series1.Points.Add(New SeriesPoint("ยอดหนี้คงค้าง", lsumPayTotal))
-
-    '            'Total sell
-
-    '            series1.Points.Add(New SeriesPoint("ยอดชำระ", mTotalSell - lsumPayTotal))
-    '            overdueChart.Series.Clear()
-
-    '            ' Add the series to the chart.
-    '            overdueChart.Series.Add(series1)
-
-    '            ' Specify the text pattern of series labels.
-    '            series1.Label.TextPattern = "{A} {VP:P0} ({V:F3}M)"
-    '            series1.LegendTextPattern = "{A}"
-
-    '            ' Specify how series points are sorted.
-    '            series1.SeriesPointsSorting = SortingMode.Ascending
-    '            series1.SeriesPointsSortingKey = SeriesPointKey.Argument
-
-    '            series1.ShowInLegend = False
-    '            '' Specify the behavior of series labels.
-    '            CType(series1.Label, Pie3DSeriesLabel).Position = PieSeriesLabelPosition.Inside
-
-    '            'Dim totalLabel As PieTotalLabel = CType(overdueChart.Series("Series 1").View, Pie3DSeriesView)
-    '            'totalLabel.Visible = True
-    '            'totalLabel.TextPattern = "Total" & vbLf & "{V:F3}M".ToString()
-
-    '            overdueChart.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
-    '            overdueChart.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
-
-    '            txtSellTotal.Text = "ยอดขายรวม :" & mTotalSell & " M"
-    '            'If overdueChart.Titles.Count > 0 Then
-    '            '    overdueChart.Titles(0).Text = "ยอดขายรวม :" & mTotalSell & " M"
-    '            'End If
-
-    '        End If
+            Dim seriesSale As New Series("Actual Sale", ViewType.Bar)
+            Dim seriesTarget As New Series("Target", ViewType.Line)
 
 
-    '    Catch ex As Exception
-    '        ShowErrorMsg(False, ex.Message)
-    '    End Try
-    'End Sub
+            For Each pRow In dataTable.Rows
+                seriesSale.Points.Add(New SeriesPoint(DateSerial(pRow("OrderYear"), pRow("Ordermonth"), 1), ConvertNullToZero(pRow("TotalAmount"))))
+                seriesTarget.Points.Add(New SeriesPoint(DateSerial(pRow("OrderYear"), pRow("Ordermonth"), 1), ConvertNullToZero(pRow("TargetPerMonth"))))
 
-    'Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs)
-    '    If ListYear.CheckedItems.Count > 0 Then
-    '        LoadData()
-    '    End If
-    'End Sub
+                lTotalSell += ConvertNullToZero(pRow("TotalAmount"))
+                lTotalTarget += ConvertNullToZero(pRow("TargetPerMonth"))
+            Next
+            'mTotalSell = lTotalSell
+            txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " K"
+            txtTarget.Text = lTotalTarget.ToString("#,##0.00") & " K"
 
-    'Private Sub ListMonth_ItemCheck(sender As Object, e As EventArgs) Handles ListMonth.ItemCheck
-    '    If ListMonth.CheckedItems.Count > 0 Then
-    '        LoadData()
-    '    End If
-    'End Sub
+            ChartSellTargetMonthly.Series.Clear()
+            ' Add the series to the chart.
+            ChartSellTargetMonthly.Series.Add(seriesSale)
+            ChartSellTargetMonthly.Series.Add(seriesTarget)
+
+            ' Specify the text pattern of series labels.
+            seriesSale.Label.TextPattern = "{V:#,##0.000,K}"
+            seriesTarget.Label.TextPattern = "{V:#,##0.000,K}"
+
+
+            seriesSale.ArgumentScaleType = ScaleType.DateTime
+            seriesSale.ValueScaleType = ScaleType.Numerical
+
+            seriesTarget.ArgumentScaleType = ScaleType.DateTime
+            seriesTarget.ValueScaleType = ScaleType.Numerical
+
+            Dim xAxisOptions As DateTimeScaleOptions = CType(ChartSellTargetMonthly.Diagram, XYDiagram).AxisX.DateTimeScaleOptions
+            xAxisOptions.ScaleMode = ScaleMode.Manual
+            xAxisOptions.GridSpacing = 1
+            xAxisOptions.GridAlignment = DateTimeGridAlignment.Month
+            xAxisOptions.AggregateFunction = AggregateFunction.None
+
+            Dim Diagram As XYDiagram = CType(ChartSellTargetMonthly.Diagram, XYDiagram)
+            ' Customize the appearance of the X-axis title.
+            Diagram.AxisX.Title.Visible = True
+            Diagram.AxisX.Title.Alignment = StringAlignment.Center
+            Diagram.AxisX.Title.Text = "Month"
+            Diagram.AxisX.Title.TextColor = Color.Gray
+            Diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
+            Diagram.AxisX.Label.TextPattern = "{A:MMM}"
+            'xAxisOptions.GridOffset = 100
+            'Dim yAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
+            'yAxisOptions.MeasureUnit = NumericMeasureUnit.Ones
+            ''yAxisOptions.GridSpacing = 500
+            ''series1.LegendTextPattern = "{A}"
+
+            seriesSale.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
+            seriesTarget.LabelsVisibility = DevExpress.Utils.DefaultBoolean.False
+
+            ' Specify how series points are sorted.
+            'series1.SeriesPointsSorting = SortingMode.Ascending
+            'series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+            'series1.ShowInLegend = True
+            '' Specify the behavior of series labels.
+            CType(seriesSale.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.TopInside
+            CType(seriesSale.View, BarSeriesView).BarWidth = 15
+            CType(seriesSale.View, BarSeriesView).ColorEach = True
+
+
+            'CType(seriesTarget.Label, Line3DSeriesLabel).Position = BarSeriesLabelPosition.Top
+
+
+            ChartSellTargetMonthly.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
+            ChartSellTargetMonthly.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ' Add the chart to the form.
+            ChartSellTargetMonthly.Dock = DockStyle.Fill
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InitChartProductTop5()
+        Try
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
+
+            If lEmpID = "" Then Exit Sub
+
+            Dim SQL = " EXEC [dbo].[spTotalSellByProduct]"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " ,@EmpID = '" & lEmpID & "' "
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            Dim series1 As New Series("Series 1", ViewType.Doughnut)
+            For Each pRow In dataTable.Rows
+                series1.Points.Add(New SeriesPoint(pRow("ProductName").ToString, ConvertNullToZero(pRow("TotalAmount"))))
+            Next
+            ChartProductTop5.Series.Clear()
+
+            ' Add the series to the chart.
+            ChartProductTop5.Series.Add(series1)
+
+            ' Specify the text pattern of series labels.
+            series1.Label.TextPattern = "{VP:P0} ({V:#,##0.000}K)"
+            series1.LegendTextPattern = "{A}"
+
+            ' Specify how series points are sorted.
+            series1.SeriesPointsSorting = SortingMode.Ascending
+            series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+            series1.ShowInLegend = True
+            '' Specify the behavior of series labels.
+            CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
+
+            Dim totalLabel As PieTotalLabel = CType(ChartProductTop5.Series("Series 1").View, DoughnutSeriesView).TotalLabel
+            totalLabel.Visible = False
+
+
+            ChartProductTop5.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
+            ChartProductTop5.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ' Add the chart to the form.
+            ChartProductTop5.Dock = DockStyle.Fill
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InitChartCusGroupTop5()
+        Try
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
+
+            If lEmpID = "" Then Exit Sub
+
+            Dim SQL = " EXEC [dbo].[spTotalSellByCusGroup]"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " ,@EmpID = '" & lEmpID & "' "
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            Dim series1 As New Series("Series 1", ViewType.Doughnut)
+            For Each pRow In dataTable.Rows
+                series1.Points.Add(New SeriesPoint(pRow("CustomerGroup").ToString, ConvertNullToZero(pRow("TotalAmount"))))
+            Next
+            ChartCusGroupTop5.Series.Clear()
+
+            ' Add the series to the chart.
+            ChartCusGroupTop5.Series.Add(series1)
+
+            ' Specify the text pattern of series labels.
+            series1.Label.TextPattern = "{VP:P0} ({V:#,##0.000}K)"
+            series1.LegendTextPattern = "{A}"
+
+            ' Specify how series points are sorted.
+            series1.SeriesPointsSorting = SortingMode.Ascending
+            series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+            series1.ShowInLegend = True
+            '' Specify the behavior of series labels.
+            CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
+
+            Dim totalLabel As PieTotalLabel = CType(ChartCusGroupTop5.Series("Series 1").View, DoughnutSeriesView).TotalLabel
+            totalLabel.Visible = False
+
+
+            ChartCusGroupTop5.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
+            ChartCusGroupTop5.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ' Add the chart to the form.
+            ChartCusGroupTop5.Dock = DockStyle.Fill
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InitChartSellGrowth()
+        Try
+            Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
+
+
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
+
+            If lEmpID = "" Then Exit Sub
+
+            Dim SQL = " EXEC spSellGrowth"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "' "
+            SQL &= " ,@EmpID = '" & lEmpID & "' "
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            Dim seriesSale As New Series("Sales Growth", ViewType.Bar)
+
+            For Each pRow In dataTable.Rows
+                seriesSale.Points.Add(New SeriesPoint(DateSerial(pRow("OrderYear"), pRow("Ordermonth"), 1), ConvertNullToZero(pRow("GrowthRate"))))
+
+            Next
+            'mTotalSell = lTotalSell
+
+
+            ChartSellGrowth.Series.Clear()
+            ' Add the series to the chart.
+            ChartSellGrowth.Series.Add(seriesSale)
+
+            ' Specify the text pattern of series labels.
+            seriesSale.Label.TextPattern = "{V:#,##0}% "
+
+
+            seriesSale.ArgumentScaleType = ScaleType.DateTime
+            seriesSale.ValueScaleType = ScaleType.Numerical
+
+
+
+            Dim xAxisOptions As DateTimeScaleOptions = CType(ChartSellGrowth.Diagram, XYDiagram).AxisX.DateTimeScaleOptions
+            xAxisOptions.ScaleMode = ScaleMode.Manual
+            xAxisOptions.GridSpacing = 1
+            xAxisOptions.GridAlignment = DateTimeGridAlignment.Month
+            xAxisOptions.AggregateFunction = AggregateFunction.None
+
+            Dim Diagram As XYDiagram = CType(ChartSellGrowth.Diagram, XYDiagram)
+            ' Customize the appearance of the X-axis title.
+            Diagram.AxisX.Title.Visible = True
+            Diagram.AxisX.Title.Alignment = StringAlignment.Center
+            Diagram.AxisX.Title.Text = "Month"
+            Diagram.AxisX.Title.TextColor = Color.Gray
+            Diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
+            Diagram.AxisX.Label.TextPattern = "{A:MMM}"
+            'xAxisOptions.GridOffset = 100
+            'Dim yAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
+            'yAxisOptions.MeasureUnit = NumericMeasureUnit.Ones
+            ''yAxisOptions.GridSpacing = 500
+            ''series1.LegendTextPattern = "{A}"
+
+            seriesSale.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
+
+
+            ' Specify how series points are sorted.
+            'series1.SeriesPointsSorting = SortingMode.Ascending
+            'series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+            'series1.ShowInLegend = True
+            '' Specify the behavior of series labels.
+            CType(seriesSale.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.TopInside
+            CType(seriesSale.View, BarSeriesView).BarWidth = 15
+            CType(seriesSale.View, BarSeriesView).ColorEach = True
+
+
+            'CType(seriesTarget.Label, Line3DSeriesLabel).Position = BarSeriesLabelPosition.Top
+
+
+            ChartSellGrowth.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False
+            ChartSellGrowth.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ' Add the chart to the form.
+            ChartSellGrowth.Dock = DockStyle.Fill
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InitGridOverDue()
+        Try
+            Dim SQL = "EXEC [dbo].[spOverdueTX]"
+            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            If dataTable.Rows.Count = 0 Then Exit Sub
+
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
+
+            If lEmpID = "" Then Exit Sub
+            Dim FilterTable As New DataTable
+            FilterTable = dataTable.Select("EmpID in(" & lEmpID & ")").CopyToDataTable
+
+            GridControl1.DataSource = FilterTable
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 
 End Class

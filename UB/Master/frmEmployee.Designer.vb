@@ -79,6 +79,9 @@ Partial Class frmEmployee
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
+        Me.TargetPerMonth = New DevExpress.XtraEditors.CalcEdit()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         CType(Me.PositionID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WorkingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDepartment.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,6 +112,7 @@ Partial Class frmEmployee
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.TargetPerMonth.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PositionID
@@ -484,6 +488,9 @@ Partial Class frmEmployee
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.Label13)
+        Me.GeneralTabPage.Controls.Add(Me.Label11)
+        Me.GeneralTabPage.Controls.Add(Me.TargetPerMonth)
         Me.GeneralTabPage.Controls.Add(Me.CommissionID)
         Me.GeneralTabPage.Controls.Add(Me.btnRefreshCommissionID)
         Me.GeneralTabPage.Controls.Add(Me.GroupPrivilege)
@@ -1001,6 +1008,53 @@ Partial Class frmEmployee
         'FormChangedComponent1
         '
         '
+        'TargetPerMonth
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TargetPerMonth, "TextChanged")
+        Me.TargetPerMonth.EnterMoveNextControl = True
+        Me.TargetPerMonth.Location = New System.Drawing.Point(474, 271)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.TargetPerMonth, True)
+        Me.TargetPerMonth.Name = "TargetPerMonth"
+        Me.TargetPerMonth.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TargetPerMonth.Properties.Appearance.Options.UseFont = True
+        Me.TargetPerMonth.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TargetPerMonth.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TargetPerMonth.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TargetPerMonth.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TargetPerMonth.Properties.MaskSettings.Set("mask", "n2")
+        Me.TargetPerMonth.Properties.Precision = 2
+        Me.TargetPerMonth.Size = New System.Drawing.Size(189, 20)
+        Me.TargetPerMonth.TabIndex = 12
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.TargetPerMonth, "Text")
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label11, "")
+        Me.Label11.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label11.Location = New System.Drawing.Point(393, 273)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label11, True)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(74, 14)
+        Me.Label11.TabIndex = 221
+        Me.Label11.Text = "ยอดเป้าหมาย"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label11, "")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label13, "")
+        Me.Label13.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label13.Location = New System.Drawing.Point(669, 274)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label13, True)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(56, 14)
+        Me.Label13.TabIndex = 222
+        Me.Label13.Text = "(ต่อเดือน)"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label13, "")
+        '
         'frmEmployee
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1042,6 +1096,7 @@ Partial Class frmEmployee
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.TargetPerMonth.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1105,4 +1160,7 @@ Partial Class frmEmployee
     Private WithEvents CommissionID As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents btnRefreshCommissionID As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Commission As DevExpress.XtraEditors.CalcEdit
+    Private WithEvents Label13 As Label
+    Private WithEvents Label11 As Label
+    Friend WithEvents TargetPerMonth As DevExpress.XtraEditors.CalcEdit
 End Class

@@ -1,0 +1,39 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [dbo].[spSellGrowth] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+with orders as (
+SELECT ROW_NUMBER ( )  OVER(ORDER BY OrderYear,Ordermonth) AS RowNo
+,Ordermonth,OrderYear,ROUND(SUM(TotalAmount)/1000,3)TotalAmount
+FROM (
+	SELECT 	month(Orders.OrderDate) as Ordermonth,year(Orders.OrderDate) as OrderYear
+	,SUM(Orders.Price * Orders.Units) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between DATEADD(month, -1, @FromDate) and @ToDate
+	and Orders.EmpID IN(select number from intlist_to_tbl(@EmpID))
+	group by month(Orders.OrderDate),year(Orders.OrderDate)
+) as tmp
+group by Ordermonth,OrderYear 
+
+)
+
+select o.Ordermonth,o.OrderYear,o.TotalAmount ,op.TotalAmount as PreviousTotalAmount
+,case when op.TotalAmount > 0 then ((o.TotalAmount-op.TotalAmount) / o.TotalAmount)*100 else 0 end GrowthRate
+from orders o
+inner join orders op on o.RowNo=op.RowNo+1
+order by OrderYear, Ordermonth
+END
+GO
+

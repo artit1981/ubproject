@@ -301,7 +301,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel57.CanGrow = False
         Me.XrLabel57.Font = New System.Drawing.Font("Cordia New", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel57.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel57.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel57.LocationFloat = New DevExpress.Utils.PointFloat(513.7921!, 144.0043!)
         Me.XrLabel57.Name = "XrLabel57"
         Me.XrLabel57.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -332,7 +332,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel55.CanGrow = False
         Me.XrLabel55.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.VatField")})
         Me.XrLabel55.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel55.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel55.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 91.49984!)
         Me.XrLabel55.Name = "XrLabel55"
         Me.XrLabel55.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -378,7 +378,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel49.CanGrow = False
         Me.XrLabel49.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel49.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel49.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel49.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 64.33327!)
         Me.XrLabel49.Name = "XrLabel49"
         Me.XrLabel49.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -394,7 +394,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel48.CanGrow = False
         Me.XrLabel48.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.DiscountField")})
         Me.XrLabel48.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel48.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel48.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel48.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 37.16664!)
         Me.XrLabel48.Name = "XrLabel48"
         Me.XrLabel48.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -425,7 +425,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel14.CanGrow = False
         Me.XrLabel14.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel14.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(513.7919!, 10.00002!)
         Me.XrLabel14.Name = "XrLabel14"
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -461,7 +461,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel78.CanGrow = False
         Me.XrLabel78.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel78.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel78.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel78.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 181.6909!)
         Me.XrLabel78.Name = "XrLabel78"
         Me.XrLabel78.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -489,7 +489,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel74.CanGrow = False
         Me.XrLabel74.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel74.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel74.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel74.LocationFloat = New DevExpress.Utils.PointFloat(677.3455!, 320.9451!)
         Me.XrLabel74.Name = "XrLabel74"
         Me.XrLabel74.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -515,7 +515,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel72.CanGrow = False
         Me.XrLabel72.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel72.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel72.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel72.LocationFloat = New DevExpress.Utils.PointFloat(552.705!, 320.9451!)
         Me.XrLabel72.Name = "XrLabel72"
         Me.XrLabel72.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -543,7 +543,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel70.CanGrow = False
         Me.XrLabel70.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel70.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel70.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel70.LocationFloat = New DevExpress.Utils.PointFloat(439.2917!, 320.9451!)
         Me.XrLabel70.Name = "XrLabel70"
         Me.XrLabel70.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -569,7 +569,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel68.CanGrow = False
         Me.XrLabel68.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel68.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel68.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel68.LocationFloat = New DevExpress.Utils.PointFloat(282.8863!, 320.9451!)
         Me.XrLabel68.Name = "XrLabel68"
         Me.XrLabel68.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -595,7 +595,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel53.CanGrow = False
         Me.XrLabel53.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel53.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel53.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(139.1718!, 320.9451!)
         Me.XrLabel53.Name = "XrLabel53"
         Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -621,7 +621,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel32.CanGrow = False
         Me.XrLabel32.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel32.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 320.9451!)
         Me.XrLabel32.Name = "XrLabel32"
         Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -782,7 +782,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel3.CanGrow = False
         Me.XrLabel3.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel3.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(14.37071!, 122.4642!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -831,7 +831,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel20.CanGrow = False
         Me.XrLabel20.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel20.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 240.3994!)
         Me.XrLabel20.Name = "XrLabel20"
         Me.XrLabel20.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -844,7 +844,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel25.CanGrow = False
         Me.XrLabel25.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel25.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 262.3994!)
         Me.XrLabel25.Name = "XrLabel25"
         Me.XrLabel25.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -857,7 +857,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel43.CanGrow = False
         Me.XrLabel43.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel43.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel43.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel43.LocationFloat = New DevExpress.Utils.PointFloat(500.5004!, 284.3994!)
         Me.XrLabel43.Name = "XrLabel43"
         Me.XrLabel43.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -881,7 +881,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel47.CanGrow = False
         Me.XrLabel47.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel47.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(500.5!, 218.3994!)
         Me.XrLabel47.Name = "XrLabel47"
         Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -917,7 +917,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel41.CanGrow = False
         Me.XrLabel41.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel41.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel41.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel41.LocationFloat = New DevExpress.Utils.PointFloat(500.4998!, 196.3994!)
         Me.XrLabel41.Name = "XrLabel41"
         Me.XrLabel41.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -931,7 +931,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel15.BorderColor = System.Drawing.Color.Navy
         Me.XrLabel15.CanGrow = False
         Me.XrLabel15.Font = New System.Drawing.Font("Cordia New", 20.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel15.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(500.5!, 22.99997!)
         Me.XrLabel15.Name = "XrLabel15"
         Me.XrLabel15.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -960,7 +960,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel33.CanGrow = False
         Me.XrLabel33.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel33.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel33.LocationFloat = New DevExpress.Utils.PointFloat(500.5004!, 147.3808!)
         Me.XrLabel33.Name = "XrLabel33"
         Me.XrLabel33.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -976,7 +976,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel31.CanGrow = False
         Me.XrLabel31.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel31.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(500.4999!, 125.3808!)
         Me.XrLabel31.Name = "XrLabel31"
         Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1002,7 +1002,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel23.CanGrow = False
         Me.XrLabel23.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel23.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(500.5!, 81.38082!)
         Me.XrLabel23.Name = "XrLabel23"
         Me.XrLabel23.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1028,7 +1028,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel61.CanGrow = False
         Me.XrLabel61.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel61.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel61.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel61.LocationFloat = New DevExpress.Utils.PointFloat(469.4268!, 395.4598!)
         Me.XrLabel61.Name = "XrLabel61"
         Me.XrLabel61.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1043,7 +1043,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel45.CanGrow = False
         Me.XrLabel45.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel45.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(689.2943!, 395.4598!)
         Me.XrLabel45.Name = "XrLabel45"
         Me.XrLabel45.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1072,7 +1072,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel40.CanGrow = False
         Me.XrLabel40.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel40.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel40.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel40.LocationFloat = New DevExpress.Utils.PointFloat(500.5001!, 103.3808!)
         Me.XrLabel40.Name = "XrLabel40"
         Me.XrLabel40.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1095,7 +1095,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel21.CanGrow = False
         Me.XrLabel21.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel21.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(609.3154!, 395.4598!)
         Me.XrLabel21.Name = "XrLabel21"
         Me.XrLabel21.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1110,7 +1110,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel9.CanGrow = False
         Me.XrLabel9.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel9.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(548.8859!, 395.4598!)
         Me.XrLabel9.Name = "XrLabel9"
         Me.XrLabel9.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1125,7 +1125,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel8.CanGrow = False
         Me.XrLabel8.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel8.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(174.5833!, 395.4598!)
         Me.XrLabel8.Name = "XrLabel8"
         Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1140,7 +1140,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel7.CanGrow = False
         Me.XrLabel7.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel7.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(55.66908!, 395.4598!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1155,7 +1155,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel2.CanGrow = False
         Me.XrLabel2.Font = New System.Drawing.Font("Cordia New", 14.25!)
-        Me.XrLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.XrLabel2.ForeColor = System.Drawing.Color.DarkGreen
         Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(14.37057!, 395.4599!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)

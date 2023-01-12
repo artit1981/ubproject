@@ -175,7 +175,7 @@ Public Class frmDashboard
             CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
 
             Dim totalLabel As PieTotalLabel = CType(ChartTotalSellByCatalog.Series("Series 1").View, DoughnutSeriesView).TotalLabel
-            totalLabel.Visible = True
+            totalLabel.Visible = False
             totalLabel.TextPattern = "Total" & vbLf & "{V:F3}M".ToString()
 
             ChartTotalSellByCatalog.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True

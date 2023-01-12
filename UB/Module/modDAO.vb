@@ -585,6 +585,23 @@ Module modDAO
         End Try
     End Sub
 
+    Public Sub SetComboTerritoryWithSQL(ByVal pCombo As DevExpress.XtraEditors.LookUpEdit, Optional ByVal pSQL As String = "")
+        Dim lcls As New TerritoryDAO
+        Dim dataTable As New DataTable()
+        Try
+            dataTable = lcls.GetDataTable(0, True, pSQL)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "NameThai"
+            pCombo.Properties.ValueMember = "ID"
+            'pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetComboCheckTerritory : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
+
     Public Sub SetComboCheckTerritory(ByVal pCombo As DevExpress.XtraEditors.CheckedComboBoxEdit, Optional ByVal pSQL As String = "")
         Dim lcls As New TerritoryDAO
         Dim dataTable As New DataTable()

@@ -1,3 +1,14 @@
+USE [BS]
+GO
+
+/****** Object:  StoredProcedure [dbo].[spCommission]    Script Date: 1/11/2023 9:27:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 
 CREATE PROCEDURE [dbo].[spCommission] 
  @FromDate date 
@@ -10,7 +21,7 @@ SET NOCOUNT ON;
 with Orders as (
 SELECT vOrderTotal.EmpID,EmpCode,EmpName,CommissionID,OrderDate,Total 
 FROM vOrderTotal
-WHERE CommissionID>0 and OrderDate between @FromDate and @ToDate
+WHERE OrderDate between @FromDate and @ToDate
 )
 
 ,Comm as (
@@ -64,3 +75,5 @@ group by CommissionID,Subject,EmpID,EmpCode,EmpName,Total
 ORDER BY  CommissionID,Subject,EmpID,EmpCode,EmpName 
 END
 GO
+
+
