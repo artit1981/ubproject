@@ -62,7 +62,7 @@ Public Class frmDashboardComm
     Private Sub SetComboTerritory()
         Try '  
             SetComboTerritoryWithSQL(cboCheckedTerritory, " and [CommissionID]>0 ")
-            cboCheckedTerritory.EditValue = Integer.Parse(6)
+            cboCheckedTerritory.EditValue = Long.Parse(6)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".SetComboTerritory : " & e.Message)
         End Try
@@ -179,9 +179,13 @@ Public Class frmDashboardComm
     End Function
     Private Sub InitChartComm()
         Try
+            ChartComm.Series.Clear()
+
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
 
             'Comm
+            Dim lTotal As Decimal = 0
+
             Dim SQL = " EXEC [dbo].[spCommission]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
@@ -200,41 +204,56 @@ Public Class frmDashboardComm
 
             If lEmpID = "" Then Exit Sub
             Dim FilterTable As New DataTable
-            FilterTable = dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ")").CopyToDataTable
+            If dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ")").Length > 0 Then
 
-            Dim lTotal As Decimal = 0
-            For Each pRow In FilterTable.Rows
-                lTotal += ConvertNullToZero(pRow("Commisstion"))
-            Next
+                FilterTable = dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ")").CopyToDataTable
+                For Each pRow In FilterTable.Rows
+                    lTotal += ConvertNullToZero(pRow("Commisstion"))
+                Next
+            End If
+
+            If lTotal > 0 Then
+                lTotal = lTotal / 1000
+            End If
             series1.Points.Add(New SeriesPoint("ค่าคอมส่วนตัว", lTotal))
 
             'Comm Group
+            lTotal = 0
+
             SQL = " EXEC [dbo].[spCommissionGroup]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
             SQL &= " WITH RECOMPILE"
-            dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+            Dim dataTableGroup = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
-            lEmpID = cboCheckedTerritory.EditValue
-            If lEmpID = "" Then Exit Sub
-            FilterTable = New DataTable
-            FilterTable = dataTable.Select("Commisstion>0 and TerritoryID in(" & lEmpID & ")").CopyToDataTable
+            If dataTableGroup.Rows.Count > 0 Then
+                Dim lTerritoryID As String = ""
+                lTerritoryID = cboCheckedTerritory.EditValue
+                If lTerritoryID <> "" Then
+                    If dataTableGroup.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").Length > 0 Then
+                        FilterTable = dataTableGroup.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").CopyToDataTable
+                        For Each pRow In FilterTable.Rows
+                            lTotal += ConvertNullToZero(pRow("EmpComm"))
+                        Next
 
-            lTotal = 0
-            For Each pRow In FilterTable.Rows
-                lTotal += ConvertNullToZero(pRow("EmpComm"))
-            Next
+                    End If
+                End If
 
+
+            End If
+
+
+            If lTotal > 0 Then
+                lTotal = lTotal / 1000
+            End If
             series1.Points.Add(New SeriesPoint("ค่าคอมทีม", lTotal))
 
-
-            ChartComm.Series.Clear()
 
             ' Add the series to the chart.
             ChartComm.Series.Add(series1)
 
             ' Specify the text pattern of series labels.
-            series1.Label.TextPattern = "{VP:P0} ({V:#,##0.000}M)"
+            series1.Label.TextPattern = "{VP:P0} ({V:#,##0.000}K)"
             series1.LegendTextPattern = "{A}"
 
             ' Specify how series points are sorted.
@@ -247,7 +266,7 @@ Public Class frmDashboardComm
 
             Dim totalLabel As PieTotalLabel = CType(ChartComm.Series("Series 1").View, DoughnutSeriesView).TotalLabel
             totalLabel.Visible = False
-            totalLabel.TextPattern = "Total" & vbLf & "{V:#,##0.000}M".ToString()
+            totalLabel.TextPattern = "Total" & vbLf & "{V:#,##0.000}K".ToString()
             totalLabel.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
 
             ChartComm.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
@@ -271,6 +290,8 @@ Public Class frmDashboardComm
 
     Private Sub InitChartSellTargetMonthly()
         Try
+            ChartSellTargetMonthly.Series.Clear()
+
             Dim lTotalSell As Double = 0, lTotalTarget As Double = 0
 
 
@@ -306,7 +327,7 @@ Public Class frmDashboardComm
             txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " K"
             txtTarget.Text = lTotalTarget.ToString("#,##0.00") & " K"
 
-            ChartSellTargetMonthly.Series.Clear()
+
             ' Add the series to the chart.
             ChartSellTargetMonthly.Series.Add(seriesSale)
             ChartSellTargetMonthly.Series.Add(seriesTarget)
@@ -372,6 +393,8 @@ Public Class frmDashboardComm
 
     Private Sub InitChartProductTop5()
         Try
+            ChartProductTop5.Series.Clear()
+
             Dim lEmpID As String = ""
             For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
                 lEmpID &= "," & pVaue
@@ -393,7 +416,7 @@ Public Class frmDashboardComm
             For Each pRow In dataTable.Rows
                 series1.Points.Add(New SeriesPoint(pRow("ProductName").ToString, ConvertNullToZero(pRow("TotalAmount"))))
             Next
-            ChartProductTop5.Series.Clear()
+
 
             ' Add the series to the chart.
             ChartProductTop5.Series.Add(series1)
@@ -427,6 +450,8 @@ Public Class frmDashboardComm
 
     Private Sub InitChartCusGroupTop5()
         Try
+            ChartCusGroupTop5.Series.Clear()
+
             Dim lEmpID As String = ""
             For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
                 lEmpID &= "," & pVaue
@@ -448,7 +473,7 @@ Public Class frmDashboardComm
             For Each pRow In dataTable.Rows
                 series1.Points.Add(New SeriesPoint(pRow("CustomerGroup").ToString, ConvertNullToZero(pRow("TotalAmount"))))
             Next
-            ChartCusGroupTop5.Series.Clear()
+
 
             ' Add the series to the chart.
             ChartCusGroupTop5.Series.Add(series1)
@@ -482,6 +507,8 @@ Public Class frmDashboardComm
 
     Private Sub InitChartSellGrowth()
         Try
+            ChartSellGrowth.Series.Clear()
+
             Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
 
 
@@ -511,7 +538,7 @@ Public Class frmDashboardComm
             'mTotalSell = lTotalSell
 
 
-            ChartSellGrowth.Series.Clear()
+
             ' Add the series to the chart.
             ChartSellGrowth.Series.Add(seriesSale)
 
@@ -574,6 +601,8 @@ Public Class frmDashboardComm
 
     Private Sub InitGridOverDue()
         Try
+            GridControl1.DataSource = Nothing
+
             Dim SQL = "EXEC [dbo].[spOverdueTX]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
@@ -591,10 +620,13 @@ Public Class frmDashboardComm
             End If
 
             If lEmpID = "" Then Exit Sub
-            Dim FilterTable As New DataTable
-            FilterTable = dataTable.Select("EmpID in(" & lEmpID & ")").CopyToDataTable
+            If dataTable.Select("EmpID in(" & lEmpID & ") and  OverDays>0").Length > 0 Then
+                Dim FilterTable As New DataTable
+                FilterTable = dataTable.Select("EmpID in(" & lEmpID & ")  and  OverDays>0").CopyToDataTable
 
-            GridControl1.DataSource = FilterTable
+                GridControl1.DataSource = FilterTable
+            End If
+
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try

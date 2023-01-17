@@ -1,7 +1,9 @@
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
  
 ALTER PROCEDURE [dbo].[spOverdueTX] 
  @FromDate date 
@@ -17,7 +19,7 @@ SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,O
 ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer
 ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME
 ,Orders.EmpID
-,DATEDIFF(day, Orders.ExpireDate, @ToDate  ) AS OverDays
+,DATEDIFF(day, Orders.ExpireDate,getdate()  ) AS OverDays
 
 FROM Orders     
 left outer join Menu on Orders.TableID=menu.MenuID
@@ -57,3 +59,4 @@ AND OrderStatus In ('Open')
 ORDER BY OrderCode
 
 END
+GO

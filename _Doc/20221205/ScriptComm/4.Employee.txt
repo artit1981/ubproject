@@ -1,1 +1,2 @@
 ALTER TABLE dbo.Employee ADD	CommissionID bigint NULL;
+ALTER TABLE dbo.Employee ADD	TargetPerMonth numeric(18, 2) NULL;

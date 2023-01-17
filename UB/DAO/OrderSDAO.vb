@@ -187,7 +187,10 @@ Public Class OrderSDAO
 
             Select Case ModeData
                 Case DataMode.ModeNew
-                    EmpID = gEmpID
+                    If EmpID = 0 Then
+                        EmpID = gEmpID
+                    End If
+
                     ID = GenNewID("OrderID", "Orders", tr)
 
                     '*** Check Approve

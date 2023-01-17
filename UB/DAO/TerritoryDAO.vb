@@ -164,7 +164,7 @@ Public Class TerritoryDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT cast(TerritoryID as int) AS ID,TerritoryCode,NameThai"
+            SQL = "SELECT TerritoryID  AS ID,TerritoryCode,NameThai"
             SQL &= " FROM Territory  "
             SQL &= " WHERE IsDelete =0   "
             If pID > 0 Then
