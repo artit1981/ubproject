@@ -9,7 +9,8 @@ Public Class frmDashboardComm
     Private mMonthList As String
     Private mFromDate As Date
     Private mToDate As Date
-    'Private mTotalSell As Double
+    Private mTotalSell As Double
+    Private mTarget As Double
 
     Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -23,26 +24,53 @@ Public Class frmDashboardComm
         Try
 
             InitCondition()
+
+            txtPercenTeam.Text = ""
+            txtSaleLastYear.Text = ""
+            txtTarget.Text = ""
+            txtTeam.Text = ""
+            txtTotalSell.Text = ""
             'LoadData()
 
-            '' Add a title to the chart and hide the legend.
-            'Dim chartTitle1 As New ChartTitle With {
-            '    .Text = "Total Sale by Catagoly",
-            '    .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
-            '}
-            'ChartTotalSellByCatalog.Titles.Add(chartTitle1)
+            ' Add a title to the chart and hide the legend.
+            Dim chartTitle1 As New ChartTitle With {
+                .Text = "Commission",
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+            }
+            ChartComm.Titles.Add(chartTitle1)
 
-            'chartTitle1 = New ChartTitle With {
-            '    .Text = "Total Sale and COGS",
-            '    .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
-            '}
-            'ChartTotalSellCOGSByYear.Titles.Add(chartTitle1)
+            chartTitle1 = New ChartTitle With {
+                .Text = "Top 5 Sales by Product",
+                .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+            }
+            ChartProductTop5.Titles.Add(chartTitle1)
 
-            'chartTitle1 = New ChartTitle With {
-            '    .Text = "Total Sale and Profit",
-            '    .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
-            '}
-            'ChartTotalSellProfitByYear.Titles.Add(chartTitle1)
+            chartTitle1 = New ChartTitle With {
+               .Text = "Top 5 Sales by Channel",
+               .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+           }
+            ChartCusGroupTop5.Titles.Add(chartTitle1)
+
+            chartTitle1 = New ChartTitle With {
+               .Text = "Actual Sales vs Target",
+               .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+           }
+            ChartSellTargetMonthly.Titles.Add(chartTitle1)
+
+
+            chartTitle1 = New ChartTitle With {
+               .Text = "Sales Growth",
+               .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+           }
+            ChartSellGrowth.Titles.Add(chartTitle1)
+
+
+            chartTitle1 = New ChartTitle With {
+               .Text = "Target Achievement",
+               .Font = New Drawing.Font("Segoe UI", 11, FontStyle.Bold)
+           }
+            ChartTargetAchieve.Titles.Add(chartTitle1)
+
 
 
         Catch ex As Exception
@@ -324,6 +352,7 @@ Public Class frmDashboardComm
                 lTotalTarget += ConvertNullToZero(pRow("TargetPerMonth"))
             Next
             'mTotalSell = lTotalSell
+            'mTarget = lTotalTarget
             txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " K"
             txtTarget.Text = lTotalTarget.ToString("#,##0.00") & " K"
 
@@ -351,26 +380,18 @@ Public Class frmDashboardComm
 
             Dim Diagram As XYDiagram = CType(ChartSellTargetMonthly.Diagram, XYDiagram)
             ' Customize the appearance of the X-axis title.
-            Diagram.AxisX.Title.Visible = True
+            Diagram.AxisX.Title.Visibility = True
             Diagram.AxisX.Title.Alignment = StringAlignment.Center
             Diagram.AxisX.Title.Text = "Month"
             Diagram.AxisX.Title.TextColor = Color.Gray
             Diagram.AxisX.Title.Font = New Font("Tahoma", 8, FontStyle.Bold)
             Diagram.AxisX.Label.TextPattern = "{A:MMM}"
-            'xAxisOptions.GridOffset = 100
-            'Dim yAxisOptions As NumericScaleOptions = CType(ChartTotalSellCOGSByYear.Diagram, XYDiagram).AxisX.NumericScaleOptions
-            'yAxisOptions.MeasureUnit = NumericMeasureUnit.Ones
-            ''yAxisOptions.GridSpacing = 500
-            ''series1.LegendTextPattern = "{A}"
+
 
             seriesSale.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
             seriesTarget.LabelsVisibility = DevExpress.Utils.DefaultBoolean.False
 
-            ' Specify how series points are sorted.
-            'series1.SeriesPointsSorting = SortingMode.Ascending
-            'series1.SeriesPointsSortingKey = SeriesPointKey.Argument
 
-            'series1.ShowInLegend = True
             '' Specify the behavior of series labels.
             CType(seriesSale.Label, BarSeriesLabel).Position = BarSeriesLabelPosition.TopInside
             CType(seriesSale.View, BarSeriesView).BarWidth = 15
@@ -386,6 +407,50 @@ Public Class frmDashboardComm
             ' Add the chart to the form.
             ChartSellTargetMonthly.Dock = DockStyle.Fill
 
+
+            '################  Chart Target ############### 
+            ChartTargetAchieve.Series.Clear()
+
+            Dim series1 As New Series("Series 1", ViewType.Doughnut)
+            Dim lPercentAchieve As Decimal = 0, lPercentNotAchieve As Decimal = 0
+
+            lPercentAchieve = Math.Round((lTotalSell / lTotalTarget) * 100, 2)
+            series1.Points.Add(New SeriesPoint("Target Achievement", lPercentAchieve))
+            If lTotalSell < lTotalTarget Then
+
+                lPercentNotAchieve = 100 - lPercentAchieve
+                series1.Points.Add(New SeriesPoint("Not Achieve", lPercentNotAchieve))
+
+
+            End If
+
+
+            ' Add the series to the chart.
+            ChartTargetAchieve.Series.Add(series1)
+
+            ' Specify the text pattern of series labels.
+            series1.Label.TextPattern = "{V:#,##0.00}%"
+            series1.LegendTextPattern = "{A}"
+
+            ' Specify how series points are sorted.
+            series1.SeriesPointsSorting = SortingMode.Ascending
+            series1.SeriesPointsSortingKey = SeriesPointKey.Argument
+
+            series1.ShowInLegend = True
+            '' Specify the behavior of series labels.
+            CType(series1.Label, DoughnutSeriesLabel).Position = PieSeriesLabelPosition.Outside
+
+            Dim totalLabel As PieTotalLabel = CType(ChartTargetAchieve.Series("Series 1").View, DoughnutSeriesView).TotalLabel
+            totalLabel.Visible = False
+            totalLabel.TextPattern = "Total" & vbLf & "{V:#,##0.00}K".ToString()
+            totalLabel.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+
+            ChartTargetAchieve.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True
+            ChartTargetAchieve.Legend.Font = New Drawing.Font("Segoe UI", 8, FontStyle.Regular)
+            ChartTargetAchieve.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Center
+            ChartTargetAchieve.Legend.AlignmentVertical = LegendAlignmentVertical.BottomOutside
+            ' Add the chart to the form.
+            ChartTargetAchieve.Dock = DockStyle.Fill
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
