@@ -1,12 +1,9 @@
-USE [BS]
-GO
-
-/****** Object:  StoredProcedure [dbo].[spSellTargetMonthly]    Script Date: 1/12/2023 4:27:46 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -25,7 +22,7 @@ FROM (
 
 	SELECT 	month(Orders.OrderDate) as Ordermonth,year(Orders.OrderDate) as OrderYear
 	,Orders.EmpCode,Orders.TargetPerMonth
-	,SUM(Orders.Price * Orders.Units) AS TotalAmount
+	,SUM(Orders.Total) AS TotalAmount
 	FROM vOrderTotal as Orders  	
 	WHERE Orders.OrderDate between @FromDate and @ToDate 
 	and Orders.EmpID IN(select number from intlist_to_tbl(@EmpID))
@@ -36,5 +33,3 @@ order by OrderYear, Ordermonth
 
 END
 GO
-
-

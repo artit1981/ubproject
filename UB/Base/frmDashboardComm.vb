@@ -9,8 +9,8 @@ Public Class frmDashboardComm
     Private mMonthList As String
     Private mFromDate As Date
     Private mToDate As Date
-    Private mTotalSell As Double
-    Private mTarget As Double
+    Private mTotalSell As Double = 0, mTotalSellTeam As Double = 0
+    'Private mTarget As Double
 
     Private Sub frmDashboard_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -89,7 +89,7 @@ Public Class frmDashboardComm
 
     Private Sub SetComboTerritory()
         Try '  
-            SetComboTerritoryWithSQL(cboCheckedTerritory, " and [CommissionID]>0 ")
+            SetComboTerritoryWithSQL(cboCheckedTerritory, "")
             cboCheckedTerritory.EditValue = Long.Parse(6)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".SetComboTerritory : " & e.Message)
@@ -109,11 +109,17 @@ Public Class frmDashboardComm
             InitChartCusGroupTop5()
             InitChartSellGrowth()
             InitGridOverDue()
-            'InitChartTotalSellCOGSByYear()
-            'InitChartTotalSellProfitByYear()
-            'InitChartBankBalance()
-            'InitGridBrand()
-            'InitOverdueGauge()
+            InitChartSellLastYear()
+            GetSaleTeam()
+
+            '###### CALC TEAM SALE AMOUNT
+            txtTeam.Text = mTotalSellTeam.ToString("#,##0.00") & " K"
+            If mTotalSell > 0 And mTotalSellTeam > 0 Then
+                txtPercenTeam.Text = Decimal.Parse((mTotalSell / mTotalSellTeam) * 100).ToString("#,##0.00") & " %"
+            Else
+                txtPercenTeam.Text = "NA."
+            End If
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
 
@@ -247,7 +253,6 @@ Public Class frmDashboardComm
 
             'Comm Group
             lTotal = 0
-
             SQL = " EXEC [dbo].[spCommissionGroup]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
@@ -258,10 +263,28 @@ Public Class frmDashboardComm
                 Dim lTerritoryID As String = ""
                 lTerritoryID = cboCheckedTerritory.EditValue
                 If lTerritoryID <> "" Then
-                    If dataTableGroup.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").Length > 0 Then
-                        FilterTable = dataTableGroup.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").CopyToDataTable
+                    If dataTableGroup.Select("EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").Length > 0 Then
+                        FilterTable = dataTableGroup.Select("EmpID in(" & lEmpID & ") and TerritoryID in(" & lTerritoryID & ")").CopyToDataTable
                         For Each pRow In FilterTable.Rows
-                            lTotal += ConvertNullToZero(pRow("EmpComm"))
+                            lTotal += ConvertNullToZero(pRow("GroupTotal"))
+                            Exit For
+                        Next
+
+                    End If
+                End If
+            End If
+            mTotalSellTeam = lTotal
+
+            lTotal = 0
+            If dataTableGroup.Rows.Count > 0 Then
+                Dim lTerritoryID As String = ""
+                lTerritoryID = cboCheckedTerritory.EditValue
+                If lTerritoryID <> "" Then
+                    If dataTableGroup.Select("Commisstion>0 and TerritoryID in(" & lTerritoryID & ")").Length > 0 Then
+                        FilterTable = dataTableGroup.Select("Commisstion>0 and TerritoryID in(" & lTerritoryID & ")").CopyToDataTable
+                        For Each pRow In FilterTable.Rows
+                            lTotal += ConvertNullToZero(pRow("Commisstion"))
+                            Exit For
                         Next
 
                     End If
@@ -351,7 +374,7 @@ Public Class frmDashboardComm
                 lTotalSell += ConvertNullToZero(pRow("TotalAmount"))
                 lTotalTarget += ConvertNullToZero(pRow("TargetPerMonth"))
             Next
-            'mTotalSell = lTotalSell
+            mTotalSell = lTotalSell
             'mTarget = lTotalTarget
             txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " K"
             txtTarget.Text = lTotalTarget.ToString("#,##0.00") & " K"
@@ -697,4 +720,80 @@ Public Class frmDashboardComm
         End Try
     End Sub
 
+    Private Sub InitChartSellLastYear()
+        Try
+
+            Dim lTotalSell As Double = 0
+
+
+            Dim lEmpID As String = ""
+            For Each pVaue In cboCheckedEmployee.Properties.Items.GetCheckedValues()
+                lEmpID &= "," & pVaue
+            Next
+            If lEmpID <> "" Then
+                lEmpID = lEmpID.Substring(1)
+            End If
+
+            If lEmpID = "" Then Exit Sub
+
+            Dim lPreFromDate As Date = DateSerial(Year(mFromDate) - 1, 1, 1)
+            Dim lPreToDate As Date = DateSerial(Year(mToDate) - 1, 12, 31)
+
+            Dim SQL = " EXEC spSellTargetMonthly"
+            SQL &= " @FromDate = '" & formatSQLDate(lPreFromDate) & "'"
+            SQL &= " ,@ToDate = '" & formatSQLDate(lPreToDate) & "' "
+            SQL &= " ,@EmpID = '" & lEmpID & "' "
+            SQL &= " WITH RECOMPILE "
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+
+
+
+            For Each pRow In dataTable.Rows
+
+                lTotalSell += ConvertNullToZero(pRow("TotalAmount"))
+
+            Next
+            'mTotalSell = lTotalSell
+            'mTarget = lTotalTarget
+            txtSaleLastYear.Text = lTotalSell.ToString("#,##0.00") & " K"
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub GetSaleTeam()
+        Try
+
+
+            Dim lTotal As Decimal = 0
+
+            Dim Sql = " EXEC [dbo].[spTotalTeamSell]"
+            Sql &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+            Sql &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            Sql &= " WITH RECOMPILE"
+            Dim dataTableGroup = gConnection.executeSelectQuery(SQL, Nothing, 180)
+
+            If dataTableGroup.Rows.Count > 0 Then
+                Dim lTerritoryID As String = ""
+                lTerritoryID = cboCheckedTerritory.EditValue
+                If lTerritoryID <> "" Then
+                    If dataTableGroup.Select("TerritoryID in(" & lTerritoryID & ")").Length > 0 Then
+                        Dim FilterTable = dataTableGroup.Select("TerritoryID in(" & lTerritoryID & ")").CopyToDataTable
+                        For Each pRow In FilterTable.Rows
+                            lTotal += ConvertNullToZero(pRow("TotalAmount"))
+                        Next
+
+                    End If
+                End If
+            End If
+            mTotalSellTeam = lTotal
+
+
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
 End Class

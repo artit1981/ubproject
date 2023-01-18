@@ -1,0 +1,29 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[spTotalSellByYear] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT OrderYear,ROUND(Cost/1000000,3)Cost
+,ROUND(Profit/1000000,3)Profit
+,ROUND(TotalAmount/1000000,3)TotalAmount
+FROM (
+	SELECT 
+	year(Orders.OrderDate) as OrderYear
+	,SUM(Orders.Cost * Orders.Units) AS Cost
+	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS Profit
+	,SUM(Orders.Total) AS TotalAmount
+	FROM vOrderTotalWithCost as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate	
+	group by 
+	year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END

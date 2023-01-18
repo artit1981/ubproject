@@ -148,9 +148,10 @@ Public Class frmDashboard
     End Function
     Private Sub InitChartTotalSellByCatalog()
         Try
-            Dim SQL = " SET ARITHABORT OFF;EXEC [dbo].[spTotalSellByCatalog]"
+            Dim SQL = " EXEC [dbo].[spTotalSellByCatalog]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim series1 As New Series("Series 1", ViewType.Doughnut)
@@ -193,9 +194,10 @@ Public Class frmDashboard
         Try
             Dim lTotalSell As Double = 0, lTotalCOGS As Double = 0, lTotalProfit As Double = 0, lTotalProfitPercen As Double = 0
 
-            Dim SQL = " SET ARITHABORT OFF; EXEC [dbo].[spTotalSellByYear]"
+            Dim SQL = " EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Bar)
@@ -275,9 +277,10 @@ Public Class frmDashboard
 
     Private Sub InitChartTotalSellProfitByYear()
         Try
-            Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].[spTotalSellByYear]"
+            Dim SQL = "EXEC [dbo].[spTotalSellByYear]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             Dim seriesSale As New Series("Total Sale", ViewType.Line)
@@ -348,9 +351,10 @@ Public Class frmDashboard
         Try
             Dim lTotalCash As Double = 0
 
-            Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].[spBankBalance]"
+            Dim SQL = "EXEC [dbo].[spBankBalance]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
 
@@ -377,9 +381,10 @@ Public Class frmDashboard
 
     Private Sub InitGridBrand()
         Try
-            Dim SQL = "SET ARITHABORT OFF;EXEC [dbo].[spTotalSellByBrand]"
+            Dim SQL = "EXEC [dbo].[spTotalSellByBrand]"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             GridControl1.DataSource = dataTable
@@ -393,9 +398,10 @@ Public Class frmDashboard
             Dim series1 As New Series("Series 1", ViewType.Pie3D)
 
             'Overdue
-            Dim SQL = "SET ARITHABORT OFF; EXEC [dbo].spOverdueTX"
+            Dim SQL = "EXEC [dbo].spOverdueTX"
             SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
             SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+            SQL &= " WITH RECOMPILE "
             Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
             If dataTable.Rows.Count > 0 Then
