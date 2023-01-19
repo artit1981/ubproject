@@ -385,6 +385,7 @@ Public Class frmOrderS
             mcls.ShipingDate = ShipingDate.EditValue
             mcls.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             mcls.EmpID = ConvertNullToZero(EmpID.EditValue)
+            mcls.SaleOwnerID = ConvertNullToZero(SaleOwnerID.EditValue)
             mcls.CurrencyID = ConvertNullToZero(cboCurrency.EditValue)
             mcls.ExchangeRate = ConvertNullToZero(Exchange.EditValue)
             mcls.RefToOrderID = mRefOrderID
@@ -598,10 +599,10 @@ Public Class frmOrderS
         End Try
     End Sub
 
-    Private Sub btnEmpID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmpID.Click
+    Private Sub btnSaleOwnerID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaleOwnerID.Click
         Try
             ShowProgress(True, "Loading...")
-            SetEmployees()
+            SetSaleOwner()
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         Finally
@@ -1339,6 +1340,7 @@ Public Class frmOrderS
                     PayType.EditValue = mcls.PayType
                     CustomerID.EditValue = mcls.CustomerID
                     EmpID.EditValue = mcls.EmpID
+                    SaleOwnerID.EditValue = mcls.SaleOwnerID
                     PO.EditValue = mcls.PO
                     QuotationDays.EditValue = mcls.QuotationDays
                     CreditRuleID.EditValue = mcls.CreditRuleID
@@ -1475,6 +1477,7 @@ Public Class frmOrderS
                 CustomerID.EditValue = mclsConvert.CustomerID
                 Institute.EditValue = mclsConvert.Institute
                 EmpID.EditValue = mclsConvert.EmpID
+                SaleOwnerID.EditValue = mclsConvert.SaleOwnerID
                 CreditRuleID.EditValue = mclsConvert.CreditRuleID
                 VatTypeID.EditValue = mclsConvert.VatTypeID
                 cboCurrency.EditValue = mclsConvert.CurrencyID
@@ -1707,7 +1710,7 @@ Public Class frmOrderS
                     InitialVatType(ConvertNullToZero(VatTypeID.EditValue))
                     CreditRuleID.EditValue = lcls.CreditRuleID
                     SendBy.EditValue = lcls.SendBy
-                    EmpID.EditValue = lcls.EmpID
+                    SaleOwnerID.EditValue = lcls.EmpID
                     cboCurrency.EditValue = lcls.CurrencyID
                     InitialCurrency(ConvertNullToZero(cboCurrency.EditValue))
                     lclsCredit = New CreditBalanceDAO
@@ -1849,6 +1852,14 @@ Public Class frmOrderS
             SetComboEmployee(EmpID)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetEmployees : " & e.Message)
+        End Try
+    End Sub
+
+    Private Sub SetSaleOwner()
+        Try
+            SetComboEmployee(SaleOwnerID)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetSaleOwner : " & e.Message)
         End Try
     End Sub
 

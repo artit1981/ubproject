@@ -44,6 +44,7 @@ Public Class OrderSDAO
                     TableID = ConvertNullToZero(dr("TableID"))
                     CustomerID = ConvertNullToZero(dr("CustomerID"))
                     EmpID = ConvertNullToZero(dr("EmpID"))
+                    SaleOwnerID = ConvertNullToZero(dr("SaleOwnerID"))
                     CreditRuleID = ConvertNullToZero(dr("CreditRuleID"))
                     VatTypeID = ConvertNullToZero(dr("VatTypeID"))
                     ShipingByID = ConvertNullToZero(dr("ShipingByID"))
@@ -1065,7 +1066,7 @@ Public Class OrderSDAO
                     Sql &= " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
                     Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
                     Sql &= " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
-                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult)"
+                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult,SaleOwnerID)"
                     Sql &= " VALUES ( " & ID
                     Sql &= " , " & TableID
                     Sql &= " , '" & Trim(Code) & "'"
@@ -1125,6 +1126,7 @@ Public Class OrderSDAO
                     Sql &= " ,  " & ConvertNullToZero(CampaignID)
                     Sql &= " , '" & ConvertNullToString(ClaimRemark) & "'"
                     Sql &= " , '" & ConvertNullToString(ClaimResult) & "'"
+                    Sql &= " ,  " & ConvertNullToZero(SaleOwnerID)
                     Sql &= " ) "
 
                 Case DataMode.ModeEdit
@@ -1133,6 +1135,7 @@ Public Class OrderSDAO
                     End If
                     Sql = " UPDATE Orders SET "
                     Sql &= " EmpID=" & ConvertNullToZero(EmpID)
+                    Sql &= " ,SaleOwnerID=" & ConvertNullToZero(SaleOwnerID)
                     Sql &= " , OrderCode='" & ConvertNullToString(Code) & "'"
                     Sql &= " , CustomerID=" & ConvertNullToZero(CustomerID)
                     Sql &= " , CreditRuleID=" & ConvertNullToZero(CreditRuleID)

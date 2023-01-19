@@ -37,7 +37,7 @@ Public Class iOrder
     Private mOrderStatus As String
     Private mCreditRuleID As Long
     Private mVatTypeID As Long
-
+    Private mSaleOwnerID As Long = 0
     Private mEmpID As Long
     Private mclsEmployee As EmployeeDAO
     Private mCustomerID As Long
@@ -501,6 +501,14 @@ Public Class iOrder
         End Get
         Set(ByVal Value As List(Of FileAttachDAO))
             mFileAttachs = Value
+        End Set
+    End Property
+    Public Property SaleOwnerID() As Long
+        Get
+            Return mSaleOwnerID
+        End Get
+        Set(ByVal value As Long)
+            mSaleOwnerID = value
         End Set
     End Property
 
