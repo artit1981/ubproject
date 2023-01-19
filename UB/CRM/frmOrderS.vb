@@ -1232,6 +1232,7 @@ Public Class frmOrderS
             SetCreditRole()
             SetVatType()
             SetEmployees()
+            SetSaleOwner()
             SetComboCustomer()
             SetComboShipingByID()
             SetComboShipingMethodeID()

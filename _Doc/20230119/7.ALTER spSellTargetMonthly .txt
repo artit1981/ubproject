@@ -1,0 +1,33 @@
+ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+ALTER PROCEDURE [dbo].[spSellTargetMonthly] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT Ordermonth,OrderYear
+,ROUND(SUM(TotalAmount)/1000,3)TotalAmount
+,ROUND(SUM(TargetPerMonth)/1000,3)TargetPerMonth
+FROM (
+
+	SELECT 	month(Orders.OrderDate) as Ordermonth,year(Orders.OrderDate) as OrderYear
+	,Orders.EmpCode,Orders.TargetPerMonth
+	,SUM(Orders.Total) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate 
+	and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+	group by month(Orders.OrderDate),year(Orders.OrderDate),Orders.EmpCode,Orders.TargetPerMonth
+) as tmp
+group by Ordermonth,OrderYear 
+order by OrderYear, Ordermonth
+
+END

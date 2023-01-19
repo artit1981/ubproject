@@ -1,0 +1,60 @@
+ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+ALTER PROCEDURE [dbo].[spOverdueTX] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+with OverdueTX as (
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,Orders.Total as PayTotal  
+,Menu.TableName,Menu.MenuDisplay,RefReceiptID,RefBillID
+,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer
+,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME
+,Orders.SaleOwnerID as EmpID
+,DATEDIFF(day, Orders.ExpireDate,getdate()  ) AS OverDays
+
+FROM Orders     
+left outer join Menu on Orders.TableID=menu.MenuID
+LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID
+LEFT OUTER JOIN Employee ON Orders.SaleOwnerID=Employee.EmpID 
+WHERE Orders.IsDelete =0 
+AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41) --invoice,Shaiping
+AND Orders.OrderDate Between @FromDate AND @ToDate 
+AND ExpireDate <= @ToDate  AND Orders.IsInActive = 0  AND Orders.IsCancel= 0  
+AND Orders.OrderDate <= @ToDate  
+)
+
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal  
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID>0  AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )  	 
+union all
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID=0
+AND Orders.RefBillID>0  AND Orders.RefBillID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )   
+union all
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID=0
+AND Orders.RefBillID=0  
+AND OrderStatus In ('Open')
+ORDER BY OrderCode
+
+END

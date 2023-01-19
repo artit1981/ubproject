@@ -1,0 +1,27 @@
+ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[spTotalSellByCusGroup] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT top 5 CustomerGroup,ROUND(TotalAmount/1000,3)TotalAmount FROM(
+SELECT CustomerGroup.CodeThai as CustomerGroup
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+inner JOIN CustomerGroup ON CustomerGroup.MasterID=Orders.CustomerGroupID
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+group by CustomerGroup.CodeThai 
+) as tmp
+order by TotalAmount desc
+
+END

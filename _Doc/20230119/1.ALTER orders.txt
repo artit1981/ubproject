@@ -1,0 +1,3 @@
+alter table orders add SaleOwnerID bigint ;
+
+update orders set SaleOwnerID=(select EmpID from Customer where Customer.CustomerID=orders.CustomerID);

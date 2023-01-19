@@ -1,0 +1,90 @@
+ 
+ALTER PROCEDURE [dbo].[spCommissionGroup] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+with Orders as (
+SELECT vOrderTotal.TerritoryID,[Territory].NameThai as TerritoryName,SaleOwnerID as EmpID,EmpCode,EmpName,Territory.CommissionID
+,OrderDate,Total 
+FROM vOrderTotal
+INNER JOIN [dbo].[Territory] on [Territory].TerritoryID = vOrderTotal.TerritoryID and [Territory].IsDelete=0
+WHERE Territory.CommissionID>0 and OrderDate between @FromDate and @ToDate
+)
+
+,Comm as (
+ 
+SELECT [Commission].CommissionID
+,[Commission].CommissionType,[Commission].Subject,[Commission].StartDate,[Commission].ExpireDate
+,[CommissionDtl].SEQ,[CommissionDtl].AmountFrom,[CommissionDtl].AmountEnd,[CommissionDtl].ComPercen,[CommissionDtl].ComAmount
+,isnull(PreComm.AmountEnd,0) as PreAmountEnd
+,isnull(NextComm.AmountEnd,0) as NextAmountEnd
+
+FROM  [dbo].[Commission] 
+INNER JOIN [dbo].[CommissionDtl] on [Commission].[CommissionID]=[CommissionDtl].[CommissionID]
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl]		
+			) PreComm on PreComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ-1=PreComm.SEQ
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl]  			
+			) NextComm on NextComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ+1=NextComm.SEQ
+WHERE [Commission].IsDelete=0 
+ 
+)
+
+,CommByGroup as (
+SELECT TerritoryID,TerritoryName 
+,max(OrderTotal)GroupTotal
+--,StartDate
+--,ExpireDate
+--,CommissionType
+,Subject
+--,SEQ,AmountFrom,AmountEnd
+--,ComPercen,ComAmount,AmountTocal
+,sum(case when AmountTocal > 0 and CommissionType=1 then (AmountTocal * ComPercen)/100
+when AmountTocal > 0 and CommissionType=2 then ComAmount
+else 0 end )Commisstion
+ FROM(
+	SELECT Orders.TerritoryID,Orders.TerritoryName ,SUM([Orders].Total) OrderTotal
+	,comm.StartDate,comm.ExpireDate,CommissionType
+	,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.ComPercen,Comm.ComAmount
+	,case when SUM([Orders].Total)> 0 and Comm.AmountFrom=0 and  SUM([Orders].Total) < Comm.AmountEnd then  SUM([Orders].Total)
+	 when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd >0  then  Comm.AmountEnd-Comm.PreAmountEnd  
+	 when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd =0  then  SUM([Orders].Total)-Comm.PreAmountEnd 
+	 when SUM([Orders].Total)< Comm.AmountEnd and SUM([Orders].Total)> Comm.AmountFrom then  SUM([Orders].Total)-Comm.PreAmountEnd 
+	 else 0 end AmountTocal
+	FROM Orders 
+	LEFT OUTER JOIN Comm on Orders.CommissionID=Comm.CommissionID  AND [Orders].OrderDate between Comm.StartDate and Comm.ExpireDate
+	GROUP BY  Orders.TerritoryID,Orders.TerritoryName 
+	,comm.StartDate,comm.ExpireDate,CommissionType
+	,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.NextAmountEnd,Comm.ComPercen,Comm.ComAmount
+) as tmp 
+group by TerritoryID,TerritoryName 
+--,OrderTotal
+--,StartDate
+--,ExpireDate
+--,CommissionType
+,Subject
+--,SEQ,AmountFrom,AmountEnd
+--,ComPercen,ComAmount,AmountTocal
+)
+
+--select * from CommByGroup
+
+
+ 
+SELECT CommissionID,Subject,Orders.TerritoryID,Orders.TerritoryName, Orders.EmpID,Orders.EmpCode,Orders.EmpName
+,CommByGroup.GroupTotal,SUM([Orders].Total) EmpTotal
+,(SUM([Orders].Total) /CommByGroup.GroupTotal) as TotalRatio 
+,CommByGroup.Commisstion
+,CommByGroup.Commisstion * (SUM([Orders].Total) /CommByGroup.GroupTotal) as EmpComm
+FROM Orders 
+LEFT OUTER JOIN CommByGroup on Orders.TerritoryID=CommByGroup.TerritoryID   
+GROUP BY   Orders.TerritoryID,Orders.TerritoryName,Orders.EmpID,Orders.EmpCode,Orders.EmpName ,CommByGroup.GroupTotal,CommByGroup.Commisstion
+,CommissionID,Subject
+ORDER BY   Orders.TerritoryID,Orders.TerritoryName,Orders.EmpID
+
+END
