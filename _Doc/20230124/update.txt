@@ -1,0 +1,741 @@
+USE [BS]
+GO
+/****** Object:  View [dbo].[vInformPricePro]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+ 
+
+CREATE VIEW [dbo].[vInformPricePro]
+AS
+
+with ProductCost as (
+	SELECT ProductID,Cost,CostID
+	FROM
+	(
+	SELECT Product_CostAVG.ProductID,Product_CostAVG.CostID,Product_CostAVG.Cost
+	,ROW_NUMBER() OVER(PARTITION BY Product_CostAVG.ProductID ORDER BY Product_CostAVG.CostID DESC) AS rank
+	from Product_CostAVG
+	where IsDelete=0
+	) as tmp
+	where rank=1
+)
+
+SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductName
+,MAX(Product.PriceStandard) AS PriceStandard,isnull( MAX(Cost.Cost),0) AS Cost,MAX(Product.Price1) AS Price1
+,MAX(Product.Price2) AS Price2 ,MAX(Product.Price3) AS Price3,MAX(Product.Price4) AS Price4
+,MAX(Product.Price5) AS Price5 ,MAX(Product.Price6) AS Price6,Product.Remark as ProductRemark 
+,isnull(Cost.CostID,0) as CostID
+,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
+FROM Product 
+left outer join ProductCost Cost on Cost.ProductID=Product.ProductID  
+WHERE Product.IsDelete =0  
+GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark ,CostID
+,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
+ 
+
+GO
+/****** Object:  View [dbo].[vOrderTotal]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[vOrderTotal]
+AS
+
+SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID
+,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
+,ProductList.Price as Price
+,case when Orders.TableID=55 then ProductList.AdjustUnit * -1 else ProductList.AdjustUnit end  Units
+,case when Orders.TableID=55 then ProductList.AdjustUnit * Price *-1 else ProductList.AdjustUnit * Price end Total
+,Orders.SaleOwnerID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
+,[Employee].TargetPerMonth
+,Customer.CustomerGroupID
+FROM Orders  
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+inner JOIN Product ON Product.ProductID=ProductList.ProductID 
+INNER JOIN [Employee] on [Orders].SaleOwnerID = [Employee].EmpID and [Employee].IsDelete=0
+INNER JOIN Customer on Customer.CustomerID = [Orders].CustomerID
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55)
+GO
+/****** Object:  View [dbo].[vOrderTotalWithCost]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+
+ 
+
+CREATE VIEW [dbo].[vOrderTotalWithCost]
+AS
+
+--with ProductCost as (
+
+----SELECT Orders.OrderID,Orders.OrderDate,ProductList.ProductID
+----,ProductList.Cost,SerialNumber.SerialNumberNo
+---- FROM Orders  
+----inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+----inner JOIN SerialNumber ON SerialNumber.ProductListID=ProductList.ProductListID AND SerialNumber.IsDelete =0  
+----WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+--	SELECT ProductID,Cost,CostID
+--	FROM
+--	(
+--	SELECT Product_CostAVG.ProductID,Product_CostAVG.CostID,Product_CostAVG.Cost
+--	,ROW_NUMBER() OVER(PARTITION BY Product_CostAVG.ProductID ORDER BY Product_CostAVG.CostID DESC) AS rank
+--	from Product_CostAVG
+--	where IsDelete=0
+--	) as tmp
+--	where rank=1
+--)
+
+SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate
+--,pCost.OrderDate as CostDate
+,ProductList.ProductID
+,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
+,ProductList.Price as Price
+,ProductList.Cost
+--,isnull(pCost.Cost,0) as Cost
+,case when Orders.TableID=55 then ProductList.AdjustUnit * -1 else ProductList.AdjustUnit end  Units
+,case when Orders.TableID=55 then ProductList.AdjustUnit * Price *-1 else ProductList.AdjustUnit * Price end Total
+FROM Orders  
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+inner JOIN Product ON Product.ProductID=ProductList.ProductID 
+--inner JOIN SerialNumber ON SerialNumber.ProductListID=ProductList.ProductListID AND SerialNumber.IsDelete =0 
+--left outer join ProductCost pCost on pCost.OrderDate<Orders.OrderDate and pCost.SerialNumberNo=SerialNumber.SerialNumberNo
+--left outer join ProductCost pCost on ProductList.ProductID=pCost.ProductID
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55)
+--and pCost.OrderDate = (select max(OrderDate) from ProductCost where ProductCost.ProductID=ProductList.ProductID and ProductCost.OrderDate<=Orders.OrderDate)
+
+GO
+/****** Object:  StoredProcedure [dbo].[spBankBalance]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spBankBalance] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT  BankCode,ROUND(AccountAmount/1000,3) as AccountAmount FROM(
+	SELECT Bank.BankCode
+	,SUM(BankAccountRecord.DR-BankAccountRecord.CR) AS AccountAmount
+	FROM BankAccountRecord  
+	inner join BankAccount on BankAccount.BankAccountID=BankAccountRecord.BankAccountID
+	inner join Bank on Bank.BankID=BankAccount.BankID
+	WHERE BankAccountRecord.IsDelete=0
+	and BankAccountRecord.RecordDate between @FromDate and @ToDate	
+	group by Bank.BankCode
+	union all
+	SELECT 'เงินสดย่อย' as BankCode
+	,isnull( SUM(CashRecord.DR-CashRecord.CR),0) AS AccountAmount
+	FROM CashRecord  
+	WHERE CashRecord.IsDelete=0
+	and CashRecord.RecordDate between @FromDate and @ToDate    
+) as tmp
+order by AccountAmount desc
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spCheckStock]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spCheckStock] 
+ @pProductCategoryID  VARCHAR(100) 
+ ,@pProductTypeID VARCHAR(100)
+ ,@pProductGroupID VARCHAR(100)
+ ,@pProductBrandID VARCHAR(100)
+AS
+BEGIN
+ SET NOCOUNT ON;
+DECLARE @query VARCHAR(4000)
+DECLARE @Locations VARCHAR(2000)
+DECLARE @Where  VARCHAR(2000)=''
+SELECT  @Locations = COALESCE(@Locations + ',[' + NameThai+ ']',
+                         '[' + NameThai + ']')
+FROM    Product_LocationDTL
+where Product_LocationDTL.LocationDTLID not in (select LocationDTLID from RunningFormat where MenuID=34)
+ORDER BY NameThai
+
+if @pProductCategoryID <> '0'
+begin
+SET @Where = ' and Product.ProductCategoryID in (' + @pProductCategoryID + ')'   
+end
+if @pProductTypeID <> '0'
+begin
+SET @Where  = @Where + ' and Product.ProductTypeID in (' + @pProductTypeID + ')'
+end
+if @pProductGroupID <> '0' 
+begin
+SET @Where = @Where + ' and Product.ProductGroupID in (' + @pProductGroupID + ')' 
+end
+if @pProductBrandID <> '0' 
+begin
+SET @Where = @Where + ' and Product.ProductBrandID in (' + @pProductBrandID + ')' 
+end
+
+SET @query =
+'
+SELECT pvt.*,a.SumUnit as sumstock FROM
+(
+  SELECT  Product.ProductCode,Product.ProductName,Product.Remark
+,CASE WHEN Product_Unit.CodeThai IS NULL then ProUnit.CodeThai ELSE Product_Unit.CodeThai END UnitName
+,Product_LocationDTL.NameThai ,Product_Stock.Units,Product.ProductID
+,CASE WHEN Product_Unit.UnitID IS NULL then ProUnit.UnitID ELSE Product_Unit.UnitID END UnitID
+FROM Product 
+left outer join Product_Unit as ProUnit on ProUnit.UnitID=Product.UnitMainID   
+Inner join Product_LocationS on Product_LocationS.RefID=Product.ProductID and Product_LocationS.IsDelete=0
+Inner join Product_LocationDTL on Product_LocationDTL.LocationDTLID=Product_LocationS.LocationDTLID
+left outer join Product_Stock on Product_Stock.ProductID=Product.ProductID and Product_Stock.IsSumStock=0
+and Product_Stock.LocationDTLID=Product_LocationS.LocationDTLID
+left outer join Product_Unit on Product_Unit.UnitID=Product_Stock.UnitID
+where Product.IsDelete=0 and Product.IsInActive=0 and 
+Product_LocationS.LocationDTLID not in(select LocationDTLID from RunningFormat where MenuID=34) '
+ 
++ @Where +
+'
+)t
+PIVOT (SUM(Units) FOR NameThai
+IN ('+@Locations+')) AS pvt
+left outer join (select Product_Stock.ProductID,Product_Stock.UnitID,
+sum(Product_Stock.Units) as SumUnit from Product_Stock
+where  IsSumStock=1 and Product_Stock.LocationDTLID=(select LocationDTLID from RunningFormat where MenuID=34)
+group by Product_Stock.ProductID,Product_Stock.UnitID) as a
+on pvt.ProductID=a.ProductID   and pvt.UnitID=a.UnitID   
+order by ProductCode
+'
+ --print(@query)
+EXECUTE (@query)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spCommission]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+
+CREATE PROCEDURE [dbo].[spCommission] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+with Orders as (
+SELECT vOrderTotal.SaleOwnerID as EmpID,EmpCode,EmpName,CommissionID,OrderDate,Total 
+FROM vOrderTotal
+WHERE OrderDate between @FromDate and @ToDate
+)
+
+,Comm as (
+SELECT [Commission].CommissionID 
+,[Commission].CommissionType,[Commission].Subject,[Commission].StartDate,[Commission].ExpireDate
+,[CommissionDtl].SEQ,[CommissionDtl].AmountFrom,[CommissionDtl].AmountEnd,[CommissionDtl].ComPercen,[CommissionDtl].ComAmount
+,isnull(PreComm.AmountEnd,0) as PreAmountEnd
+,isnull(NextComm.AmountEnd,0) as NextAmountEnd
+FROM  [dbo].[Commission] 
+INNER JOIN [dbo].[CommissionDtl] on [Commission].[CommissionID]=[CommissionDtl].[CommissionID]
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl] 				
+			) PreComm on PreComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ-1=PreComm.SEQ
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl]  			
+			) NextComm on NextComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ+1=NextComm.SEQ
+WHERE [Commission].IsDelete=0 
+
+)
+
+
+SELECT CommissionID,Subject,EmpID,EmpCode,EmpName
+,Total as EmpTotal
+--,StartDate
+--,ExpireDate
+--,CommissionType
+--,Subject,SEQ,AmountFrom,AmountEnd
+--,ComPercen,ComAmount,AmountTocal
+,sum(case when AmountTocal > 0 and CommissionType=1 then (AmountTocal * ComPercen)/100
+when AmountTocal > 0 and CommissionType=2 then ComAmount
+else 0 end )Commisstion
+ FROM(
+
+SELECT Orders.CommissionID
+,Orders.EmpID,Orders.EmpCode,Orders.EmpName
+,SUM([Orders].Total) Total
+,comm.StartDate,comm.ExpireDate
+,comm.CommissionType
+,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd
+,Comm.PreAmountEnd,Comm.ComPercen,Comm.ComAmount
+,case when SUM([Orders].Total)> 0 and Comm.AmountFrom=0 and  SUM([Orders].Total) < Comm.AmountEnd then  SUM([Orders].Total)
+ when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd >0  then  Comm.AmountEnd-Comm.PreAmountEnd  
+ when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd =0  then  SUM([Orders].Total)-Comm.PreAmountEnd 
+ when SUM([Orders].Total)< Comm.AmountEnd and SUM([Orders].Total)> Comm.AmountFrom then  SUM([Orders].Total)-Comm.PreAmountEnd
+ else 0 end AmountTocal
+FROM Orders 
+LEFT OUTER JOIN Comm on Orders.CommissionID=Comm.CommissionID  AND [Orders].OrderDate between Comm.StartDate and Comm.ExpireDate
+GROUP BY  Orders.CommissionID,Orders.EmpID,Orders.EmpCode,Orders.EmpName
+,comm.StartDate,comm.ExpireDate,comm.CommissionType
+,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.NextAmountEnd,Comm.ComPercen,Comm.ComAmount
+) as tmp
+group by CommissionID,Subject,EmpID,EmpCode,EmpName,Total
+ORDER BY  CommissionID,Subject,EmpID,EmpCode,EmpName 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spCommissionGroup]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[spCommissionGroup] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+with Orders as (
+SELECT vOrderTotal.TerritoryID,[Territory].NameThai as TerritoryName,SaleOwnerID as EmpID,EmpCode,EmpName,Territory.CommissionID
+,OrderDate,Total 
+FROM vOrderTotal
+INNER JOIN [dbo].[Territory] on [Territory].TerritoryID = vOrderTotal.TerritoryID and [Territory].IsDelete=0
+WHERE Territory.CommissionID>0 and OrderDate between @FromDate and @ToDate
+)
+
+,Comm as (
+ 
+SELECT [Commission].CommissionID
+,[Commission].CommissionType,[Commission].Subject,[Commission].StartDate,[Commission].ExpireDate
+,[CommissionDtl].SEQ,[CommissionDtl].AmountFrom,[CommissionDtl].AmountEnd,[CommissionDtl].ComPercen,[CommissionDtl].ComAmount
+,isnull(PreComm.AmountEnd,0) as PreAmountEnd
+,isnull(NextComm.AmountEnd,0) as NextAmountEnd
+
+FROM  [dbo].[Commission] 
+INNER JOIN [dbo].[CommissionDtl] on [Commission].[CommissionID]=[CommissionDtl].[CommissionID]
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl]		
+			) PreComm on PreComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ-1=PreComm.SEQ
+LEFT OUTER JOIN (
+			SELECT CommissionID,SEQ,AmountEnd as AmountEnd  FROM [dbo].[CommissionDtl]  			
+			) NextComm on NextComm.CommissionID=[Commission].CommissionID and [CommissionDtl].SEQ+1=NextComm.SEQ
+WHERE [Commission].IsDelete=0 
+ 
+)
+
+,CommByGroup as (
+SELECT TerritoryID,TerritoryName 
+,max(OrderTotal)GroupTotal
+--,StartDate
+--,ExpireDate
+--,CommissionType
+,Subject
+--,SEQ,AmountFrom,AmountEnd
+--,ComPercen,ComAmount,AmountTocal
+,sum(case when AmountTocal > 0 and CommissionType=1 then (AmountTocal * ComPercen)/100
+when AmountTocal > 0 and CommissionType=2 then ComAmount
+else 0 end )Commisstion
+ FROM(
+	SELECT Orders.TerritoryID,Orders.TerritoryName ,SUM([Orders].Total) OrderTotal
+	,comm.StartDate,comm.ExpireDate,CommissionType
+	,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.ComPercen,Comm.ComAmount
+	,case when SUM([Orders].Total)> 0 and Comm.AmountFrom=0 and  SUM([Orders].Total) < Comm.AmountEnd then  SUM([Orders].Total)
+	 when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd >0  then  Comm.AmountEnd-Comm.PreAmountEnd  
+	 when SUM([Orders].Total)> Comm.AmountEnd and Comm.NextAmountEnd =0  then  SUM([Orders].Total)-Comm.PreAmountEnd 
+	 when SUM([Orders].Total)< Comm.AmountEnd and SUM([Orders].Total)> Comm.AmountFrom then  SUM([Orders].Total)-Comm.PreAmountEnd 
+	 else 0 end AmountTocal
+	FROM Orders 
+	LEFT OUTER JOIN Comm on Orders.CommissionID=Comm.CommissionID  AND [Orders].OrderDate between Comm.StartDate and Comm.ExpireDate
+	GROUP BY  Orders.TerritoryID,Orders.TerritoryName 
+	,comm.StartDate,comm.ExpireDate,CommissionType
+	,Comm.Subject,Comm.SEQ,Comm.AmountFrom,Comm.AmountEnd,Comm.PreAmountEnd,Comm.NextAmountEnd,Comm.ComPercen,Comm.ComAmount
+) as tmp 
+group by TerritoryID,TerritoryName 
+--,OrderTotal
+--,StartDate
+--,ExpireDate
+--,CommissionType
+,Subject
+--,SEQ,AmountFrom,AmountEnd
+--,ComPercen,ComAmount,AmountTocal
+)
+
+--select * from CommByGroup
+
+
+ 
+SELECT CommissionID,Subject,Orders.TerritoryID,Orders.TerritoryName, Orders.EmpID,Orders.EmpCode,Orders.EmpName
+,CommByGroup.GroupTotal,SUM([Orders].Total) EmpTotal
+,(SUM([Orders].Total) /CommByGroup.GroupTotal) as TotalRatio 
+,CommByGroup.Commisstion
+,CommByGroup.Commisstion * (SUM([Orders].Total) /CommByGroup.GroupTotal) as EmpComm
+FROM Orders 
+LEFT OUTER JOIN CommByGroup on Orders.TerritoryID=CommByGroup.TerritoryID   
+GROUP BY   Orders.TerritoryID,Orders.TerritoryName,Orders.EmpID,Orders.EmpCode,Orders.EmpName ,CommByGroup.GroupTotal,CommByGroup.Commisstion
+,CommissionID,Subject
+ORDER BY   Orders.TerritoryID,Orders.TerritoryName,Orders.EmpID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spOverdueTX]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[spOverdueTX] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+with OverdueTX as (
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,Orders.Total as PayTotal  
+,Menu.TableName,Menu.MenuDisplay,RefReceiptID,RefBillID
+,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer
+,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME
+,Orders.SaleOwnerID as EmpID
+,DATEDIFF(day, Orders.ExpireDate,getdate()  ) AS OverDays
+
+FROM Orders     
+left outer join Menu on Orders.TableID=menu.MenuID
+LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID
+LEFT OUTER JOIN Employee ON Orders.SaleOwnerID=Employee.EmpID 
+WHERE Orders.IsDelete =0 
+AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41) --invoice,Shaiping
+AND Orders.OrderDate Between @FromDate AND @ToDate 
+AND ExpireDate <= @ToDate  AND Orders.IsInActive = 0  AND Orders.IsCancel= 0  
+AND Orders.OrderDate <= @ToDate  
+)
+
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal  
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID>0  AND Orders.RefReceiptID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )  	 
+union all
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID=0
+AND Orders.RefBillID>0  AND Orders.RefBillID not in(select RefOrderID from Cheque where Cheque.IsDelete=0 )   
+union all
+SELECT Orders.OrderID  , Orders.OrderCode ,Orders.CustomerID ,Orders.OrderDate,Orders.ExpireDate  
+,Orders.OrderStatus,Orders.GrandTotal,PayTotal
+,TableName,MenuDisplay,Customer,EMPNAME,EmpID
+,OverDays
+FROM OverdueTX Orders     
+WHERE Orders.RefReceiptID=0
+AND Orders.RefBillID=0  
+AND OrderStatus In ('Open')
+ORDER BY OrderCode
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spSellGrowth]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[spSellGrowth] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+with orders as (
+SELECT ROW_NUMBER ( )  OVER(ORDER BY OrderYear,Ordermonth) AS RowNo
+,Ordermonth,OrderYear,ROUND(SUM(TotalAmount)/1000,3)TotalAmount
+FROM (
+	SELECT 	month(Orders.OrderDate) as Ordermonth,year(Orders.OrderDate) as OrderYear
+	,SUM(Orders.Total) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between DATEADD(month, -1, @FromDate) and @ToDate
+	and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+	group by month(Orders.OrderDate),year(Orders.OrderDate)
+) as tmp
+group by Ordermonth,OrderYear 
+
+)
+
+select o.Ordermonth,o.OrderYear,o.TotalAmount ,op.TotalAmount as PreviousTotalAmount
+,case when op.TotalAmount > 0 then ((o.TotalAmount-op.TotalAmount) / o.TotalAmount)*100 else 0 end GrowthRate
+from orders o
+inner join orders op on o.RowNo=op.RowNo+1
+order by OrderYear, Ordermonth
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spSellTargetMonthly]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[spSellTargetMonthly] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT Ordermonth,OrderYear
+,ROUND(SUM(TotalAmount)/1000,3)TotalAmount
+,ROUND(SUM(TargetPerMonth)/1000,3)TargetPerMonth
+FROM (
+
+	SELECT 	month(Orders.OrderDate) as Ordermonth,year(Orders.OrderDate) as OrderYear
+	,Orders.EmpCode,Orders.TargetPerMonth
+	,SUM(Orders.Total) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate 
+	and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+	group by month(Orders.OrderDate),year(Orders.OrderDate),Orders.EmpCode,Orders.TargetPerMonth
+) as tmp
+group by Ordermonth,OrderYear 
+order by OrderYear, Ordermonth
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellByBrand]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spTotalSellByBrand] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+with SellByBrand as (
+	SELECT ROW_NUMBER() OVER(PARTITION BY Orders.ProductBrandID  ORDER BY SUM(Orders.Total) DESC) AS rowrank
+	,Orders.ProductBrandID,ProductBrand.NameThai as ProductBrand
+	,Orders.ProductCode,Orders.ProductName
+	,SUM(Orders.Units) AS TotalUnits
+	,SUM(Orders.Total) AS TotalAmount
+	,SUM(Orders.Cost) AS TotalCost
+	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
+	FROM vOrderTotalWithCost as Orders  
+	inner JOIN ProductBrand ON Orders.ProductBrandID=ProductBrand.ProductBrandID
+	--WHERE Orders.TableID in(39,41)
+	--and year(Orders.OrderDate)in(2021,2022)
+	--and month(Orders.OrderDate) in(1,2,3,4,5,6)
+	WHERE Orders.OrderDate between @FromDate and @ToDate	
+	and Orders.ProductBrandID>0
+	group by Orders.ProductBrandID,ProductBrand.NameThai,Orders.ProductName,Orders.ProductCode
+) 
+
+SELECT   ProductBrand,ProductCode,ProductName,ROUND(TotalAmount/1000000,3)TotalAmount
+,ROUND(TotalCost/1000000,3)TotalCost,ROUND(TotalUnits,3)TotalUnits,ROUND(TotalGain/1000000,3)TotalGain
+FROM(
+	SELECT ProductBrandID,ProductBrand,ProductCode,ProductName,TotalUnits,TotalAmount,TotalCost,TotalGain,rowrank
+	FROM SellByBrand
+) as tmp
+where rowrank<=3
+and ProductBrandID in(select top 5 ProductBrandID from SellByBrand group by ProductBrandID order by SUM(TotalAmount) desc )
+order by  ProductBrand,ProductName,TotalAmount desc
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellByCatalog]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spTotalSellByCatalog] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT top 5 ProductCategory,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
+SELECT 
+Product.ProductCategoryID,ProductCategory.NameThai as ProductCategory
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+inner JOIN Product ON Product.ProductID=Orders.ProductID 
+inner JOIN ProductCategory ON Product.ProductCategoryID=ProductCategory.CategoryID
+--WHERE Orders.TableID in(39,41)
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+and Product.ProductCategoryID>0
+group by Product.ProductCategoryID,ProductCategory.NameThai
+) as tmp
+order by TotalAmount desc
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellByCusGroup]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spTotalSellByCusGroup] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT top 5 CustomerGroup,ROUND(TotalAmount/1000,3)TotalAmount FROM(
+SELECT CustomerGroup.CodeThai as CustomerGroup
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+inner JOIN CustomerGroup ON CustomerGroup.MasterID=Orders.CustomerGroupID
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+group by CustomerGroup.CodeThai 
+) as tmp
+order by TotalAmount desc
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellByProduct]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spTotalSellByProduct] 
+ @FromDate date 
+ ,@ToDate date
+ ,@EmpID nvarchar(1000)
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT top 5 ProductName,ROUND(TotalAmount/1000,3)TotalAmount FROM(
+SELECT 
+Product.ProductCode as ProductName
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders  
+inner JOIN Product ON Product.ProductID=Orders.ProductID 
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+and Orders.SaleOwnerID IN(select number from intlist_to_tbl(@EmpID))
+group by Product.ProductCode
+) as tmp
+order by TotalAmount desc
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellByYear]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spTotalSellByYear] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+SELECT OrderYear,ROUND(Cost/1000000,3)Cost
+,ROUND(Profit/1000000,3)Profit
+,ROUND(TotalAmount/1000000,3)TotalAmount
+FROM (
+	SELECT 
+	year(Orders.OrderDate) as OrderYear
+	,SUM(Orders.Cost * Orders.Units) AS Cost
+	,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS Profit
+	,SUM(Orders.Price *  Orders.Units) AS TotalAmount
+	FROM vOrderTotalWithCost as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate	
+	group by 
+	year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalSellProfitByYear]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spTotalSellProfitByYear] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+SELECT OrderYear,ROUND(TotalGain/1000000,3)TotalGain,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
+SELECT 
+year(Orders.OrderDate) as OrderYear
+,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotalWithCost as Orders 
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+group by 
+year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spTotalTeamSell]    Script Date: 1/24/2023 11:14:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [dbo].[spTotalTeamSell] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+ 
+	SELECT  Orders.TerritoryID
+	,SUM(Orders.Total/1000) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate 	
+	group by Orders.TerritoryID
+ 
+END
+GO
