@@ -67,6 +67,10 @@ Public Class frmDashboard
             InitChartBankBalance()
             InitGridBrand()
             InitOverdueGauge()
+
+            ConfigureTreeMapDataAdapter()
+            ConfigureTreeMapColorizer()
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
 
@@ -348,35 +352,35 @@ Public Class frmDashboard
     End Sub
 
     Private Sub InitChartBankBalance()
-        Try
-            Dim lTotalCash As Double = 0
+        'Try
+        '    Dim lTotalCash As Double = 0
 
-            Dim SQL = "EXEC [dbo].[spBankBalance]"
-            SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
-            SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
-            SQL &= " WITH RECOMPILE "
-            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+        '    Dim SQL = "EXEC [dbo].[spBankBalance]"
+        '    SQL &= " @FromDate = '" & formatSQLDate(mFromDate) & "'"
+        '    SQL &= " ,@ToDate = '" & formatSQLDate(mToDate) & "'"
+        '    SQL &= " WITH RECOMPILE "
+        '    Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
 
 
-            Dim storage As New TreeMapItemStorage()
-            BankAccTreeMap.DataAdapter = storage
+        '    Dim storage As New TreeMapItemStorage()
+        '    BankAccTreeMap.DataAdapter = storage
 
-            Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
+        '    Dim BankGroup As TreeMapItem = New TreeMapItem With {.Label = "ยอดเงินในธนาคาร"}
 
-            For Each pRow In dataTable.Rows
-                BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
-                lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
-            Next
+        '    For Each pRow In dataTable.Rows
+        '        BankGroup.Children.Add(New TreeMapItem With {.Label = pRow("BankCode").ToString, .Value = ConvertNullToZero(pRow("AccountAmount"))})
+        '        lTotalCash += ConvertNullToZero(pRow("AccountAmount"))
+        '    Next
 
-            txtCash.Text = lTotalCash.ToString("#,##0.00") & " K"
+        '    txtCash.Text = lTotalCash.ToString("#,##0.00") & " K"
 
-            storage.Items.Add(BankGroup)
+        '    storage.Items.Add(BankGroup)
 
-            BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
-            BankAccTreeMap.LeafTextPattern = "{L} {V} K"
-        Catch ex As Exception
-            ShowErrorMsg(False, ex.Message)
-        End Try
+        '    BankAccTreeMap.Colorizer = New TreeMapPaletteColorizer With {.ColorizeGroups = False, .Palette = DevExpress.XtraTreeMap.Palette.OfficePalette}
+        '    BankAccTreeMap.LeafTextPattern = "{L} {V} K"
+        'Catch ex As Exception
+        '    ShowErrorMsg(False, ex.Message)
+        'End Try
     End Sub
 
     Private Sub InitGridBrand()
@@ -461,4 +465,37 @@ Public Class frmDashboard
         End If
     End Sub
 
+#Region "#FlatDataAdapter"
+    Private Sub ConfigureTreeMapDataAdapter()
+        Dim adapter As TreeMapFlatDataAdapter = New TreeMapFlatDataAdapter With {.DataSource = CreateBillionaireInfos(), .LabelDataMember = "Name", .ValueDataMember = "NetWorth"}
+        adapter.GroupDataMembers.Add("Residence")
+        BankAccTreeMap.DataAdapter = adapter
+    End Sub
+
+#End Region  ' #FlatDataAdapter
+#Region "#GroupGradientColorizer"
+    Private Sub ConfigureTreeMapColorizer()
+        BankAccTreeMap.Colorizer = New TreeMapGroupGradientColorizer With {.GradientColor = Color.White, .Max = 1, .Min = 0.3, .Palette = DevExpress.XtraTreeMap.Palette.Office2013Palette}
+    End Sub
+
+#End Region  ' #GroupGradientColorizer
+    Private Function CreateBillionaireInfos() As List(Of BillionaireInfo)
+        'Dim infos As List(Of BillionaireInfo) = New List(Of BillionaireInfo) From {New BillionaireInfo With {.Name = "Bill Gates", .NetWorth = 79.2, .Age = 60, .Residence = "United States", .Source = "Microsoft"}, New BillionaireInfo With {.Name = "Carlos Slim Helu", .NetWorth = 77.1, .Age = 75, .Residence = "Mexico", .Source = "telecom"}, New BillionaireInfo With {.Name = "Warren Buffett", .NetWorth = 72.7, .Age = 85, .Residence = "United States", .Source = "Berkshire Hathaway"}, New BillionaireInfo With {.Name = "Amancio Ortega", .NetWorth = 64.5, .Age = 79, .Residence = "Spain", .Source = "Zara"}, New BillionaireInfo With {.Name = "Larry Ellison", .NetWorth = 54.3, .Age = 71, .Residence = "United States", .Source = "Oracle"}, New BillionaireInfo With {.Name = "Charles Koch", .NetWorth = 42.9, .Age = 79, .Residence = "United States", .Source = "diversified"}, New BillionaireInfo With {.Name = "David Koch", .NetWorth = 42.9, .Age = 75, .Residence = "United States", .Source = "diversified"}, New BillionaireInfo With {.Name = "Christy Walton", .NetWorth = 41.7, .Age = 60, .Residence = "United States", .Source = "Wal-Mart"}, New BillionaireInfo With {.Name = "Jim Walton", .NetWorth = 40.6, .Age = 67, .Residence = "United States", .Source = "Wal-Mart"}, New BillionaireInfo With {.Name = "Liliane Bettencourt", .NetWorth = 40.1, .Age = 93, .Residence = "France", .Source = "L'Oreal"}}
+        Dim infos As List(Of BillionaireInfo) = New List(Of BillionaireInfo) From {New BillionaireInfo With {.Name = "Bill Gates", .NetWorth = 79.2, .Age = 60, .Residence = "United States", .Source = "Microsoft"}, New BillionaireInfo With {.Name = "Warren Buffett", .NetWorth = 72.7, .Age = 85, .Residence = "United States", .Source = "Berkshire Hathaway"}, New BillionaireInfo With {.Name = "Larry Ellison", .NetWorth = 54.3, .Age = 71, .Residence = "United States", .Source = "Oracle"}, New BillionaireInfo With {.Name = "Charles Koch", .NetWorth = 42.9, .Age = 79, .Residence = "United States", .Source = "diversified"}, New BillionaireInfo With {.Name = "David Koch", .NetWorth = 42.9, .Age = 75, .Residence = "United States", .Source = "diversified"}, New BillionaireInfo With {.Name = "Christy Walton", .NetWorth = 41.7, .Age = 60, .Residence = "United States", .Source = "Wal-Mart"}, New BillionaireInfo With {.Name = "Jim Walton", .NetWorth = 40.6, .Age = 67, .Residence = "United States", .Source = "Wal-Mart"}}
+        Return infos
+    End Function
+End Class
+
+
+Public Class BillionaireInfo
+
+    Public Property Name As String
+
+    'Public Property Residence As String
+
+    'Public Property Source As String
+
+    'Public Property Age As Integer
+
+    Public Property Amount As Double
 End Class
