@@ -86,9 +86,9 @@ Partial Class frmCampaign
         CType(Me.MinimumAmount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Budget.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ExpireDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.StartDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,11 +111,11 @@ Partial Class frmCampaign
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.None
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(919, 574)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(919, 581)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.EmployeeTabPage, Me.CustomerTabPage, Me.ProductTabPage, Me.ProductAddTabPage, Me.ActivityTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -161,7 +161,7 @@ Partial Class frmCampaign
         Me.GeneralTabPage.Controls.Add(Me.MinimumUnit)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(917, 556)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -480,7 +480,7 @@ Partial Class frmCampaign
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(623, 14)
         Me.Label3.TabIndex = 229
-        Me.Label3.Text = "_________________________________________________________________________________" & _
+        Me.Label3.Text = "_________________________________________________________________________________" &
     "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label3, "")
         '
@@ -511,7 +511,7 @@ Partial Class frmCampaign
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(623, 14)
         Me.Label28.TabIndex = 227
-        Me.Label28.Text = "_________________________________________________________________________________" & _
+        Me.Label28.Text = "_________________________________________________________________________________" &
     "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label28, "")
         '
@@ -569,12 +569,12 @@ Partial Class frmCampaign
         Me.ExpireDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.ExpireDate.Properties.Appearance.Options.UseFont = True
         Me.ExpireDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ExpireDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.ExpireDate.Properties.DisplayFormat.FormatString = "D"
         Me.ExpireDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.ExpireDate.Properties.EditFormat.FormatString = "D"
         Me.ExpireDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.ExpireDate.Properties.Mask.EditMask = "D"
-        Me.ExpireDate.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.ExpireDate.Size = New System.Drawing.Size(212, 20)
         Me.ExpireDate.TabIndex = 7
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ExpireDate, "Text")
@@ -591,12 +591,12 @@ Partial Class frmCampaign
         Me.StartDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.StartDate.Properties.Appearance.Options.UseFont = True
         Me.StartDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.StartDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.StartDate.Properties.DisplayFormat.FormatString = "D"
         Me.StartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.StartDate.Properties.EditFormat.FormatString = "D"
         Me.StartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.StartDate.Properties.Mask.EditMask = "D"
-        Me.StartDate.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.StartDate.Size = New System.Drawing.Size(212, 20)
         Me.StartDate.TabIndex = 5
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.StartDate, "Text")
@@ -716,7 +716,7 @@ Partial Class frmCampaign
         Me.EmployeeTabPage.Controls.Add(Me.UcEmployee1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.EmployeeTabPage, True)
         Me.EmployeeTabPage.Name = "EmployeeTabPage"
-        Me.EmployeeTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.EmployeeTabPage.Size = New System.Drawing.Size(917, 549)
         Me.EmployeeTabPage.Text = "พนักงาน"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.EmployeeTabPage, "")
         '
@@ -727,7 +727,7 @@ Partial Class frmCampaign
         Me.UcEmployee1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcEmployee1, True)
         Me.UcEmployee1.Name = "UcEmployee1"
-        Me.UcEmployee1.Size = New System.Drawing.Size(913, 546)
+        Me.UcEmployee1.Size = New System.Drawing.Size(917, 549)
         Me.UcEmployee1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcEmployee1, "")
         '
@@ -737,7 +737,7 @@ Partial Class frmCampaign
         Me.CustomerTabPage.Controls.Add(Me.UcCustomer1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CustomerTabPage, True)
         Me.CustomerTabPage.Name = "CustomerTabPage"
-        Me.CustomerTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.CustomerTabPage.Size = New System.Drawing.Size(917, 549)
         Me.CustomerTabPage.Text = "กลุ่มเป้าหมาย"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CustomerTabPage, "")
         '
@@ -748,7 +748,7 @@ Partial Class frmCampaign
         Me.UcCustomer1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCustomer1, True)
         Me.UcCustomer1.Name = "UcCustomer1"
-        Me.UcCustomer1.Size = New System.Drawing.Size(913, 546)
+        Me.UcCustomer1.Size = New System.Drawing.Size(917, 549)
         Me.UcCustomer1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCustomer1, "")
         '
@@ -758,7 +758,7 @@ Partial Class frmCampaign
         Me.ProductTabPage.Controls.Add(Me.UcProductLists1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductTabPage, True)
         Me.ProductTabPage.Name = "ProductTabPage"
-        Me.ProductTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.ProductTabPage.Size = New System.Drawing.Size(917, 556)
         Me.ProductTabPage.Text = "สินค้า"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductTabPage, "")
         '
@@ -769,7 +769,7 @@ Partial Class frmCampaign
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists1, True)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(913, 546)
+        Me.UcProductLists1.Size = New System.Drawing.Size(917, 556)
         Me.UcProductLists1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
@@ -779,7 +779,7 @@ Partial Class frmCampaign
         Me.ProductAddTabPage.Controls.Add(Me.UcProductLists2)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductAddTabPage, True)
         Me.ProductAddTabPage.Name = "ProductAddTabPage"
-        Me.ProductAddTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.ProductAddTabPage.Size = New System.Drawing.Size(917, 549)
         Me.ProductAddTabPage.Text = "สินค้าแถม"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductAddTabPage, "")
         '
@@ -790,7 +790,7 @@ Partial Class frmCampaign
         Me.UcProductLists2.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists2, True)
         Me.UcProductLists2.Name = "UcProductLists2"
-        Me.UcProductLists2.Size = New System.Drawing.Size(913, 546)
+        Me.UcProductLists2.Size = New System.Drawing.Size(917, 549)
         Me.UcProductLists2.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists2, "")
         '
@@ -800,7 +800,7 @@ Partial Class frmCampaign
         Me.ActivityTabPage.Controls.Add(Me.UcCampaignDTL1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ActivityTabPage, True)
         Me.ActivityTabPage.Name = "ActivityTabPage"
-        Me.ActivityTabPage.Size = New System.Drawing.Size(913, 546)
+        Me.ActivityTabPage.Size = New System.Drawing.Size(917, 549)
         Me.ActivityTabPage.Text = "Activity"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ActivityTabPage, "")
         '
@@ -823,7 +823,7 @@ Partial Class frmCampaign
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.NoteTabPage.Size = New System.Drawing.Size(917, 549)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -834,7 +834,7 @@ Partial Class frmCampaign
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(913, 630)
+        Me.UcNote1.Size = New System.Drawing.Size(917, 549)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -844,7 +844,7 @@ Partial Class frmCampaign
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(917, 549)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -855,7 +855,7 @@ Partial Class frmCampaign
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(913, 630)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(917, 549)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -865,7 +865,7 @@ Partial Class frmCampaign
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(913, 630)
+        Me.AdminTabPage.Size = New System.Drawing.Size(917, 549)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -903,9 +903,9 @@ Partial Class frmCampaign
         CType(Me.MinimumAmount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Budget.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CampaignType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ExpireDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.StartDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.StartDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StartDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Subject.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -919,6 +919,7 @@ Partial Class frmCampaign
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents FormChangedComponent1 As FormChangedComponent

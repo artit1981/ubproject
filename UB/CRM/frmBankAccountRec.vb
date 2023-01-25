@@ -52,30 +52,9 @@ Public Class frmBankAccountRec
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         Try
             If Verify() = True Then
-                'If gridView.RowCount > 0 Then
-                '    For lRow = 0 To gridView.RowCount
-                '        If ConvertNullToZero(gridView.GetRowCellValue(lRow, "IsChange")) = 1 Then
-                '            Dim lDataDAO = New BankAccountRecordSDAO
-                '            lDataDAO.ID = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "ID"))
-                '            If ConvertNullToZero(gridView.GetRowCellValue(lRow, "ModeData")) = 3 Then
-                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeDelete)
-                '            ElseIf lDataDAO.ID = 0 Then
-                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeNew)
-                '            Else
-                '                lDataDAO.ModeData = Integer.Parse(DataMode.ModeEdit)
-                '            End If
-                '            lDataDAO.RecordDate = gridView.GetRowCellValue(lRow, "RecordDate")
-                '            lDataDAO.BankAccountID = ConvertNullToZero(gridView.GetRowCellValue(lRow, "BankAccountID"))
-                '            lDataDAO.DR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "DR"))
-                '            lDataDAO.CR = ConvertNullToZero(gridView.GetRowCellDisplayText(lRow, "CR"))
-                '            lDataDAO.Remark = ConvertNullToString(gridView.GetRowCellDisplayText(lRow, "Remark"))
-                '            lDataDAO.SaveData(Nothing)
-                '        End If
-                '    Next
-                'End If
 
                 For Each pDataDAO As MyRecord In bindingSource1
-                    If pDataDAO.IsChange = 1 And pDataDAO.IsDelete = 0 Then
+                    If pDataDAO.IsChange = 1 And pDataDAO.IsDelete = 0 And pDataDAO.ModeData > 0 Then
                         Dim lDataDAO = New BankAccountRecordSDAO
                         lDataDAO.ID = pDataDAO.ID
                         If pDataDAO.ModeData = 3 Then
@@ -212,6 +191,39 @@ Public Class frmBankAccountRec
                     lBalance -= rec.CR
                 Next
             End If
+
+            'Cheque
+            'Comm
+            Dim lTotal As Decimal = 0
+
+            Dim SQL = " select * from vChequeBalance"
+            SQL &= " where ChequeDate between '" & formatSQLDate(dtpDateFrom.EditValue) & "'"
+            SQL &= " and  '" & formatSQLDate(dtpDateTo.EditValue) & "'"
+
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing, 180)
+            If dataTable.Rows.Count > 0 Then
+                For Each dr As DataRow In dataTable.Rows
+                    Dim rec As New MyRecord()
+                    rec.ID = 0
+                    rec.BankAccountID = ConvertNullToZero(dr("BankAccountID"))
+                    rec.RecordDate = dr("ChequeDate")
+                    If ConvertNullToString(dr("CashType")) = "D" Then
+                        rec.DR = ConvertNullToZero(dr("ChequeBalance"))
+                    Else
+                        rec.CR = ConvertNullToZero(dr("ChequeBalance"))
+                    End If
+
+                    rec.Remark = ConvertNullToString(dr("BankDocType")) & " : " & ConvertNullToString(dr("OrderCode"))
+                    rec.IsChange = 0
+                    rec.ModeData = 0
+                    rec.IsDelete = 0
+                    bindingSource1.Add(rec)
+                    lBalance += rec.DR
+                    lBalance -= rec.CR
+                Next
+            End If
+
+
             lblBalance.Text = "ยอดคงเหลือ  " & lBalance.ToString("#,##0.00")
             DxErrorProvider1.DataSource = bindingSource1
             DxErrorProvider1.ContainerControl = Me
@@ -239,6 +251,10 @@ Public Class frmBankAccountRec
                     e.Appearance.BackColor = Color.WhiteSmoke
                     e.Appearance.ForeColor = Color.Red
                 End If
+                If lData = 0 Then
+                    e.Appearance.BackColor = Color.WhiteSmoke
+                    e.Appearance.ForeColor = Color.DarkBlue
+                End If
             End If
 
         Catch ex As Exception
@@ -263,6 +279,8 @@ Public Class frmBankAccountRec
         Select Case e.Button.Tag
 
             Case "Remove"
+                If ConvertNullToZero(gridView.GetRowCellValue(index, "ModeData")) = 0 Then Exit Sub
+
                 If ConvertNullToZero(gridView.GetRowCellValue(index, "IsDelete")) = 0 Then
                     If XtraMessageBox.Show(Me, "ยืนยันการลบ ใช่หรือไม่", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
                         If ConvertNullToZero(gridView.GetRowCellValue(index, "ID")) = 0 Then
@@ -405,7 +423,7 @@ Public Class frmBankAccountRec
                 info.ErrorText = String.Format("กรุณาวันที่", propertyName)
                 info.ErrorType = ErrorType.Critical
             End If
-            If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 Then
+            If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 AndAlso ConvertNullToZero(ModeData) > 0 Then
                 info.ErrorText = String.Format("กรุณาระบุบัญชี", propertyName)
                 info.ErrorType = ErrorType.Critical
             End If

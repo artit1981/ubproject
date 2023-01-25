@@ -133,6 +133,7 @@ Public Class frmDashboardComm
         SetComboTerritory()
 
         Dim lYear As Integer = GetCurrentDate(Nothing).Year
+        lYear = IIf(lYear < 2500, lYear + 543, lYear)
 
         Dim lList As New List(Of Integer)
         For i = 0 To 10
@@ -140,15 +141,17 @@ Public Class frmDashboardComm
             lYear -= 1
         Next
         cboYear.Properties.DataSource = lList
-        cboYear.EditValue = Integer.Parse(GetCurrentDate(Nothing).Year)
+
+        lYear = Integer.Parse(GetCurrentDate(Nothing).Year)
+        cboYear.EditValue = IIf(lYear < 2500, lYear + 543, lYear)
 
         Dim items() As CheckedListBoxItem = {
-              New CheckedListBoxItem("January", True), New CheckedListBoxItem("February", True),
-              New CheckedListBoxItem("March", True), New CheckedListBoxItem("April", True),
-              New CheckedListBoxItem("May", True), New CheckedListBoxItem("June", True),
-              New CheckedListBoxItem("July", True), New CheckedListBoxItem("August", True),
-              New CheckedListBoxItem("September", True), New CheckedListBoxItem("October", True),
-              New CheckedListBoxItem("November", True), New CheckedListBoxItem("December", True)}
+              New CheckedListBoxItem("มกราคม", True), New CheckedListBoxItem("กุมภาพันธ์", True),
+              New CheckedListBoxItem("มีนาคม ", True), New CheckedListBoxItem("เมษายน", True),
+              New CheckedListBoxItem("พฤษภาคม ", True), New CheckedListBoxItem("มิถุนายน", True),
+              New CheckedListBoxItem("กรกฎาคม ", True), New CheckedListBoxItem("สิงหาคม", True),
+              New CheckedListBoxItem("กันยายน ", True), New CheckedListBoxItem("ตุลาคม", True),
+              New CheckedListBoxItem("พฤศจิกายน", True), New CheckedListBoxItem("ธันวาคม", True)}
         cboMonth.Properties.Items.AddRange(items)
     End Sub
 
@@ -200,16 +203,26 @@ Public Class frmDashboardComm
         'End If
 
 
-        mFromDate = New DateTime(lYearFrom, lMonthFrom, 1)
-        mToDate = New DateTime(lYearTo, lMonthTo, Date.DaysInMonth(lYearTo, lMonthTo))
+        mFromDate = New DateTime(IIf(lYearFrom > 2500, lYearFrom - 543, lYearFrom), lMonthFrom, 1)
+        mToDate = New DateTime(IIf(lYearTo > 2500, lYearTo - 543, lYearTo), lMonthTo, Date.DaysInMonth(IIf(lYearTo > 2500, lYearTo - 543, lYearTo), lMonthTo))
     End Sub
 
     Private Function GetMonthNumber(ByVal pMonthName As String) As Integer
-        Dim lGetMonthNumber As String
-
-        lGetMonthNumber = Month(DateValue("1 " & pMonthName & " 2020"))
-        Return Integer.Parse(lGetMonthNumber)
-
+        Select Case pMonthName
+            Case "มกราคม" : Return 1
+            Case "กุมภาพันธ์" : Return 2
+            Case "มีนาคม" : Return 3
+            Case "เมษายน" : Return 4
+            Case "พฤษภาคม" : Return 5
+            Case "มิถุนายน" : Return 6
+            Case "กรกฎาคม" : Return 7
+            Case "สิงหาคม" : Return 8
+            Case "กันยายน" : Return 9
+            Case "ตุลาคม" : Return 10
+            Case "พฤศจิกายน" : Return 11
+            Case "ธันวาคม" : Return 12
+            Case Else : Return 1
+        End Select
     End Function
     Private Sub InitChartComm()
         Try

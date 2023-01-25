@@ -80,8 +80,8 @@ Public Class frmCampaign
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
-            mcls.ProductDAOs = UcProductLists1.GetDAOs(False, True, False, Nothing, False, 0, True, "", pMode, "")
-            mcls.ProductAddDAOs = UcProductLists2.GetDAOs(False, True, False, Nothing, False, 0, True, "", pMode, "")
+            mcls.ProductDAOs = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, True, "", pMode, "")
+            mcls.ProductAddDAOs = UcProductLists2.GetDAOs(False, False, False, Nothing, False, 0, True, "", pMode, "")
             mcls.EmployeeList = UcEmployee1.GetDAOs()
             mcls.CustomerList = UcCustomer1.GetDAOs()
             If Verify() = True Then

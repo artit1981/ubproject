@@ -444,7 +444,7 @@ Public Class ucProductLists
                         mDataDAOs.Add(lDataDAO)
                         info.ErrorText = ""
 
-                        If mIsError = "" And mMode = DataMode.ModeEdit Then
+                        If mIsError = "" And mMode = DataMode.ModeEdit And mIsCheckError = True Then
                             If lDataDAO.ID = 0 Then
                                 mIsError = "PRODUCTCHANGE"
                             ElseIf lDataDAO.LocationDTLID <> lDataDAO.LocationDTLID_Old Then

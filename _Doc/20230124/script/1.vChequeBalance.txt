@@ -1,0 +1,22 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE VIEW [dbo].[vChequeBalance]
+AS
+SELECT  ChequeID,RefOrderID,BankDocType,CashType,ChequeOwnerTH,ChequeOwnerEN,Cheque.BankAccountID,Bank.BankCode
+,ChequeNo,ChequeDate,ChequeBalance,ChequePay,ChequeType,ChequeStep ,ChequeStatus,Cheque.Remark  
+,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,Orders.GrandTotal,Orders.OrderCode
+FROM Cheque 
+LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 
+LEFT OUTER JOIN BankAccount on BankAccount.BankAccountID=Cheque.BankAccountID
+LEFT OUTER JOIN Bank on Bank.BankID=BankAccount.BankID
+WHERE Cheque.IsDelete =0   
+GO
+
+

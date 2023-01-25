@@ -227,9 +227,9 @@ Public Class ChequeDAO
         Try
             SQL = "SELECT  ChequeID as ID,RefOrderID,BankDocType,CashType,ChequeOwnerTH,ChequeOwnerEN, BankID,BankAccountID "
             SQL &=  " ,ChequeNo,ChequeDate,ChequeBalance,ChequePay,BankBranch,ChequeType,ChequeStep ,ChequeStatus,Cheque.Remark  "
-            SQL &=  " ,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,ChequeOwnerTH,Orders.GrandTotal"
+            SQL &= " ,ChequeDateDue,ChequeDatePass,ChequeDateReceive,ChequeDateStop,Orders.GrandTotal,Orders.OrderCode"
             SQL &=  " FROM Cheque"
-            SQL &=  " LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 and Orders.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+            SQL &= " LEFT OUTER JOIN Orders ON Orders.OrderID=Cheque.RefOrderID and Orders.IsDelete=0 " 'and Orders.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
             SQL &=  " WHERE Cheque.IsDelete =0   "
             If pChequeID > 0 Then
                 SQL &=  " AND Cheque.ChequeID =" & pChequeID
