@@ -5,6 +5,7 @@ Public Class frmFindCustomer
     Private mDataKey As Collection
     Private mLookFor As String
     Private mIsAccept As Boolean = False
+    Private mMasterType As MasterType
 
     Public ReadOnly Property IsAccept() As Boolean
         Get
@@ -23,6 +24,13 @@ Public Class frmFindCustomer
         End Set
     End Property
 
+    Public WriteOnly Property CusMasterType() As Integer
+        Set(ByVal value As Integer)
+            mMasterType = value
+        End Set
+    End Property
+
+
     Public Sub Execute()
         Try
 
@@ -40,13 +48,18 @@ Public Class frmFindCustomer
         Dim dataTable As New DataTable()
 
         Try
-            lcls.TableID = MasterType.Contacts
+            lcls.TableID = mMasterType
             dataTable = lcls.GetDataTableForCombo(True, True, False)
             If dataTable.Rows.Count > 0 Then
                 dataTable.Columns.Add("IsSelect", System.Type.GetType("System.Boolean"))
                 dataTable.Columns("IsSelect").DefaultValue = False
                 GridControl.DataSource = dataTable
-                GridView.ViewCaption = "ลูกค้า"
+                If mMasterType = MasterType.Agency Then
+                    GridView.ViewCaption = "เจ้าหนี้"
+                Else
+                    GridView.ViewCaption = "ลูกค้า"
+                End If
+
             Else
                 GridControl.DataSource = Nothing
             End If

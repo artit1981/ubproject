@@ -1047,4 +1047,10 @@ Public Class frmMain
         End Try
 
     End Sub
+
+    Private Sub CampaignBuyBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles CampaignBuyBar.ItemClick
+        Dim lcls As New CampaignControl
+        ShowDataOnControl(lcls, MasterType.CampaignBuy)
+        InsertActivity(DataMode.ModeOpen, MasterType.CampaignBuy, "", Nothing)
+    End Sub
 End Class

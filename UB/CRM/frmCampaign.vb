@@ -59,7 +59,7 @@ Public Class frmCampaign
     Protected Overrides Function Save(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         XtraTabControl1.SelectedTabPage = GeneralTabPage
         Try
-
+            mcls.TableID = mOrderType
             mcls.ID = pID
             mcls.ModeData = pMode
             mcls.Subject = Subject.Text.Trim
@@ -165,8 +165,8 @@ Public Class frmCampaign
                                        , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
             UcProductLists2.ShowControl(pMode, lOrderList, mcls.TableName & "_ProAdd", ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total _
                                        , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
-            UcEmployee1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
-            UcCustomer1.ShowControl(mcls.ID, MasterType.Campaign, mcls.IsDelete)
+            UcEmployee1.ShowControl(mcls.ID, mOrderType, mcls.IsDelete)
+            UcCustomer1.ShowControl(mcls.ID, mOrderType, mcls.IsDelete)
             UcCampaignDTL1.ShowControl(mCampaignDtlList)
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
@@ -202,29 +202,6 @@ Public Class frmCampaign
     End Function
 
 
-
-    'Private Sub InitialCondition(ByVal pCampaihnType As Integer)
-    '    Try
-    '        CpTypeCont1.Visible = False
-    '        CpTypeCont2.Visible = False
-    '        CpTypeCont3_1.Visible = False
-    '        CpTypeCont3_2.Visible = False
-    '        ProductAddTabPage.PageEnabled = False
-
-    '        Select Case pCampaihnType
-    '            Case 1 : CpTypeCont1.Visible = True
-    '            Case 2 : CpTypeCont2.Visible = True
-    '            Case 3
-    '                CpTypeCont3_1.Visible = True
-    '                CpTypeCont3_2.Visible = True
-    '            Case 4
-    '                ProductAddTabPage.PageEnabled = True
-    '        End Select
-
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mFormName & ".InitialCondition : " & e.Message)
-    '    End Try
-    'End Sub
 
 #End Region
 

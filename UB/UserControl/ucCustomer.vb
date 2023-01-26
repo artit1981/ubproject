@@ -92,6 +92,11 @@ Public Class ucCustomer
             Else
                 Dim lfrmFind As New frmFindCustomer
                 lfrmFind.LookFor = pName
+                If mRefTableID = MasterType.Campaign Then
+                    lfrmFind.CusMasterType = MasterType.Contacts
+                Else
+                    lfrmFind.CusMasterType = MasterType.Agency
+                End If
                 lfrmFind.Execute()
                 If lfrmFind.IsAccept Then
                     If lfrmFind.GetDataKey.Count > 0 Then

@@ -119,6 +119,7 @@ Module modGlobal
         Dashboard = 110
         InvoiceOnline = 111
         Commission = 112
+        CampaignBuy = 115
     End Enum
 
     Public Enum DataMode

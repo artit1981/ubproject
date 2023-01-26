@@ -26,7 +26,7 @@ Public Class CampaignDAO
 
     Public Overrides ReadOnly Property TableName() As String
         Get
-            Return "Campaign"
+            Return IIf(TableID = 91, "Campaign", "CampaignBuy")
         End Get
     End Property
 
@@ -187,7 +187,7 @@ Public Class CampaignDAO
         Dim SQL As String
         Dim dataTable As New DataTable()
         Try
-            SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM " & TableName & " WITH (NOLOCK);"
+            SQL = "SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM Campaign WITH (NOLOCK);"
 
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             If dataTable.Rows.Count > 0 Then
@@ -325,7 +325,9 @@ Public Class CampaignDAO
                 SQL &=  " AND Campaign.IsDelete =0   "
                 SQL &=  " AND Campaign.IsInActive = 0"
             End If
-
+            If TableID > 0 Then
+                SQL &= " AND Campaign.TableID = " & TableID
+            End If
             SQL &=  " ORDER BY Campaign.CampaignID"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
@@ -381,7 +383,7 @@ Public Class CampaignDAO
                     ID = GenNewID("CampaignID", "Campaign", tr)
                     SQL = " INSERT INTO Campaign (CampaignID,Subject,Budget,MinimumAmount,StartDate ,ExpireDate "
                     SQL &=  " ,CampaignType ,EvaluateBy,EvaluateTarget , CampaignStatus,StatusDesc , Remark "
-                    SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,MinimumUnit,CpTypeCont1,CpTypeCont2,CpTypeCont3_1,CpTypeCont3_2 "
+                    SQL &= " ,CreateBy,CreateTime,IsInActive,IsDelete,MinimumUnit,CpTypeCont1,CpTypeCont2,CpTypeCont3_1,CpTypeCont3_2,TableID "
                     SQL &=  " )"
                     SQL &=  " VALUES ( @IDs"
                     SQL &=  " ,  @Subject"
@@ -403,7 +405,8 @@ Public Class CampaignDAO
                     SQL &=  " ,  @CpTypeCont1"
                     SQL &=  " ,  @CpTypeCont2"
                     SQL &=  " ,  @CpTypeCont3_1"
-                    SQL &=  " ,  @CpTypeCont3_2"
+                    SQL &= " ,  @CpTypeCont3_2"
+                    SQL &= " ,  @TableID"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Campaign SET "
@@ -456,8 +459,7 @@ Public Class CampaignDAO
             myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
             myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
             myCommand.Parameters.Add(New SqlParameter("@IsInActive", IsInActive))
-
-
+            myCommand.Parameters.Add(New SqlParameter("@TableID", ConvertNullToZero(TableID)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))
@@ -468,8 +470,8 @@ Public Class CampaignDAO
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
             SaveNote(NoteDAOs, ModeData, ID, TableName, tr)
-            SaveEmployeeList(EmployeeList, ModeData, ID, MasterType.Campaign, tr)
-            SaveCustomerList(CustomerList, ModeData, ID, MasterType.Campaign, tr)
+            SaveEmployeeList(EmployeeList, ModeData, ID, TableID, tr)
+            SaveCustomerList(CustomerList, ModeData, ID, TableID, tr)
             SaveAttachFile(FileAttachs, ModeData, ID, TableName, tr)
             If ModeData <> DataMode.ModeDelete Then
                 Dim lclsOrder As New OrderSDAO

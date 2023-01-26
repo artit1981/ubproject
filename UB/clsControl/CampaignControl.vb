@@ -2,19 +2,27 @@
 
 Public Class CampaignControl
     Implements iControl
-    Private Const mCaption As String = "โปรโมชั่น"
+    Private mCaption As String = "โปรโมชั่น"
     Private WithEvents mCtlForm As frmControlCampaign
     Private mCHECKSUM_AGG As Long
     Private bindingSource1 As BindingSource
+    Private mOrderType As Long
 
     Public Sub Execute(ByVal pOrderType As Integer) Implements iControl.Execute
         Try
             mCtlForm = New frmControlCampaign
+            mOrderType = pOrderType
+            If pOrderType = MasterType.Campaign Then
+                mCaption = "โปรโมชั่น"
+            Else
+                mCaption = "โปรโมชั่นซื้อ"
+            End If
+
             With mCtlForm
                 .Text = mCaption
                 .MdiParent = frmMain
                 Call LoadData()
-                Call SetControlMenuPrivilege(mCtlForm, MasterType.Campaign)
+                Call SetControlMenuPrivilege(mCtlForm, pOrderType)
                 .Show()
             End With
 
@@ -67,6 +75,7 @@ Public Class CampaignControl
             bindingSource1 = Nothing
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(CampaignSub)
+            lcls.TableID = mOrderType
             dataTable = lcls.GetDataTable(0, lIsActiveOnly)
 
             If dataTable.Rows.Count > 0 Then
@@ -164,7 +173,11 @@ Public Class CampaignControl
     Private Sub ShowForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pIndex As Long)
         Dim lFormEdit As New frmCampaign
         Try
-            Dim rec As CampaignSub = TryCast(bindingSource1.Item(pIndex), CampaignSub)
+            Dim rec As New CampaignSub
+            If bindingSource1.Count > 0 Then
+                rec = TryCast(bindingSource1.Item(pIndex), CampaignSub)
+            End If
+
 
             With lFormEdit
                 .Caption = mCaption
@@ -172,7 +185,7 @@ Public Class CampaignControl
                 .ModeData = pMode
                 .CampaignDtlList = rec.CampaignDTL
                 .IDs = pID
-                .OrderType = MasterType.Campaign
+                .OrderType = mOrderType
                 .Show()
             End With
 
