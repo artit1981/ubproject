@@ -622,8 +622,8 @@ Public Class CustomerDAO
             ElseIf pSelectBoth = True Then
                 SQL &=  " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
                 If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Then
-                    SQL &=  " ,CustomerType AS Type "
-                ElseIf MasterType.Agency Then
+                    SQL &= " ,CustomerType AS Type "
+                ElseIf mTableID = MasterType.Agency Then
                     SQL &=  " ,'เจ้าหนี้' AS Type"
                 End If
             End If
@@ -640,8 +640,8 @@ Public Class CustomerDAO
                 SQL &=  " AND A.CustomerType in('Contacts','Accounts','Agency')"
             ElseIf pSelectBoth = True Then
                 If mTableID = MasterType.Accounts Or mTableID = MasterType.Contacts Then
-                    SQL &=  " AND A.CustomerType in('Contacts','Accounts')"
-                ElseIf MasterType.Agency Then
+                    SQL &= " AND A.CustomerType in('Contacts','Accounts')"
+                ElseIf mTableID = MasterType.Agency Then
                     SQL &=  " AND A.CustomerType in('Agency')"
                 End If
             Else

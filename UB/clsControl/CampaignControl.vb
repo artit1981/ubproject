@@ -172,6 +172,7 @@ Public Class CampaignControl
                 .ModeData = pMode
                 .CampaignDtlList = rec.CampaignDTL
                 .IDs = pID
+                .OrderType = MasterType.Campaign
                 .Show()
             End With
 

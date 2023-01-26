@@ -8,6 +8,7 @@ Public Class frmCampaign
     Private Const mFormName As String = "frmCampaign"
     Dim mcls As New CampaignDAO
     Dim mCampaignDtlList As List(Of CampaignDetail)
+    Private mOrderType As MasterType
 
     Public Property CampaignDtlList() As List(Of CampaignDetail)
         Get
@@ -22,7 +23,7 @@ Public Class frmCampaign
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
-
+            mOrderType = pOrderType
             Call LoadData(pMode, pID)
 
         Catch e As Exception
@@ -174,9 +175,6 @@ Public Class frmCampaign
 
         End Try
     End Function
-
-
-
 
 
     Private Function Verify() As Boolean
