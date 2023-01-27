@@ -1,7 +1,7 @@
 USE [BS]
 GO
 
-/****** Object:  View [dbo].[vOrderTotal]    Script Date: 1/26/2023 3:58:05 PM ******/
+/****** Object:  View [dbo].[vOrderTotal]    Script Date: 1/27/2023 2:24:44 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,26 +12,41 @@ GO
 
 
 
+
 ALTER VIEW [dbo].[vOrderTotal]
 AS
 
 SELECT OrderID,OrderCode,TableID, OrderDate,ProductID
-,ProductCode,ProductName,ProductBrandID,Price,Units,Units * Price as Total
+,ProductCode,ProductName,ProductBrandID,Price,Units,Units * Price as Total,Cost
 ,SaleOwnerID,[EmpCode],EmpName,CommissionID,TerritoryID
 ,TargetPerMonth,CustomerGroupID
 ,CampaignPrice ,CampaignDiscount,CampaignType,CpTypeCont3_1,CpTypeCont3_2
+,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy
 from(
 --Calc price with Campaign
 SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID
 ,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
+,ProductList.Price as ProductPrice
+--Campaign Sell
 ,case when Campaign.CampaignID=0 then ProductList.Price 
 when Campaign.CampaignID>0 and Campaign.CampaignType=3 and Campaign.CpTypeCont3_1>0 then ProductList.Price-Campaign.CpTypeCont3_1
 when Campaign.CampaignID>0 and Campaign.CampaignType=3 and Campaign.CpTypeCont3_2>0 then ProductList.Price-(ProductList.Price * (Campaign.CpTypeCont3_2/100))
 when Campaign.CampaignID>0 and Campaign.CampaignType=4 and Campaign.CampaignPrice >0 then Campaign.CampaignPrice 
 when Campaign.CampaignID>0 and Campaign.CampaignType=4 and Campaign.CampaignDiscount >0 then ProductList.Price-Campaign.CampaignDiscount
 else ProductList.Price  end Price
-,ProductList.Price as ProductPrice,Campaign.CampaignPrice ,Campaign.CampaignDiscount,Campaign.CampaignType
+,Campaign.CampaignPrice ,Campaign.CampaignDiscount,Campaign.CampaignType
 ,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
+--Calc cost with Campaign
+--Campaign Buy
+,case when CampaignBuy.CampaignID=0 then ProductList.Cost 
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=3 and CampaignBuy.CpTypeCont3_1>0 then ProductList.Cost-CampaignBuy.CpTypeCont3_1
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=3 and CampaignBuy.CpTypeCont3_2>0 then ProductList.Cost-(ProductList.Cost * (CampaignBuy.CpTypeCont3_2/100))
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=4 and CampaignBuy.CampaignPrice >0 then CampaignBuy.CampaignPrice 
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=4 and CampaignBuy.CampaignDiscount >0 then ProductList.Cost-CampaignBuy.CampaignDiscount
+else ProductList.Cost  end Cost
+,CampaignBuy.CampaignPrice as CampaignPriceBuy ,CampaignBuy.CampaignDiscount as CampaignDiscountBuy,CampaignBuy.CampaignType as CampaignTypeBuy
+,CampaignBuy.CpTypeCont3_1 as CpTypeCont3_1_Buy,CampaignBuy.CpTypeCont3_2 as CpTypeCont3_2_Buy
+
 ,case when Orders.TableID=55 then ProductList.AdjustUnit * -1 else ProductList.AdjustUnit end  Units
 ,Orders.SaleOwnerID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
 ,[Employee].TargetPerMonth
@@ -41,7 +56,7 @@ inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDel
 inner JOIN Product ON Product.ProductID=ProductList.ProductID 
 INNER JOIN [Employee] on [Orders].SaleOwnerID = [Employee].EmpID and [Employee].IsDelete=0
 INNER JOIN Customer on Customer.CustomerID = [Orders].CustomerID
-LEFT OUTER JOIN  
+LEFT OUTER JOIN  --Campaign Sell
 ( 
  Select isnull(Campaign.CampaignID,0)CampaignID,Campaign.Subject,Campaign.StartDate,Campaign.ExpireDate
  ,Campaign.CampaignType,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
@@ -49,14 +64,27 @@ LEFT OUTER JOIN
   from Campaign
   left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='Campaign' 
   left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 91  
+  where Campaign.TableID= 91  
   ) Campaign ON Campaign.ProductID=ProductList.ProductID  
 			and Campaign.CustomerID=Orders.CustomerID
 			and Campaign.StartDate < Orders.OrderDate and Campaign.ExpireDate > Orders.OrderDate
-
+LEFT OUTER JOIN  --Campaign Buy
+( 
+ Select isnull(Campaign.CampaignID,0)CampaignID,Campaign.Subject,Campaign.StartDate,Campaign.ExpireDate
+ ,Campaign.CampaignType,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
+ ,ProductList.ProductID,CustomerList.CustomerID,ProductList.Price as CampaignPrice,ProductList.Discount as CampaignDiscount
+  from Campaign
+  left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='CampaignBuy' 
+  left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 115  
+  where Campaign.TableID= 115  
+  ) CampaignBuy ON Campaign.ProductID=ProductList.ProductID  
+			and Campaign.CustomerID=Orders.CustomerID
+			and Campaign.StartDate < Orders.OrderDate and Campaign.ExpireDate > Orders.OrderDate
 WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
 and Orders.TableID in(39,41,54,55)
 --and Orders.OrderDate between '2022-06-01' and '2022-12-31' 
 ) as tmp
+
 GO
 
 

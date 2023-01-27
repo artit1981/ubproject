@@ -1,0 +1,25 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[spTotalSellProfitByYear] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+
+
+SELECT OrderYear,ROUND(TotalGain/1000000,3)TotalGain,ROUND(TotalAmount/1000000,3)TotalAmount FROM(
+SELECT 
+year(Orders.OrderDate) as OrderYear
+,SUM((Orders.Price-Orders.Cost) * Orders.Units) AS TotalGain
+,SUM(Orders.Total) AS TotalAmount
+FROM vOrderTotal as Orders 
+WHERE Orders.OrderDate between @FromDate and @ToDate	
+group by 
+year(Orders.OrderDate)
+) as tmp
+order by OrderYear 
+
+END
