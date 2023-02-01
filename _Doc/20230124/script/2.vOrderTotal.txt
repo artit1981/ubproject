@@ -1,30 +1,28 @@
 USE [BS]
 GO
 
-/****** Object:  View [dbo].[vOrderTotal]    Script Date: 1/27/2023 2:24:44 PM ******/
+/****** Object:  View [dbo].[vOrderTotal]    Script Date: 1/29/2023 10:26:38 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
+ 
+  
 
 ALTER VIEW [dbo].[vOrderTotal]
 AS
 
-SELECT OrderID,OrderCode,TableID, OrderDate,ProductID
-,ProductCode,ProductName,ProductBrandID,Price,Units,Units * Price as Total,Cost
+SELECT OrderID,CustomerID,CustomerCode,OrderCode,TableID, OrderDate,ProductID
+,ProductCode,ProductName,ProductBrandID,Price,Units,Units * Price as Total
+,Cost
 ,SaleOwnerID,[EmpCode],EmpName,CommissionID,TerritoryID
 ,TargetPerMonth,CustomerGroupID
 ,CampaignPrice ,CampaignDiscount,CampaignType,CpTypeCont3_1,CpTypeCont3_2
 ,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy
 from(
 --Calc price with Campaign
-SELECT Orders.OrderID,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID
+SELECT Orders.OrderID,[Orders].CustomerID,Customer.CustomerCode,Orders.OrderCode,Orders.TableID, Orders.OrderDate,ProductList.ProductID
 ,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
 ,ProductList.Price as ProductPrice
 --Campaign Sell
@@ -58,33 +56,44 @@ INNER JOIN [Employee] on [Orders].SaleOwnerID = [Employee].EmpID and [Employee].
 INNER JOIN Customer on Customer.CustomerID = [Orders].CustomerID
 LEFT OUTER JOIN  --Campaign Sell
 ( 
- Select isnull(Campaign.CampaignID,0)CampaignID,Campaign.Subject,Campaign.StartDate,Campaign.ExpireDate
- ,Campaign.CampaignType,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
- ,ProductList.ProductID,CustomerList.CustomerID,ProductList.Price as CampaignPrice,ProductList.Discount as CampaignDiscount
+ Select max( isnull(Campaign.CampaignID,0))CampaignID
+ --,Campaign.Subject
+ ,min(Campaign.StartDate) StartDate,max(Campaign.ExpireDate)ExpireDate
+ ,max(Campaign.CampaignType)CampaignType,max(Campaign.CpTypeCont3_1)CpTypeCont3_1,max(Campaign.CpTypeCont3_2)CpTypeCont3_2
+ ,ProductList.ProductID,CustomerList.CustomerID
+ ,max(ProductList.Price) as CampaignPrice
+ ,max(ProductList.Discount) as CampaignDiscount
   from Campaign
   left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='Campaign' 
   left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 91  
   where Campaign.TableID= 91  
+  group by ProductList.ProductID,CustomerList.CustomerID
   ) Campaign ON Campaign.ProductID=ProductList.ProductID  
 			and Campaign.CustomerID=Orders.CustomerID
 			and Campaign.StartDate < Orders.OrderDate and Campaign.ExpireDate > Orders.OrderDate
 LEFT OUTER JOIN  --Campaign Buy
 ( 
- Select isnull(Campaign.CampaignID,0)CampaignID,Campaign.Subject,Campaign.StartDate,Campaign.ExpireDate
- ,Campaign.CampaignType,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
- ,ProductList.ProductID,CustomerList.CustomerID,ProductList.Price as CampaignPrice,ProductList.Discount as CampaignDiscount
+ Select max( isnull(Campaign.CampaignID,0))CampaignID
+ --,Campaign.Subject
+ ,min(Campaign.StartDate) StartDate,max(Campaign.ExpireDate)ExpireDate
+ ,max(Campaign.CampaignType)CampaignType,max(Campaign.CpTypeCont3_1)CpTypeCont3_1,max(Campaign.CpTypeCont3_2)CpTypeCont3_2
+ ,ProductList.ProductID
+ --,CustomerList.CustomerID
+ ,max(ProductList.Price) as CampaignPrice,max(ProductList.Discount) as CampaignDiscount
   from Campaign
   left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='CampaignBuy' 
-  left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 115  
+  --left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 115  
   where Campaign.TableID= 115  
-  ) CampaignBuy ON Campaign.ProductID=ProductList.ProductID  
-			and Campaign.CustomerID=Orders.CustomerID
-			and Campaign.StartDate < Orders.OrderDate and Campaign.ExpireDate > Orders.OrderDate
+  group by ProductList.ProductID
+  ) CampaignBuy ON CampaignBuy.ProductID=ProductList.ProductID  
+			--and CampaignBuy.CustomerID=Orders.CustomerID
+			and CampaignBuy.StartDate <= Orders.OrderDate and CampaignBuy.ExpireDate > Orders.OrderDate
 WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
 and Orders.TableID in(39,41,54,55)
---and Orders.OrderDate between '2022-06-01' and '2022-12-31' 
+--and Orders.OrderDate between '2021-12-01' and '2021-12-31'
+--and Orders.OrderID= 306362
 ) as tmp
-
+   --order by [OrderID]
 GO
 
 

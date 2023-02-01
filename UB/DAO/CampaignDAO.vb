@@ -224,7 +224,7 @@ Public Class CampaignDAO
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
-
+                    TableID = ConvertNullToZero(dr("TableID"))
                     Subject = ConvertNullToString(dr("Subject"))
                     ID = ConvertNullToZero(dr("CampaignID"))
                     Budget = ConvertNullToZero(dr("Budget"))
@@ -500,8 +500,9 @@ Public Class CampaignDAO
             SQL = "SELECT CampaignID  FROM Campaign"
             SQL &=  " WHERE IsDelete =0 AND Subject='" & Trim(mSubject) & "'"
             If ModeData = DataMode.ModeEdit Then
-                SQL &=  " AND CampaignID <> " & ID
+                SQL &= " AND CampaignID <> " & ID
             End If
+            SQL &= " AND TableID = " & TableID
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
             Return dataTable.Rows.Count > 0
         Catch e As Exception

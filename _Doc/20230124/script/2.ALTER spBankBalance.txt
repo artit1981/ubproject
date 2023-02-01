@@ -1,3 +1,6 @@
+USE [BS]
+GO
+/****** Object:  StoredProcedure [dbo].[spBankBalance]    Script Date: 2/1/2023 9:32:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,7 +30,7 @@ FROM(
 	and CashRecord.RecordDate between @FromDate and @ToDate    
 	union all
 	 
-	SELECT  case when BankAccountID>0 then BankCode else 'Cheque' end BankCode
+	SELECT  case when BankAccountID>0 then BankCode else 'NA.' end BankCode
 	,case when CashType='D' then ChequeBalance else ChequeBalance * -1 end AccountAmount 
 	FROM vChequeBalance  
 	WHERE  ChequeDate between @FromDate and   @ToDate     
