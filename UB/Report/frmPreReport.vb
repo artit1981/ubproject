@@ -70,7 +70,7 @@ Public Class frmPreReport
         Dim lclsContactPerson As New CustomerDAO
 
         Try
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, mOrderType)
             If lclsOrder.InitailData(pOrderID) Then
                 Select Case mOrderType
                     Case MasterType.PurchaseOrder
@@ -417,7 +417,7 @@ Public Class frmPreReport
             End Select
             If lclsOrder.InitailData(pOrderID) Then
                 'Set company header
-                BuildCompanyAddress(lclsReport)
+                BuildCompanyAddress(lclsReport, mOrderType)
                 lclsReport.AddressBill = lclsOrder.CustomerDAO.AddressS.AddressLong
                 If lclsOrder.CustomerDAO.AddressShip.AddressNo = "" And lclsOrder.CustomerDAO.AddressShip.AddressName = "" Then
                     lclsReport.AddressShip = lclsOrder.CustomerDAO.AddressS.AddressLong
@@ -587,7 +587,7 @@ Public Class frmPreReport
 
             If lclsOrder.InitailData(pOrderID) Then
                 'Set company header
-                BuildCompanyAddress(lclsReport)
+                BuildCompanyAddress(lclsReport, 0)
                 lclsReport.AddressBill = lclsOrder.CustomerDAO.AddressS.AddressLong
                 If lclsOrder.CustomerDAO.AddressShip.AddressNo = "" And lclsOrder.CustomerDAO.AddressShip.AddressName = "" Then
                     lclsReport.AddressShip = lclsOrder.CustomerDAO.AddressS.AddressLong

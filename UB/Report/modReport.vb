@@ -49,11 +49,18 @@ Module modReport
     End Sub
 
 
-    Public Sub BuildCompanyAddress(ByRef pclsReport As TmpOrderDAO)
+    Public Sub BuildCompanyAddress(ByRef pclsReport As TmpOrderDAO, ByVal pType As Integer)
         Dim lclsCompanyDAO As New CompanyDAO
         Try
             If lclsCompanyDAO.InitailData(gCompanyID) Then
                 pclsReport.Company = lclsCompanyDAO.CompanyName
+                If pType = MasterType.InvoiceOnline Then
+                    If ConvertNullToZero(lclsCompanyDAO.IsMainCompany) = 1 Then  ' *** ใช้กลับกัน 0 = is main , 1 2 3 =Brance
+                        pclsReport.Company &= " (สำนักงานใหญ่)"
+                    Else
+                        pclsReport.Company &= " (สาขา " & ConvertNullToZero(lclsCompanyDAO.Branch) & ")"
+                    End If
+                End If
                 If lclsCompanyDAO.Owner = "" Then
                     pclsReport.CompanyOwner = lclsCompanyDAO.CompanyName
                 Else

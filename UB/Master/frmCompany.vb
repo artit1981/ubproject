@@ -225,8 +225,8 @@ Public Class frmCompany
     End Function
 
     Private Sub IsMainCompanyYes_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles IsMainCompanyYes.CheckedChanged
-        Branch.Enabled = IsMainCompanyYes.Checked = False = 0
-        Branch.TabStop = IsMainCompanyYes.Checked = False
+        Branch.Enabled = (IsMainCompanyYes.Checked = False)
+        Branch.TabStop = (IsMainCompanyYes.Checked = False)
     End Sub
 
 

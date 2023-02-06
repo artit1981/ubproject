@@ -107,9 +107,15 @@ Public Class frmCommissionReport
             If dataTable.Rows.Count > 0 Then
                 Dim FilterTable As New DataTable
                 If rdoCondition.EditValue = 1 Then
-                    FilterTable = dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").CopyToDataTable
+                    If dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").Length > 0 Then
+                        FilterTable = dataTable.Select("Commisstion>0 and EmpID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").CopyToDataTable
+                    End If
+
                 Else
-                    FilterTable = dataTable.Select("Commisstion>0 and TerritoryID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").CopyToDataTable
+                    If dataTable.Select("Commisstion>0 and TerritoryID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").Length > 0 Then
+                        FilterTable = dataTable.Select("Commisstion>0 and TerritoryID in(" & lEmpID & ") and CommissionID in(" & lCommID & ")").CopyToDataTable
+                    End If
+
                 End If
 
                 gridView.Columns.Clear()
@@ -195,19 +201,20 @@ Public Class frmCommissionReport
         Try
             DxErrorProvider1.ClearErrors()
 
-            If ConvertNullToZero(cboCheckedCommission.EditValue) = 0 Then
+            If cboCheckedCommission.Properties.Items.GetCheckedValues.Count = 0 Then
                 SetErrorProvider(DxErrorProvider1, cboCheckedCommission, "กรุณาระบุข้อมูล")
             End If
 
             If rdoCondition.EditValue = 1 Then
-                If ConvertNullToString(cboCheckedEmployee.EditValue) = "" Then
+                If cboCheckedEmployee.Properties.Items.GetCheckedValues.Count = 0 Then
                     SetErrorProvider(DxErrorProvider1, cboCheckedEmployee, "กรุณาระบุข้อมูล")
                 End If
             Else
-                If ConvertNullToString(cboCheckedTerritory.EditValue) = "" Then
-                    SetErrorProvider(DxErrorProvider1, cboCheckedTerritory, "กรุณาระบุข้อมูล")
+
+                    If cboCheckedTerritory.Properties.Items.GetCheckedValues.Count = 0 Then
+                        SetErrorProvider(DxErrorProvider1, cboCheckedTerritory, "กรุณาระบุข้อมูล")
+                    End If
                 End If
-            End If
 
             Return DxErrorProvider1.HasErrors = False
         Catch e As Exception

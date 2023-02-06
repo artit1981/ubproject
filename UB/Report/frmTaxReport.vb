@@ -32,7 +32,7 @@ Public Class frmTaxReport
             report = New rptTaxSell
 
             'Set company header
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, 0)
             If OrderType.EditValue = "S" Then 'Sell
                 lclsReport.Header1 = "รายงานภาษีขาย"
             Else

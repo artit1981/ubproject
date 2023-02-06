@@ -55,7 +55,7 @@ Public Class frmDebtAnalystReport
         Try
             lAsOfDate = DateAsOf.EditValue
             'Set company header
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, 0)
             report = New rptDebtAnalyst
             Select Case ReportType.EditValue
                 Case 1

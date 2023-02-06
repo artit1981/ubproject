@@ -33,7 +33,7 @@ Public Class frmDealReport
 
 
             'Set company header
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, 0)
             If OrderType.EditValue = "S" Then 'Sell
                 If OrderType2.EditValue = "S" Then
                     report = New rptDealSell

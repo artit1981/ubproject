@@ -82,7 +82,7 @@ Public Class frmStockReport
         Dim lclsReport As New TmpOrderDAO
         Try
             'Set company header
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, 0)
 
             lclsReport.Header1 = "รายงานมูลค่าสต๊อกคลังสินค้า"
             report = New rptStockReport

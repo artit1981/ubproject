@@ -76,7 +76,7 @@ Public Class frmCommReport
 
 
             'Set company header
-            BuildCompanyAddress(lclsReport)
+            BuildCompanyAddress(lclsReport, 0)
 
             Select Case ReportType.EditValue
                 Case 1
