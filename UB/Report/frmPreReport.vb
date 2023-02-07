@@ -44,7 +44,8 @@ Public Class frmPreReport
         Try
             Select Case mOrderType
                 Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
-                    , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
+                    , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow _
+                    , MasterType.Expose, MasterType.ClaimReturn, MasterType.AddCredit, MasterType.AddCreditBuy
                     Call PrintOrder(mOrderID, pClaimLoop)
                 Case MasterType.Bill, MasterType.Receipt, MasterType.ReceiptBuy
                     Call PrintBill(mOrderID)
@@ -108,6 +109,10 @@ Public Class frmPreReport
                         report = New rptShipingReport
                     Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy
                         report = New rptReduceCredit
+                        lclsReport.Header1 = "ใบลดหนี้"
+                    Case MasterType.AddCredit, MasterType.AddCreditBuy
+                        report = New rptReduceCredit
+                        lclsReport.Header1 = "ใบเพิ่มหนี้"
                     Case MasterType.Borrow
                         report = New rptBorrow
                     Case Else
