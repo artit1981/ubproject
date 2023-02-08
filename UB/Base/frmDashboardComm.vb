@@ -80,7 +80,11 @@ Public Class frmDashboardComm
 
     Private Sub SetComboEmployee()
         Try '  
-            SetComboCheckEmployee(cboCheckedEmployee)
+            Dim lSQLEmp As String = ""
+            If gPrivilegeID > 1 Then
+                lSQLEmp = " and EmpID=" & gEmpID
+            End If
+            SetComboCheckEmployee(cboCheckedEmployee, lSQLEmp)
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, ".SetComboEmployee : " & e.Message)
@@ -391,6 +395,8 @@ Public Class frmDashboardComm
             'mTarget = lTotalTarget
             txtTotalSell.Text = lTotalSell.ToString("#,##0.00") & " K"
             txtTarget.Text = lTotalTarget.ToString("#,##0.00") & " K"
+
+            If lTotalSell = 0 And lTotalTarget = 0 Then Exit Sub
 
 
             ' Add the series to the chart.

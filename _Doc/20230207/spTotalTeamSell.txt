@@ -1,0 +1,18 @@
+
+
+
+ALTER PROCEDURE [dbo].[spTotalTeamSell] 
+ @FromDate date 
+ ,@ToDate date
+AS
+BEGIN
+SET NOCOUNT ON;
+ 
+	SELECT  Orders.TerritoryID
+	,SUM(Orders.Total/1000) AS TotalAmount
+	FROM vOrderTotal as Orders  	
+	WHERE Orders.OrderDate between @FromDate and @ToDate 
+	and CommissionID>0
+	group by Orders.TerritoryID
+ 
+END
