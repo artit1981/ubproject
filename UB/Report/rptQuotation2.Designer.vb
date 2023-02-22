@@ -106,7 +106,6 @@ Partial Public Class rptQuotation2
         Me.TmpOrders1 = New UB.TmpOrders()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         Me.Number2Dit = New DevExpress.XtraReports.UI.FormattingRule()
-        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
         Me.XrLabel77 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel76 = New DevExpress.XtraReports.UI.XRLabel()
@@ -130,7 +129,6 @@ Partial Public Class rptQuotation2
         Me.TmpProductListTableAdapter = New UB.TmpOrdersTableAdapters.TmpProductListTableAdapter()
         Me.CalSEQ = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalUnitSum = New DevExpress.XtraReports.UI.CalculatedField()
-        Me.GroupFooter1 = New DevExpress.XtraReports.UI.GroupFooterBand()
         Me.XrLine14 = New DevExpress.XtraReports.UI.XRLine()
         Me.DiscountField = New DevExpress.XtraReports.UI.CalculatedField()
         Me.VatField = New DevExpress.XtraReports.UI.CalculatedField()
@@ -138,6 +136,7 @@ Partial Public Class rptQuotation2
         Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPhone = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.PanelTotal = New DevExpress.XtraReports.UI.XRPanel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -263,7 +262,7 @@ Partial Public Class rptQuotation2
         '
         'BottomMargin
         '
-        Me.BottomMargin.HeightF = 46.4021!
+        Me.BottomMargin.HeightF = 32.05159!
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -272,7 +271,7 @@ Partial Public Class rptQuotation2
         '
         Me.XrLabel18.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.GrandTotalSTR")})
         Me.XrLabel18.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(14.37066!, 37.16664!)
+        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(8.120187!, 0.00006357829!)
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel18.SizeF = New System.Drawing.SizeF(473.1624!, 27.16663!)
@@ -286,7 +285,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel58.CanGrow = False
         Me.XrLabel58.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.GrandTotal")})
         Me.XrLabel58.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel58.LocationFloat = New DevExpress.Utils.PointFloat(660.5519!, 120.6669!)
+        Me.XrLabel58.LocationFloat = New DevExpress.Utils.PointFloat(656.8018!, 110.6668!)
         Me.XrLabel58.Name = "XrLabel58"
         Me.XrLabel58.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel58.SizeF = New System.Drawing.SizeF(130.2696!, 27.16669!)
@@ -301,7 +300,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel57.CanGrow = False
         Me.XrLabel57.Font = New System.Drawing.Font("Cordia New", 14.0!, System.Drawing.FontStyle.Bold)
         Me.XrLabel57.ForeColor = System.Drawing.Color.DarkGreen
-        Me.XrLabel57.LocationFloat = New DevExpress.Utils.PointFloat(513.7921!, 120.6667!)
+        Me.XrLabel57.LocationFloat = New DevExpress.Utils.PointFloat(510.042!, 110.6667!)
         Me.XrLabel57.Name = "XrLabel57"
         Me.XrLabel57.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel57.SizeF = New System.Drawing.SizeF(128.8545!, 27.16663!)
@@ -316,7 +315,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel56.CanGrow = False
         Me.XrLabel56.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.VatAmount")})
         Me.XrLabel56.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel56.LocationFloat = New DevExpress.Utils.PointFloat(660.5517!, 91.49995!)
+        Me.XrLabel56.LocationFloat = New DevExpress.Utils.PointFloat(656.8016!, 81.49986!)
         Me.XrLabel56.Name = "XrLabel56"
         Me.XrLabel56.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel56.SizeF = New System.Drawing.SizeF(130.2697!, 27.16669!)
@@ -332,7 +331,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel55.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.VatField")})
         Me.XrLabel55.Font = New System.Drawing.Font("Cordia New", 14.25!)
         Me.XrLabel55.ForeColor = System.Drawing.Color.DarkGreen
-        Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 91.49984!)
+        Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(483.783!, 81.49986!)
         Me.XrLabel55.Name = "XrLabel55"
         Me.XrLabel55.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel55.SizeF = New System.Drawing.SizeF(155.1136!, 27.16664!)
@@ -348,7 +347,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel52.CanGrow = False
         Me.XrLabel52.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Total_Dis")})
         Me.XrLabel52.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(660.5518!, 64.33332!)
+        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(656.8017!, 54.33331!)
         Me.XrLabel52.Name = "XrLabel52"
         Me.XrLabel52.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel52.SizeF = New System.Drawing.SizeF(130.2696!, 27.16669!)
@@ -363,7 +362,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel51.CanGrow = False
         Me.XrLabel51.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.DiscountAmount")})
         Me.XrLabel51.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(660.5517!, 37.16669!)
+        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(656.8016!, 27.16669!)
         Me.XrLabel51.Name = "XrLabel51"
         Me.XrLabel51.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel51.SizeF = New System.Drawing.SizeF(130.2698!, 27.16669!)
@@ -378,7 +377,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel49.CanGrow = False
         Me.XrLabel49.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel49.ForeColor = System.Drawing.Color.DarkGreen
-        Me.XrLabel49.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 64.33327!)
+        Me.XrLabel49.LocationFloat = New DevExpress.Utils.PointFloat(483.783!, 54.33324!)
         Me.XrLabel49.Name = "XrLabel49"
         Me.XrLabel49.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel49.SizeF = New System.Drawing.SizeF(155.1136!, 27.16663!)
@@ -394,7 +393,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel48.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.DiscountField")})
         Me.XrLabel48.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel48.ForeColor = System.Drawing.Color.DarkGreen
-        Me.XrLabel48.LocationFloat = New DevExpress.Utils.PointFloat(487.5331!, 37.16664!)
+        Me.XrLabel48.LocationFloat = New DevExpress.Utils.PointFloat(483.783!, 27.16662!)
         Me.XrLabel48.Name = "XrLabel48"
         Me.XrLabel48.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel48.SizeF = New System.Drawing.SizeF(155.1135!, 27.16663!)
@@ -410,7 +409,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel10.CanGrow = False
         Me.XrLabel10.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Total")})
         Me.XrLabel10.Font = New System.Drawing.Font("Cordia New", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel10.LocationFloat = New DevExpress.Utils.PointFloat(660.5518!, 10.00001!)
+        Me.XrLabel10.LocationFloat = New DevExpress.Utils.PointFloat(656.8017!, 0!)
         Me.XrLabel10.Name = "XrLabel10"
         Me.XrLabel10.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel10.SizeF = New System.Drawing.SizeF(130.2695!, 27.16669!)
@@ -425,7 +424,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel14.CanGrow = False
         Me.XrLabel14.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel14.ForeColor = System.Drawing.Color.DarkGreen
-        Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(513.7919!, 10.00002!)
+        Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(510.0417!, 0!)
         Me.XrLabel14.Name = "XrLabel14"
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel14.SizeF = New System.Drawing.SizeF(128.8548!, 27.16662!)
@@ -1217,7 +1216,8 @@ Partial Public Class rptQuotation2
         '
         'PageFooter
         '
-        Me.PageFooter.HeightF = 0!
+        Me.PageFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.PanelTotal})
+        Me.PageFooter.HeightF = 343.1505!
         Me.PageFooter.Name = "PageFooter"
         '
         'Number2Dit
@@ -1225,20 +1225,12 @@ Partial Public Class rptQuotation2
         Me.Number2Dit.Formatting.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         Me.Number2Dit.Name = "Number2Dit"
         '
-        'ReportFooter
-        '
-        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLabel59, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLine7})
-        Me.ReportFooter.HeightF = 166.4936!
-        Me.ReportFooter.KeepTogether = True
-        Me.ReportFooter.Name = "ReportFooter"
-        Me.ReportFooter.PrintAtBottom = True
-        '
         'XrLabel77
         '
         Me.XrLabel77.CanGrow = False
         Me.XrLabel77.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel77.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel77.LocationFloat = New DevExpress.Utils.PointFloat(469.4269!, 80.02802!)
+        Me.XrLabel77.LocationFloat = New DevExpress.Utils.PointFloat(465.6766!, 255.0652!)
         Me.XrLabel77.Name = "XrLabel77"
         Me.XrLabel77.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel77.SizeF = New System.Drawing.SizeF(194.7689!, 27.16663!)
@@ -1254,7 +1246,7 @@ Partial Public Class rptQuotation2
         Me.XrLine5.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
         Me.XrLine5.BorderColor = System.Drawing.Color.LightGray
         Me.XrLine5.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(245.5001!, 78.02798!)
+        Me.XrLine5.LocationFloat = New DevExpress.Utils.PointFloat(241.7498!, 253.0652!)
         Me.XrLine5.Name = "XrLine5"
         Me.XrLine5.SizeF = New System.Drawing.SizeF(94.87781!, 2.000004!)
         Me.XrLine5.StylePriority.UseBorderColor = False
@@ -1266,7 +1258,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel76.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.EmployeeEmail")})
         Me.XrLabel76.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel76.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel76.LocationFloat = New DevExpress.Utils.PointFloat(91.55283!, 134.3613!)
+        Me.XrLabel76.LocationFloat = New DevExpress.Utils.PointFloat(87.80247!, 309.3985!)
         Me.XrLabel76.Name = "XrLabel76"
         Me.XrLabel76.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel76.SizeF = New System.Drawing.SizeF(248.825!, 27.16663!)
@@ -1281,7 +1273,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel71.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.EmployeePhone")})
         Me.XrLabel71.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel71.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel71.LocationFloat = New DevExpress.Utils.PointFloat(91.5528!, 107.1946!)
+        Me.XrLabel71.LocationFloat = New DevExpress.Utils.PointFloat(87.80247!, 282.2318!)
         Me.XrLabel71.Name = "XrLabel71"
         Me.XrLabel71.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel71.SizeF = New System.Drawing.SizeF(248.825!, 27.16662!)
@@ -1295,7 +1287,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel67.CanGrow = False
         Me.XrLabel67.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel67.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel67.LocationFloat = New DevExpress.Utils.PointFloat(39.66529!, 134.3613!)
+        Me.XrLabel67.LocationFloat = New DevExpress.Utils.PointFloat(35.91496!, 309.3985!)
         Me.XrLabel67.Name = "XrLabel67"
         Me.XrLabel67.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel67.SizeF = New System.Drawing.SizeF(51.88751!, 27.16662!)
@@ -1310,7 +1302,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel66.CanGrow = False
         Me.XrLabel66.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel66.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel66.LocationFloat = New DevExpress.Utils.PointFloat(39.66529!, 107.1946!)
+        Me.XrLabel66.LocationFloat = New DevExpress.Utils.PointFloat(35.91496!, 282.2318!)
         Me.XrLabel66.Name = "XrLabel66"
         Me.XrLabel66.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel66.SizeF = New System.Drawing.SizeF(51.88751!, 27.16662!)
@@ -1326,7 +1318,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel65.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Employee")})
         Me.XrLabel65.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel65.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel65.LocationFloat = New DevExpress.Utils.PointFloat(55.63752!, 80.02802!)
+        Me.XrLabel65.LocationFloat = New DevExpress.Utils.PointFloat(51.88716!, 255.0652!)
         Me.XrLabel65.Name = "XrLabel65"
         Me.XrLabel65.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel65.SizeF = New System.Drawing.SizeF(144.2402!, 27.16663!)
@@ -1340,7 +1332,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel64.CanGrow = False
         Me.XrLabel64.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel64.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel64.LocationFloat = New DevExpress.Utils.PointFloat(199.8777!, 78.02805!)
+        Me.XrLabel64.LocationFloat = New DevExpress.Utils.PointFloat(196.1273!, 253.0653!)
         Me.XrLabel64.Name = "XrLabel64"
         Me.XrLabel64.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel64.SizeF = New System.Drawing.SizeF(26.59298!, 27.16663!)
@@ -1355,7 +1347,7 @@ Partial Public Class rptQuotation2
         Me.lblEmp.CanGrow = False
         Me.lblEmp.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.lblEmp.ForeColor = System.Drawing.Color.Black
-        Me.lblEmp.LocationFloat = New DevExpress.Utils.PointFloat(29.04454!, 80.02802!)
+        Me.lblEmp.LocationFloat = New DevExpress.Utils.PointFloat(25.29421!, 255.0652!)
         Me.lblEmp.Name = "lblEmp"
         Me.lblEmp.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.lblEmp.SizeF = New System.Drawing.SizeF(26.59298!, 27.16663!)
@@ -1370,7 +1362,7 @@ Partial Public Class rptQuotation2
         Me.XrLine2.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
         Me.XrLine2.BorderColor = System.Drawing.Color.LightGray
         Me.XrLine2.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine2.LocationFloat = New DevExpress.Utils.PointFloat(500.4997!, 78.02798!)
+        Me.XrLine2.LocationFloat = New DevExpress.Utils.PointFloat(496.7494!, 253.0652!)
         Me.XrLine2.Name = "XrLine2"
         Me.XrLine2.SizeF = New System.Drawing.SizeF(128.87!, 2.000004!)
         Me.XrLine2.StylePriority.UseBorderColor = False
@@ -1381,7 +1373,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel59.CanGrow = False
         Me.XrLabel59.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel59.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(498.8024!, 9.999974!)
+        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(495.0521!, 185.0372!)
         Me.XrLabel59.Name = "XrLabel59"
         Me.XrLabel59.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel59.SizeF = New System.Drawing.SizeF(128.87!, 27.16662!)
@@ -1396,7 +1388,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel60.CanGrow = False
         Me.XrLabel60.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel60.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel60.LocationFloat = New DevExpress.Utils.PointFloat(660.5519!, 9.999974!)
+        Me.XrLabel60.LocationFloat = New DevExpress.Utils.PointFloat(656.8016!, 185.0372!)
         Me.XrLabel60.Name = "XrLabel60"
         Me.XrLabel60.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel60.SizeF = New System.Drawing.SizeF(98.14!, 27.16662!)
@@ -1411,7 +1403,7 @@ Partial Public Class rptQuotation2
         Me.XrLine11.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
         Me.XrLine11.BorderColor = System.Drawing.Color.LightGray
         Me.XrLine11.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine11.LocationFloat = New DevExpress.Utils.PointFloat(660.5517!, 78.02798!)
+        Me.XrLine11.LocationFloat = New DevExpress.Utils.PointFloat(656.8014!, 253.0652!)
         Me.XrLine11.Name = "XrLine11"
         Me.XrLine11.SizeF = New System.Drawing.SizeF(94.87781!, 2.000004!)
         Me.XrLine11.StylePriority.UseBorderColor = False
@@ -1422,7 +1414,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel17.CanGrow = False
         Me.XrLabel17.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel17.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(242.239!, 13.19466!)
+        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(238.4887!, 188.2318!)
         Me.XrLabel17.Name = "XrLabel17"
         Me.XrLabel17.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel17.SizeF = New System.Drawing.SizeF(98.1389!, 27.16662!)
@@ -1437,7 +1429,7 @@ Partial Public Class rptQuotation2
         Me.XrLabel16.CanGrow = False
         Me.XrLabel16.Font = New System.Drawing.Font("Cordia New", 14.0!)
         Me.XrLabel16.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(55.63751!, 13.19466!)
+        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(51.88716!, 188.2318!)
         Me.XrLabel16.Name = "XrLabel16"
         Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel16.SizeF = New System.Drawing.SizeF(127.1695!, 27.16662!)
@@ -1452,7 +1444,7 @@ Partial Public Class rptQuotation2
         Me.XrLine7.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
         Me.XrLine7.BorderColor = System.Drawing.Color.LightGray
         Me.XrLine7.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine7.LocationFloat = New DevExpress.Utils.PointFloat(55.63751!, 78.02802!)
+        Me.XrLine7.LocationFloat = New DevExpress.Utils.PointFloat(51.88716!, 253.0653!)
         Me.XrLine7.Name = "XrLine7"
         Me.XrLine7.SizeF = New System.Drawing.SizeF(144.2402!, 2.0!)
         Me.XrLine7.StylePriority.UseBorderColor = False
@@ -1497,19 +1489,12 @@ Partial Public Class rptQuotation2
         Me.CalUnitSum.Expression = "[].Sum([Units])"
         Me.CalUnitSum.Name = "CalUnitSum"
         '
-        'GroupFooter1
-        '
-        Me.GroupFooter1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine14, Me.XrLabel18, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10})
-        Me.GroupFooter1.HeightF = 147.8335!
-        Me.GroupFooter1.KeepTogether = True
-        Me.GroupFooter1.Name = "GroupFooter1"
-        '
         'XrLine14
         '
         Me.XrLine14.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
         Me.XrLine14.BorderColor = System.Drawing.Color.Gray
         Me.XrLine14.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine14.LocationFloat = New DevExpress.Utils.PointFloat(508.1824!, 118.6666!)
+        Me.XrLine14.LocationFloat = New DevExpress.Utils.PointFloat(504.4323!, 108.6666!)
         Me.XrLine14.Name = "XrLine14"
         Me.XrLine14.SizeF = New System.Drawing.SizeF(282.6391!, 2.000015!)
         Me.XrLine14.StylePriority.UseBorderColor = False
@@ -1552,9 +1537,16 @@ Partial Public Class rptQuotation2
         Me.CalPhone.Expression = "Concat([CompanyPhone], '  MB: 086-355-1154 , 089-616-2255') "
         Me.CalPhone.Name = "CalPhone"
         '
+        'PanelTotal
+        '
+        Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLine7, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLabel59, Me.XrLine14, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10, Me.XrLabel18})
+        Me.PanelTotal.LocationFloat = New DevExpress.Utils.PointFloat(3.750006!, 0!)
+        Me.PanelTotal.Name = "PanelTotal"
+        Me.PanelTotal.SizeF = New System.Drawing.SizeF(793.2499!, 343.1505!)
+        '
         'rptQuotation2
         '
-        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader, Me.GroupFooter1})
+        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportHeader})
         Me.CalculatedFields.AddRange(New DevExpress.XtraReports.UI.CalculatedField() {Me.ProName, Me.Total_Dis, Me.CalSEQ, Me.CalUnitSum, Me.DiscountField, Me.VatField, Me.CalTotal, Me.CalUnit, Me.CalPrice, Me.CalPhone})
         Me.DataAdapter = Me.TmpProductListTableAdapter
         Me.DataMember = "TmpProductList"
@@ -1563,7 +1555,7 @@ Partial Public Class rptQuotation2
         Me.DrawGrid = False
         Me.Font = New System.Drawing.Font("Angsana New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormattingRuleSheet.AddRange(New DevExpress.XtraReports.UI.FormattingRule() {Me.Number2Dit, Me.Total})
-        Me.Margins = New System.Drawing.Printing.Margins(20, 10, 42, 46)
+        Me.Margins = New System.Drawing.Printing.Margins(20, 10, 42, 32)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
@@ -1581,7 +1573,6 @@ Partial Public Class rptQuotation2
     Friend WithEvents TmpOrders1 As TmpOrders
     Friend WithEvents PageFooter As DevExpress.XtraReports.UI.PageFooterBand
     Friend WithEvents Number2Dit As DevExpress.XtraReports.UI.FormattingRule
-    Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
     Friend WithEvents Total As DevExpress.XtraReports.UI.FormattingRule
     Friend WithEvents ReportHeader As DevExpress.XtraReports.UI.ReportHeaderBand
     Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
@@ -1627,7 +1618,6 @@ Partial Public Class rptQuotation2
     Friend WithEvents XrLabel23 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel37 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLine6 As DevExpress.XtraReports.UI.XRLine
-    Friend WithEvents GroupFooter1 As DevExpress.XtraReports.UI.GroupFooterBand
     Friend WithEvents XrPictureBox2 As DevExpress.XtraReports.UI.XRPictureBox
     Friend WithEvents XrLabel17 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel16 As DevExpress.XtraReports.UI.XRLabel
@@ -1691,4 +1681,5 @@ Partial Public Class rptQuotation2
     Friend WithEvents XrLabel79 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel78 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents CalPhone As DevExpress.XtraReports.UI.CalculatedField
+    Friend WithEvents PanelTotal As DevExpress.XtraReports.UI.XRPanel
 End Class
