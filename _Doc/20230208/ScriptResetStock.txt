@@ -1,0 +1,70 @@
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Product_Stock_bk]') AND type in (N'U'))
+DROP TABLE [dbo].[Product_Stock_bk] ;
+GO 
+
+-----------------------------------------------------------
+
+EXEC sp_rename 'Product_Stock', 'Product_Stock_bk';
+
+
+-----------------------------------------------------------
+
+
+EXEC sp_rename 'Product_Stock_Log', 'Product_Stock_Log_bk';
+
+
+
+-----------------------------------------------------------
+
+
+CREATE TABLE [dbo].[Product_Stock](
+	[ProductID] [bigint] NOT NULL,
+	[UnitID] [bigint] NULL,
+	[LocationDTLID] [bigint] NULL,
+	[Units] [bigint] NULL,
+	[Cost] [numeric](18, 2) NULL,
+	[CostType] [int] NULL,
+	[Lot] [bigint] NULL,
+	[IsSumStock] [int] NULL
+) ON [PRIMARY] 
+GO
+
+-----------------------------------------------------------
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Product_Stock_Log_bk]') AND type in (N'U'))
+DROP TABLE [dbo].[Product_Stock_Log_bk] ;
+GO 
+
+-----------------------------------------------------------
+
+
+CREATE TABLE [dbo].[Product_Stock_Log](
+	[ProductID] [bigint] NOT NULL,
+	[UnitID] [bigint] NULL,
+	[LocationDTLID] [bigint] NULL,
+	[Units] [bigint] NULL,
+	[Cost] [numeric](18, 2) NULL,
+	[CostType] [int] NULL,
+	[Lot] [bigint] NULL,
+	[IsSumStock] [int] NULL,
+	[OrderID] [bigint] NULL,
+	[OrderCode] [nvarchar](100) NOT NULL,
+	[OrderBy] [nvarchar](100) NOT NULL,
+	[LogTime] [datetime] NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Product_Stock_Log] ADD  DEFAULT (getdate()) FOR [LogTime]
+GO
+
+-----------------------------------------------------------
+
+INSERT INTO Product_Stock SELECT * FROM Product_Stock_bk ;
+
+
+-----------------------------------------------------------
+
+
+update Product_Stock set Units=0 ,Cost=0;
