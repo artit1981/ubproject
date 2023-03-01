@@ -1053,4 +1053,10 @@ Public Class frmMain
         ShowDataOnControl(lcls, MasterType.CampaignBuy)
         InsertActivity(DataMode.ModeOpen, MasterType.CampaignBuy, "", Nothing)
     End Sub
+
+    Private Sub InvoiceAbbBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles InvoiceAbbBar.ItemClick
+        Dim lcls As New OrderControl
+        ShowDataOnControl(lcls, MasterType.InvoiceAbb)
+        InsertActivity(DataMode.ModeOpen, MasterType.InvoiceAbb, "", Nothing)
+    End Sub
 End Class

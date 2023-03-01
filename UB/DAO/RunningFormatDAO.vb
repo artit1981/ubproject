@@ -173,7 +173,7 @@ Public Class RunningFormatDAO
 
             'Get Last no
             Select Case lTableID
-                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Bill, MasterType.AddCredit _
+                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Bill, MasterType.AddCredit _
                     , MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.Quotation, MasterType.PurchaseOrder _
                     , MasterType.Asset, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut _
                     , MasterType.ReceiptBuy, MasterType.ShipingBuy, MasterType.Borrow, MasterType.ClaimOut, MasterType.StockIn, MasterType.UpdateStock _

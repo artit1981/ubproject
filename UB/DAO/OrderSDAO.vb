@@ -203,7 +203,7 @@ Public Class OrderSDAO
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveBuyOrder And TableID = MasterType.PurchaseOrder Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
-                    ElseIf gIsApproveInvoice And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
+                    ElseIf gIsApproveInvoice And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline Or TableID = MasterType.InvoiceAbb) Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
                     ElseIf gIsApproveShiping And TableID = MasterType.Shiping Then
                         OrderStatus = EnumStatus.WaitApprove.ToString
@@ -247,7 +247,7 @@ Public Class OrderSDAO
 
                     '*** Check Under LimitS amount
                     lIsCheckOver = False
-                    If gIsCheckLimitInvoice = True And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
+                    If gIsCheckLimitInvoice = True And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline Or TableID = MasterType.InvoiceAbb) Then
                         lIsCheckOver = True
                     ElseIf gIsCheckLimitShiping = True And TableID = MasterType.Shiping Then
                         lIsCheckOver = True
@@ -355,7 +355,7 @@ Public Class OrderSDAO
             'Ref Order Status
             If IsNothing(RefToOrderID) = False Then
                 Select Case TableID
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
                         , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn
                         If RefToOrderID.Count > 0 Then
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
@@ -407,7 +407,7 @@ Public Class OrderSDAO
 
         Try
             Select Case pTableID
-                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Borrow, MasterType.Bill _
+                Case MasterType.SellOrders, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Borrow, MasterType.Bill _
                     , MasterType.AddCredit, MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.ReceiptCut _
                     , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose, MasterType.ClaimReturn
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
@@ -440,7 +440,7 @@ Public Class OrderSDAO
             If TableID = MasterType.SellOrders Then
                 SQL &= ",Invoice.OrderCode AS InvoiceCode,Shiping.OrderCode AS ShipingCode,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
-            If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Or TableID = MasterType.InvoiceOnline Then
+            If TableID = MasterType.Invoice Or TableID = MasterType.Shiping Or TableID = MasterType.InvoiceOnline Or TableID = MasterType.InvoiceAbb Then
                 SQL &= ",Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             End If
             If TableID = MasterType.InvoiceBuy Or TableID = MasterType.ShipingBuy Or TableID = MasterType.ReduceCreditBuy Or TableID = MasterType.AddCreditBuy _
@@ -454,7 +454,7 @@ Public Class OrderSDAO
             SQL &= " FROM Orders  "
             SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
             SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL &= " LEFT OUTER JOIN Orders AS Invoice ON Invoice.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Invoice.IsDelete=0 and Invoice.TableID in(" & MasterType.Invoice & "," & MasterType.InvoiceOnline & ")"
+            SQL &= " LEFT OUTER JOIN Orders AS Invoice ON Invoice.OrderID =(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Invoice.IsDelete=0 and Invoice.TableID in(" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb & ")"
             SQL &= " LEFT OUTER JOIN Orders AS Shiping ON Shiping.OrderID=(select max(OrderID) from OrdersRef where OrdersRef.IsDelete=0 and OrdersRef.RefOrderID=Orders.OrderID  ) and Shiping.IsDelete=0 and Shiping.TableID=" & MasterType.Shiping
             SQL &= " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
             SQL &= " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill

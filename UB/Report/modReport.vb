@@ -54,7 +54,7 @@ Module modReport
         Try
             If lclsCompanyDAO.InitailData(gCompanyID) Then
                 pclsReport.Company = lclsCompanyDAO.CompanyName
-                If pType = MasterType.InvoiceOnline Then
+                If pType = MasterType.InvoiceOnline Or pType = MasterType.InvoiceAbb Then
                     If ConvertNullToZero(lclsCompanyDAO.IsMainCompany) = 1 Then  ' *** ใช้กลับกัน 0 = is main , 1 2 3 =Brance
                         pclsReport.Company &= " (สำนักงานใหญ่)"
                     Else

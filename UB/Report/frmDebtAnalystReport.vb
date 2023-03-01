@@ -84,7 +84,10 @@ Public Class frmDebtAnalystReport
 
             If chkInvoiceOnline.Checked = True And ReportType.EditValue = 1 Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.InvoiceOnline
+            End If
 
+            If chkInvoiceAbb.Checked = True And ReportType.EditValue = 1 Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.InvoiceAbb
             End If
 
             If chkShiping.Checked = True And ReportType.EditValue = 1 Then

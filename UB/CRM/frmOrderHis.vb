@@ -186,6 +186,9 @@ Public Class frmOrderHis
             If CheckInvoiceOnline.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.InvoiceOnline
             End If
+            If CheckInvoiceAbb.Checked = True Then
+                lstrOrderType = lstrOrderType & "," & MasterType.InvoiceAbb
+            End If
             If CheckInvoiceBuy.Checked = True Then
                 lstrOrderType = lstrOrderType & "," & MasterType.InvoiceBuy
             End If

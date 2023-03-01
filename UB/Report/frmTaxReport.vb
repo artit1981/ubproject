@@ -62,7 +62,7 @@ Public Class frmTaxReport
             If OrderType.EditValue = "B" Then 'buy
                 SQL &=  " and Orders.TableID in (" & MasterType.InvoiceBuy & "," & MasterType.Asset & "," & MasterType.ReduceCreditBuy & ")"
             Else
-                SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.ReduceCredit & ")"
+                SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb & "," & MasterType.ReduceCredit & ")"
             End If
             SQL &=  " ORDER BY Orders.OrderDate ,Orders.OrderCode"
             lTableOrder = gConnection.executeSelectQuery(SQL, Nothing)

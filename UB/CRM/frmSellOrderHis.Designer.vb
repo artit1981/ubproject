@@ -29,6 +29,7 @@ Partial Class frmSellOrderHis
         Me.UcCustomer1 = New UB.ucCustomer()
         Me.CheckAll = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckShiping = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckInvoice = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckQuotation = New DevExpress.XtraEditors.CheckEdit()
@@ -55,7 +56,7 @@ Partial Class frmSellOrderHis
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
+        Me.CheckInvoiceAbb = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatePanel.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,6 +66,7 @@ Partial Class frmSellOrderHis
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckShiping.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckQuotation.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,7 +89,7 @@ Partial Class frmSellOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatePanel
@@ -172,6 +174,7 @@ Partial Class frmSellOrderHis
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
+        Me.PanelControl2.Controls.Add(Me.CheckInvoiceAbb)
         Me.PanelControl2.Controls.Add(Me.CheckInvoiceOnline)
         Me.PanelControl2.Controls.Add(Me.CheckShiping)
         Me.PanelControl2.Controls.Add(Me.CheckInvoice)
@@ -184,10 +187,21 @@ Partial Class frmSellOrderHis
         Me.PanelControl2.TabIndex = 298
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
         '
+        'CheckInvoiceOnline
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
+        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(314, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
+        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
+        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
+        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(134, 20)
+        Me.CheckInvoiceOnline.TabIndex = 302
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
+        '
         'CheckShiping
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckShiping, "CheckedChanged")
-        Me.CheckShiping.Location = New System.Drawing.Point(566, 5)
+        Me.CheckShiping.Location = New System.Drawing.Point(594, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckShiping, True)
         Me.CheckShiping.Name = "CheckShiping"
         Me.CheckShiping.Properties.Caption = "ใบส่งของ(ขาย)"
@@ -198,7 +212,7 @@ Partial Class frmSellOrderHis
         'CheckInvoice
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoice, "CheckedChanged")
-        Me.CheckInvoice.Location = New System.Drawing.Point(256, 5)
+        Me.CheckInvoice.Location = New System.Drawing.Point(187, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoice, True)
         Me.CheckInvoice.Name = "CheckInvoice"
         Me.CheckInvoice.Properties.Caption = "ใบกำกับภาษี(ขาย)"
@@ -209,7 +223,7 @@ Partial Class frmSellOrderHis
         'CheckQuotation
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckQuotation, "CheckedChanged")
-        Me.CheckQuotation.Location = New System.Drawing.Point(134, 5)
+        Me.CheckQuotation.Location = New System.Drawing.Point(86, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckQuotation, True)
         Me.CheckQuotation.Name = "CheckQuotation"
         Me.CheckQuotation.Properties.Caption = "ใบเสนอราคา"
@@ -546,16 +560,16 @@ Partial Class frmSellOrderHis
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
-        'CheckInvoiceOnline
+        'CheckInvoiceAbb
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
-        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(408, 5)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
-        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
-        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
-        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(134, 20)
-        Me.CheckInvoiceOnline.TabIndex = 302
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceAbb, "CheckedChanged")
+        Me.CheckInvoiceAbb.Location = New System.Drawing.Point(454, 4)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceAbb, True)
+        Me.CheckInvoiceAbb.Name = "CheckInvoiceAbb"
+        Me.CheckInvoiceAbb.Properties.Caption = "ใบกำกับภาษีอย่างย่อ"
+        Me.CheckInvoiceAbb.Size = New System.Drawing.Size(134, 20)
+        Me.CheckInvoiceAbb.TabIndex = 303
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceAbb, "Checked")
         '
         'frmSellOrderHis
         '
@@ -580,6 +594,7 @@ Partial Class frmSellOrderHis
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckShiping.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckQuotation.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -603,7 +618,7 @@ Partial Class frmSellOrderHis
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -644,4 +659,5 @@ Partial Class frmSellOrderHis
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents UcCustomer1 As UB.ucCustomer
     Friend WithEvents CheckInvoiceOnline As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CheckInvoiceAbb As DevExpress.XtraEditors.CheckEdit
 End Class

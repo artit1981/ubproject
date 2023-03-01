@@ -43,7 +43,7 @@ Public Class frmPreReport
     Public Sub PrintReportOrder(ByVal pClaimLoop As Long)
         Try
             Select Case mOrderType
-                Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
+                Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                     , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.Borrow _
                     , MasterType.Expose, MasterType.ClaimReturn, MasterType.AddCredit, MasterType.AddCreditBuy
                     Call PrintOrder(mOrderID, pClaimLoop)
@@ -78,6 +78,9 @@ Public Class frmPreReport
                         report = New rptPOOrders
                     Case MasterType.InvoiceOnline
                         report = New rptInvoiceOnline
+                    Case MasterType.InvoiceAbb
+                        report = New rptInvoiceAbb
+                        lclsReport.Header1 = "ใบเสร็จรับเงิน/ใบกำกับภาษีอย่างย่อ"
                     Case MasterType.SellOrders
                         report = New rptSellOrders
                         lclsReport.Header1 = "ใบสั่งขาย\Sell Order"
@@ -339,7 +342,7 @@ Public Class frmPreReport
                 End If
 
                 Select Case mOrderType
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
                         lSnCodeList = ""
                         If chkSN.Checked = True Then
                             lSN = New SnDAO

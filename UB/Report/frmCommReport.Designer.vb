@@ -35,6 +35,7 @@ Partial Class frmCommReport
         Me.UcMoverItem1 = New UB.ucMoverItem()
         Me.chkShowPO = New DevExpress.XtraEditors.CheckEdit()
         Me.chkInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
+        Me.chkInvoiceAbb = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,6 +46,7 @@ Partial Class frmCommReport
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkShowPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DateFrom
@@ -90,10 +92,10 @@ Partial Class frmCommReport
         'chkInvoice
         '
         Me.chkInvoice.EditValue = True
-        Me.chkInvoice.Location = New System.Drawing.Point(243, 149)
+        Me.chkInvoice.Location = New System.Drawing.Point(206, 149)
         Me.chkInvoice.Name = "chkInvoice"
         Me.chkInvoice.Properties.Caption = "ใบกำกับภาษี"
-        Me.chkInvoice.Size = New System.Drawing.Size(106, 20)
+        Me.chkInvoice.Size = New System.Drawing.Size(83, 20)
         Me.chkInvoice.TabIndex = 196
         '
         'Label4
@@ -113,7 +115,7 @@ Partial Class frmCommReport
         Me.chkShiping.Location = New System.Drawing.Point(135, 149)
         Me.chkShiping.Name = "chkShiping"
         Me.chkShiping.Properties.Caption = "ใบส่งของ"
-        Me.chkShiping.Size = New System.Drawing.Size(102, 20)
+        Me.chkShiping.Size = New System.Drawing.Size(76, 20)
         Me.chkShiping.TabIndex = 194
         '
         'DateTo
@@ -200,7 +202,7 @@ Partial Class frmCommReport
         '
         'chkShowPO
         '
-        Me.chkShowPO.Location = New System.Drawing.Point(510, 149)
+        Me.chkShowPO.Location = New System.Drawing.Point(561, 149)
         Me.chkShowPO.Name = "chkShowPO"
         Me.chkShowPO.Properties.Caption = "แสดงเลขใบสั่งซื้อ"
         Me.chkShowPO.Size = New System.Drawing.Size(175, 20)
@@ -209,17 +211,28 @@ Partial Class frmCommReport
         'chkInvoiceOnline
         '
         Me.chkInvoiceOnline.EditValue = True
-        Me.chkInvoiceOnline.Location = New System.Drawing.Point(355, 149)
+        Me.chkInvoiceOnline.Location = New System.Drawing.Point(295, 149)
         Me.chkInvoiceOnline.Name = "chkInvoiceOnline"
         Me.chkInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
-        Me.chkInvoiceOnline.Size = New System.Drawing.Size(137, 20)
+        Me.chkInvoiceOnline.Size = New System.Drawing.Size(131, 20)
         Me.chkInvoiceOnline.TabIndex = 201
+        '
+        'chkInvoiceAbb
+        '
+        Me.chkInvoiceAbb.EditValue = True
+        Me.chkInvoiceAbb.Location = New System.Drawing.Point(423, 149)
+        Me.chkInvoiceAbb.Name = "chkInvoiceAbb"
+        Me.chkInvoiceAbb.Properties.Caption = "ใบกำกับภาษีอย่างย่อ"
+        Me.chkInvoiceAbb.Size = New System.Drawing.Size(132, 20)
+        Me.chkInvoiceAbb.TabIndex = 202
         '
         'frmCommReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1112, 490)
+        Me.Controls.Add(Me.chkInvoiceAbb)
+        Me.Controls.Add(Me.chkInvoice)
         Me.Controls.Add(Me.chkInvoiceOnline)
         Me.Controls.Add(Me.chkShowPO)
         Me.Controls.Add(Me.UcMoverItem1)
@@ -234,11 +247,9 @@ Partial Class frmCommReport
         Me.Controls.Add(Me.chkShiping)
         Me.Controls.Add(Me.ReportType)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.chkInvoice)
         Me.IconOptions.Icon = CType(resources.GetObject("frmCommReport.IconOptions.Icon"), System.Drawing.Icon)
         Me.Name = "frmCommReport"
         Me.Text = "รายงานวิเคราะห์ยอดขาย"
-        Me.Controls.SetChildIndex(Me.chkInvoice, 0)
         Me.Controls.SetChildIndex(Me.Label4, 0)
         Me.Controls.SetChildIndex(Me.ReportType, 0)
         Me.Controls.SetChildIndex(Me.chkShiping, 0)
@@ -253,6 +264,8 @@ Partial Class frmCommReport
         Me.Controls.SetChildIndex(Me.UcMoverItem1, 0)
         Me.Controls.SetChildIndex(Me.chkShowPO, 0)
         Me.Controls.SetChildIndex(Me.chkInvoiceOnline, 0)
+        Me.Controls.SetChildIndex(Me.chkInvoice, 0)
+        Me.Controls.SetChildIndex(Me.chkInvoiceAbb, 0)
         CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -263,6 +276,7 @@ Partial Class frmCommReport
         CType(Me.VatType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkShowPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -282,4 +296,5 @@ Partial Class frmCommReport
     Friend WithEvents UcMoverItem1 As UB.ucMoverItem
     Friend WithEvents chkShowPO As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents chkInvoiceOnline As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents chkInvoiceAbb As DevExpress.XtraEditors.CheckEdit
 End Class

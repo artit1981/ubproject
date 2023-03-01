@@ -485,6 +485,12 @@
     <Compile Include="Report\rptSellByCusPO.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\rptInvoiceAbb.Designer.vb">
+      <DependentUpon>rptInvoiceAbb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptInvoiceAbb.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptStockReport.Designer.vb">
       <DependentUpon>rptStockReport.vb</DependentUpon>
     </Compile>
@@ -1340,6 +1346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptSellByCusPO.resx">
       <DependentUpon>rptSellByCusPO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInvoiceAbb.resx">
+      <DependentUpon>rptInvoiceAbb.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptStockReport.resx">
       <DependentUpon>rptStockReport.vb</DependentUpon>

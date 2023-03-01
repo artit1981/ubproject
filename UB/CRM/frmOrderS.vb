@@ -216,7 +216,7 @@ Public Class frmOrderS
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPO_2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                Case MasterType.Invoice, MasterType.Borrow, MasterType.InvoiceOnline
+                Case MasterType.Invoice, MasterType.Borrow, MasterType.InvoiceOnline, MasterType.InvoiceAbb
                     OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                     LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
@@ -229,7 +229,7 @@ Public Class frmOrderS
                     LayoutExpireDate2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     LayoutPayType2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                    If mOrderType = MasterType.Invoice Or mOrderType = MasterType.InvoiceOnline Then
+                    If mOrderType = MasterType.Invoice Or mOrderType = MasterType.InvoiceOnline Or mOrderType = MasterType.InvoiceAbb Then
                         LayoutCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                         LayoutbtnCampaign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                     End If
@@ -473,7 +473,7 @@ Public Class frmOrderS
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ รอการอนุมัติ", "Approve", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                 Else
                     Select Case mOrderType
-                        Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
+                        Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Shiping, MasterType.Reserve, MasterType.PurchaseOrder _
                             , MasterType.Quotation, MasterType.Claim, MasterType.ClaimOut, MasterType.ReduceCredit, MasterType.ReduceCreditBuy _
                             , MasterType.Borrow, MasterType.Expose, MasterType.ClaimReturn
                             If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์เอกสารหรือไม่ ?", "พิมพ์เอกสาร", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
@@ -893,7 +893,7 @@ Public Class frmOrderS
                     Case MasterType.SellOrders
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Reserve) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Quotation) Then Return True
-                    Case MasterType.Invoice, MasterType.InvoiceOnline
+                    Case MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.SellOrders) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Borrow) Then Return True
                     Case MasterType.Shiping, MasterType.Borrow
@@ -903,6 +903,7 @@ Public Class frmOrderS
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceOnline) Then Return True
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceAbb) Then Return True
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.ClaimResult)
                     Case MasterType.Reserve
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Quotation)
@@ -911,6 +912,7 @@ Public Class frmOrderS
                     Case MasterType.Claim
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Invoice) Then Return True
                         If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceOnline) Then Return True
+                        If InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.InvoiceAbb) Then Return True
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Shiping)
                     Case MasterType.ClaimOut
                         InitialOrder(pRefOrderID, pRefOrderCode.Trim, pInitProduct, MasterType.Claim)

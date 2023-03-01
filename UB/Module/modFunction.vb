@@ -745,10 +745,10 @@ Module modFunction
             'Condition for Up Stock
             If TableID = MasterType.SellOrders Then
                 Return 1
-            ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Or (TableID = MasterType.InvoiceOnline) Then
+            ElseIf (TableID = MasterType.Invoice) Or (TableID = MasterType.Shiping) Or (TableID = MasterType.Borrow) Or (TableID = MasterType.InvoiceOnline) Or (TableID = MasterType.InvoiceAbb) Then
                 Return 2
                 If IsNothing(RefToOrderID) = False Then
-                    If RefToOrderID.Count > 0 And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline) Then
+                    If RefToOrderID.Count > 0 And (TableID = MasterType.Invoice Or TableID = MasterType.InvoiceOnline Or TableID = MasterType.InvoiceAbb) Then
                         For Each pOrderID As Long In RefToOrderID
                             lclsOrder = New OrderSDAO
                             If lclsOrder.InitailData(pOrderID, , tr) Then

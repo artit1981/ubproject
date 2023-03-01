@@ -120,6 +120,7 @@ Module modGlobal
         InvoiceOnline = 111
         Commission = 112
         CampaignBuy = 115
+        InvoiceAbb = 116
     End Enum
 
     Public Enum DataMode

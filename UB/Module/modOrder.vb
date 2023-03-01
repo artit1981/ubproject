@@ -211,9 +211,18 @@ Module modOrder
                 Else
                     lStatus = EnumStatus.Close.ToString
                 End If
-            ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Or pOrderType = MasterType.InvoiceOnline Then 'Ref from Sell
+            ElseIf pOrderType = MasterType.InvoiceAbb And lRefOrderType = MasterType.Borrow Then
+                lRefStatus = GetUnitNotRef(pRefOrderID, "'Borrow'", "'InvoiceAbb'", MasterType.InvoiceAbb, tr, pProListID, pProID, pUnitNotRef)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = EnumStatus.Open.ToString
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = EnumStatus.Waiting.ToString
+                Else
+                    lStatus = EnumStatus.Close.ToString
+                End If
+            ElseIf pOrderType = MasterType.Borrow Or pOrderType = MasterType.Invoice Or pOrderType = MasterType.Shiping Or pOrderType = MasterType.InvoiceOnline Or pOrderType = MasterType.InvoiceAbb Then 'Ref from Sell
                 lRefStatus = GetUnitNotRef(pRefOrderID, "'SellOrders'", "'Borrow','Invoice','Shiping','InvoiceOnline'" _
-                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping & "," & MasterType.InvoiceOnline, tr, pProListID, pProID, pUnitNotRef)
+                                                , MasterType.Borrow & "," & MasterType.Invoice & "," & MasterType.Shiping & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb, tr, pProListID, pProID, pUnitNotRef)
                 If lRefStatus = RefOrderStatus.NotToRef Then
                     lStatus = EnumStatus.Open.ToString
                 ElseIf lRefStatus = RefOrderStatus.RefSome Then

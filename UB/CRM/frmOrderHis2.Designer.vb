@@ -25,6 +25,7 @@ Partial Class frmOrderHis2
         Me.DatePanel = New DevExpress.XtraEditors.PanelControl()
         Me.CheckAll = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckReceiptCut = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckShipingBuy = New DevExpress.XtraEditors.CheckEdit()
         Me.CheckReduceCreditBuy = New DevExpress.XtraEditors.CheckEdit()
@@ -54,12 +55,13 @@ Partial Class frmOrderHis2
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CheckInvoiceOnline = New DevExpress.XtraEditors.CheckEdit()
+        Me.CheckInvoiceAbb = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DatePanel.SuspendLayout()
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckReceiptCut.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckShipingBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckReduceCreditBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,7 +87,7 @@ Partial Class frmOrderHis2
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatePanel
@@ -125,6 +127,7 @@ Partial Class frmOrderHis2
         'PanelControl2
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PanelControl2, "")
+        Me.PanelControl2.Controls.Add(Me.CheckInvoiceAbb)
         Me.PanelControl2.Controls.Add(Me.CheckInvoiceOnline)
         Me.PanelControl2.Controls.Add(Me.CheckReceiptCut)
         Me.PanelControl2.Controls.Add(Me.CheckShipingBuy)
@@ -139,6 +142,17 @@ Partial Class frmOrderHis2
         Me.PanelControl2.Size = New System.Drawing.Size(556, 85)
         Me.PanelControl2.TabIndex = 298
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl2, "")
+        '
+        'CheckInvoiceOnline
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
+        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(150, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
+        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
+        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
+        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(137, 20)
+        Me.CheckInvoiceOnline.TabIndex = 315
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
         '
         'CheckReceiptCut
         '
@@ -536,16 +550,16 @@ Partial Class frmOrderHis2
         Me.GridView1.GridControl = Me.gridControl
         Me.GridView1.Name = "GridView1"
         '
-        'CheckInvoiceOnline
+        'CheckInvoiceAbb
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceOnline, "CheckedChanged")
-        Me.CheckInvoiceOnline.Location = New System.Drawing.Point(150, 5)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceOnline, True)
-        Me.CheckInvoiceOnline.Name = "CheckInvoiceOnline"
-        Me.CheckInvoiceOnline.Properties.Caption = "ใบกำกับภาษีออนไลน์"
-        Me.CheckInvoiceOnline.Size = New System.Drawing.Size(137, 20)
-        Me.CheckInvoiceOnline.TabIndex = 315
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceOnline, "Checked")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CheckInvoiceAbb, "CheckedChanged")
+        Me.CheckInvoiceAbb.Location = New System.Drawing.Point(293, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CheckInvoiceAbb, True)
+        Me.CheckInvoiceAbb.Name = "CheckInvoiceAbb"
+        Me.CheckInvoiceAbb.Properties.Caption = "ใบกำกับภาษีอย่างย่อ"
+        Me.CheckInvoiceAbb.Size = New System.Drawing.Size(137, 20)
+        Me.CheckInvoiceAbb.TabIndex = 316
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CheckInvoiceAbb, "Checked")
         '
         'frmOrderHis2
         '
@@ -567,6 +581,7 @@ Partial Class frmOrderHis2
         CType(Me.CheckAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
+        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckReceiptCut.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckShipingBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckReduceCreditBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -593,7 +608,7 @@ Partial Class frmOrderHis2
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckInvoiceOnline.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckInvoiceAbb.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -633,4 +648,5 @@ Partial Class frmOrderHis2
     Friend WithEvents CheckInvoice As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckAll As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CheckInvoiceOnline As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CheckInvoiceAbb As DevExpress.XtraEditors.CheckEdit
 End Class

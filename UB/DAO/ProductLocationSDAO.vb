@@ -137,7 +137,7 @@ Public Class ProductLocationSDAO
                 SQL &= " where  D.LocationDTLID=(select LocationDTLID from RunningFormat where MenuID=" & MasterType.SellOrders & ")"
                 SQL &= " group BY D.NameThai,D.LocationDTLID"
                 SQL &= " ORDER BY D.NameThai"
-            ElseIf pRefTable = MasterType.Invoice.ToString Or pRefTable = MasterType.InvoiceOnline.ToString Or pRefTable = MasterType.Borrow.ToString _
+            ElseIf pRefTable = MasterType.Invoice.ToString Or pRefTable = MasterType.InvoiceOnline.ToString Or pRefTable = MasterType.InvoiceAbb.ToString Or pRefTable = MasterType.Borrow.ToString _
                 Or pRefTable = MasterType.ReduceCredit.ToString Or pRefTable = MasterType.ReduceCreditBuy.ToString _
                 Or pRefTable = MasterType.AddCredit.ToString Or pRefTable = MasterType.AddCreditBuy.ToString Or pRefTable = MasterType.StockIn.ToString Then
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "

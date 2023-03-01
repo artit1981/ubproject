@@ -94,7 +94,7 @@ Public Class frmDealReport
                 If OrderType.EditValue = "B" Then 'buy
                     SQL &=  " and Orders.TableID in (" & MasterType.InvoiceBuy & ")"
                 Else
-                    SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & ")"
+                    SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb & ")"
                 End If
             End If
 

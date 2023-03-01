@@ -115,6 +115,9 @@ Public Class frmCommReport
             If chkInvoiceOnline.Checked = True Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.InvoiceOnline
             End If
+            If chkInvoiceAbb.Checked = True Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.InvoiceAbb
+            End If
             If chkShiping.Checked = True Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Shiping
             End If
