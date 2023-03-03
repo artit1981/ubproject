@@ -1,0 +1,17 @@
+TRUNCATE TABLE [dbo].[Orders];
+TRUNCATE TABLE [dbo].[OrdersDetail];
+TRUNCATE TABLE [dbo].[ApproveTX];
+TRUNCATE TABLE [dbo].[Cheque];
+TRUNCATE TABLE [dbo].[CreditBalance];
+TRUNCATE TABLE [dbo].[OrdersDetail];
+TRUNCATE TABLE [dbo].[OrdersLog];
+TRUNCATE TABLE [dbo].[OrdersRef];
+TRUNCATE TABLE [dbo].[Product_CostAVG];
+TRUNCATE TABLE [dbo].[ProductList];
+TRUNCATE TABLE [dbo].[ProductListLog];
+TRUNCATE TABLE [dbo].[SerialNumber];
+TRUNCATE TABLE [dbo].[StockIn]  ;
+TRUNCATE TABLE [dbo].[TaxOrder];
+TRUNCATE TABLE [dbo].[UpdateStock];
+
+

@@ -25,7 +25,7 @@ Partial Class frmTaxReport
         Me.Label1 = New System.Windows.Forms.Label()
         Me.OrderType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label36 = New System.Windows.Forms.Label()
-        CType(Me.OrderDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OrderDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OrderDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
@@ -42,12 +42,12 @@ Partial Class frmTaxReport
         Me.OrderDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.OrderDate.Properties.Appearance.Options.UseFont = True
         Me.OrderDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.OrderDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.OrderDate.Properties.DisplayFormat.FormatString = "MMMM/yyyy"
         Me.OrderDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.OrderDate.Properties.EditFormat.FormatString = "MMMM/yyyy"
         Me.OrderDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.OrderDate.Properties.Mask.EditMask = "MMMM/yyyy"
-        Me.OrderDate.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.OrderDate.Size = New System.Drawing.Size(169, 20)
         Me.OrderDate.TabIndex = 4
         '
@@ -80,8 +80,8 @@ Partial Class frmTaxReport
         Me.OrderType.EnterMoveNextControl = True
         Me.OrderType.Location = New System.Drawing.Point(131, 73)
         Me.OrderType.Name = "OrderType"
-        Me.OrderType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("S", "รายการขาย"), New DevExpress.XtraEditors.Controls.RadioGroupItem("B", "รายการซื้อ")})
-        Me.OrderType.Size = New System.Drawing.Size(314, 26)
+        Me.OrderType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("S", "รายการขาย"), New DevExpress.XtraEditors.Controls.RadioGroupItem("A", "รายการขายอย่างย่อ"), New DevExpress.XtraEditors.Controls.RadioGroupItem("B", "รายการซื้อ")})
+        Me.OrderType.Size = New System.Drawing.Size(383, 26)
         Me.OrderType.TabIndex = 172
         '
         'Label36
@@ -100,17 +100,18 @@ Partial Class frmTaxReport
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.ClientSize = New System.Drawing.Size(873, 616)
         Me.Controls.Add(Me.GroupControl1)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmTaxReport.IconOptions.Icon"), System.Drawing.Icon)
         Me.Name = "frmTaxReport"
         Me.Text = "รายงานภาษี"
         Me.Controls.SetChildIndex(Me.GroupControl1, 0)
-        CType(Me.OrderDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OrderDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OrderDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
         CType(Me.OrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents OrderDate As DevExpress.XtraEditors.DateEdit

@@ -60,9 +60,11 @@ Public Class frmTaxReport
             SQL &=  " and Year(Orders.TaxMonthYear) =" & IIf(Year(OrderDate.EditValue) > 2500, Year(OrderDate.EditValue) - 543, Year(OrderDate.EditValue))
             SQL &=  " and Orders.IsInActive = 0"
             If OrderType.EditValue = "B" Then 'buy
-                SQL &=  " and Orders.TableID in (" & MasterType.InvoiceBuy & "," & MasterType.Asset & "," & MasterType.ReduceCreditBuy & ")"
+                SQL &= " and Orders.TableID in (" & MasterType.InvoiceBuy & "," & MasterType.Asset & "," & MasterType.ReduceCreditBuy & "," & MasterType.AddCreditBuy & ")"
+            ElseIf OrderType.EditValue = "A" Then 'Abb
+                SQL &= " and Orders.TableID in (" & MasterType.InvoiceAbb & ")"
             Else
-                SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb & "," & MasterType.ReduceCredit & ")"
+                SQL &= " and Orders.TableID in (" & MasterType.Invoice & "," & MasterType.InvoiceOnline & "," & MasterType.ReduceCredit & "," & MasterType.AddCredit & ")"
             End If
             SQL &=  " ORDER BY Orders.OrderDate ,Orders.OrderCode"
             lTableOrder = gConnection.executeSelectQuery(SQL, Nothing)
