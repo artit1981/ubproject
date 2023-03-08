@@ -33,8 +33,10 @@ Public Class frmTaxReport
 
             'Set company header
             BuildCompanyAddress(lclsReport, 0)
-            If OrderType.EditValue = "S" Then 'Sell
+            If OrderType.EditValue = "S" Then  'Sell
                 lclsReport.Header1 = "รายงานภาษีขาย"
+            ElseIf OrderType.EditValue = "A" Then
+                lclsReport.Header1 = "รายงานภาษีขายอย่างย่อ"
             Else
                 lclsReport.Header1 = "รายงานภาษีซื้อ"
             End If
@@ -73,7 +75,7 @@ Public Class frmTaxReport
                 For Each pRow As DataRow In lTableOrder.Rows
                     lclsTmpProList.SEQ = i
                     lclsTmpProList.ProductID = pRow.Item("OrderID")
-                    If OrderType.EditValue = "S" Then 'Sell
+                    If OrderType.EditValue = "S" Or OrderType.EditValue = "A" Then 'Sell
                         lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("OrderCode"))
                     Else
                         If ConvertNullToString(pRow.Item("InvoiceSuplierID")) <> "" Then
