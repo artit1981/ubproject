@@ -30,18 +30,18 @@ Partial Class frmImport
         Me.txtFileName = New DevExpress.XtraEditors.TextEdit()
         Me.CompletionWizardPage1 = New DevExpress.XtraWizard.CompletionWizardPage()
         Me.GridPage = New DevExpress.XtraWizard.WizardPage()
+        Me.txtError = New DevExpress.XtraEditors.MemoEdit()
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.txtError = New DevExpress.XtraEditors.MemoEdit()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
         Me.WelcomeWizardPage1.SuspendLayout()
         Me.BrowsPage.SuspendLayout()
         CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GridPage.SuspendLayout()
+        CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'WizardControl1
@@ -60,10 +60,9 @@ Partial Class frmImport
         Me.WizardControl1.Controls.Add(Me.CompletionWizardPage1)
         Me.WizardControl1.Controls.Add(Me.GridPage)
         Me.WizardControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WizardControl1.Image = CType(resources.GetObject("WizardControl1.Image"), System.Drawing.Image)
-        Me.WizardControl1.ImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.WizardControl1.ImageWidth = 250
-        Me.WizardControl1.Location = New System.Drawing.Point(0, 0)
+        Me.WizardControl1.ImageOptions.Image = CType(resources.GetObject("WizardControl1.ImageOptions.Image"), System.Drawing.Image)
+        Me.WizardControl1.ImageOptions.ImageWidth = 250
+        Me.WizardControl1.ImageOptions.Layout = System.Windows.Forms.ImageLayout.None
         Me.WizardControl1.Name = "WizardControl1"
         Me.WizardControl1.Pages.AddRange(New DevExpress.XtraWizard.BaseWizardPage() {Me.WelcomeWizardPage1, Me.BrowsPage, Me.GridPage, Me.CompletionWizardPage1})
         Me.WizardControl1.Size = New System.Drawing.Size(1183, 520)
@@ -80,17 +79,17 @@ Partial Class frmImport
         'WelcomeWizardPage1
         '
         Me.WelcomeWizardPage1.Controls.Add(Me.SimpleButton1)
-        Me.WelcomeWizardPage1.IntroductionText = "กรุณาเตรียมไฟล์สำหรับใช้ในการ Import ตามรูปแบบที่กำหนดไว้" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "หรือกด              " & _
-            "   เพื่อเรียกไฟล์"
+        Me.WelcomeWizardPage1.IntroductionText = "กรุณาเตรียมไฟล์สำหรับใช้ในการ Import ตามรูปแบบที่กำหนดไว้" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "หรือกด              " &
+    "   เพื่อเรียกไฟล์"
         Me.WelcomeWizardPage1.Name = "WelcomeWizardPage1"
         Me.WelcomeWizardPage1.ProceedText = "กด Next เพื่อเริ่มต้นการทำงาน"
-        Me.WelcomeWizardPage1.Size = New System.Drawing.Size(901, 387)
+        Me.WelcomeWizardPage1.Size = New System.Drawing.Size(901, 388)
         Me.WelcomeWizardPage1.Text = "Import Products"
         '
         'SimpleButton1
         '
-        Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
-        Me.SimpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.SimpleButton1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
+        Me.SimpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.SimpleButton1.Location = New System.Drawing.Point(61, 32)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(33, 23)
@@ -103,7 +102,7 @@ Partial Class frmImport
         Me.BrowsPage.Controls.Add(Me.txtFileName)
         Me.BrowsPage.DescriptionText = ""
         Me.BrowsPage.Name = "BrowsPage"
-        Me.BrowsPage.Size = New System.Drawing.Size(1151, 375)
+        Me.BrowsPage.Size = New System.Drawing.Size(1151, 377)
         Me.BrowsPage.Text = "กรุณาเลือกไฟล์สำหรับการ Import"
         '
         'Label8
@@ -121,8 +120,8 @@ Partial Class frmImport
         '
         Me.btnBrows.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnBrows.Appearance.Options.UseFont = True
-        Me.btnBrows.Image = CType(resources.GetObject("btnBrows.Image"), System.Drawing.Image)
-        Me.btnBrows.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBrows.ImageOptions.Image = CType(resources.GetObject("btnBrows.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBrows.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnBrows.Location = New System.Drawing.Point(589, 49)
         Me.btnBrows.Name = "btnBrows"
         Me.btnBrows.Size = New System.Drawing.Size(21, 21)
@@ -149,26 +148,35 @@ Partial Class frmImport
         'CompletionWizardPage1
         '
         Me.CompletionWizardPage1.Name = "CompletionWizardPage1"
-        Me.CompletionWizardPage1.Size = New System.Drawing.Size(901, 387)
+        Me.CompletionWizardPage1.Size = New System.Drawing.Size(901, 388)
         '
         'GridPage
         '
         Me.GridPage.Controls.Add(Me.txtError)
         Me.GridPage.Controls.Add(Me.GridControl)
         Me.GridPage.Name = "GridPage"
-        Me.GridPage.Size = New System.Drawing.Size(1151, 375)
-        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อดำเนินการต่อ หรือกด Back เพื่อทำการ Import File " & _
-            "อีกครั้ง"
+        Me.GridPage.Size = New System.Drawing.Size(1151, 377)
+        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อดำเนินการต่อ หรือกด Back เพื่อทำการ Import File " &
+    "อีกครั้ง"
+        '
+        'txtError
+        '
+        Me.txtError.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtError.Location = New System.Drawing.Point(0, 262)
+        Me.txtError.Name = "txtError"
+        Me.txtError.Size = New System.Drawing.Size(1148, 112)
+        Me.txtError.TabIndex = 19
         '
         'GridControl
         '
         Me.GridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GridControl.Location = New System.Drawing.Point(0, 0)
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
-        Me.GridControl.Size = New System.Drawing.Size(1148, 254)
+        Me.GridControl.Size = New System.Drawing.Size(1148, 256)
         Me.GridControl.TabIndex = 18
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -190,15 +198,6 @@ Partial Class frmImport
         Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
         '
-        'txtError
-        '
-        Me.txtError.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtError.Location = New System.Drawing.Point(0, 260)
-        Me.txtError.Name = "txtError"
-        Me.txtError.Size = New System.Drawing.Size(1148, 112)
-        Me.txtError.TabIndex = 19
-        '
         'frmImport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -216,9 +215,9 @@ Partial Class frmImport
         Me.BrowsPage.PerformLayout()
         CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GridPage.ResumeLayout(False)
+        CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

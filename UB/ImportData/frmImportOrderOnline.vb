@@ -1,27 +1,28 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
 Imports System.IO
+Imports System.Linq
 Imports DevExpress.XtraEditors
 Imports ExcelDataReader
 
 
 Public Class frmImportOrderOnline
     Public Event AddNew()
-    Private mMasterType As MasterType
-    Private mclsProduct As ProductImport
-    Private mclsCustomer As CustomerImport
-    Private mclsStock As StockImport
+    'Private mMasterType As MasterType
+    Private mclsShopee As ShopeeImport
+    'Private mclsCustomer As CustomerImport
+    'Private mclsStock As StockImport
     Private MyWorkSheets As List(Of String)
 
-    Public Property MasterTypes() As Long
+    'Public Property MasterTypes() As Long
 
-        Set(ByVal value As Long)
-            mMasterType = value
-        End Set
-        Get
-            Return mMasterType
-        End Get
-    End Property
+    '    Set(ByVal value As Long)
+    '        mMasterType = value
+    '    End Set
+    '    Get
+    '        Return mMasterType
+    '    End Get
+    'End Property
 
     Private Sub btnBrows_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrows.Click
         Dim sFileNamePath As String = ""
@@ -85,27 +86,31 @@ Public Class frmImportOrderOnline
             End If
 
             If RadioCompany.EditValue = "Shopee" Then
-                Dim lines = File.ReadAllLines("TextFile1.txt")
+                Dim lines = File.ReadAllLines(fullFileName)
 
-                Dim headers = lines(0).Split(vbTab)
-                For Each header In headers
-                    dt.Columns.Add(header)
-                Next
+                data.Columns.Add("OrderDate", GetType(Date))
+                data.Columns.Add("PayBy", GetType(String))
+                data.Columns.Add("OrderAmount", GetType(Decimal))
+                data.Columns.Add("OrderDesc", GetType(String))
+                data.Columns.Add("OrderStatus", GetType(String))
+                data.Columns.Add("OrderUnit", GetType(Decimal))
+                data.Columns.Add("ExternalCode", GetType(String))
+                data.Columns.Add("InternalCode", GetType(String))
 
-                For Each line In lines.Skip(1)
+                For Each line In lines.Skip(7)
                     Dim parts = line.Split(vbTab)
-                    dt.Rows.Add(parts)
+                    data.Rows.Add(parts)
                 Next
-
+            Else
+                Using stream As FileStream = File.Open(fullFileName, FileMode.Open, FileAccess.Read)
+                    Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
+                    Dim lds As DataSet = excelReader.AsDataSet
+                    data = lds.Tables(0)
+                    'Remove header 7
+                    data.Rows.RemoveAt(0)
+                End Using
             End If
-            Using stream As FileStream = File.Open(fileName, FileMode.Open, FileAccess.Read)
-                Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
-                Dim lds As DataSet = excelReader.AsDataSet
-                data = lds.Tables(0)
-                'Remove header
-                data.Rows.RemoveAt(0)
 
-            End Using
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -142,9 +147,7 @@ Public Class frmImportOrderOnline
 #End Region
 
     Private Sub frmImport_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        mclsProduct = Nothing
-        mclsCustomer = Nothing
-        mclsStock = Nothing
+
     End Sub
 
     Private Sub frmImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -250,46 +253,22 @@ Public Class frmImportOrderOnline
         Dim dataTable As New DataTable()
         Dim lError As String = ""
         LoadFileToGrid = False
-        Dim lProductPropertyS As List(Of ProductProperty)
-        'Dim lStockPropertyS As List(Of StockProperty)
-        'Dim lCustomerPropertyS As List(Of CustomerProperty)
-        Try
-            'gIsCheckError = True
 
-            'bindingSource1 = Nothing
-            'bindingSource1 = New BindingSource
+
+        Try
 
             dataTable = OpenFile(txtFileName.Text)
-            'bindingSource1.DataSource = GetType(Object)
-            'If mMasterType = MasterType.Product Then
-            '    mclsProduct.LoadFileToGrid(dataTable, bindingSource1)
-            'ElseIf mMasterType = MasterType.StockIn Then
-            '    mclsStock.LoadFileToGrid(dataTable, bindingSource1)
-            'Else
-            '    mclsCustomer.LoadFileToGrid(dataTable, bindingSource1)
-            'End If
-            If mMasterType = MasterType.Product Then
-                lError = mclsProduct.LoadFileToGrid(dataTable)
-                lProductPropertyS = mclsProduct.DataDAOs
-                GridControl.DataSource = lProductPropertyS
-                'ElseIf mMasterType = MasterType.StockIn Then
-                '    lStockPropertyS = mclsStock.LoadFileToGrid(dataTable)
-                '    GridControl.DataSource = lStockPropertyS
-                'Else
-                '    lCustomerPropertyS = mclsCustomer.LoadFileToGrid(dataTable)
-                '    GridControl.DataSource = lCustomerPropertyS
+
+            If RadioCompany.EditValue = "Shopee" Then
+                lError = mclsShopee.LoadFileToGrid(dataTable)
+                Dim lShopeePropertyS = mclsShopee.DataDAOs
+                GridControl.DataSource = lShopeePropertyS
+
             End If
 
-            'DxErrorProvider1.DataSource = bindingSource1
-            'DxErrorProvider1.ContainerControl = Me
-            'GridControl.DataSource = bindingSource1
-            'DxErrorProvider1.DataSource = bindingSource1
-            'DxErrorProvider1.ContainerControl = Me
-            'GridControl.DataSource = lListData
+
             GridStyle(GridView)
-            'gIsCheckError = True
-            'Return CheckIsError() = False
-            'GridView.RefreshData()
+
             If lError <> "" Then
                 txtError.EditValue = lError
             End If

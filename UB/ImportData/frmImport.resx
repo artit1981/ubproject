@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="SimpleButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="SimpleButton1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACDklEQVQ4T42MX0hTYRjGX+coI+pilUGG
@@ -133,7 +133,7 @@
         4KKT65JNYFfrSnx9x0pm/we46BCR7Q+/nMnA0OZ2vQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnBrows.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnBrows.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhEAAQAIcAAAAAAP///3BvwF1epGZmsmJjq1xcoWBgp2lptWZmsHl5z3Z2ynR0x3N0xXFxwn5+
         13x9021tuoCA2W9vu3V1wnR0v5CQ1ouLzJub2oCAs6am5KCg2K6u5MDA96Oj0YyMssLC9aen07u768zM
@@ -155,7 +155,7 @@
         EPhAcQCNFRwuTHBQQcMIJRQNUGBgoYMLIhQTknjhI7nzgAA7
 </value>
   </data>
-  <data name="WizardControl1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="WizardControl1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAP8AAAD/CAYAAAA+CADKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AADx30lEQVR4XuydBXwU5/a/B+reUqde6hRt

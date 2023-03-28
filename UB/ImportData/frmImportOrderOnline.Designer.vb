@@ -32,6 +32,7 @@ Partial Class frmImportOrderOnline
         Me.txtError = New DevExpress.XtraEditors.MemoEdit()
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.CompletionWizardPage1 = New DevExpress.XtraWizard.CompletionWizardPage()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
         Me.BrowsPage.SuspendLayout()
@@ -56,12 +57,13 @@ Partial Class frmImportOrderOnline
         Me.WizardControl1.Controls.Add(Me.Splitter1)
         Me.WizardControl1.Controls.Add(Me.BrowsPage)
         Me.WizardControl1.Controls.Add(Me.GridPage)
+        Me.WizardControl1.Controls.Add(Me.CompletionWizardPage1)
         Me.WizardControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.WizardControl1.ImageOptions.Image = CType(resources.GetObject("WizardControl1.ImageOptions.Image"), System.Drawing.Image)
         Me.WizardControl1.ImageOptions.ImageWidth = 250
         Me.WizardControl1.ImageOptions.Layout = System.Windows.Forms.ImageLayout.None
         Me.WizardControl1.Name = "WizardControl1"
-        Me.WizardControl1.Pages.AddRange(New DevExpress.XtraWizard.BaseWizardPage() {Me.BrowsPage, Me.GridPage})
+        Me.WizardControl1.Pages.AddRange(New DevExpress.XtraWizard.BaseWizardPage() {Me.BrowsPage, Me.GridPage, Me.CompletionWizardPage1})
         Me.WizardControl1.Size = New System.Drawing.Size(1183, 520)
         Me.WizardControl1.Text = "Import"
         '
@@ -194,6 +196,11 @@ Partial Class frmImportOrderOnline
         Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
         '
+        'CompletionWizardPage1
+        '
+        Me.CompletionWizardPage1.Name = "CompletionWizardPage1"
+        Me.CompletionWizardPage1.Size = New System.Drawing.Size(901, 388)
+        '
         'frmImportOrderOnline
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -229,4 +236,5 @@ Partial Class frmImportOrderOnline
     Friend WithEvents txtError As DevExpress.XtraEditors.MemoEdit
     Private WithEvents Label19 As Label
     Friend WithEvents RadioCompany As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents CompletionWizardPage1 As DevExpress.XtraWizard.CompletionWizardPage
 End Class

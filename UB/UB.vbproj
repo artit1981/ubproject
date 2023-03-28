@@ -436,6 +436,7 @@
     <Compile Include="ImportData\frmImportOrderOnline.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ImportData\ShopeeImport.vb" />
     <Compile Include="Master\frmProvince.Designer.vb">
       <DependentUpon>frmProvince.vb</DependentUpon>
     </Compile>
