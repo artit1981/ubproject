@@ -14,15 +14,7 @@ Public Class frmImportOrderOnline
     'Private mclsStock As StockImport
     Private MyWorkSheets As List(Of String)
 
-    'Public Property MasterTypes() As Long
 
-    '    Set(ByVal value As Long)
-    '        mMasterType = value
-    '    End Set
-    '    Get
-    '        Return mMasterType
-    '    End Get
-    'End Property
 
     Private Sub btnBrows_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrows.Click
         Dim sFileNamePath As String = ""
@@ -45,7 +37,7 @@ Public Class frmImportOrderOnline
         Dim openFileDialog As New OpenFileDialog
         openFileDialog.CheckPathExists = True
         openFileDialog.CheckFileExists = True
-        openFileDialog.Filter = "Image Files (*.xls;*.xlsx)|*.xls;*.xlsx"
+        openFileDialog.Filter = "Image Files (*.xls;*.xlsx;*.txt;*.csv)|*.xls;*.xlsx;*.txt;*.csv"
         openFileDialog.Multiselect = False
         openFileDialog.AddExtension = True
         openFileDialog.ValidateNames = True
@@ -61,23 +53,10 @@ Public Class frmImportOrderOnline
         End Try
     End Sub
 
-    'Private Function GetWorksheets(ByVal Connection As OleDbConnection) As IEnumerable
-    '    Try
-    '        Dim schema As DataTable = Connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, New Object() {Nothing, Nothing, Nothing, "Table"})
-    '        MyWorkSheets = New List(Of String)
-    '        For Each row As DataRow In schema.Rows
-    '            MyWorkSheets.Add(row("TABLE_NAME").ToString)
-    '        Next
-    '        Return MyWorkSheets
-    '    Catch ex As Exception
-    '        System.Windows.Forms.MessageBox.Show(ex.Message)
-    '        Throw
-    '    End Try
-    'End Function
 
     Private Function OpenFile(ByVal fileName As String) As Object
         Dim fullFileName = fileName
-        Dim data As DataTable = Nothing
+        Dim data As New DataTable
         'Dim dt As New DataTable
         Try
             If (Not File.Exists(fullFileName)) Then
@@ -94,11 +73,10 @@ Public Class frmImportOrderOnline
                 data.Columns.Add("OrderDesc", GetType(String))
                 data.Columns.Add("OrderStatus", GetType(String))
                 data.Columns.Add("OrderUnit", GetType(Decimal))
-                data.Columns.Add("ExternalCode", GetType(String))
-                data.Columns.Add("InternalCode", GetType(String))
 
                 For Each line In lines.Skip(7)
-                    Dim parts = line.Split(vbTab)
+                    Dim parts = line.Split(",")
+                    'Dim ltmp = parts
                     data.Rows.Add(parts)
                 Next
             Else
@@ -106,7 +84,7 @@ Public Class frmImportOrderOnline
                     Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
                     Dim lds As DataSet = excelReader.AsDataSet
                     data = lds.Tables(0)
-                    'Remove header 7
+                    'Remove header
                     data.Rows.RemoveAt(0)
                 End Using
             End If
@@ -115,30 +93,6 @@ Public Class frmImportOrderOnline
             ShowErrorMsg(False, ex.Message)
         End Try
         Return data
-
-
-        'Dim fullFileName = fileName
-        'Dim data As DataTable = Nothing
-        'Dim dt As New DataTable
-        'Try
-        '    If (Not File.Exists(fullFileName)) Then
-        '        System.Windows.Forms.MessageBox.Show("File not found")
-        '        Return Nothing
-        '    End If
-        '    Dim connectionString As String = String.Format("Provider=Microsoft.ACE.Oledb.12.0; data source={0}; Extended Properties=Excel 12.0;", fullFileName)
-        '    Dim con As OleDbConnection = New OleDbConnection(connectionString)
-        '    con.Open()
-        '    dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
-        '    Dim adapter = New OleDbDataAdapter("select * from [" & dt.Rows(0).Item(2) & "]", connectionString)
-        '    Dim ds = New DataSet()
-        '    Dim tableName As String = "excelData"
-        '    adapter.Fill(ds, tableName)
-        '    data = ds.Tables(tableName)
-
-        'Catch ex As Exception
-        '    ShowErrorMsg(False, ex.Message)
-        'End Try
-
 
 
 
@@ -151,29 +105,6 @@ Public Class frmImportOrderOnline
     End Sub
 
     Private Sub frmImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        '*** 
-        'If mMasterType = MasterType.Product Then
-        '    mclsProduct = New ProductImport
-        '    WelcomeWizardPage1.Text = "Import Products"
-        '    Me.Text = "Import Products"
-        'ElseIf mMasterType = MasterType.StockIn Then
-        '    mclsStock = New StockImport
-        '    WelcomeWizardPage1.Text = "Import Stock"
-        '    Me.Text = "Import Stock"
-        'Else
-        '    mclsCustomer = New CustomerImport
-        '    mclsCustomer.MasterTypes = mMasterType
-        '    If mMasterType = MasterType.Accounts Then
-        '        WelcomeWizardPage1.Text = "Import Accounts"
-        '        Me.Text = "Import Accounts"
-        '    ElseIf mMasterType = MasterType.Contacts Then
-        '        WelcomeWizardPage1.Text = "Import Contacts"
-        '        Me.Text = "Import Contacts"
-        '    ElseIf mMasterType = MasterType.Agency Then
-        '        WelcomeWizardPage1.Text = "Import Supplier"
-        '        Me.Text = "Import Supplier"
-        '    End If
-        'End If
 
     End Sub
 
@@ -260,6 +191,7 @@ Public Class frmImportOrderOnline
             dataTable = OpenFile(txtFileName.Text)
 
             If RadioCompany.EditValue = "Shopee" Then
+                mclsShopee = New ShopeeImport
                 lError = mclsShopee.LoadFileToGrid(dataTable)
                 Dim lShopeePropertyS = mclsShopee.DataDAOs
                 GridControl.DataSource = lShopeePropertyS
@@ -288,19 +220,21 @@ Public Class frmImportOrderOnline
         LoadFileToGridOnImport = False
         Try
             'gIsCheckError = False
-            If mMasterType = MasterType.Product Then
-                llngRow = mclsProduct.ImportData()
-            ElseIf mMasterType = MasterType.StockIn Then
-                llngRow = mclsStock.ImportData()
-            Else
-                llngRow = mclsCustomer.ImportData()
+            If RadioCompany.EditValue = "Shopee" Then
+                llngRow = mclsShopee.ImportData()
+                'ElseIf mMasterType = MasterType.StockIn Then
+                '    llngRow = mclsStock.ImportData()
+                'Else
+                '    llngRow = mclsCustomer.ImportData()
             End If
 
-            lstrFinish = Me.Text & " Success." & vbNewLine
-            lstrFinish &= "Import Total : " & llngRow(0) & " row" & vbNewLine
-            lstrFinish &= "Import Success : " & llngRow(1) & " row" & vbNewLine
-            lstrFinish &= "Import Fail : " & llngRow(0) - llngRow(1) & " row"
-            CompletionWizardPage1.FinishText = lstrFinish
+            'lstrFinish = Me.Text & " Success." & vbNewLine
+            'lstrFinish &= "Import Total : " & llngRow(0) & " row" & vbNewLine
+            'lstrFinish &= "Import Success : " & llngRow(1) & " row" & vbNewLine
+            'lstrFinish &= "Import Fail : " & llngRow(0) - llngRow(1) & " row"
+            'CompletionWizardPage1.FinishText = lstrFinish
+
+            Me.Close()
             Return True
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmImport.LoadFileToGridOnImport : " & e.Message)
@@ -312,39 +246,58 @@ Public Class frmImportOrderOnline
 
     Private Sub GridStyle(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView)
         With pGrid
-            pGrid.OptionsBehavior.ReadOnly = True
-            If mMasterType = MasterType.Product Then
-                If Not IsNothing(.Columns("UnitMainID")) Then
-                    .Columns("UnitMainID").Visible = False
-                    .Columns("ProductCategoryID").Visible = False
-                    .Columns("ProductBrandID").Visible = False
-                    .Columns("ProductTypeID").Visible = False
-                    .Columns("ProductGroup1ID").Visible = False
-                    .Columns("ProductDimension1ID").Visible = False
-                    .Columns("LocationMainID").Visible = False
-                    .Columns("LocationSubID").Visible = False
-                    '.Columns("LocationSub").Visible = False
-                    .Columns("ProductID").Visible = False
-                End If
-            ElseIf mMasterType = MasterType.StockIn Then
-                If Not IsNothing(.Columns("ProductID")) Then
-                    .Columns("ProductID").Visible = False
-                    .Columns("UnitMainID").Visible = False
-                    .Columns("LocationDTLID").Visible = False
-                    '.Columns("VerifyStep1").Width = 0
-                End If
-            Else
-                If Not IsNothing(.Columns("CustomerGroupID")) Then
-                    .Columns("CustomerGroupID").Visible = False
-                    .Columns("CustomerZoneID").Visible = False
-                    .Columns("EmpID").Visible = False
-                    .Columns("CriterionPriceID").Visible = False
-                    .Columns("ContactPersonID").Visible = False
-                    .Columns("CreditRuleID").Visible = False
-                    .Columns("VatTypeID").Visible = False
-                    '.Columns("VerifyStep1").Width = 0
-                    .Columns("MasterTypes").Visible = False
-                End If
+            'pGrid.OptionsBehavior.ReadOnly = True
+
+            If RadioCompany.EditValue = "Shopee" Then
+                .Columns("ExternalCode").Visible = False
+                .Columns("OrderID").Visible = False
+                .Columns("OrderUnit").Visible = False
+                '.Columns("OrderStatus").Visible = False
+
+                .Columns("IsSelect").MaxWidth = "70"
+                .Columns("OrderDate").Caption = "เลือก"
+
+                .Columns("OrderDate").OptionsColumn.ReadOnly = True
+                .Columns("OrderDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                .Columns("OrderDate").DisplayFormat.FormatString = "dd/MM/yyyy"
+                .Columns("OrderDate").Caption = "วันที่ Shopee"
+                .Columns("OrderDate").MaxWidth = "150"
+
+                .Columns("PayBy").OptionsColumn.ReadOnly = True
+                .Columns("PayBy").Caption = "ผู้นำจ่าย"
+                .Columns("PayBy").MaxWidth = "200"
+
+
+                .Columns("OrderAmount").OptionsColumn.ReadOnly = True
+                .Columns("OrderAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("OrderAmount").DisplayFormat.FormatString = "n2"
+                .Columns("OrderAmount").Caption = "จำนวนเงิน Shopee"
+                .Columns("OrderAmount").MaxWidth = "150"
+
+                .Columns("OrderDesc").OptionsColumn.ReadOnly = True
+                .Columns("OrderDesc").Caption = "รายการ"
+                .Columns("OrderDesc").MaxWidth = "0"
+
+                .Columns("InternalCode").OptionsColumn.ReadOnly = True
+                .Columns("InternalCode").Caption = "เลขที่เอกสาร"
+                .Columns("InternalCode").MaxWidth = "200"
+
+                .Columns("OrderStatus").OptionsColumn.ReadOnly = True
+                .Columns("OrderStatus").Caption = "สถานะเอกสาร"
+                .Columns("OrderStatus").MaxWidth = "150"
+
+                .Columns("GrandTotal").OptionsColumn.ReadOnly = True
+                .Columns("GrandTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("GrandTotal").DisplayFormat.FormatString = "n2"
+                .Columns("GrandTotal").Caption = "ยอดรวมรายการ"
+                .Columns("GrandTotal").MaxWidth = "200"
+
+                .Columns("DiffAmount").OptionsColumn.ReadOnly = True
+                .Columns("DiffAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
+                .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
+                .Columns("DiffAmount").MaxWidth = "200"
+
             End If
 
         End With

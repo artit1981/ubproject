@@ -173,6 +173,32 @@ Module modOrder
 
     End Function
 
+    Public Function GetOrderFromPO(ByVal pPOCode As String) As Object
+        Dim SQL As String
+        Dim DataTable As DataTable
+        Dim lOrderID As Long = 0
+        Dim lOrderCode As String = ""
+        Dim lGrandTotal As Decimal = 0
+        Dim lOrderStatus As String = ""
+
+
+        SQL = "SELECT OrderID,OrderCode,GrandTotal,OrderStatus  "
+        SQL &= " FROM Orders"
+        SQL &= " WHERE IsCancel=0 and  IsDelete=0 "
+        SQL &= " AND PO='" & pPOCode.Trim & "' "
+
+        DataTable = New DataTable
+        DataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        For Each pRow In DataTable.Rows
+            lOrderID = ConvertNullToZero(pRow("OrderID"))
+            lOrderCode = ConvertNullToString(pRow("OrderCode"))
+            lGrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+            lOrderStatus = ConvertNullToString(pRow("OrderStatus"))
+            Exit For
+        Next
+
+        Return {lOrderID, lOrderCode, lGrandTotal, lOrderStatus}
+    End Function
 
     Public Function GetRefOrderStatus(ByVal pRefOrderID As Long, ByVal pOrderType As Long, ByVal pParentOrderID As Long, ByVal pProListID As Long, ByVal pProID As Long _
                                     , ByRef ptr As SqlTransaction, ByVal pMode As DataMode, ByRef pUnitNotRef As Long, ByVal pOrderUnit As Long) As String

@@ -1059,4 +1059,9 @@ Public Class frmMain
         ShowDataOnControl(lcls, MasterType.InvoiceAbb)
         InsertActivity(DataMode.ModeOpen, MasterType.InvoiceAbb, "", Nothing)
     End Sub
+
+    Private Sub ImportOnlineSalesBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ImportOnlineSalesBar.ItemClick
+        frmImportOrderOnline.MdiParent = Me
+        frmImportOrderOnline.Show()
+    End Sub
 End Class

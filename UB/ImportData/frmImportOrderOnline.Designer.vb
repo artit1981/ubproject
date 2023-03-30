@@ -42,7 +42,7 @@ Partial Class frmImportOrderOnline
         CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.SuspendLayout
         '
         'WizardControl1
         '
@@ -184,8 +184,6 @@ Partial Class frmImportOrderOnline
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
-        Me.GridView.OptionsBehavior.Editable = False
-        Me.GridView.OptionsBehavior.ReadOnly = True
         Me.GridView.OptionsLayout.Columns.AddNewColumns = False
         Me.GridView.OptionsLayout.Columns.RemoveOldColumns = False
         Me.GridView.OptionsMenu.EnableColumnMenu = False

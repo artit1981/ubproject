@@ -1,16 +1,16 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
 
-Public Class ShopeeImport
+Public Class LazadaImport
     'Implements iImport
-    Private mClassName As String = "ShopeeImport"
-    Private mPropertyS As List(Of ShopeeProperty)
+    Private mClassName As String = "LazadaImport"
+    Private mPropertyS As List(Of LazadaProperty)
 
-    Public Property DataDAOs() As List(Of ShopeeProperty)
+    Public Property DataDAOs() As List(Of LazadaProperty)
         Get
             Return mPropertyS
         End Get
-        Set(ByVal Value As List(Of ShopeeProperty))
+        Set(ByVal Value As List(Of LazadaProperty))
             mPropertyS = Value
         End Set
     End Property
@@ -18,14 +18,14 @@ Public Class ShopeeImport
     'Public Sub LoadFileToGrid(ByVal pDataTable As DataTable, ByRef pBindingSource As BindingSource)
     Public Function LoadFileToGrid(ByVal pDataTable As DataTable) As String
         Try
-            Dim rec As ShopeeProperty
+            Dim rec As LazadaProperty
             Dim lError As String = "", lErrorList As String = "", lSEQ As Long = 1
-            mPropertyS = New List(Of ShopeeProperty)
+            mPropertyS = New List(Of LazadaProperty)
 
             If pDataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In pDataTable.Rows
                     If ConvertNullToString(dr(3)) <> "" Then '*** OrderDesc
-                        rec = New ShopeeProperty
+                        rec = New LazadaProperty
                         rec.IsSelect = True  '' 0
                         rec.OrderDate = dr(0)
                         rec.PayBy = ConvertNullToString(dr(1))
@@ -203,22 +203,13 @@ End Class
 
 
 
-Public Class ShopeeProperty
+Public Class LazadaProperty
     'Implements IDXDataErrorInfo
-    Private mClassName As String = "ShopeeProperty"
+    Private mClassName As String = "LazadaProperty"
 
 #Region "Property"
-    Private mOrderDate As Date
-    Private mPayBy As String
-    Private mOrderAmount As Decimal
-    Private mOrderDesc As String
-    Private mOrderUnit As Decimal
-    Private mExternalCode As String
-    Private mInternalCode As String
 
     Dim mIsSelect As Boolean
-
-
     Public Property IsSelect() As Boolean
         Get
             Return mIsSelect
@@ -227,54 +218,49 @@ Public Class ShopeeProperty
             mIsSelect = value
         End Set
     End Property
-
-    Public Property OrderDate() As Date
+    Private mTXDate As Date
+    Public Property TXDate() As Date
         Get
-            Return mOrderDate
+            Return mTXDate
         End Get
         Set(ByVal value As Date)
-            mOrderDate = value
+            mTXDate = value
         End Set
     End Property
 
-    Public Property PayBy() As String
+    Private mTxNo As String
+    Public Property TxNo() As String
         Get
-            Return mPayBy
+            Return mTxNo
         End Get
         Set(ByVal value As String)
-            mPayBy = value
+            mTxNo = value
         End Set
     End Property
 
-    Public Property OrderAmount() As Decimal
-        Get
-            Return mOrderAmount
-        End Get
-        Set(ByVal value As Decimal)
-            mOrderAmount = value
-        End Set
-    End Property
 
-    Public Property OrderDesc() As String
+    Private mTxDesc As String
+    Public Property TxDesc() As String
         Get
-            Return mOrderDesc
+            Return mTxDesc
         End Get
         Set(ByVal value As String)
-            mOrderDesc = value
+            mTxDesc = value
         End Set
     End Property
 
-
-    Public Property OrderUnit() As Decimal
+    Private mTxAmount As Decimal
+    Public Property TxAmount() As Decimal
         Get
-            Return mOrderUnit
+            Return mTxAmount
         End Get
         Set(ByVal value As Decimal)
-            mOrderUnit = value
+            mTxAmount = value
         End Set
-
     End Property
 
+
+    Private mExternalCode As String
     Public Property ExternalCode() As String
         Get
             Return mExternalCode
@@ -284,6 +270,7 @@ Public Class ShopeeProperty
         End Set
     End Property
 
+    Private mInternalCode As String
     Public Property InternalCode() As String
         Get
             Return mInternalCode

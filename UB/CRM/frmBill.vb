@@ -11,6 +11,16 @@ Public Class frmBill
     Private mMode As DataMode
     Private mOrderType As MasterType
     Private mTaxOrderTotal As Double
+    Private mSubOrderList As BindingSource = Nothing
+    Public Property SubOrderList() As BindingSource
+        Get
+            Return mSubOrderList
+        End Get
+        Set(ByVal value As BindingSource)
+            mSubOrderList = value
+        End Set
+    End Property
+
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
@@ -378,7 +388,7 @@ Public Class frmBill
             gCustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcCheque1.ShowControl(False, pID)
             UcNote1.ShowControl(mcls.TableName, pID)
-            UcOrderList1.ShowControl(Nothing, mcls.ID, mcls.OrderDate, mMode <> DataMode.ModeNew, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True, pMode)
+            UcOrderList1.ShowControl(SubOrderList, mcls.ID, mcls.OrderDate, mMode <> DataMode.ModeNew, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True, pMode)
 
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadData : " & ex.Message)
