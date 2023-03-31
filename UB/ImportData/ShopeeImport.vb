@@ -323,11 +323,11 @@ Public Class ShopeeProperty
     End Property
 
     Dim mDiffAmount As Decimal = 0
-    Public Property DiffAmount() As Long
+    Public Property DiffAmount() As Decimal
         Get
             Return mDiffAmount
         End Get
-        Set(ByVal value As Long)
+        Set(ByVal value As Decimal)
             mDiffAmount = value
         End Set
     End Property

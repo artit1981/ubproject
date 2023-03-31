@@ -10,6 +10,7 @@ Public Class frmImportOrderOnline
     Public Event AddNew()
     'Private mMasterType As MasterType
     Private mclsShopee As ShopeeImport
+    Private mclsLazada As LazadaImport
     'Private mclsCustomer As CustomerImport
     'Private mclsStock As StockImport
     Private MyWorkSheets As List(Of String)
@@ -195,7 +196,11 @@ Public Class frmImportOrderOnline
                 lError = mclsShopee.LoadFileToGrid(dataTable)
                 Dim lShopeePropertyS = mclsShopee.DataDAOs
                 GridControl.DataSource = lShopeePropertyS
-
+            Else
+                mclsLazada = New LazadaImport
+                lError = mclsLazada.LoadFileToGrid(dataTable)
+                Dim lLazadaPropertyS = mclsLazada.DataDAOs
+                GridControl.DataSource = lLazadaPropertyS
             End If
 
 
@@ -255,7 +260,7 @@ Public Class frmImportOrderOnline
                 '.Columns("OrderStatus").Visible = False
 
                 .Columns("IsSelect").MaxWidth = "70"
-                .Columns("OrderDate").Caption = "เลือก"
+                .Columns("IsSelect").Caption = "เลือก"
 
                 .Columns("OrderDate").OptionsColumn.ReadOnly = True
                 .Columns("OrderDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
@@ -297,7 +302,59 @@ Public Class frmImportOrderOnline
                 .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
                 .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
                 .Columns("DiffAmount").MaxWidth = "200"
+            Else
+                .Columns("ExternalCode").Visible = False
+                .Columns("OrderID").Visible = False
 
+                '.Columns("OrderStatus").Visible = False
+
+                .Columns("IsSelect").MaxWidth = "70"
+                .Columns("IsSelect").Caption = "เลือก"
+
+                .Columns("TXDate").OptionsColumn.ReadOnly = True
+                .Columns("TXDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+                .Columns("TXDate").DisplayFormat.FormatString = "dd/MM/yyyy"
+                .Columns("TXDate").Caption = "วันที่ Lazada"
+                .Columns("TXDate").MaxWidth = "150"
+
+                .Columns("TxNo").OptionsColumn.ReadOnly = True
+                .Columns("TxNo").Caption = "Tx. No"
+                .Columns("TxNo").MaxWidth = "200"
+
+                .Columns("TxDesc").OptionsColumn.ReadOnly = True
+                .Columns("TxDesc").Caption = "รายละเอียด"
+                .Columns("TxDesc").MaxWidth = "0"
+
+                .Columns("TxAmount").OptionsColumn.ReadOnly = True
+                .Columns("TxAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("TxAmount").DisplayFormat.FormatString = "n2"
+                .Columns("TxAmount").Caption = "จำนวนเงิน Lazada"
+                .Columns("TxAmount").MaxWidth = "150"
+
+
+                .Columns("ExternalCode").OptionsColumn.ReadOnly = True
+                .Columns("ExternalCode").Caption = "Order No."
+                .Columns("ExternalCode").MaxWidth = "200"
+
+                .Columns("InternalCode").OptionsColumn.ReadOnly = True
+                .Columns("InternalCode").Caption = "เลขที่เอกสาร"
+                .Columns("InternalCode").MaxWidth = "200"
+
+                .Columns("OrderStatus").OptionsColumn.ReadOnly = True
+                .Columns("OrderStatus").Caption = "สถานะเอกสาร"
+                .Columns("OrderStatus").MaxWidth = "150"
+
+                .Columns("GrandTotal").OptionsColumn.ReadOnly = True
+                .Columns("GrandTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("GrandTotal").DisplayFormat.FormatString = "n2"
+                .Columns("GrandTotal").Caption = "ยอดรวมรายการ"
+                .Columns("GrandTotal").MaxWidth = "200"
+
+                .Columns("DiffAmount").OptionsColumn.ReadOnly = True
+                .Columns("DiffAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
+                .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
+                .Columns("DiffAmount").MaxWidth = "200"
             End If
 
         End With

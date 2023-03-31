@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
+Imports System.Linq
 
 Public Class LazadaImport
     'Implements iImport
@@ -20,47 +21,65 @@ Public Class LazadaImport
         Try
             Dim rec As LazadaProperty
             Dim lError As String = "", lErrorList As String = "", lSEQ As Long = 1
+
+
             mPropertyS = New List(Of LazadaProperty)
 
             If pDataTable.Rows.Count > 0 Then
-                For Each dr As DataRow In pDataTable.Rows
-                    If ConvertNullToString(dr(3)) <> "" Then '*** OrderDesc
+                For Each dr In pDataTable.Rows
+                    If ConvertNullToString(dr(13)) <> "" Then '*** PO Code
                         rec = New LazadaProperty
-                        rec.IsSelect = True  '' 0
-                        rec.OrderDate = dr(0)
-                        rec.PayBy = ConvertNullToString(dr(1))
-                        rec.OrderAmount = ConvertNullToZero(dr(2))
-                        rec.OrderDesc = ConvertNullToString(dr(3)).Trim
-                        'rec.OrderStatus = ConvertNullToString(dr(4))
-                        rec.OrderUnit = ConvertNullToZero(dr(5))
-
-                        Dim lPoCode = rec.OrderDesc.Substring(rec.OrderDesc.IndexOf("#"c) + 1)
-                        rec.ExternalCode = lPoCode.Trim
-                        If rec.ExternalCode.Trim <> "" Then
-                            Dim lOrders = GetOrderFromPO(rec.ExternalCode)
-                            rec.OrderID = lOrders(0)
-                            rec.InternalCode = lOrders(1)
-                            rec.GrandTotal = lOrders(2)
-                            rec.OrderStatus = lOrders(3)
-                        End If
-                        rec.IsSelect = rec.OrderID > 0
-                        rec.DiffAmount = rec.OrderAmount - rec.GrandTotal
-                        lError = GetPropertyError(rec)
-                        If lError <> "" Then
-                            If lErrorList = "" Then
-                                lErrorList = "******** Import Error *********"
-                                lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
-                            Else
-                                lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
-                            End If
-                            rec.IsSelect = False
-                        End If
-
+                        rec.IsSelect = False
+                        rec.TXDate = dr(0)
+                        rec.TxNo = ConvertNullToString(dr(3))
+                        rec.TxDesc = ConvertNullToString(dr(4)).Trim
+                        rec.TxAmount = ConvertNullToZero(dr(7))
+                        rec.ExternalCode = ConvertNullToString(dr(13))
                         mPropertyS.Add(rec)
-                        lSEQ = lSEQ + 1
                     End If
                 Next
+
+                'Grouping
+                Dim lTableGroup = (From e In mPropertyS
+                                   Group e By
+                                                TxDate = e.TXDate,
+                                                TxNo = e.TxNo,
+                                                TxDesc = e.TxDesc,
+                                                ExternalCode = e.ExternalCode
+                                        Into Group
+                                   Select New With {
+                                                .TxDate = TxDate,
+                                                .TxNo = TxNo,
+                                                .TxDesc = TxDesc,
+                                                .ExternalCode = ExternalCode,
+                                                .TxAmount = Group.Sum(Function(x) Convert.ToDouble(x.TxAmount))
+                                        })
+
+                mPropertyS = New List(Of LazadaProperty)
+                For Each lItem In lTableGroup
+                    Dim lOrders = GetOrderFromPO(lItem.ExternalCode)
+                    rec = New LazadaProperty
+
+                    rec.OrderID = lOrders(0)
+                    rec.InternalCode = lOrders(1)
+                    rec.GrandTotal = lOrders(2)
+                    rec.OrderStatus = lOrders(3)
+                    rec.TXDate = lItem.TxDate
+                    rec.TxNo = lItem.TxNo
+                    rec.TxDesc = lItem.TxDesc
+                    rec.ExternalCode = lItem.ExternalCode
+                    rec.TxAmount = lItem.TxAmount
+                    rec.IsSelect = rec.OrderID > 0
+                    rec.DiffAmount = lItem.TxAmount - rec.GrandTotal
+                    lError = GetPropertyError(rec)
+                    mPropertyS.Add(rec)
+                Next
+
             End If
+
+
+
+
             Return lErrorList
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mClassName & ".LoadFileToGrid : " & e.Message)
@@ -182,7 +201,7 @@ Public Class LazadaImport
 
 
 
-    Public Function GetPropertyError(ByVal pData As ShopeeProperty) As String
+    Public Function GetPropertyError(ByVal pData As LazadaProperty) As String
         Dim lError As String = ""
         'If String.IsNullOrEmpty(pData.IsNew) Then
         '    pData.IsNew = "Y" 'Default Y
@@ -238,7 +257,15 @@ Public Class LazadaProperty
         End Set
     End Property
 
-
+    Private mExternalCode As String
+    Public Property ExternalCode() As String
+        Get
+            Return mExternalCode
+        End Get
+        Set(ByVal value As String)
+            mExternalCode = value
+        End Set
+    End Property
     Private mTxDesc As String
     Public Property TxDesc() As String
         Get
@@ -260,15 +287,7 @@ Public Class LazadaProperty
     End Property
 
 
-    Private mExternalCode As String
-    Public Property ExternalCode() As String
-        Get
-            Return mExternalCode
-        End Get
-        Set(ByVal value As String)
-            mExternalCode = value
-        End Set
-    End Property
+
 
     Private mInternalCode As String
     Public Property InternalCode() As String
@@ -310,11 +329,11 @@ Public Class LazadaProperty
     End Property
 
     Dim mDiffAmount As Decimal = 0
-    Public Property DiffAmount() As Long
+    Public Property DiffAmount() As Decimal
         Get
             Return mDiffAmount
         End Get
-        Set(ByVal value As Long)
+        Set(ByVal value As Decimal)
             mDiffAmount = value
         End Set
     End Property
