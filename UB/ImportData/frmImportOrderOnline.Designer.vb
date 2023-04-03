@@ -33,6 +33,7 @@ Partial Class frmImportOrderOnline
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.CompletionWizardPage1 = New DevExpress.XtraWizard.CompletionWizardPage()
+        Me.lblError = New System.Windows.Forms.Label()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
         Me.BrowsPage.SuspendLayout()
@@ -42,7 +43,7 @@ Partial Class frmImportOrderOnline
         CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout
+        Me.SuspendLayout()
         '
         'WizardControl1
         '
@@ -77,6 +78,7 @@ Partial Class frmImportOrderOnline
         '
         'BrowsPage
         '
+        Me.BrowsPage.Controls.Add(Me.lblError)
         Me.BrowsPage.Controls.Add(Me.RadioCompany)
         Me.BrowsPage.Controls.Add(Me.Label19)
         Me.BrowsPage.Controls.Add(Me.Label8)
@@ -154,8 +156,8 @@ Partial Class frmImportOrderOnline
         Me.GridPage.Controls.Add(Me.GridControl)
         Me.GridPage.Name = "GridPage"
         Me.GridPage.Size = New System.Drawing.Size(1151, 377)
-        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อดำเนินการต่อ หรือกด Back เพื่อทำการ Import File " &
-    "อีกครั้ง"
+        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อทำรายการตัดรับชำระ หรือกด Back เพื่อทำการ Import" &
+    " File อีกครั้ง"
         '
         'txtError
         '
@@ -199,6 +201,18 @@ Partial Class frmImportOrderOnline
         Me.CompletionWizardPage1.Name = "CompletionWizardPage1"
         Me.CompletionWizardPage1.Size = New System.Drawing.Size(901, 388)
         '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.BackColor = System.Drawing.Color.Transparent
+        Me.lblError.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblError.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblError.Location = New System.Drawing.Point(98, 142)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(33, 14)
+        Me.lblError.TabIndex = 361
+        Me.lblError.Text = "Error"
+        '
         'frmImportOrderOnline
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -235,4 +249,5 @@ Partial Class frmImportOrderOnline
     Private WithEvents Label19 As Label
     Friend WithEvents RadioCompany As DevExpress.XtraEditors.RadioGroup
     Friend WithEvents CompletionWizardPage1 As DevExpress.XtraWizard.CompletionWizardPage
+    Private WithEvents lblError As Label
 End Class

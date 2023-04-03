@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
+Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class ShopeeImport
     'Implements iImport
@@ -114,18 +115,18 @@ Public Class ShopeeImport
     '    End Try
     'End Function
 
-    Public Function ImportData() As Long()
+    Public Function ImportData() As BindingSource
         'Dim lList As New List(Of SubOrder)
         Dim bindingSource1 = New BindingSource
         bindingSource1.DataSource = GetType(SubOrder)
+
         Try
             If mPropertyS.Count > 0 Then
-                For Each pRow In mPropertyS
+                Dim query = mPropertyS.FindAll(Function(p) p.IsSelect = True)
+
+                For Each pRow In query
                     If pRow.IsSelect = True Then
-
-
                         Dim lcls As New OrderSDAO
-
                         If lcls.InitailData(pRow.OrderID, "", Nothing) Then
                             If lcls.ID > 0 Then
                                 Dim rec As New SubOrder
@@ -152,25 +153,22 @@ Public Class ShopeeImport
                             End If
                         End If
                     End If
-
-
-
                 Next
 
-                If bindingSource1.Count > 0 Then
-                    Dim lFormEdit As New frmBill
-                    With lFormEdit
-                        .OrderType = MasterType.ReceiptCut
-                        .Caption = "ตัดรับชำระ"
-                        .MdiParent = frmMain
-                        .ModeData = DataMode.ModeNew
-                        .IDs = 0
-                        .SubOrderList = bindingSource1
-                        .Show()
-                    End With
-                End If
+                'If bindingSource1.Count > 0 Then
+                '    Dim lFormEdit As New frmBill
+                '    With lFormEdit
+                '        .OrderType = MasterType.ReceiptCut
+                '        .Caption = "ตัดรับชำระ"
+                '        .MdiParent = frmMain
+                '        .ModeData = DataMode.ModeNew
+                '        .IDs = 0
+                '        .SubOrderList = bindingSource1
+                '        .Show()
+                '    End With
+                'End If
             End If
-
+            Return bindingSource1
         Catch e As Exception
 
             Err.Raise(Err.Number, e.Source, mClassName & ".ImportData : " & e.Message)
@@ -182,18 +180,16 @@ Public Class ShopeeImport
 
 
 
-    Public Function GetPropertyError(ByVal pData As ShopeeProperty) As String
-        Dim lError As String = ""
-        'If String.IsNullOrEmpty(pData.IsNew) Then
-        '    pData.IsNew = "Y" 'Default Y
-        'ElseIf pData.IsNew.ToString.Trim <> "Y" And pData.IsNew.ToString.Trim <> "N" Then
-        '    lError = lError & vbNewLine & "ข้อมูล IsNew ไม่ถูกต้อง[Y,N]"
-        'End If
+    'Public Function GetPropertyError(ByVal pData As ShopeeProperty) As String
+    '    Dim lError As String = ""
+    '    If pData.InternalCode.ToString.Trim = "" Then
+    '        lError = lError & vbNewLine & "ไม่พบข้อมูลอ้างอิงจากคำสั่งซื้อ " & pData.ExternalCode
+    '    End If
 
 
 
-        Return lError
-    End Function
+    '    Return lError
+    'End Function
 
     Public Sub New()
         'mRunningFormatDAO = New RunningFormatDAO
@@ -204,7 +200,7 @@ End Class
 
 
 Public Class ShopeeProperty
-    'Implements IDXDataErrorInfo
+    Implements IDXDataErrorInfo
     Private mClassName As String = "ShopeeProperty"
 
 #Region "Property"
@@ -218,6 +214,45 @@ Public Class ShopeeProperty
 
     Dim mIsSelect As Boolean
 
+    Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+        If propertyName = "OrderCode" AndAlso String.IsNullOrEmpty(OrderCode) Then
+            info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
+            info.ErrorType = ErrorType.Critical
+        End If
+        'If propertyName = "UnitName" AndAlso String.IsNullOrEmpty(UnitName) Then
+        '    info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
+        '    info.ErrorType = ErrorType.Critical
+        'End If
+        'If propertyName = "Units" AndAlso ConvertNullToZero(Units) <= 0 Then
+        '    info.ErrorText = String.Format("กรุณาระบุจำนวน", propertyName)
+        '    info.ErrorType = ErrorType.Critical
+        'End If
+    End Sub
+
+    Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
+        Dim propertyInfo As New ErrorInfo()
+
+        GetPropertyError("OrderCode", propertyInfo)
+
+        'If propertyInfo.ErrorText = "" Then
+        '    If (mColData And ProColumn.UnitName) = ProColumn.UnitName Then
+        '        GetPropertyError("UnitName", propertyInfo)
+        '    End If
+        'End If
+
+        'If propertyInfo.ErrorText = "" Then
+        '    If (mColData And ProColumn.Units) = ProColumn.Units Then
+        '        GetPropertyError("Units", propertyInfo)
+        '    End If
+        'End If
+
+        'If propertyInfo.ErrorText <> "" Then
+        '    info.ErrorText = "พบข้อผิดพลาด"
+        'Else
+
+        'End If
+        'Total = (Units * Price) - Discount
+    End Sub
 
     Public Property IsSelect() As Boolean
         Get

@@ -38,7 +38,12 @@ Public Class frmImportOrderOnline
         Dim openFileDialog As New OpenFileDialog
         openFileDialog.CheckPathExists = True
         openFileDialog.CheckFileExists = True
-        openFileDialog.Filter = "Image Files (*.xls;*.xlsx;*.txt;*.csv)|*.xls;*.xlsx;*.txt;*.csv"
+        If RadioCompany.EditValue = "Shopee" Then
+            openFileDialog.Filter = "Import Files (*.csv)|*.csv"
+        Else
+            openFileDialog.Filter = "Import Files (*.xls;*.xlsx)|*.xls;*.xlsx"
+        End If
+
         openFileDialog.Multiselect = False
         openFileDialog.AddExtension = True
         openFileDialog.ValidateNames = True
@@ -49,6 +54,11 @@ Public Class frmImportOrderOnline
     Private Sub AddFile(ByVal pFileNamePath As String)
         Try
             txtFileName.Text = pFileNamePath
+            If InStr(pFileNamePath.ToUpper, "Shopee".ToUpper) > 0 Then
+                RadioCompany.EditValue = "Shopee"
+            Else
+                RadioCompany.EditValue = "Lazada"
+            End If
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, "frmImport.AddFile : " & ex.Message)
         End Try
@@ -106,7 +116,7 @@ Public Class frmImportOrderOnline
     End Sub
 
     Private Sub frmImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        lblError.Text = ""
     End Sub
 
     Private Sub WizardControl1_CancelClick(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WizardControl1.CancelClick
@@ -122,16 +132,19 @@ Public Class frmImportOrderOnline
     Private Sub WizardControl1_NextClick(ByVal sender As Object, ByVal e As DevExpress.XtraWizard.WizardCommandButtonClickEventArgs) Handles WizardControl1.NextClick
         Try
             GridPage.DescriptionText = ""
+            lblError.Text = ""
             ShowProgress(True, "Loading...")
             If e.Page Is BrowsPage Then
                 If txtFileName.Text.Trim = "" Then
-                    MessageBox.Show("กรุณาระบุไฟล์")
+                    lblError.Text = "กรุณาระบุไฟล์"
                     e.Handled = True
                 Else
+                    txtError.EditValue = ""
                     ShowProgress(True, "Loading...")
                     If LoadFileToGrid() = False Then
                         'e.Handled = True
-                        GridPage.DescriptionText = "พบข้อผิดพลาด กรุณาตรวจสอบข้อมูล หรือดำเนินการต่อโดยไม่สนใจข้อมูลที่ผิดพลาด"
+                        GridPage.DescriptionText = "พบข้อผิดพลาด กรุณาตรวจสอบข้อมูล"
+                        e.Handled = True
                     Else
                         e.Handled = False
                     End If
@@ -139,8 +152,12 @@ Public Class frmImportOrderOnline
 
                 End If
             ElseIf e.Page Is GridPage Then
-                LoadFileToGridOnImport()
-                e.Handled = False
+                If LoadFileToGridOnImport() Then
+                    e.Handled = False
+                Else
+                    e.Handled = True
+                End If
+
             End If
         Catch ex As Exception
             e.Handled = True
@@ -155,9 +172,10 @@ Public Class frmImportOrderOnline
             If e.Direction = DevExpress.XtraWizard.Direction.Forward Then
 
             ElseIf e.Direction = DevExpress.XtraWizard.Direction.Backward Then
-                'If e.Page Is WelcomeWizardPage1 Then
-                '    GridPage.DescriptionText = ""
-                'End If
+                If e.Page Is BrowsPage Then
+                    GridPage.DescriptionText = ""
+                    lblError.Text = ""
+                End If
             End If
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -192,21 +210,34 @@ Public Class frmImportOrderOnline
             dataTable = OpenFile(txtFileName.Text)
 
             If RadioCompany.EditValue = "Shopee" Then
-                mclsShopee = New ShopeeImport
-                lError = mclsShopee.LoadFileToGrid(dataTable)
-                Dim lShopeePropertyS = mclsShopee.DataDAOs
-                GridControl.DataSource = lShopeePropertyS
+                If dataTable.Columns.Count = 6 Then
+                    mclsShopee = New ShopeeImport
+                    lError = mclsShopee.LoadFileToGrid(dataTable)
+                    Dim lShopeePropertyS = mclsShopee.DataDAOs
+                    GridControl.DataSource = lShopeePropertyS
+                Else
+                    lError = "จำนวนแถวของข้อมูลไม่ถูกต้อง (6 แถว)"
+                End If
+
             Else
-                mclsLazada = New LazadaImport
-                lError = mclsLazada.LoadFileToGrid(dataTable)
-                Dim lLazadaPropertyS = mclsLazada.DataDAOs
-                GridControl.DataSource = lLazadaPropertyS
+                If dataTable.Columns.Count = 22 Then
+                    mclsLazada = New LazadaImport
+                    lError = mclsLazada.LoadFileToGrid(dataTable)
+                    Dim lLazadaPropertyS = mclsLazada.DataDAOs
+                    GridControl.DataSource = lLazadaPropertyS
+                Else
+                    lError = "จำนวนแถวของข้อมูลไม่ถูกต้อง (22 แถว)"
+                End If
+
             End If
 
 
-            GridStyle(GridView)
 
-            If lError <> "" Then
+
+            If lError = "" Then
+                GridStyle(GridView)
+            Else
+                lblError.Text = lError
                 txtError.EditValue = lError
             End If
             Return lError = ""
@@ -220,27 +251,39 @@ Public Class frmImportOrderOnline
     End Function
 
     Private Function LoadFileToGridOnImport() As Boolean
-        Dim lstrFinish As String = ""
-        Dim llngRow(1) As Long
+
+        Dim bindingSource1 As New BindingSource
         LoadFileToGridOnImport = False
         Try
-            'gIsCheckError = False
+
             If RadioCompany.EditValue = "Shopee" Then
-                llngRow = mclsShopee.ImportData()
-                'ElseIf mMasterType = MasterType.StockIn Then
-                '    llngRow = mclsStock.ImportData()
-                'Else
-                '    llngRow = mclsCustomer.ImportData()
+                bindingSource1 = mclsShopee.ImportData()
+
             End If
 
-            'lstrFinish = Me.Text & " Success." & vbNewLine
-            'lstrFinish &= "Import Total : " & llngRow(0) & " row" & vbNewLine
-            'lstrFinish &= "Import Success : " & llngRow(1) & " row" & vbNewLine
-            'lstrFinish &= "Import Fail : " & llngRow(0) - llngRow(1) & " row"
-            'CompletionWizardPage1.FinishText = lstrFinish
+            If bindingSource1.Count > 0 Then
+                ShowProgress(False, "")
+                If XtraMessageBox.Show(Me, "ยืนยันการสร้างรายการตัดรับชำระ", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                    Dim lFormEdit As New frmBill
+                    With lFormEdit
+                        .OrderType = MasterType.ReceiptCut
+                        .Caption = "ตัดรับชำระ"
+                        .MdiParent = frmMain
+                        .ModeData = DataMode.ModeNew
+                        .IDs = 0
+                        .SubOrderList = bindingSource1
+                        .Show()
 
-            Me.Close()
-            Return True
+                        Me.Close()
+                    End With
+                End If
+            Else
+                txtError.EditValue = "กรุณาเลือกรายการ"
+            End If
+
+            Return False
+
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmImport.LoadFileToGridOnImport : " & e.Message)
         Finally
