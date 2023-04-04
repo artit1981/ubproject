@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Imports System.Data.SqlClient
 Imports System.Linq
+Imports DevExpress.XtraEditors.DXErrorProvider
 
 Public Class LazadaImport
     'Implements iImport
@@ -71,7 +72,7 @@ Public Class LazadaImport
                     rec.TxAmount = lItem.TxAmount
                     rec.IsSelect = rec.OrderID > 0
                     rec.DiffAmount = lItem.TxAmount - rec.GrandTotal
-                    lError = GetPropertyError(rec)
+                    'lError = GetPropertyError(rec)
                     mPropertyS.Add(rec)
                 Next
 
@@ -86,65 +87,19 @@ Public Class LazadaImport
         End Try
     End Function
 
-    'Public Function CheckIsError(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView) As Boolean
-    '    Dim info As New ErrorInfo()
-    '    Dim lIsError = False
-    '    Try
-    '        If pGrid.RowCount > 0 Then
-    '            For lRow = 0 To pGrid.RowCount - 1
-    '                TryCast(pGrid.GetRow(lRow), ProductProperty).GetError(info)
-    '                If info.ErrorText <> "" Then
-    '                    lIsError = True
-    '                End If
-    '            Next
-    '        End If
-    '        Return lIsError
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mClassName & ".CheckIsError : " & e.Message)
-    '    Finally
-    '    End Try
-    'End Function
 
-    'Public Function GetDAOFromGrid(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView)
-    '    Dim lRow As Long
-    '    Dim rec As ProductProperty
+    Public Function ImportData() As BindingSource
 
-    '    GetDAOFromGrid = False
-    '    Try
-    '        mProductPropertyS = Nothing
-    '        mProductPropertyS = New List(Of ProductProperty)
-    '        pProgressBar.Position = 0
-    '        If pGrid.RowCount > 0 Then
-    '            pProgressBar.Properties.Maximum = pGrid.RowCount
-    '            For lRow = 0 To pGrid.RowCount
-    '                rec = Nothing
-    '                rec = TryCast(pGrid.GetRow(lRow), ProductProperty)
-    '                If Not rec Is Nothing AndAlso rec.IsSelect = True Then
-    '                    mProductPropertyS.Add(rec)
-    '                End If
-    '                pProgressBar.Position = lRow
-    '                'End If
-    '            Next
-    '        End If
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "frmImport.GetDAOFromGrid : " & e.Message)
-    '    Finally
-    '        rec = Nothing
-    '    End Try
-    'End Function
-
-    Public Function ImportData() As Long()
-        'Dim lList As New List(Of SubOrder)
         Dim bindingSource1 = New BindingSource
         bindingSource1.DataSource = GetType(SubOrder)
+
         Try
             If mPropertyS.Count > 0 Then
-                For Each pRow In mPropertyS
-                    If pRow.IsSelect = True Then
+                Dim query = mPropertyS.FindAll(Function(p) p.IsSelect = True)
 
-
+                For Each pRow In query
+                    If pRow.IsSelect = True And pRow.OrderID > 0 Then
                         Dim lcls As New OrderSDAO
-
                         If lcls.InitailData(pRow.OrderID, "", Nothing) Then
                             If lcls.ID > 0 Then
                                 Dim rec As New SubOrder
@@ -170,26 +125,14 @@ Public Class LazadaImport
                                 bindingSource1.Add(rec)
                             End If
                         End If
+                    Else
+                        pRow.IsSelect = False
                     End If
-
-
 
                 Next
 
-                If bindingSource1.Count > 0 Then
-                    Dim lFormEdit As New frmBill
-                    With lFormEdit
-                        .OrderType = MasterType.ReceiptCut
-                        .Caption = "ตัดรับชำระ"
-                        .MdiParent = frmMain
-                        .ModeData = DataMode.ModeNew
-                        .IDs = 0
-                        .SubOrderList = bindingSource1
-                        .Show()
-                    End With
-                End If
             End If
-
+            Return bindingSource1
         Catch e As Exception
 
             Err.Raise(Err.Number, e.Source, mClassName & ".ImportData : " & e.Message)
@@ -200,32 +143,30 @@ Public Class LazadaImport
 
 
 
-
-    Public Function GetPropertyError(ByVal pData As LazadaProperty) As String
-        Dim lError As String = ""
-        'If String.IsNullOrEmpty(pData.IsNew) Then
-        '    pData.IsNew = "Y" 'Default Y
-        'ElseIf pData.IsNew.ToString.Trim <> "Y" And pData.IsNew.ToString.Trim <> "N" Then
-        '    lError = lError & vbNewLine & "ข้อมูล IsNew ไม่ถูกต้อง[Y,N]"
-        'End If
-
-
-
-        Return lError
-    End Function
-
     Public Sub New()
-        'mRunningFormatDAO = New RunningFormatDAO
-        'mRunningFormatDAO.InitailData(MasterType.Product, Nothing)
+
     End Sub
 End Class
 
 
 
 Public Class LazadaProperty
-    'Implements IDXDataErrorInfo
+    Implements IDXDataErrorInfo
     Private mClassName As String = "LazadaProperty"
+    Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
+        If propertyName = "InternalCode" AndAlso String.IsNullOrEmpty(InternalCode) Then
+            info.ErrorText = String.Format("ไม่พบข้อมูลอ้างอิงจากคำสั่งซื้อ " & ExternalCode, propertyName)
+            info.ErrorType = ErrorType.Critical
+        End If
 
+    End Sub
+
+    Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
+        Dim propertyInfo As New ErrorInfo()
+
+        GetPropertyError("InternalCode", propertyInfo)
+
+    End Sub
 #Region "Property"
 
     Dim mIsSelect As Boolean

@@ -46,7 +46,7 @@ Public Class ShopeeImport
                         End If
                         rec.IsSelect = rec.OrderID > 0
                         rec.DiffAmount = rec.OrderAmount - rec.GrandTotal
-                        lError = GetPropertyError(rec)
+                        'lError = GetPropertyError(rec)
                         If lError <> "" Then
                             If lErrorList = "" Then
                                 lErrorList = "******** Import Error *********"
@@ -68,55 +68,9 @@ Public Class ShopeeImport
         End Try
     End Function
 
-    'Public Function CheckIsError(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView) As Boolean
-    '    Dim info As New ErrorInfo()
-    '    Dim lIsError = False
-    '    Try
-    '        If pGrid.RowCount > 0 Then
-    '            For lRow = 0 To pGrid.RowCount - 1
-    '                TryCast(pGrid.GetRow(lRow), ProductProperty).GetError(info)
-    '                If info.ErrorText <> "" Then
-    '                    lIsError = True
-    '                End If
-    '            Next
-    '        End If
-    '        Return lIsError
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mClassName & ".CheckIsError : " & e.Message)
-    '    Finally
-    '    End Try
-    'End Function
-
-    'Public Function GetDAOFromGrid(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView)
-    '    Dim lRow As Long
-    '    Dim rec As ProductProperty
-
-    '    GetDAOFromGrid = False
-    '    Try
-    '        mProductPropertyS = Nothing
-    '        mProductPropertyS = New List(Of ProductProperty)
-    '        pProgressBar.Position = 0
-    '        If pGrid.RowCount > 0 Then
-    '            pProgressBar.Properties.Maximum = pGrid.RowCount
-    '            For lRow = 0 To pGrid.RowCount
-    '                rec = Nothing
-    '                rec = TryCast(pGrid.GetRow(lRow), ProductProperty)
-    '                If Not rec Is Nothing AndAlso rec.IsSelect = True Then
-    '                    mProductPropertyS.Add(rec)
-    '                End If
-    '                pProgressBar.Position = lRow
-    '                'End If
-    '            Next
-    '        End If
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "frmImport.GetDAOFromGrid : " & e.Message)
-    '    Finally
-    '        rec = Nothing
-    '    End Try
-    'End Function
 
     Public Function ImportData() As BindingSource
-        'Dim lList As New List(Of SubOrder)
+
         Dim bindingSource1 = New BindingSource
         bindingSource1.DataSource = GetType(SubOrder)
 
@@ -125,7 +79,7 @@ Public Class ShopeeImport
                 Dim query = mPropertyS.FindAll(Function(p) p.IsSelect = True)
 
                 For Each pRow In query
-                    If pRow.IsSelect = True Then
+                    If pRow.IsSelect = True And pRow.OrderID > 0 Then
                         Dim lcls As New OrderSDAO
                         If lcls.InitailData(pRow.OrderID, "", Nothing) Then
                             If lcls.ID > 0 Then
@@ -152,21 +106,12 @@ Public Class ShopeeImport
                                 bindingSource1.Add(rec)
                             End If
                         End If
+                    Else
+                        pRow.IsSelect = False
                     End If
+
                 Next
 
-                'If bindingSource1.Count > 0 Then
-                '    Dim lFormEdit As New frmBill
-                '    With lFormEdit
-                '        .OrderType = MasterType.ReceiptCut
-                '        .Caption = "ตัดรับชำระ"
-                '        .MdiParent = frmMain
-                '        .ModeData = DataMode.ModeNew
-                '        .IDs = 0
-                '        .SubOrderList = bindingSource1
-                '        .Show()
-                '    End With
-                'End If
             End If
             Return bindingSource1
         Catch e As Exception
@@ -215,43 +160,19 @@ Public Class ShopeeProperty
     Dim mIsSelect As Boolean
 
     Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-        If propertyName = "OrderCode" AndAlso String.IsNullOrEmpty(OrderCode) Then
-            info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
+        If propertyName = "InternalCode" AndAlso String.IsNullOrEmpty(InternalCode) Then
+            info.ErrorText = String.Format("ไม่พบข้อมูลอ้างอิงจากคำสั่งซื้อ " & ExternalCode, propertyName)
             info.ErrorType = ErrorType.Critical
         End If
-        'If propertyName = "UnitName" AndAlso String.IsNullOrEmpty(UnitName) Then
-        '    info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
-        '    info.ErrorType = ErrorType.Critical
-        'End If
-        'If propertyName = "Units" AndAlso ConvertNullToZero(Units) <= 0 Then
-        '    info.ErrorText = String.Format("กรุณาระบุจำนวน", propertyName)
-        '    info.ErrorType = ErrorType.Critical
-        'End If
+
     End Sub
 
     Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
         Dim propertyInfo As New ErrorInfo()
 
-        GetPropertyError("OrderCode", propertyInfo)
+        GetPropertyError("InternalCode", propertyInfo)
 
-        'If propertyInfo.ErrorText = "" Then
-        '    If (mColData And ProColumn.UnitName) = ProColumn.UnitName Then
-        '        GetPropertyError("UnitName", propertyInfo)
-        '    End If
-        'End If
 
-        'If propertyInfo.ErrorText = "" Then
-        '    If (mColData And ProColumn.Units) = ProColumn.Units Then
-        '        GetPropertyError("Units", propertyInfo)
-        '    End If
-        'End If
-
-        'If propertyInfo.ErrorText <> "" Then
-        '    info.ErrorText = "พบข้อผิดพลาด"
-        'Else
-
-        'End If
-        'Total = (Units * Price) - Discount
     End Sub
 
     Public Property IsSelect() As Boolean

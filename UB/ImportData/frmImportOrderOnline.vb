@@ -117,6 +117,7 @@ Public Class frmImportOrderOnline
 
     Private Sub frmImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblError.Text = ""
+        Me.Text = "Import Online Sales"
     End Sub
 
     Private Sub WizardControl1_CancelClick(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WizardControl1.CancelClick
@@ -182,21 +183,6 @@ Public Class frmImportOrderOnline
         End Try
     End Sub
 
-    'Private Function CheckIsError() As Boolean
-    '    Dim info As New ErrorInfo()
-    '    Try
-    '        If mMasterType = MasterType.Product Then
-    '            Return mclsProduct.CheckIsError(GridView)
-    '        ElseIf mMasterType = MasterType.StockIn Then
-    '            Return mclsStock.CheckIsError(GridView)
-    '        Else
-    '            Return mclsCustomer.CheckIsError(GridView)
-    '        End If
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "frmImport.CheckIsError : " & e.Message)
-    '    Finally
-    '    End Try
-    'End Function
 
 
     Private Function LoadFileToGrid() As Boolean
@@ -258,7 +244,8 @@ Public Class frmImportOrderOnline
 
             If RadioCompany.EditValue = "Shopee" Then
                 bindingSource1 = mclsShopee.ImportData()
-
+            Else
+                bindingSource1 = mclsLazada.ImportData()
             End If
 
             If bindingSource1.Count > 0 Then
@@ -278,7 +265,7 @@ Public Class frmImportOrderOnline
                     End With
                 End If
             Else
-                txtError.EditValue = "กรุณาเลือกรายการ"
+                txtError.EditValue = "กรุณาเลือกรายการ หรือตรวจสอบข้อผิดพลาด"
             End If
 
             Return False
