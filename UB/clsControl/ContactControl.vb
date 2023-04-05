@@ -76,6 +76,8 @@ Public Class ContactControl
             .Columns("Fax").Width = 100
             .Columns("Email1").Caption = "อีเมล์"
             .Columns("Email1").Width = 100
+
+            .Columns("ParentCompany").Visible = False
         End With
     End Sub
 

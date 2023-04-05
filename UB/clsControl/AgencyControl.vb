@@ -62,6 +62,8 @@ Public Class AgencyControl
             .Columns("Code").Width = 300
             .Columns("CompanyName").Caption = "ชื่อบริษัท"
             .Columns("CompanyName").Width = 250
+            .Columns("ParentCompany").Caption = "บริษัทแม่"
+            .Columns("ParentCompany").Width = 250
             .Columns("Rating").Caption = "ระดับความสนใจ"
             .Columns("Rating").Width = 100
 

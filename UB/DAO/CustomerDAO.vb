@@ -550,7 +550,8 @@ Public Class CustomerDAO
                 SQL &=  " ,A.Title + A.Firstname + ' ' + A.LastName AS NAME"
             End If
 
-            SQL &=  " ,A.CompanyName "
+            SQL &= " ,A.CompanyName "
+            SQL &= " ,case when CompanyRelate.CompanyName='' then CompanyRelate.Title + CompanyRelate.Firstname + ' ' + CompanyRelate.LastName else CompanyRelate.CompanyName end ParentCompany"
             If mTableID = MasterType.Lead Then
                 SQL &=  " ,A.LeadStatus"
             End If
@@ -565,14 +566,17 @@ Public Class CustomerDAO
             SQL &=  " ,A.IsQuick "
             SQL &=  " ,Address.Phone1,Address.Fax,Address.Email1 "
             SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
-            SQL &=  " ,A.ModifiedTime"
+            SQL &= " ,A.ModifiedTime"
+
             SQL &=  " FROM Customer A"
             If mTableID = MasterType.Accounts Or mTableID = MasterType.Agency Then
-                SQL &=  " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=A.ContactPersonID  "
+                SQL &= " LEFT OUTER JOIN Customer as Contact ON Contact.CustomerID=A.ContactPersonID  "
+
             End If
-            SQL &=  " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
-            SQL &=  " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
-            SQL &=  " WHERE A.IsDelete =0   "
+            SQL &= " LEFT OUTER JOIN Customer as CompanyRelate ON CompanyRelate.CompanyRelateID=A.CustomerID  "
+            SQL &= " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
+            SQL &= " WHERE A.IsDelete =0   "
             If TableName <> "" And TableName <> "0" Then
                 SQL &=  "  AND A.CustomerType='" & TableName & "'"
             End If

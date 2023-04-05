@@ -19,6 +19,7 @@ Module modFunction
         OppName = 128
         Agency = 256
         CustomerCode = 512
+        PO = 1024
     End Enum
 
 
@@ -34,6 +35,7 @@ Module modFunction
     Private mFindCustomer(1) As String
     Private mFindOppName(1) As String
     Private mFindAgency(1) As String
+    Private mFindPO(1) As String
 
     Public Sub InitialFilterCon(ByVal pCombo As DevExpress.XtraEditors.ComboBoxEdit, ByVal pFilterBy As FilterBy)
         mFindAll(0) = "ทั้งหมด"
@@ -58,6 +60,8 @@ Module modFunction
         mFindOppName(1) = "OppName"
         mFindAgency(0) = "เจ้าหนี้"
         mFindAgency(1) = "Agency"
+        mFindPO(0) = "เลขคำสั่งซื้อ"
+        mFindPO(1) = "PO"
         Try
             pCombo.Properties.Items.Add(mFindAll(0))
             If (pFilterBy And FilterBy.Subject) = FilterBy.Subject Then pCombo.Properties.Items.Add(mFindSubject(0))
@@ -70,6 +74,7 @@ Module modFunction
             If (pFilterBy And FilterBy.CustomerCode) = FilterBy.CustomerCode Then pCombo.Properties.Items.Add(mFindCustomerCode(0))
             If (pFilterBy And FilterBy.OppName) = FilterBy.OppName Then pCombo.Properties.Items.Add(mFindOppName(0))
             If (pFilterBy And FilterBy.Agency) = FilterBy.Agency Then pCombo.Properties.Items.Add(mFindAgency(0))
+            If (pFilterBy And FilterBy.PO) = FilterBy.PO Then pCombo.Properties.Items.Add(mFindPO(0))
             pCombo.SelectedIndex = 0
 
 
@@ -106,6 +111,8 @@ Module modFunction
                     Return mFindOppName(1)
                 Case mFindAgency(0)
                     Return mFindAgency(1)
+                Case mFindPO(0)
+                    Return mFindPO(1)
                 Case Else
                     Return "*"   'Default ALL
             End Select

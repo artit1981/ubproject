@@ -80,6 +80,8 @@ Public Class LeadControl
             .Columns("ModifiedTime").Caption = "แก้ไขล่าสุด"
             .Columns("ModifiedTime").Width = 200
             .Columns("ModifiedTime").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
+
+            .Columns("ParentCompany").Visible = False
         End With
     End Sub
 

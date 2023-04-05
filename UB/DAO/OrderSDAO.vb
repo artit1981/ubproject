@@ -436,6 +436,10 @@ Public Class OrderSDAO
             If TableID = MasterType.Quotation Then
                 SQL &= ",RefOrder.OrderCode AS RefCode  "
             End If
+            Select Case pTableID
+                Case MasterType.SellOrders, MasterType.AddCredit, MasterType.ReduceCredit, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.Borrow, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy
+                    SQL &= " ,Orders.PO "
+            End Select
             SQL &= "  ,Orders.GrandTotal"
             If TableID = MasterType.SellOrders Then
                 SQL &= ",Invoice.OrderCode AS InvoiceCode,Shiping.OrderCode AS ShipingCode,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
@@ -448,6 +452,9 @@ Public Class OrderSDAO
                 SQL &= ",Orders.InvoiceSuplierID "
             End If
             SQL &= ",Orders.IsDelete,Orders.IsCancel, Orders.IsNotPass"
+
+
+
 
             SQL &= " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME,Orders.ModifiedTime "
             SQL &= " ,(select max(ChequeID) from Cheque where Cheque.RefOrderID=Orders.OrderID and Cheque.IsDelete=0 ) as ChequeID"

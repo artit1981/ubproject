@@ -30,7 +30,7 @@ Public Class OrderControl
             Case MasterType.SellOrders
                 mCaption = "ใบสั่งขาย"
                 lMakeOrderCation = "Make Invoice & Shiping"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Quotation
                 mCaption = "ใบเสนอราคา"
                 lMakeOrderCation = "Make Order"
@@ -40,16 +40,16 @@ Public Class OrderControl
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Invoice
                 mCaption = "ใบกำกับภาษี(ขาย)"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.InvoiceOnline
                 mCaption = "ใบกำกับภาษีออนไลน์"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.InvoiceAbb
                 mCaption = "ใบกำกับภาษีอย่างย่อ"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Borrow
                 mCaption = "ยืมสินค้า (ขาย)"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.PurchaseOrder
                 mCaption = "ใบสั่งซื้อ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
@@ -59,13 +59,13 @@ Public Class OrderControl
             Case MasterType.Reserve
                 mCaption = "ใบสั่งจอง"
                 lMakeOrderCation = "Make Order"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Shiping
                 mCaption = "ใบส่งของ"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.AddCredit
                 mCaption = "ตั้งลูกหนี้"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Receipt
                 mCaption = "ใบเสร็จรับเงิน /ชำระเงิน"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
@@ -86,13 +86,13 @@ Public Class OrderControl
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReduceCredit
                 mCaption = "บันทึกลดหนี้"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.AddCreditBuy
                 mCaption = "ตั้งลูกหนี้"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName + FilterBy.PO
             Case MasterType.ReduceCreditBuy
                 mCaption = "บันทึกลดหนี้"
-                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
+                lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName + FilterBy.PO
             Case MasterType.ClaimOut
                 mCaption = "แจ้งเคลม Supplier"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
@@ -200,14 +200,19 @@ Public Class OrderControl
                     .Columns("RefCode").MaxWidth = 100
                 Case MasterType.StockIn
                     .Columns("PO").Caption = "PO"
-                    .Columns("PO").Width = 100
-                    .Columns("PO").MaxWidth = 120
+                    .Columns("PO").Width = 150
+                    .Columns("PO").MaxWidth = 300
                 Case MasterType.InvoiceBuy, MasterType.ShipingBuy, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.ReduceCredit, MasterType.AddCreditBuy
                     .Columns("InvoiceSuplierID").Caption = "เลขที่ใบกำกับภาษีเจ้าหนี้"
                     .Columns("InvoiceSuplierID").Width = 100
                     .Columns("InvoiceSuplierID").MaxWidth = 120
             End Select
-
+            Select Case mOrderType
+                Case MasterType.SellOrders, MasterType.AddCredit, MasterType.ReduceCredit, MasterType.Shiping, MasterType.Reserve, MasterType.Invoice, MasterType.Borrow, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy
+                    .Columns("PO").Caption = "เลขคำสั่งซื้อ"
+                    .Columns("PO").Width = 100
+                    .Columns("PO").MaxWidth = 120
+            End Select
             Select Case mOrderType
                 Case MasterType.PurchaseOrder, MasterType.Asset, MasterType.InvoiceBuy, MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.ClaimOut, MasterType.ReceiptBuy, MasterType.ShipingBuy, MasterType.CancelPO
                     .Columns("Customer").Caption = "เจ้าหนี้"

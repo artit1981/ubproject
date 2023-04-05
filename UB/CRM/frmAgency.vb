@@ -254,7 +254,7 @@ Public Class frmAgency
 
     Private Sub SetComboCustomer()
         Try
-            SetSearchLookCustomer(CustomerID, False, False)
+            SetSearchLookCustomer(CustomerID, False, True)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboCustomer : " & e.Message)
         End Try
