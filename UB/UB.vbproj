@@ -475,6 +475,12 @@
     <Compile Include="Report\frmDebtAnalystReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\rptInvoiceOwn.Designer.vb">
+      <DependentUpon>rptInvoiceOwn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptInvoiceOwn.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptInvoiceOnline.Designer.vb">
       <DependentUpon>rptInvoiceOnline.vb</DependentUpon>
     </Compile>
@@ -1348,6 +1354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmDebtAnalystReport.resx">
       <DependentUpon>frmDebtAnalystReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInvoiceOwn.resx">
+      <DependentUpon>rptInvoiceOwn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptInvoiceOnline.resx">
       <DependentUpon>rptInvoiceOnline.vb</DependentUpon>
