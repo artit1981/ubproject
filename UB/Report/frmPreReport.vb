@@ -32,6 +32,15 @@ Public Class frmPreReport
             mProName = pProName
             mBarCodeList = pBarCodeList
             mReport = pReport
+
+            Select Case mOrderType
+                Case MasterType.Invoice, MasterType.Shiping
+                    rdoReportLayout.Visible = True
+                    lblReportLayout.Visible = True
+                Case Else
+                    rdoReportLayout.Visible = False
+                    lblReportLayout.Visible = False
+            End Select
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmPreReport.InitialForm : " & e.Message)
             Return False
@@ -108,7 +117,21 @@ Public Class frmPreReport
                     Case MasterType.Expose
                         report = New rptExpose
                         lclsReport.Header1 = "รายการเบิก"
-                    Case MasterType.Shiping, MasterType.ShipingBuy
+                    Case MasterType.Shiping
+                        If rdoReportLayout.EditValue = "2" Then
+                            report = New rptInvoiceOwn
+                        Else
+                            report = New rptShipingReport
+                        End If
+
+                    Case MasterType.Invoice
+                        If rdoReportLayout.EditValue = "2" Then
+                            report = New rptInvoiceOwn
+                        Else
+                            report = New rptOrdersReport
+                        End If
+
+                    Case MasterType.ShipingBuy
                         report = New rptShipingReport
                     Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy
                         report = New rptReduceCredit

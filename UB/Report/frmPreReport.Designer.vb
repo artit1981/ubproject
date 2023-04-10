@@ -22,6 +22,8 @@ Partial Class frmPreReport
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPreReport))
         Me.rdoCondition = New DevExpress.XtraEditors.RadioGroup()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.GroupControl5 = New DevExpress.XtraEditors.GroupControl()
+        Me.chkSN = New System.Windows.Forms.CheckBox()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
         Me.chkShiping = New System.Windows.Forms.CheckBox()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
@@ -35,6 +37,7 @@ Partial Class frmPreReport
         Me.CoppyLayout = New DevExpress.XtraLayout.LayoutControlItem()
         Me.DateLayout = New DevExpress.XtraLayout.LayoutControlItem()
         Me.ShipingDateLayout = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.SNLayout = New DevExpress.XtraLayout.LayoutControlItem()
         Me.btnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.btnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -42,12 +45,13 @@ Partial Class frmPreReport
         Me.cboBarcode = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
-        Me.GroupControl5 = New DevExpress.XtraEditors.GroupControl()
-        Me.chkSN = New System.Windows.Forms.CheckBox()
-        Me.SNLayout = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.rdoReportLayout = New DevExpress.XtraEditors.RadioGroup()
+        Me.lblReportLayout = New DevExpress.XtraEditors.LabelControl()
         CType(Me.rdoCondition.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl5.SuspendLayout()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl4.SuspendLayout()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,13 +65,12 @@ Partial Class frmPreReport
         CType(Me.CoppyLayout, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateLayout, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShipingDateLayout, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SNLayout, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.cboBarcode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupControl5.SuspendLayout()
-        CType(Me.SNLayout, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rdoReportLayout.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rdoCondition
@@ -97,6 +100,30 @@ Partial Class frmPreReport
         Me.LayoutControl1.Size = New System.Drawing.Size(441, 338)
         Me.LayoutControl1.TabIndex = 346
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'GroupControl5
+        '
+        Me.GroupControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupControl5.Appearance.Options.UseFont = True
+        Me.GroupControl5.Controls.Add(Me.chkSN)
+        Me.GroupControl5.Location = New System.Drawing.Point(12, 300)
+        Me.GroupControl5.Name = "GroupControl5"
+        Me.GroupControl5.ShowCaption = False
+        Me.GroupControl5.Size = New System.Drawing.Size(417, 26)
+        Me.GroupControl5.TabIndex = 348
+        Me.GroupControl5.Text = "เงื่อนไขอื่นๆ"
+        '
+        'chkSN
+        '
+        Me.chkSN.AutoSize = True
+        Me.chkSN.Checked = True
+        Me.chkSN.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkSN.Location = New System.Drawing.Point(16, 4)
+        Me.chkSN.Name = "chkSN"
+        Me.chkSN.Size = New System.Drawing.Size(77, 20)
+        Me.chkSN.TabIndex = 0
+        Me.chkSN.Text = "แสดง SN"
+        Me.chkSN.UseVisualStyleBackColor = True
         '
         'GroupControl4
         '
@@ -235,6 +262,15 @@ Partial Class frmPreReport
         Me.ShipingDateLayout.TextSize = New System.Drawing.Size(0, 0)
         Me.ShipingDateLayout.TextVisible = False
         '
+        'SNLayout
+        '
+        Me.SNLayout.Control = Me.GroupControl5
+        Me.SNLayout.Location = New System.Drawing.Point(0, 288)
+        Me.SNLayout.Name = "SNLayout"
+        Me.SNLayout.Size = New System.Drawing.Size(421, 30)
+        Me.SNLayout.TextSize = New System.Drawing.Size(0, 0)
+        Me.SNLayout.TextVisible = False
+        '
         'btnOK
         '
         Me.btnOK.Location = New System.Drawing.Point(447, 18)
@@ -292,38 +328,23 @@ Partial Class frmPreReport
         Me.PictureEdit1.Size = New System.Drawing.Size(201, 110)
         Me.PictureEdit1.TabIndex = 345
         '
-        'GroupControl5
+        'rdoReportLayout
         '
-        Me.GroupControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupControl5.Appearance.Options.UseFont = True
-        Me.GroupControl5.Controls.Add(Me.chkSN)
-        Me.GroupControl5.Location = New System.Drawing.Point(12, 300)
-        Me.GroupControl5.Name = "GroupControl5"
-        Me.GroupControl5.ShowCaption = False
-        Me.GroupControl5.Size = New System.Drawing.Size(417, 26)
-        Me.GroupControl5.TabIndex = 348
-        Me.GroupControl5.Text = "เงื่อนไขอื่นๆ"
+        Me.rdoReportLayout.EditValue = "1"
+        Me.rdoReportLayout.Location = New System.Drawing.Point(65, 339)
+        Me.rdoReportLayout.Name = "rdoReportLayout"
+        Me.rdoReportLayout.Properties.Columns = 2
+        Me.rdoReportLayout.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("1", "รูปแบบฟอร์มปกติ"), New DevExpress.XtraEditors.Controls.RadioGroupItem("2", "แบบฟอร์มบริษัท")})
+        Me.rdoReportLayout.Size = New System.Drawing.Size(364, 40)
+        Me.rdoReportLayout.TabIndex = 347
         '
-        'chkSN
+        'lblReportLayout
         '
-        Me.chkSN.AutoSize = True
-        Me.chkSN.Checked = True
-        Me.chkSN.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkSN.Location = New System.Drawing.Point(16, 4)
-        Me.chkSN.Name = "chkSN"
-        Me.chkSN.Size = New System.Drawing.Size(77, 20)
-        Me.chkSN.TabIndex = 0
-        Me.chkSN.Text = "แสดง SN"
-        Me.chkSN.UseVisualStyleBackColor = True
-        '
-        'SNLayout
-        '
-        Me.SNLayout.Control = Me.GroupControl5
-        Me.SNLayout.Location = New System.Drawing.Point(0, 288)
-        Me.SNLayout.Name = "SNLayout"
-        Me.SNLayout.Size = New System.Drawing.Size(421, 30)
-        Me.SNLayout.TextSize = New System.Drawing.Size(0, 0)
-        Me.SNLayout.TextVisible = False
+        Me.lblReportLayout.Location = New System.Drawing.Point(12, 352)
+        Me.lblReportLayout.Name = "lblReportLayout"
+        Me.lblReportLayout.Size = New System.Drawing.Size(47, 13)
+        Me.lblReportLayout.TabIndex = 348
+        Me.lblReportLayout.Text = "แบบฟอร์ม"
         '
         'frmPreReport
         '
@@ -331,7 +352,9 @@ Partial Class frmPreReport
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(537, 351)
+        Me.ClientSize = New System.Drawing.Size(537, 391)
+        Me.Controls.Add(Me.lblReportLayout)
+        Me.Controls.Add(Me.rdoReportLayout)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.PictureEdit1)
         Me.Controls.Add(Me.GroupControl3)
@@ -345,6 +368,9 @@ Partial Class frmPreReport
         CType(Me.rdoCondition.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl5.ResumeLayout(False)
+        Me.GroupControl5.PerformLayout()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl4.ResumeLayout(False)
         Me.GroupControl4.PerformLayout()
@@ -361,16 +387,15 @@ Partial Class frmPreReport
         CType(Me.CoppyLayout, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateLayout, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ShipingDateLayout, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SNLayout, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         Me.GroupControl3.PerformLayout()
         CType(Me.cboBarcode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupControl5.ResumeLayout(False)
-        Me.GroupControl5.PerformLayout()
-        CType(Me.SNLayout, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rdoReportLayout.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents rdoCondition As DevExpress.XtraEditors.RadioGroup
@@ -398,4 +423,6 @@ Partial Class frmPreReport
     Friend WithEvents GroupControl5 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents chkSN As CheckBox
     Friend WithEvents SNLayout As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents rdoReportLayout As DevExpress.XtraEditors.RadioGroup
+    Friend WithEvents lblReportLayout As DevExpress.XtraEditors.LabelControl
 End Class
