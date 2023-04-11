@@ -331,20 +331,24 @@ Partial Class frmPreReport
         'rdoReportLayout
         '
         Me.rdoReportLayout.EditValue = "1"
-        Me.rdoReportLayout.Location = New System.Drawing.Point(65, 339)
+        Me.rdoReportLayout.Location = New System.Drawing.Point(12, 366)
         Me.rdoReportLayout.Name = "rdoReportLayout"
-        Me.rdoReportLayout.Properties.Columns = 2
-        Me.rdoReportLayout.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("1", "รูปแบบฟอร์มปกติ"), New DevExpress.XtraEditors.Controls.RadioGroupItem("2", "แบบฟอร์มบริษัท")})
-        Me.rdoReportLayout.Size = New System.Drawing.Size(364, 40)
+        Me.rdoReportLayout.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoReportLayout.Properties.Appearance.Options.UseFont = True
+        Me.rdoReportLayout.Properties.Columns = 1
+        Me.rdoReportLayout.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("1", "แบบฟอร์มปกติ"), New DevExpress.XtraEditors.Controls.RadioGroupItem("2", "แบบฟอร์มใบกำกับภาษีบริษัท"), New DevExpress.XtraEditors.Controls.RadioGroupItem("3", "แบบฟอร์มใบเสร็จรับเงินบริษัท")})
+        Me.rdoReportLayout.Size = New System.Drawing.Size(352, 72)
         Me.rdoReportLayout.TabIndex = 347
         '
         'lblReportLayout
         '
-        Me.lblReportLayout.Location = New System.Drawing.Point(12, 352)
+        Me.lblReportLayout.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReportLayout.Appearance.Options.UseFont = True
+        Me.lblReportLayout.Location = New System.Drawing.Point(12, 344)
         Me.lblReportLayout.Name = "lblReportLayout"
-        Me.lblReportLayout.Size = New System.Drawing.Size(47, 13)
+        Me.lblReportLayout.Size = New System.Drawing.Size(83, 16)
         Me.lblReportLayout.TabIndex = 348
-        Me.lblReportLayout.Text = "แบบฟอร์ม"
+        Me.lblReportLayout.Text = "เลือกแบบฟอร์ม"
         '
         'frmPreReport
         '
@@ -352,7 +356,7 @@ Partial Class frmPreReport
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(537, 391)
+        Me.ClientSize = New System.Drawing.Size(537, 473)
         Me.Controls.Add(Me.lblReportLayout)
         Me.Controls.Add(Me.rdoReportLayout)
         Me.Controls.Add(Me.LayoutControl1)

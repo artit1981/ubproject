@@ -120,6 +120,8 @@ Public Class frmPreReport
                     Case MasterType.Shiping
                         If rdoReportLayout.EditValue = "2" Then
                             report = New rptInvoiceOwn
+                        ElseIf rdoReportLayout.EditValue = "3" Then
+                            report = New rptInvoiceRC
                         Else
                             report = New rptShipingReport
                         End If
@@ -127,6 +129,8 @@ Public Class frmPreReport
                     Case MasterType.Invoice
                         If rdoReportLayout.EditValue = "2" Then
                             report = New rptInvoiceOwn
+                        ElseIf rdoReportLayout.EditValue = "3" Then
+                            report = New rptInvoiceRC
                         Else
                             report = New rptOrdersReport
                         End If
