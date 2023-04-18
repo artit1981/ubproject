@@ -186,6 +186,7 @@ Module modOrder
         SQL &= " FROM Orders"
         SQL &= " WHERE IsCancel=0 and  IsDelete=0 "
         SQL &= " AND PO='" & pPOCode.Trim & "' "
+        SQL &= " AND TableID in (" & MasterType.Invoice & "," & MasterType.Shiping & "," & MasterType.InvoiceOnline & "," & MasterType.InvoiceAbb & ")"
 
         DataTable = New DataTable
         DataTable = gConnection.executeSelectQuery(SQL, Nothing)

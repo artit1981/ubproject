@@ -768,7 +768,7 @@ Partial Public Class rptInvoiceOwn
         Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel32, Me.XrLabel31, Me.XrLine5, Me.XrLine9, Me.XrLine6, Me.XrLabel7, Me.XrLine2, Me.XrLabel11, Me.XrLine4, Me.XrLine7, Me.XrLine8, Me.XrLabel17, Me.XrLabel16, Me.XrLabel18, Me.XrLabel58, Me.XrLabel56, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel10})
         Me.PanelTotal.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.SizeF = New System.Drawing.SizeF(797.0001!, 279.5136!)
+        Me.PanelTotal.SizeF = New System.Drawing.SizeF(797.0001!, 280.0!)
         '
         'XrLabel32
         '
@@ -782,7 +782,7 @@ Partial Public Class rptInvoiceOwn
         Me.XrLabel32.StylePriority.UseFont = False
         Me.XrLabel32.StylePriority.UseForeColor = False
         Me.XrLabel32.StylePriority.UseTextAlignment = False
-        Me.XrLabel32.Text = "2.ได้รับสินค้าตามรายการข้างต้นไว้ถูกต้องและอยู่ในสภาพเรียบร้อยทุกประการ"
+        Me.XrLabel32.Text = "2.ได้รับสินค้าตามรายการข้างบนนี้ไว้ถูกต้อง และ อยู่ในสภาพเรียบร้อยทุกประการ"
         Me.XrLabel32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel31
@@ -797,8 +797,8 @@ Partial Public Class rptInvoiceOwn
         Me.XrLabel31.StylePriority.UseFont = False
         Me.XrLabel31.StylePriority.UseForeColor = False
         Me.XrLabel31.StylePriority.UseTextAlignment = False
-        Me.XrLabel31.Text = "1.โปรดตรวจรับสินค้าตามรายการข้างต้นให้ถูกต้องก่อนเซ็นรับสินค้า ฉะนั้นทางร้านจะไม่" &
-    "รับผิดชอบทุกประการ"
+        Me.XrLabel31.Text = "1.โปรดตรวจนับสินค้าดังกล่าวให้ถูกต้องก่อนลงชื่อรับสินค้า มิฉะนั้นทางร้านจะไม่รับผ" &
+    "ิดชอบทุกประการ"
         Me.XrLabel31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLine5
@@ -929,9 +929,9 @@ Partial Public Class rptInvoiceOwn
         '
         'XrLine11
         '
-        Me.XrLine11.LocationFloat = New DevExpress.Utils.PointFloat(13.329!, 0!)
+        Me.XrLine11.LocationFloat = New DevExpress.Utils.PointFloat(13.32901!, 0!)
         Me.XrLine11.Name = "XrLine11"
-        Me.XrLine11.SizeF = New System.Drawing.SizeF(777.4508!, 2.0!)
+        Me.XrLine11.SizeF = New System.Drawing.SizeF(777.4507!, 2.0!)
         '
         'Number2Dit
         '
@@ -1030,6 +1030,7 @@ Partial Public Class rptInvoiceOwn
         Me.GroupFooter1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine11})
         Me.GroupFooter1.HeightF = 2.0!
         Me.GroupFooter1.Name = "GroupFooter1"
+        Me.GroupFooter1.PrintAtBottom = True
         Me.GroupFooter1.RepeatEveryPage = True
         '
         'XrCrossBandBox1

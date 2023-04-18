@@ -46,6 +46,12 @@ Public Class ShopeeImport
                         End If
                         rec.IsSelect = rec.OrderID > 0
                         rec.DiffAmount = rec.OrderAmount - rec.GrandTotal
+
+                        If rec.DiffAmount <> 0 And rec.GrandTotal > 0 Then
+                            rec.DiffPercen = (rec.DiffAmount / rec.GrandTotal) * 100
+                        Else
+                            rec.DiffPercen = 0
+                        End If
                         'lError = GetPropertyError(rec)
                         If lError <> "" Then
                             If lErrorList = "" Then
@@ -149,12 +155,8 @@ Public Class ShopeeProperty
     Private mClassName As String = "ShopeeProperty"
 
 #Region "Property"
-    Private mOrderDate As Date
-    Private mPayBy As String
-    Private mOrderAmount As Decimal
-    Private mOrderDesc As String
-    Private mOrderUnit As Decimal
-    Private mExternalCode As String
+
+
     Private mInternalCode As String
 
     Dim mIsSelect As Boolean
@@ -184,53 +186,27 @@ Public Class ShopeeProperty
         End Set
     End Property
 
-    Public Property OrderDate() As Date
+    Private mTXDate As Date
+    Public Property TXDate() As Date
         Get
-            Return mOrderDate
+            Return mTXDate
         End Get
         Set(ByVal value As Date)
-            mOrderDate = value
+            mTXDate = value
         End Set
     End Property
 
-    Public Property PayBy() As String
+    Private mTxNo As String
+    Public Property TxNo() As String
         Get
-            Return mPayBy
+            Return mTxNo
         End Get
         Set(ByVal value As String)
-            mPayBy = value
+            mTxNo = value
         End Set
     End Property
 
-    Public Property OrderAmount() As Decimal
-        Get
-            Return mOrderAmount
-        End Get
-        Set(ByVal value As Decimal)
-            mOrderAmount = value
-        End Set
-    End Property
-
-    Public Property OrderDesc() As String
-        Get
-            Return mOrderDesc
-        End Get
-        Set(ByVal value As String)
-            mOrderDesc = value
-        End Set
-    End Property
-
-
-    Public Property OrderUnit() As Decimal
-        Get
-            Return mOrderUnit
-        End Get
-        Set(ByVal value As Decimal)
-            mOrderUnit = value
-        End Set
-
-    End Property
-
+    Private mExternalCode As String
     Public Property ExternalCode() As String
         Get
             Return mExternalCode
@@ -239,7 +215,25 @@ Public Class ShopeeProperty
             mExternalCode = value
         End Set
     End Property
+    Private mTxDesc As String
+    Public Property TxDesc() As String
+        Get
+            Return mTxDesc
+        End Get
+        Set(ByVal value As String)
+            mTxDesc = value
+        End Set
+    End Property
 
+    Private mTxAmount As Decimal
+    Public Property TxAmount() As Decimal
+        Get
+            Return mTxAmount
+        End Get
+        Set(ByVal value As Decimal)
+            mTxAmount = value
+        End Set
+    End Property
     Public Property InternalCode() As String
         Get
             Return mInternalCode
@@ -288,6 +282,15 @@ Public Class ShopeeProperty
         End Set
     End Property
 
+    Dim mDiffPercen As Decimal = 0
+    Public Property DiffPercen() As Decimal
+        Get
+            Return mDiffPercen
+        End Get
+        Set(ByVal value As Decimal)
+            mDiffPercen = value
+        End Set
+    End Property
 
 
 #End Region

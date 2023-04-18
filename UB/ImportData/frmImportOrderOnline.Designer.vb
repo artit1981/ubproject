@@ -23,6 +23,7 @@ Partial Class frmImportOrderOnline
         Me.WizardControl1 = New DevExpress.XtraWizard.WizardControl()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.BrowsPage = New DevExpress.XtraWizard.WizardPage()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.RadioCompany = New DevExpress.XtraEditors.RadioGroup()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -33,7 +34,6 @@ Partial Class frmImportOrderOnline
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.CompletionWizardPage1 = New DevExpress.XtraWizard.CompletionWizardPage()
-        Me.lblError = New System.Windows.Forms.Label()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
         Me.BrowsPage.SuspendLayout()
@@ -88,6 +88,18 @@ Partial Class frmImportOrderOnline
         Me.BrowsPage.Name = "BrowsPage"
         Me.BrowsPage.Size = New System.Drawing.Size(1151, 377)
         Me.BrowsPage.Text = "กรุณาเลือกไฟล์สำหรับการ Import"
+        '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.BackColor = System.Drawing.Color.Transparent
+        Me.lblError.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblError.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblError.Location = New System.Drawing.Point(98, 142)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(33, 14)
+        Me.lblError.TabIndex = 361
+        Me.lblError.Text = "Error"
         '
         'RadioCompany
         '
@@ -192,7 +204,10 @@ Partial Class frmImportOrderOnline
         Me.GridView.OptionsMenu.EnableFooterMenu = False
         Me.GridView.OptionsMenu.EnableGroupPanelMenu = False
         Me.GridView.OptionsMenu.ShowGroupSortSummaryItems = False
-        Me.GridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
+        Me.GridView.OptionsSelection.CheckBoxSelectorField = "IsSelect"
+        Me.GridView.OptionsSelection.MultiSelect = True
+        Me.GridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect
+        Me.GridView.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
         '
@@ -200,18 +215,6 @@ Partial Class frmImportOrderOnline
         '
         Me.CompletionWizardPage1.Name = "CompletionWizardPage1"
         Me.CompletionWizardPage1.Size = New System.Drawing.Size(901, 388)
-        '
-        'lblError
-        '
-        Me.lblError.AutoSize = True
-        Me.lblError.BackColor = System.Drawing.Color.Transparent
-        Me.lblError.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblError.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblError.Location = New System.Drawing.Point(98, 142)
-        Me.lblError.Name = "lblError"
-        Me.lblError.Size = New System.Drawing.Size(33, 14)
-        Me.lblError.TabIndex = 361
-        Me.lblError.Text = "Error"
         '
         'frmImportOrderOnline
         '

@@ -283,14 +283,43 @@ Public Class frmImportOrderOnline
         With pGrid
             'pGrid.OptionsBehavior.ReadOnly = True
 
-            If RadioCompany.EditValue = "Shopee" Then
-                .Columns("ExternalCode").Visible = False
-                .Columns("OrderID").Visible = False
-                .Columns("OrderUnit").Visible = False
-                '.Columns("OrderStatus").Visible = False
+            .Columns("ExternalCode").Visible = False
+            .Columns("OrderID").Visible = False
 
-                .Columns("IsSelect").MaxWidth = "70"
-                .Columns("IsSelect").Caption = "เลือก"
+            '.Columns("OrderStatus").Visible = False
+
+            '.Columns("IsSelect").MaxWidth = "70"
+            '.Columns("IsSelect").Caption = "เลือก"
+
+            .Columns("InternalCode").OptionsColumn.ReadOnly = True
+            .Columns("InternalCode").Caption = "เลขที่เอกสาร"
+            .Columns("InternalCode").MaxWidth = "200"
+
+            .Columns("OrderStatus").OptionsColumn.ReadOnly = True
+            .Columns("OrderStatus").Caption = "สถานะเอกสาร"
+            .Columns("OrderStatus").MaxWidth = "150"
+
+            .Columns("GrandTotal").OptionsColumn.ReadOnly = True
+            .Columns("GrandTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            .Columns("GrandTotal").DisplayFormat.FormatString = "n2"
+            .Columns("GrandTotal").Caption = "ยอดรวมรายการ"
+            .Columns("GrandTotal").MaxWidth = "200"
+
+            .Columns("DiffAmount").OptionsColumn.ReadOnly = True
+            .Columns("DiffAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
+            .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
+            .Columns("DiffAmount").MaxWidth = "200"
+
+            .Columns("DiffPercen").OptionsColumn.ReadOnly = True
+            .Columns("DiffPercen").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            .Columns("DiffPercen").DisplayFormat.FormatString = "n2"
+            .Columns("DiffPercen").Caption = "% ยอดต่าง"
+            .Columns("DiffPercen").MaxWidth = "150"
+
+            If RadioCompany.EditValue = "Shopee" Then
+
+                .Columns("OrderUnit").Visible = False
 
                 .Columns("OrderDate").OptionsColumn.ReadOnly = True
                 .Columns("OrderDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
@@ -302,7 +331,6 @@ Public Class frmImportOrderOnline
                 .Columns("PayBy").Caption = "ผู้นำจ่าย"
                 .Columns("PayBy").MaxWidth = "200"
 
-
                 .Columns("OrderAmount").OptionsColumn.ReadOnly = True
                 .Columns("OrderAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
                 .Columns("OrderAmount").DisplayFormat.FormatString = "n2"
@@ -312,35 +340,7 @@ Public Class frmImportOrderOnline
                 .Columns("OrderDesc").OptionsColumn.ReadOnly = True
                 .Columns("OrderDesc").Caption = "รายการ"
                 .Columns("OrderDesc").MaxWidth = "0"
-
-                .Columns("InternalCode").OptionsColumn.ReadOnly = True
-                .Columns("InternalCode").Caption = "เลขที่เอกสาร"
-                .Columns("InternalCode").MaxWidth = "200"
-
-                .Columns("OrderStatus").OptionsColumn.ReadOnly = True
-                .Columns("OrderStatus").Caption = "สถานะเอกสาร"
-                .Columns("OrderStatus").MaxWidth = "150"
-
-                .Columns("GrandTotal").OptionsColumn.ReadOnly = True
-                .Columns("GrandTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("GrandTotal").DisplayFormat.FormatString = "n2"
-                .Columns("GrandTotal").Caption = "ยอดรวมรายการ"
-                .Columns("GrandTotal").MaxWidth = "200"
-
-                .Columns("DiffAmount").OptionsColumn.ReadOnly = True
-                .Columns("DiffAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
-                .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
-                .Columns("DiffAmount").MaxWidth = "200"
             Else
-                .Columns("ExternalCode").Visible = False
-                .Columns("OrderID").Visible = False
-
-                '.Columns("OrderStatus").Visible = False
-
-                .Columns("IsSelect").MaxWidth = "70"
-                .Columns("IsSelect").Caption = "เลือก"
-
                 .Columns("TXDate").OptionsColumn.ReadOnly = True
                 .Columns("TXDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
                 .Columns("TXDate").DisplayFormat.FormatString = "dd/MM/yyyy"
@@ -361,30 +361,6 @@ Public Class frmImportOrderOnline
                 .Columns("TxAmount").Caption = "จำนวนเงิน Lazada"
                 .Columns("TxAmount").MaxWidth = "150"
 
-
-                .Columns("ExternalCode").OptionsColumn.ReadOnly = True
-                .Columns("ExternalCode").Caption = "Order No."
-                .Columns("ExternalCode").MaxWidth = "200"
-
-                .Columns("InternalCode").OptionsColumn.ReadOnly = True
-                .Columns("InternalCode").Caption = "เลขที่เอกสาร"
-                .Columns("InternalCode").MaxWidth = "200"
-
-                .Columns("OrderStatus").OptionsColumn.ReadOnly = True
-                .Columns("OrderStatus").Caption = "สถานะเอกสาร"
-                .Columns("OrderStatus").MaxWidth = "150"
-
-                .Columns("GrandTotal").OptionsColumn.ReadOnly = True
-                .Columns("GrandTotal").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("GrandTotal").DisplayFormat.FormatString = "n2"
-                .Columns("GrandTotal").Caption = "ยอดรวมรายการ"
-                .Columns("GrandTotal").MaxWidth = "200"
-
-                .Columns("DiffAmount").OptionsColumn.ReadOnly = True
-                .Columns("DiffAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("DiffAmount").DisplayFormat.FormatString = "n2"
-                .Columns("DiffAmount").Caption = "ยอดแตกต่าง"
-                .Columns("DiffAmount").MaxWidth = "200"
             End If
 
         End With
