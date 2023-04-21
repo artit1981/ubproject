@@ -328,23 +328,23 @@ Public Class frmShippingRecord
 
         End Sub
 
-        Dim mIDs As Long
-        Public Property ID() As Long
+        Dim mOrderID As Long
+        Public Property OrderID() As Long
             Get
-                Return mIDs
+                Return mOrderID
             End Get
             Set(ByVal value As Long)
-                mIDs = value
+                mOrderID = value
             End Set
         End Property
 
-        Dim mCode As String
-        Public Property Code() As String
+        Dim mOrderCode As String
+        Public Property OrderCode() As String
             Get
-                Return mCode
+                Return mOrderCode
             End Get
             Set(ByVal value As String)
-                mCode = value
+                mOrderCode = value
             End Set
         End Property
 
@@ -502,14 +502,14 @@ Public Class frmShippingRecord
 
 #Region "IDXDataErrorInfo Members"
         Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-            If propertyName = "RecordDate" AndAlso IsDate(RecordDate) = False Then
-                info.ErrorText = String.Format("กรุณาวันที่", propertyName)
-                info.ErrorType = ErrorType.Critical
-            End If
-            If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 AndAlso ConvertNullToZero(ModeData) > 0 Then
-                info.ErrorText = String.Format("กรุณาระบุบัญชี", propertyName)
-                info.ErrorType = ErrorType.Critical
-            End If
+            'If propertyName = "RecordDate" AndAlso IsDate(RecordDate) = False Then
+            '    info.ErrorText = String.Format("กรุณาวันที่", propertyName)
+            '    info.ErrorType = ErrorType.Critical
+            'End If
+            'If propertyName = "BankAccountID" AndAlso ConvertNullToZero(BankAccountID) <= 0 AndAlso ConvertNullToZero(ModeData) > 0 Then
+            '    info.ErrorText = String.Format("กรุณาระบุบัญชี", propertyName)
+            '    info.ErrorType = ErrorType.Critical
+            'End If
             'If propertyName = "DR" AndAlso IsDBNull(DR) Then
             '    DR = 0
             'End If

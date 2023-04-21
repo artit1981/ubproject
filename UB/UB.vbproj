@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>57</ApplicationRevision>
-    <ApplicationVersion>1.0.1.57</ApplicationVersion>
+    <ApplicationRevision>58</ApplicationRevision>
+    <ApplicationVersion>1.0.1.58</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -422,6 +422,12 @@
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </Compile>
     <Compile Include="CRM\frmOrderHis2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecord.Designer.vb">
+      <DependentUpon>frmShippingRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecord.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DAO\CommissionDAO.vb" />
@@ -1339,6 +1345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmShippingRecord.resx">
+      <DependentUpon>frmShippingRecord.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportData\frmImportOrderOnline.resx">
       <DependentUpon>frmImportOrderOnline.vb</DependentUpon>

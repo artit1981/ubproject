@@ -598,6 +598,52 @@ Public Class OrderSDAO
         Return dataTable
     End Function
 
+    Public Function GetDataTableForShippingRec(ByVal pFromDate As Date, ByVal pToDate As Date) As DataTable
+        Dim SQL As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = " SELECT Orders.OrderID,Orders.OrderCode,Orders.OrderDate"
+            SQL &= " ,Customer.CustomerCode "
+            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " ,Orders.OrderStatus,Orders.GrandTotal "
+            SQL &= " ,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
+            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
+            SQL &= "  "
+            SQL &= "  "
+            SQL &= "  "
+            SQL &= "  "
+            SQL &= "  "
+
+
+            SQL &= " ,case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
+            SQL &= " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' "
+            SQL &= " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
+            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
+            SQL &= " ,Orders.RefReceiptID AS ReceiptID"
+            SQL &= " "
+
+            SQL &= " FROM Orders  "
+            SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
+            SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
+            SQL &= " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill
+
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL &= " and Orders.TableID in(" & pOrderType & ")"
+            SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
+            SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
+            SQL &= " AND Orders.CustomerID in(" & pCusList & ")"
+            SQL &= " ORDER BY Customer.CustomerCode,Orders.OrderDate"
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForDebtAnalyst : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
+
     Public Function GetDataTableForCampaign(ByVal pCampaignID As Long) As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()

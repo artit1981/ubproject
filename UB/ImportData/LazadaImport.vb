@@ -30,7 +30,7 @@ Public Class LazadaImport
                 For Each dr In pDataTable.Rows
                     If ConvertNullToString(dr(13)) <> "" Then '*** PO Code
                         rec = New LazadaProperty
-                        'rec.IsSelect = False
+                        rec.IsSelect = False
                         rec.TXDate = dr(0)
                         rec.TxNo = ConvertNullToString(dr(3))
                         rec.TxDesc = ConvertNullToString(dr(4)).Trim
@@ -70,7 +70,7 @@ Public Class LazadaImport
                     rec.TxDesc = lItem.TxDesc
                     rec.ExternalCode = lItem.ExternalCode
                     rec.TxAmount = lItem.TxAmount
-                    'rec.IsSelect = rec.OrderID > 0
+                    rec.IsSelect = rec.OrderID > 0
                     rec.DiffAmount = lItem.TxAmount - rec.GrandTotal
                     If rec.DiffAmount <> 0 And rec.GrandTotal > 0 Then
                         rec.DiffPercen = (rec.DiffAmount / rec.GrandTotal) * 100
@@ -231,8 +231,6 @@ Public Class LazadaProperty
             mTxAmount = value
         End Set
     End Property
-
-
 
 
     Private mInternalCode As String

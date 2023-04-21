@@ -281,12 +281,9 @@ Public Class frmImportOrderOnline
 
     Private Sub GridStyle(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView)
         With pGrid
-            'pGrid.OptionsBehavior.ReadOnly = True
 
             .Columns("ExternalCode").Visible = False
             .Columns("OrderID").Visible = False
-
-            '.Columns("OrderStatus").Visible = False
 
             '.Columns("IsSelect").MaxWidth = "70"
             '.Columns("IsSelect").Caption = "เลือก"
@@ -317,50 +314,31 @@ Public Class frmImportOrderOnline
             .Columns("DiffPercen").Caption = "% ยอดต่าง"
             .Columns("DiffPercen").MaxWidth = "150"
 
+            .Columns("TXDate").OptionsColumn.ReadOnly = True
+            .Columns("TXDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+            .Columns("TXDate").DisplayFormat.FormatString = "dd/MM/yyyy"
+            .Columns("TXDate").MaxWidth = "150"
+
+            .Columns("TxNo").OptionsColumn.ReadOnly = True
+            .Columns("TxNo").MaxWidth = "200"
+
+            .Columns("TxDesc").OptionsColumn.ReadOnly = True
+            .Columns("TxDesc").Caption = "รายละเอียด"
+            .Columns("TxDesc").MaxWidth = "0"
+
+            .Columns("TxAmount").OptionsColumn.ReadOnly = True
+            .Columns("TxAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            .Columns("TxAmount").DisplayFormat.FormatString = "n2"
+            .Columns("TxAmount").MaxWidth = "150"
+
             If RadioCompany.EditValue = "Shopee" Then
-
-                .Columns("OrderUnit").Visible = False
-
-                .Columns("OrderDate").OptionsColumn.ReadOnly = True
-                .Columns("OrderDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                .Columns("OrderDate").DisplayFormat.FormatString = "dd/MM/yyyy"
-                .Columns("OrderDate").Caption = "วันที่ Shopee"
-                .Columns("OrderDate").MaxWidth = "150"
-
-                .Columns("PayBy").OptionsColumn.ReadOnly = True
-                .Columns("PayBy").Caption = "ผู้นำจ่าย"
-                .Columns("PayBy").MaxWidth = "200"
-
-                .Columns("OrderAmount").OptionsColumn.ReadOnly = True
-                .Columns("OrderAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("OrderAmount").DisplayFormat.FormatString = "n2"
-                .Columns("OrderAmount").Caption = "จำนวนเงิน Shopee"
-                .Columns("OrderAmount").MaxWidth = "150"
-
-                .Columns("OrderDesc").OptionsColumn.ReadOnly = True
-                .Columns("OrderDesc").Caption = "รายการ"
-                .Columns("OrderDesc").MaxWidth = "0"
+                .Columns("TXDate").Caption = "วันที่ Shopee"
+                .Columns("TxNo").Caption = "ผู้นำจ่าย"
+                .Columns("TxAmount").Caption = "จำนวนเงิน Shopee"
             Else
-                .Columns("TXDate").OptionsColumn.ReadOnly = True
-                .Columns("TXDate").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-                .Columns("TXDate").DisplayFormat.FormatString = "dd/MM/yyyy"
                 .Columns("TXDate").Caption = "วันที่ Lazada"
-                .Columns("TXDate").MaxWidth = "150"
-
-                .Columns("TxNo").OptionsColumn.ReadOnly = True
                 .Columns("TxNo").Caption = "Tx. No"
-                .Columns("TxNo").MaxWidth = "200"
-
-                .Columns("TxDesc").OptionsColumn.ReadOnly = True
-                .Columns("TxDesc").Caption = "รายละเอียด"
-                .Columns("TxDesc").MaxWidth = "0"
-
-                .Columns("TxAmount").OptionsColumn.ReadOnly = True
-                .Columns("TxAmount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                .Columns("TxAmount").DisplayFormat.FormatString = "n2"
                 .Columns("TxAmount").Caption = "จำนวนเงิน Lazada"
-                .Columns("TxAmount").MaxWidth = "150"
-
             End If
 
         End With

@@ -28,14 +28,14 @@ Public Class ShopeeImport
                     If ConvertNullToString(dr(3)) <> "" Then '*** OrderDesc
                         rec = New ShopeeProperty
                         rec.IsSelect = True  '' 0
-                        rec.OrderDate = dr(0)
-                        rec.PayBy = ConvertNullToString(dr(1))
-                        rec.OrderAmount = ConvertNullToZero(dr(2))
-                        rec.OrderDesc = ConvertNullToString(dr(3)).Trim
+                        rec.TXDate = dr(0)
+                        rec.TxNo = ConvertNullToString(dr(1))
+                        rec.TxAmount = ConvertNullToZero(dr(2))
+                        rec.TxDesc = ConvertNullToString(dr(3)).Trim
                         'rec.OrderStatus = ConvertNullToString(dr(4))
-                        rec.OrderUnit = ConvertNullToZero(dr(5))
+                        'rec.OrderUnit = ConvertNullToZero(dr(5))
 
-                        Dim lPoCode = rec.OrderDesc.Substring(rec.OrderDesc.IndexOf("#"c) + 1)
+                        Dim lPoCode = rec.TxDesc.Substring(rec.TxDesc.IndexOf("#"c) + 1)
                         rec.ExternalCode = lPoCode.Trim
                         If rec.ExternalCode.Trim <> "" Then
                             Dim lOrders = GetOrderFromPO(rec.ExternalCode)
@@ -45,7 +45,7 @@ Public Class ShopeeImport
                             rec.OrderStatus = lOrders(3)
                         End If
                         rec.IsSelect = rec.OrderID > 0
-                        rec.DiffAmount = rec.OrderAmount - rec.GrandTotal
+                        rec.DiffAmount = rec.TxAmount - rec.GrandTotal
 
                         If rec.DiffAmount <> 0 And rec.GrandTotal > 0 Then
                             rec.DiffPercen = (rec.DiffAmount / rec.GrandTotal) * 100

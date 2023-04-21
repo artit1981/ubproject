@@ -33,6 +33,17 @@ Partial Class frmImportOrderOnline
         Me.txtError = New DevExpress.XtraEditors.MemoEdit()
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.TXDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ExternalCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.InternalCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.OrderStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.OrderID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GrandTotal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.DiffAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.DiffPercen = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CompletionWizardPage1 = New DevExpress.XtraWizard.CompletionWizardPage()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
@@ -194,6 +205,7 @@ Partial Class frmImportOrderOnline
         '
         'GridView
         '
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.TXDate, Me.TxNo, Me.TxDesc, Me.TxAmount, Me.InternalCode, Me.OrderStatus, Me.GrandTotal, Me.DiffAmount, Me.DiffPercen, Me.ExternalCode, Me.OrderID})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -210,6 +222,94 @@ Partial Class frmImportOrderOnline
         Me.GridView.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
+        '
+        'TXDate
+        '
+        Me.TXDate.Caption = "TXDate"
+        Me.TXDate.FieldName = "TXDate"
+        Me.TXDate.Name = "TXDate"
+        Me.TXDate.Visible = True
+        Me.TXDate.VisibleIndex = 1
+        '
+        'TxNo
+        '
+        Me.TxNo.Caption = "TxNo"
+        Me.TxNo.FieldName = "TxNo"
+        Me.TxNo.Name = "TxNo"
+        Me.TxNo.Visible = True
+        Me.TxNo.VisibleIndex = 2
+        '
+        'ExternalCode
+        '
+        Me.ExternalCode.Caption = "ExternalCode"
+        Me.ExternalCode.FieldName = "ExternalCode"
+        Me.ExternalCode.Name = "ExternalCode"
+        Me.ExternalCode.Visible = True
+        Me.ExternalCode.VisibleIndex = 10
+        '
+        'TxDesc
+        '
+        Me.TxDesc.Caption = "TxDesc"
+        Me.TxDesc.FieldName = "TxDesc"
+        Me.TxDesc.Name = "TxDesc"
+        Me.TxDesc.Visible = True
+        Me.TxDesc.VisibleIndex = 3
+        '
+        'TxAmount
+        '
+        Me.TxAmount.Caption = "TxAmount"
+        Me.TxAmount.FieldName = "TxAmount"
+        Me.TxAmount.Name = "TxAmount"
+        Me.TxAmount.Visible = True
+        Me.TxAmount.VisibleIndex = 4
+        '
+        'InternalCode
+        '
+        Me.InternalCode.Caption = "InternalCode"
+        Me.InternalCode.FieldName = "InternalCode"
+        Me.InternalCode.Name = "InternalCode"
+        Me.InternalCode.Visible = True
+        Me.InternalCode.VisibleIndex = 5
+        '
+        'OrderStatus
+        '
+        Me.OrderStatus.Caption = "OrderStatus"
+        Me.OrderStatus.FieldName = "OrderStatus"
+        Me.OrderStatus.Name = "OrderStatus"
+        Me.OrderStatus.Visible = True
+        Me.OrderStatus.VisibleIndex = 6
+        '
+        'OrderID
+        '
+        Me.OrderID.Caption = "OrderID"
+        Me.OrderID.FieldName = "OrderID"
+        Me.OrderID.Name = "OrderID"
+        Me.OrderID.Visible = True
+        Me.OrderID.VisibleIndex = 11
+        '
+        'GrandTotal
+        '
+        Me.GrandTotal.Caption = "GrandTotal"
+        Me.GrandTotal.FieldName = "GrandTotal"
+        Me.GrandTotal.Name = "GrandTotal"
+        Me.GrandTotal.Visible = True
+        Me.GrandTotal.VisibleIndex = 7
+        '
+        'DiffAmount
+        '
+        Me.DiffAmount.Caption = "DiffAmount"
+        Me.DiffAmount.FieldName = "DiffAmount"
+        Me.DiffAmount.Name = "DiffAmount"
+        Me.DiffAmount.Visible = True
+        Me.DiffAmount.VisibleIndex = 8
+        '
+        'DiffPercen
+        '
+        Me.DiffPercen.Caption = "DiffPercen"
+        Me.DiffPercen.FieldName = "DiffPercen"
+        Me.DiffPercen.Name = "DiffPercen"
+        Me.DiffPercen.Visible = True
+        Me.DiffPercen.VisibleIndex = 9
         '
         'CompletionWizardPage1
         '
@@ -253,4 +353,15 @@ Partial Class frmImportOrderOnline
     Friend WithEvents RadioCompany As DevExpress.XtraEditors.RadioGroup
     Friend WithEvents CompletionWizardPage1 As DevExpress.XtraWizard.CompletionWizardPage
     Private WithEvents lblError As Label
+    Friend WithEvents TXDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ExternalCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxDesc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxAmount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents InternalCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents OrderStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents OrderID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GrandTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents DiffAmount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents DiffPercen As DevExpress.XtraGrid.Columns.GridColumn
 End Class
