@@ -34,21 +34,21 @@ Partial Class frmUpdateStockDTL
         Me.lblUnitName = New DevExpress.XtraEditors.LabelControl()
         Me.txtUnitName = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.UnitsMain = New DevExpress.XtraEditors.SpinEdit()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.UnitRate = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.UnitMainName = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.btnSN = New DevExpress.XtraEditors.SimpleButton()
         Me.lblUpdateStr = New System.Windows.Forms.Label()
         Me.IsSumStock = New DevExpress.XtraEditors.CheckEdit()
         Me.SpinUnit = New DevExpress.XtraEditors.SpinEdit()
-        Me.UnitMainName = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
-        Me.UnitRate = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.UnitsMain = New DevExpress.XtraEditors.SpinEdit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,13 +57,13 @@ Partial Class frmUpdateStockDTL
         CType(Me.txtUnitName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
+        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitRate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
         CType(Me.IsSumStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SpinUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.UnitRate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageCollection1
@@ -75,6 +75,7 @@ Partial Class frmUpdateStockDTL
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Appearance.Options.UseFont = True
         Me.LabelControl2.Location = New System.Drawing.Point(268, 81)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(80, 14)
@@ -105,9 +106,9 @@ Partial Class frmUpdateStockDTL
         Me.btnOK.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnOK.Appearance.Options.UseFont = True
         Me.btnOK.Appearance.Options.UseImage = True
-        Me.btnOK.DialogResult = DialogResult.OK
-        Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
-        Me.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
+        Me.btnOK.ImageOptions.Image = CType(resources.GetObject("btnOK.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnOK.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnOK.Location = New System.Drawing.Point(554, 12)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(82, 31)
@@ -120,9 +121,9 @@ Partial Class frmUpdateStockDTL
         Me.btnCancel.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancel.Appearance.Options.UseFont = True
         Me.btnCancel.Appearance.Options.UseImage = True
-        Me.btnCancel.DialogResult = DialogResult.Cancel
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.ImageOptions.Image = CType(resources.GetObject("btnCancel.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCancel.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnCancel.Location = New System.Drawing.Point(554, 51)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(82, 31)
@@ -166,6 +167,7 @@ Partial Class frmUpdateStockDTL
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.LabelControl1.Location = New System.Drawing.Point(9, 28)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(27, 14)
@@ -191,6 +193,7 @@ Partial Class frmUpdateStockDTL
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl3.Appearance.Options.UseFont = True
         Me.LabelControl3.Location = New System.Drawing.Point(9, 55)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(39, 14)
@@ -200,6 +203,7 @@ Partial Class frmUpdateStockDTL
         'lblUnitName
         '
         Me.lblUnitName.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUnitName.Appearance.Options.UseFont = True
         Me.lblUnitName.Location = New System.Drawing.Point(9, 81)
         Me.lblUnitName.Name = "lblUnitName"
         Me.lblUnitName.Size = New System.Drawing.Size(43, 14)
@@ -247,6 +251,87 @@ Partial Class frmUpdateStockDTL
         Me.GroupControl1.TabIndex = 333
         Me.GroupControl1.Text = " "
         '
+        'UnitsMain
+        '
+        Me.UnitsMain.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UnitsMain.Location = New System.Drawing.Point(367, 130)
+        Me.UnitsMain.Name = "UnitsMain"
+        Me.UnitsMain.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitsMain.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitsMain.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitsMain.Properties.Appearance.Options.UseFont = True
+        Me.UnitsMain.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.UnitsMain.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
+        Me.UnitsMain.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None
+        Me.UnitsMain.Properties.MaxLength = 50
+        Me.UnitsMain.Properties.ReadOnly = True
+        Me.UnitsMain.Properties.ValidateOnEnterKey = True
+        Me.UnitsMain.Size = New System.Drawing.Size(145, 20)
+        Me.UnitsMain.TabIndex = 339
+        Me.UnitsMain.TabStop = False
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl7.Appearance.Options.UseFont = True
+        Me.LabelControl7.Location = New System.Drawing.Point(268, 133)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(93, 14)
+        Me.LabelControl7.TabIndex = 338
+        Me.LabelControl7.Text = "จำนวน(หน่วยหลัก)"
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl6.Appearance.Options.UseFont = True
+        Me.LabelControl6.Location = New System.Drawing.Point(9, 133)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(45, 14)
+        Me.LabelControl6.TabIndex = 336
+        Me.LabelControl6.Text = "อัตราส่วน"
+        '
+        'UnitRate
+        '
+        Me.UnitRate.EditValue = ""
+        Me.UnitRate.EnterMoveNextControl = True
+        Me.UnitRate.Location = New System.Drawing.Point(95, 130)
+        Me.UnitRate.Name = "UnitRate"
+        Me.UnitRate.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitRate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitRate.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitRate.Properties.Appearance.Options.UseFont = True
+        Me.UnitRate.Properties.MaxLength = 50
+        Me.UnitRate.Properties.ReadOnly = True
+        Me.UnitRate.Properties.ValidateOnEnterKey = True
+        Me.UnitRate.Size = New System.Drawing.Size(145, 20)
+        Me.UnitRate.TabIndex = 335
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl5.Appearance.Options.UseFont = True
+        Me.LabelControl5.Location = New System.Drawing.Point(9, 107)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(50, 14)
+        Me.LabelControl5.TabIndex = 334
+        Me.LabelControl5.Text = "หน่วยหลัก"
+        '
+        'UnitMainName
+        '
+        Me.UnitMainName.EditValue = ""
+        Me.UnitMainName.EnterMoveNextControl = True
+        Me.UnitMainName.Location = New System.Drawing.Point(95, 104)
+        Me.UnitMainName.Name = "UnitMainName"
+        Me.UnitMainName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.UnitMainName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.UnitMainName.Properties.Appearance.Options.UseBackColor = True
+        Me.UnitMainName.Properties.Appearance.Options.UseFont = True
+        Me.UnitMainName.Properties.MaxLength = 50
+        Me.UnitMainName.Properties.ReadOnly = True
+        Me.UnitMainName.Properties.ValidateOnEnterKey = True
+        Me.UnitMainName.Size = New System.Drawing.Size(145, 20)
+        Me.UnitMainName.TabIndex = 333
+        '
         'GroupControl2
         '
         Me.GroupControl2.Controls.Add(Me.Label3)
@@ -263,6 +348,30 @@ Partial Class frmUpdateStockDTL
         Me.GroupControl2.TabIndex = 334
         Me.GroupControl2.Text = " "
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(265, 98)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(136, 14)
+        Me.Label3.TabIndex = 331
+        Me.Label3.Text = "หน่วยหลักให้อัตโนมัติเสมอ"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(246, 84)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(218, 14)
+        Me.Label2.TabIndex = 330
+        Me.Label2.Text = "- กรณี update หน่วยย่อย ระบบจะ update"
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -278,6 +387,7 @@ Partial Class frmUpdateStockDTL
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Appearance.Options.UseFont = True
         Me.LabelControl4.Location = New System.Drawing.Point(9, 39)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(74, 14)
@@ -289,8 +399,8 @@ Partial Class frmUpdateStockDTL
         Me.btnSN.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnSN.Appearance.Options.UseFont = True
         Me.btnSN.Appearance.Options.UseImage = True
-        Me.btnSN.Image = CType(resources.GetObject("btnSN.Image"), System.Drawing.Image)
-        Me.btnSN.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnSN.ImageOptions.Image = CType(resources.GetObject("btnSN.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnSN.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnSN.Location = New System.Drawing.Point(95, 97)
         Me.btnSN.Name = "btnSN"
         Me.btnSN.Size = New System.Drawing.Size(136, 35)
@@ -318,7 +428,7 @@ Partial Class frmUpdateStockDTL
         Me.IsSumStock.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsSumStock.Properties.Appearance.Options.UseFont = True
         Me.IsSumStock.Properties.Caption = "ปรับคลังรวม"
-        Me.IsSumStock.Size = New System.Drawing.Size(92, 19)
+        Me.IsSumStock.Size = New System.Drawing.Size(92, 20)
         Me.IsSumStock.TabIndex = 289
         Me.IsSumStock.TabStop = False
         '
@@ -331,120 +441,18 @@ Partial Class frmUpdateStockDTL
         Me.SpinUnit.Size = New System.Drawing.Size(100, 20)
         Me.SpinUnit.TabIndex = 1
         '
-        'UnitMainName
-        '
-        Me.UnitMainName.EditValue = ""
-        Me.UnitMainName.EnterMoveNextControl = True
-        Me.UnitMainName.Location = New System.Drawing.Point(95, 104)
-        Me.UnitMainName.Name = "UnitMainName"
-        Me.UnitMainName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
-        Me.UnitMainName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.UnitMainName.Properties.Appearance.Options.UseBackColor = True
-        Me.UnitMainName.Properties.Appearance.Options.UseFont = True
-        Me.UnitMainName.Properties.MaxLength = 50
-        Me.UnitMainName.Properties.ReadOnly = True
-        Me.UnitMainName.Properties.ValidateOnEnterKey = True
-        Me.UnitMainName.Size = New System.Drawing.Size(145, 20)
-        Me.UnitMainName.TabIndex = 333
-        '
-        'LabelControl5
-        '
-        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(9, 107)
-        Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(50, 14)
-        Me.LabelControl5.TabIndex = 334
-        Me.LabelControl5.Text = "หน่วยหลัก"
-        '
-        'UnitRate
-        '
-        Me.UnitRate.EditValue = ""
-        Me.UnitRate.EnterMoveNextControl = True
-        Me.UnitRate.Location = New System.Drawing.Point(95, 130)
-        Me.UnitRate.Name = "UnitRate"
-        Me.UnitRate.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
-        Me.UnitRate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.UnitRate.Properties.Appearance.Options.UseBackColor = True
-        Me.UnitRate.Properties.Appearance.Options.UseFont = True
-        Me.UnitRate.Properties.MaxLength = 50
-        Me.UnitRate.Properties.ReadOnly = True
-        Me.UnitRate.Properties.ValidateOnEnterKey = True
-        Me.UnitRate.Size = New System.Drawing.Size(145, 20)
-        Me.UnitRate.TabIndex = 335
-        '
-        'LabelControl6
-        '
-        Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(9, 133)
-        Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(45, 14)
-        Me.LabelControl6.TabIndex = 336
-        Me.LabelControl6.Text = "อัตราส่วน"
-        '
-        'LabelControl7
-        '
-        Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(268, 133)
-        Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(93, 14)
-        Me.LabelControl7.TabIndex = 338
-        Me.LabelControl7.Text = "จำนวน(หน่วยหลัก)"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(246, 84)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(218, 14)
-        Me.Label2.TabIndex = 330
-        Me.Label2.Text = "- กรณี update หน่วยย่อย ระบบจะ update"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(265, 98)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(136, 14)
-        Me.Label3.TabIndex = 331
-        Me.Label3.Text = "หน่วยหลักให้อัตโนมัติเสมอ"
-        '
-        'UnitsMain
-        '
-        Me.UnitsMain.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UnitsMain.Location = New System.Drawing.Point(367, 130)
-        Me.UnitsMain.Name = "UnitsMain"
-        Me.UnitsMain.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
-        Me.UnitsMain.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.UnitsMain.Properties.Appearance.Options.UseBackColor = True
-        Me.UnitsMain.Properties.Appearance.Options.UseFont = True
-        Me.UnitsMain.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.UnitsMain.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.[Default]
-        Me.UnitsMain.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None
-        Me.UnitsMain.Properties.MaxLength = 50
-        Me.UnitsMain.Properties.ReadOnly = True
-        Me.UnitsMain.Properties.ValidateOnEnterKey = True
-        Me.UnitsMain.Size = New System.Drawing.Size(145, 20)
-        Me.UnitsMain.TabIndex = 339
-        Me.UnitsMain.TabStop = False
-        '
         'frmUpdateStockDTL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(644, 315)
+        Me.ClientSize = New System.Drawing.Size(644, 341)
         Me.Controls.Add(Me.GroupControl2)
         Me.Controls.Add(Me.GroupControl1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmUpdateStockDTL.IconOptions.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmUpdateStockDTL"
@@ -459,14 +467,14 @@ Partial Class frmUpdateStockDTL
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
+        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitRate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
         Me.GroupControl2.PerformLayout()
         CType(Me.IsSumStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SpinUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.UnitMainName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.UnitRate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

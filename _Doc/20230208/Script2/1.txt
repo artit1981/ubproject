@@ -1,0 +1,8 @@
+ALTER TABLE dbo.Orders ADD
+	ShippingPeriod nvarchar(100) NULL,
+	ShippingMethod nvarchar(100) NULL,
+	ShippingEmpID bigint NULL,
+	ShippingStatus nvarchar(100) NULL,
+	ShippingRemark nvarchar(100) NULL,
+	AssignEmpID bigint NULL,
+	AssignDate date NULL ;

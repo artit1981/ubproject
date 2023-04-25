@@ -603,42 +603,32 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = " SELECT Orders.OrderID,Orders.OrderCode,Orders.OrderDate"
+            SQL = " SELECT 0 as IsSelect, Orders.OrderID,Orders.OrderCode,Orders.OrderDate"
             SQL &= " ,Customer.CustomerCode "
             SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             SQL &= " ,Orders.OrderStatus,Orders.GrandTotal "
             SQL &= " ,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
-            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
-            SQL &= "  "
-            SQL &= "  "
-            SQL &= "  "
-            SQL &= "  "
-            SQL &= "  "
-
-
-            SQL &= " ,case when Orders.TableID in(39,58) then 'ใบกำกับภาษี' when Orders.TableID in(41,74) then 'ใบส่งของ'  "
-            SQL &= " when Orders.TableID in(73) then 'ใบยืมสินค้า' when Orders.TableID in(54,61) then 'ใบเพิ่มหนี้' "
-            SQL &= " when Orders.TableID in(55,62) then 'ใบลดหนี้' else '' end OrderType"
-            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS Employee"
-            SQL &= " ,Orders.RefReceiptID AS ReceiptID"
-            SQL &= " "
-
+            SQL &= " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME"
+            SQL &= " ,Orders.ShippingPeriod,Orders.ShippingMethod "
+            SQL &= " ,ShippingEmp.Title + ShippingEmp.Firstname + ' ' + ShippingEmp.LastName AS ShippingEmp"
+            SQL &= " ,Orders.ShippingStatus,Orders.ShippingRemark"
+            'SQL &= "  ,AssignDate"
+            'SQL &= " ,AssignEmp.Title + AssignEmp.Firstname + ' ' + AssignEmp.LastName AS AssignEmp"
             SQL &= " FROM Orders  "
             SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
             SQL &= " LEFT OUTER JOIN Employee ON Orders.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Employee ShippingEmp ON Orders.ShippingEmpID=ShippingEmp.EmpID  "
+            'SQL &= " LEFT OUTER JOIN Employee AssignEmp ON Orders.AssignEmpID=AssignEmp.EmpID  "
             SQL &= " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
             SQL &= " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill
-
             SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
-            SQL &= " and Orders.TableID in(" & pOrderType & ")"
-            SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
+            'SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
             SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
-            SQL &= " AND Orders.CustomerID in(" & pCusList & ")"
-            SQL &= " ORDER BY Customer.CustomerCode,Orders.OrderDate"
+
+            SQL &= " ORDER BY Orders.OrderCode,Orders.OrderDate"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForDebtAnalyst : " & e.Message)
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForShippingRec : " & e.Message)
         End Try
         Return dataTable
     End Function
@@ -1261,6 +1251,30 @@ Public Class OrderSDAO
 
         End Try
     End Sub
+
+
+    Public Sub UpdateAssignShipping(ByRef ptr As SqlTransaction)
+        Dim Sql As String = ""
+        Try
+
+            Sql = " UPDATE Orders SET "
+            Sql &= "  ShippingPeriod='" & ConvertNullToString(ShippingPeriod) & "'"
+            Sql &= " ,ShippingMethod='" & ConvertNullToString(ShippingMethod) & "'"
+            Sql &= " ,ShippingStatus='" & ConvertNullToString(ShippingStatus) & "'"
+            Sql &= " ,ShippingRemark='" & ConvertNullToString(ShippingRemark) & "'"
+            Sql &= " ,ShippingEmpID=" & ConvertNullToZero(ShippingEmpID)
+            Sql &= " ,AssignEmpID=" & ConvertNullToZero(AssignEmpID)
+            Sql &= " ,AssignDate='" & formatSQLDate(AssignDate) & "'"
+            Sql &= " WHERE OrderID=" & ID
+
+            gConnection.executeInsertQuery(Sql, ptr)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.UpdateAssignShipping : " & e.Message)
+        Finally
+
+        End Try
+    End Sub
+
 
     Private Sub InsertOrderLog(ByRef ptr As SqlTransaction)
         Dim Sql As String = ""

@@ -1064,4 +1064,9 @@ Public Class frmMain
         frmImportOrderOnline.MdiParent = Me
         frmImportOrderOnline.Show()
     End Sub
+
+    Private Sub ShippingRecordBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ShippingRecordBar.ItemClick
+        frmShippingRecord.MdiParent = Me
+        frmShippingRecord.Show()
+    End Sub
 End Class

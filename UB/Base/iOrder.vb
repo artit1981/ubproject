@@ -829,6 +829,78 @@ Public Class iOrder
         End Set
     End Property
 
+    Dim mShippingPeriod As String = ""
+    Public Property ShippingPeriod() As String
+        Get
+            Return mShippingPeriod
+        End Get
+        Set(ByVal value As String)
+            mShippingPeriod = value
+        End Set
+    End Property
+
+
+    Dim mShippingMethod As String = ""
+    Public Property ShippingMethod() As String
+        Get
+            Return mShippingMethod
+        End Get
+        Set(ByVal value As String)
+            mShippingMethod = value
+        End Set
+    End Property
+
+    Dim mShippingStatus As String = ""
+    Public Property ShippingStatus() As String
+        Get
+            Return mShippingStatus
+        End Get
+        Set(ByVal value As String)
+            mShippingStatus = value
+        End Set
+    End Property
+
+
+    Dim mShippingRemark As String = ""
+    Public Property ShippingRemark() As String
+        Get
+            Return mShippingRemark
+        End Get
+        Set(ByVal value As String)
+            mShippingRemark = value
+        End Set
+    End Property
+
+    Dim mShippingEmpID As Long = 0
+    Public Property ShippingEmpID() As Long
+        Get
+            Return mShippingEmpID
+        End Get
+        Set(ByVal value As Long)
+            mShippingEmpID = value
+        End Set
+    End Property
+
+    Dim mAssignEmpID As Long = 0
+    Public Property AssignEmpID() As Long
+        Get
+            Return mAssignEmpID
+        End Get
+        Set(ByVal value As Long)
+            mAssignEmpID = value
+        End Set
+    End Property
+
+    Dim mAssignDate As Date
+    Public Property AssignDate() As Date
+        Get
+            Return mAssignDate
+        End Get
+        Set(ByVal value As Date)
+            mAssignDate = value
+        End Set
+    End Property
+
     Public Sub New()
         mIDs = 0
         mCode = ""
