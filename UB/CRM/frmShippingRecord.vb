@@ -16,7 +16,7 @@ Public Class frmShippingRecord
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
 
-            InitialCombo()
+
             dtpDateFrom.EditValue = New DateTime(GetCurrentDate(Nothing).Year, 1, 1)
             dtpDateTo.EditValue = GetCurrentDate(Nothing)
 
@@ -123,79 +123,14 @@ Public Class frmShippingRecord
 
 #Region "Private"
 
-    Private Sub InitialCombo()
-        Try
-            'Call LoadDataBankAccount()
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
-        End Try
-    End Sub
 
-    'Private Sub LoadDataBankAccount()
-    '    Dim lcls As New BankAccountDAO
-
-
-    '    Try
-    '        Dim dataTable = lcls.GetDataTable(0, True, 0, 0)
-    '        BankAccountIDLookUpEdit.DataSource = dataTable
-
-    '        Dim dataTable2 = lcls.GetDataTable(0, True, 0, 0)
-    '        Dim drNewRow As DataRow = dataTable2.NewRow
-
-    '        'specify the information of the new row.
-    '        drNewRow("ID") = 0
-    '        drNewRow("BankAccountCode") = "ALL"
-    '        drNewRow("BankAccountNo") = "ALL"
-    '        drNewRow("BankName") = "ALL"
-    '        drNewRow("CusName") = "ALL"
-    '        drNewRow("ACCNAME") = "ALL"
-
-    '        dataTable2.Rows.Add(drNewRow)
-
-    '        BankAccID.Properties.DataSource = dataTable2
-    '        BankAccID.Properties.DisplayMember = "ACCNAME"
-    '        BankAccID.Properties.ValueMember = "ID"
-    '        BankAccID.EditValue = 0
-
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, "frmBankAccountRec.LoadDataLocaton : " & e.Message)
-    '    Finally
-
-    '        lcls = Nothing
-    '    End Try
-    'End Sub
 
 
     Private Sub LoadData()
         Dim lcls As New OrderSDAO
-
-        'Dim lBalance As Decimal = 0
         Try
-
             Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue)
 
-            'If dataTable.Rows.Count > 0 Then
-            '    For Each dr As DataRow In dataTable.Rows
-            '        Dim rec As New MyRecord()
-            '        rec.ID = dr("ID")
-            '        rec.BankAccountID = ConvertNullToZero(dr("BankAccountID"))
-            '        rec.RecordDate = dr("RecordDate")
-            '        rec.DR = ConvertNullToZero(dr("DR"))
-            '        rec.CR = ConvertNullToZero(dr("CR"))
-            '        rec.Remark = ConvertNullToString(dr("Remark"))
-            '        rec.IsChange = 0
-            '        rec.ModeData = 2
-            '        rec.IsDelete = ConvertNullToZero(dr("IsDelete"))
-            '        bindingSource1.Add(rec)
-            '        lBalance += rec.DR
-            '        lBalance -= rec.CR
-            '    Next
-            'End If
-
-
-
-
-            DxErrorProvider1.ContainerControl = Me
             GridControl.DataSource = dataTable
 
             GridStyle()

@@ -1147,6 +1147,9 @@ Public Class frmPreReport
             ElseIf mOrderType = 1005 Then
                 ExecuteReport()
                 PrintReport()
+            ElseIf mOrderType = Integer.Parse(MasterType.ShippingRecord) Then
+                ExecuteReportTax()
+                PrintReport()
             ElseIf mOrderType = MasterType.Claim Or mOrderType = MasterType.ClaimReturn Then
                 If chkPrintCopy.Checked = True Then
                     PrintReportOrder(1)

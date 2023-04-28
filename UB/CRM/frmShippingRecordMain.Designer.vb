@@ -1,0 +1,548 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmShippingRecordMain
+    Inherits DevExpress.XtraEditors.XtraForm
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing AndAlso components IsNot Nothing Then
+            components.Dispose()
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmShippingRecordMain))
+        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.MenuBar = New DevExpress.XtraBars.Bar()
+        Me.RefreshBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.AssignToBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.SummaryBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.PrintBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ExitBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.AddBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.EditBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.OptionBar = New DevExpress.XtraBars.BarSubItem()
+        Me.QuickBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.CopyBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ImportBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.AssignBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.ConvertBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.MakeOrderBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarStaticItem1 = New DevExpress.XtraBars.BarStaticItem()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.RepositoryItemComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.RepositoryItemComboBox2 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
+        Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.RepositoryItemComboBox3 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
+        Me.RepositoryItemTextEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemComboBox4 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
+        Me.FindPanel = New DevExpress.XtraEditors.PanelControl()
+        Me.DatePanel = New DevExpress.XtraEditors.PanelControl()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpDateTo = New DevExpress.XtraEditors.DateEdit()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpDateFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.GridControl = New DevExpress.XtraGrid.GridControl()
+        Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemComboBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemComboBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemComboBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FindPanel, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FindPanel.SuspendLayout()
+        CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DatePanel.SuspendLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'BarManager1
+        '
+        Me.BarManager1.AllowShowToolbarsPopup = False
+        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.MenuBar})
+        Me.BarManager1.DockControls.Add(Me.barDockControlTop)
+        Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
+        Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
+        Me.BarManager1.DockControls.Add(Me.barDockControlRight)
+        Me.BarManager1.Form = Me
+        Me.BarManager1.Images = Me.ImageList1
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.AddBar, Me.EditBar, Me.AssignToBar, Me.RefreshBar, Me.OptionBar, Me.CopyBar, Me.ExitBar, Me.PrintBar, Me.QuickBar, Me.ImportBar, Me.BarStaticItem1, Me.AssignBar, Me.ConvertBar, Me.MakeOrderBar, Me.BarButtonItem1, Me.SummaryBar})
+        Me.BarManager1.MaxItemId = 42
+        Me.BarManager1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemComboBox1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox2, Me.RepositoryItemTextEdit3, Me.RepositoryItemComboBox3, Me.RepositoryItemTextEdit4, Me.RepositoryItemCheckEdit1, Me.RepositoryItemComboBox4})
+        '
+        'MenuBar
+        '
+        Me.MenuBar.BarName = "Menu"
+        Me.MenuBar.CanDockStyle = CType((DevExpress.XtraBars.BarCanDockStyle.Left Or DevExpress.XtraBars.BarCanDockStyle.Top), DevExpress.XtraBars.BarCanDockStyle)
+        Me.MenuBar.DockCol = 0
+        Me.MenuBar.DockRow = 0
+        Me.MenuBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top
+        Me.MenuBar.FloatLocation = New System.Drawing.Point(564, 249)
+        Me.MenuBar.FloatSize = New System.Drawing.Size(270, 40)
+        Me.MenuBar.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.RefreshBar, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.AssignToBar, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.SummaryBar, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.PrintBar, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.ExitBar, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)})
+        Me.MenuBar.OptionsBar.AllowQuickCustomization = False
+        Me.MenuBar.Text = "Menu"
+        '
+        'RefreshBar
+        '
+        Me.RefreshBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.RefreshBar.Caption = "Refresh"
+        Me.RefreshBar.Id = 11
+        Me.RefreshBar.ImageOptions.ImageIndex = 3
+        Me.RefreshBar.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5)
+        Me.RefreshBar.Name = "RefreshBar"
+        '
+        'AssignToBar
+        '
+        Me.AssignToBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.AssignToBar.Caption = "Assign To"
+        Me.AssignToBar.Id = 10
+        Me.AssignToBar.ImageOptions.ImageIndex = 8
+        Me.AssignToBar.ImageOptions.SvgImageSize = New System.Drawing.Size(32, 32)
+        Me.AssignToBar.Name = "AssignToBar"
+        '
+        'SummaryBar
+        '
+        Me.SummaryBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.SummaryBar.Caption = "สรุปงาน"
+        Me.SummaryBar.Id = 41
+        Me.SummaryBar.ImageOptions.ImageIndex = 9
+        Me.SummaryBar.Name = "SummaryBar"
+        '
+        'PrintBar
+        '
+        Me.PrintBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.PrintBar.Caption = "พิมพ์รายงาน"
+        Me.PrintBar.Id = 28
+        Me.PrintBar.ImageOptions.ImageIndex = 7
+        Me.PrintBar.Name = "PrintBar"
+        '
+        'ExitBar
+        '
+        Me.ExitBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.ExitBar.Caption = "ปิดหน้าจอ (Esc)"
+        Me.ExitBar.Id = 17
+        Me.ExitBar.ImageOptions.ImageIndex = 6
+        Me.ExitBar.Name = "ExitBar"
+        '
+        'barDockControlTop
+        '
+        Me.barDockControlTop.CausesValidation = False
+        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Manager = Me.BarManager1
+        Me.barDockControlTop.Size = New System.Drawing.Size(1193, 30)
+        '
+        'barDockControlBottom
+        '
+        Me.barDockControlBottom.CausesValidation = False
+        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 620)
+        Me.barDockControlBottom.Manager = Me.BarManager1
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1193, 0)
+        '
+        'barDockControlLeft
+        '
+        Me.barDockControlLeft.CausesValidation = False
+        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 30)
+        Me.barDockControlLeft.Manager = Me.BarManager1
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 590)
+        '
+        'barDockControlRight
+        '
+        Me.barDockControlRight.CausesValidation = False
+        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.barDockControlRight.Location = New System.Drawing.Point(1193, 30)
+        Me.barDockControlRight.Manager = Me.BarManager1
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 590)
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "Add.png")
+        Me.ImageList1.Images.SetKeyName(1, "Edit.png")
+        Me.ImageList1.Images.SetKeyName(2, "_active__remove_(delete).png")
+        Me.ImageList1.Images.SetKeyName(3, "refresh.png")
+        Me.ImageList1.Images.SetKeyName(4, "_active__find.gif")
+        Me.ImageList1.Images.SetKeyName(5, "pege_setup.gif")
+        Me.ImageList1.Images.SetKeyName(6, "_active__exit.png")
+        Me.ImageList1.Images.SetKeyName(7, "prtpv_32.png")
+        Me.ImageList1.Images.SetKeyName(8, "transport_icon.ico")
+        Me.ImageList1.Images.SetKeyName(9, "3319603_agrement_document_loan apply_paper_report_icon.ico")
+        '
+        'AddBar
+        '
+        Me.AddBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.AddBar.Caption = "เพิ่ม (F2)"
+        Me.AddBar.Id = 8
+        Me.AddBar.ImageOptions.ImageIndex = 0
+        Me.AddBar.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F2)
+        Me.AddBar.Name = "AddBar"
+        '
+        'EditBar
+        '
+        Me.EditBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.EditBar.Caption = "แก้ไข (F3)"
+        Me.EditBar.Id = 9
+        Me.EditBar.ImageOptions.ImageIndex = 1
+        Me.EditBar.ItemShortcut = New DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F3)
+        Me.EditBar.Name = "EditBar"
+        Me.EditBar.ShortcutKeyDisplayString = "F3"
+        '
+        'OptionBar
+        '
+        Me.OptionBar.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
+        Me.OptionBar.Caption = "เพิ่มเติม"
+        Me.OptionBar.Id = 14
+        Me.OptionBar.ImageOptions.ImageIndex = 5
+        Me.OptionBar.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.QuickBar), New DevExpress.XtraBars.LinkPersistInfo(Me.CopyBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ImportBar), New DevExpress.XtraBars.LinkPersistInfo(Me.AssignBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ConvertBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeOrderBar)})
+        Me.OptionBar.Name = "OptionBar"
+        '
+        'QuickBar
+        '
+        Me.QuickBar.Caption = "Create Quick"
+        Me.QuickBar.Id = 38
+        Me.QuickBar.Name = "QuickBar"
+        '
+        'CopyBar
+        '
+        Me.CopyBar.Caption = "Copy"
+        Me.CopyBar.Id = 15
+        Me.CopyBar.Name = "CopyBar"
+        '
+        'ImportBar
+        '
+        Me.ImportBar.Caption = "Import"
+        Me.ImportBar.Id = 34
+        Me.ImportBar.Name = "ImportBar"
+        '
+        'AssignBar
+        '
+        Me.AssignBar.Caption = "Assign"
+        Me.AssignBar.Id = 36
+        Me.AssignBar.Name = "AssignBar"
+        Me.AssignBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'ConvertBar
+        '
+        Me.ConvertBar.Caption = "Convert Lead"
+        Me.ConvertBar.Id = 37
+        Me.ConvertBar.Name = "ConvertBar"
+        '
+        'MakeOrderBar
+        '
+        Me.MakeOrderBar.Caption = "Make Order"
+        Me.MakeOrderBar.Id = 39
+        Me.MakeOrderBar.Name = "MakeOrderBar"
+        Me.MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'BarStaticItem1
+        '
+        Me.BarStaticItem1.Caption = "----------------"
+        Me.BarStaticItem1.Id = 35
+        Me.BarStaticItem1.Name = "BarStaticItem1"
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "BarButtonItem1"
+        Me.BarButtonItem1.Id = 40
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'RepositoryItemTextEdit1
+        '
+        Me.RepositoryItemTextEdit1.AutoHeight = False
+        Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        '
+        'RepositoryItemComboBox1
+        '
+        Me.RepositoryItemComboBox1.AutoHeight = False
+        Me.RepositoryItemComboBox1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemComboBox1.Name = "RepositoryItemComboBox1"
+        Me.RepositoryItemComboBox1.ReadOnly = True
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        '
+        'RepositoryItemComboBox2
+        '
+        Me.RepositoryItemComboBox2.AutoHeight = False
+        Me.RepositoryItemComboBox2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemComboBox2.Name = "RepositoryItemComboBox2"
+        '
+        'RepositoryItemTextEdit3
+        '
+        Me.RepositoryItemTextEdit3.AutoHeight = False
+        Me.RepositoryItemTextEdit3.Name = "RepositoryItemTextEdit3"
+        '
+        'RepositoryItemComboBox3
+        '
+        Me.RepositoryItemComboBox3.AutoHeight = False
+        Me.RepositoryItemComboBox3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemComboBox3.Name = "RepositoryItemComboBox3"
+        '
+        'RepositoryItemTextEdit4
+        '
+        Me.RepositoryItemTextEdit4.AutoHeight = False
+        Me.RepositoryItemTextEdit4.Name = "RepositoryItemTextEdit4"
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        '
+        'RepositoryItemComboBox4
+        '
+        Me.RepositoryItemComboBox4.AutoHeight = False
+        Me.RepositoryItemComboBox4.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemComboBox4.EditValueChangedDelay = 5
+        Me.RepositoryItemComboBox4.Items.AddRange(New Object() {"1", "5", "10", "30", "60"})
+        Me.RepositoryItemComboBox4.Name = "RepositoryItemComboBox4"
+        Me.RepositoryItemComboBox4.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        '
+        'FindPanel
+        '
+        Me.FindPanel.Controls.Add(Me.DatePanel)
+        Me.FindPanel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.FindPanel.Location = New System.Drawing.Point(0, 30)
+        Me.FindPanel.Name = "FindPanel"
+        Me.FindPanel.Size = New System.Drawing.Size(1193, 46)
+        Me.FindPanel.TabIndex = 7
+        '
+        'DatePanel
+        '
+        Me.DatePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.DatePanel.Controls.Add(Me.Label3)
+        Me.DatePanel.Controls.Add(Me.dtpDateTo)
+        Me.DatePanel.Controls.Add(Me.Label2)
+        Me.DatePanel.Controls.Add(Me.dtpDateFrom)
+        Me.DatePanel.Location = New System.Drawing.Point(12, 2)
+        Me.DatePanel.Name = "DatePanel"
+        Me.DatePanel.Size = New System.Drawing.Size(403, 40)
+        Me.DatePanel.TabIndex = 112
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label3.Location = New System.Drawing.Point(205, 12)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(20, 14)
+        Me.Label3.TabIndex = 122
+        Me.Label3.Text = "ถึง"
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateTo.EnterMoveNextControl = True
+        Me.dtpDateTo.Location = New System.Drawing.Point(231, 10)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateTo.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateTo.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateTo.Properties.Mask.EditMask = "D"
+        Me.dtpDateTo.Size = New System.Drawing.Size(139, 20)
+        Me.dtpDateTo.TabIndex = 121
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label2.Location = New System.Drawing.Point(5, 13)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(49, 14)
+        Me.Label2.TabIndex = 120
+        Me.Label2.Text = "ช่วงวันที่"
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
+        Me.dtpDateFrom.EnterMoveNextControl = True
+        Me.dtpDateFrom.Location = New System.Drawing.Point(60, 10)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.dtpDateFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.dtpDateFrom.Properties.Appearance.Options.UseFont = True
+        Me.dtpDateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpDateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.EditFormat.FormatString = "D"
+        Me.dtpDateFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpDateFrom.Properties.Mask.EditMask = "D"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(139, 20)
+        Me.dtpDateFrom.TabIndex = 2
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.GridControl)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 76)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1193, 544)
+        Me.PanelControl2.TabIndex = 12
+        '
+        'GridControl
+        '
+        Me.GridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GridControl.Location = New System.Drawing.Point(5, 6)
+        Me.GridControl.MainView = Me.GridView
+        Me.GridControl.Name = "GridControl"
+        Me.GridControl.Size = New System.Drawing.Size(1183, 533)
+        Me.GridControl.TabIndex = 19
+        Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
+        '
+        'GridView
+        '
+        Me.GridView.GridControl = Me.GridControl
+        Me.GridView.Name = "GridView"
+        Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridView.OptionsBehavior.AutoSelectAllInEditor = False
+        Me.GridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click
+        Me.GridView.OptionsFind.AlwaysVisible = True
+        Me.GridView.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel
+        Me.GridView.OptionsLayout.Columns.AddNewColumns = False
+        Me.GridView.OptionsLayout.Columns.RemoveOldColumns = False
+        Me.GridView.OptionsSelection.CheckBoxSelectorColumnWidth = 50
+        Me.GridView.OptionsSelection.CheckBoxSelectorField = "IsSelect"
+        Me.GridView.OptionsSelection.MultiSelect = True
+        Me.GridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect
+        Me.GridView.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView.OptionsView.ShowViewCaption = True
+        '
+        'GridView1
+        '
+        Me.GridView1.Name = "GridView1"
+        '
+        'frmShippingRecordMain
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1193, 620)
+        Me.Controls.Add(Me.PanelControl2)
+        Me.Controls.Add(Me.FindPanel)
+        Me.Controls.Add(Me.barDockControlLeft)
+        Me.Controls.Add(Me.barDockControlRight)
+        Me.Controls.Add(Me.barDockControlBottom)
+        Me.Controls.Add(Me.barDockControlTop)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmShippingRecordMain.IconOptions.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
+        Me.Name = "frmShippingRecordMain"
+        Me.Text = "บันทึกส่งของ"
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemComboBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemComboBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemComboBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FindPanel, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FindPanel.ResumeLayout(False)
+        CType(Me.DatePanel, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.DatePanel.ResumeLayout(False)
+        Me.DatePanel.PerformLayout()
+        CType(Me.dtpDateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.GridControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents BarManager1 As DevExpress.XtraBars.BarManager
+    Friend WithEvents MenuBar As DevExpress.XtraBars.Bar
+    Friend WithEvents AddBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents EditBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents AssignToBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RefreshBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents OptionBar As DevExpress.XtraBars.BarSubItem
+    Friend WithEvents CopyBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ExitBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RepositoryItemComboBox1 As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents barDockControlTop As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlBottom As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents RepositoryItemComboBox2 As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
+    Friend WithEvents RepositoryItemTextEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents RepositoryItemComboBox3 As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
+    Friend WithEvents RepositoryItemTextEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents FindPanel As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PrintBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemComboBox4 As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
+    Friend WithEvents ImportBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarStaticItem1 As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents AssignBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ConvertBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents QuickBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents MakeOrderBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents DatePanel As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents dtpDateFrom As DevExpress.XtraEditors.DateEdit
+    Private WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents dtpDateTo As DevExpress.XtraEditors.DateEdit
+    Private WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents SummaryBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents GridControl As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GridView As DevExpress.XtraGrid.Views.Grid.GridView
+End Class

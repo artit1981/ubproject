@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>58</ApplicationRevision>
-    <ApplicationVersion>1.0.1.58</ApplicationVersion>
+    <ApplicationRevision>59</ApplicationRevision>
+    <ApplicationVersion>1.0.1.59</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -418,22 +418,28 @@
     <Compile Include="CRM\frmCommission.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CRM\frmShippingRecordMain.Designer.vb">
+      <DependentUpon>frmShippingRecordMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecordMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmOrderHis2.Designer.vb">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </Compile>
     <Compile Include="CRM\frmOrderHis2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CRM\frmShippingRecord.Designer.vb">
-      <DependentUpon>frmShippingRecord.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CRM\frmShippingRecord.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CRM\frmShippingRecordDTL.Designer.vb">
       <DependentUpon>frmShippingRecordDTL.vb</DependentUpon>
     </Compile>
     <Compile Include="CRM\frmShippingRecordDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecordLog.Designer.vb">
+      <DependentUpon>frmShippingRecordLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecordLog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DAO\CommissionDAO.vb" />
@@ -461,6 +467,12 @@
       <DependentUpon>frmStockReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Report\frmStockReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmShippingRecReport.Designer.vb">
+      <DependentUpon>frmShippingRecReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmShippingRecReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\rptClaimReturn.Designer.vb">
@@ -523,10 +535,22 @@
     <Compile Include="Report\rptInvoiceAbb.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\rptShippingRecord.Designer.vb">
+      <DependentUpon>rptShippingRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptShippingRecord.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\rptStockReport.Designer.vb">
       <DependentUpon>rptStockReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Report\rptStockReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptShippingRec.Designer.vb">
+      <DependentUpon>rptShippingRec.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptShippingRec.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Stock\frmUpdateStockLog.Designer.vb">
@@ -1349,14 +1373,18 @@
     <EmbeddedResource Include="CRM\frmCommission.resx">
       <DependentUpon>frmCommission.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmShippingRecordMain.resx">
+      <DependentUpon>frmShippingRecordMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmOrderHis2.resx">
       <DependentUpon>frmOrderHis2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CRM\frmShippingRecord.resx">
-      <DependentUpon>frmShippingRecord.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmShippingRecordDTL.resx">
       <DependentUpon>frmShippingRecordDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmShippingRecordLog.resx">
+      <DependentUpon>frmShippingRecordLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportData\frmImportOrderOnline.resx">
       <DependentUpon>frmImportOrderOnline.vb</DependentUpon>
@@ -1366,6 +1394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmStockReport.resx">
       <DependentUpon>frmStockReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmShippingRecReport.resx">
+      <DependentUpon>frmShippingRecReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptClaimReturn.resx">
       <DependentUpon>rptClaimReturn.vb</DependentUpon>
@@ -1397,8 +1428,14 @@
     <EmbeddedResource Include="Report\rptInvoiceAbb.resx">
       <DependentUpon>rptInvoiceAbb.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptShippingRecord.resx">
+      <DependentUpon>rptShippingRecord.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptStockReport.resx">
       <DependentUpon>rptStockReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptShippingRec.resx">
+      <DependentUpon>rptShippingRec.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\frmUpdateStockLog.resx">
       <DependentUpon>frmUpdateStockLog.vb</DependentUpon>

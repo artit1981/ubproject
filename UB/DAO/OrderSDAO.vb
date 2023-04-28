@@ -598,7 +598,7 @@ Public Class OrderSDAO
         Return dataTable
     End Function
 
-    Public Function GetDataTableForShippingRec(ByVal pFromDate As Date, ByVal pToDate As Date) As DataTable
+    Public Function GetDataTableForShippingRec(ByVal pFromDate As Date, ByVal pToDate As Date, ByVal pIsOnlyAssign As Boolean) As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
 
@@ -624,11 +624,38 @@ Public Class OrderSDAO
             SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
             'SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
             SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
-
+            If pIsOnlyAssign = True Then
+                SQL &= " AND Orders.ShippingEmpID>0 "
+            End If
             SQL &= " ORDER BY Orders.OrderCode,Orders.OrderDate"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForShippingRec : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
+    Public Function GetDataTableForShippingRecSummary(ByVal pFromDate As Date, ByVal pToDate As Date) As DataTable
+        Dim SQL As String = ""
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = " SELECT  ShippingEmp,sum(SuccessCount) SuccessCount,sum(NotSuccessCount)NotSuccessCount,sum(SomeCount )SomeCount"
+            SQL &= " FROM("
+            SQL &= " SELECT ShippingEmp.Title + ShippingEmp.Firstname + ' ' + ShippingEmp.LastName AS ShippingEmp"
+            SQL &= " ,case when Orders.ShippingStatus='สำเร็จ' then 1 else 0 end SuccessCount  "
+            SQL &= " ,case when Orders.ShippingStatus='ไม่สำเร็จ' then 1 else 0 end NotSuccessCount  "
+            SQL &= " ,case when Orders.ShippingStatus='สำเร็จบางส่วน' then 1 else 0 end SomeCount  "
+            SQL &= " FROM Orders    "
+            SQL &= " LEFT OUTER JOIN Employee ShippingEmp ON Orders.ShippingEmpID=ShippingEmp.EmpID    "
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  AND Orders.ShippingEmpID>0    "
+            SQL &= " AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
+            SQL &= " ) as tmp "
+            SQL &= " group by ShippingEmp "
+            SQL &= " ORDER by ShippingEmp "
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "OrderSDAO.GetDataTableForShippingRecSummary : " & e.Message)
         End Try
         Return dataTable
     End Function
