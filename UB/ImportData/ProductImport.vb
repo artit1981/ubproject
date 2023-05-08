@@ -35,6 +35,7 @@ Public Class ProductImport
                         rec.Price = ConvertNullToZero(dr(3))
                         rec.IsSN = "No"
                         rec.UnitMain = ConvertNullToString(dr(4), True, 50)
+
                         rec.ProductCategory = ConvertNullToString(dr(5), True, 50)
                         rec.ProductBrand = ConvertNullToString(dr(6), True, 50)
                         rec.ProductType = ConvertNullToString(dr(7), True, 50)
@@ -816,6 +817,7 @@ Public Class ProductProperty
                 lclsDAO.TaxType = False
                 lclsDAO.IsSN = IIf(IsSN = "Yes", 1, 0)
                 lclsDAO.UnitMainID = UnitMainID
+                lclsDAO.UnitMainIDBuy = UnitMainID
                 lclsDAO.UnitSecondID = UnitMainID
                 lclsDAO.ProductCategoryID = ProductCategoryID
                 lclsDAO.ProductTypeID = ProductTypeID

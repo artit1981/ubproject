@@ -69,6 +69,13 @@ Public Class frmShippingRecordLog
             .Columns("SomeCount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("SomeCount").DisplayFormat.FormatString = "n0"
 
+            .Columns("InProcessCount").Caption = "กำลังดำเนินการ"
+            .Columns("InProcessCount").MinWidth = 50
+            .Columns("InProcessCount").MaxWidth = 70
+            .Columns("InProcessCount").Width = 50
+            .Columns("InProcessCount").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            .Columns("InProcessCount").DisplayFormat.FormatString = "n0"
+
         End With
     End Sub
 End Class

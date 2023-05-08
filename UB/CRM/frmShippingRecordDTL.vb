@@ -50,6 +50,7 @@ Public Class frmShippingRecordDTL
             ShippingStatus.Properties.Items.Add("สำเร็จ")
             ShippingStatus.Properties.Items.Add("ไม่สำเร็จ")
             ShippingStatus.Properties.Items.Add("สำเร็จบางส่วน")
+            ShippingStatus.Properties.Items.Add("กำลังดำเนินการ")
             ShippingStatus.SelectedIndex = 0
 
 

@@ -61,9 +61,9 @@ Public Class ProductBrandDAO
             SQL = "SELECT *   "
             SQL &=  " FROM ProductBrand"
             SQL &=  " WHERE 1=1 "
-            'If pID > 0 Then
-            '    SQL &=  " and ProductBrandID=" & pID
-            'End If
+            If pID > 0 Then
+                SQL &= " and ProductBrandID=" & pID
+            End If
             If pCode <> "" Then
                 SQL &=  " and NameThai='" & pCode & "'"
             End If

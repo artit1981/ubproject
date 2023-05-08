@@ -640,12 +640,13 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = " SELECT  ShippingEmp,sum(SuccessCount) SuccessCount,sum(NotSuccessCount)NotSuccessCount,sum(SomeCount )SomeCount"
+            SQL = " SELECT  ShippingEmp,sum(SuccessCount) SuccessCount,sum(NotSuccessCount)NotSuccessCount,sum(SomeCount )SomeCount,sum(InProcessCount )InProcessCount"
             SQL &= " FROM("
             SQL &= " SELECT ShippingEmp.Title + ShippingEmp.Firstname + ' ' + ShippingEmp.LastName AS ShippingEmp"
             SQL &= " ,case when Orders.ShippingStatus='สำเร็จ' then 1 else 0 end SuccessCount  "
             SQL &= " ,case when Orders.ShippingStatus='ไม่สำเร็จ' then 1 else 0 end NotSuccessCount  "
             SQL &= " ,case when Orders.ShippingStatus='สำเร็จบางส่วน' then 1 else 0 end SomeCount  "
+            SQL &= " ,case when Orders.ShippingStatus='กำลังดำเนินการ' then 1 else 0 end InProcessCount  "
             SQL &= " FROM Orders    "
             SQL &= " LEFT OUTER JOIN Employee ShippingEmp ON Orders.ShippingEmpID=ShippingEmp.EmpID    "
             SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  AND Orders.ShippingEmpID>0    "
