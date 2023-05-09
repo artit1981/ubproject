@@ -260,6 +260,29 @@ Public Class CompanyDAO
             mBankAccount2 = value
         End Set
     End Property
+
+    Private mShippingNotAssign As DateTime
+    Public Property ShippingNotAssign() As DateTime
+        Get
+            Return mShippingNotAssign
+        End Get
+        Set(ByVal value As DateTime)
+            mShippingNotAssign = value
+        End Set
+
+    End Property
+
+    Private mShippingNotSuccess As DateTime
+    Public Property ShippingNotSuccess() As DateTime
+        Get
+            Return mShippingNotSuccess
+        End Get
+        Set(ByVal value As DateTime)
+            mShippingNotSuccess = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Function CHECKSUM_AGG() As Long
@@ -330,6 +353,9 @@ Public Class CompanyDAO
                     CheckLimitShiping = ConvertNullToZero(dr("CheckLimitShiping"))
                     BankAccount = ConvertNullToString(dr("BankAccount"))
                     BankAccount2 = ConvertNullToString(dr("BankAccount2"))
+                    ShippingNotAssign = dr("ShippingNotAssign")
+                    ShippingNotSuccess = dr("ShippingNotSuccess")
+
                     'Person
                     ID = Int32.Parse(dr("CompanyID"))
                     IsInActive = dr("IsInActive")
@@ -461,7 +487,8 @@ Public Class CompanyDAO
                     SQL &=  " ,CommitteeNum,CommitteeName,HistoryID,AddressID,CheckLimitReserve,CheckLimitSellOrder,IsApproveQua "
                     SQL &=  " ,IsApproveReserve,IsApproveSellOrder,IsApproveOffer,IsApproveBuyOrder"
                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,IsMainCompany,Branch,BankAccount,BankAccount2   "
-                    SQL &=  " ,CheckLimitInvoice,CheckLimitShiping,UnderLimit,IsApproveInvoice,IsApproveShiping,IsApproveBorrow"
+                    SQL &= " ,CheckLimitInvoice,CheckLimitShiping,UnderLimit,IsApproveInvoice,IsApproveShiping,IsApproveBorrow"
+                    SQL &= " ,ShippingNotAssign,ShippingNotSuccess"
                     SQL &=  " )"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @CompanyName"
@@ -500,7 +527,9 @@ Public Class CompanyDAO
                     SQL &=  " ,  @UnderLimit"
                     SQL &=  " ,  @IsApproveInvoice"
                     SQL &=  " ,  @IsApproveShiping"
-                    SQL &=  " ,  @IsApproveBorrow"
+                    SQL &= " ,  @IsApproveBorrow"
+                    SQL &= " ,  @ShippingNotAssign"
+                    SQL &= " ,  @ShippingNotSuccess"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Company SET "
@@ -535,7 +564,9 @@ Public Class CompanyDAO
                     SQL &=  " ,  UnderLimit=@UnderLimit"
                     SQL &=  " ,  IsApproveInvoice=@IsApproveInvoice"
                     SQL &=  " ,  IsApproveShiping=@IsApproveShiping"
-                    SQL &=  " ,  IsApproveBorrow=@IsApproveBorrow"
+                    SQL &= " ,  IsApproveBorrow=@IsApproveBorrow"
+                    SQL &= " ,  ShippingNotAssign=@ShippingNotAssign"
+                    SQL &= " ,  ShippingNotSuccess=@ShippingNotSuccess"
                     SQL &=  " WHERE CompanyID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Company SET IsDelete=@IsDelete "
@@ -582,7 +613,8 @@ Public Class CompanyDAO
             myCommand.Parameters.Add(New SqlParameter("@gUserID", gUserID))
             myCommand.Parameters.Add(New SqlParameter("@CreateTime", formatSQLDateTime(GetCurrentDate(tr))))
             myCommand.Parameters.Add(New SqlParameter("@IsInActive", IsInActive))
-
+            myCommand.Parameters.Add(New SqlParameter("@ShippingNotAssign", formatSQLDateTime(ShippingNotAssign)))
+            myCommand.Parameters.Add(New SqlParameter("@ShippingNotSuccess", formatSQLDateTime(ShippingNotSuccess)))
 
             Select Case ModeData
                 Case DataMode.ModeNew

@@ -80,6 +80,8 @@ Public Class frmCompany
             mcls.HistoryDAO = UcHistory1.GetDAO
             mcls.BankAccount = ConvertNullToString(BankAccount.EditValue)
             mcls.BankAccount2 = ConvertNullToString(BankAccount2.EditValue)
+            mcls.ShippingNotAssign = dtpNotAssign.EditValue
+            mcls.ShippingNotSuccess = dtpNotSuccess.EditValue
             If Verify() = True Then
                 mcls.SaveData()
                 VerifyCompany()
@@ -122,6 +124,8 @@ Public Class frmCompany
         Try
             If pMode = DataMode.ModeNew Then
                 UcAddress1.InitailData(Nothing, lclsProvince.GetDataTable())
+                dtpNotSuccess.EditValue = Now
+                dtpNotAssign.EditValue = Now
             ElseIf pMode = DataMode.ModeEdit Or pMode = DataMode.ModeCopy Then
                 If mcls.InitailData(pID) Then
                     If pMode = DataMode.ModeEdit Then
@@ -166,7 +170,8 @@ Public Class frmCompany
                     CheckLimitInvoice.Checked = mcls.CheckLimitInvoice
                     CheckLimitShiping.Checked = mcls.CheckLimitShiping
                     UnderLimit.EditValue = mcls.UnderLimit
-
+                    dtpNotAssign.EditValue = mcls.ShippingNotAssign
+                    dtpNotSuccess.EditValue = mcls.ShippingNotSuccess
                     UcAddress1.InitailData(mcls.AddressS, lclsProvince.GetDataTable())
                     If mcls.IsMainCompany = 1 Then
                         IsMainCompanyYes.Checked = True

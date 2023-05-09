@@ -101,6 +101,11 @@ Partial Class frmCompany
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
+        Me.dtpNotAssign = New DevExpress.XtraEditors.TimeEdit()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.dtpNotSuccess = New DevExpress.XtraEditors.TimeEdit()
         Me.AddressTabPage.SuspendLayout()
         CType(Me.RegisterNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RegisterNum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,7 +148,7 @@ Partial Class frmCompany
         CType(Me.TaxID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Owners.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CompanyNameEng.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RegisterDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RegisterDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RegisterDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TaxType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CompanyNames.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -155,6 +160,9 @@ Partial Class frmCompany
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabPage2.SuspendLayout()
+        CType(Me.dtpNotAssign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtpNotSuccess.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'AddressTabPage
@@ -162,7 +170,7 @@ Partial Class frmCompany
         Me.AddressTabPage.AutoScroll = True
         Me.AddressTabPage.Controls.Add(Me.UcAddress1)
         Me.AddressTabPage.Name = "AddressTabPage"
-        Me.AddressTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.AddressTabPage.Size = New System.Drawing.Size(829, 599)
         Me.AddressTabPage.Text = "ที่อยู่"
         '
         'UcAddress1
@@ -170,7 +178,7 @@ Partial Class frmCompany
         Me.UcAddress1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcAddress1.Location = New System.Drawing.Point(0, 0)
         Me.UcAddress1.Name = "UcAddress1"
-        Me.UcAddress1.Size = New System.Drawing.Size(825, 589)
+        Me.UcAddress1.Size = New System.Drawing.Size(829, 599)
         Me.UcAddress1.TabIndex = 0
         '
         'RegisterNo
@@ -252,20 +260,19 @@ Partial Class frmCompany
         '
         'TabControl2
         '
-        Me.TabControl2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl2.Location = New System.Drawing.Point(45, 408)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedTabPage = Me.CheckCreditTabPage
         Me.TabControl2.Size = New System.Drawing.Size(770, 174)
         Me.TabControl2.TabIndex = 185
-        Me.TabControl2.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.CheckCreditTabPage, Me.ApproveTabPage})
+        Me.TabControl2.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.CheckCreditTabPage, Me.ApproveTabPage, Me.XtraTabPage2})
         '
         'CheckCreditTabPage
         '
         Me.CheckCreditTabPage.Controls.Add(Me.PanelControl2)
         Me.CheckCreditTabPage.Controls.Add(Me.PanelControl1)
         Me.CheckCreditTabPage.Name = "CheckCreditTabPage"
-        Me.CheckCreditTabPage.Size = New System.Drawing.Size(764, 146)
+        Me.CheckCreditTabPage.Size = New System.Drawing.Size(768, 149)
         Me.CheckCreditTabPage.Text = "อนุมัติวงเงิน"
         '
         'PanelControl2
@@ -316,7 +323,7 @@ Partial Class frmCompany
         Me.CheckLimitInvoice.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckLimitInvoice.Properties.Appearance.Options.UseFont = True
         Me.CheckLimitInvoice.Properties.Caption = "เช็คเกณฑ์ใบกำกับภาษี"
-        Me.CheckLimitInvoice.Size = New System.Drawing.Size(135, 19)
+        Me.CheckLimitInvoice.Size = New System.Drawing.Size(135, 20)
         Me.CheckLimitInvoice.TabIndex = 0
         '
         'BarManager1
@@ -326,13 +333,13 @@ Partial Class frmCompany
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.MaxItemId = 0
         '
         'barDockControlTop
         '
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Manager = Me.BarManager1
         Me.barDockControlTop.Size = New System.Drawing.Size(831, 0)
         '
         'barDockControlBottom
@@ -340,6 +347,7 @@ Partial Class frmCompany
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 654)
+        Me.barDockControlBottom.Manager = Me.BarManager1
         Me.barDockControlBottom.Size = New System.Drawing.Size(831, 0)
         '
         'barDockControlLeft
@@ -347,6 +355,7 @@ Partial Class frmCompany
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlLeft.Manager = Me.BarManager1
         Me.barDockControlLeft.Size = New System.Drawing.Size(0, 654)
         '
         'barDockControlRight
@@ -354,6 +363,7 @@ Partial Class frmCompany
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(831, 0)
+        Me.barDockControlRight.Manager = Me.BarManager1
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 654)
         '
         'CheckLimitShiping
@@ -364,7 +374,7 @@ Partial Class frmCompany
         Me.CheckLimitShiping.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckLimitShiping.Properties.Appearance.Options.UseFont = True
         Me.CheckLimitShiping.Properties.Caption = "เช็คเกณฑ์ใบส่งของ"
-        Me.CheckLimitShiping.Size = New System.Drawing.Size(135, 19)
+        Me.CheckLimitShiping.Size = New System.Drawing.Size(135, 20)
         Me.CheckLimitShiping.TabIndex = 1
         '
         'PanelControl1
@@ -387,7 +397,7 @@ Partial Class frmCompany
         Me.CheckLimitReserve.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckLimitReserve.Properties.Appearance.Options.UseFont = True
         Me.CheckLimitReserve.Properties.Caption = "เช็ควงเงินใบสั่งจอง"
-        Me.CheckLimitReserve.Size = New System.Drawing.Size(135, 19)
+        Me.CheckLimitReserve.Size = New System.Drawing.Size(135, 20)
         Me.CheckLimitReserve.TabIndex = 0
         '
         'Label20
@@ -410,7 +420,7 @@ Partial Class frmCompany
         Me.CheckLimitSellOrder.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckLimitSellOrder.Properties.Appearance.Options.UseFont = True
         Me.CheckLimitSellOrder.Properties.Caption = "เช็ควงเงินใบสั่งขาย"
-        Me.CheckLimitSellOrder.Size = New System.Drawing.Size(135, 19)
+        Me.CheckLimitSellOrder.Size = New System.Drawing.Size(135, 20)
         Me.CheckLimitSellOrder.TabIndex = 1
         '
         'ApproveTabPage
@@ -425,7 +435,7 @@ Partial Class frmCompany
         Me.ApproveTabPage.Controls.Add(Me.IsApproveReserve)
         Me.ApproveTabPage.Controls.Add(Me.IsApproveQua)
         Me.ApproveTabPage.Name = "ApproveTabPage"
-        Me.ApproveTabPage.Size = New System.Drawing.Size(764, 146)
+        Me.ApproveTabPage.Size = New System.Drawing.Size(768, 149)
         Me.ApproveTabPage.Text = "อนุมัติรายการ"
         '
         'Label19
@@ -448,7 +458,7 @@ Partial Class frmCompany
         Me.IsApproveShiping.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveShiping.Properties.Appearance.Options.UseFont = True
         Me.IsApproveShiping.Properties.Caption = "อนุมัติใบใบส่งของ"
-        Me.IsApproveShiping.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveShiping.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveShiping.TabIndex = 8
         '
         'IsApproveBorrow
@@ -459,7 +469,7 @@ Partial Class frmCompany
         Me.IsApproveBorrow.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveBorrow.Properties.Appearance.Options.UseFont = True
         Me.IsApproveBorrow.Properties.Caption = "อนุมัติใบยืมสินค้า"
-        Me.IsApproveBorrow.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveBorrow.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveBorrow.TabIndex = 7
         '
         'IsApproveInvoice
@@ -470,7 +480,7 @@ Partial Class frmCompany
         Me.IsApproveInvoice.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveInvoice.Properties.Appearance.Options.UseFont = True
         Me.IsApproveInvoice.Properties.Caption = "อนุมัติใบกำกับภาษี"
-        Me.IsApproveInvoice.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveInvoice.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveInvoice.TabIndex = 6
         '
         'IsApproveBuyOrder
@@ -481,7 +491,7 @@ Partial Class frmCompany
         Me.IsApproveBuyOrder.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveBuyOrder.Properties.Appearance.Options.UseFont = True
         Me.IsApproveBuyOrder.Properties.Caption = "อนุมัติใบสั่งซื้อ"
-        Me.IsApproveBuyOrder.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveBuyOrder.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveBuyOrder.TabIndex = 5
         '
         'IsApproveOffer
@@ -492,7 +502,7 @@ Partial Class frmCompany
         Me.IsApproveOffer.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveOffer.Properties.Appearance.Options.UseFont = True
         Me.IsApproveOffer.Properties.Caption = "อนุมัติใบเสนอซื้อ"
-        Me.IsApproveOffer.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveOffer.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveOffer.TabIndex = 4
         '
         'IsApproveSellOrder
@@ -503,7 +513,7 @@ Partial Class frmCompany
         Me.IsApproveSellOrder.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveSellOrder.Properties.Appearance.Options.UseFont = True
         Me.IsApproveSellOrder.Properties.Caption = "อนุมัติใบสั่งขาย"
-        Me.IsApproveSellOrder.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveSellOrder.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveSellOrder.TabIndex = 3
         '
         'IsApproveReserve
@@ -514,7 +524,7 @@ Partial Class frmCompany
         Me.IsApproveReserve.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveReserve.Properties.Appearance.Options.UseFont = True
         Me.IsApproveReserve.Properties.Caption = "อนุมัติใบสั่งจอง"
-        Me.IsApproveReserve.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveReserve.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveReserve.TabIndex = 2
         '
         'IsApproveQua
@@ -525,16 +535,16 @@ Partial Class frmCompany
         Me.IsApproveQua.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsApproveQua.Properties.Appearance.Options.UseFont = True
         Me.IsApproveQua.Properties.Caption = "อนุมัติใบเสนอราคา"
-        Me.IsApproveQua.Size = New System.Drawing.Size(135, 19)
+        Me.IsApproveQua.Size = New System.Drawing.Size(135, 20)
         Me.IsApproveQua.TabIndex = 1
         '
         'XtraTabControl1
         '
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(831, 617)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(831, 624)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.XtraTabPage1, Me.AddressTabPage, Me.RegisterTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         '
@@ -546,7 +556,7 @@ Partial Class frmCompany
         Me.GeneralTabPage.Controls.Add(Me.GroupControl2)
         Me.GeneralTabPage.Controls.Add(Me.TabControl2)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(829, 599)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         '
         'GroupControl2
@@ -815,12 +825,12 @@ Partial Class frmCompany
         Me.RegisterDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.RegisterDate.Properties.Appearance.Options.UseFont = True
         Me.RegisterDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RegisterDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.RegisterDate.Properties.DisplayFormat.FormatString = "D"
         Me.RegisterDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.RegisterDate.Properties.EditFormat.FormatString = "D"
         Me.RegisterDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.RegisterDate.Properties.Mask.EditMask = "D"
-        Me.RegisterDate.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.RegisterDate.Size = New System.Drawing.Size(189, 20)
         Me.RegisterDate.TabIndex = 6
         '
@@ -900,7 +910,7 @@ Partial Class frmCompany
         '
         Me.XtraTabPage1.Controls.Add(Me.UcHistory1)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(825, 589)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(829, 599)
         Me.XtraTabPage1.Text = "ข้อมูลบริษัท"
         '
         'UcHistory1
@@ -908,7 +918,7 @@ Partial Class frmCompany
         Me.UcHistory1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcHistory1.Location = New System.Drawing.Point(0, 0)
         Me.UcHistory1.Name = "UcHistory1"
-        Me.UcHistory1.Size = New System.Drawing.Size(825, 589)
+        Me.UcHistory1.Size = New System.Drawing.Size(829, 599)
         Me.UcHistory1.TabIndex = 201
         '
         'RegisterTabPage
@@ -927,7 +937,7 @@ Partial Class frmCompany
         Me.RegisterTabPage.Controls.Add(Me.Label5)
         Me.RegisterTabPage.Controls.Add(Me.RegisterNo)
         Me.RegisterTabPage.Name = "RegisterTabPage"
-        Me.RegisterTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.RegisterTabPage.Size = New System.Drawing.Size(829, 599)
         Me.RegisterTabPage.Text = "ข้อมูลการจดทะเบียน"
         '
         'Label14
@@ -1020,7 +1030,7 @@ Partial Class frmCompany
         '
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.NoteTabPage.Size = New System.Drawing.Size(829, 599)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         '
         'UcNote1
@@ -1028,14 +1038,14 @@ Partial Class frmCompany
         Me.UcNote1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(825, 589)
+        Me.UcNote1.Size = New System.Drawing.Size(829, 599)
         Me.UcNote1.TabIndex = 1
         '
         'AttachmentTabPage
         '
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(829, 599)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         '
         'UcFileAttach1
@@ -1043,14 +1053,14 @@ Partial Class frmCompany
         Me.UcFileAttach1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(825, 589)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(829, 599)
         Me.UcFileAttach1.TabIndex = 0
         '
         'AdminTabPage
         '
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(825, 589)
+        Me.AdminTabPage.Size = New System.Drawing.Size(829, 599)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         '
         'UcAdmin1
@@ -1067,6 +1077,68 @@ Partial Class frmCompany
         Me.ImageCollection1.Images.SetKeyName(0, "Add.png")
         Me.ImageCollection1.Images.SetKeyName(1, "_active__remove_(delete).png")
         Me.ImageCollection1.Images.SetKeyName(2, "Refresh1.png")
+        '
+        'XtraTabPage2
+        '
+        Me.XtraTabPage2.Controls.Add(Me.dtpNotSuccess)
+        Me.XtraTabPage2.Controls.Add(Me.Label24)
+        Me.XtraTabPage2.Controls.Add(Me.Label23)
+        Me.XtraTabPage2.Controls.Add(Me.dtpNotAssign)
+        Me.XtraTabPage2.Name = "XtraTabPage2"
+        Me.XtraTabPage2.Size = New System.Drawing.Size(768, 149)
+        Me.XtraTabPage2.Text = "การแจ้งเตือนบันทึกส่งของ"
+        '
+        'dtpNotAssign
+        '
+        Me.dtpNotAssign.EditValue = New Date(2023, 5, 9, 0, 0, 0, 0)
+        Me.dtpNotAssign.Location = New System.Drawing.Point(186, 33)
+        Me.dtpNotAssign.MenuManager = Me.BarManager1
+        Me.dtpNotAssign.Name = "dtpNotAssign"
+        Me.dtpNotAssign.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpNotAssign.Properties.DisplayFormat.FormatString = "HH:mm"
+        Me.dtpNotAssign.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpNotAssign.Properties.EditFormat.FormatString = "HH:mm"
+        Me.dtpNotAssign.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpNotAssign.Properties.MaskSettings.Set("mask", "t")
+        Me.dtpNotAssign.Size = New System.Drawing.Size(73, 20)
+        Me.dtpNotAssign.TabIndex = 0
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.BackColor = System.Drawing.Color.Transparent
+        Me.Label23.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label23.Location = New System.Drawing.Point(35, 35)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(105, 14)
+        Me.Label23.TabIndex = 206
+        Me.Label23.Text = "กรณีไม่มีการ Assign"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label24.Location = New System.Drawing.Point(35, 74)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(103, 14)
+        Me.Label24.TabIndex = 207
+        Me.Label24.Text = "กรณีสถานะไม่สำเร็จ"
+        '
+        'dtpNotSuccess
+        '
+        Me.dtpNotSuccess.EditValue = New Date(2023, 5, 9, 0, 0, 0, 0)
+        Me.dtpNotSuccess.Location = New System.Drawing.Point(186, 72)
+        Me.dtpNotSuccess.MenuManager = Me.BarManager1
+        Me.dtpNotSuccess.Name = "dtpNotSuccess"
+        Me.dtpNotSuccess.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.dtpNotSuccess.Properties.DisplayFormat.FormatString = "HH:mm"
+        Me.dtpNotSuccess.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpNotSuccess.Properties.EditFormat.FormatString = "HH:mm"
+        Me.dtpNotSuccess.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.dtpNotSuccess.Properties.MaskSettings.Set("mask", "t")
+        Me.dtpNotSuccess.Size = New System.Drawing.Size(73, 20)
+        Me.dtpNotSuccess.TabIndex = 208
         '
         'frmCompany
         '
@@ -1132,7 +1204,7 @@ Partial Class frmCompany
         CType(Me.TaxID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Owners.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CompanyNameEng.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RegisterDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RegisterDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RegisterDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TaxType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CompanyNames.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1145,7 +1217,12 @@ Partial Class frmCompany
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabPage2.ResumeLayout(False)
+        Me.XtraTabPage2.PerformLayout()
+        CType(Me.dtpNotAssign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtpNotSuccess.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
@@ -1215,10 +1292,7 @@ Partial Class frmCompany
     Private WithEvents Label7 As System.Windows.Forms.Label
     Private WithEvents Label18 As System.Windows.Forms.Label
     Private WithEvents BankAccount2 As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
-    Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
-    Friend WithEvents barDockControlBottom As DevExpress.XtraBars.BarDockControl
-    Friend WithEvents barDockControlTop As DevExpress.XtraBars.BarDockControl
+
     Friend WithEvents IsApproveInvoice As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents IsApproveShiping As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents IsApproveBorrow As DevExpress.XtraEditors.CheckEdit
@@ -1230,4 +1304,13 @@ Partial Class frmCompany
     Friend WithEvents CheckLimitShiping As DevExpress.XtraEditors.CheckEdit
     Private WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents UnderLimit As DevExpress.XtraEditors.CalcEdit
+    Friend WithEvents barDockControlTop As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlBottom As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents XtraTabPage2 As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents dtpNotAssign As DevExpress.XtraEditors.TimeEdit
+    Friend WithEvents dtpNotSuccess As DevExpress.XtraEditors.TimeEdit
+    Private WithEvents Label24 As Label
+    Private WithEvents Label23 As Label
 End Class
