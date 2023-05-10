@@ -598,7 +598,7 @@ Public Class OrderSDAO
         Return dataTable
     End Function
 
-    Public Function GetDataTableForShippingRec(ByVal pFromDate As Date, ByVal pToDate As Date, ByVal pIsOnlyAssign As Boolean) As DataTable
+    Public Function GetDataTableForShippingRec(ByVal pFromDate As Date, ByVal pToDate As Date, ByVal pIsOnlyAssign As Boolean, ByVal pIsFilterNotifi As Boolean, ByVal pNotifiType As Integer) As DataTable
         Dim SQL As String = ""
         Dim dataTable As New DataTable()
 
@@ -626,6 +626,18 @@ Public Class OrderSDAO
             SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
             If pIsOnlyAssign = True Then
                 SQL &= " AND Orders.ShippingEmpID>0 "
+            End If
+            If pIsFilterNotifi = True Then
+                If pNotifiType = 1 Then  'Not Assign
+                    SQL &= " AND  Orders.ShippingEmpID is null  "
+                Else ''Not Success
+                    SQL &= " AND  Orders.ShippingEmpID >0 AND ShippingStatus='ไม่สำเร็จ'"
+                End If
+
+                If gPrivilegeID > 1 Then 'Not admin
+                    SQL &= " AND Orders.EmpID=" & gUserID
+                End If
+
             End If
             SQL &= " ORDER BY Orders.OrderCode,Orders.OrderDate"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)

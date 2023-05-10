@@ -956,6 +956,28 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub ShowNotAssign()
+        Try
+            Dim lcls As New OrderSDAO
+            Dim lTable = lcls.GetDataTableForShippingRec(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), False, True, 1)
+            If lTable.Rows.Count > 0 Then
+                Dim mCtlForm = New frmNotifyAssign
+                With mCtlForm
+                    .Text = "แจ้งเตือนรายการไม่มีการบันทึกส่งของ"
+                    .MdiParent = Me
+                    .OverdueData = lTable
+                    .Show()
+                End With
+
+
+            End If
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
+
+
 
     Private Sub ReceiptHisBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ReceiptHisBar.ItemClick
         Try
@@ -1068,5 +1090,9 @@ Public Class frmMain
     Private Sub ShippingRecordBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ShippingRecordBar.ItemClick
         frmShippingRecordMain.MdiParent = Me
         frmShippingRecordMain.Show()
+    End Sub
+
+    Private Sub NotiNotAssignBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles NotiNotAssignBar.ItemClick
+        ShowNotAssign()
     End Sub
 End Class

@@ -39,7 +39,7 @@ Public Class frmShippingRecReport
 
             lclsReport.SaveData()
             Dim lcls As New OrderSDAO
-            Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, True)
+            Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, True, False, 1)
             If dataTable.Rows.Count > 0 Then
                 Dim SQL As String
 

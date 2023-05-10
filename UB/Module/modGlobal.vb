@@ -122,6 +122,8 @@ Module modGlobal
         CampaignBuy = 115
         InvoiceAbb = 116
         ShippingRecord = 118
+        NotiNotAssign = 119
+        NotiNotSuccess = 120
     End Enum
 
     Public Enum DataMode

@@ -308,6 +308,12 @@
     <Compile Include="Base\frmDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Base\frmNotifyAssign.Designer.vb">
+      <DependentUpon>frmNotifyAssign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmNotifyAssign.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmNotify.Designer.vb">
       <DependentUpon>frmNotify.vb</DependentUpon>
     </Compile>
@@ -1335,6 +1341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmNotifyAssign.resx">
+      <DependentUpon>frmNotifyAssign.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmNotify.resx">
       <DependentUpon>frmNotify.vb</DependentUpon>
