@@ -84,8 +84,43 @@ Module modApprove
                 gIsApproveBorrow = lcls.IsApproveBorrow
                 gUnderLimit = lcls.UnderLimit
                 gCompanyName = lcls.CompanyName
+                'Set date to Current
+                Dim dateString As String = GetCurrentDate(Nothing).ToString("yyyy/MM/dd") & " " & lcls.ShippingNotAssign.ToString("HH:mm")  ' "2014/08/20 03:00"
+                gTimeNotifiNotAssign = DateTime.Parse(dateString)
+                dateString = GetCurrentDate(Nothing).ToString("yyyy/MM/dd") & " " & lcls.ShippingNotSuccess.ToString("HH:mm")
+                gTimeNotifiNotSuccess = DateTime.Parse(dateString)
                 Return True
             End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modApprove.VerifyCompany : " & e.Message)
+        End Try
+    End Function
+
+    Public Function VerifyShippingNotifi() As Boolean
+        VerifyShippingNotifi = False
+
+        Dim lLastNotifiNotAssign As DateTime = Now, lLastNotifiNotSuccess As DateTime = Now
+
+        Try
+            Dim lcls As New ActivityDAO
+            Dim lData = lcls.GetDataLogTable(gUserID, 0, Nothing)
+            For Each pRow In lData.Rows
+                If Integer.Parse(pRow("MenuID")) = MasterType.NotiNotAssign Then
+                    lLastNotifiNotAssign = pRow("LogTime")
+                ElseIf Integer.Parse(pRow("MenuID")) = MasterType.NotiNotSuccess Then
+                    lLastNotifiNotSuccess = pRow("LogTime")
+                End If
+            Next
+
+            If Long.Parse(lLastNotifiNotAssign.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotAssign.ToString("yyyyMMddHHmm")) Then
+                gIsNotifiNotAssign = True
+            End If
+
+            If Long.Parse(lLastNotifiNotSuccess.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotSuccess.ToString("yyyyMMddHHmm")) Then
+                gIsNotifiNotSuccess = True
+            End If
+            Return True
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "modApprove.VerifyCompany : " & e.Message)
         End Try

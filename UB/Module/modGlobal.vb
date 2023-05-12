@@ -121,6 +121,7 @@ Module modGlobal
         Commission = 112
         CampaignBuy = 115
         InvoiceAbb = 116
+        ImportOnlineSales = 117
         ShippingRecord = 118
         NotiNotAssign = 119
         NotiNotSuccess = 120
@@ -206,6 +207,12 @@ Module modGlobal
     Public gShowShipingDateReport As Boolean = True
     'Calc
     Public gGrandAmount As Decimal = 0
+
+    'Notifi
+    Public gIsNotifiNotAssign As Boolean = False
+    Public gIsNotifiNotSuccess As Boolean = False
+    Public gTimeNotifiNotAssign As DateTime
+    Public gTimeNotifiNotSuccess As DateTime
 
     Public Sub InsertActivity(ByVal Action As DataMode, ByVal MenuID As MasterType, ByVal Remark As String, ByRef ptr As SqlTransaction)
         Dim lcls As New ActivityDAO

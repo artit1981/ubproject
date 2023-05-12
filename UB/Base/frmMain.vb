@@ -965,11 +965,13 @@ Public Class frmMain
                 With mCtlForm
                     .Text = "แจ้งเตือนรายการไม่มีการบันทึกส่งของ"
                     .MdiParent = Me
-                    .OverdueData = lTable
+                    .TableData = lTable
+                    .MenuID = MasterType.NotiNotAssign
                     .Show()
                 End With
 
-
+            Else
+                gIsNotifiNotAssign = True
             End If
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -977,6 +979,28 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub ShowNotSuccess()
+        Try
+            Dim lcls As New OrderSDAO
+            Dim lTable = lcls.GetDataTableForShippingRec(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), False, True, 2)
+            If lTable.Rows.Count > 0 Then
+                Dim mCtlForm = New frmNotifyAssign
+                With mCtlForm
+                    .Text = "แจ้งเตือนบันทึกส่งของไม่สำเร็จ"
+                    .MdiParent = Me
+                    .TableData = lTable
+                    .MenuID = MasterType.NotiNotSuccess
+                    .Show()
+                End With
+
+            Else
+                gIsNotifiNotSuccess = True
+            End If
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
 
 
     Private Sub ReceiptHisBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ReceiptHisBar.ItemClick
@@ -1083,16 +1107,43 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportOnlineSalesBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ImportOnlineSalesBar.ItemClick
+        InsertActivity(DataMode.ModeOpen, MasterType.ImportOnlineSales, "", Nothing)
         frmImportOrderOnline.MdiParent = Me
         frmImportOrderOnline.Show()
     End Sub
 
     Private Sub ShippingRecordBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ShippingRecordBar.ItemClick
+        InsertActivity(DataMode.ModeOpen, MasterType.ShippingRecord, "", Nothing)
         frmShippingRecordMain.MdiParent = Me
         frmShippingRecordMain.Show()
     End Sub
 
     Private Sub NotiNotAssignBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles NotiNotAssignBar.ItemClick
         ShowNotAssign()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Try
+            Dim lCurTime = Now
+            If gIsNotifiNotAssign = False Then
+
+                If Integer.Parse(gTimeNotifiNotAssign.ToString("HHmm")) < Integer.Parse(lCurTime.ToString("HHmm")) Then
+                    ShowNotAssign()
+                End If
+            End If
+
+            If gIsNotifiNotSuccess = False Then
+                If Integer.Parse(gTimeNotifiNotSuccess.ToString("HHmm")) < Integer.Parse(lCurTime.ToString("HHmm")) Then
+                    ShowNotSuccess()
+                End If
+            End If
+        Catch ex As Exception
+
+
+        End Try
+    End Sub
+
+    Private Sub NotiNotSuccessBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles NotiNotSuccessBar.ItemClick
+        ShowNotSuccess()
     End Sub
 End Class

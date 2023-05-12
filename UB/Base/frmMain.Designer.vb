@@ -31,7 +31,7 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim GalleryItemGroup2 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
+        Dim GalleryItemGroup1 As DevExpress.XtraBars.Ribbon.GalleryItemGroup = New DevExpress.XtraBars.Ribbon.GalleryItemGroup()
         Me.ribbonMain = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.appMenu = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
         Me.ImageMenu = New DevExpress.Utils.ImageCollection(Me.components)
@@ -158,6 +158,8 @@ Partial Class frmMain
         Me.InvoiceAbbBar = New DevExpress.XtraBars.BarButtonItem()
         Me.ImportOnlineSalesBar = New DevExpress.XtraBars.BarButtonItem()
         Me.ShippingRecordBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.NotiNotAssignBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.NotiNotSuccessBar = New DevExpress.XtraBars.BarButtonItem()
         Me.imageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
         Me.homeRibbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.fileRibbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -187,6 +189,7 @@ Partial Class frmMain
         Me.RibbonPageGroup10 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.SaleRibbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup11 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup38 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup14 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup19 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup26 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -223,9 +226,7 @@ Partial Class frmMain
         Me.ExitBar = New DevExpress.XtraNavBar.NavBarItem()
         Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarSubItem1 = New DevExpress.XtraBars.BarSubItem()
-        Me.RibbonPageGroup38 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.NotiNotAssignBar = New DevExpress.XtraBars.BarButtonItem()
-        Me.NotiNotSuccessBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.ribbonMain, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.appMenu, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageMenu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -279,8 +280,8 @@ Partial Class frmMain
         '
         '
         '
-        GalleryItemGroup2.Caption = "Group1"
-        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup2})
+        GalleryItemGroup1.Caption = "Group1"
+        Me.rgbiSkins.Gallery.Groups.AddRange(New DevExpress.XtraBars.Ribbon.GalleryItemGroup() {GalleryItemGroup1})
         Me.rgbiSkins.Id = 62
         Me.rgbiSkins.Name = "rgbiSkins"
         '
@@ -1030,6 +1031,18 @@ Partial Class frmMain
         Me.ShippingRecordBar.Id = 230
         Me.ShippingRecordBar.Name = "ShippingRecordBar"
         '
+        'NotiNotAssignBar
+        '
+        Me.NotiNotAssignBar.Caption = "แจ้งเตือนไม่บันทึกส่งของ"
+        Me.NotiNotAssignBar.Id = 231
+        Me.NotiNotAssignBar.Name = "NotiNotAssignBar"
+        '
+        'NotiNotSuccessBar
+        '
+        Me.NotiNotSuccessBar.Caption = "แจ้งเตือนบันทึกส่งของไม่สำเร็จ"
+        Me.NotiNotSuccessBar.Id = 232
+        Me.NotiNotSuccessBar.Name = "NotiNotSuccessBar"
+        '
         'imageCollection1
         '
         Me.imageCollection1.ImageSize = New System.Drawing.Size(50, 50)
@@ -1241,6 +1254,12 @@ Partial Class frmMain
         Me.RibbonPageGroup11.ItemLinks.Add(Me.ImportOnlineSalesBar)
         Me.RibbonPageGroup11.ItemLinks.Add(Me.ShippingRecordBar)
         Me.RibbonPageGroup11.Name = "RibbonPageGroup11"
+        '
+        'RibbonPageGroup38
+        '
+        Me.RibbonPageGroup38.ItemLinks.Add(Me.NotiNotAssignBar)
+        Me.RibbonPageGroup38.ItemLinks.Add(Me.NotiNotSuccessBar)
+        Me.RibbonPageGroup38.Name = "RibbonPageGroup38"
         '
         'RibbonPageGroup14
         '
@@ -1483,23 +1502,10 @@ Partial Class frmMain
         '
         Me.BarSubItem1.Name = "BarSubItem1"
         '
-        'RibbonPageGroup38
+        'Timer1
         '
-        Me.RibbonPageGroup38.ItemLinks.Add(Me.NotiNotAssignBar)
-        Me.RibbonPageGroup38.ItemLinks.Add(Me.NotiNotSuccessBar)
-        Me.RibbonPageGroup38.Name = "RibbonPageGroup38"
-        '
-        'NotiNotAssignBar
-        '
-        Me.NotiNotAssignBar.Caption = "แจ้งเตือนไม่บันทึกส่งของ"
-        Me.NotiNotAssignBar.Id = 231
-        Me.NotiNotAssignBar.Name = "NotiNotAssignBar"
-        '
-        'NotiNotSuccessBar
-        '
-        Me.NotiNotSuccessBar.Caption = "แจ้งเตือนบันทึกส่งของไม่สำเร็จ"
-        Me.NotiNotSuccessBar.Id = 232
-        Me.NotiNotSuccessBar.Name = "NotiNotSuccessBar"
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 30000
         '
         'frmMain
         '
@@ -1723,4 +1729,5 @@ Partial Class frmMain
     Friend WithEvents NotiNotAssignBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup38 As RibbonPageGroup
     Friend WithEvents NotiNotSuccessBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents Timer1 As Timer
 End Class

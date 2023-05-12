@@ -1,9 +1,16 @@
 ﻿
 Public Class frmNotifyAssign
     Private mData As DataTable
-    Public WriteOnly Property OverdueData() As DataTable
+    Public WriteOnly Property TableData() As DataTable
         Set(ByVal value As DataTable)
             mData = value
+        End Set
+    End Property
+
+    Private mMenuID As Integer
+    Public WriteOnly Property MenuID() As Integer
+        Set(ByVal value As Integer)
+            mMenuID = value
         End Set
     End Property
 
@@ -15,7 +22,17 @@ Public Class frmNotifyAssign
     End Sub
 
     Private Sub frmNotify_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim lcls As New ActivityDAO
         Try
+            If mMenuID = MasterType.NotiNotAssign Then
+                InsertActivity(DataMode.ModeOpen, MasterType.NotiNotAssign, "", Nothing)
+                lcls.SaveActivityLog(MasterType.NotiNotAssign, "", Nothing)
+                gIsNotifiNotAssign = True
+            Else
+                InsertActivity(DataMode.ModeOpen, MasterType.NotiNotSuccess, "", Nothing)
+                lcls.SaveActivityLog(MasterType.NotiNotSuccess, "", Nothing)
+                gIsNotifiNotSuccess = True
+            End If
 
             GridControl.DataSource = mData
             GridStyle()
@@ -82,7 +99,7 @@ Public Class frmNotifyAssign
             .Columns("ShippingPeriod").Width = 90
             .Columns("ShippingPeriod").MaxWidth = 90
             .Columns("ShippingPeriod").OptionsColumn.ReadOnly = True
-            .Columns("ShippingPeriod").Visible = False
+
 
             .Columns("ShippingMethod").Caption = "ลักษณะงาน"
             .Columns("ShippingMethod").Width = 90
@@ -94,7 +111,7 @@ Public Class frmNotifyAssign
             .Columns("ShippingEmp").Width = 140
             .Columns("ShippingEmp").MaxWidth = 150
             .Columns("ShippingEmp").OptionsColumn.ReadOnly = True
-            .Columns("ShippingEmp").Visible = False
+
 
             .Columns("ShippingStatus").Caption = "สถานะ"
             .Columns("ShippingStatus").Width = 90
@@ -106,8 +123,12 @@ Public Class frmNotifyAssign
             .Columns("ShippingRemark").Width = 110
             .Columns("ShippingRemark").MaxWidth = 120
             .Columns("ShippingRemark").OptionsColumn.ReadOnly = True
-            .Columns("ShippingRemark").Visible = False
 
+            If mMenuID = MasterType.NotiNotAssign Then
+                .Columns("ShippingPeriod").Visible = False
+                .Columns("ShippingEmp").Visible = False
+                .Columns("ShippingRemark").Visible = False
+            End If
         End With
     End Sub
 End Class

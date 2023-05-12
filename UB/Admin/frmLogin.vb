@@ -38,6 +38,7 @@ Public Class frmLogin
                     frmSelectCompany.ShowDialog()
                     Me.Hide()
                     VerifyCompany()
+                    VerifyShippingNotifi()
                     frmMain.Show()
                     ''PrintTaxAtPay(5)
                 End If

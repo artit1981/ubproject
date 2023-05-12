@@ -1,0 +1,7 @@
+CREATE TABLE [dbo].[NotifiLog](
+	[UserID] [bigint] NOT NULL,
+	[LogTime] [datetime] NOT NULL,
+	[MenuID] [int] NOT NULL,	
+	[Remark] [nvarchar](100) NULL
+) ON [PRIMARY]
+GO
