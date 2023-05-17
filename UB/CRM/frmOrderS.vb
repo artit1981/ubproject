@@ -1255,6 +1255,13 @@ Public Class frmOrderS
                 OrderStatus.EditValue = EnumStatus.Open.ToString
                 OrderCode.EditValue = AutoGenCode(mOrderType)
                 EmpID.EditValue = gEmpID
+                Select Case mOrderType
+                    Case MasterType.Borrow, MasterType.Invoice, MasterType.AddCredit, MasterType.ReduceCredit, MasterType.Shiping, MasterType.Claim, MasterType.ClaimReturn
+                        IsMass.EditValue = Int16.Parse(1)
+                    Case Else
+                        IsMass.EditValue = Int16.Parse(0)
+                End Select
+
 
                 If mIsMakePO Then
                     mRefReserveID = New List(Of Long)
@@ -1524,12 +1531,14 @@ Public Class frmOrderS
             End If
             lstrErr = lstrErr & DxErrorProvider1.GetError(OrderCode) & vbNewLine
 
+
             If LayoutCustomerID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always Then
                 If ConvertNullToZero(CustomerID.EditValue) = 0 Then
                     SetErrorProvider(DxErrorProvider1, CustomerID, "กรุณาระบุลูกค้า/เจ้าหนี้")
                     lstrErr = lstrErr & DxErrorProvider1.GetError(CustomerID) & vbNewLine
                 End If
             End If
+
 
 
             If ConvertNullToZero(VatTypeID.EditValue) = 0 Then

@@ -42,8 +42,10 @@ Public Class frmShippingRecordDTL
             ShippingMethod.Properties.Items.Add("ส่งของ + วางบิล")
             ShippingMethod.Properties.Items.Add("ส่งของ + เก็บเงินสด/โอน")
             ShippingMethod.Properties.Items.Add("ส่งของ + เก็บเช็ค")
+            ShippingMethod.Properties.Items.Add("ส่งของ")
             ShippingMethod.Properties.Items.Add("เก็บเงินสด/โอน")
             ShippingMethod.Properties.Items.Add("เก็บเช็ค")
+            ShippingMethod.Properties.Items.Add("ส่งใบเสร็จ")
             ShippingMethod.Properties.Items.Add("อื่นๆ ระบุ...")
             ShippingMethod.SelectedIndex = 0
 

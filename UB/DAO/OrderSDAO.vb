@@ -107,6 +107,7 @@ Public Class OrderSDAO
                     CampaignID = ConvertNullToZero(dr("CampaignID"))
                     ClaimRemark = ConvertNullToString(dr("ClaimRemark"))
                     ClaimResult = ConvertNullToString(dr("ClaimResult"))
+                    IsMass = ConvertNullToZero(dr("IsMass"))
 
 
                     ID = Int32.Parse(dr("OrderID"))
@@ -228,7 +229,7 @@ Public Class OrderSDAO
                     End If
 
                     Dim lIsHoldBudget As Boolean
-                    If lIsCheckOver = True Then
+                    If lIsCheckOver = True And CustomerID > 0 Then
                         Dim lCreditAmount As Decimal = GetCustomerCredit(CustomerID, tr, lIsHoldBudget)
                         If lIsHoldBudget = True Then
                             OrderStatus = EnumStatus.WaitApprove.ToString
@@ -411,7 +412,7 @@ Public Class OrderSDAO
                     , MasterType.AddCredit, MasterType.Receipt, MasterType.ReduceCredit, MasterType.Claim, MasterType.ReceiptCut _
                     , MasterType.StockIn, MasterType.UpdateStock, MasterType.Expose, MasterType.ClaimReturn
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate  "
-                    SQL &= ",Customer.CustomerCode ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+                    SQL &= ",case when Orders.CustomerID=0 then 'NA.' else  Customer.CustomerCode end CustomerCode ,case when Orders.CustomerID=0 then 'NA.' else CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END END Customer "
                 Case MasterType.Quotation, MasterType.Quotation2
                     SQL = "SELECT DISTINCT Orders.OrderID AS ID,Orders.OrderCode AS Code,Orders.OrderDate,Orders.ExpireDate  "
                     SQL &= " ,Customer.CustomerCode,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "

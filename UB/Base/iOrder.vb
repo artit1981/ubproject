@@ -901,6 +901,16 @@ Public Class iOrder
         End Set
     End Property
 
+    Dim mIsMass As Integer = 0
+    Public Property IsMass() As Integer
+        Get
+            Return mIsMass
+        End Get
+        Set(ByVal value As Integer)
+            mIsMass = value
+        End Set
+    End Property
+
     Public Sub New()
         mIDs = 0
         mCode = ""

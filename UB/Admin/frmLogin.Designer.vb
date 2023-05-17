@@ -71,6 +71,7 @@ Partial Class frmLogin
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Appearance.Options.UseFont = True
         Me.LabelControl1.Location = New System.Drawing.Point(33, 31)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(58, 14)
@@ -99,7 +100,7 @@ Partial Class frmLogin
         '
         'btnCancel
         '
-        Me.btnCancel.DialogResult = DialogResult.Cancel
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Location = New System.Drawing.Point(199, 105)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
@@ -127,12 +128,13 @@ Partial Class frmLogin
         Me.chSetup.Location = New System.Drawing.Point(31, 129)
         Me.chSetup.Name = "chSetup"
         Me.chSetup.Properties.Caption = "Setup Connection"
-        Me.chSetup.Size = New System.Drawing.Size(129, 19)
+        Me.chSetup.Size = New System.Drawing.Size(129, 20)
         Me.chSetup.TabIndex = 7
         '
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Appearance.Options.UseFont = True
         Me.LabelControl2.Location = New System.Drawing.Point(33, 69)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(40, 14)
@@ -156,7 +158,7 @@ Partial Class frmLogin
         Me.NavBarGroup1.Caption = ""
         Me.NavBarGroup1.ControlContainer = Me.NavBarGroupControlContainer1
         Me.NavBarGroup1.Expanded = True
-        Me.NavBarGroup1.GroupClientHeight = 153
+        Me.NavBarGroup1.GroupClientHeight = 155
         Me.NavBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer
         Me.NavBarGroup1.Name = "NavBarGroup1"
         '
@@ -172,7 +174,7 @@ Partial Class frmLogin
         Me.NavBarGroupControlContainer1.Controls.Add(Me.LabelControl3)
         Me.NavBarGroupControlContainer1.Controls.Add(Me.DBServerName)
         Me.NavBarGroupControlContainer1.Name = "NavBarGroupControlContainer1"
-        Me.NavBarGroupControlContainer1.Size = New System.Drawing.Size(308, 146)
+        Me.NavBarGroupControlContainer1.Size = New System.Drawing.Size(316, 155)
         Me.NavBarGroupControlContainer1.TabIndex = 0
         '
         'LabelControl6
@@ -215,7 +217,7 @@ Partial Class frmLogin
         Me.txtResult.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtResult.Properties.Appearance.Options.UseBackColor = True
         Me.txtResult.Properties.ReadOnly = True
-        Me.txtResult.Size = New System.Drawing.Size(265, 44)
+        Me.txtResult.Size = New System.Drawing.Size(265, 43)
         Me.txtResult.TabIndex = 10
         Me.txtResult.TabStop = False
         '
@@ -245,7 +247,7 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(342, 315)
+        Me.ClientSize = New System.Drawing.Size(342, 380)
         Me.Controls.Add(Me.chSetup)
         Me.Controls.Add(Me.NavBarControl1)
         Me.Controls.Add(Me.LabelControl2)
@@ -255,7 +257,7 @@ Partial Class frmLogin
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.txtLogin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmLogin.IconOptions.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLogin"

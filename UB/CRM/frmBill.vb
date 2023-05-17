@@ -380,7 +380,10 @@ Public Class frmBill
                     TaxSection.EditValue = mcls.TaxSection
                     TaxType.EditValue = mcls.TaxType
                     TotalTax.EditValue = mcls.TaxTotal
-                    ContactName.EditValue = mcls.CustomerDAO.AddressS.ContactName
+                    If mcls.CustomerID > 0 Then
+                        ContactName.EditValue = mcls.CustomerDAO.AddressS.ContactName
+                    End If
+
                 End If
             End If
             LoadTaxOrder(pID)
@@ -410,17 +413,33 @@ Public Class frmBill
             End If
             lstrErr = lstrErr & DxErrorProvider1.GetError(OrderCode) & vbNewLine
 
-            If ConvertNullToZero(CustomerID.EditValue) = 0 Then
-                If mOrderType = MasterType.ReceiptBuy Then
-                    SetErrorProvider(DxErrorProvider1, CustomerID, "กรุณาระบุเจ้าหนี้")
-                Else
-                    SetErrorProvider(DxErrorProvider1, CustomerID, "กรุณาระบุลูกค้า")
-                End If
+            Select Case mOrderType
+                Case MasterType.ReceiptCut
+                    If ConvertNullToZero(CustomerID.EditValue) = 0 Then
+                        Exchange.EditValue = 1
+                        Calculation()
+                        mcls.Total = ConvertNullToZero(Total.EditValue)
+                        mcls.DiscountPercen = ConvertNullToZero(DiscountPercen.EditValue)
+                        mcls.DiscountAmount = ConvertNullToZero(DiscountAmount.EditValue)
+                        mcls.GrandTotal = ConvertNullToZero(GrandTotal.EditValue)
+                    End If
 
-                lstrErr = lstrErr & DxErrorProvider1.GetError(CustomerID) & vbNewLine
-            End If
+                Case Else
+                    If ConvertNullToZero(CustomerID.EditValue) = 0 Then
+                        If mOrderType = MasterType.ReceiptBuy Then
+                            SetErrorProvider(DxErrorProvider1, CustomerID, "กรุณาระบุเจ้าหนี้")
+                        Else
+                            SetErrorProvider(DxErrorProvider1, CustomerID, "กรุณาระบุลูกค้า")
+                        End If
 
-            Call UcOrderList1.GetDAOs()
+                        lstrErr = lstrErr & DxErrorProvider1.GetError(CustomerID) & vbNewLine
+
+                    End If
+                    Call UcOrderList1.GetDAOs()
+            End Select
+
+
+
             'lTotal = UcOrderList1.Totals
             'If lTotal = 0 Then
             '    lstrErr = lstrErr & "ระบุยอดชำระ" & vbNewLine

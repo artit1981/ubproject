@@ -44,7 +44,13 @@ Public Class frmCommissionReport
 
     Private Sub SetComboEmployee()
         Try '  
-            SetComboCheckEmployee(cboCheckedEmployee, " and [CommissionID]>0 ")
+            If gPrivilegeID > 1 Then 'Not admin
+                SetComboCheckEmployee(cboCheckedEmployee, " and [CommissionID]>0 and EmpID=" & gEmpID)
+            Else
+                SetComboCheckEmployee(cboCheckedEmployee, " and [CommissionID]>0 ")
+            End If
+
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboEmployee : " & e.Message)
         End Try
@@ -118,16 +124,27 @@ Public Class frmCommissionReport
 
                 End If
 
-                gridView.Columns.Clear()
+                If gPrivilegeID > 1 Then 'Not admin
+                    dataTable = FilterTable
+                    If dataTable.Select("EmpID in(" & gEmpID & ") ").Length > 0 Then
+                        FilterTable = dataTable.Select("EmpID in(" & gEmpID & ")").CopyToDataTable
+                    Else
+                        FilterTable = Nothing
+                    End If
 
-                If FilterTable.Rows.Count > 0 Then
-                    gridControl.DataSource = FilterTable
-                    gridView.ViewCaption = "Commission"
-                    Call GridStyle()
-                Else
-                    gridControl.DataSource = Nothing
                 End If
 
+                gridView.Columns.Clear()
+                If FilterTable IsNot Nothing Then
+                    If FilterTable.Rows.Count > 0 Then
+                        gridControl.DataSource = FilterTable
+                        gridView.ViewCaption = "Commission"
+                        Call GridStyle()
+                    Else
+                        gridControl.DataSource = Nothing
+                    End If
+
+                End If
             End If
 
         Catch e As Exception
