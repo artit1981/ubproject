@@ -100,23 +100,25 @@ Module modApprove
         VerifyShippingNotifi = False
 
         Dim lLastNotifiNotAssign As DateTime = Now, lLastNotifiNotSuccess As DateTime = Now
-
+        Dim lNotAssignNull As Boolean = True, lNotSuccess As Boolean = True
         Try
             Dim lcls As New ActivityDAO
             Dim lData = lcls.GetDataLogTable(gUserID, 0, Nothing)
             For Each pRow In lData.Rows
                 If Integer.Parse(pRow("MenuID")) = MasterType.NotiNotAssign Then
                     lLastNotifiNotAssign = pRow("LogTime")
+                    lNotAssignNull = False
                 ElseIf Integer.Parse(pRow("MenuID")) = MasterType.NotiNotSuccess Then
                     lLastNotifiNotSuccess = pRow("LogTime")
+                    lNotSuccess = False
                 End If
             Next
 
-            If Long.Parse(lLastNotifiNotAssign.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotAssign.ToString("yyyyMMddHHmm")) Then
+            If Long.Parse(lLastNotifiNotAssign.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotAssign.ToString("yyyyMMddHHmm")) And lNotAssignNull = False Then
                 gIsNotifiNotAssign = True
             End If
 
-            If Long.Parse(lLastNotifiNotSuccess.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotSuccess.ToString("yyyyMMddHHmm")) Then
+            If Long.Parse(lLastNotifiNotSuccess.ToString("yyyyMMddHHmm")) >= Long.Parse(gTimeNotifiNotSuccess.ToString("yyyyMMddHHmm")) And lNotSuccess = False Then
                 gIsNotifiNotSuccess = True
             End If
             Return True

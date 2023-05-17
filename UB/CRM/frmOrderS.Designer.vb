@@ -25,6 +25,7 @@ Partial Class frmOrderS
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.IsMass = New DevExpress.XtraEditors.RadioGroup()
         Me.EmpID = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -196,6 +197,7 @@ Partial Class frmOrderS
         Me.LayoutClaimResult2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.PledgeTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcPledge1 = New UB.ucPledge()
         Me.TaxTabPage = New DevExpress.XtraTab.XtraTabPage()
@@ -274,13 +276,12 @@ Partial Class frmOrderS
         Me.LayoutPO2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem12 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
-        Me.IsMass = New DevExpress.XtraEditors.RadioGroup()
-        Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.IsMass.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmpID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -423,6 +424,7 @@ Partial Class frmOrderS
         CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PledgeTabPage.SuspendLayout()
         Me.TaxTabPage.SuspendLayout()
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -476,8 +478,6 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.IsMass.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -587,6 +587,21 @@ Partial Class frmOrderS
         Me.LayoutControl1.TabIndex = 9
         Me.LayoutControl1.Text = "LayoutControl1"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.LayoutControl1, "")
+        '
+        'IsMass
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.IsMass, "")
+        Me.IsMass.EditValue = CType(0, Short)
+        Me.IsMass.EnterMoveNextControl = True
+        Me.IsMass.Location = New System.Drawing.Point(126, 366)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.IsMass, True)
+        Me.IsMass.Name = "IsMass"
+        Me.IsMass.Properties.Columns = 3
+        Me.IsMass.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(1, Short), "ใช่"), New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(0, Short), "ไม่ใช่")})
+        Me.IsMass.Size = New System.Drawing.Size(299, 34)
+        Me.IsMass.StyleController = Me.LayoutControl1
+        Me.IsMass.TabIndex = 14
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.IsMass, "")
         '
         'EmpID
         '
@@ -2993,6 +3008,18 @@ Partial Class frmOrderS
         Me.LayoutControlItem1.Text = " ผู้จัดทำ"
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(102, 13)
         '
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.IsMass
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 354)
+        Me.LayoutControlItem3.MaxSize = New System.Drawing.Size(0, 38)
+        Me.LayoutControlItem3.MinSize = New System.Drawing.Size(168, 38)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(417, 38)
+        Me.LayoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutControlItem3.Text = "ดึงไป Mass"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(102, 13)
+        '
         'PledgeTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.PledgeTabPage, "")
@@ -4133,33 +4160,6 @@ Partial Class frmOrderS
         Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl"})
         '
-        'IsMass
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.IsMass, "")
-        Me.IsMass.EditValue = "Y"
-        Me.IsMass.EnterMoveNextControl = True
-        Me.IsMass.Location = New System.Drawing.Point(126, 366)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.IsMass, True)
-        Me.IsMass.Name = "IsMass"
-        Me.IsMass.Properties.Columns = 3
-        Me.IsMass.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(1, Short), "ใช่"), New DevExpress.XtraEditors.Controls.RadioGroupItem(CType(0, Short), "ไม่ใช่")})
-        Me.IsMass.Size = New System.Drawing.Size(299, 34)
-        Me.IsMass.StyleController = Me.LayoutControl1
-        Me.IsMass.TabIndex = 14
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.IsMass, "")
-        '
-        'LayoutControlItem3
-        '
-        Me.LayoutControlItem3.Control = Me.IsMass
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 354)
-        Me.LayoutControlItem3.MaxSize = New System.Drawing.Size(0, 38)
-        Me.LayoutControlItem3.MinSize = New System.Drawing.Size(168, 38)
-        Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(417, 38)
-        Me.LayoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
-        Me.LayoutControlItem3.Text = "ดึงไป Mass"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(102, 13)
-        '
         'frmOrderS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4177,6 +4177,7 @@ Partial Class frmOrderS
         Me.GeneralTabPage.ResumeLayout(False)
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.IsMass.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmpID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ClaimResult.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4319,6 +4320,7 @@ Partial Class frmOrderS
         CType(Me.LayoutClaimResult2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PledgeTabPage.ResumeLayout(False)
         Me.TaxTabPage.ResumeLayout(False)
         CType(Me.TaxGroup, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4380,8 +4382,6 @@ Partial Class frmOrderS
         CType(Me.LayoutPO2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.IsMass.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

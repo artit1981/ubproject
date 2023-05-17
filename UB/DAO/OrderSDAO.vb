@@ -622,7 +622,7 @@ Public Class OrderSDAO
             'SQL &= " LEFT OUTER JOIN Employee AssignEmp ON Orders.AssignEmpID=AssignEmp.EmpID  "
             SQL &= " LEFT OUTER JOIN Orders AS Receipt ON Orders.RefReceiptID=Receipt.OrderID and Receipt.IsDelete=0 and Receipt.TableID in(" & MasterType.Receipt & "," & MasterType.ReceiptCut & ")"
             SQL &= " LEFT OUTER JOIN Orders AS Bill ON Orders.RefBillID=Bill.OrderID and Bill.IsDelete=0 and Bill.TableID=" & MasterType.Bill
-            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0  "
+            SQL &= " WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0 and Orders.IsMass=1 "
             'SQL &= "  AND Orders.OrderStatus In ('Approve','Open','Billed','Close') "
             SQL &= "  AND Orders.OrderDate Between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
             If pIsOnlyAssign = True Then
@@ -632,7 +632,7 @@ Public Class OrderSDAO
                 If pNotifiType = 1 Then  'Not Assign
                     SQL &= " AND  Orders.ShippingEmpID is null  "
                 Else ''Not Success
-                    SQL &= " AND  Orders.ShippingEmpID >0 AND ShippingStatus='ไม่สำเร็จ'"
+                    SQL &= " AND  Orders.ShippingEmpID >0 AND Orders.ShippingStatus='ไม่สำเร็จ'"
                 End If
 
                 If gPrivilegeID > 1 Then 'Not admin
@@ -1150,7 +1150,7 @@ Public Class OrderSDAO
                     Sql &= " ,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
                     Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal "
                     Sql &= " ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType,IsSumStock,IsMakePO,MakePOStatus,IsEditVat"
-                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult,SaleOwnerID)"
+                    Sql &= " ,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult,SaleOwnerID,IsMass)"
                     Sql &= " VALUES ( " & ID
                     Sql &= " , " & TableID
                     Sql &= " , '" & Trim(Code) & "'"
@@ -1211,6 +1211,7 @@ Public Class OrderSDAO
                     Sql &= " , '" & ConvertNullToString(ClaimRemark) & "'"
                     Sql &= " , '" & ConvertNullToString(ClaimResult) & "'"
                     Sql &= " ,  " & ConvertNullToZero(SaleOwnerID)
+                    Sql &= " ,  " & ConvertNullToZero(IsMass)
                     Sql &= " ) "
 
                 Case DataMode.ModeEdit
@@ -1273,6 +1274,7 @@ Public Class OrderSDAO
                     Sql &= " ,CampaignID=" & ConvertNullToZero(CampaignID)
                     Sql &= " ,ClaimRemark='" & ConvertNullToString(ClaimRemark) & "'"
                     Sql &= " ,ClaimResult='" & ConvertNullToString(ClaimResult) & "'"
+                    Sql &= " ,IsMass=" & ConvertNullToZero(IsMass)
                     Sql &= " WHERE OrderID=" & ID
                 Case DataMode.ModeDelete
                     Sql = " UPDATE Orders SET IsDelete=1 "
@@ -1317,27 +1319,27 @@ Public Class OrderSDAO
     End Sub
 
 
-    Private Sub InsertOrderLog(ByRef ptr As SqlTransaction)
-        Dim Sql As String = ""
-        Try
-            Sql = " INSERT INTO OrdersLog  (LogTime,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
-            Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
-            Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
-            Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
-            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult)"
-            Sql &= " SELECT '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
-            Sql &= " ,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
-            Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
-            Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
-            Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
-            Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult"
-            Sql &= " FROM Orders"
-            Sql &= " WHERE OrderID=" & ID
-            gConnection.executeInsertQuery(Sql, ptr)
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrderLog : " & e.Message)
-        End Try
-    End Sub
+    'Private Sub InsertOrderLog(ByRef ptr As SqlTransaction)
+    '    Dim Sql As String = ""
+    '    Try
+    '        Sql = " INSERT INTO OrdersLog  (LogTime,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
+    '        Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
+    '        Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
+    '        Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
+    '        Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult)"
+    '        Sql &= " SELECT '" & formatSQLDateTime(GetCurrentDate(ptr)) & "'"
+    '        Sql &= " ,OrderID,TableID,OrderCode,PO,OrderDate,ShipingDate,CustomerID,EmpID,CreditRuleID,VatTypeID,OrderStatus,OrderStatus2"
+    '        Sql &= " ,IsCancel,CancelRemark,Total,DiscountPercen,DiscountAmount,VatPercen,VatAmount,GrandTotal,PledgeTotal,Remark,CreateBy,CreateTime,IsInActive,IsDelete "
+    '        Sql &= " ,RefBillID,SendBy,ExpireDate,QuotationDays,ShipingByID,ShipingMethodeID,AgencyID,PayType,BillMedthodID,PayTotal,CurrencyID,ExchangeRate"
+    '        Sql &= " ,TaxCanYes,TaxCondition,TaxMonthYear,TaxNumber,TaxTotal ,TaxRemark,TaxSection,TaxType,ShipingRuleID,InvoiceSuplierID,Institute,StockType"
+    '        Sql &= " ,IsSumStock,IsMakePO,MakePOStatus,IsEditVat,QuotationRemarkID,IsNotPass,CampaignID,ClaimRemark,ClaimResult"
+    '        Sql &= " FROM Orders"
+    '        Sql &= " WHERE OrderID=" & ID
+    '        gConnection.executeInsertQuery(Sql, ptr)
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, "OrderSDAO.InsertOrderLog : " & e.Message)
+    '    End Try
+    'End Sub
 
     Private Sub SaveBalance(ByRef ptr As SqlTransaction)
         Try

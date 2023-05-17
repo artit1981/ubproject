@@ -437,7 +437,7 @@ Public Class frmOrderS
             mcls.NoteProductDAOs = UcNote2.GetNoteDAOs
             mcls.FileAttachs = UcFileAttach1.GetFileAttachs
             mcls.IsMakePO = mIsMakePO
-
+            mcls.IsMass = ConvertNullToZero(IsMass.EditValue)
 
 
             If TaxGroup.Enabled = True Then
@@ -1289,6 +1289,7 @@ Public Class frmOrderS
                         StockType.EditValue = mcls.StockType
                         CancelRemark.EditValue = mcls.CancelRemark
                         PO.EditValue = mcls.PO
+                        IsMass.EditValue = Int16.Parse(mcls.IsMass)
                         UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
                         UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
                         UcAdmin1.txtCreateTime.Text = mcls.CreateTime
@@ -1503,6 +1504,7 @@ Public Class frmOrderS
                 SendBy.EditValue = mclsConvert.SendBy
                 PayType.EditValue = mclsConvert.PayType
                 PO.EditValue = mclsConvert.PO
+
                 gCustomerID = ConvertNullToZero(CustomerID.EditValue)
                 Dim lOrderList As New List(Of Long)
                 lOrderList.Add(mclsConvert.ID)
