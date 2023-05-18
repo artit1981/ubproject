@@ -62,6 +62,21 @@ Partial Class frmShippingRecordMain
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.GridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.OrderCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.OrderDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CustomerCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Customer = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.OrderStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GrandTotal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ReceiptCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BillCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.EMPNAME = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingPeriod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingMethod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingEmp = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.OrderID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,15 +178,15 @@ Partial Class frmShippingRecordMain
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
         Me.barDockControlTop.Manager = Me.BarManager1
-        Me.barDockControlTop.Size = New System.Drawing.Size(1193, 30)
+        Me.barDockControlTop.Size = New System.Drawing.Size(1234, 30)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 620)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 630)
         Me.barDockControlBottom.Manager = Me.BarManager1
-        Me.barDockControlBottom.Size = New System.Drawing.Size(1193, 0)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1234, 0)
         '
         'barDockControlLeft
         '
@@ -179,15 +194,15 @@ Partial Class frmShippingRecordMain
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 30)
         Me.barDockControlLeft.Manager = Me.BarManager1
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 590)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 600)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(1193, 30)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1234, 30)
         Me.barDockControlRight.Manager = Me.BarManager1
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 590)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 600)
         '
         'ImageList1
         '
@@ -341,7 +356,7 @@ Partial Class frmShippingRecordMain
         Me.FindPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.FindPanel.Location = New System.Drawing.Point(0, 30)
         Me.FindPanel.Name = "FindPanel"
-        Me.FindPanel.Size = New System.Drawing.Size(1193, 46)
+        Me.FindPanel.Size = New System.Drawing.Size(1234, 46)
         Me.FindPanel.TabIndex = 7
         '
         'DatePanel
@@ -422,7 +437,7 @@ Partial Class frmShippingRecordMain
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl2.Location = New System.Drawing.Point(0, 76)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(1193, 544)
+        Me.PanelControl2.Size = New System.Drawing.Size(1234, 554)
         Me.PanelControl2.TabIndex = 12
         '
         'GridControl
@@ -430,31 +445,157 @@ Partial Class frmShippingRecordMain
         Me.GridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GridControl.Location = New System.Drawing.Point(5, 6)
+        Me.GridControl.Location = New System.Drawing.Point(12, 6)
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
-        Me.GridControl.Size = New System.Drawing.Size(1183, 533)
+        Me.GridControl.Size = New System.Drawing.Size(1210, 536)
         Me.GridControl.TabIndex = 19
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
         'GridView
         '
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.OrderCode, Me.OrderDate, Me.CustomerCode, Me.Customer, Me.OrderStatus, Me.GrandTotal, Me.ReceiptCode, Me.BillCode, Me.EMPNAME, Me.ShippingPeriod, Me.ShippingMethod, Me.ShippingEmp, Me.ShippingStatus, Me.ShippingRemark, Me.OrderID})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[False]
-        Me.GridView.OptionsBehavior.AutoSelectAllInEditor = False
-        Me.GridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click
         Me.GridView.OptionsFind.AlwaysVisible = True
-        Me.GridView.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel
         Me.GridView.OptionsLayout.Columns.AddNewColumns = False
         Me.GridView.OptionsLayout.Columns.RemoveOldColumns = False
-        Me.GridView.OptionsSelection.CheckBoxSelectorColumnWidth = 50
+        Me.GridView.OptionsMenu.EnableColumnMenu = False
+        Me.GridView.OptionsMenu.EnableFooterMenu = False
+        Me.GridView.OptionsMenu.EnableGroupPanelMenu = False
+        Me.GridView.OptionsMenu.ShowGroupSortSummaryItems = False
         Me.GridView.OptionsSelection.CheckBoxSelectorField = "IsSelect"
         Me.GridView.OptionsSelection.MultiSelect = True
         Me.GridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect
         Me.GridView.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView.OptionsView.ShowGroupPanel = False
         Me.GridView.OptionsView.ShowViewCaption = True
+        '
+        'OrderCode
+        '
+        Me.OrderCode.Caption = "OrderCode"
+        Me.OrderCode.FieldName = "OrderCode"
+        Me.OrderCode.MinWidth = 10
+        Me.OrderCode.Name = "OrderCode"
+        Me.OrderCode.Visible = True
+        Me.OrderCode.VisibleIndex = 1
+        '
+        'OrderDate
+        '
+        Me.OrderDate.Caption = "OrderDate"
+        Me.OrderDate.FieldName = "OrderDate"
+        Me.OrderDate.MinWidth = 10
+        Me.OrderDate.Name = "OrderDate"
+        Me.OrderDate.Visible = True
+        Me.OrderDate.VisibleIndex = 2
+        '
+        'CustomerCode
+        '
+        Me.CustomerCode.Caption = "CustomerCode"
+        Me.CustomerCode.FieldName = "CustomerCode"
+        Me.CustomerCode.MinWidth = 10
+        Me.CustomerCode.Name = "CustomerCode"
+        Me.CustomerCode.Visible = True
+        Me.CustomerCode.VisibleIndex = 3
+        '
+        'Customer
+        '
+        Me.Customer.Caption = "Customer"
+        Me.Customer.FieldName = "Customer"
+        Me.Customer.MinWidth = 10
+        Me.Customer.Name = "Customer"
+        Me.Customer.Visible = True
+        Me.Customer.VisibleIndex = 4
+        '
+        'OrderStatus
+        '
+        Me.OrderStatus.Caption = "OrderStatus"
+        Me.OrderStatus.FieldName = "OrderStatus"
+        Me.OrderStatus.Name = "OrderStatus"
+        Me.OrderStatus.Visible = True
+        Me.OrderStatus.VisibleIndex = 5
+        '
+        'GrandTotal
+        '
+        Me.GrandTotal.Caption = "GrandTotal"
+        Me.GrandTotal.FieldName = "GrandTotal"
+        Me.GrandTotal.Name = "GrandTotal"
+        Me.GrandTotal.Visible = True
+        Me.GrandTotal.VisibleIndex = 6
+        '
+        'ReceiptCode
+        '
+        Me.ReceiptCode.Caption = "ReceiptCode"
+        Me.ReceiptCode.FieldName = "ReceiptCode"
+        Me.ReceiptCode.Name = "ReceiptCode"
+        Me.ReceiptCode.Visible = True
+        Me.ReceiptCode.VisibleIndex = 7
+        '
+        'BillCode
+        '
+        Me.BillCode.Caption = "BillCode"
+        Me.BillCode.FieldName = "BillCode"
+        Me.BillCode.Name = "BillCode"
+        Me.BillCode.Visible = True
+        Me.BillCode.VisibleIndex = 8
+        '
+        'EMPNAME
+        '
+        Me.EMPNAME.Caption = "EMPNAME"
+        Me.EMPNAME.FieldName = "EMPNAME"
+        Me.EMPNAME.Name = "EMPNAME"
+        Me.EMPNAME.Visible = True
+        Me.EMPNAME.VisibleIndex = 9
+        '
+        'ShippingPeriod
+        '
+        Me.ShippingPeriod.Caption = "ShippingPeriod"
+        Me.ShippingPeriod.FieldName = "ShippingPeriod"
+        Me.ShippingPeriod.Name = "ShippingPeriod"
+        Me.ShippingPeriod.Visible = True
+        Me.ShippingPeriod.VisibleIndex = 10
+        '
+        'ShippingMethod
+        '
+        Me.ShippingMethod.Caption = "ShippingMethod"
+        Me.ShippingMethod.FieldName = "ShippingMethod"
+        Me.ShippingMethod.Name = "ShippingMethod"
+        Me.ShippingMethod.Visible = True
+        Me.ShippingMethod.VisibleIndex = 11
+        '
+        'ShippingEmp
+        '
+        Me.ShippingEmp.Caption = "ShippingEmp"
+        Me.ShippingEmp.FieldName = "ShippingEmp"
+        Me.ShippingEmp.Name = "ShippingEmp"
+        Me.ShippingEmp.Visible = True
+        Me.ShippingEmp.VisibleIndex = 12
+        '
+        'ShippingStatus
+        '
+        Me.ShippingStatus.Caption = "ShippingStatus"
+        Me.ShippingStatus.FieldName = "ShippingStatus"
+        Me.ShippingStatus.Name = "ShippingStatus"
+        Me.ShippingStatus.Visible = True
+        Me.ShippingStatus.VisibleIndex = 13
+        '
+        'ShippingRemark
+        '
+        Me.ShippingRemark.Caption = "ShippingRemark"
+        Me.ShippingRemark.FieldName = "ShippingRemark"
+        Me.ShippingRemark.Name = "ShippingRemark"
+        Me.ShippingRemark.Visible = True
+        Me.ShippingRemark.VisibleIndex = 14
+        '
+        'OrderID
+        '
+        Me.OrderID.Caption = "OrderID"
+        Me.OrderID.FieldName = "OrderID"
+        Me.OrderID.Name = "OrderID"
+        Me.OrderID.Visible = True
+        Me.OrderID.VisibleIndex = 15
         '
         'GridView1
         '
@@ -464,7 +605,7 @@ Partial Class frmShippingRecordMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1193, 620)
+        Me.ClientSize = New System.Drawing.Size(1234, 630)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.FindPanel)
         Me.Controls.Add(Me.barDockControlLeft)
@@ -545,4 +686,19 @@ Partial Class frmShippingRecordMain
     Friend WithEvents SummaryBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents GridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents OrderDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents OrderCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CustomerCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Customer As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ReceiptCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents OrderStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GrandTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BillCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents EMPNAME As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingPeriod As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents OrderID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingMethod As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingEmp As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingRemark As DevExpress.XtraGrid.Columns.GridColumn
 End Class

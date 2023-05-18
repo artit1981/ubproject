@@ -1,8 +1,10 @@
 ﻿Option Explicit On
+Imports System.IO
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.DXErrorProvider
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
+Imports ExcelDataReader
 
 Public Class frmInformPricePro
     Inherits iEditForm
@@ -526,4 +528,85 @@ Public Class frmInformPricePro
         Finally
         End Try
     End Sub
+
+    Private Sub btnBrows_Click(sender As Object, e As EventArgs) Handles btnBrows.Click
+        Dim sFileNamePath As String = ""
+        Try
+            Using OpenFileDialog As OpenFileDialog = Me.GetOpenFileDialog()
+                If (OpenFileDialog.ShowDialog(Me) = DialogResult.OK) Then
+                    sFileNamePath = OpenFileDialog.FileName
+                    Call AddFile(sFileNamePath)
+                    Dim dataTable = OpenFile(txtFileName.Text)
+                    If dataTable.Columns.Count = 8 Then
+                        Dim lProSKU As New InformPriceSubDAO
+                        Dim lclsPro As New InformPriceProDAO
+                        Dim lProID = lclsPro.GetDtProFromSKU
+                    Else
+                        MessageBox.Show("จำนวนแถวของข้อมูลไม่ถูกต้อง (8 แถว)")
+                    End If
+
+                Else 'Cancel                
+                    Exit Sub
+                End If
+            End Using
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+    End Sub
+
+
+#Region "FileDialog"
+    Private Function GetOpenFileDialog() As OpenFileDialog
+        Dim openFileDialog As New OpenFileDialog
+        openFileDialog.CheckPathExists = True
+        openFileDialog.CheckFileExists = True
+        openFileDialog.Filter = "Import Files (*.xls;*.xlsx)|*.xls;*.xlsx"
+        openFileDialog.Multiselect = False
+        openFileDialog.AddExtension = True
+        openFileDialog.ValidateNames = True
+        openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer)
+        Return openFileDialog
+    End Function
+
+    Private Sub AddFile(ByVal pFileNamePath As String)
+        Try
+            txtFileName.Text = pFileNamePath
+
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "frmImport.AddFile : " & ex.Message)
+        End Try
+    End Sub
+
+
+    Private Function OpenFile(ByVal fileName As String) As Object
+        Dim fullFileName = fileName
+        Dim data As New DataTable
+        'Dim dt As New DataTable
+        Try
+            If (Not File.Exists(fullFileName)) Then
+                System.Windows.Forms.MessageBox.Show("File not found")
+                Return Nothing
+            End If
+
+
+            Using stream As FileStream = File.Open(fullFileName, FileMode.Open, FileAccess.Read)
+                Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
+                Dim lds As DataSet = excelReader.AsDataSet
+                data = lds.Tables(0)
+                'Remove header
+                data.Rows.RemoveAt(0)
+            End Using
+
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        End Try
+        Return data
+
+
+
+    End Function
+
+#End Region
+
 End Class

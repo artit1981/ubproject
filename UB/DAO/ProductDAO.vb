@@ -414,6 +414,56 @@ Public Class ProductDAO
         End Set
 
     End Property
+
+    Dim msku1 As String = ""
+    Public Property sku1() As String
+        Get
+            Return msku1
+        End Get
+        Set(ByVal value As String)
+            msku1 = value
+        End Set
+    End Property
+
+    Dim msku2 As String = ""
+    Public Property sku2() As String
+        Get
+            Return msku2
+        End Get
+        Set(ByVal value As String)
+            msku2 = value
+        End Set
+    End Property
+
+    Dim msku3 As String = ""
+    Public Property sku3() As String
+        Get
+            Return msku3
+        End Get
+        Set(ByVal value As String)
+            msku3 = value
+        End Set
+    End Property
+
+    Dim msku4 As String = ""
+    Public Property sku4() As String
+        Get
+            Return msku4
+        End Get
+        Set(ByVal value As String)
+            msku4 = value
+        End Set
+    End Property
+
+    Dim msku5 As String = ""
+    Public Property sku5() As String
+        Get
+            Return msku5
+        End Get
+        Set(ByVal value As String)
+            msku5 = value
+        End Set
+    End Property
     Public Property CostType() As ProductCostDAO.CostTypes
         Get
             Return mCostType
@@ -603,6 +653,12 @@ Public Class ProductDAO
                     ProductDimension5 = ConvertNullToZero(dr("ProductDimension5"))
                     ImportTXID = ConvertNullToZero(dr("ImportTXID"))
                     GuaranteeDay = ConvertNullToZero(dr("GuaranteeDay"))
+                    sku1 = ConvertNullToString(dr("sku1"))
+                    sku2 = ConvertNullToString(dr("sku2"))
+                    sku3 = ConvertNullToString(dr("sku3"))
+                    sku4 = ConvertNullToString(dr("sku4"))
+                    sku5 = ConvertNullToString(dr("sku5"))
+
                     'Calc Price
                     If pCustomerID > 0 Then
                         'Customer
@@ -816,7 +872,7 @@ Public Class ProductDAO
                     SQL &=  " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
                     SQL &=  " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
                     SQL &=  " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
-                    SQL &=  " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,GuaranteeDay)"
+                    SQL &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,GuaranteeDay,sku1,sku2,sku3,sku4,sku5)"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @Code"
                     SQL &=  " ,  @ProductName"
@@ -860,7 +916,12 @@ Public Class ProductDAO
                     SQL &=  " ,  @mIsInActive"
                     SQL &=  " ,  @mIsDelete"
                     SQL &=  " ,  @ImportTXID"
-                    SQL &=  " ,  @GuaranteeDay"
+                    SQL &= " ,  @GuaranteeDay"
+                    SQL &= " ,  @sku1"
+                    SQL &= " ,  @sku2"
+                    SQL &= " ,  @sku3"
+                    SQL &= " ,  @sku4"
+                    SQL &= " ,  @sku5"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Product SET "
@@ -900,7 +961,12 @@ Public Class ProductDAO
                     SQL &=  " ,  Size=@Size"
                     SQL &=  " ,  Generation=@Generation"
                     SQL &=  " ,  Color=@Color"
-                    SQL &=  " ,  GuaranteeDay=@GuaranteeDay"
+                    SQL &= " ,  GuaranteeDay=@GuaranteeDay"
+                    SQL &= " ,  sku1=@sku1"
+                    SQL &= " ,  sku2=@sku2"
+                    SQL &= " ,  sku3=@sku3"
+                    SQL &= " ,  sku4=@sku4"
+                    SQL &= " ,  sku5=@sku5"
                     SQL &=  " ,Remark= @Remark"
                     SQL &=  " ,ModifiedBy= @gUserID"
                     SQL &=  " ,ModifiedTime= @CreateTime"
@@ -958,6 +1024,12 @@ Public Class ProductDAO
             myCommand.Parameters.Add(New SqlParameter("@Color", ConvertNullToString(Color)))
             myCommand.Parameters.Add(New SqlParameter("@ImportTXID", ConvertNullToZero(ImportTXID)))
             myCommand.Parameters.Add(New SqlParameter("@GuaranteeDay", ConvertNullToZero(GuaranteeDay)))
+            myCommand.Parameters.Add(New SqlParameter("@sku1", ConvertNullToString(sku1)))
+            myCommand.Parameters.Add(New SqlParameter("@sku2", ConvertNullToString(sku2)))
+            myCommand.Parameters.Add(New SqlParameter("@sku3", ConvertNullToString(sku3)))
+            myCommand.Parameters.Add(New SqlParameter("@sku4", ConvertNullToString(sku4)))
+            myCommand.Parameters.Add(New SqlParameter("@sku5", ConvertNullToString(sku5)))
+
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@mIsDelete", 0))
@@ -1034,6 +1106,8 @@ Public Class ProductDAO
         End Try
 
     End Function
+
+
 
     Public Function CheckIsToUse() As Boolean ''ถูกใช้งานอยู่ ???
         Dim SQL As String

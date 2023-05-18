@@ -37,6 +37,7 @@ Partial Class frmInformPricePro
         Me.rdoCalcType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnReset = New DevExpress.XtraEditors.SimpleButton()
+        Me.chkAutoRow = New DevExpress.XtraEditors.CheckEdit()
         Me.btnCalc = New DevExpress.XtraEditors.SimpleButton()
         Me.chkSelectAll = New DevExpress.XtraEditors.CheckEdit()
         Me.calcPrice6 = New DevExpress.XtraEditors.SpinEdit()
@@ -46,12 +47,10 @@ Partial Class frmInformPricePro
         Me.calcPrice2 = New DevExpress.XtraEditors.SpinEdit()
         Me.calcPrice1 = New DevExpress.XtraEditors.SpinEdit()
         Me.calcPriceStandard = New DevExpress.XtraEditors.SpinEdit()
-        Me.chkAutoRow = New DevExpress.XtraEditors.CheckEdit()
         Me.gridControl = New DevExpress.XtraGrid.GridControl()
         Me.gridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.CostID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
@@ -68,6 +67,7 @@ Partial Class frmInformPricePro
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.ProductBtn = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.PriceCalcEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.btnBrandRefresh = New DevExpress.XtraEditors.SimpleButton()
@@ -85,6 +85,9 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnBrows = New DevExpress.XtraEditors.SimpleButton()
+        Me.txtFileName = New DevExpress.XtraEditors.TextEdit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -98,6 +101,7 @@ Partial Class frmInformPricePro
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkAutoRow.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPrice6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPrice5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,14 +110,13 @@ Partial Class frmInformPricePro
         CType(Me.calcPrice2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPrice1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.calcPriceStandard.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.chkAutoRow.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
@@ -122,6 +125,7 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -135,7 +139,7 @@ Partial Class frmInformPricePro
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
         Me.XtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1474, 512)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1664, 512)
         Me.XtraTabControl1.TabIndex = 8
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -146,6 +150,9 @@ Partial Class frmInformPricePro
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.Label8)
+        Me.GeneralTabPage.Controls.Add(Me.btnBrows)
+        Me.GeneralTabPage.Controls.Add(Me.txtFileName)
         Me.GeneralTabPage.Controls.Add(Me.Label3)
         Me.GeneralTabPage.Controls.Add(Me.PanelControl2)
         Me.GeneralTabPage.Controls.Add(Me.PanelControl1)
@@ -153,7 +160,7 @@ Partial Class frmInformPricePro
         Me.GeneralTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1472, 487)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1662, 487)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -165,7 +172,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label3, "")
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(1167, 83)
+        Me.Label3.Location = New System.Drawing.Point(1357, 83)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label3, True)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(154, 14)
@@ -186,7 +193,7 @@ Partial Class frmInformPricePro
         Me.PanelControl2.Controls.Add(Me.CheckShowInfo)
         Me.PanelControl2.Controls.Add(Me.cboStatus)
         Me.PanelControl2.Controls.Add(Me.Label4)
-        Me.PanelControl2.Location = New System.Drawing.Point(1327, 43)
+        Me.PanelControl2.Location = New System.Drawing.Point(1517, 43)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl2, True)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(130, 54)
@@ -335,7 +342,7 @@ Partial Class frmInformPricePro
         Me.PanelControl1.Location = New System.Drawing.Point(10, 103)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.PanelControl1, True)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1447, 31)
+        Me.PanelControl1.Size = New System.Drawing.Size(1637, 31)
         Me.PanelControl1.TabIndex = 310
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.PanelControl1, "")
         '
@@ -358,7 +365,7 @@ Partial Class frmInformPricePro
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label2, "")
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.Location = New System.Drawing.Point(917, 9)
+        Me.Label2.Location = New System.Drawing.Point(1107, 9)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label2, True)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(19, 14)
@@ -374,7 +381,7 @@ Partial Class frmInformPricePro
         Me.btnReset.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnReset, "")
         Me.btnReset.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnReset.Location = New System.Drawing.Point(766, 5)
+        Me.btnReset.Location = New System.Drawing.Point(956, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnReset, True)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(63, 21)
@@ -384,6 +391,17 @@ Partial Class frmInformPricePro
         Me.btnReset.ToolTip = "รีเซตราคา"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnReset, "")
         '
+        'chkAutoRow
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkAutoRow, "CheckedChanged")
+        Me.chkAutoRow.Location = New System.Drawing.Point(13, 5)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.chkAutoRow, True)
+        Me.chkAutoRow.Name = "chkAutoRow"
+        Me.chkAutoRow.Properties.Caption = "ปรับความสูงของแถวอัตโนมัติ"
+        Me.chkAutoRow.Size = New System.Drawing.Size(173, 20)
+        Me.chkAutoRow.TabIndex = 309
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkAutoRow, "Checked")
+        '
         'btnCalc
         '
         Me.btnCalc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -392,7 +410,7 @@ Partial Class frmInformPricePro
         Me.btnCalc.Appearance.Options.UseImage = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCalc, "")
         Me.btnCalc.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnCalc.Location = New System.Drawing.Point(848, 5)
+        Me.btnCalc.Location = New System.Drawing.Point(1038, 5)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCalc, True)
         Me.btnCalc.Name = "btnCalc"
         Me.btnCalc.Size = New System.Drawing.Size(63, 21)
@@ -419,7 +437,7 @@ Partial Class frmInformPricePro
         Me.calcPrice6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice6, "TextChanged")
         Me.calcPrice6.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice6.Location = New System.Drawing.Point(1340, 6)
+        Me.calcPrice6.Location = New System.Drawing.Point(1530, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice6, True)
         Me.calcPrice6.Name = "calcPrice6"
         Me.calcPrice6.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -444,7 +462,7 @@ Partial Class frmInformPricePro
         Me.calcPrice5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice5, "TextChanged")
         Me.calcPrice5.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice5.Location = New System.Drawing.Point(1275, 6)
+        Me.calcPrice5.Location = New System.Drawing.Point(1465, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice5, True)
         Me.calcPrice5.Name = "calcPrice5"
         Me.calcPrice5.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -469,7 +487,7 @@ Partial Class frmInformPricePro
         Me.calcPrice4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice4, "TextChanged")
         Me.calcPrice4.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice4.Location = New System.Drawing.Point(1210, 6)
+        Me.calcPrice4.Location = New System.Drawing.Point(1400, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice4, True)
         Me.calcPrice4.Name = "calcPrice4"
         Me.calcPrice4.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -494,7 +512,7 @@ Partial Class frmInformPricePro
         Me.calcPrice3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice3, "TextChanged")
         Me.calcPrice3.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice3.Location = New System.Drawing.Point(1145, 6)
+        Me.calcPrice3.Location = New System.Drawing.Point(1335, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice3, True)
         Me.calcPrice3.Name = "calcPrice3"
         Me.calcPrice3.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -519,7 +537,7 @@ Partial Class frmInformPricePro
         Me.calcPrice2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice2, "TextChanged")
         Me.calcPrice2.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice2.Location = New System.Drawing.Point(1082, 6)
+        Me.calcPrice2.Location = New System.Drawing.Point(1272, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice2, True)
         Me.calcPrice2.Name = "calcPrice2"
         Me.calcPrice2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -544,7 +562,7 @@ Partial Class frmInformPricePro
         Me.calcPrice1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPrice1, "TextChanged")
         Me.calcPrice1.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPrice1.Location = New System.Drawing.Point(1017, 6)
+        Me.calcPrice1.Location = New System.Drawing.Point(1207, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPrice1, True)
         Me.calcPrice1.Name = "calcPrice1"
         Me.calcPrice1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -569,7 +587,7 @@ Partial Class frmInformPricePro
         Me.calcPriceStandard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.calcPriceStandard, "TextChanged")
         Me.calcPriceStandard.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.calcPriceStandard.Location = New System.Drawing.Point(952, 6)
+        Me.calcPriceStandard.Location = New System.Drawing.Point(1142, 6)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.calcPriceStandard, True)
         Me.calcPriceStandard.Name = "calcPriceStandard"
         Me.calcPriceStandard.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -589,17 +607,6 @@ Partial Class frmInformPricePro
         Me.calcPriceStandard.TabIndex = 9
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.calcPriceStandard, "Text")
         '
-        'chkAutoRow
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.chkAutoRow, "CheckedChanged")
-        Me.chkAutoRow.Location = New System.Drawing.Point(13, 5)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.chkAutoRow, True)
-        Me.chkAutoRow.Name = "chkAutoRow"
-        Me.chkAutoRow.Properties.Caption = "ปรับความสูงของแถวอัตโนมัติ"
-        Me.chkAutoRow.Size = New System.Drawing.Size(173, 20)
-        Me.chkAutoRow.TabIndex = 309
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.chkAutoRow, "Checked")
-        '
         'gridControl
         '
         Me.gridControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -614,7 +621,7 @@ Partial Class frmInformPricePro
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.ProductBtn, Me.PriceCalcEdit1, Me.RepositoryItemMemoEdit1, Me.RepositoryItemCheckEdit1, Me.btnImage})
-        Me.gridControl.Size = New System.Drawing.Size(1447, 337)
+        Me.gridControl.Size = New System.Drawing.Size(1637, 337)
         Me.gridControl.TabIndex = 290
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView, Me.GridView1})
@@ -654,15 +661,6 @@ Partial Class frmInformPricePro
         Me.ProductID.FieldName = "ProductID"
         Me.ProductID.Name = "ProductID"
         Me.ProductID.OptionsColumn.TabStop = False
-        '
-        'RepositoryItemCheckEdit1
-        '
-        Me.RepositoryItemCheckEdit1.AutoHeight = False
-        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
-        Me.RepositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked
-        Me.RepositoryItemCheckEdit1.ValueChecked = 1
-        Me.RepositoryItemCheckEdit1.ValueGrayed = CType(0, Short)
-        Me.RepositoryItemCheckEdit1.ValueUnchecked = CType(0, Short)
         '
         'ProductCode
         '
@@ -913,6 +911,15 @@ Partial Class frmInformPricePro
         Me.PriceCalcEdit1.Name = "PriceCalcEdit1"
         Me.PriceCalcEdit1.Precision = 2
         '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked
+        Me.RepositoryItemCheckEdit1.ValueChecked = 1
+        Me.RepositoryItemCheckEdit1.ValueGrayed = CType(0, Short)
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = CType(0, Short)
+        '
         'GridView1
         '
         Me.GridView1.GridControl = Me.gridControl
@@ -1150,11 +1157,60 @@ Partial Class frmInformPricePro
         'FormChangedComponent1
         '
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label8, "")
+        Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label8.Location = New System.Drawing.Point(744, 50)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label8, True)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(29, 14)
+        Me.Label8.TabIndex = 315
+        Me.Label8.Text = "SKU"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label8, "")
+        '
+        'btnBrows
+        '
+        Me.btnBrows.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnBrows.Appearance.Options.UseFont = True
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnBrows, "")
+        Me.btnBrows.ImageOptions.Image = CType(resources.GetObject("btnBrows.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBrows.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBrows.Location = New System.Drawing.Point(1157, 47)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.btnBrows, True)
+        Me.btnBrows.Name = "btnBrows"
+        Me.btnBrows.Size = New System.Drawing.Size(21, 21)
+        Me.btnBrows.TabIndex = 314
+        Me.btnBrows.TabStop = False
+        Me.btnBrows.ToolTip = "Auto ID"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnBrows, "")
+        '
+        'txtFileName
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtFileName, "TextChanged")
+        Me.txtFileName.EditValue = ""
+        Me.txtFileName.EnterMoveNextControl = True
+        Me.txtFileName.Location = New System.Drawing.Point(777, 47)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.txtFileName, True)
+        Me.txtFileName.Name = "txtFileName"
+        Me.txtFileName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.txtFileName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtFileName.Properties.Appearance.Options.UseBackColor = True
+        Me.txtFileName.Properties.Appearance.Options.UseFont = True
+        Me.txtFileName.Properties.MaxLength = 50
+        Me.txtFileName.Properties.ReadOnly = True
+        Me.txtFileName.Properties.ValidateOnEnterKey = True
+        Me.txtFileName.Size = New System.Drawing.Size(374, 20)
+        Me.txtFileName.TabIndex = 313
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtFileName, "Text")
+        '
         'frmInformPricePro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1474, 542)
+        Me.ClientSize = New System.Drawing.Size(1664, 542)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.Name = "frmInformPricePro"
         Me.Text = "แจ้งราคา"
@@ -1176,6 +1232,7 @@ Partial Class frmInformPricePro
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.rdoCalcType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkAutoRow.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkSelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPrice6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPrice5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1184,14 +1241,13 @@ Partial Class frmInformPricePro
         CType(Me.calcPrice2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPrice1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.calcPriceStandard.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.chkAutoRow.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBtn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
@@ -1201,6 +1257,7 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1269,4 +1326,7 @@ Partial Class frmInformPricePro
     Friend WithEvents rdoCalcType As DevExpress.XtraEditors.RadioGroup
     Friend WithEvents Cost As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CostID As DevExpress.XtraGrid.Columns.GridColumn
+    Private WithEvents Label8 As Label
+    Friend WithEvents btnBrows As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents txtFileName As DevExpress.XtraEditors.TextEdit
 End Class

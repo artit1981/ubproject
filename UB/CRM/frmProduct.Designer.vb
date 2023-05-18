@@ -62,6 +62,7 @@ Partial Class frmProduct
         Me.txtPriceStandart = New DevExpress.XtraEditors.CalcEdit()
         Me.TabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.Price4 = New DevExpress.XtraEditors.CalcEdit()
         Me.UnitBuyRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.UnitMainIDBuy = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView12 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -79,7 +80,6 @@ Partial Class frmProduct
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Price5 = New DevExpress.XtraEditors.CalcEdit()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.Price4 = New DevExpress.XtraEditors.CalcEdit()
         Me.CostType = New DevExpress.XtraEditors.LookUpEdit()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -213,6 +213,17 @@ Partial Class frmProduct
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.AlertControl1 = New DevExpress.XtraBars.Alerter.AlertControl(Me.components)
+        Me.sku1 = New DevExpress.XtraEditors.TextEdit()
+        Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.sku2 = New DevExpress.XtraEditors.TextEdit()
+        Me.sku3 = New DevExpress.XtraEditors.TextEdit()
+        Me.sku4 = New DevExpress.XtraEditors.TextEdit()
+        Me.sku5 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
         CType(Me.ProductNameS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -229,12 +240,12 @@ Partial Class frmProduct
         CType(Me.TabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
+        CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GuaranteeDay.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Price6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Price5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CostType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Price3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Price2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -281,6 +292,13 @@ Partial Class frmProduct
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.sku1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl3.SuspendLayout()
+        CType(Me.sku2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sku3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sku4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sku5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProductNameS
@@ -843,6 +861,25 @@ Partial Class frmProduct
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
+        'Price4
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Price4, "TextChanged")
+        Me.Price4.EnterMoveNextControl = True
+        Me.Price4.Location = New System.Drawing.Point(335, 197)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Price4, True)
+        Me.Price4.Name = "Price4"
+        Me.Price4.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Price4.Properties.Appearance.Options.UseFont = True
+        Me.Price4.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.Price4.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Price4.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.Price4.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.Price4.Properties.MaskSettings.Set("mask", "n")
+        Me.Price4.Properties.Precision = 2
+        Me.Price4.Size = New System.Drawing.Size(89, 20)
+        Me.Price4.TabIndex = 10
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Price4, "Text")
+        '
         'UnitBuyRefresh
         '
         Me.UnitBuyRefresh.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
@@ -1064,25 +1101,6 @@ Partial Class frmProduct
         Me.Label30.Tag = ""
         Me.Label30.Text = "ราคา 4 (3-6 ชิ้น)"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label30, "")
-        '
-        'Price4
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Price4, "TextChanged")
-        Me.Price4.EnterMoveNextControl = True
-        Me.Price4.Location = New System.Drawing.Point(335, 197)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Price4, True)
-        Me.Price4.Name = "Price4"
-        Me.Price4.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Price4.Properties.Appearance.Options.UseFont = True
-        Me.Price4.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Price4.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Price4.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.Price4.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.Price4.Properties.MaskSettings.Set("mask", "n")
-        Me.Price4.Properties.Precision = 2
-        Me.Price4.Size = New System.Drawing.Size(89, 20)
-        Me.Price4.TabIndex = 10
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Price4, "Text")
         '
         'CostType
         '
@@ -1387,6 +1405,7 @@ Partial Class frmProduct
         'GroupTabPage
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GroupTabPage, "")
+        Me.GroupTabPage.Controls.Add(Me.GroupControl3)
         Me.GroupTabPage.Controls.Add(Me.btnProductType)
         Me.GroupTabPage.Controls.Add(Me.ProductTypeID)
         Me.GroupTabPage.Controls.Add(Me.btnProductCategory)
@@ -2661,6 +2680,177 @@ Partial Class frmProduct
         'FormChangedComponent1
         '
         '
+        'sku1
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.sku1, "TextChanged")
+        Me.sku1.EditValue = ""
+        Me.sku1.EnterMoveNextControl = True
+        Me.sku1.Location = New System.Drawing.Point(86, 35)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.sku1, True)
+        Me.sku1.Name = "sku1"
+        Me.sku1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.sku1.Properties.Appearance.Options.UseFont = True
+        Me.sku1.Properties.MaxLength = 50
+        Me.sku1.Properties.ValidateOnEnterKey = True
+        Me.sku1.Size = New System.Drawing.Size(210, 20)
+        Me.sku1.TabIndex = 238
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.sku1, "Text")
+        '
+        'GroupControl3
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GroupControl3, "")
+        Me.GroupControl3.Controls.Add(Me.Label42)
+        Me.GroupControl3.Controls.Add(Me.Label41)
+        Me.GroupControl3.Controls.Add(Me.Label40)
+        Me.GroupControl3.Controls.Add(Me.Label39)
+        Me.GroupControl3.Controls.Add(Me.sku5)
+        Me.GroupControl3.Controls.Add(Me.sku4)
+        Me.GroupControl3.Controls.Add(Me.sku3)
+        Me.GroupControl3.Controls.Add(Me.sku2)
+        Me.GroupControl3.Controls.Add(Me.Label38)
+        Me.GroupControl3.Controls.Add(Me.sku1)
+        Me.GroupControl3.Location = New System.Drawing.Point(33, 350)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.GroupControl3, True)
+        Me.GroupControl3.Name = "GroupControl3"
+        Me.GroupControl3.Size = New System.Drawing.Size(346, 171)
+        Me.GroupControl3.TabIndex = 239
+        Me.GroupControl3.Text = "sup / sku"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.GroupControl3, "")
+        '
+        'Label38
+        '
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label38, "")
+        Me.Label38.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label38.Location = New System.Drawing.Point(28, 36)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label38, True)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(53, 18)
+        Me.Label38.TabIndex = 239
+        Me.Label38.Text = "1"
+        Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label38, "")
+        '
+        'sku2
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.sku2, "TextChanged")
+        Me.sku2.EditValue = ""
+        Me.sku2.EnterMoveNextControl = True
+        Me.sku2.Location = New System.Drawing.Point(86, 61)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.sku2, True)
+        Me.sku2.Name = "sku2"
+        Me.sku2.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.sku2.Properties.Appearance.Options.UseFont = True
+        Me.sku2.Properties.MaxLength = 50
+        Me.sku2.Properties.ValidateOnEnterKey = True
+        Me.sku2.Size = New System.Drawing.Size(210, 20)
+        Me.sku2.TabIndex = 240
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.sku2, "Text")
+        '
+        'sku3
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.sku3, "TextChanged")
+        Me.sku3.EditValue = ""
+        Me.sku3.EnterMoveNextControl = True
+        Me.sku3.Location = New System.Drawing.Point(86, 87)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.sku3, True)
+        Me.sku3.Name = "sku3"
+        Me.sku3.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.sku3.Properties.Appearance.Options.UseFont = True
+        Me.sku3.Properties.MaxLength = 50
+        Me.sku3.Properties.ValidateOnEnterKey = True
+        Me.sku3.Size = New System.Drawing.Size(210, 20)
+        Me.sku3.TabIndex = 241
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.sku3, "Text")
+        '
+        'sku4
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.sku4, "TextChanged")
+        Me.sku4.EditValue = ""
+        Me.sku4.EnterMoveNextControl = True
+        Me.sku4.Location = New System.Drawing.Point(86, 113)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.sku4, True)
+        Me.sku4.Name = "sku4"
+        Me.sku4.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.sku4.Properties.Appearance.Options.UseFont = True
+        Me.sku4.Properties.MaxLength = 50
+        Me.sku4.Properties.ValidateOnEnterKey = True
+        Me.sku4.Size = New System.Drawing.Size(210, 20)
+        Me.sku4.TabIndex = 242
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.sku4, "Text")
+        '
+        'sku5
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.sku5, "TextChanged")
+        Me.sku5.EditValue = ""
+        Me.sku5.EnterMoveNextControl = True
+        Me.sku5.Location = New System.Drawing.Point(86, 137)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.sku5, True)
+        Me.sku5.Name = "sku5"
+        Me.sku5.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.sku5.Properties.Appearance.Options.UseFont = True
+        Me.sku5.Properties.MaxLength = 50
+        Me.sku5.Properties.ValidateOnEnterKey = True
+        Me.sku5.Size = New System.Drawing.Size(210, 20)
+        Me.sku5.TabIndex = 243
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.sku5, "Text")
+        '
+        'Label39
+        '
+        Me.Label39.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label39, "")
+        Me.Label39.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label39.Location = New System.Drawing.Point(28, 63)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label39, True)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(53, 18)
+        Me.Label39.TabIndex = 244
+        Me.Label39.Text = "2"
+        Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label39, "")
+        '
+        'Label40
+        '
+        Me.Label40.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label40, "")
+        Me.Label40.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label40.Location = New System.Drawing.Point(28, 89)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label40, True)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(53, 18)
+        Me.Label40.TabIndex = 245
+        Me.Label40.Text = "3"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label40, "")
+        '
+        'Label41
+        '
+        Me.Label41.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label41, "")
+        Me.Label41.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label41.Location = New System.Drawing.Point(28, 114)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label41, True)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(53, 18)
+        Me.Label41.TabIndex = 246
+        Me.Label41.Text = "4"
+        Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label41, "")
+        '
+        'Label42
+        '
+        Me.Label42.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label42, "")
+        Me.Label42.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label42.Location = New System.Drawing.Point(28, 138)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label42, True)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(53, 18)
+        Me.Label42.TabIndex = 247
+        Me.Label42.Text = "5"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label42, "")
+        '
         'frmProduct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2688,12 +2878,12 @@ Partial Class frmProduct
         Me.TabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
+        CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GuaranteeDay.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Price6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Price5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CostType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Price3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Price2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2744,6 +2934,13 @@ Partial Class frmProduct
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.sku1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl3.ResumeLayout(False)
+        CType(Me.sku2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sku3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sku4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sku5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2941,4 +3138,15 @@ Partial Class frmProduct
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn37 As DevExpress.XtraGrid.Columns.GridColumn
     Private WithEvents Label37 As System.Windows.Forms.Label
+    Friend WithEvents GroupControl3 As DevExpress.XtraEditors.GroupControl
+    Private WithEvents Label42 As Label
+    Private WithEvents Label41 As Label
+    Private WithEvents Label40 As Label
+    Private WithEvents Label39 As Label
+    Friend WithEvents sku5 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents sku4 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents sku3 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents sku2 As DevExpress.XtraEditors.TextEdit
+    Private WithEvents Label38 As Label
+    Friend WithEvents sku1 As DevExpress.XtraEditors.TextEdit
 End Class

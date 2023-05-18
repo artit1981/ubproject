@@ -75,7 +75,26 @@ Public Class InformPriceProDAO
 
     End Sub
 
+    Public Function GetDtProFromSKU(ByVal psku As String) As DataTable
+        Dim SQL As String
 
+        Try
+            SQL = "SELECT ProductID  FROM [vInformPricePro] "
+            SQL &= " WHERE sku1 ='" & psku.Trim & "'"
+            SQL &= " or sku2 ='" & psku.Trim & "'"
+            SQL &= " or sku3 ='" & psku.Trim & "'"
+            SQL &= " or sku4 ='" & psku.Trim & "'"
+            SQL &= " or sku5 ='" & psku.Trim & "'"
+            Dim dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+            Return dataTable
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "ProductDAO.GetDtProFromSKU : " & e.Message)
+
+        Finally
+
+        End Try
+
+    End Function
     Public Function InitailData(ByVal tr As SqlTransaction _
                                  , Optional ByVal pProGroupID As Long = 0, Optional ByVal pProCategID As Long = 0 _
                                  , Optional ByVal pProTypeID As Long = 0, Optional ByVal pProBandID As Long = 0) As Boolean

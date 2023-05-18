@@ -90,6 +90,11 @@ Public Class frmProduct
             mcls.ProductDimension4 = ConvertNullToZero(ProductDimension4.EditValue)
             mcls.ProductDimension5 = ConvertNullToZero(ProductDimension5.EditValue)
             mcls.GuaranteeDay = ConvertNullToZero(GuaranteeDay.EditValue)
+            mcls.sku1 = ConvertNullToString(sku1.Text)
+            mcls.sku2 = ConvertNullToString(sku2.Text)
+            mcls.sku3 = ConvertNullToString(sku3.Text)
+            mcls.sku4 = ConvertNullToString(sku4.Text)
+            mcls.sku5 = ConvertNullToString(sku5.Text)
             mcls.Remark = Remark.Text.Trim
             mcls.IsInActive = UcAdmin1.CheckInAcive.Checked
             mcls.NoteDAOs = UcNote1.GetNoteDAOs
@@ -228,6 +233,12 @@ Public Class frmProduct
                     ProductDimension4.EditValue = mcls.ProductDimension4
                     ProductDimension5.EditValue = mcls.ProductDimension5
                     GuaranteeDay.EditValue = mcls.GuaranteeDay
+                    sku1.EditValue = mcls.sku1
+                    sku2.EditValue = mcls.sku2
+                    sku3.EditValue = mcls.sku3
+                    sku4.EditValue = mcls.sku4
+                    sku5.EditValue = mcls.sku5
+
                     Remark.Text = mcls.Remark
                 End If
             End If

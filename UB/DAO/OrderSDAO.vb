@@ -604,7 +604,7 @@ Public Class OrderSDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = " SELECT 0 as IsSelect, Orders.OrderID,Orders.OrderCode,Orders.OrderDate"
+            SQL = " SELECT 'False' as IsSelect, Orders.OrderID,Orders.OrderCode,Orders.OrderDate"
             SQL &= " ,Customer.CustomerCode "
             SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
             SQL &= " ,Orders.OrderStatus,Orders.GrandTotal "

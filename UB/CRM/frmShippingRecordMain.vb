@@ -12,10 +12,31 @@ Public Class frmShippingRecordMain
 
     Private Sub LoadData()
         Dim lcls As New OrderSDAO
+        Dim lList As New List(Of ShippingRecProperty)
+
         Try
             Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, False, False, 1)
-
-            GridControl.DataSource = dataTable
+            For Each pRow In dataTable.Rows
+                Dim lRecProperty As New ShippingRecProperty
+                lRecProperty.IsSelect = False
+                lRecProperty.OrderID = pRow("OrderID")
+                lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                lRecProperty.OrderDate = pRow("OrderDate")
+                lRecProperty.CustomerCode = pRow("CustomerCode").ToString.Trim
+                lRecProperty.Customer = pRow("Customer").ToString.Trim
+                lRecProperty.OrderStatus = pRow("OrderStatus").ToString.Trim
+                lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                lList.Add(lRecProperty)
+            Next
+            GridControl.DataSource = lList
 
             GridStyle()
 
@@ -30,7 +51,7 @@ Public Class frmShippingRecordMain
         With GridView
 
             .Columns("OrderID").Visible = False
-            .Columns("IsSelect").Visible = False
+            '.Columns("IsSelect").Visible = False
 
             .Columns("OrderCode").Caption = "เลขที่"
             .Columns("OrderCode").Width = 100
@@ -143,7 +164,7 @@ Public Class frmShippingRecordMain
             Dim llRow As Long = 0
             Dim lList As New List(Of iOrder)
             For lRow = 0 To GridView.RowCount
-                If GridView.GetRowCellValue(lRow, "IsSelect") = 1 Then
+                If GridView.GetRowCellValue(lRow, "IsSelect") = True Then
                     Dim liorder As New iOrder With {
                             .ID = GridView.GetRowCellValue(lRow, "OrderID")
                         }
@@ -193,4 +214,191 @@ Public Class frmShippingRecordMain
         End Try
 
     End Sub
+End Class
+
+
+
+Public Class ShippingRecProperty
+
+    Private mClassName As String = "ShippingRecProperty"
+
+#Region "Property"
+
+
+
+    Dim mIsSelect As Boolean
+
+    Public Property IsSelect() As Boolean
+        Get
+            Return mIsSelect
+        End Get
+        Set(ByVal value As Boolean)
+            mIsSelect = value
+        End Set
+    End Property
+
+
+    Private mOrderCode As String
+    Public Property OrderCode() As String
+        Get
+            Return mOrderCode
+        End Get
+        Set(ByVal value As String)
+            mOrderCode = value
+        End Set
+    End Property
+
+    Private mOrderDate As Date
+    Public Property OrderDate() As Date
+        Get
+            Return mOrderDate
+        End Get
+        Set(ByVal value As Date)
+            mOrderDate = value
+        End Set
+    End Property
+
+
+    Private mCustomerCode As String
+    Public Property CustomerCode() As String
+        Get
+            Return mCustomerCode
+        End Get
+        Set(ByVal value As String)
+            mCustomerCode = value
+        End Set
+    End Property
+
+    Private mCustomer As String
+    Public Property Customer() As String
+        Get
+            Return mCustomer
+        End Get
+        Set(ByVal value As String)
+            mCustomer = value
+        End Set
+    End Property
+
+    Private mOrderStatus As String
+    Public Property OrderStatus() As String
+        Get
+            Return mOrderStatus
+        End Get
+        Set(ByVal value As String)
+            mOrderStatus = value
+        End Set
+    End Property
+
+
+
+
+    Private mGrandTotal As Decimal
+    Public Property GrandTotal() As Decimal
+        Get
+            Return mGrandTotal
+        End Get
+        Set(ByVal value As Decimal)
+            mGrandTotal = value
+        End Set
+    End Property
+
+
+
+    Dim mReceiptCode As String = ""
+    Public Property ReceiptCode() As String
+        Get
+            Return mReceiptCode
+        End Get
+        Set(ByVal value As String)
+            mReceiptCode = value
+        End Set
+    End Property
+    Dim mBillCode As String = ""
+    Public Property BillCode() As String
+        Get
+            Return mBillCode
+        End Get
+        Set(ByVal value As String)
+            mBillCode = value
+        End Set
+    End Property
+
+    Dim mEMPNAME As String = ""
+    Public Property EMPNAME() As String
+        Get
+            Return mEMPNAME
+        End Get
+        Set(ByVal value As String)
+            mEMPNAME = value
+        End Set
+    End Property
+
+    Dim mShippingPeriod As String = ""
+    Public Property ShippingPeriod() As String
+        Get
+            Return mShippingPeriod
+        End Get
+        Set(ByVal value As String)
+            mShippingPeriod = value
+        End Set
+    End Property
+
+    Dim mShippingMethod As String = ""
+    Public Property ShippingMethod() As String
+        Get
+            Return mShippingMethod
+        End Get
+        Set(ByVal value As String)
+            mShippingMethod = value
+        End Set
+    End Property
+
+
+    Dim mShippingEmp As String = ""
+    Public Property ShippingEmp() As String
+        Get
+            Return mShippingEmp
+        End Get
+        Set(ByVal value As String)
+            mShippingEmp = value
+        End Set
+    End Property
+
+
+    Dim mShippingStatus As String = ""
+    Public Property ShippingStatus() As String
+        Get
+            Return mShippingStatus
+        End Get
+        Set(ByVal value As String)
+            mShippingStatus = value
+        End Set
+    End Property
+
+    Dim mShippingRemark As String = ""
+    Public Property ShippingRemark() As String
+        Get
+            Return mShippingRemark
+        End Get
+        Set(ByVal value As String)
+            mShippingRemark = value
+        End Set
+    End Property
+
+    ''Hide
+    Dim mOrderID As Long = 0
+    Public Property OrderID() As Long
+        Get
+            Return mOrderID
+        End Get
+        Set(ByVal value As Long)
+            mOrderID = value
+        End Set
+    End Property
+
+
+#End Region
+
+
+
 End Class
