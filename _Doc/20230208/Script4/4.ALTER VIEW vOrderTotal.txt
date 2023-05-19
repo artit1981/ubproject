@@ -1,3 +1,13 @@
+USE [BS]
+GO
+
+/****** Object:  View [dbo].[vOrderTotal]    Script Date: 5/19/2023 2:52:27 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
  
   
 
@@ -10,11 +20,14 @@ SELECT OrderID,CustomerID,CustomerCode,OrderCode,TableID, OrderDate,ProductID
 ,SaleOwnerID,[EmpCode],EmpName,CommissionID,TerritoryID
 ,TargetPerMonth,CustomerGroupID
 ,CampaignPrice ,CampaignDiscount,CampaignType,CpTypeCont3_1,CpTypeCont3_2
-,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy,OrderTotal
+,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy,OrderTotal,OrderDiscountAmount,OrderVatAmount,OrderGrandTotal
 from(
 --Calc price with Campaign
 SELECT Orders.OrderID,[Orders].CustomerID,Customer.CustomerCode,Orders.OrderCode,Orders.TableID, Orders.OrderDate
-,Orders.GrandTotal AS OrderTotal
+,Orders.Total AS OrderTotal
+,Orders.DiscountAmount AS OrderDiscountAmount
+,Orders.VatAmount AS OrderVatAmount
+,Orders.GrandTotal AS OrderGrandTotal
 ,ProductList.ProductID
 ,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
 ,ProductList.Price as ProductPrice

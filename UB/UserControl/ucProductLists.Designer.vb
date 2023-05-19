@@ -63,7 +63,6 @@ Partial Class ucProductLists
         Me.TotalEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit()
         Me.ClaimRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ClaimResult = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.Remark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.UnitID = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -78,12 +77,15 @@ Partial Class ucProductLists
         Me.IsSN = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsShow = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsMerge = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RealPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RealPriceButtonEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.Image = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.btnImage = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.UnitMainID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RateUnit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceMain = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         Me.btnFind = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,9 +103,10 @@ Partial Class ucProductLists
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RealPriceButtonEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageCollection1
@@ -129,14 +132,14 @@ Partial Class ucProductLists
         Me.gridControl.Location = New System.Drawing.Point(0, 26)
         Me.gridControl.MainView = Me.gridView
         Me.gridControl.Name = "gridControl"
-        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage, Me.RepositoryItemCheckEdit1})
-        Me.gridControl.Size = New System.Drawing.Size(1075, 387)
+        Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.UnitBtn, Me.ProductBtn, Me.UnitsSpin, Me.PriceCalcEdit1, Me.LocationDTLIDLookUpEdit1, Me.DiscountCalcEdit1, Me.CostCalcEdit1, Me.SelectCheckEdit2, Me.ProductNameBtn, Me.TotalEdit, Me.RepositoryItemButtonSN, Me.btnImage, Me.RepositoryItemCheckEdit1, Me.RealPriceButtonEdit1})
+        Me.gridControl.Size = New System.Drawing.Size(1513, 387)
         Me.gridControl.TabIndex = 9
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.RefOrderCode, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.ClaimRemark, Me.ClaimResult, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.IsSelect, Me.RefOrderCode, Me.ID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.LocationDTLID, Me.UnitName, Me.KeepMin, Me.Units, Me.AdjustUnit, Me.Cost, Me.Price, Me.Discount, Me.Total, Me.ClaimRemark, Me.ClaimResult, Me.Remark, Me.SEQ, Me.UnitID, Me.ModePro, Me.ProductNameExt, Me.Units_Old, Me.LocationDTLID_Old, Me.ProductListRefID, Me.SN, Me.SNList, Me.IsSN, Me.IsShow, Me.IsMerge, Me.RealPrice, Me.Image, Me.UnitMainID, Me.RateUnit, Me.IsDelete, Me.PriceMain})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -170,7 +173,7 @@ Partial Class ucProductLists
         Me.IsSelect.Name = "IsSelect"
         Me.IsSelect.Visible = True
         Me.IsSelect.VisibleIndex = 0
-        Me.IsSelect.Width = 41
+        Me.IsSelect.Width = 44
         '
         'SelectCheckEdit2
         '
@@ -193,7 +196,7 @@ Partial Class ucProductLists
         Me.RefOrderCode.OptionsColumn.TabStop = False
         Me.RefOrderCode.Visible = True
         Me.RefOrderCode.VisibleIndex = 1
-        Me.RefOrderCode.Width = 100
+        Me.RefOrderCode.Width = 108
         '
         'ID
         '
@@ -219,7 +222,7 @@ Partial Class ucProductLists
         Me.ProductCode.Name = "ProductCode"
         Me.ProductCode.Visible = True
         Me.ProductCode.VisibleIndex = 2
-        Me.ProductCode.Width = 91
+        Me.ProductCode.Width = 98
         '
         'ProductBtn
         '
@@ -241,7 +244,7 @@ Partial Class ucProductLists
         Me.ProductName.OptionsColumn.ReadOnly = True
         Me.ProductName.Visible = True
         Me.ProductName.VisibleIndex = 3
-        Me.ProductName.Width = 182
+        Me.ProductName.Width = 197
         '
         'ProductNameBtn
         '
@@ -312,7 +315,7 @@ Partial Class ucProductLists
         Me.KeepMin.ToolTip = "จำนวนต่ำสุด"
         Me.KeepMin.Visible = True
         Me.KeepMin.VisibleIndex = 6
-        Me.KeepMin.Width = 50
+        Me.KeepMin.Width = 53
         '
         'UnitsSpin
         '
@@ -343,7 +346,7 @@ Partial Class ucProductLists
         Me.AdjustUnit.Name = "AdjustUnit"
         Me.AdjustUnit.Visible = True
         Me.AdjustUnit.VisibleIndex = 7
-        Me.AdjustUnit.Width = 62
+        Me.AdjustUnit.Width = 67
         '
         'Cost
         '
@@ -359,7 +362,7 @@ Partial Class ucProductLists
         Me.Cost.Name = "Cost"
         Me.Cost.Visible = True
         Me.Cost.VisibleIndex = 8
-        Me.Cost.Width = 91
+        Me.Cost.Width = 98
         '
         'CostCalcEdit1
         '
@@ -389,7 +392,7 @@ Partial Class ucProductLists
         Me.Price.Name = "Price"
         Me.Price.Visible = True
         Me.Price.VisibleIndex = 9
-        Me.Price.Width = 101
+        Me.Price.Width = 109
         '
         'PriceCalcEdit1
         '
@@ -416,7 +419,7 @@ Partial Class ucProductLists
         Me.Discount.Name = "Discount"
         Me.Discount.Visible = True
         Me.Discount.VisibleIndex = 10
-        Me.Discount.Width = 71
+        Me.Discount.Width = 76
         '
         'DiscountCalcEdit1
         '
@@ -450,7 +453,7 @@ Partial Class ucProductLists
         Me.Total.OptionsColumn.TabStop = False
         Me.Total.Visible = True
         Me.Total.VisibleIndex = 11
-        Me.Total.Width = 101
+        Me.Total.Width = 109
         '
         'TotalEdit
         '
@@ -467,7 +470,7 @@ Partial Class ucProductLists
         Me.ClaimRemark.Name = "ClaimRemark"
         Me.ClaimRemark.Visible = True
         Me.ClaimRemark.VisibleIndex = 15
-        Me.ClaimRemark.Width = 100
+        Me.ClaimRemark.Width = 108
         '
         'ClaimResult
         '
@@ -478,14 +481,7 @@ Partial Class ucProductLists
         Me.ClaimResult.Name = "ClaimResult"
         Me.ClaimResult.Visible = True
         Me.ClaimResult.VisibleIndex = 16
-        Me.ClaimResult.Width = 60
-        '
-        'RepositoryItemCheckEdit1
-        '
-        Me.RepositoryItemCheckEdit1.AutoHeight = False
-        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
-        Me.RepositoryItemCheckEdit1.ValueChecked = 1
-        Me.RepositoryItemCheckEdit1.ValueUnchecked = 0
+        Me.ClaimResult.Width = 76
         '
         'Remark
         '
@@ -497,7 +493,7 @@ Partial Class ucProductLists
         Me.Remark.Name = "Remark"
         Me.Remark.Visible = True
         Me.Remark.VisibleIndex = 12
-        Me.Remark.Width = 50
+        Me.Remark.Width = 53
         '
         'SEQ
         '
@@ -553,7 +549,7 @@ Partial Class ucProductLists
         Me.SN.OptionsColumn.ReadOnly = True
         Me.SN.Visible = True
         Me.SN.VisibleIndex = 13
-        Me.SN.Width = 23
+        Me.SN.Width = 24
         '
         'RepositoryItemButtonSN
         '
@@ -589,6 +585,26 @@ Partial Class ucProductLists
         Me.IsMerge.MaxWidth = 20
         Me.IsMerge.Name = "IsMerge"
         Me.IsMerge.Width = 20
+        '
+        'RealPrice
+        '
+        Me.RealPrice.Caption = "ราคาจริง"
+        Me.RealPrice.ColumnEdit = Me.RealPriceButtonEdit1
+        Me.RealPrice.FieldName = "RealPrice"
+        Me.RealPrice.MaxWidth = 40
+        Me.RealPrice.MinWidth = 30
+        Me.RealPrice.Name = "RealPrice"
+        Me.RealPrice.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways
+        Me.RealPrice.Visible = True
+        Me.RealPrice.VisibleIndex = 17
+        Me.RealPrice.Width = 40
+        '
+        'RealPriceButtonEdit1
+        '
+        Me.RealPriceButtonEdit1.AutoHeight = False
+        Me.RealPriceButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.RealPriceButtonEdit1.Name = "RealPriceButtonEdit1"
+        Me.RealPriceButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
         'Image
         '
@@ -639,6 +655,13 @@ Partial Class ucProductLists
         Me.PriceMain.FieldName = "PriceMain"
         Me.PriceMain.Name = "PriceMain"
         '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = 1
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = 0
+        '
         'ControlNavigator1
         '
         Me.ControlNavigator1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -682,7 +705,7 @@ Partial Class ucProductLists
         Me.Controls.Add(Me.ControlNavigator1)
         Me.Controls.Add(Me.gridControl)
         Me.Name = "ucProductLists"
-        Me.Size = New System.Drawing.Size(1075, 437)
+        Me.Size = New System.Drawing.Size(1516, 437)
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -698,9 +721,10 @@ Partial Class ucProductLists
         CType(Me.PriceCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountCalcEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TotalEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemButtonSN, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RealPriceButtonEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnImage, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -759,4 +783,6 @@ Partial Class ucProductLists
     Friend WithEvents ClaimRemark As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ClaimResult As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RealPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RealPriceButtonEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
 End Class

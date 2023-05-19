@@ -482,6 +482,19 @@ Public Class ProductListDAO
             mClaimResult = Value
         End Set
     End Property
+
+    Dim mRealPrice As Decimal = 0
+    Public Property RealPrice() As Decimal
+        Get
+            Return mRealPrice
+        End Get
+        Set(ByVal Value As Decimal)
+            mRealPrice = Value
+        End Set
+
+    End Property
+
+
 #End Region
 
     Public Function GetDataTable(ByVal pRefID As List(Of Long), ByVal pRefTable As String, ByVal tr As SqlTransaction, ByVal pIsCheckConfirm As Boolean _
@@ -496,7 +509,7 @@ Public Class ProductListDAO
             SQL &= " ,Product.ProductCode,Product.ProductName,ProductList.ProductNameExt,ProductList.Cost,ProductList.Price,ProductList.PriceMain,ProductList.Units,ProductList.KeepMin "
             SQL &= " ,ProductList.UnitID,Product_Unit.UnitCode ,Product_Unit.CodeThai AS UnitName,ProductList.ToTal,ProductList.LocationDTLID ,ProductList.Discount,ProductList.ProductListRefID"
             SQL &= " ,Product.IsSN ,ProductList.IsShow ,ProductList.IsMerge,ProductList.UnitMainID,ProductList.AdjustUnit,ProductList.RateUnit,ProductList.IsDelete"
-            SQL &= " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy,ProductList.ClaimRemark,ProductList.ClaimResult"
+            SQL &= " ,Product.UnitMainID AS UnitMainIDSell,Product.UnitMainIDBuy,ProductList.ClaimRemark,ProductList.ClaimResult,ProductList.RealPrice"
             SQL &= " FROM ProductList"
             SQL &= " LEFT OUTER JOIN Product ON Product.ProductID=ProductList.ProductID "
             SQL &= " LEFT OUTER JOIN Product_Unit ON Product_Unit.UnitID=ProductList.UnitID "
@@ -598,7 +611,7 @@ Public Class ProductListDAO
                     SQL &= " ,ProductListRefID,ProductListRefID2,ProductListRefID3,ProductListRefID4,ProductListRefID5"
                     SQL &= " ,IsShow,IsMerge,UnitMainID,AdjustUnit,RateUnit"
                     SQL &= " ,ProductListUnitRef1,ProductListUnitRef2,ProductListUnitRef3,ProductListUnitRef4,ProductListUnitRef5"
-                    SQL &= " ,ClaimRemark,ClaimResult)"
+                    SQL &= " ,ClaimRemark,ClaimResult,RealPrice)"
                     SQL &= " VALUES ( "
                     SQL &= "   @ID"
                     SQL &= " ,  @SEQ"
@@ -636,6 +649,7 @@ Public Class ProductListDAO
                     SQL &= " ,  @ProductListUnitRef5"
                     SQL &= " ,  @ClaimRemark"
                     SQL &= " ,  @ClaimResult"
+                    SQL &= " ,  @RealPrice"
                     SQL &= " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update ProductList   "
@@ -658,6 +672,7 @@ Public Class ProductListDAO
                     SQL &= " ,RateUnit=@RateUnit"
                     SQL &= " ,ClaimRemark=@ClaimRemark"
                     SQL &= " ,ClaimResult=@ClaimResult"
+                    SQL &= " ,RealPrice=@RealPrice"
                     SQL &= " WHERE ProductListID= @ID"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE ProductList SET IsDelete=@IsDelete "
@@ -702,6 +717,7 @@ Public Class ProductListDAO
             myCommand.Parameters.Add(New SqlParameter("@RateUnit", RateUnit))
             myCommand.Parameters.Add(New SqlParameter("@ClaimRemark", ConvertNullToString(ClaimRemark)))
             myCommand.Parameters.Add(New SqlParameter("@ClaimResult", ConvertNullToString(ClaimResult)))
+            myCommand.Parameters.Add(New SqlParameter("@RealPrice", ConvertNullToZero(RealPrice)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

@@ -158,6 +158,7 @@ Public Class ucProductLists
                 rec.Cost = pPro.Cost
                 rec.Discount = pPro.Discount
                 rec.Total = pPro.Total
+                rec.RealPrice = pPro.RealPrice
                 If pMode = DataMode.ModeNew Then
                     rec.Units_Old = 0
                     rec.AdjustUnit_Old = 0
@@ -176,6 +177,7 @@ Public Class ucProductLists
                 rec.IsMerge = pPro.IsMerge
                 rec.UnitMainID = pPro.UnitMainID
                 rec.IsDelete = pPro.IsDelete
+
                 'Load S/N
                 rec.IsSN = lclsProduct.IsSerialNumber(pPro.ProductID)
                 rec.SNList = pPro.SNList
@@ -260,6 +262,7 @@ Public Class ucProductLists
                         lDataDAO.Cost = pProSub.Cost
                         lDataDAO.Discount = pProSub.Discount
                         lDataDAO.Total = pProSub.Total
+                        lDataDAO.RealPrice = pProSub.RealPrice
                         lDataDAO.LocationDTLID_Old = pProSub.LocationDTLID_Old
                         lDataDAO.ProductListRefID = pProSub.ProductListRefID
                         lDataDAO.ProductListRefID2 = pProSub.ProductListRefID2
@@ -547,6 +550,7 @@ Public Class ucProductLists
                     rec.Cost = ConvertNullToZero(dr("Cost"))
                     rec.Discount = ConvertNullToZero(dr("Discount"))
                     rec.Total = ConvertNullToZero(dr("Total"))
+                    rec.RealPrice = ConvertNullToZero(dr("RealPrice"))
                     rec.IsShow = ConvertNullToZero(dr("IsShow"))
                     rec.IsMerge = ConvertNullToZero(dr("IsMerge"))
                     rec.UnitMainID = ConvertNullToZero(dr("UnitMainID"))
@@ -832,6 +836,7 @@ Public Class ucProductLists
                 rec.IsMerge = 0
                 rec.IsDelete = 0
                 rec.Price = rec.PriceMain * rec.RateUnit
+                rec.RealPrice = rec.Price
                 If llIndex = 0 Then
                     bindingSource1.Add(rec)
 
@@ -1178,7 +1183,15 @@ Public Class ucProductLists
 
     End Class
 
-    Private Sub gridView_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles gridView.InitNewRow
 
+
+    Private Sub RealPriceButtonEdit1_ButtonPressed(sender As Object, e As ButtonPressedEventArgs) Handles RealPriceButtonEdit1.ButtonPressed
+        Dim lstrMsg As String
+        If e.Button.Index = 0 Then
+            lstrMsg = InputBox("ระบุราคาจริง", "ราคาจริง", ConvertNullToString(gridView.GetFocusedRowCellValue("RealPrice"))).Trim
+            If IsNumeric(lstrMsg) Then
+                gridView.SetFocusedRowCellValue("RealPrice", lstrMsg)
+            End If
+        End If
     End Sub
 End Class

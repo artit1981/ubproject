@@ -530,20 +530,51 @@ Public Class frmInformPricePro
     End Sub
 
     Private Sub btnBrows_Click(sender As Object, e As EventArgs) Handles btnBrows.Click
-        Dim sFileNamePath As String = ""
+        Dim lProSKUList As New List(Of InformPriceSubDAO)
         Try
             Using OpenFileDialog As OpenFileDialog = Me.GetOpenFileDialog()
                 If (OpenFileDialog.ShowDialog(Me) = DialogResult.OK) Then
-                    sFileNamePath = OpenFileDialog.FileName
+                    Dim sFileNamePath = OpenFileDialog.FileName
                     Call AddFile(sFileNamePath)
                     Dim dataTable = OpenFile(txtFileName.Text)
-                    If dataTable.Columns.Count = 8 Then
-                        Dim lProSKU As New InformPriceSubDAO
-                        Dim lclsPro As New InformPriceProDAO
-                        Dim lProID = lclsPro.GetDtProFromSKU
-                    Else
-                        MessageBox.Show("จำนวนแถวของข้อมูลไม่ถูกต้อง (8 แถว)")
+                    If dataTable IsNot Nothing Then
+                        If dataTable.Columns.Count = 8 Then
+                            If XtraMessageBox.Show(Me, "ยืนยัน Import ราคา SKU", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                                For Each pRow In dataTable.rows
+                                    Dim lProSKU As New InformPriceSubDAO
+                                    Dim lclsInformPrice As New InformPriceProDAO
+                                    Dim lProTb = lclsInformPrice.GetDtProFromSKU(pRow(0).ToString.Trim)
+                                    If lProTb IsNot Nothing Then
+                                        For Each pRowPro In lProTb.Rows
+                                            lProSKU.IsSelect = True
+                                            lProSKU.ProductID = pRowPro("ProductID")
+                                            lProSKU.ProductCode = pRowPro("ProductCode").ToString.Trim
+                                            lProSKU.ProductName = pRowPro("ProductName").ToString.Trim
+                                            lProSKU.PriceStandard = ConvertNullToZero(pRow(1))
+                                            lProSKU.Price1 = ConvertNullToZero(pRow(2)) 'Cost 
+                                            lProSKU.Price2 = ConvertNullToZero(pRow(3)) 'Cash
+                                            lProSKU.Price3 = ConvertNullToZero(pRow(4)) '1 -3ชิ้น
+                                            lProSKU.Price4 = ConvertNullToZero(pRow(5)) '3-6 ชิ้น
+                                            lProSKU.Price5 = ConvertNullToZero(pRow(6)) '6 ชิ้น+
+                                            lProSKU.Price6 = ConvertNullToZero(pRow(7)) 'NV
+                                            lProSKUList.Add(lProSKU)
+                                            Exit For
+                                        Next
+                                    End If
+                                Next
+                                If IsNothing(lProSKUList) = False Then
+                                    bindingSource1.DataSource = lProSKUList
+                                End If
+                                DxErrorProvider1.DataSource = bindingSource1
+                                DxErrorProvider1.ContainerControl = Me
+                                gridControl.DataSource = bindingSource1
+                            End If
+
+                        Else
+                            MessageBox.Show("จำนวนแถวของข้อมูลไม่ถูกต้อง (8 แถว)")
+                        End If
                     End If
+
 
                 Else 'Cancel                
                     Exit Sub

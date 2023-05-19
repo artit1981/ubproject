@@ -1,0 +1,39 @@
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(1,'0','0','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(2,'7 วัน','7 วัน','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(3,'15 วัน ','15 วัน ','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(4,'30 วัน','30 วัน','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(5,'3 เดือน','3 เดือน','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(6,'6 เดือน','6 เดือน','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(7,'1 ปี','1 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(8,'1 ปี onsite','1 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(9,'2 ปี','2 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(10,'2 ปี onsite','2 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(11,'3 ปี','3 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(12,'3 ปี onsite','3 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(13,'4 ปี','4 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(14,'4 ปี onsite','4 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(15,'5 ปี','5 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(16,'5 ปี onsite','5 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(17,'10 ปี','10 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(18,'10 ปี onsite','10 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(19,'12 ปี','12 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(20,'12 ปี onsite','12 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(21,'15 ปี','15 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(22,'15 ปี onsite','15 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(23,'20 ปี','20 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(24,'20 ปี onsite','20 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(25,'30 ปี','30 ปี','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+INSERT INTO [dbo].[ProductGuarantee]([MasterID],[CodeThai],[CodeEng],[Remark],[IsInActive],[IsDelete],[CreateBy],[CreateTime],[ModifiedBy],[ModifiedTime]) VALUES(26,'30 ปี onsite','30 ปี onsite','',0,0,3,'2023-05-19 14:41:56.000',3,'2023-05-19 14:41:56.000');
+
+
+
+
+
+
+
+
+
+
+
+
+

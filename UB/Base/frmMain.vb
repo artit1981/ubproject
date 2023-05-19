@@ -1146,4 +1146,9 @@ Public Class frmMain
     Private Sub NotiNotSuccessBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles NotiNotSuccessBar.ItemClick
         ShowNotSuccess()
     End Sub
+
+    Private Sub ProductGuaranteeBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ProductGuaranteeBar.ItemClick
+        ShowMaster(MasterType.ProductGuarantee)
+        InsertActivity(DataMode.ModeOpen, MasterType.ProductGuarantee, "", Nothing)
+    End Sub
 End Class

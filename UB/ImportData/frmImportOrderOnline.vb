@@ -337,7 +337,7 @@ Public Class frmImportOrderOnline
                 .Columns("TxAmount").Caption = "จำนวนเงิน Shopee"
             Else
                 .Columns("TXDate").Caption = "วันที่ Lazada"
-                .Columns("TxNo").Caption = "Tx. No"
+                .Columns("TxNo").Caption = "Order No."
                 .Columns("TxAmount").Caption = "จำนวนเงิน Lazada"
             End If
 

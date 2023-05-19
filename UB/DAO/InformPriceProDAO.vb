@@ -79,7 +79,11 @@ Public Class InformPriceProDAO
         Dim SQL As String
 
         Try
-            SQL = "SELECT ProductID  FROM [vInformPricePro] "
+            SQL = "SELECT ProductID ,ProductCode,ProductName "
+            SQL &= " ,PriceStandard AS PriceStandard,Cost AS Cost,Price1 AS Price1"
+            SQL &= " ,Price2 AS Price2 ,Price3 AS Price3,Price4 AS Price4"
+            SQL &= " ,Price5 AS Price5 ,Price6 AS Price6,ProductRemark,CostID "
+            SQL &= " FROM [vInformPricePro] "
             SQL &= " WHERE sku1 ='" & psku.Trim & "'"
             SQL &= " or sku2 ='" & psku.Trim & "'"
             SQL &= " or sku3 ='" & psku.Trim & "'"

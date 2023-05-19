@@ -32,7 +32,7 @@ Public Class LazadaImport
                         rec = New LazadaProperty
                         rec.IsSelect = False
                         rec.TXDate = dr(0)
-                        rec.TxNo = ConvertNullToString(dr(3))
+                        rec.TxNo = ConvertNullToString(dr(13))
                         rec.TxDesc = ConvertNullToString(dr(4)).Trim
                         rec.TxAmount = ConvertNullToZero(dr(7))
                         rec.ExternalCode = ConvertNullToString(dr(13))
