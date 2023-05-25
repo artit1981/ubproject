@@ -1,21 +1,11 @@
-USE [BS]
-GO
-
-/****** Object:  View [dbo].[vOrderTotal]    Script Date: 5/19/2023 2:52:27 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
- 
   
 
 ALTER VIEW [dbo].[vOrderTotal]
 AS
 
 SELECT OrderID,CustomerID,CustomerCode,OrderCode,TableID, OrderDate,ProductID
-,ProductCode,ProductName,ProductBrandID,Price,Units,Units * Price as Total
+,ProductCode,ProductName,ProductBrandID,Price,Units
+,case when VatType='I' then round( (Units * Price) / ((100+VatPercen)/100),2) else Units * Price end Total
 ,Cost
 ,SaleOwnerID,[EmpCode],EmpName,CommissionID,TerritoryID
 ,TargetPerMonth,CustomerGroupID
@@ -55,7 +45,10 @@ else ProductList.Cost  end Cost
 ,Orders.SaleOwnerID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
 ,[Employee].TargetPerMonth
 ,Customer.CustomerGroupID
+,VatType.VatType
+,Orders.VatPercen
 FROM Orders  
+inner join VatType on VatType.VatTypeID=Orders.VatTypeID
 inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
 inner JOIN Product ON Product.ProductID=ProductList.ProductID 
 INNER JOIN [Employee] on [Orders].SaleOwnerID = [Employee].EmpID and [Employee].IsDelete=0
@@ -101,5 +94,3 @@ and Orders.TableID in(39,41,54,55)
 ) as tmp
    --order by [OrderID]
 GO
-
-
