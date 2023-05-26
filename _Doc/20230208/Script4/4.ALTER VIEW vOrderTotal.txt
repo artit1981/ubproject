@@ -11,6 +11,7 @@ SELECT OrderID,CustomerID,CustomerCode,OrderCode,TableID, OrderDate,ProductID
 ,TargetPerMonth,CustomerGroupID
 ,CampaignPrice ,CampaignDiscount,CampaignType,CpTypeCont3_1,CpTypeCont3_2
 ,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy,OrderTotal,OrderDiscountAmount,OrderVatAmount,OrderGrandTotal
+,VatTypeID,VatTypeCode,VatType
 from(
 --Calc price with Campaign
 SELECT Orders.OrderID,[Orders].CustomerID,Customer.CustomerCode,Orders.OrderCode,Orders.TableID, Orders.OrderDate
@@ -45,7 +46,7 @@ else ProductList.Cost  end Cost
 ,Orders.SaleOwnerID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
 ,[Employee].TargetPerMonth
 ,Customer.CustomerGroupID
-,VatType.VatType
+,Orders.VatTypeID,VatType.VatType,VatType.VatTypeCode
 ,Orders.VatPercen
 FROM Orders  
 inner join VatType on VatType.VatTypeID=Orders.VatTypeID
