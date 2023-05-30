@@ -1,4 +1,4 @@
-  
+ 
 
 ALTER VIEW [dbo].[vOrderTotal]
 AS
@@ -89,7 +89,7 @@ LEFT OUTER JOIN  --Campaign Buy
 			--and CampaignBuy.CustomerID=Orders.CustomerID
 			and CampaignBuy.StartDate <= Orders.OrderDate and CampaignBuy.ExpireDate > Orders.OrderDate
 WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
-and Orders.TableID in(39,41,54,55)
+and Orders.TableID in(39,41,54,55,111,116)
 --and Orders.OrderDate between '2021-12-01' and '2021-12-31'
 --and Orders.OrderID= 306362
 ) as tmp

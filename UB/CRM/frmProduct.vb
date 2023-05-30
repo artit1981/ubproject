@@ -89,7 +89,7 @@ Public Class frmProduct
             mcls.ProductDimension3 = ConvertNullToZero(ProductDimension3.EditValue)
             mcls.ProductDimension4 = ConvertNullToZero(ProductDimension4.EditValue)
             mcls.ProductDimension5 = ConvertNullToZero(ProductDimension5.EditValue)
-            mcls.GuaranteeDay = ConvertNullToZero(GuaranteeDay.EditValue)
+            mcls.ProductGuaranteeID = ConvertNullToZero(ProductGuaranteeID.EditValue)
             mcls.sku1 = ConvertNullToString(sku1.Text)
             mcls.sku2 = ConvertNullToString(sku2.Text)
             mcls.sku3 = ConvertNullToString(sku3.Text)
@@ -158,6 +158,7 @@ Public Class frmProduct
             SetComboProductDimension(2)
             SetComboProductDimension(3)
             SetComboProductDimension(4)
+            SetComboProductGuarantee()
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try
@@ -232,7 +233,7 @@ Public Class frmProduct
                     ProductDimension3.EditValue = mcls.ProductDimension3
                     ProductDimension4.EditValue = mcls.ProductDimension4
                     ProductDimension5.EditValue = mcls.ProductDimension5
-                    GuaranteeDay.EditValue = mcls.GuaranteeDay
+                    ProductGuaranteeID.EditValue = mcls.ProductGuaranteeID
                     sku1.EditValue = mcls.sku1
                     sku2.EditValue = mcls.sku2
                     sku3.EditValue = mcls.sku3
@@ -442,6 +443,18 @@ Public Class frmProduct
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProductDimension : " & e.Message)
         End Try
 
+    End Sub
+
+
+    Private Sub SetComboProductGuarantee()
+        Try
+
+            SetLookProductGuarantee(ProductGuaranteeID, 0)
+
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboProductGuarantee : " & e.Message)
+        End Try
     End Sub
 
     'Private Sub InitialProBrand(ByVal pProBrandID As Long)

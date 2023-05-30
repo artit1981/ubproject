@@ -50,7 +50,7 @@ Public Class ProductDAO
     Dim mCost As Decimal
     Dim mProductBrand As ProductBrandDAO
     Dim mProductGroupID As Long
-    Dim mGuaranteeDay As Long = 0
+    Dim mProductGuaranteeID As Long = 0
     Dim mUnitMainIDBuy As Long = 0
 
 
@@ -368,12 +368,12 @@ Public Class ProductDAO
 
     End Property
 
-    Public Property GuaranteeDay() As Long
+    Public Property ProductGuaranteeID() As Long
         Get
-            Return mGuaranteeDay
+            Return mProductGuaranteeID
         End Get
         Set(ByVal value As Long)
-            mGuaranteeDay = value
+            mProductGuaranteeID = value
         End Set
 
     End Property
@@ -652,7 +652,7 @@ Public Class ProductDAO
                     ProductDimension4 = ConvertNullToZero(dr("ProductDimension4"))
                     ProductDimension5 = ConvertNullToZero(dr("ProductDimension5"))
                     ImportTXID = ConvertNullToZero(dr("ImportTXID"))
-                    GuaranteeDay = ConvertNullToZero(dr("GuaranteeDay"))
+                    ProductGuaranteeID = ConvertNullToZero(dr("ProductGuaranteeID"))
                     sku1 = ConvertNullToString(dr("sku1"))
                     sku2 = ConvertNullToString(dr("sku2"))
                     sku3 = ConvertNullToString(dr("sku3"))
@@ -791,19 +791,19 @@ Public Class ProductDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT ProductID AS ID,ProductCode,ProductName,PriceStandard AS Price,Remark"
-            SQL &=  " FROM " & TableName
-            SQL &=  " WHERE IsDelete =0   "
+            SQL = "SELECT p.ProductID AS ID,p.ProductCode,p.ProductName,p.PriceStandard AS Price,p.Remark"
+            SQL &= " FROM " & TableName & " p"
+            SQL &= " WHERE p.IsDelete =0   "
             If pID > 0 Then
-                SQL &=  "  AND ProductID=" & pID
+                SQL &= "  AND p.ProductID=" & pID
             End If
             If pProductCode.Trim <> "" Then
-                SQL &=  "  AND ProductCode='" & pProductCode.Trim & "'"
+                SQL &= "  AND p.ProductCode='" & pProductCode.Trim & "'"
             End If
             If pOnlyActive = True Then
-                SQL &=  "  AND IsInActive = 0"
+                SQL &= "  AND p.IsInActive = 0"
             End If
-            SQL &=  " ORDER BY ProductCode"
+            SQL &= " ORDER BY p.ProductCode"
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "ProductDAO.GetDataTable : " & e.Message)
@@ -872,7 +872,7 @@ Public Class ProductDAO
                     SQL &=  " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
                     SQL &=  " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
                     SQL &=  " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
-                    SQL &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,GuaranteeDay,sku1,sku2,sku3,sku4,sku5)"
+                    SQL &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,ProductGuaranteeID,sku1,sku2,sku3,sku4,sku5)"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @Code"
                     SQL &=  " ,  @ProductName"
@@ -916,7 +916,7 @@ Public Class ProductDAO
                     SQL &=  " ,  @mIsInActive"
                     SQL &=  " ,  @mIsDelete"
                     SQL &=  " ,  @ImportTXID"
-                    SQL &= " ,  @GuaranteeDay"
+                    SQL &= " ,  @ProductGuaranteeID"
                     SQL &= " ,  @sku1"
                     SQL &= " ,  @sku2"
                     SQL &= " ,  @sku3"
@@ -961,7 +961,7 @@ Public Class ProductDAO
                     SQL &=  " ,  Size=@Size"
                     SQL &=  " ,  Generation=@Generation"
                     SQL &=  " ,  Color=@Color"
-                    SQL &= " ,  GuaranteeDay=@GuaranteeDay"
+                    SQL &= " ,  ProductGuaranteeID=@ProductGuaranteeID"
                     SQL &= " ,  sku1=@sku1"
                     SQL &= " ,  sku2=@sku2"
                     SQL &= " ,  sku3=@sku3"
@@ -1023,7 +1023,7 @@ Public Class ProductDAO
             myCommand.Parameters.Add(New SqlParameter("@Generation", ConvertNullToString(Generation)))
             myCommand.Parameters.Add(New SqlParameter("@Color", ConvertNullToString(Color)))
             myCommand.Parameters.Add(New SqlParameter("@ImportTXID", ConvertNullToZero(ImportTXID)))
-            myCommand.Parameters.Add(New SqlParameter("@GuaranteeDay", ConvertNullToZero(GuaranteeDay)))
+            myCommand.Parameters.Add(New SqlParameter("@ProductGuaranteeID", ConvertNullToZero(ProductGuaranteeID)))
             myCommand.Parameters.Add(New SqlParameter("@sku1", ConvertNullToString(sku1)))
             myCommand.Parameters.Add(New SqlParameter("@sku2", ConvertNullToString(sku2)))
             myCommand.Parameters.Add(New SqlParameter("@sku3", ConvertNullToString(sku3)))

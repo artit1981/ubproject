@@ -121,16 +121,26 @@ Public Class frmCommReport
             If chkShiping.Checked = True Then
                 lOrderTypeList = lOrderTypeList & "," & MasterType.Shiping
             End If
+            If chkAddCredit.Checked = True Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.AddCredit
+            End If
+            If chkReduceCredit.Checked = True Then
+                lOrderTypeList = lOrderTypeList & "," & MasterType.ReduceCredit
+            End If
             lOrderTypeList = lOrderTypeList & ")"
 
             'Build Employee List
             Dim lEmployeeList As String = UcMoverItem1.GetSelectItem
 
             SQL = "SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID ,Orders.PO"
-            SQL &=  " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
-            SQL &=  " ,Orders.Total,Orders.DiscountAmount,Orders.VatAmount,Orders.GrandTotal, Orders.TableID"
-            SQL &=  " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
-            SQL &=  " FROM Orders  "
+            SQL &= " ,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer "
+            SQL &= " ,case when Orders.TableID=55 then Orders.Total * -1 else Orders.Total end  Total "
+            SQL &= " ,case when Orders.TableID=55 then Orders.DiscountAmount * -1 else Orders.DiscountAmount end  DiscountAmount "
+            SQL &= " ,case when Orders.TableID=55 then Orders.VatAmount * -1 else Orders.VatAmount end  VatAmount "
+            SQL &= " ,case when Orders.TableID=55 then Orders.GrandTotal * -1 else Orders.GrandTotal end  GrandTotal "
+            SQL &= " , Orders.TableID"
+            SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
+            SQL &= " FROM Orders  "
             SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
             SQL &=  " LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  "
             SQL &=  " WHERE Orders.IsDelete =0   "

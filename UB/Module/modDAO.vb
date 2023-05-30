@@ -530,6 +530,26 @@ Module modDAO
         End Try
     End Sub
 
+    Public Sub SetLookProductGuarantee(ByVal pCombo As DevExpress.XtraEditors.LookUpEdit, ByVal pProductGuaranteeID As Long)
+        Dim lcls As New MasterDAO
+        Dim dataTable As New DataTable()
+        Dim pTable As String = ""
+        Try
+
+            pTable = GetMasterTableName(MasterType.ProductGuarantee)
+            dataTable = lcls.GetDataTable(0, pTable, True, , pProductGuaranteeID)
+            pCombo.Properties.DataSource = dataTable
+            pCombo.Properties.DisplayMember = "CodeThai"
+            pCombo.Properties.ValueMember = "ID"
+            pCombo.EditValue = DBNull.Value
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "modDAO.SetLookProGroup : " & e.Message)
+        Finally
+            lcls = Nothing
+            dataTable = Nothing
+        End Try
+    End Sub
+
     Public Sub SetComboMasterSearch(ByVal pCombo As DevExpress.XtraEditors.SearchLookUpEdit, ByVal pMasterType As MasterType)
         Dim lcls As New MasterDAO
         Dim dataTable As New DataTable()

@@ -3,4 +3,6 @@ ALTER TABLE dbo.Product ADD
 	sku2 nvarchar(100) NULL,
 	sku3 nvarchar(100) NULL,
 	sku4 nvarchar(100) NULL,
-	sku5 nvarchar(100) NULL;
+	sku5 nvarchar(100) NULL,
+	ProductGuaranteeID bigint NULL;
+ 
