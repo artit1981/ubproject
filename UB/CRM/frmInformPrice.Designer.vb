@@ -36,7 +36,9 @@ Partial Class frmInformPrice
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.ProductGuaranteeCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Subject = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Unit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Promotion = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceStandard = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -293,7 +295,7 @@ Partial Class frmInformPrice
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Unit, Me.Promotion, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.CostAdjust, Me.PriceOnline, Me.PriceInform, Me.InformPriceID, Me.PriceInformOld, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ProductID, Me.ProductCode, Me.ProductName, Me.ProductGuaranteeCode, Me.ProductRemark, Me.Subject, Me.Unit, Me.Promotion, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.CostAdjust, Me.PriceOnline, Me.PriceInform, Me.InformPriceID, Me.PriceInformOld, Me.Image})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.Name = "gridView"
         Me.gridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -336,7 +338,7 @@ Partial Class frmInformPrice
         Me.ProductCode.OptionsColumn.TabStop = False
         Me.ProductCode.Visible = True
         Me.ProductCode.VisibleIndex = 1
-        Me.ProductCode.Width = 84
+        Me.ProductCode.Width = 81
         '
         'ProductName
         '
@@ -361,6 +363,23 @@ Partial Class frmInformPrice
         Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         Me.RepositoryItemMemoEdit1.ScrollBars = System.Windows.Forms.ScrollBars.None
         '
+        'ProductGuaranteeCode
+        '
+        Me.ProductGuaranteeCode.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ProductGuaranteeCode.AppearanceCell.Options.UseBackColor = True
+        Me.ProductGuaranteeCode.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductGuaranteeCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductGuaranteeCode.Caption = "จำนวนวันประกัน"
+        Me.ProductGuaranteeCode.FieldName = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.MaxWidth = 100
+        Me.ProductGuaranteeCode.MinWidth = 60
+        Me.ProductGuaranteeCode.Name = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.OptionsColumn.AllowEdit = False
+        Me.ProductGuaranteeCode.OptionsColumn.TabStop = False
+        Me.ProductGuaranteeCode.Visible = True
+        Me.ProductGuaranteeCode.VisibleIndex = 3
+        Me.ProductGuaranteeCode.Width = 80
+        '
         'ProductRemark
         '
         Me.ProductRemark.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -374,8 +393,25 @@ Partial Class frmInformPrice
         Me.ProductRemark.OptionsColumn.ReadOnly = True
         Me.ProductRemark.OptionsColumn.TabStop = False
         Me.ProductRemark.Visible = True
-        Me.ProductRemark.VisibleIndex = 3
+        Me.ProductRemark.VisibleIndex = 4
         Me.ProductRemark.Width = 200
+        '
+        'Subject
+        '
+        Me.Subject.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Subject.AppearanceCell.Options.UseBackColor = True
+        Me.Subject.AppearanceHeader.Options.UseTextOptions = True
+        Me.Subject.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.Subject.Caption = "โปรโมชัน"
+        Me.Subject.FieldName = "Subject"
+        Me.Subject.MaxWidth = 200
+        Me.Subject.MinWidth = 150
+        Me.Subject.Name = "Subject"
+        Me.Subject.OptionsColumn.ReadOnly = True
+        Me.Subject.OptionsColumn.TabStop = False
+        Me.Subject.Visible = True
+        Me.Subject.VisibleIndex = 5
+        Me.Subject.Width = 150
         '
         'Unit
         '
@@ -395,7 +431,7 @@ Partial Class frmInformPrice
         Me.Unit.OptionsColumn.ReadOnly = True
         Me.Unit.OptionsColumn.TabStop = False
         Me.Unit.Visible = True
-        Me.Unit.VisibleIndex = 4
+        Me.Unit.VisibleIndex = 6
         Me.Unit.Width = 65
         '
         'Promotion
@@ -416,8 +452,8 @@ Partial Class frmInformPrice
         Me.Promotion.OptionsColumn.ReadOnly = True
         Me.Promotion.OptionsColumn.TabStop = False
         Me.Promotion.Visible = True
-        Me.Promotion.VisibleIndex = 5
-        Me.Promotion.Width = 70
+        Me.Promotion.VisibleIndex = 7
+        Me.Promotion.Width = 66
         '
         'PriceStandard
         '
@@ -437,8 +473,8 @@ Partial Class frmInformPrice
         Me.PriceStandard.OptionsColumn.ReadOnly = True
         Me.PriceStandard.OptionsColumn.TabStop = False
         Me.PriceStandard.Visible = True
-        Me.PriceStandard.VisibleIndex = 6
-        Me.PriceStandard.Width = 69
+        Me.PriceStandard.VisibleIndex = 8
+        Me.PriceStandard.Width = 65
         '
         'Price1
         '
@@ -458,8 +494,8 @@ Partial Class frmInformPrice
         Me.Price1.OptionsColumn.ReadOnly = True
         Me.Price1.OptionsColumn.TabStop = False
         Me.Price1.Visible = True
-        Me.Price1.VisibleIndex = 7
-        Me.Price1.Width = 69
+        Me.Price1.VisibleIndex = 9
+        Me.Price1.Width = 65
         '
         'Price2
         '
@@ -479,8 +515,8 @@ Partial Class frmInformPrice
         Me.Price2.OptionsColumn.ReadOnly = True
         Me.Price2.OptionsColumn.TabStop = False
         Me.Price2.Visible = True
-        Me.Price2.VisibleIndex = 8
-        Me.Price2.Width = 69
+        Me.Price2.VisibleIndex = 10
+        Me.Price2.Width = 65
         '
         'Price3
         '
@@ -500,8 +536,8 @@ Partial Class frmInformPrice
         Me.Price3.OptionsColumn.ReadOnly = True
         Me.Price3.OptionsColumn.TabStop = False
         Me.Price3.Visible = True
-        Me.Price3.VisibleIndex = 9
-        Me.Price3.Width = 69
+        Me.Price3.VisibleIndex = 11
+        Me.Price3.Width = 65
         '
         'Price4
         '
@@ -521,8 +557,8 @@ Partial Class frmInformPrice
         Me.Price4.OptionsColumn.ReadOnly = True
         Me.Price4.OptionsColumn.TabStop = False
         Me.Price4.Visible = True
-        Me.Price4.VisibleIndex = 10
-        Me.Price4.Width = 69
+        Me.Price4.VisibleIndex = 12
+        Me.Price4.Width = 65
         '
         'Price5
         '
@@ -542,8 +578,8 @@ Partial Class frmInformPrice
         Me.Price5.OptionsColumn.ReadOnly = True
         Me.Price5.OptionsColumn.TabStop = False
         Me.Price5.Visible = True
-        Me.Price5.VisibleIndex = 11
-        Me.Price5.Width = 69
+        Me.Price5.VisibleIndex = 13
+        Me.Price5.Width = 65
         '
         'Price6
         '
@@ -563,8 +599,8 @@ Partial Class frmInformPrice
         Me.Price6.OptionsColumn.ReadOnly = True
         Me.Price6.OptionsColumn.TabStop = False
         Me.Price6.Visible = True
-        Me.Price6.VisibleIndex = 12
-        Me.Price6.Width = 70
+        Me.Price6.VisibleIndex = 14
+        Me.Price6.Width = 66
         '
         'CostAdjust
         '
@@ -599,8 +635,8 @@ Partial Class frmInformPrice
         Me.PriceOnline.MinWidth = 65
         Me.PriceOnline.Name = "PriceOnline"
         Me.PriceOnline.Visible = True
-        Me.PriceOnline.VisibleIndex = 13
-        Me.PriceOnline.Width = 70
+        Me.PriceOnline.VisibleIndex = 15
+        Me.PriceOnline.Width = 66
         '
         'PriceInform
         '
@@ -619,7 +655,7 @@ Partial Class frmInformPrice
         Me.PriceInform.MinWidth = 65
         Me.PriceInform.Name = "PriceInform"
         Me.PriceInform.Visible = True
-        Me.PriceInform.VisibleIndex = 14
+        Me.PriceInform.VisibleIndex = 16
         Me.PriceInform.Width = 65
         '
         'PriceCalcEdit1
@@ -653,8 +689,8 @@ Partial Class frmInformPrice
         Me.Image.MaxWidth = 38
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 15
-        Me.Image.Width = 38
+        Me.Image.VisibleIndex = 17
+        Me.Image.Width = 28
         '
         'btnImage
         '
@@ -724,7 +760,7 @@ Partial Class frmInformPrice
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label3, "")
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label3.Location = New System.Drawing.Point(262, 66)
+        Me.Label3.Location = New System.Drawing.Point(262, 69)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label3, True)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(20, 14)
@@ -760,7 +796,7 @@ Partial Class frmInformPrice
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label2, "")
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.Location = New System.Drawing.Point(19, 69)
+        Me.Label2.Location = New System.Drawing.Point(14, 69)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.Label2, True)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(76, 14)
@@ -773,7 +809,7 @@ Partial Class frmInformPrice
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.dtpDateFrom, "TextChanged")
         Me.dtpDateFrom.EditValue = New Date(2012, 4, 20, 0, 0, 0, 0)
         Me.dtpDateFrom.EnterMoveNextControl = True
-        Me.dtpDateFrom.Location = New System.Drawing.Point(101, 63)
+        Me.dtpDateFrom.Location = New System.Drawing.Point(101, 66)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.dtpDateFrom, True)
         Me.dtpDateFrom.Name = "dtpDateFrom"
         Me.dtpDateFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
@@ -1362,4 +1398,6 @@ Partial Class frmInformPrice
     Friend WithEvents dtpDateTo As DevExpress.XtraEditors.DateEdit
     Private WithEvents Label2 As Label
     Friend WithEvents dtpDateFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents ProductGuaranteeCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Subject As DevExpress.XtraGrid.Columns.GridColumn
 End Class

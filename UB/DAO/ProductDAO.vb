@@ -791,8 +791,9 @@ Public Class ProductDAO
         Dim dataTable As New DataTable()
 
         Try
-            SQL = "SELECT p.ProductID AS ID,p.ProductCode,p.ProductName,p.PriceStandard AS Price,p.Remark"
+            SQL = "SELECT p.ProductID AS ID,p.ProductCode,p.ProductName,p.PriceStandard AS Price,g.CodeThai as ProductGuaranteeCode,p.Remark"
             SQL &= " FROM " & TableName & " p"
+            SQL &= " LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=p.ProductGuaranteeID"
             SQL &= " WHERE p.IsDelete =0   "
             If pID > 0 Then
                 SQL &= "  AND p.ProductID=" & pID

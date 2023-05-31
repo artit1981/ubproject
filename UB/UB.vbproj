@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>62</ApplicationRevision>
-    <ApplicationVersion>1.0.1.62</ApplicationVersion>
+    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationVersion>1.0.1.63</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

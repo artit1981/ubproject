@@ -108,18 +108,23 @@ Public Class InformPriceDAO
             SQL &= " ,Inform.ProductCode,Inform.ProductName,Inform.CostAdjust,Inform.PriceInform,Inform.PriceInform as PriceInformOld,sum(Stock.Units) as Unit"
             SQL &= " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3 ,Inform.Price4 ,Inform.Price5 ,Inform.Price6,Inform.PriceOnline  "
             SQL &= " ,Inform.ProductRemark "
+            SQL &= " ,Inform.ProductGuaranteeCode"
             If pAccountID > 0 And pIsUseDate = True Then
                 SQL &= " ,isnull(MAX(Campaign.Price),0) as PricePromotion  "
+                SQL &= " ,MAX(Campaign.Subject) as Subject  "
             Else
                 SQL &= " ,0 as PricePromotion  "
+                SQL &= " ,'' as Subject  "
             End If
             SQL &= " FROM ( "
             If pAccountID > 0 Then
                 SQL &= "SELECT  InformPrice.InformPriceID,InformPrice.ProductID,InformPrice.CreateTime,InformPrice.CreateBy"
                 SQL &= " ,Product.ProductCode,Product.ProductName ,InformPrice.PriceInform,InformPrice.CostAdjust,Product.Remark as ProductRemark   "
                 SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6,isnull(InformPrice.PriceOnline,0) as PriceOnline  "
+                SQL &= " ,g.CodeThai as ProductGuaranteeCode "
                 SQL &= " FROM InformPrice "
                 SQL &= " Inner join Product ON Product.ProductID=InformPrice.ProductID "
+                SQL &= " LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=Product.ProductGuaranteeID"
                 SQL &= " WHERE InformPrice.IsDelete =0 and Product.IsDelete =0  AND InformPrice.CustomerID =" & pAccountID
                 If pProID > 0 Then
                     SQL &= " AND InformPrice.ProductID =" & pProID
@@ -141,7 +146,9 @@ Public Class InformPriceDAO
             SQL &= " SELECT  0 as InformPriceID,Product.ProductID ,Product.CreateTime,Product.CreateBy"
             SQL &= " ,Product.ProductCode,Product.ProductName ,0 AS PriceInform,0 as CostAdjust,Product.Remark as ProductRemark "
             SQL &= " ,Product.PriceStandard,Product.Price1,Product.Price2,Product.Price3 ,Product.Price4 ,Product.Price5 ,Product.Price6 ,0 as PriceOnline "
+            SQL &= " ,g.CodeThai as ProductGuaranteeCode "
             SQL &= " FROM Product "
+            SQL &= " LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=Product.ProductGuaranteeID"
             SQL &= " WHERE Product.IsDelete =0 "
             If pProID > 0 Then
                 SQL &= " AND Product.ProductID =" & pProID
@@ -176,7 +183,7 @@ Public Class InformPriceDAO
             End If
 
             SQL &= " Group BY Inform.InformPriceID,Inform.ProductID,Inform.CreateTime,Inform.CreateBy,Inform.ProductCode,Inform.ProductName"
-            SQL &= " ,Inform.PriceInform,Inform.ProductRemark"
+            SQL &= " ,Inform.PriceInform,Inform.ProductRemark,Inform.ProductGuaranteeCode "
             SQL &= " ,Inform.CostAdjust"
             SQL &= " ,Inform.PriceStandard,Inform.Price1,Inform.Price2,Inform.Price3 ,Inform.Price4 ,Inform.Price5 ,Inform.Price6,Inform.PriceOnline  "
             SQL &= " ORDER BY Inform.ProductCode,Inform.ProductName"

@@ -79,26 +79,31 @@ Public Class ProductControl
 
     Private Sub GridStyle()
         With mCtlForm.GridView
-
             .Columns("ID").Width = 0
             .Columns("ID").Caption = "รหัสสินค้า"
             .Columns("ID").Visible = False
 
             .Columns("ProductCode").Caption = "รหัสสินค้า"
-            .Columns("ProductCode").Width = 400
+            .Columns("ProductCode").Width = 300
+            .Columns("ProductCode").MaxWidth = 400
 
             .Columns("ProductName").Caption = "ชื่อสินค้า"
             .Columns("ProductName").Width = 700
+            .Columns("ProductName").MaxWidth = 1500
 
             .Columns("Price").Caption = "ราคามาตรฐาน"
-            .Columns("Price").Width = 700
+            .Columns("Price").Width = 200
             .Columns("Price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             .Columns("Price").DisplayFormat.FormatString = "n2"
+            .Columns("Price").MaxWidth = 300
+
+            .Columns("ProductGuaranteeCode").Caption = "จำนวนวันประกัน"
+            .Columns("ProductGuaranteeCode").Width = 300
+            .Columns("ProductGuaranteeCode").MaxWidth = 400
 
             .Columns("Remark").Caption = "รายละเอียด"
             .Columns("Remark").Width = 700
-
-
+            .Columns("Remark").MaxWidth = 0
         End With
     End Sub
 

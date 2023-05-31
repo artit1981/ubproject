@@ -23,10 +23,12 @@ SELECT   0 as IsSelect, Product.ProductID  ,Product.ProductCode,Product.ProductN
 ,isnull(Cost.CostID,0) as CostID
 ,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
 ,Product.sku1,Product.sku2,Product.sku3,Product.sku4,Product.sku5
+,g.CodeThai as ProductGuaranteeCode
 FROM Product 
 left outer join ProductCost Cost on Cost.ProductID=Product.ProductID  
+LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=Product.ProductGuaranteeID
 WHERE Product.IsDelete =0  
 GROUP BY Product.ProductID,Product.ProductCode,Product.ProductName,Product.Remark ,CostID
 ,ProductGroupID,ProductCategoryID,ProductTypeID,ProductBrandID
- ,Product.sku1,Product.sku2,Product.sku3,Product.sku4,Product.sku5
+ ,Product.sku1,Product.sku2,Product.sku3,Product.sku4,Product.sku5,g.CodeThai
 ;

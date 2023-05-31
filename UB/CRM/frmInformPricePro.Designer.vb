@@ -23,6 +23,9 @@ Partial Class frmInformPricePro
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmInformPricePro))
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnBrows = New DevExpress.XtraEditors.SimpleButton()
+        Me.txtFileName = New DevExpress.XtraEditors.TextEdit()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.btnExportExcel = New DevExpress.XtraEditors.PictureEdit()
@@ -85,12 +88,11 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.btnBrows = New DevExpress.XtraEditors.SimpleButton()
-        Me.txtFileName = New DevExpress.XtraEditors.TextEdit()
+        Me.ProductGuaranteeCode = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
+        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.btnExportExcel.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,7 +127,6 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -163,6 +164,55 @@ Partial Class frmInformPricePro
         Me.GeneralTabPage.Size = New System.Drawing.Size(1662, 487)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label8, "")
+        Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label8.Location = New System.Drawing.Point(744, 50)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label8, True)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(29, 14)
+        Me.Label8.TabIndex = 315
+        Me.Label8.Text = "SKU"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label8, "")
+        '
+        'btnBrows
+        '
+        Me.btnBrows.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnBrows.Appearance.Options.UseFont = True
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnBrows, "")
+        Me.btnBrows.ImageOptions.Image = CType(resources.GetObject("btnBrows.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnBrows.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnBrows.Location = New System.Drawing.Point(1157, 47)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.btnBrows, True)
+        Me.btnBrows.Name = "btnBrows"
+        Me.btnBrows.Size = New System.Drawing.Size(21, 21)
+        Me.btnBrows.TabIndex = 314
+        Me.btnBrows.TabStop = False
+        Me.btnBrows.ToolTip = "Auto ID"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnBrows, "")
+        '
+        'txtFileName
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtFileName, "TextChanged")
+        Me.txtFileName.EditValue = ""
+        Me.txtFileName.EnterMoveNextControl = True
+        Me.txtFileName.Location = New System.Drawing.Point(777, 47)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.txtFileName, True)
+        Me.txtFileName.Name = "txtFileName"
+        Me.txtFileName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.txtFileName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtFileName.Properties.Appearance.Options.UseBackColor = True
+        Me.txtFileName.Properties.Appearance.Options.UseFont = True
+        Me.txtFileName.Properties.MaxLength = 50
+        Me.txtFileName.Properties.ReadOnly = True
+        Me.txtFileName.Properties.ValidateOnEnterKey = True
+        Me.txtFileName.Size = New System.Drawing.Size(374, 20)
+        Me.txtFileName.TabIndex = 313
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtFileName, "Text")
         '
         'Label3
         '
@@ -628,7 +678,7 @@ Partial Class frmInformPricePro
         '
         'gridView
         '
-        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CostID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.ProductRemark, Me.Cost, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
+        Me.gridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CostID, Me.ProductID, Me.ProductCode, Me.ProductName, Me.ProductGuaranteeCode, Me.ProductRemark, Me.Cost, Me.PriceStandard, Me.Price1, Me.Price2, Me.Price3, Me.Price4, Me.Price5, Me.Price6, Me.Image})
         Me.gridView.GridControl = Me.gridControl
         Me.gridView.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", Me.Price1, "")})
         Me.gridView.Name = "gridView"
@@ -677,7 +727,7 @@ Partial Class frmInformPricePro
         Me.ProductCode.OptionsColumn.TabStop = False
         Me.ProductCode.Visible = True
         Me.ProductCode.VisibleIndex = 1
-        Me.ProductCode.Width = 95
+        Me.ProductCode.Width = 132
         '
         'ProductName
         '
@@ -694,7 +744,7 @@ Partial Class frmInformPricePro
         Me.ProductName.OptionsColumn.TabStop = False
         Me.ProductName.Visible = True
         Me.ProductName.VisibleIndex = 2
-        Me.ProductName.Width = 210
+        Me.ProductName.Width = 293
         '
         'RepositoryItemMemoEdit1
         '
@@ -716,8 +766,8 @@ Partial Class frmInformPricePro
         Me.ProductRemark.OptionsColumn.ReadOnly = True
         Me.ProductRemark.OptionsColumn.TabStop = False
         Me.ProductRemark.Visible = True
-        Me.ProductRemark.VisibleIndex = 3
-        Me.ProductRemark.Width = 178
+        Me.ProductRemark.VisibleIndex = 4
+        Me.ProductRemark.Width = 249
         '
         'Cost
         '
@@ -735,7 +785,7 @@ Partial Class frmInformPricePro
         Me.Cost.MinWidth = 65
         Me.Cost.Name = "Cost"
         Me.Cost.Visible = True
-        Me.Cost.VisibleIndex = 4
+        Me.Cost.VisibleIndex = 5
         Me.Cost.Width = 65
         '
         'PriceStandard
@@ -754,7 +804,7 @@ Partial Class frmInformPricePro
         Me.PriceStandard.MinWidth = 65
         Me.PriceStandard.Name = "PriceStandard"
         Me.PriceStandard.Visible = True
-        Me.PriceStandard.VisibleIndex = 5
+        Me.PriceStandard.VisibleIndex = 6
         Me.PriceStandard.Width = 65
         '
         'Price1
@@ -774,7 +824,7 @@ Partial Class frmInformPricePro
         Me.Price1.Name = "Price1"
         Me.Price1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:#,##0 .00; ( #,##0.00 ); """"""""}")})
         Me.Price1.Visible = True
-        Me.Price1.VisibleIndex = 6
+        Me.Price1.VisibleIndex = 7
         Me.Price1.Width = 65
         '
         'Price2
@@ -793,7 +843,7 @@ Partial Class frmInformPricePro
         Me.Price2.MinWidth = 65
         Me.Price2.Name = "Price2"
         Me.Price2.Visible = True
-        Me.Price2.VisibleIndex = 7
+        Me.Price2.VisibleIndex = 8
         Me.Price2.Width = 65
         '
         'Price3
@@ -812,7 +862,7 @@ Partial Class frmInformPricePro
         Me.Price3.MinWidth = 65
         Me.Price3.Name = "Price3"
         Me.Price3.Visible = True
-        Me.Price3.VisibleIndex = 8
+        Me.Price3.VisibleIndex = 9
         Me.Price3.Width = 65
         '
         'Price4
@@ -831,7 +881,7 @@ Partial Class frmInformPricePro
         Me.Price4.MinWidth = 65
         Me.Price4.Name = "Price4"
         Me.Price4.Visible = True
-        Me.Price4.VisibleIndex = 9
+        Me.Price4.VisibleIndex = 10
         Me.Price4.Width = 65
         '
         'Price5
@@ -850,7 +900,7 @@ Partial Class frmInformPricePro
         Me.Price5.MinWidth = 65
         Me.Price5.Name = "Price5"
         Me.Price5.Visible = True
-        Me.Price5.VisibleIndex = 10
+        Me.Price5.VisibleIndex = 11
         Me.Price5.Width = 65
         '
         'Price6
@@ -869,7 +919,7 @@ Partial Class frmInformPricePro
         Me.Price6.MinWidth = 65
         Me.Price6.Name = "Price6"
         Me.Price6.Visible = True
-        Me.Price6.VisibleIndex = 11
+        Me.Price6.VisibleIndex = 12
         Me.Price6.Width = 65
         '
         'Image
@@ -882,7 +932,7 @@ Partial Class frmInformPricePro
         Me.Image.MinWidth = 30
         Me.Image.Name = "Image"
         Me.Image.Visible = True
-        Me.Image.VisibleIndex = 12
+        Me.Image.VisibleIndex = 13
         Me.Image.Width = 38
         '
         'btnImage
@@ -1157,54 +1207,22 @@ Partial Class frmInformPricePro
         'FormChangedComponent1
         '
         '
-        'Label8
+        'ProductGuaranteeCode
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label8, "")
-        Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.Location = New System.Drawing.Point(744, 50)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label8, True)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(29, 14)
-        Me.Label8.TabIndex = 315
-        Me.Label8.Text = "SKU"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label8, "")
-        '
-        'btnBrows
-        '
-        Me.btnBrows.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnBrows.Appearance.Options.UseFont = True
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnBrows, "")
-        Me.btnBrows.ImageOptions.Image = CType(resources.GetObject("btnBrows.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnBrows.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.btnBrows.Location = New System.Drawing.Point(1157, 47)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.btnBrows, True)
-        Me.btnBrows.Name = "btnBrows"
-        Me.btnBrows.Size = New System.Drawing.Size(21, 21)
-        Me.btnBrows.TabIndex = 314
-        Me.btnBrows.TabStop = False
-        Me.btnBrows.ToolTip = "Auto ID"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.btnBrows, "")
-        '
-        'txtFileName
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.txtFileName, "TextChanged")
-        Me.txtFileName.EditValue = ""
-        Me.txtFileName.EnterMoveNextControl = True
-        Me.txtFileName.Location = New System.Drawing.Point(777, 47)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.txtFileName, True)
-        Me.txtFileName.Name = "txtFileName"
-        Me.txtFileName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
-        Me.txtFileName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtFileName.Properties.Appearance.Options.UseBackColor = True
-        Me.txtFileName.Properties.Appearance.Options.UseFont = True
-        Me.txtFileName.Properties.MaxLength = 50
-        Me.txtFileName.Properties.ReadOnly = True
-        Me.txtFileName.Properties.ValidateOnEnterKey = True
-        Me.txtFileName.Size = New System.Drawing.Size(374, 20)
-        Me.txtFileName.TabIndex = 313
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.txtFileName, "Text")
+        Me.ProductGuaranteeCode.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.ProductGuaranteeCode.AppearanceCell.Options.UseBackColor = True
+        Me.ProductGuaranteeCode.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductGuaranteeCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductGuaranteeCode.Caption = "จำนวนวันประกัน"
+        Me.ProductGuaranteeCode.FieldName = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.MaxWidth = 150
+        Me.ProductGuaranteeCode.MinWidth = 80
+        Me.ProductGuaranteeCode.Name = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.OptionsColumn.AllowEdit = False
+        Me.ProductGuaranteeCode.OptionsColumn.TabStop = False
+        Me.ProductGuaranteeCode.Visible = True
+        Me.ProductGuaranteeCode.VisibleIndex = 3
+        Me.ProductGuaranteeCode.Width = 100
         '
         'frmInformPricePro
         '
@@ -1220,6 +1238,7 @@ Partial Class frmInformPricePro
         Me.XtraTabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
+        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
@@ -1257,7 +1276,6 @@ Partial Class frmInformPricePro
         CType(Me.ProductGroupID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductBrandID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1329,4 +1347,5 @@ Partial Class frmInformPricePro
     Private WithEvents Label8 As Label
     Friend WithEvents btnBrows As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents txtFileName As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents ProductGuaranteeCode As DevExpress.XtraGrid.Columns.GridColumn
 End Class
