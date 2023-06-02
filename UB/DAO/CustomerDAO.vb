@@ -337,6 +337,16 @@ Public Class CustomerDAO
         End Set
     End Property
 
+
+    Dim mCompanyParentID As Long = 0
+    Public Property CompanyParentID() As Long
+        Get
+            Return mCompanyParentID
+        End Get
+        Set(ByVal value As Long)
+            mCompanyParentID = value
+        End Set
+    End Property
     Public ReadOnly Property DecisionMakerDAO_Con() As CustomerDAO
         Get
             If mclsDecisionMaker_Con Is Nothing Then
@@ -388,16 +398,85 @@ Public Class CustomerDAO
         Dim lUserDAO As New UserDAO
         Try
             SQL = "SELECT *   "
-            SQL &=  " FROM Customer"
+            SQL &= " FROM Customer"
+
+            SQL = "SELECT C.[CustomerID]"
+            SQL &= " ,C.[CustomerType]"
+            SQL &= " ,C.[CustomerCode]"
+            SQL &= " ,C.[Subject]"
+            SQL &= " ,C.[Title]"
+            SQL &= " ,C.[Firstname]"
+            SQL &= " ,C.[LastName]"
+            SQL &= " ,C.[CompanyName]"
+            SQL &= " ,C.[Position]"
+            SQL &= " ,C.[Rating]"
+            SQL &= " ,C.[ContactRole]"
+            SQL &= " ,C.[SourceID]"
+            SQL &= " ,C.[LeadID]"
+            SQL &= " ,C.[Branch]"
+            SQL &= " ,C.[CompanyTypeID]"
+            SQL &= " ,C.[CompanyRelateID]"
+            SQL &= " ,C.[IndustryTypeID]"
+            SQL &= " ,C.[BusinessTypeID]"
+            SQL &= " ,C.[DecisionMakerID]"
+            SQL &= " ,C.[NoOfEmployee]"
+            SQL &= " ,C.[AnnualRevenue]"
+            SQL &= " ,C.[EstimatedBudjet]"
+            SQL &= " ,C.[IsHoldButget]"
+            SQL &= " ,C.[CreditGroupID]"
+            SQL &= " ,C.[CreditAmount]"
+            SQL &= " ,C.[BuyingTimeFrame]"
+            SQL &= " ,C.[CreditRuleID]"
+            SQL &= " ,C.[CurrencyID]"
+            SQL &= " ,C.[CriterionPriceID]"
+            SQL &= " ,C.[VatTypeID]"
+            SQL &= " ,C.[Remark]"
+            SQL &= " ,C.[HistoryID]"
+            SQL &= " ,C.[IsQuick]"
+            SQL &= " ,C.[TerritoryID]"
+            SQL &= " ,C.[AddressID]"
+            SQL &= " ,C.[AddressIDShip]"
+            SQL &= " ,C.[EmpID]"
+            SQL &= " ,C.[BillDay]"
+            SQL &= " ,C.[ChqDay]"
+            SQL &= " ,C.[CustomerZoneID]"
+            SQL &= " ,C.[CustomerGroupID]"
+            SQL &= " ,C.[IsCorporation]"
+            SQL &= " ,C.[SendBy]"
+            SQL &= " ,C.[LeadType]"
+            SQL &= " ,C.[LeadStatus]"
+            SQL &= " ,C.[DisqualifyStatus]"
+            SQL &= " ,C.[ContactPersonID]"
+            SQL &= " ,C.[EsttablishedDate]"
+            SQL &= " ,C.[RelateAccountID]"
+            SQL &= " ,C.[IsConvert]"
+            SQL &= " ,C.[Capital]"
+            SQL &= " ,C.[CreateBy]"
+            SQL &= " ,C.[CreateTime]"
+            SQL &= " ,C.[ModifiedBy]"
+            SQL &= " ,C.[ModifiedTime]"
+            SQL &= " ,C.[IsInActive]"
+            SQL &= " ,C.[IsDelete]"
+            SQL &= " ,C.[ImportTXID]"
+            SQL &= " ,C.[IsMainCompany]"
+            SQL &= " ,C.[BillDayTo]"
+            SQL &= " ,C.[ChqDayTo]"
+            SQL &= " ,C.[Institute]"
+            SQL &= " ,C.[BankAccountID1]"
+            SQL &= " ,C.[BankAccountID2]"
+            SQL &= " ,C.[BankAccountID3]"
+            SQL &= " ,CompanyParent.CustomerID as CompanyParentID"
+            SQL &= " FROM [Customer] C "
+            SQL &= " LEFT OUTER JOIN Customer as CompanyParent ON CompanyParent.CompanyRelateID=C.CustomerID  "
             If pName <> "" Then
-                SQL &=  " WHERE Firstname LIKE '%" & pName & "%'"
+                SQL &= " WHERE C.Firstname LIKE '%" & pName & "%'"
             Else
-                SQL &=  " WHERE CustomerID=" & pID
+                SQL &= " WHERE C.CustomerID=" & pID
             End If
             If TableName <> "" And TableName <> "0" Then
-                SQL &=  " and CustomerType ='" & TableName & "'"
+                SQL &= " and C.CustomerType ='" & TableName & "'"
             End If
-            SQL &=  " ORDER BY CustomerCode"
+            SQL &= " ORDER BY C.CustomerCode"
             dataTable = gConnection.executeSelectQuery(SQL, tr)
             If dataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In dataTable.Rows
@@ -442,6 +521,7 @@ Public Class CustomerDAO
                     BankAccountID1 = ConvertNullToZero(dr("BankAccountID1"))
                     BankAccountID2 = ConvertNullToZero(dr("BankAccountID2"))
                     BankAccountID3 = ConvertNullToZero(dr("BankAccountID3"))
+                    CompanyParentID = ConvertNullToZero(dr("CompanyParentID"))
 
                     'Person
                     ID = Int32.Parse(dr("CustomerID"))
@@ -612,6 +692,7 @@ Public Class CustomerDAO
 
         Try
             SQL = "SELECT A.CustomerID AS ID,A.CustomerCode AS Code"
+            SQL &= " ,C.CodeThai AS CustomerGroup "
             If pCus_Agency = True Then
                 SQL &=  " ,case when A.CompanyName='' then A.Title + A.Firstname + ' ' + A.LastName else A.CompanyName end CusName"
                 SQL &=  " ,CustomerType AS Type "
@@ -635,7 +716,8 @@ Public Class CustomerDAO
             SQL &=  " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME "
             SQL &=  " FROM Customer A"
             SQL &=  " LEFT OUTER JOIN Employee ON A.EmpID=Employee.EmpID  "
-            SQL &=  " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
+            SQL &= " LEFT OUTER JOIN Address ON A.AddressID=Address.AddressID  "
+            SQL &= " LEFT OUTER JOIN CustomerGroup C ON C.MasterID=A.CustomerGroupID  "
             SQL &=  " WHERE A.IsDelete =0   "
             If pOnlyActive = True Then
                 SQL &=  "  AND A.IsInActive= 0"

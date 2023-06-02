@@ -60,30 +60,31 @@ Public Class AccountControl
             .Columns("ID").Caption = "รหัส"
             .Columns("ID").Visible = False
             .Columns("Code").Caption = "รหัส"
-            .Columns("Code").Width = 300
+            .Columns("Code").Width = 100
             .Columns("CompanyName").Caption = "ชื่อบริษัท"
             .Columns("CompanyName").Width = 250
+            .Columns("CompanyName").MaxWidth = 0
             .Columns("ParentCompany").Caption = "บริษัทแม่"
             .Columns("ParentCompany").Width = 250
             .Columns("Rating").Caption = "ระดับความสนใจ"
             .Columns("Rating").Width = 100
 
             .Columns("ContactPerson").Caption = "ผู้ติดต่อ"
-            .Columns("ContactPerson").Width = 250
+            .Columns("ContactPerson").Width = 150
             .Columns("IsQuick").Caption = "Is Quick"
             .Columns("IsQuick").Width = 100
             .Columns("IsQuick").Visible = False
             .Columns("EMPNAME").Caption = "ผู้รับผิดชอบ"
-            .Columns("EMPNAME").Width = 250
+            .Columns("EMPNAME").Width = 200
             .Columns("ModifiedTime").Caption = "แก้ไขล่าสุด"
-            .Columns("ModifiedTime").Width = 150
+            .Columns("ModifiedTime").Width = 120
             .Columns("ModifiedTime").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
             .Columns("Phone1").Caption = "โทรศัพท์"
-            .Columns("Phone1").Width = 100
+            .Columns("Phone1").Width = 120
             .Columns("Fax").Caption = "โทรสาร"
-            .Columns("Fax").Width = 100
+            .Columns("Fax").Width = 120
             .Columns("Email1").Caption = "อีเมล์"
-            .Columns("Email1").Width = 100
+            .Columns("Email1").Width = 150
         End With
     End Sub
 

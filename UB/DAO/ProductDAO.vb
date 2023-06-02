@@ -665,6 +665,15 @@ Public Class ProductDAO
                         Dim lclsCus As New CustomerDAO
                         lclsCus.InitailData(pCustomerID, "", ptr)
 
+                        'Parent comapny
+                        Dim lCompanyParentID = lclsCus.CompanyParentID
+                        If lCompanyParentID > 0 Then
+                            pCustomerID = lCompanyParentID
+                            lclsCus = New CustomerDAO
+                            lclsCus.InitailData(lCompanyParentID, "", ptr)
+                        End If
+
+
                         Dim lclsInform As New InformPriceDAO
                         If lclsInform.InitailData(pCustomerID, ID, ptr) Then
                             PriceSale = lclsInform.PriceSale

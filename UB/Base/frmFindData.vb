@@ -137,6 +137,8 @@ Public Class frmFindData
                 .Columns("Fax").Width = 100
                 .Columns("Email1").Caption = "อีเมล์"
                 .Columns("Email1").Width = 100
+                .Columns("CustomerGroup").Caption = "กลุ่มลูกค้า"
+                .Columns("CustomerGroup").Width = 100
             End With
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmFindData.LoadDataContact : " & e.Message)

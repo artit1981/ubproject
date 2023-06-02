@@ -145,7 +145,31 @@ Public Class ucCustomer
                     End If
 
                     TryCast(gridControl.DataSource, DataTable).Rows.Add(newRow)
-                    gridControl.RefreshDataSource()
+
+                    Dim lRelateCusID As Long = 0
+                    If lcls.CompanyRelateID > 0 Then
+                        lRelateCusID = lcls.CompanyRelateID
+                    ElseIf lcls.CompanyParentID > 0 Then
+                        lRelateCusID = lcls.CompanyParentID
+                    End If
+                    If lRelateCusID > 0 Then
+                        If lcls.InitailData(lRelateCusID, "") Then
+                            newRow = (TryCast(gridControl.DataSource, DataTable)).NewRow()
+                            newRow("CustomerID") = lcls.ID
+                            newRow("CusName") = ConvertNullToString(lcls.CustomerName)
+                            newRow("CustomerCode") = ConvertNullToString(lcls.Code)
+                            newRow("CustomerType") = ConvertNullToString(lcls.CustomerType)
+
+                            If IsNothing(lcls.AddressS) = False Then
+                                newRow("Email1") = ConvertNullToString(lcls.AddressS.Email1)
+                                newRow("Phone1") = ConvertNullToString(lcls.AddressS.Phone1)
+                            End If
+
+                            TryCast(gridControl.DataSource, DataTable).Rows.Add(newRow)
+                        End If
+                    End If
+
+                        gridControl.RefreshDataSource()
                 Else
                     gridView.SetFocusedRowCellValue("CustomerID", lcls.ID)
                     gridView.SetFocusedRowCellValue("CusName", ConvertNullToString(lcls.CustomerName))

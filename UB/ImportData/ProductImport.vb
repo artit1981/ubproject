@@ -44,15 +44,24 @@ Public Class ProductImport
                         rec.LocationMain = ConvertNullToString(dr(10), True, 50)
                         rec.LocationSub = ConvertNullToString(dr(12), True, 50)
                         rec.LocationSubNo = ConvertNullToString(dr(13), True, 50)
+                        rec.Weight = ConvertNullToString(dr(14), True, 50)
+                        rec.Size = ConvertNullToString(dr(15), True, 50)
+                        rec.Generation = ConvertNullToString(dr(16), True, 50)
+                        rec.Color = ConvertNullToString(dr(17), True, 50)
+                        rec.sku1 = ConvertNullToString(dr(18), True, 50)
+                        rec.sku2 = ConvertNullToString(dr(19), True, 50)
+                        rec.sku3 = ConvertNullToString(dr(20), True, 50)
+                        rec.sku4 = ConvertNullToString(dr(21), True, 50)
+                        rec.sku5 = ConvertNullToString(dr(22), True, 50)
 
-                        rec.Remark = ConvertNullToString(dr(14), True, 500)
-                        rec.Price1 = ConvertNullToZero(dr(15))
-                        rec.Price2 = ConvertNullToZero(dr(16))
-                        rec.Price3 = ConvertNullToZero(dr(17))
-                        rec.Price4 = ConvertNullToZero(dr(18))
-                        rec.Price5 = ConvertNullToZero(dr(19))
-                        rec.Price6 = ConvertNullToZero(dr(20))
-                        rec.IsNew = ConvertNullToString(dr(21))
+                        rec.Remark = ConvertNullToString(dr(23), True, 500)
+                        rec.Price1 = ConvertNullToZero(dr(24))
+                        rec.Price2 = ConvertNullToZero(dr(25))
+                        rec.Price3 = ConvertNullToZero(dr(26))
+                        rec.Price4 = ConvertNullToZero(dr(27))
+                        rec.Price5 = ConvertNullToZero(dr(28))
+                        rec.Price6 = ConvertNullToZero(dr(29))
+                        rec.IsNew = ConvertNullToString(dr(30))
                         lError = GetPropertyError(rec)
                         If lError <> "" Then
                             If lErrorList = "" Then
@@ -773,6 +782,95 @@ Public Class ProductProperty
         End Get
         Set(ByVal value As Long)
             mProductID = value
+        End Set
+    End Property
+
+    Dim mColor As String = ""
+    Public Property Color() As String
+        Get
+            Return mColor
+        End Get
+        Set(ByVal value As String)
+            mColor = value
+        End Set
+    End Property
+    Dim mGeneration As String = ""
+    Public Property Generation() As String
+        Get
+            Return mGeneration
+        End Get
+        Set(ByVal value As String)
+            mGeneration = value
+        End Set
+    End Property
+
+    Dim mSize As String = ""
+    Public Property Size() As String
+        Get
+            Return mSize
+        End Get
+        Set(ByVal value As String)
+            mSize = value
+        End Set
+    End Property
+    Dim mWeight As String = ""
+    Public Property Weight() As String
+        Get
+            Return mWeight
+        End Get
+        Set(ByVal value As String)
+            mWeight = value
+        End Set
+
+    End Property
+
+    Dim msku1 As String = ""
+    Public Property sku1() As String
+        Get
+            Return msku1
+        End Get
+        Set(ByVal value As String)
+            msku1 = value
+        End Set
+    End Property
+
+    Dim msku2 As String = ""
+    Public Property sku2() As String
+        Get
+            Return msku2
+        End Get
+        Set(ByVal value As String)
+            msku2 = value
+        End Set
+    End Property
+
+    Dim msku3 As String = ""
+    Public Property sku3() As String
+        Get
+            Return msku3
+        End Get
+        Set(ByVal value As String)
+            msku3 = value
+        End Set
+    End Property
+
+    Dim msku4 As String = ""
+    Public Property sku4() As String
+        Get
+            Return msku4
+        End Get
+        Set(ByVal value As String)
+            msku4 = value
+        End Set
+    End Property
+
+    Dim msku5 As String = ""
+    Public Property sku5() As String
+        Get
+            Return msku5
+        End Get
+        Set(ByVal value As String)
+            msku5 = value
         End Set
     End Property
 
