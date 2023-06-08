@@ -15,11 +15,12 @@ Public Class StockImport
         End Set
     End Property
 
-    Public Sub LoadFileToGrid(ByVal pDataTable As DataTable, ByRef pBindingSource As BindingSource)
+    Public Function LoadFileToGrid(ByVal pDataTable As DataTable) As String
         Try
+            Dim lError As String = "", lErrorList As String = "", lSEQ As Long = 1
             Dim rec As StockProperty
             mStockPropertyS = New List(Of StockProperty)
-            pBindingSource.Clear()
+
             If pDataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In pDataTable.Rows
                     rec = New StockProperty
@@ -30,34 +31,44 @@ Public Class StockImport
                     rec.LocationDTL = ConvertNullToString(dr(3), True, 100)
                     rec.Units = ConvertNullToZero(dr(4))
                     rec.Cost = ConvertNullToZero(dr(5))
-                    pBindingSource.Add(rec)
+                    lError = GetPropertyError(rec)
+                    If lError <> "" Then
+                        If lErrorList = "" Then
+                            lErrorList = "******** Import Error *********"
+                            lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
+                        Else
+                            lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
+                        End If
+                        rec.IsSelect = False
+                    End If
+                    lSEQ += 1
                     mStockPropertyS.Add(rec)
                 Next
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mClassName & ".LoadFileToGrid : " & e.Message)
         End Try
-    End Sub
-
-    Public Function CheckIsError(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView) As Boolean
-        Dim info As New ErrorInfo()
-        Dim lIsError = False
-        CheckIsError = False
-        Try
-            If pGrid.RowCount > 0 Then
-                For lRow = 0 To pGrid.RowCount - 1
-                    TryCast(pGrid.GetRow(lRow), StockProperty).GetError(info)
-                    If info.ErrorText <> "" Then
-                        lIsError = True
-                    End If
-                Next
-            End If
-            Return lIsError
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckIsError : " & e.Message)
-        Finally
-        End Try
     End Function
+
+    'Public Function CheckIsError(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView) As Boolean
+    '    Dim info As New ErrorInfo()
+    '    Dim lIsError = False
+    '    CheckIsError = False
+    '    Try
+    '        If pGrid.RowCount > 0 Then
+    '            For lRow = 0 To pGrid.RowCount - 1
+    '                TryCast(pGrid.GetRow(lRow), StockProperty).GetError(info)
+    '                If info.ErrorText <> "" Then
+    '                    lIsError = True
+    '                End If
+    '            Next
+    '        End If
+    '        Return lIsError
+    '    Catch e As Exception
+    '        Err.Raise(Err.Number, e.Source, mClassName & ".CheckIsError : " & e.Message)
+    '    Finally
+    '    End Try
+    'End Function
 
     Public Function ImportData() As Long()
         Dim tr As SqlTransaction = Nothing
@@ -120,6 +131,122 @@ Public Class StockImport
         End Try
     End Function
 
+    Public Function GetPropertyError(ByVal pData As StockProperty) As String
+        Dim lError As String = ""
+        'If String.IsNullOrEmpty(pData.IsNew) Then
+        '    pData.IsNew = "Y" 'Default Y
+        'ElseIf pData.IsNew.ToString.Trim <> "Y" And pData.IsNew.ToString.Trim <> "N" Then
+        '    lError = lError & vbNewLine & "ข้อมูล IsNew ไม่ถูกต้อง[Y,N]"
+        'End If
+
+        If String.IsNullOrEmpty(pData.Code) Then
+            lError = lError & vbNewLine & "กรุณาระบุข้อมูลรหัสสินค้า"
+        Else
+            pData.ProductID = CheckProductFromCode(pData.Code)
+            If pData.ProductID = 0 Then
+                lError = lError & vbNewLine & "ไม่พบรหัสสินค้า : " & pData.Code
+            End If
+
+        End If
+
+        If ConvertNullToZero(pData.Units) <= 0 Then
+            lError = lError & vbNewLine & "กรุณาระบุจำนวน"
+        End If
+
+
+        If String.IsNullOrEmpty(pData.UnitMain) Then
+            lError = lError & vbNewLine & "กรุณาระบุข้อมูลหน่วยนับ"
+
+        Else
+            pData.UnitMainID = CheckUnitFromCode(pData.UnitMain)
+            If pData.UnitMainID = 0 Then
+                lError = lError & vbNewLine & "ไม่พบหน่วยนับในระบบ"
+            End If
+        End If
+
+
+        If ConvertNullToString(pData.LocationDTL) <> "" Then
+            pData.LocationDTLID = CheckLocationDTL(pData.LocationDTL)
+            If pData.LocationDTLID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบตำแหน่งเก็บสินค้าในระบบ : " & pData.LocationDTL
+            End If
+        Else
+            pData.LocationDTLID = 0
+        End If
+
+
+        Return lError
+    End Function
+
+
+    Private Function CheckProductFromCode(ByVal pCode As String) As Long
+        Dim lcls As New ProductDAO
+        CheckProductFromCode = 0
+        Try
+            If lcls.InitailData(0, 0, pCode, "") Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckProductFromCode : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+    Private Function CheckProductFromName(ByVal pNamee As String) As Long
+        Dim lcls As New ProductDAO
+        CheckProductFromName = 0
+        Try
+            If lcls.InitailData(0, 0, "", pNamee) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckProductFromName : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
+    Private Function CheckUnitFromCode(ByVal pCode As String) As Long
+        Dim lcls As New UnitDAO
+        CheckUnitFromCode = 0
+        Try
+            If lcls.InitailData(0, pCode) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckUnitFromCode : " & e.Message)
+        Finally
+            lcls = Nothing
+
+        End Try
+    End Function
+
+    Private Function CheckLocationDTL(ByVal pName As String) As Long
+        Dim lcls As New LocationDTLDAO
+        CheckLocationDTL = 0
+        Try
+            If lcls.InitailData(0, pName) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckLocationDTL : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
     Public Sub New()
         mRunningFormatDAO = New RunningFormatDAO
         mRunningFormatDAO.InitailData(MasterType.StockIn, Nothing)
@@ -127,7 +254,7 @@ Public Class StockImport
 End Class
 
 Public Class StockProperty
-    Implements IDXDataErrorInfo
+
     Private mClassName As String = "StockProperty"
 
 #Region "Property"
@@ -245,176 +372,6 @@ Public Class StockProperty
 
 #End Region
 
-#Region "Verify"
-    Private Function CheckProductFromCode(ByVal pCode As String) As Long
-        Dim lcls As New ProductDAO
-        CheckProductFromCode = 0
-        Try
-            If lcls.InitailData(0, 0, pCode, "") Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckProductFromCode : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-    Private Function CheckProductFromName(ByVal pNamee As String) As Long
-        Dim lcls As New ProductDAO
-        CheckProductFromName = 0
-        Try
-            If lcls.InitailData(0, 0, "", pNamee) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckProductFromName : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckUnitFromCode(ByVal pCode As String) As Long
-        Dim lcls As New UnitDAO
-        CheckUnitFromCode = 0
-        Try
-            If lcls.InitailData(0, pCode) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckUnitFromCode : " & e.Message)
-        Finally
-            lcls = Nothing
-
-        End Try
-    End Function
-
-    Private Function CheckLocationDTL(ByVal pName As String) As Long
-        Dim lcls As New LocationDTLDAO
-        CheckLocationDTL = 0
-        Try
-            If lcls.InitailData(0, pName) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckLocationDTL : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-
-#End Region
-
-#Region "IDXDataErrorInfo Members"
-    Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-        If propertyName = "Code" Then
-            If String.IsNullOrEmpty(Code) Then
-                info.ErrorText = String.Format("กรุณาระบุรหัส", propertyName)
-                info.ErrorType = ErrorType.Critical
-            Else
-                If propertyName = "Code" Then
-                    If Not String.IsNullOrEmpty(Code) Then
-                        ProductID = CheckProductFromCode(Code)
-                        If ProductID = 0 Then
-                            info.ErrorText = String.Format("ไม่พบรหัสสินค้าในระบบ", propertyName)
-                            info.ErrorType = ErrorType.Critical
-                        End If
-                    End If
-                End If
-                'If propertyName = "NameThai" Then
-                '    'If Not String.IsNullOrEmpty(NameThai) Then
-                '    '    'ProductID = CheckProductFromName(NameThai)
-                '    '    'If ProductID = 0 Then
-                '    '    '    info.ErrorText = String.Format("ไม่พบชื่อสินค้าในระบบ", propertyName)
-                '    '    '    info.ErrorType = ErrorType.Critical
-                '    '    'End If
-                '    'End If
-                'End If
-            End If
-        End If
-
-        'If propertyName = "Cost" AndAlso ConvertNullToZero(Cost) <= 0 Then
-        '    info.ErrorText = String.Format("กรุณาระบุราคาทุน", propertyName)
-        '    info.ErrorType = ErrorType.Critical
-        'End If
-
-        If propertyName = "Units" AndAlso ConvertNullToZero(Units) <= 0 Then
-            info.ErrorText = String.Format("กรุณาระบุจำนวน", propertyName)
-            info.ErrorType = ErrorType.Critical
-        End If
-
-        If propertyName = "UnitMain" Then
-            If String.IsNullOrEmpty(UnitMain) Then
-                info.ErrorText = String.Format("กรุณาระบุหน่วยนับ", propertyName)
-                info.ErrorType = ErrorType.Critical
-            Else
-                UnitMainID = CheckUnitFromCode(UnitMain)
-                If UnitMainID > 0 Then
-                    ''
-                Else
-
-                    info.ErrorText = String.Format("ไม่พบหน่วยนับในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "LocationDTL" Then
-            If ConvertNullToString(LocationDTL) <> "" Then
-                LocationDTLID = CheckLocationDTL(LocationDTL)
-                If LocationDTLID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบตำแหน่งเก็บสินค้าในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-    End Sub
-
-
-    Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
-        Dim propertyInfo As New ErrorInfo()
-        'If gIsCheckError = True Then
-
-
-        GetPropertyError("Code", propertyInfo)
-
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("NameThai", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("Units", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("UnitMain", propertyInfo)
-        End If
-
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("LocationDTL", propertyInfo)
-        End If
-        If propertyInfo.ErrorText <> "" Then
-            info.ErrorText = "พบข้อผิดพลาด"
-            IsSelect = False
-        ElseIf mVerifyStep1 = False Then
-            IsSelect = True
-        End If
-        mVerifyStep1 = True
-        'End If
-    End Sub
-#End Region
-
 #Region "Save Product"
     'Public Sub SaveData(ByRef ptr As SqlTransaction, ByVal pImportID As Long)
     '    Dim lcls As New ProductStockDAO
@@ -438,59 +395,7 @@ Public Class StockProperty
     '    End Try
     'End Sub
 
-    Private Function GetLocationDTL(ByRef ptr As SqlTransaction) As List(Of ProductLocationSDAO)
-        Dim lDataDAOs = New List(Of ProductLocationSDAO)
-        Dim lDataDAO As ProductLocationSDAO
-        Dim lLocationDTL As New LocationDTLDAO
-        Try
-            If LocationDTLID > 0 Then
-                lDataDAO = New ProductLocationSDAO
-                lDataDAO.ID = 0
-                lDataDAO.SEQ = 1
-                If lLocationDTL.InitailData(LocationDTLID, , ptr) Then
-                    lDataDAO.LocationID = lLocationDTL.RefID
-                End If
 
-                lDataDAO.LocationDTLID = LocationDTLID
-                lDataDAO.KeepMax = 0
-                lDataDAO.KeepMin = 0
-                lDataDAO.IsInActive = False
-
-                lDataDAOs.Add(lDataDAO)
-
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".GetLocationDTL : " & e.Message)
-        Finally
-            lDataDAO = Nothing
-            lLocationDTL = Nothing
-        End Try
-        Return lDataDAOs
-    End Function
-
-
-    Public Function GetUnitDAOs() As List(Of ProductUnitDAO)
-        Dim lUnitDAOs = New List(Of ProductUnitDAO)
-        Dim lDataDAO As ProductUnitDAO
-        Try
-            If UnitMainID > 0 Then
-                lDataDAO = New ProductUnitDAO
-                lDataDAO.ID = 0
-                lDataDAO.UnitID = UnitMainID
-                lDataDAO.SEQ = 1
-                lDataDAO.Rate = 1
-                lDataDAO.IsInActive = False
-                lDataDAO.Remark = ""
-                lUnitDAOs.Add(lDataDAO)
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".GetUnitDAOs : " & e.Message)
-        Finally
-            lDataDAO = Nothing
-        End Try
-        Return lUnitDAOs
-    End Function
 
 #End Region
 

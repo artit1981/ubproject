@@ -57,6 +57,7 @@ Partial Class frmInformPricePro
         Me.ProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.ProductGuaranteeCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ProductRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Cost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PriceStandard = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -88,7 +89,6 @@ Partial Class frmInformPricePro
         Me.ProductBrandID = New DevExpress.XtraEditors.LookUpEdit()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ProductGuaranteeCode = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -752,6 +752,23 @@ Partial Class frmInformPricePro
         Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         Me.RepositoryItemMemoEdit1.ScrollBars = System.Windows.Forms.ScrollBars.None
         '
+        'ProductGuaranteeCode
+        '
+        Me.ProductGuaranteeCode.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
+        Me.ProductGuaranteeCode.AppearanceCell.Options.UseBackColor = True
+        Me.ProductGuaranteeCode.AppearanceHeader.Options.UseTextOptions = True
+        Me.ProductGuaranteeCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ProductGuaranteeCode.Caption = "จำนวนวันประกัน"
+        Me.ProductGuaranteeCode.FieldName = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.MaxWidth = 150
+        Me.ProductGuaranteeCode.MinWidth = 80
+        Me.ProductGuaranteeCode.Name = "ProductGuaranteeCode"
+        Me.ProductGuaranteeCode.OptionsColumn.AllowEdit = False
+        Me.ProductGuaranteeCode.OptionsColumn.TabStop = False
+        Me.ProductGuaranteeCode.Visible = True
+        Me.ProductGuaranteeCode.VisibleIndex = 3
+        Me.ProductGuaranteeCode.Width = 100
+        '
         'ProductRemark
         '
         Me.ProductRemark.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
@@ -1206,23 +1223,6 @@ Partial Class frmInformPricePro
         '
         'FormChangedComponent1
         '
-        '
-        'ProductGuaranteeCode
-        '
-        Me.ProductGuaranteeCode.AppearanceCell.BackColor = System.Drawing.Color.LightYellow
-        Me.ProductGuaranteeCode.AppearanceCell.Options.UseBackColor = True
-        Me.ProductGuaranteeCode.AppearanceHeader.Options.UseTextOptions = True
-        Me.ProductGuaranteeCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.ProductGuaranteeCode.Caption = "จำนวนวันประกัน"
-        Me.ProductGuaranteeCode.FieldName = "ProductGuaranteeCode"
-        Me.ProductGuaranteeCode.MaxWidth = 150
-        Me.ProductGuaranteeCode.MinWidth = 80
-        Me.ProductGuaranteeCode.Name = "ProductGuaranteeCode"
-        Me.ProductGuaranteeCode.OptionsColumn.AllowEdit = False
-        Me.ProductGuaranteeCode.OptionsColumn.TabStop = False
-        Me.ProductGuaranteeCode.Visible = True
-        Me.ProductGuaranteeCode.VisibleIndex = 3
-        Me.ProductGuaranteeCode.Width = 100
         '
         'frmInformPricePro
         '

@@ -451,6 +451,8 @@ Public Class frmDashboardComm
 
 
             '################  Chart Target ############### 
+            If lTotalSell = 0 Or lTotalTarget = 0 Then Exit Sub
+
             ChartTargetAchieve.Series.Clear()
 
             Dim series1 As New Series("Series 1", ViewType.Doughnut)

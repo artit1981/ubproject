@@ -24,6 +24,7 @@ Public Class frmCampaign
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
             mOrderType = pOrderType
+            PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             Call LoadData(pMode, pID)
 
         Catch e As Exception
@@ -124,8 +125,9 @@ Public Class frmCampaign
         Try
             If pMode = DataMode.ModeNew Then
 
-            ElseIf pMode = DataMode.ModeEdit Then
+            ElseIf pMode = DataMode.ModeEdit Or pMode = DataMode.ModeCopy Then
                 If mcls.InitailData(pID) Then
+
                     Subject.Text = mcls.Subject
                     Budget.EditValue = mcls.Budget
                     MinimumAmount.EditValue = mcls.MinimumAmount
@@ -145,14 +147,20 @@ Public Class frmCampaign
 
                     Remark.EditValue = mcls.Remark
 
-                    UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
-                    UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
-                    UcAdmin1.txtCreateTime.Text = mcls.CreateTime
-                    UcAdmin1.txtModifiBy.Text = mcls.ModifiedBy.Trim
-                    UcAdmin1.txtModifiTime.Text = mcls.ModifiedTime
+                    If pMode = DataMode.ModeEdit Then
+                        UcAdmin1.CheckInAcive.Checked = mcls.IsInActive
+                        UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
+                        UcAdmin1.txtCreateTime.Text = mcls.CreateTime
+                        UcAdmin1.txtModifiBy.Text = mcls.ModifiedBy.Trim
+                        UcAdmin1.txtModifiTime.Text = mcls.ModifiedTime
+                        ''FileAttachs
+                        UcFileAttach1.ShowControl(mcls.FileAttachs)
+                    Else ''Cpoy
+                        MyBase.SetMode = DataMode.ModeNew
+                        'mMode = DataMode.ModeNew
 
-                    ''FileAttachs
-                    UcFileAttach1.ShowControl(mcls.FileAttachs)
+                    End If
+
                 End If
             End If
 

@@ -858,6 +858,50 @@ Public Class ProductDAO
         Return dataTable
     End Function
 
+    Public Function GetDataTableExport(ByVal pID As Long, ByVal pOnlyActive As Boolean, Optional ByVal pProductCode As String = "") As DataTable
+        Dim SQL As String
+        Dim dataTable As New DataTable()
+
+        Try
+            SQL = "SELECT p.ProductCode as Code,p.ProductName as NameThai,p.ProductNameEng as NameEng"
+            SQL &= " ,p.PriceStandard as Price"
+            SQL &= " ,u.CodeThai as UnitMain,c.NameThai as ProductCategory,b.NameThai as ProductBrand"
+            SQL &= " ,t.NameThai as ProductType,pg.CodeThai as ProductGroup1,d.CodeThai asProductDimension1"
+            SQL &= " ,ld.IDCode as LocationMain ,ld2.IDCode as LocationSub"
+            SQL &= " ,p.Weight,p.Size,p.Generation,p.Color,p.sku1,p.sku2,p.sku3,p.sku4,p.sku5,p.Remark"
+            SQL &= " ,p.Price1,p.Price2,p.Price3,p.Price4,p.Price5,p.Price6"
+            SQL &= " FROM " & TableName & " p"
+            SQL &= " LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=p.ProductGuaranteeID"
+            SQL &= " LEFT OUTER JOIN Product_Unit u ON u.UnitID=p.UnitMainID"
+            SQL &= " LEFT OUTER JOIN ProductCategory c ON c.CategoryID=p.ProductCategoryID"
+            SQL &= " LEFT OUTER JOIN ProductBrand b ON b.ProductBrandID=p.ProductBrandID"
+            SQL &= " LEFT OUTER JOIN ProductType t ON t.ProductTypeID=p.ProductTypeID"
+            SQL &= " LEFT OUTER JOIN ProductGroup pg ON pg.MasterID=p.ProductGroup1"
+            SQL &= " LEFT OUTER JOIN ProductDimension d ON d.MasterID=p.ProductDimension1"
+
+            SQL &= " LEFT OUTER JOIN Product_LocationS pl ON pl.RefID=p.ProductID and pl.SEQ=1 and pl.IsMain='Y' and pl.IsDelete=0"
+            SQL &= " LEFT OUTER JOIN Product_LocationDTL ld ON ld.LocationDTLID=pl.LocationDTLID"
+
+            SQL &= " LEFT OUTER JOIN Product_LocationS pl2 ON pl2.RefID=p.ProductID and pl2.SEQ=2 and pl2.IsMain='1' and pl2.IsDelete=0"
+            SQL &= " LEFT OUTER JOIN Product_LocationDTL ld2 ON ld2.LocationDTLID=pl2.LocationDTLID"
+            SQL &= " WHERE p.IsDelete =0   "
+            If pID > 0 Then
+                SQL &= "  AND p.ProductID=" & pID
+            End If
+            If pProductCode.Trim <> "" Then
+                SQL &= "  AND p.ProductCode='" & pProductCode.Trim & "'"
+            End If
+            If pOnlyActive = True Then
+                SQL &= "  AND p.IsInActive = 0"
+            End If
+            SQL &= " ORDER BY p.ProductCode"
+            dataTable = gConnection.executeSelectQuery(SQL, Nothing)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "ProductDAO.GetDataTableExport : " & e.Message)
+        End Try
+        Return dataTable
+    End Function
+
 
     Public Function SaveData(Optional ByRef ptr As SqlTransaction = Nothing) As Boolean
         Dim SQL As String

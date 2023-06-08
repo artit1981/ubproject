@@ -43,9 +43,7 @@ Partial Class frmControls
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
-        Me.UcInfo1 = New UB.ucInfo()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.BarStaticItem1 = New DevExpress.XtraBars.BarStaticItem()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -133,7 +131,7 @@ Partial Class frmControls
         Me.BarManager1.DockManager = Me.DockManager1
         Me.BarManager1.Form = Me
         Me.BarManager1.Images = Me.ImageList1
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.AddBar, Me.EditBar, Me.DeleteBar, Me.RefreshBar, Me.OptionBar, Me.CopyBar, Me.ExitBar, Me.PrintBar, Me.QuickBar, Me.ImportBar, Me.BarStaticItem1, Me.AssignBar, Me.ConvertBar, Me.MakeOrderBar})
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.AddBar, Me.EditBar, Me.DeleteBar, Me.RefreshBar, Me.OptionBar, Me.CopyBar, Me.ExitBar, Me.PrintBar, Me.QuickBar, Me.ImportBar, Me.AssignBar, Me.ConvertBar, Me.MakeOrderBar})
         Me.BarManager1.MaxItemId = 40
         Me.BarManager1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemComboBox1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox2, Me.RepositoryItemTextEdit3, Me.RepositoryItemComboBox3, Me.RepositoryItemTextEdit4, Me.RepositoryItemCheckEdit1, Me.RepositoryItemComboBox4})
         '
@@ -303,20 +301,10 @@ Partial Class frmControls
         '
         'DockPanel1_Container
         '
-        Me.DockPanel1_Container.Controls.Add(Me.UcInfo1)
         Me.DockPanel1_Container.Location = New System.Drawing.Point(4, 26)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
         Me.DockPanel1_Container.Size = New System.Drawing.Size(70, 561)
         Me.DockPanel1_Container.TabIndex = 0
-        '
-        'UcInfo1
-        '
-        Me.UcInfo1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcInfo1.Location = New System.Drawing.Point(0, 0)
-        Me.UcInfo1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.UcInfo1.Name = "UcInfo1"
-        Me.UcInfo1.Size = New System.Drawing.Size(70, 561)
-        Me.UcInfo1.TabIndex = 0
         '
         'ImageList1
         '
@@ -330,12 +318,6 @@ Partial Class frmControls
         Me.ImageList1.Images.SetKeyName(5, "pege_setup.gif")
         Me.ImageList1.Images.SetKeyName(6, "_active__exit.png")
         Me.ImageList1.Images.SetKeyName(7, "prtpv_32.png")
-        '
-        'BarStaticItem1
-        '
-        Me.BarStaticItem1.Caption = "----------------"
-        Me.BarStaticItem1.Id = 35
-        Me.BarStaticItem1.Name = "BarStaticItem1"
         '
         'RepositoryItemTextEdit1
         '
@@ -820,7 +802,6 @@ Partial Class frmControls
     Friend WithEvents cboRefreshTime As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents CheckIsRefresh As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents ImportBar As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents BarStaticItem1 As DevExpress.XtraBars.BarStaticItem
     Friend WithEvents AssignBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ConvertBar As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents CheckShowInfo As DevExpress.XtraEditors.CheckEdit

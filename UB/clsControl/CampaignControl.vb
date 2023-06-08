@@ -41,11 +41,11 @@ Public Class CampaignControl
                 pfrmControl.AddBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Add) = Privilege.Add
                 pfrmControl.EditBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Edit) = Privilege.Edit
                 pfrmControl.DeleteBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Delete) = Privilege.Delete
-                pfrmControl.ImportBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Import) = Privilege.Import
-                pfrmControl.QuickBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Quick) = Privilege.Quick
-                pfrmControl.CopyBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Copy) = Privilege.Copy
-                pfrmControl.AssignBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Assign) = Privilege.Assign
-                pfrmControl.ConvertBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Convert) = Privilege.Convert
+                'pfrmControl.ImportBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Import) = Privilege.Import
+                'pfrmControl.QuickBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Quick) = Privilege.Quick
+                'pfrmControl.CopyBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Copy) = Privilege.Copy
+                'pfrmControl.AssignBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Assign) = Privilege.Assign
+                'pfrmControl.ConvertBar.Enabled = (lclsPrivilege.PrivilegeData And Privilege.Convert) = Privilege.Convert
 
             End If
 
@@ -67,11 +67,11 @@ Public Class CampaignControl
         Dim lIsActiveOnly As Boolean = True
         Try
 
-            If mCtlForm.chkShowDelete.Checked = True Then
-                lIsActiveOnly = False
-            Else
-                lIsActiveOnly = True
-            End If
+            'If mCtlForm.chkShowDelete.Checked = True Then
+            '    lIsActiveOnly = False
+            'Else
+            lIsActiveOnly = True
+            'End If
             bindingSource1 = Nothing
             bindingSource1 = New BindingSource
             bindingSource1.DataSource = GetType(CampaignSub)
@@ -257,4 +257,11 @@ Public Class CampaignControl
         End Try
     End Sub
 
+    Private Sub mCtlForm_Copy(pID As Long, pIndex As Long) Handles mCtlForm.Copy
+        Try
+            Call ShowForm(DataMode.ModeCopy, pID, pIndex)
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "CampaignControl.mCtlForm_Copy : " & ex.Message)
+        End Try
+    End Sub
 End Class

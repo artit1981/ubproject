@@ -27,11 +27,12 @@ Public Class CustomerImport
         End Set
     End Property
 
-    Public Sub LoadFileToGrid(ByVal pDataTable As DataTable, ByRef pBindingSource As BindingSource)
+    Public Function LoadFileToGrid(ByVal pDataTable As DataTable) As String
         Try
+            Dim lError As String = "", lErrorList As String = "", lSEQ As Long = 1
             Dim rec As CustomerProperty
             mCustomerPropertyS = New List(Of CustomerProperty)
-            pBindingSource.Clear()
+
             If pDataTable.Rows.Count > 0 Then
                 For Each dr As DataRow In pDataTable.Rows
                     rec = New CustomerProperty
@@ -71,34 +72,266 @@ Public Class CustomerImport
                     rec.Branch = ConvertNullToString(dr(27), True, 50)
                     rec.TaxID = ConvertNullToString(dr(28), True, 50)
                     rec.IsNew = ConvertNullToString(dr(29))
-                    pBindingSource.Add(rec)
+                    lError = GetPropertyError(rec)
+                    If lError <> "" Then
+                        If lErrorList = "" Then
+                            lErrorList = "******** Import Error *********"
+                            lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
+                        Else
+                            lErrorList = lErrorList & vbNewLine & " Row : " & lSEQ & lError
+                        End If
+                        rec.IsSelect = False
+                    End If
+                    lSEQ += 1
                     mCustomerPropertyS.Add(rec)
                 Next
             End If
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mClassName & ".LoadFileToGrid : " & e.Message)
         End Try
-    End Sub
+    End Function
 
-    Public Function CheckIsError(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView) As Boolean
-        Dim info As New ErrorInfo()
-        Dim lIsError = False
-        Try
-            If pGrid.RowCount > 0 Then
-                For lRow = 0 To pGrid.RowCount - 1
-                    TryCast(pGrid.GetRow(lRow), CustomerProperty).GetError(info)
-                    If info.ErrorText <> "" Then
-                        lIsError = True
-                    End If
-                Next
+    Public Function GetPropertyError(ByVal pData As CustomerProperty) As String
+        Dim lError As String = ""
+        If String.IsNullOrEmpty(pData.IsNew) Then
+            pData.IsNew = "Y" 'Default Y
+        ElseIf pData.IsNew.ToString.Trim <> "Y" And pData.IsNew.ToString.Trim <> "N" Then
+            lError = lError & vbNewLine & "ข้อมูล IsNew ไม่ถูกต้อง[Y,N]"
+        End If
+
+        If String.IsNullOrEmpty(pData.Code) Then
+            lError = lError & vbNewLine & "กรุณาระบุข้อมูลรหัส"
+        Else
+            If pData.IsNew = "Y" Then
+                If CheckCodeCheckExist(pData.Code) Then
+                    lError = lError & vbNewLine & "รหัสซ้ำ"
+                End If
+            Else
+
+                If CheckCodeCheckExist(pData.Code) = false Then
+                    lError = lError & vbNewLine & "ไม่พบรหัส : " & pData.Code
+                End If
             End If
-            Return lIsError
+        End If
+
+        If String.IsNullOrEmpty(pData.FirstName) Then
+            lError = lError & vbNewLine & "กรุณาระบุชื่อ"
+        Else
+            If pData.IsNew = "Y" Then
+
+            Else
+                pData.CustomerID = CheckNameExist(pData.FirstName)
+                If pData.CustomerID = 0 Then
+                    lError = lError & vbNewLine & "ไม่พบชื่อ : " & pData.FirstName
+                End If
+            End If
+        End If
+
+        If String.IsNullOrEmpty(pData.IsCorporation) Then
+            lError = lError & vbNewLine & "กรุณาระบุข้อมูลนิติบุคคล"
+        Else
+
+            If pData.IsCorporation.ToString.Trim <> "Y" And pData.IsCorporation.ToString.Trim <> "N" Then
+                lError = lError & vbNewLine & "ข้อมูลไม่ถูกต้อง [Y,N] : " & pData.IsCorporation
+            End If
+
+        End If
+
+
+
+
+        If ConvertNullToString(pData.CustomerGroup) <> "" Then
+            pData.CustomerGroupID = CheckDataMasterFromCode(pData.CustomerGroup, MasterType.CustomerGroup)
+            If pData.CustomerGroupID = 0 Then
+                lError = lError & vbNewLine & "ไม่พบกลุ่มลูกค้าในระบบ"
+            End If
+        Else
+            pData.CustomerGroupID = 0
+        End If
+
+        If ConvertNullToString(pData.CustomerZone) <> "" Then
+            pData.CustomerZoneID = CheckDataMasterFromCode(pData.CustomerZone, MasterType.CustomerZone)
+            If pData.CustomerZoneID = 0 Then
+                lError = lError & vbNewLine & "ไม่พบเขตลูกค้าในระบบ"
+            End If
+        Else
+            pData.CustomerZoneID = 0
+        End If
+
+
+        If ConvertNullToString(pData.Emp) <> "" Then
+            pData.EmpID = CheckEmployee(pData.Emp)
+            If pData.EmpID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบพนักงานในระบบ"
+            End If
+        Else
+            pData.EmpID = 0
+        End If
+
+        If ConvertNullToString(pData.CriterionPrice) <> "" Then
+            pData.CriterionPriceID = CheckDataMasterFromCode(pData.CriterionPrice, MasterType.CriterionPrice)
+            If pData.CriterionPriceID = 0 Then
+                lError = lError & vbNewLine & "ไม่พบเขตลูกค้าในระบบ"
+            End If
+        Else
+            pData.CriterionPriceID = 0
+        End If
+
+        If ConvertNullToString(pData.ContactPerson) <> "" Then
+            pData.ContactPersonID = CheckContact(pData.ContactPerson)
+            If pData.ContactPersonID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบผู้ติดต่อในระบบ"
+            End If
+        Else
+            pData.ContactPersonID = 0
+        End If
+
+        If ConvertNullToString(pData.ContactPerson) <> "" Then
+            pData.ContactPersonID = CheckContact(pData.ContactPerson)
+            If pData.ContactPersonID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบผู้ติดต่อในระบบ"
+            End If
+        Else
+            pData.ContactPersonID = 0
+        End If
+
+        If ConvertNullToString(pData.CreditRule) <> "" Then
+            pData.CreditRuleID = CheckCreditRole(pData.CreditRule)
+            If pData.CreditRuleID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบเงื่อนไขการชำระเงินในระบบ"
+            End If
+        Else
+            pData.CreditRuleID = 0
+        End If
+
+        If ConvertNullToString(pData.VatType) <> "" Then
+            pData.VatTypeID = CheckVatType(pData.VatType)
+            If pData.VatTypeID <= 0 Then
+                lError = lError & vbNewLine & "ไม่พบรูปแบบภาษีในระบบ"
+            End If
+        Else
+            pData.VatTypeID = 0
+        End If
+
+        Return lError
+    End Function
+
+#Region "Verify"
+
+
+    Private Function CheckDataMasterFromCode(ByVal pCode As String, ByVal pMasterType As Long) As Long
+        Dim lcls As New MasterDAO
+
+        Try
+            If lcls.InitailData(0, pMasterType, pCode) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
         Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckIsError : " & e.Message)
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckDataMaster : " & e.Message)
         Finally
+            lcls = Nothing
         End Try
     End Function
 
+    Private Function CheckEmployee(ByVal pName As String) As Long
+        Dim lcls As New EmployeeDAO
+
+        Try
+            If lcls.InitailData(0, pName) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckEmployee : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
+    Private Function CheckContact(ByVal pName As String) As Long
+        Dim lcls As New CustomerDAO
+        Try
+            If lcls.InitailData(0, pName) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckContact : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
+    Private Function CheckCreditRole(ByVal pName As String) As Long
+        Dim lcls As New CreditRoleDAO
+        Try
+            If lcls.InitailData(0, pName) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckCreditRole : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
+    Private Function CheckVatType(ByVal pName As String) As Long
+        Dim lcls As New VatTypeDAO
+        Try
+            If lcls.InitailData(0, pName) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckVatType : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+
+    Private Function CheckCodeCheckExist(ByVal pCode As String) As Boolean
+        Dim lcls As New CustomerDAO
+
+        Try
+            If pCode <> "อัตโนมัติ" Then
+                lcls.TableID = mMasterType
+                lcls.ModeData = DataMode.ModeNew
+                lcls.Code = pCode
+                Return lcls.CheckExist()
+            Else
+                Return False
+            End If
+
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckCodeCheckExist : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+    Private Function CheckNameExist(ByVal pName As String) As Long
+        Dim lcls As New CustomerDAO
+        Try
+            If lcls.InitailData(0, pName, Nothing) Then
+                Return lcls.ID
+            Else
+                Return 0
+            End If
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mClassName & ".CheckNameExist : " & e.Message)
+        Finally
+            lcls = Nothing
+        End Try
+    End Function
+#End Region
     Public Function ImportData() As Long()
         Dim lRow As Long = 0
         Dim tr As SqlTransaction = Nothing
@@ -138,6 +371,7 @@ Public Class CustomerImport
         End Try
     End Function
 
+
     Public Sub New()
         mRunningFormatDAO = New RunningFormatDAO
         mRunningFormatDAO.InitailData(MasterType.Accounts, Nothing)
@@ -146,7 +380,6 @@ End Class
 
 
 Public Class CustomerProperty
-    Implements IDXDataErrorInfo
     Private mClassName As String = "CustomerProperty"
 
 #Region "Property"
@@ -541,7 +774,7 @@ Public Class CustomerProperty
             Return mMasterType
         End Get
     End Property
-    Private Property CustomerID() As Long
+    Public Property CustomerID() As Long
         Get
             Return mCustomerID
         End Get
@@ -552,306 +785,11 @@ Public Class CustomerProperty
 
 #End Region
 
-#Region "Verify"
-    'Private Function CheckUnitFromCode(ByVal pCode As String) As Long
-    '    Dim lcls As New UnitDAO
-
-    '    Try
-    '        If lcls.InitailData(0, pCode) Then
-    '            Return lcls.ID
-    '        Else
-    '            Return 0
-    '        End If
-
-    '    Catch e As Exception
-    '        Err.Raise(Err.Number, e.Source, mClassName & ".CheckUnitFromCode : " & e.Message)
-    '    Finally
-    '        lcls = Nothing
-
-    '    End Try
-    'End Function
-
-    Private Function CheckDataMasterFromCode(ByVal pCode As String, ByVal pMasterType As Long) As Long
-        Dim lcls As New MasterDAO
-
-        Try
-            If lcls.InitailData(0, pMasterType, pCode) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckDataMaster : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckEmployee(ByVal pName As String) As Long
-        Dim lcls As New EmployeeDAO
-
-        Try
-            If lcls.InitailData(0, pName) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckEmployee : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckContact(ByVal pName As String) As Long
-        Dim lcls As New CustomerDAO
-        Try
-            If lcls.InitailData(0, pName) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckContact : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckCreditRole(ByVal pName As String) As Long
-        Dim lcls As New CreditRoleDAO
-        Try
-            If lcls.InitailData(0, pName) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckCreditRole : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckVatType(ByVal pName As String) As Long
-        Dim lcls As New VatTypeDAO
-        Try
-            If lcls.InitailData(0, pName) Then
-                Return lcls.ID
-            Else
-                Return 0
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckVatType : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-
-    Private Function CheckCodeCheckExist(ByVal pCode As String) As Boolean
-        Dim lcls As New CustomerDAO
-
-        Try
-            If pCode <> "อัตโนมัติ" Then
-                lcls.TableID = mMasterType
-                lcls.ModeData = DataMode.ModeNew
-                lcls.Code = pCode
-                Return lcls.CheckExist()
-            Else
-                Return False
-            End If
-
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckCodeCheckExist : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-    Private Function CheckNameExist(ByVal pName As String) As Boolean
-        Dim lcls As New CustomerDAO
-
-        Try
-            If lcls.InitailData(0, pName, Nothing) Then
-                CustomerID = lcls.ID
-                Return True
-            Else
-                CustomerID = 0
-                Return False
-            End If
-        Catch e As Exception
-            Err.Raise(Err.Number, e.Source, mClassName & ".CheckNameExist : " & e.Message)
-        Finally
-            lcls = Nothing
-        End Try
-    End Function
-#End Region
-
-#Region "IDXDataErrorInfo Members"
-    Public Sub GetPropertyError(ByVal propertyName As String, ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetPropertyError
-        If propertyName = "IsNew" Then
-            If String.IsNullOrEmpty(IsNew) Then
-                IsNew = "Y" 'Default Y
-            ElseIf IsNew.ToString.Trim <> "Y" And IsNew.ToString.Trim <> "N" Then
-                info.ErrorText = String.Format("ข้อมูล IsNew ไม่ถูกต้อง[Y,N]", propertyName)
-                info.ErrorType = ErrorType.Critical
-            End If
-        End If
-        If propertyName = "Code" AndAlso String.IsNullOrEmpty(Code) Then
-
-        ElseIf propertyName = "Code" AndAlso VerifyStep1 = True Then
-            If CheckCodeCheckExist(Code) Then
-                info.ErrorText = String.Format("ข้อมูลซ้ำ", propertyName)
-                info.ErrorType = ErrorType.Critical
-            End If
-        End If
-
-        If propertyName = "FirstName" AndAlso String.IsNullOrEmpty(FirstName) Then
-            info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
-            info.ErrorType = ErrorType.Critical
-        Else
-            If IsNew = "Y" Then
-            Else
-                If CheckNameExist(FirstName) = False Then
-                    info.ErrorText = String.Format("ไม่พบชื่อ : " & FirstName, propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "IsCorporation" Then
-            If String.IsNullOrEmpty(IsCorporation) Then
-                info.ErrorText = String.Format("กรุณาระบุข้อมูล", propertyName)
-                info.ErrorType = ErrorType.Critical
-            ElseIf IsCorporation.ToString.Trim <> "Y" And IsCorporation.ToString.Trim <> "N" Then
-                info.ErrorText = String.Format("เป็นนิติบุคคลไม่ถูกต้อง[Y,N]", propertyName)
-                info.ErrorType = ErrorType.Critical
-            End If
-        End If
-
-
-        If propertyName = "CustomerGroup" Then
-            If ConvertNullToString(CustomerGroup) <> "" Then
-                CustomerGroupID = CheckDataMasterFromCode(CustomerGroup, MasterType.CustomerGroup)
-                If CustomerGroupID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบกลุ่มลูกค้าในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "CustomerZone" Then
-            If ConvertNullToString(CustomerZone) <> "" Then
-                CustomerZoneID = CheckDataMasterFromCode(CustomerZone, MasterType.CustomerZone)
-                If CustomerZoneID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบเขตลูกค้า(ภาค) ในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "Emp" Then
-            If ConvertNullToString(Emp) <> "" Then
-                EmpID = CheckEmployee(Emp)
-                If EmpID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบพนักงานในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "CriterionPrice" Then
-            If ConvertNullToString(CriterionPrice) <> "" Then
-                CriterionPriceID = CheckDataMasterFromCode(CriterionPrice, MasterType.CriterionPrice)
-                If CriterionPriceID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบเกณฑ์ราคา(เกรด)ในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "ContactPerson" Then
-            If ConvertNullToString(ContactPerson) <> "" Then
-                ContactPersonID = CheckContact(ContactPerson)
-                If ContactPersonID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบผู้ติดต่อในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-
-        If propertyName = "CreditRule" Then
-            If ConvertNullToString(CreditRule) <> "" Then
-                CreditRuleID = CheckCreditRole(CreditRule)
-                If CreditRuleID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบเงื่อนไขการชำระเงิน(เครดิตเทอม)ในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-        If propertyName = "VatType" Then
-            If ConvertNullToString(VatType) <> "" Then
-                VatTypeID = CheckVatType(VatType)
-                If VatTypeID <= 0 Then
-                    info.ErrorText = String.Format("ไม่พบรูปแบบภาษีในระบบ", propertyName)
-                    info.ErrorType = ErrorType.Critical
-                End If
-            End If
-        End If
-    End Sub
-
-
-    Public Sub GetError(ByVal info As ErrorInfo) Implements IDXDataErrorInfo.GetError
-        Dim propertyInfo As New ErrorInfo()
-        'If gIsCheckError = True Then
-
-        GetPropertyError("IsNew", propertyInfo)
-
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("Code", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("FirstName", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("IsCorporation", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("CustomerGroup", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("CustomerZone", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("Emp", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("CriterionPrice", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("ContactPerson", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("CreditRule", propertyInfo)
-        End If
-        If propertyInfo.ErrorText = "" Then
-            GetPropertyError("VatType", propertyInfo)
-        End If
-        If propertyInfo.ErrorText <> "" Then
-            info.ErrorText = "พบข้อผิดพลาด"
-            IsSelect = False
-        ElseIf mVerifyStep1 = False Then
-            IsSelect = True
-        End If
-        mVerifyStep1 = True
-        'End If
-
-    End Sub
 
 
 
-#End Region
+
+
 
 #Region "Save Product"
     Public Sub SaveData(ByRef ptr As SqlTransaction, ByVal pImportID As Long)

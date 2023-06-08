@@ -1,5 +1,6 @@
 ﻿
 Option Explicit On
+Imports DevExpress.XtraBars
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Base
@@ -9,7 +10,7 @@ Public Class frmControlCampaign
 #Region "Public"
     Public Event AddNew()
     Public Event Edit(ByVal pID As Long, ByVal pIndex As Long)
-    'Public Event Detail(ByVal pIndex As Long)
+    Public Event Copy(ByVal pID As Long, ByVal pIndex As Long)
     Public Event Delete(ByRef pID As Long)
     Public Event ReLoad()
     Public Event CHeckRefresh()
@@ -36,6 +37,28 @@ Public Class frmControlCampaign
             mID = GridView.GetRowCellDisplayText(rowHandle, "CampaignID")
             mRowFocus = rowHandle
             RaiseEvent Edit(mID, mRowFocus)
+
+        Catch ex As Exception
+
+            ShowErrorMsg(False, ex.Message)
+        Finally
+            ShowProgress(False, "")
+        End Try
+    End Sub
+
+    Private Sub CopyBarItem_ItemClick(sender As Object, e As ItemClickEventArgs) Handles CopyBarItem.ItemClick
+        Dim rowHandle As Integer
+        Try
+
+            If GridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
+
+            If rowHandle < 0 Then Exit Sub
+
+            ShowProgress(True, "Loading...")
+            mID = GridView.GetRowCellDisplayText(rowHandle, "CampaignID")
+            mRowFocus = rowHandle
+            RaiseEvent Copy(mID, mRowFocus)
 
         Catch ex As Exception
 
@@ -242,6 +265,8 @@ Public Class frmControlCampaign
         End Try
 
     End Sub
+
+
 
     'Private Sub btnDetail_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles btnDetail.ButtonClick
     '    Dim rowHandle As Integer

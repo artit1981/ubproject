@@ -23,8 +23,8 @@ Partial Class frmImport
         Me.WizardControl1 = New DevExpress.XtraWizard.WizardControl()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.WelcomeWizardPage1 = New DevExpress.XtraWizard.WelcomeWizardPage()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.BrowsPage = New DevExpress.XtraWizard.WizardPage()
+        Me.rdoType = New DevExpress.XtraEditors.RadioGroup()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnBrows = New DevExpress.XtraEditors.SimpleButton()
         Me.txtFileName = New DevExpress.XtraEditors.TextEdit()
@@ -35,8 +35,8 @@ Partial Class frmImport
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardControl1.SuspendLayout()
-        Me.WelcomeWizardPage1.SuspendLayout()
         Me.BrowsPage.SuspendLayout()
+        CType(Me.rdoType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GridPage.SuspendLayout()
         CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,25 +78,15 @@ Partial Class frmImport
         '
         'WelcomeWizardPage1
         '
-        Me.WelcomeWizardPage1.Controls.Add(Me.SimpleButton1)
-        Me.WelcomeWizardPage1.IntroductionText = "กรุณาเตรียมไฟล์สำหรับใช้ในการ Import ตามรูปแบบที่กำหนดไว้" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "หรือกด              " &
-    "   เพื่อเรียกไฟล์"
+        Me.WelcomeWizardPage1.IntroductionText = "กรุณาเตรียมไฟล์สำหรับใช้ในการ Import ตามรูปแบบที่กำหนดไว้"
         Me.WelcomeWizardPage1.Name = "WelcomeWizardPage1"
         Me.WelcomeWizardPage1.ProceedText = "กด Next เพื่อเริ่มต้นการทำงาน"
         Me.WelcomeWizardPage1.Size = New System.Drawing.Size(901, 388)
         Me.WelcomeWizardPage1.Text = "Import Products"
         '
-        'SimpleButton1
-        '
-        Me.SimpleButton1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
-        Me.SimpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.SimpleButton1.Location = New System.Drawing.Point(61, 32)
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(33, 23)
-        Me.SimpleButton1.TabIndex = 0
-        '
         'BrowsPage
         '
+        Me.BrowsPage.Controls.Add(Me.rdoType)
         Me.BrowsPage.Controls.Add(Me.Label8)
         Me.BrowsPage.Controls.Add(Me.btnBrows)
         Me.BrowsPage.Controls.Add(Me.txtFileName)
@@ -104,6 +94,17 @@ Partial Class frmImport
         Me.BrowsPage.Name = "BrowsPage"
         Me.BrowsPage.Size = New System.Drawing.Size(1151, 377)
         Me.BrowsPage.Text = "กรุณาเลือกไฟล์สำหรับการ Import"
+        '
+        'rdoType
+        '
+        Me.rdoType.EditValue = "I"
+        Me.rdoType.EnterMoveNextControl = True
+        Me.rdoType.Location = New System.Drawing.Point(87, 96)
+        Me.rdoType.Name = "rdoType"
+        Me.rdoType.Properties.Columns = 3
+        Me.rdoType.Properties.Items.AddRange(New DevExpress.XtraEditors.Controls.RadioGroupItem() {New DevExpress.XtraEditors.Controls.RadioGroupItem("I", "Import"), New DevExpress.XtraEditors.Controls.RadioGroupItem("E", "Export")})
+        Me.rdoType.Size = New System.Drawing.Size(245, 25)
+        Me.rdoType.TabIndex = 220
         '
         'Label8
         '
@@ -156,8 +157,7 @@ Partial Class frmImport
         Me.GridPage.Controls.Add(Me.GridControl)
         Me.GridPage.Name = "GridPage"
         Me.GridPage.Size = New System.Drawing.Size(1151, 377)
-        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อดำเนินการต่อ หรือกด Back เพื่อทำการ Import File " &
-    "อีกครั้ง"
+        Me.GridPage.Text = "กรุณาตรวจสอบข้อมูล, กด Next เพื่อดำเนินการต่อ หรือกด Back เพื่อทำการแก้ไข"
         '
         'txtError
         '
@@ -210,9 +210,9 @@ Partial Class frmImport
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardControl1.ResumeLayout(False)
-        Me.WelcomeWizardPage1.ResumeLayout(False)
         Me.BrowsPage.ResumeLayout(False)
         Me.BrowsPage.PerformLayout()
+        CType(Me.rdoType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GridPage.ResumeLayout(False)
         CType(Me.txtError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -227,11 +227,11 @@ Partial Class frmImport
     Friend WithEvents CompletionWizardPage1 As DevExpress.XtraWizard.CompletionWizardPage
     Friend WithEvents btnBrows As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents txtFileName As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Private WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents GridPage As DevExpress.XtraWizard.WizardPage
     Friend WithEvents GridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
     Friend WithEvents txtError As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents rdoType As DevExpress.XtraEditors.RadioGroup
 End Class

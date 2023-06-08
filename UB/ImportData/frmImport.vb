@@ -134,10 +134,15 @@ Public Class frmImport
 
     Private Sub frmImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         '*** 
+        rdoType.Visible = False
         If mMasterType = MasterType.Product Then
             mclsProduct = New ProductImport
-            WelcomeWizardPage1.Text = "Import Products"
-            Me.Text = "Import Products"
+            WelcomeWizardPage1.Text = "Import & Export Products"
+            Me.Text = "Import & Export Products"
+
+            rdoType.Visible = True
+            btnBrows.Enabled = rdoType.EditValue = "I"
+
         ElseIf mMasterType = MasterType.StockIn Then
             mclsStock = New StockImport
             WelcomeWizardPage1.Text = "Import Stock"
@@ -174,7 +179,7 @@ Public Class frmImport
             GridPage.DescriptionText = ""
             ShowProgress(True, "Loading...")
             If e.Page Is BrowsPage Then
-                If txtFileName.Text.Trim = "" Then
+                If txtFileName.Text.Trim = "" And rdoType.EditValue = "I" Then
                     MessageBox.Show("กรุณาระบุไฟล์")
                     e.Handled = True
                 Else
@@ -189,7 +194,13 @@ Public Class frmImport
 
                 End If
             ElseIf e.Page Is GridPage Then
-                LoadFileToGridOnImport()
+                If rdoType.EditValue = "I" Then
+                    LoadFileToGridOnImport()
+                Else
+                    Dim lfrm As New frmPreExport
+                    lfrm.InitialForm("Produc", GridControl)
+                    lfrm.ShowDialog()
+                End If
                 e.Handled = False
             End If
         Catch ex As Exception
@@ -236,33 +247,33 @@ Public Class frmImport
         Dim lError As String = ""
         LoadFileToGrid = False
         Dim lProductPropertyS As List(Of ProductProperty)
-        'Dim lStockPropertyS As List(Of StockProperty)
-        'Dim lCustomerPropertyS As List(Of CustomerProperty)
+        Dim lStockPropertyS As List(Of StockProperty)
+        Dim lCustomerPropertyS As List(Of CustomerProperty)
         Try
-            'gIsCheckError = True
 
-            'bindingSource1 = Nothing
-            'bindingSource1 = New BindingSource
+            If rdoType.EditValue = "I" Then
+                dataTable = OpenFile(txtFileName.Text)
+            End If
 
-            dataTable = OpenFile(txtFileName.Text)
-            'bindingSource1.DataSource = GetType(Object)
-            'If mMasterType = MasterType.Product Then
-            '    mclsProduct.LoadFileToGrid(dataTable, bindingSource1)
-            'ElseIf mMasterType = MasterType.StockIn Then
-            '    mclsStock.LoadFileToGrid(dataTable, bindingSource1)
-            'Else
-            '    mclsCustomer.LoadFileToGrid(dataTable, bindingSource1)
-            'End If
+
             If mMasterType = MasterType.Product Then
-                lError = mclsProduct.LoadFileToGrid(dataTable)
-                lProductPropertyS = mclsProduct.DataDAOs
-                GridControl.DataSource = lProductPropertyS
-                'ElseIf mMasterType = MasterType.StockIn Then
-                '    lStockPropertyS = mclsStock.LoadFileToGrid(dataTable)
-                '    GridControl.DataSource = lStockPropertyS
-                'Else
-                '    lCustomerPropertyS = mclsCustomer.LoadFileToGrid(dataTable)
-                '    GridControl.DataSource = lCustomerPropertyS
+                If rdoType.EditValue = "I" Then
+                    lError = mclsProduct.LoadFileToGrid(dataTable)
+                    lProductPropertyS = mclsProduct.DataDAOs
+                    GridControl.DataSource = lProductPropertyS
+                Else
+                    GridControl.DataSource = mclsProduct.LoadDataExport
+                End If
+
+
+            ElseIf mMasterType = MasterType.StockIn Then
+                lError = mclsStock.LoadFileToGrid(dataTable)
+                lStockPropertyS = mclsStock.DataDAOs
+                GridControl.DataSource = lStockPropertyS
+            Else
+                lError = mclsCustomer.LoadFileToGrid(dataTable)
+                lCustomerPropertyS = mclsCustomer.DataDAOs
+                GridControl.DataSource = lCustomerPropertyS
             End If
 
             'DxErrorProvider1.DataSource = bindingSource1
@@ -319,7 +330,7 @@ Public Class frmImport
     Private Sub GridStyle(ByVal pGrid As DevExpress.XtraGrid.Views.Grid.GridView)
         With pGrid
             pGrid.OptionsBehavior.ReadOnly = True
-            If mMasterType = MasterType.Product Then
+            If mMasterType = MasterType.Product And rdoType.EditValue = "I" Then
                 If Not IsNothing(.Columns("UnitMainID")) Then
                     .Columns("UnitMainID").Visible = False
                     .Columns("ProductCategoryID").Visible = False
@@ -366,5 +377,7 @@ Public Class frmImport
 
     End Sub
 
-
+    Private Sub rdoType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rdoType.SelectedIndexChanged
+        btnBrows.Enabled = rdoType.EditValue = "I"
+    End Sub
 End Class
