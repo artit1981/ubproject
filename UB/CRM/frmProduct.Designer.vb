@@ -62,6 +62,7 @@ Partial Class frmProduct
         Me.txtPriceStandart = New DevExpress.XtraEditors.CalcEdit()
         Me.TabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.GeneralTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.ProductGuaranteeID = New DevExpress.XtraEditors.LookUpEdit()
         Me.Price4 = New DevExpress.XtraEditors.CalcEdit()
         Me.UnitBuyRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.UnitMainIDBuy = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -222,7 +223,6 @@ Partial Class frmProduct
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.AlertControl1 = New DevExpress.XtraBars.Alerter.AlertControl(Me.components)
-        Me.ProductGuaranteeID = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.ProductNameS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -239,6 +239,7 @@ Partial Class frmProduct
         CType(Me.TabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
+        CType(Me.ProductGuaranteeID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView12, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -297,7 +298,6 @@ Partial Class frmProduct
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
-        CType(Me.ProductGuaranteeID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProductNameS
@@ -858,6 +858,23 @@ Partial Class frmProduct
         Me.GeneralTabPage.Size = New System.Drawing.Size(1094, 560)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
+        '
+        'ProductGuaranteeID
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ProductGuaranteeID, "TextChanged")
+        Me.ProductGuaranteeID.Location = New System.Drawing.Point(151, 356)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductGuaranteeID, True)
+        Me.ProductGuaranteeID.Name = "ProductGuaranteeID"
+        Me.ProductGuaranteeID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ProductGuaranteeID.Properties.Appearance.Options.UseFont = True
+        Me.ProductGuaranteeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ProductGuaranteeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "Name", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "Remark", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
+        Me.ProductGuaranteeID.Properties.NullText = ""
+        Me.ProductGuaranteeID.Properties.ShowHeader = False
+        Me.ProductGuaranteeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
+        Me.ProductGuaranteeID.Size = New System.Drawing.Size(273, 20)
+        Me.ProductGuaranteeID.TabIndex = 244
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductGuaranteeID, "Text")
         '
         'Price4
         '
@@ -2815,29 +2832,12 @@ Partial Class frmProduct
         Me.UcAdmin1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAdmin1, True)
         Me.UcAdmin1.Name = "UcAdmin1"
-        Me.UcAdmin1.Size = New System.Drawing.Size(532, 178)
+        Me.UcAdmin1.Size = New System.Drawing.Size(662, 258)
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
         'FormChangedComponent1
         '
-        '
-        'ProductGuaranteeID
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ProductGuaranteeID, "TextChanged")
-        Me.ProductGuaranteeID.Location = New System.Drawing.Point(151, 356)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ProductGuaranteeID, True)
-        Me.ProductGuaranteeID.Name = "ProductGuaranteeID"
-        Me.ProductGuaranteeID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductGuaranteeID.Properties.Appearance.Options.UseFont = True
-        Me.ProductGuaranteeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ProductGuaranteeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "Code", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "Name", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "Remark", 100, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
-        Me.ProductGuaranteeID.Properties.NullText = ""
-        Me.ProductGuaranteeID.Properties.ShowHeader = False
-        Me.ProductGuaranteeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ProductGuaranteeID.Size = New System.Drawing.Size(273, 20)
-        Me.ProductGuaranteeID.TabIndex = 244
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ProductGuaranteeID, "Text")
         '
         'frmProduct
         '
@@ -2866,6 +2866,7 @@ Partial Class frmProduct
         Me.TabControl1.ResumeLayout(False)
         Me.GeneralTabPage.ResumeLayout(False)
         Me.GeneralTabPage.PerformLayout()
+        CType(Me.ProductGuaranteeID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Price4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UnitMainIDBuy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView12, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2928,7 +2929,6 @@ Partial Class frmProduct
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
-        CType(Me.ProductGuaranteeID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

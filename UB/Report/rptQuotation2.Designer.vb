@@ -105,7 +105,7 @@ Partial Public Class rptQuotation2
         Me.XrPictureBox2 = New DevExpress.XtraReports.UI.XRPictureBox()
         Me.TmpOrders1 = New UB.TmpOrders()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
-        Me.Number2Dit = New DevExpress.XtraReports.UI.FormattingRule()
+        Me.PanelTotal = New DevExpress.XtraReports.UI.XRPanel()
         Me.XrLabel77 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine5 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel76 = New DevExpress.XtraReports.UI.XRLabel()
@@ -116,12 +116,14 @@ Partial Public Class rptQuotation2
         Me.XrLabel64 = New DevExpress.XtraReports.UI.XRLabel()
         Me.lblEmp = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel59 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine7 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel60 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine11 = New DevExpress.XtraReports.UI.XRLine()
         Me.XrLabel17 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel16 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine7 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLabel59 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine14 = New DevExpress.XtraReports.UI.XRLine()
+        Me.Number2Dit = New DevExpress.XtraReports.UI.FormattingRule()
         Me.Total = New DevExpress.XtraReports.UI.FormattingRule()
         Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
         Me.ProName = New DevExpress.XtraReports.UI.CalculatedField()
@@ -129,14 +131,12 @@ Partial Public Class rptQuotation2
         Me.TmpProductListTableAdapter = New UB.TmpOrdersTableAdapters.TmpProductListTableAdapter()
         Me.CalSEQ = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalUnitSum = New DevExpress.XtraReports.UI.CalculatedField()
-        Me.XrLine14 = New DevExpress.XtraReports.UI.XRLine()
         Me.DiscountField = New DevExpress.XtraReports.UI.CalculatedField()
         Me.VatField = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalTotal = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPhone = New DevExpress.XtraReports.UI.CalculatedField()
-        Me.PanelTotal = New DevExpress.XtraReports.UI.XRPanel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -227,9 +227,8 @@ Partial Public Class rptQuotation2
         '
         'XrLabel11
         '
-        Me.XrLabel11.CanGrow = False
         Me.XrLabel11.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ProductCode")})
-        Me.XrLabel11.Font = New System.Drawing.Font("Cordia New", 14.25!)
+        Me.XrLabel11.Font = New System.Drawing.Font("Cordia New", 12.0!)
         Me.XrLabel11.LocationFloat = New DevExpress.Utils.PointFloat(55.66912!, 5.000006!)
         Me.XrLabel11.Name = "XrLabel11"
         Me.XrLabel11.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -1220,10 +1219,12 @@ Partial Public Class rptQuotation2
         Me.PageFooter.HeightF = 343.1505!
         Me.PageFooter.Name = "PageFooter"
         '
-        'Number2Dit
+        'PanelTotal
         '
-        Me.Number2Dit.Formatting.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.Number2Dit.Name = "Number2Dit"
+        Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLine7, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLabel59, Me.XrLine14, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10, Me.XrLabel18})
+        Me.PanelTotal.LocationFloat = New DevExpress.Utils.PointFloat(3.750006!, 0!)
+        Me.PanelTotal.Name = "PanelTotal"
+        Me.PanelTotal.SizeF = New System.Drawing.SizeF(793.2499!, 343.1505!)
         '
         'XrLabel77
         '
@@ -1368,20 +1369,16 @@ Partial Public Class rptQuotation2
         Me.XrLine2.StylePriority.UseBorderColor = False
         Me.XrLine2.StylePriority.UseForeColor = False
         '
-        'XrLabel59
+        'XrLine7
         '
-        Me.XrLabel59.CanGrow = False
-        Me.XrLabel59.Font = New System.Drawing.Font("Cordia New", 14.0!)
-        Me.XrLabel59.ForeColor = System.Drawing.Color.Black
-        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(495.0521!, 185.0372!)
-        Me.XrLabel59.Name = "XrLabel59"
-        Me.XrLabel59.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel59.SizeF = New System.Drawing.SizeF(128.87!, 27.16662!)
-        Me.XrLabel59.StylePriority.UseFont = False
-        Me.XrLabel59.StylePriority.UseForeColor = False
-        Me.XrLabel59.StylePriority.UseTextAlignment = False
-        Me.XrLabel59.Text = "ยืนยันการสั่งซื้อ"
-        Me.XrLabel59.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLine7.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
+        Me.XrLine7.BorderColor = System.Drawing.Color.LightGray
+        Me.XrLine7.ForeColor = System.Drawing.Color.LightGray
+        Me.XrLine7.LocationFloat = New DevExpress.Utils.PointFloat(51.88716!, 253.0653!)
+        Me.XrLine7.Name = "XrLine7"
+        Me.XrLine7.SizeF = New System.Drawing.SizeF(144.2402!, 2.0!)
+        Me.XrLine7.StylePriority.UseBorderColor = False
+        Me.XrLine7.StylePriority.UseForeColor = False
         '
         'XrLabel60
         '
@@ -1439,16 +1436,36 @@ Partial Public Class rptQuotation2
         Me.XrLabel16.Text = "ผู้เสนอราคา"
         Me.XrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLine7
+        'XrLabel59
         '
-        Me.XrLine7.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
-        Me.XrLine7.BorderColor = System.Drawing.Color.LightGray
-        Me.XrLine7.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine7.LocationFloat = New DevExpress.Utils.PointFloat(51.88716!, 253.0653!)
-        Me.XrLine7.Name = "XrLine7"
-        Me.XrLine7.SizeF = New System.Drawing.SizeF(144.2402!, 2.0!)
-        Me.XrLine7.StylePriority.UseBorderColor = False
-        Me.XrLine7.StylePriority.UseForeColor = False
+        Me.XrLabel59.CanGrow = False
+        Me.XrLabel59.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel59.ForeColor = System.Drawing.Color.Black
+        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(495.0521!, 185.0372!)
+        Me.XrLabel59.Name = "XrLabel59"
+        Me.XrLabel59.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel59.SizeF = New System.Drawing.SizeF(128.87!, 27.16662!)
+        Me.XrLabel59.StylePriority.UseFont = False
+        Me.XrLabel59.StylePriority.UseForeColor = False
+        Me.XrLabel59.StylePriority.UseTextAlignment = False
+        Me.XrLabel59.Text = "ยืนยันการสั่งซื้อ"
+        Me.XrLabel59.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLine14
+        '
+        Me.XrLine14.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
+        Me.XrLine14.BorderColor = System.Drawing.Color.Gray
+        Me.XrLine14.ForeColor = System.Drawing.Color.LightGray
+        Me.XrLine14.LocationFloat = New DevExpress.Utils.PointFloat(504.4323!, 108.6666!)
+        Me.XrLine14.Name = "XrLine14"
+        Me.XrLine14.SizeF = New System.Drawing.SizeF(282.6391!, 2.000015!)
+        Me.XrLine14.StylePriority.UseBorderColor = False
+        Me.XrLine14.StylePriority.UseForeColor = False
+        '
+        'Number2Dit
+        '
+        Me.Number2Dit.Formatting.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.Number2Dit.Name = "Number2Dit"
         '
         'Total
         '
@@ -1489,17 +1506,6 @@ Partial Public Class rptQuotation2
         Me.CalUnitSum.Expression = "[].Sum([Units])"
         Me.CalUnitSum.Name = "CalUnitSum"
         '
-        'XrLine14
-        '
-        Me.XrLine14.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Top
-        Me.XrLine14.BorderColor = System.Drawing.Color.Gray
-        Me.XrLine14.ForeColor = System.Drawing.Color.LightGray
-        Me.XrLine14.LocationFloat = New DevExpress.Utils.PointFloat(504.4323!, 108.6666!)
-        Me.XrLine14.Name = "XrLine14"
-        Me.XrLine14.SizeF = New System.Drawing.SizeF(282.6391!, 2.000015!)
-        Me.XrLine14.StylePriority.UseBorderColor = False
-        Me.XrLine14.StylePriority.UseForeColor = False
-        '
         'DiscountField
         '
         Me.DiscountField.DataMember = "TmpOrders"
@@ -1536,13 +1542,6 @@ Partial Public Class rptQuotation2
         Me.CalPhone.DataMember = "TmpOrders"
         Me.CalPhone.Expression = "Concat([CompanyPhone], '  MB: 086-355-1154 , 089-616-2255') "
         Me.CalPhone.Name = "CalPhone"
-        '
-        'PanelTotal
-        '
-        Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLine7, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLabel59, Me.XrLine14, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10, Me.XrLabel18})
-        Me.PanelTotal.LocationFloat = New DevExpress.Utils.PointFloat(3.750006!, 0!)
-        Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.SizeF = New System.Drawing.SizeF(793.2499!, 343.1505!)
         '
         'rptQuotation2
         '

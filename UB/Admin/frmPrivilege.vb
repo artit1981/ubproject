@@ -239,7 +239,7 @@ Public Class frmPrivilege
     End Sub
 
 
-#End Region
+
 
     Private Sub btnSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectAll.Click
         For Each ctrControl As System.Windows.Forms.Control In GroupDisplay.Controls
@@ -372,8 +372,5 @@ Public Class frmPrivilege
         SetRowData()
     End Sub
 
-
-    Private Sub frmPrivilege_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
+#End Region
 End Class

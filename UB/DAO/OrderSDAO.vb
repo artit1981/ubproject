@@ -636,7 +636,7 @@ Public Class OrderSDAO
                 End If
 
                 If gPrivilegeID > 1 Then 'Not admin
-                    SQL &= " AND Orders.EmpID=" & gUserID
+                    SQL &= " AND Orders.EmpID=" & gEmpID
                 End If
 
             End If
