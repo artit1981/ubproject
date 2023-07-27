@@ -424,6 +424,18 @@
     <Compile Include="CRM\frmCommission.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CRM\frmShipping2AddDTL.Designer.vb">
+      <DependentUpon>frmShipping2AddDTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmShipping2AddDTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecordMain2.Designer.vb">
+      <DependentUpon>frmShippingRecordMain2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frmShippingRecordMain2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CRM\frmShippingRecordMain.Designer.vb">
       <DependentUpon>frmShippingRecordMain.vb</DependentUpon>
     </Compile>
@@ -454,6 +466,7 @@
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="DAO\CashRecordSDAO.vb" />
+    <Compile Include="DAO\Shipping2DAO.vb" />
     <Compile Include="ImportData\frmImportOrderOnline.Designer.vb">
       <DependentUpon>frmImportOrderOnline.vb</DependentUpon>
     </Compile>
@@ -1381,6 +1394,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmCommission.resx">
       <DependentUpon>frmCommission.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmShipping2AddDTL.resx">
+      <DependentUpon>frmShipping2AddDTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frmShippingRecordMain2.resx">
+      <DependentUpon>frmShippingRecordMain2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CRM\frmShippingRecordMain.resx">
       <DependentUpon>frmShippingRecordMain.vb</DependentUpon>

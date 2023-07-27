@@ -1151,4 +1151,10 @@ Public Class frmMain
         ShowMaster(MasterType.ProductGuarantee)
         InsertActivity(DataMode.ModeOpen, MasterType.ProductGuarantee, "", Nothing)
     End Sub
+
+    Private Sub ShippingRecord2Bar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles ShippingRecord2Bar.ItemClick
+        InsertActivity(DataMode.ModeOpen, MasterType.ShippingRec2, "", Nothing)
+        frmShippingRecordMain2.MdiParent = Me
+        frmShippingRecordMain2.Show()
+    End Sub
 End Class

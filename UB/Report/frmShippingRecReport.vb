@@ -7,6 +7,13 @@ Imports DevExpress.XtraReports.UI
 Public Class frmShippingRecReport
     Inherits iReport
     Private Const mFormName As String = "frmShippingRecReport"
+    Private mTypeID As Integer
+
+    Public WriteOnly Property TypeID() As Integer
+        Set(ByVal value As Integer)
+            mTypeID = value
+        End Set
+    End Property
 
     Protected Overrides Sub Print()
         Try
@@ -38,8 +45,16 @@ Public Class frmShippingRecReport
             lclsReport.Header2 = "วันที่ " & Format(dtpDateFrom.EditValue, "dd MMMMM yyyy") & " ถึง " & Format(dtpDateTo.EditValue, "dd MMMMM yyyy")
 
             lclsReport.SaveData()
-            Dim lcls As New OrderSDAO
-            Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, True, False, 1)
+
+            Dim dataTable As New DataTable
+            If mTypeID = 1 Then
+                Dim lcls As New OrderSDAO
+                dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, True, False, 1)
+            ElseIf mTypeID = 2 Then
+                Dim lcls As New Shipping2DAO
+                dataTable = lcls.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue)
+            End If
+
             If dataTable.Rows.Count > 0 Then
                 Dim SQL As String
 

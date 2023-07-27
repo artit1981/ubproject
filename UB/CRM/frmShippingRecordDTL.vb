@@ -4,9 +4,15 @@ Imports System.Data.SqlClient
 Imports DevExpress.XtraEditors
 
 Public Class frmShippingRecordDTL
-    Private mIsFromLoad As Boolean
+    Private mTypeID As Integer
     Private miOrderListDAO As List(Of iOrder)
 
+
+    Public WriteOnly Property TypeID() As Integer
+        Set(ByVal value As Integer)
+            mTypeID = value
+        End Set
+    End Property
 
     Public WriteOnly Property iOrderListDAO() As List(Of iOrder)
         Set(ByVal value As List(Of iOrder))
@@ -23,7 +29,7 @@ Public Class frmShippingRecordDTL
 
 
     Private Sub frmUpdateStockDTL_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        mIsFromLoad = True
+
         Try
             Dim lcls As New EmployeeDAO
             Dim dataTable As New DataTable()
@@ -60,7 +66,7 @@ Public Class frmShippingRecordDTL
             ShowErrorMsg(False, ex.Message)
         End Try
 
-        mIsFromLoad = False
+
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -75,23 +81,43 @@ Public Class frmShippingRecordDTL
         Try
             If Verify() Then
                 If XtraMessageBox.Show(Me, "ยืนยันการบันทึกข้อมูล", "Assign To", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-                    tr = gConnection.Connection.BeginTransaction
 
-                    For Each pRow In miOrderListDAO
-                        Dim lOrder As New OrderSDAO
-                        lOrder.ID = pRow.ID
-                        lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
-                        lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
-                        lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
-                        lOrder.ShippingRemark = ShippingRemark.Text.Trim
-                        lOrder.ShippingEmpID = ShippingEmp.EditValue
-                        lOrder.AssignEmpID = gUserID
-                        lOrder.AssignDate = GetCurrentDate(tr)
-                        lOrder.UpdateAssignShipping(tr)
-                    Next
+                    If mTypeID = 1 Then
+                        tr = gConnection.Connection.BeginTransaction
 
+                        For Each pRow In miOrderListDAO
+                            Dim lOrder As New OrderSDAO
+                            lOrder.ID = pRow.ID
+                            lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
+                            lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
+                            lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
+                            lOrder.ShippingRemark = ShippingRemark.Text.Trim
+                            lOrder.ShippingEmpID = ShippingEmp.EditValue
+                            lOrder.AssignEmpID = gUserID
+                            lOrder.AssignDate = GetCurrentDate(tr)
+                            lOrder.UpdateAssignShipping(tr)
+                        Next
 
-                    tr.Commit()
+                        tr.Commit()
+
+                    ElseIf mTypeID = 2 Then
+                        For Each pRow In miOrderListDAO
+                            Dim lOrder As New Shipping2DAO
+                            If lOrder.InitailData(pRow.ID) Then
+                                lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
+                                lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
+                                lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
+                                lOrder.ShippingRemark = ShippingRemark.Text.Trim
+                                lOrder.ShippingEmpID = ShippingEmp.EditValue
+                                lOrder.AssignEmpID = gUserID
+                                lOrder.AssignDate = GetCurrentDate(tr)
+                                lOrder.ModeData = DataMode.ModeEdit
+                                lOrder.SaveData()
+                            End If
+
+                        Next
+                    End If
+
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     Me.DialogResult = DialogResult.OK
                     Me.Close()

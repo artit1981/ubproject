@@ -28,9 +28,9 @@ Partial Class frmShippingRecordDTL
         Me.ShippingRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.ShippingEmp = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ShippingMethod = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.ShippingPeriod = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.ShippingStatus = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.Root = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.กำหนดเวลาส่ง = New DevExpress.XtraLayout.LayoutControlItem()
@@ -38,15 +38,18 @@ Partial Class frmShippingRecordDTL
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.ShippingMethod = New DevExpress.XtraEditors.ComboBoxEdit()
-        Me.ShippingPeriod = New DevExpress.XtraEditors.ComboBoxEdit()
-        Me.ShippingStatus = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.ShippingRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShippingEmp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ShippingPeriod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.กำหนดเวลาส่ง, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,9 +57,6 @@ Partial Class frmShippingRecordDTL
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ShippingPeriod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageCollection1
@@ -143,27 +143,56 @@ Partial Class frmShippingRecordDTL
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn1
+        'ShippingMethod
         '
-        Me.GridColumn1.Caption = "รหัส"
-        Me.GridColumn1.FieldName = " ID"
-        Me.GridColumn1.Name = "GridColumn1"
+        Me.ShippingMethod.EditValue = CType(0, Short)
+        Me.ShippingMethod.Location = New System.Drawing.Point(90, 60)
+        Me.ShippingMethod.Name = "ShippingMethod"
+        Me.ShippingMethod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingMethod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingMethod.Properties.Appearance.Options.UseFont = True
+        Me.ShippingMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingMethod.Properties.ImmediatePopup = True
+        Me.ShippingMethod.Properties.NullText = "[EditValue is null]"
+        Me.ShippingMethod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingMethod.Properties.PopupSizeable = True
+        Me.ShippingMethod.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingMethod.StyleController = Me.LayoutControl1
+        Me.ShippingMethod.TabIndex = 25
         '
-        'GridColumn5
+        'ShippingPeriod
         '
-        Me.GridColumn5.Caption = "รหัส"
-        Me.GridColumn5.FieldName = "EmpCode"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
+        Me.ShippingPeriod.EditValue = CType(0, Short)
+        Me.ShippingPeriod.Location = New System.Drawing.Point(90, 36)
+        Me.ShippingPeriod.Name = "ShippingPeriod"
+        Me.ShippingPeriod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingPeriod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingPeriod.Properties.Appearance.Options.UseFont = True
+        Me.ShippingPeriod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingPeriod.Properties.ImmediatePopup = True
+        Me.ShippingPeriod.Properties.NullText = "[EditValue is null]"
+        Me.ShippingPeriod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingPeriod.Properties.PopupSizeable = True
+        Me.ShippingPeriod.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingPeriod.StyleController = Me.LayoutControl1
+        Me.ShippingPeriod.TabIndex = 24
         '
-        'GridColumn6
+        'ShippingStatus
         '
-        Me.GridColumn6.Caption = "ชื่อ - นามสกุล"
-        Me.GridColumn6.FieldName = "NAME"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
+        Me.ShippingStatus.EditValue = CType(0, Short)
+        Me.ShippingStatus.Location = New System.Drawing.Point(90, 84)
+        Me.ShippingStatus.Name = "ShippingStatus"
+        Me.ShippingStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingStatus.Properties.Appearance.Options.UseFont = True
+        Me.ShippingStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingStatus.Properties.ImmediatePopup = True
+        Me.ShippingStatus.Properties.NullText = "[EditValue is null]"
+        Me.ShippingStatus.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingStatus.Properties.PopupSizeable = True
+        Me.ShippingStatus.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingStatus.StyleController = Me.LayoutControl1
+        Me.ShippingStatus.TabIndex = 26
         '
         'Root
         '
@@ -226,59 +255,27 @@ Partial Class frmShippingRecordDTL
         Me.EmptySpaceItem1.Size = New System.Drawing.Size(512, 11)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
-        'ShippingMethod
+        'GridColumn1
         '
-        Me.ShippingMethod.EditValue = CType(0, Short)
-        Me.ShippingMethod.Location = New System.Drawing.Point(90, 60)
-        Me.ShippingMethod.Name = "ShippingMethod"
-        Me.ShippingMethod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingMethod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingMethod.Properties.Appearance.Options.UseFont = True
-        Me.ShippingMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingMethod.Properties.ImmediatePopup = True
-        Me.ShippingMethod.Properties.NullText = "[EditValue is null]"
-        Me.ShippingMethod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingMethod.Properties.PopupSizeable = True
-        Me.ShippingMethod.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ShippingMethod.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingMethod.StyleController = Me.LayoutControl1
-        Me.ShippingMethod.TabIndex = 25
+        Me.GridColumn1.Caption = "รหัส"
+        Me.GridColumn1.FieldName = " ID"
+        Me.GridColumn1.Name = "GridColumn1"
         '
-        'ShippingPeriod
+        'GridColumn5
         '
-        Me.ShippingPeriod.EditValue = CType(0, Short)
-        Me.ShippingPeriod.Location = New System.Drawing.Point(90, 36)
-        Me.ShippingPeriod.Name = "ShippingPeriod"
-        Me.ShippingPeriod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingPeriod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingPeriod.Properties.Appearance.Options.UseFont = True
-        Me.ShippingPeriod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingPeriod.Properties.ImmediatePopup = True
-        Me.ShippingPeriod.Properties.NullText = "[EditValue is null]"
-        Me.ShippingPeriod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingPeriod.Properties.PopupSizeable = True
-        Me.ShippingPeriod.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ShippingPeriod.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingPeriod.StyleController = Me.LayoutControl1
-        Me.ShippingPeriod.TabIndex = 24
+        Me.GridColumn5.Caption = "รหัส"
+        Me.GridColumn5.FieldName = "EmpCode"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
         '
-        'ShippingStatus
+        'GridColumn6
         '
-        Me.ShippingStatus.EditValue = CType(0, Short)
-        Me.ShippingStatus.Location = New System.Drawing.Point(90, 84)
-        Me.ShippingStatus.Name = "ShippingStatus"
-        Me.ShippingStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingStatus.Properties.Appearance.Options.UseFont = True
-        Me.ShippingStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingStatus.Properties.ImmediatePopup = True
-        Me.ShippingStatus.Properties.NullText = "[EditValue is null]"
-        Me.ShippingStatus.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingStatus.Properties.PopupSizeable = True
-        Me.ShippingStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.ShippingStatus.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingStatus.StyleController = Me.LayoutControl1
-        Me.ShippingStatus.TabIndex = 26
+        Me.GridColumn6.Caption = "ชื่อ - นามสกุล"
+        Me.GridColumn6.FieldName = "NAME"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 1
         '
         'frmShippingRecordDTL
         '
@@ -303,6 +300,9 @@ Partial Class frmShippingRecordDTL
         CType(Me.ShippingRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ShippingEmp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ShippingPeriod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.กำหนดเวลาส่ง, System.ComponentModel.ISupportInitialize).EndInit()
@@ -310,9 +310,6 @@ Partial Class frmShippingRecordDTL
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ShippingPeriod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

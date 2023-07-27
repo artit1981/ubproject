@@ -126,6 +126,7 @@ Module modGlobal
         NotiNotAssign = 119
         NotiNotSuccess = 120
         ProductGuarantee = 121
+        ShippingRec2 = 122
     End Enum
 
     Public Enum DataMode
