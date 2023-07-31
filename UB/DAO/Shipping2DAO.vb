@@ -199,7 +199,7 @@ Public Class Shipping2DAO
 #End Region
 
 
-    Public Function GetDataTable(ByVal pFromDate As Date, ByVal pToDate As Date) As DataTable
+    Public Function GetDataTable(ByVal pFromDate As Date, ByVal pToDate As Date, ByVal pIsFilterNotifi As Boolean, ByVal pNotifiType As Integer) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
         Try
@@ -212,7 +212,18 @@ Public Class Shipping2DAO
             SQL &= " LEFT OUTER JOIN Employee ON ShippingRec2.EmpID=Employee.EmpID  "
             SQL &= " LEFT OUTER JOIN Employee ShippingEmp ON ShippingRec2.ShippingEmpID=ShippingEmp.EmpID  "
             SQL &= " WHERE OrderDate between '" & formatSQLDate(pFromDate) & "' and '" & formatSQLDate(pToDate) & "'"
-            'SQL &= " AND OrdersDetail.IsDelete =0   "
+            If pIsFilterNotifi = True Then
+                If pNotifiType = 1 Then  'Not Assign
+                    SQL &= " AND  (ShippingRec2.ShippingEmpID is null or ShippingRec2.ShippingEmpID=0)  "
+                Else ''Not Success
+                    SQL &= " AND  ShippingRec2.ShippingEmpID >0 AND ShippingRec2.ShippingStatus='ไม่สำเร็จ'"
+                End If
+
+                If gPrivilegeID > 1 Then 'Not admin
+                    SQL &= " AND Orders.EmpID=" & gEmpID
+                End If
+
+            End If
             SQL &= " ORDER BY OrderID "
             dataTable = gConnection.executeSelectQuery(SQL, Nothing)
         Catch e As Exception

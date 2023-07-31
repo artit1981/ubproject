@@ -1,0 +1,23 @@
+CREATE TABLE [dbo].[ShippingRec2](
+	[OrderID] [bigint] NOT NULL,
+	[OrderCode] [nvarchar](100) NULL,
+	[OrderDate] [date] NULL,
+	[CusName] [nvarchar](100) NULL,
+	[GrandTotal] [numeric](18, 2) NULL,
+	[ReceiptCode] [nvarchar](100) NULL,
+	[BillCode] [nvarchar](100) NULL,
+	[Remark] [nvarchar](500) NULL,
+	[EmpID] [bigint] NULL,
+	[ShippingPeriod] [nvarchar](100) NULL,
+	[ShippingMethod] [nvarchar](100) NULL,
+	[ShippingStatus] [nvarchar](100) NULL,
+	[ShippingRemark] [nvarchar](100) NULL,
+	[ShippingEmpID] [bigint] NULL,
+	[AssignEmpID] [bigint] NULL,
+	[AssignDate] [date] NULL,
+ CONSTRAINT [PK_ShippingRec2] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

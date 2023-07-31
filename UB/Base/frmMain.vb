@@ -958,14 +958,71 @@ Public Class frmMain
 
     Private Sub ShowNotAssign()
         Try
+            Dim lList As New List(Of ShippingRecProperty)
+
+
+
             Dim lcls As New OrderSDAO
             Dim lTable = lcls.GetDataTableForShippingRec(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), False, True, 1)
             If lTable.Rows.Count > 0 Then
+                For Each pRow In lTable.Rows
+                    Dim lRecProperty As New ShippingRecProperty
+                    lRecProperty.IsSelect = False
+                    lRecProperty.ShippingGroup = "บันทึกส่งของ"
+                    lRecProperty.OrderID = pRow("OrderID")
+                    lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                    lRecProperty.OrderDate = pRow("OrderDate")
+                    lRecProperty.CustomerCode = pRow("CustomerCode").ToString.Trim
+                    lRecProperty.Customer = pRow("Customer").ToString.Trim
+                    lRecProperty.OrderStatus = pRow("OrderStatus").ToString.Trim
+                    lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                    lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                    lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                    lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                    lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                    lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                    lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                    lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                    lList.Add(lRecProperty)
+                Next
+
+            End If
+
+            Dim lclsShiping2 As New Shipping2DAO
+
+            lTable = lclsShiping2.GetDataTable(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), True, 1)
+            If lTable.Rows.Count > 0 Then
+                For Each pRow In lTable.Rows
+                    Dim lRecProperty As New ShippingRecProperty
+                    lRecProperty.IsSelect = False
+                    lRecProperty.ShippingGroup = "เพิ่มงานส่งของ"
+                    lRecProperty.OrderID = pRow("OrderID")
+                    lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                    lRecProperty.OrderDate = pRow("OrderDate")
+                    lRecProperty.CustomerCode = ""
+                    lRecProperty.Customer = pRow("Customer").ToString.Trim
+                    lRecProperty.OrderStatus = ""
+                    lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                    lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                    lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                    lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                    lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                    lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                    lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                    lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                    lList.Add(lRecProperty)
+                Next
+
+            End If
+
+            If lList.Count > 0 Then
                 Dim mCtlForm = New frmNotifyAssign
                 With mCtlForm
                     .Text = "แจ้งเตือนรายการไม่มีการบันทึกส่งของ"
                     .MdiParent = Me
-                    .TableData = lTable
+                    .TableData = lList
                     .MenuID = MasterType.NotiNotAssign
                     .Show()
                 End With
@@ -981,14 +1038,70 @@ Public Class frmMain
 
     Private Sub ShowNotSuccess()
         Try
+            Dim lList As New List(Of ShippingRecProperty)
+
             Dim lcls As New OrderSDAO
             Dim lTable = lcls.GetDataTableForShippingRec(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), False, True, 2)
             If lTable.Rows.Count > 0 Then
+                For Each pRow In lTable.Rows
+                    Dim lRecProperty As New ShippingRecProperty
+                    lRecProperty.IsSelect = False
+                    lRecProperty.ShippingGroup = "บันทึกส่งของ"
+                    lRecProperty.OrderID = pRow("OrderID")
+                    lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                    lRecProperty.OrderDate = pRow("OrderDate")
+                    lRecProperty.CustomerCode = pRow("CustomerCode").ToString.Trim
+                    lRecProperty.Customer = pRow("Customer").ToString.Trim
+                    lRecProperty.OrderStatus = pRow("OrderStatus").ToString.Trim
+                    lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                    lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                    lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                    lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                    lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                    lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                    lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                    lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                    lList.Add(lRecProperty)
+                Next
+
+            End If
+
+            Dim lclsShiping2 As New Shipping2DAO
+
+            lTable = lclsShiping2.GetDataTable(New DateTime(GetCurrentDate(Nothing).Year, 1, 1), GetCurrentDate(Nothing), True, 2)
+            If lTable.Rows.Count > 0 Then
+                For Each pRow In lTable.Rows
+                    Dim lRecProperty As New ShippingRecProperty
+                    lRecProperty.IsSelect = False
+                    lRecProperty.ShippingGroup = "เพิ่มงานส่งของ"
+                    lRecProperty.OrderID = pRow("OrderID")
+                    lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                    lRecProperty.OrderDate = pRow("OrderDate")
+                    lRecProperty.CustomerCode = ""
+                    lRecProperty.Customer = pRow("Customer").ToString.Trim
+                    lRecProperty.OrderStatus = ""
+                    lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                    lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                    lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                    lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                    lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                    lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                    lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                    lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                    lList.Add(lRecProperty)
+                Next
+
+            End If
+
+
+            If lList.Count > 0 Then
                 Dim mCtlForm = New frmNotifyAssign
                 With mCtlForm
                     .Text = "แจ้งเตือนบันทึกส่งของไม่สำเร็จ"
                     .MdiParent = Me
-                    .TableData = lTable
+                    .TableData = lList
                     .MenuID = MasterType.NotiNotSuccess
                     .Show()
                 End With

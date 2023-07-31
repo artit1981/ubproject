@@ -1,8 +1,8 @@
 ﻿
 Public Class frmNotifyAssign
-    Private mData As DataTable
-    Public WriteOnly Property TableData() As DataTable
-        Set(ByVal value As DataTable)
+    Private mData As List(Of ShippingRecProperty)
+    Public WriteOnly Property TableData() As List(Of ShippingRecProperty)
+        Set(ByVal value As List(Of ShippingRecProperty))
             mData = value
         End Set
     End Property
@@ -46,6 +46,11 @@ Public Class frmNotifyAssign
 
             .Columns("OrderID").Visible = False
             .Columns("IsSelect").Visible = False
+
+            .Columns("ShippingGroup").Caption = "หน้าจอ"
+            .Columns("ShippingGroup").Width = 100
+            .Columns("ShippingGroup").MaxWidth = 120
+            .Columns("ShippingGroup").OptionsColumn.ReadOnly = True
 
             .Columns("OrderCode").Caption = "เลขที่"
             .Columns("OrderCode").Width = 100

@@ -52,7 +52,7 @@ Public Class frmShippingRecReport
                 dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, True, False, 1)
             ElseIf mTypeID = 2 Then
                 Dim lcls As New Shipping2DAO
-                dataTable = lcls.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue)
+                dataTable = lcls.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue, False, 0)
             End If
 
             If dataTable.Rows.Count > 0 Then

@@ -130,6 +130,7 @@ Partial Class frmShippingRecordMain2
         'AddBar
         '
         Me.AddBar.Caption = "Add"
+        Me.AddBar.Description = "เพิ่ม 1 รายการ"
         Me.AddBar.Id = 42
         Me.AddBar.ImageOptions.ImageIndex = 0
         Me.AddBar.Name = "AddBar"
@@ -137,6 +138,7 @@ Partial Class frmShippingRecordMain2
         'EditBar
         '
         Me.EditBar.Caption = "Edit"
+        Me.EditBar.Description = "แก้ไข 1 รายการ"
         Me.EditBar.Id = 43
         Me.EditBar.ImageOptions.ImageIndex = 1
         Me.EditBar.Name = "EditBar"
@@ -586,7 +588,7 @@ Partial Class frmShippingRecordMain2
         Me.IconOptions.Icon = CType(resources.GetObject("frmShippingRecordMain2.IconOptions.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "frmShippingRecordMain2"
-        Me.Text = "บันทึกส่งของ"
+        Me.Text = "เพิ่มงานส่งของ"
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).EndInit()

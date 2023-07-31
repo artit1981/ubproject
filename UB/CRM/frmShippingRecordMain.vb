@@ -239,6 +239,15 @@ Public Class ShippingRecProperty
         End Set
     End Property
 
+    Private mShippingGroup As String
+    Public Property ShippingGroup() As String
+        Get
+            Return mShippingGroup
+        End Get
+        Set(ByVal value As String)
+            mShippingGroup = value
+        End Set
+    End Property
 
     Private mOrderCode As String
     Public Property OrderCode() As String

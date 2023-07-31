@@ -13,7 +13,7 @@ Public Class frmShippingRecordMain2
         Dim lList As New List(Of ShippingRecProperty)
 
         Try
-            Dim dataTable = lcls.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue)
+            Dim dataTable = lcls.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue, False, 0)
             For Each pRow In dataTable.Rows
                 Dim lRecProperty As New ShippingRecProperty
                 lRecProperty.IsSelect = False

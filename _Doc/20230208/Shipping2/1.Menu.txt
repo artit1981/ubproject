@@ -1,0 +1,1 @@
+INSERT INTO  [Menu]([MenuID],[ShowMode],[System],[Module],[MenuName],[MenuDisplay],[TableName],[IsVisible],[IsEnable],[IsAdd],[IsEdit],[IsDelete],[IsPrint],[IsImport],[IsCreateQuick],[IsCopy],[IsAssign],[IsConvert]) VALUES (122,3,'CRM','ฝ่ายขาย' ,'ShippingRecord2Bar','เพิ่มงานส่งของ' ,'ShippingRec2',1 ,1 ,0,0,0,0,0,0,0,0,0);
