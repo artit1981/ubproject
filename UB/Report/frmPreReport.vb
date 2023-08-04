@@ -369,11 +369,11 @@ Public Class frmPreReport
                 End If
 
                 Select Case mOrderType
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.PurchaseOrder, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
                         lSnCodeList = ""
                         If chkSN.Checked = True Then
                             lSN = New SnDAO
-                            lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "")
+                            lSNTable = lSN.GetDataTable(lOrderList, ConvertNullToZero(pRow.Item("ID")), lclsTmpProList.ProductID, "", Nothing, False, "", False)
                             For Each pRowSn As DataRow In lSNTable.Rows
                                 If lSnCodeList = "" Then
                                     lSnCodeList = ConvertNullToString(pRowSn.Item("SerialNumberNo"))

@@ -61,6 +61,10 @@ Partial Class frmAgency
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.CreditTabPage = New DevExpress.XtraTab.XtraTabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ChqDayTo = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.BillDayTo = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.IsMainCompanyNo = New System.Windows.Forms.RadioButton()
         Me.IsMainCompanyYes = New System.Windows.Forms.RadioButton()
@@ -106,10 +110,8 @@ Partial Class frmAgency
         Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.ChqDayTo = New DevExpress.XtraEditors.ComboBoxEdit()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.BillDayTo = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.BarCode = New DevExpress.XtraEditors.TextEdit()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -124,6 +126,8 @@ Partial Class frmAgency
         CType(Me.txtCompanyName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CreditTabPage.SuspendLayout()
+        CType(Me.ChqDayTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BillDayTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.cboCurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,8 +146,7 @@ Partial Class frmAgency
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
-        CType(Me.ChqDayTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BillDayTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BarCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -153,11 +156,11 @@ Partial Class frmAgency
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(893, 485)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(893, 492)
         Me.XtraTabControl1.TabIndex = 7
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.CreditTabPage, Me.HiastoryTabPage, Me.AddressTabPage, Me.SWOTTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -168,6 +171,8 @@ Partial Class frmAgency
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.Label6)
+        Me.GeneralTabPage.Controls.Add(Me.BarCode)
         Me.GeneralTabPage.Controls.Add(Me.btnCompanyType)
         Me.GeneralTabPage.Controls.Add(Me.Label27)
         Me.GeneralTabPage.Controls.Add(Me.CustomerID)
@@ -197,7 +202,7 @@ Partial Class frmAgency
         Me.GeneralTabPage.Controls.Add(Me.txtRemark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(891, 467)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -206,8 +211,8 @@ Partial Class frmAgency
         Me.btnCompanyType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCompanyType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCompanyType, "")
-        Me.btnCompanyType.Image = CType(resources.GetObject("btnCompanyType.Image"), System.Drawing.Image)
-        Me.btnCompanyType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCompanyType.ImageOptions.Image = CType(resources.GetObject("btnCompanyType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCompanyType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCompanyType.Location = New System.Drawing.Point(356, 243)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCompanyType, True)
         Me.btnCompanyType.Name = "btnCompanyType"
@@ -243,7 +248,7 @@ Partial Class frmAgency
         Me.CustomerID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.CustomerID.Properties.NullText = ""
         Me.CustomerID.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
-        Me.CustomerID.Properties.View = Me.GridView2
+        Me.CustomerID.Properties.PopupView = Me.GridView2
         Me.CustomerID.Size = New System.Drawing.Size(212, 20)
         Me.CustomerID.TabIndex = 10
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CustomerID, "Text")
@@ -344,8 +349,8 @@ Partial Class frmAgency
         Me.btnCustomerID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCustomerID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCustomerID, "")
-        Me.btnCustomerID.Image = CType(resources.GetObject("btnCustomerID.Image"), System.Drawing.Image)
-        Me.btnCustomerID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCustomerID.ImageOptions.Image = CType(resources.GetObject("btnCustomerID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCustomerID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCustomerID.Location = New System.Drawing.Point(699, 243)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCustomerID, True)
         Me.btnCustomerID.Name = "btnCustomerID"
@@ -382,11 +387,10 @@ Partial Class frmAgency
         Me.CompanyType.Properties.Appearance.Options.UseFont = True
         Me.CompanyType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CompanyType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CompanyType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.CompanyType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CompanyType.Properties.DropDownRows = 10
         Me.CompanyType.Properties.ImmediatePopup = True
         Me.CompanyType.Properties.NullText = ""
-        Me.CompanyType.Properties.NullValuePromptShowForEmptyValue = True
         Me.CompanyType.Properties.PopupWidth = 300
         Me.CompanyType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CompanyType.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -497,8 +501,8 @@ Partial Class frmAgency
         Me.btnGenID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnGenID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnGenID, "")
-        Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
-        Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnGenID.ImageOptions.Image = CType(resources.GetObject("btnGenID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnGenID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnGenID.Location = New System.Drawing.Point(357, 32)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnGenID, True)
         Me.btnGenID.Name = "btnGenID"
@@ -535,11 +539,10 @@ Partial Class frmAgency
         Me.cboBusinessType.Properties.Appearance.Options.UseFont = True
         Me.cboBusinessType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboBusinessType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboBusinessType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboBusinessType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboBusinessType.Properties.DropDownRows = 10
         Me.cboBusinessType.Properties.ImmediatePopup = True
         Me.cboBusinessType.Properties.NullText = ""
-        Me.cboBusinessType.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboBusinessType.Properties.PopupWidth = 300
         Me.cboBusinessType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboBusinessType.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -561,11 +564,10 @@ Partial Class frmAgency
         Me.cboIndustryType.Properties.Appearance.Options.UseFont = True
         Me.cboIndustryType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboIndustryType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.cboIndustryType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboIndustryType.Properties.DropDownRows = 10
         Me.cboIndustryType.Properties.ImmediatePopup = True
         Me.cboIndustryType.Properties.NullText = ""
-        Me.cboIndustryType.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboIndustryType.Properties.PopupWidth = 300
         Me.cboIndustryType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboIndustryType.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -579,8 +581,8 @@ Partial Class frmAgency
         Me.btnRefreshBusinessType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshBusinessType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshBusinessType, "")
-        Me.btnRefreshBusinessType.Image = CType(resources.GetObject("btnRefreshBusinessType.Image"), System.Drawing.Image)
-        Me.btnRefreshBusinessType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshBusinessType.ImageOptions.Image = CType(resources.GetObject("btnRefreshBusinessType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshBusinessType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshBusinessType.Location = New System.Drawing.Point(699, 216)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshBusinessType, True)
         Me.btnRefreshBusinessType.Name = "btnRefreshBusinessType"
@@ -611,8 +613,8 @@ Partial Class frmAgency
         Me.btnRefreshIndustryType.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshIndustryType.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshIndustryType, "")
-        Me.btnRefreshIndustryType.Image = CType(resources.GetObject("btnRefreshIndustryType.Image"), System.Drawing.Image)
-        Me.btnRefreshIndustryType.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshIndustryType.ImageOptions.Image = CType(resources.GetObject("btnRefreshIndustryType.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshIndustryType.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshIndustryType.Location = New System.Drawing.Point(356, 216)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshIndustryType, True)
         Me.btnRefreshIndustryType.Name = "btnRefreshIndustryType"
@@ -634,8 +636,8 @@ Partial Class frmAgency
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(623, 14)
         Me.Label29.TabIndex = 121
-        Me.Label29.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label29.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label29, "")
         '
         'Label28
@@ -650,8 +652,8 @@ Partial Class frmAgency
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(623, 14)
         Me.Label28.TabIndex = 120
-        Me.Label28.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label28.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label28, "")
         '
         'Label21
@@ -781,9 +783,63 @@ Partial Class frmAgency
         Me.CreditTabPage.Controls.Add(Me.Branch)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.CreditTabPage, True)
         Me.CreditTabPage.Name = "CreditTabPage"
-        Me.CreditTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.CreditTabPage.Size = New System.Drawing.Size(891, 460)
         Me.CreditTabPage.Text = "ข้อมูลทางการเงิน"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.CreditTabPage, "")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label13, "")
+        Me.Label13.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label13.Location = New System.Drawing.Point(577, 147)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label13, True)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(20, 14)
+        Me.Label13.TabIndex = 362
+        Me.Label13.Text = "ถึง"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label13, "")
+        '
+        'ChqDayTo
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ChqDayTo, "TextChanged")
+        Me.ChqDayTo.Location = New System.Drawing.Point(598, 145)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.ChqDayTo, True)
+        Me.ChqDayTo.Name = "ChqDayTo"
+        Me.ChqDayTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ChqDayTo.Properties.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.ChqDayTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        Me.ChqDayTo.Size = New System.Drawing.Size(95, 20)
+        Me.ChqDayTo.TabIndex = 18
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ChqDayTo, "Text")
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label10, "")
+        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label10.Location = New System.Drawing.Point(235, 147)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(20, 14)
+        Me.Label10.TabIndex = 361
+        Me.Label10.Text = "ถึง"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
+        '
+        'BillDayTo
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.BillDayTo, "TextChanged")
+        Me.BillDayTo.Location = New System.Drawing.Point(255, 145)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.BillDayTo, True)
+        Me.BillDayTo.Name = "BillDayTo"
+        Me.BillDayTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.BillDayTo.Properties.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.BillDayTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        Me.BillDayTo.Size = New System.Drawing.Size(95, 20)
+        Me.BillDayTo.TabIndex = 17
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.BillDayTo, "Text")
         '
         'GroupControl3
         '
@@ -867,11 +923,10 @@ Partial Class frmAgency
         Me.cboCurrency.Properties.Appearance.Options.UseFont = True
         Me.cboCurrency.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboCurrency.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboCurrency.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", 50, "สกุลเงิน"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ExchangeRate", "อัตราแลกเปลี่ยน", 40, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.cboCurrency.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "สกุลเงิน", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ExchangeRate", "อัตราแลกเปลี่ยน", 40, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboCurrency.Properties.DropDownRows = 10
         Me.cboCurrency.Properties.ImmediatePopup = True
         Me.cboCurrency.Properties.NullText = ""
-        Me.cboCurrency.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboCurrency.Properties.PopupWidth = 300
         Me.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboCurrency.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -979,11 +1034,10 @@ Partial Class frmAgency
         Me.cboTerritory.Properties.Appearance.Options.UseFont = True
         Me.cboTerritory.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboTerritory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboTerritory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("TerritoryCode", 50, "รหัสทีมขาย"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 70, "ชื่อทีมขาย")})
+        Me.cboTerritory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("TerritoryCode", "รหัสทีมขาย", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อทีมขาย", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboTerritory.Properties.DropDownRows = 10
         Me.cboTerritory.Properties.ImmediatePopup = True
         Me.cboTerritory.Properties.NullText = ""
-        Me.cboTerritory.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboTerritory.Properties.PopupWidth = 300
         Me.cboTerritory.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboTerritory.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -997,8 +1051,8 @@ Partial Class frmAgency
         Me.btnRefreshTerritory.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshTerritory.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshTerritory, "")
-        Me.btnRefreshTerritory.Image = CType(resources.GetObject("btnRefreshTerritory.Image"), System.Drawing.Image)
-        Me.btnRefreshTerritory.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshTerritory.ImageOptions.Image = CType(resources.GetObject("btnRefreshTerritory.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshTerritory.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshTerritory.Location = New System.Drawing.Point(352, 215)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshTerritory, True)
         Me.btnRefreshTerritory.Name = "btnRefreshTerritory"
@@ -1068,8 +1122,8 @@ Partial Class frmAgency
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(623, 14)
         Me.Label30.TabIndex = 273
-        Me.Label30.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label30.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label30, "")
         '
         'Label31
@@ -1099,11 +1153,10 @@ Partial Class frmAgency
         Me.VatTypeID.Properties.Appearance.Options.UseFont = True
         Me.VatTypeID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.VatTypeID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.VatTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", 30, "รหัสภาษี"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อรูปแบบภาษี", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("VatRate", "อัตราภาษี (%)", 20, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.VatTypeID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "รหัสภาษี", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อรูปแบบภาษี", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("VatRate", "อัตราภาษี (%)", 20, DevExpress.Utils.FormatType.Numeric, "n2", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.VatTypeID.Properties.DropDownRows = 10
         Me.VatTypeID.Properties.ImmediatePopup = True
         Me.VatTypeID.Properties.NullText = ""
-        Me.VatTypeID.Properties.NullValuePromptShowForEmptyValue = True
         Me.VatTypeID.Properties.PopupWidth = 300
         Me.VatTypeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.VatTypeID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -1132,8 +1185,8 @@ Partial Class frmAgency
         Me.btnVatTypeID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnVatTypeID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnVatTypeID, "")
-        Me.btnVatTypeID.Image = CType(resources.GetObject("btnVatTypeID.Image"), System.Drawing.Image)
-        Me.btnVatTypeID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnVatTypeID.ImageOptions.Image = CType(resources.GetObject("btnVatTypeID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnVatTypeID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnVatTypeID.Location = New System.Drawing.Point(351, 91)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnVatTypeID, True)
         Me.btnVatTypeID.Name = "btnVatTypeID"
@@ -1155,11 +1208,10 @@ Partial Class frmAgency
         Me.CriterionPriceID.Properties.Appearance.Options.UseFont = True
         Me.CriterionPriceID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.CriterionPriceID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.CriterionPriceID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", 50, "ชื่อข้อความ"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", 70, "รายละเอียด")})
+        Me.CriterionPriceID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeThai", "ชื่อข้อความ", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodeEng", "", 40, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Remark", "รายละเอียด", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.CriterionPriceID.Properties.DropDownRows = 10
         Me.CriterionPriceID.Properties.ImmediatePopup = True
         Me.CriterionPriceID.Properties.NullText = ""
-        Me.CriterionPriceID.Properties.NullValuePromptShowForEmptyValue = True
         Me.CriterionPriceID.Properties.PopupWidth = 300
         Me.CriterionPriceID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.CriterionPriceID.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -1173,8 +1225,8 @@ Partial Class frmAgency
         Me.btnCriterionPrice.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCriterionPrice.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnCriterionPrice, "")
-        Me.btnCriterionPrice.Image = CType(resources.GetObject("btnCriterionPrice.Image"), System.Drawing.Image)
-        Me.btnCriterionPrice.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnCriterionPrice.ImageOptions.Image = CType(resources.GetObject("btnCriterionPrice.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCriterionPrice.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnCriterionPrice.Location = New System.Drawing.Point(351, 118)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnCriterionPrice, True)
         Me.btnCriterionPrice.Name = "btnCriterionPrice"
@@ -1203,8 +1255,8 @@ Partial Class frmAgency
         Me.btnRefreshCurrency.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshCurrency.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshCurrency, "")
-        Me.btnRefreshCurrency.Image = CType(resources.GetObject("btnRefreshCurrency.Image"), System.Drawing.Image)
-        Me.btnRefreshCurrency.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCurrency.ImageOptions.Image = CType(resources.GetObject("btnRefreshCurrency.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCurrency.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshCurrency.Location = New System.Drawing.Point(695, 91)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshCurrency, True)
         Me.btnRefreshCurrency.Name = "btnRefreshCurrency"
@@ -1233,8 +1285,8 @@ Partial Class frmAgency
         Me.btnRefreshCreditRule.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefreshCreditRule.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefreshCreditRule, "")
-        Me.btnRefreshCreditRule.Image = CType(resources.GetObject("btnRefreshCreditRule.Image"), System.Drawing.Image)
-        Me.btnRefreshCreditRule.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefreshCreditRule.ImageOptions.Image = CType(resources.GetObject("btnRefreshCreditRule.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefreshCreditRule.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefreshCreditRule.Location = New System.Drawing.Point(352, 64)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefreshCreditRule, True)
         Me.btnRefreshCreditRule.Name = "btnRefreshCreditRule"
@@ -1270,11 +1322,10 @@ Partial Class frmAgency
         Me.cboCreditRule.Properties.Appearance.Options.UseFont = True
         Me.cboCreditRule.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         Me.cboCreditRule.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cboCreditRule.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditRoleCode", 30, "รหัสเครดิต"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อเครดิต", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditDay", "จำนวนวัน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far)})
+        Me.cboCreditRule.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditRoleCode", "รหัสเครดิต", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อเครดิต", 50, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CreditDay", "จำนวนวัน", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.cboCreditRule.Properties.DropDownRows = 10
         Me.cboCreditRule.Properties.ImmediatePopup = True
         Me.cboCreditRule.Properties.NullText = ""
-        Me.cboCreditRule.Properties.NullValuePromptShowForEmptyValue = True
         Me.cboCreditRule.Properties.PopupWidth = 300
         Me.cboCreditRule.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
         Me.cboCreditRule.Properties.ThrowExceptionOnInvalidLookUpEditValueType = True
@@ -1310,8 +1361,8 @@ Partial Class frmAgency
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(623, 14)
         Me.Label4.TabIndex = 258
-        Me.Label4.Text = "_________________________________________________________________________________" & _
-            "_______"
+        Me.Label4.Text = "_________________________________________________________________________________" &
+    "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label4, "")
         '
         'Branch
@@ -1338,7 +1389,7 @@ Partial Class frmAgency
         Me.HiastoryTabPage.Controls.Add(Me.UcHistory1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.HiastoryTabPage, True)
         Me.HiastoryTabPage.Name = "HiastoryTabPage"
-        Me.HiastoryTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.HiastoryTabPage.Size = New System.Drawing.Size(891, 460)
         Me.HiastoryTabPage.Text = "ข้อมูลส่วนตัว"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.HiastoryTabPage, "")
         '
@@ -1349,7 +1400,7 @@ Partial Class frmAgency
         Me.UcHistory1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcHistory1, True)
         Me.UcHistory1.Name = "UcHistory1"
-        Me.UcHistory1.Size = New System.Drawing.Size(887, 457)
+        Me.UcHistory1.Size = New System.Drawing.Size(891, 460)
         Me.UcHistory1.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcHistory1, "")
         '
@@ -1360,7 +1411,7 @@ Partial Class frmAgency
         Me.AddressTabPage.Controls.Add(Me.UcAddress1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AddressTabPage, True)
         Me.AddressTabPage.Name = "AddressTabPage"
-        Me.AddressTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.AddressTabPage.Size = New System.Drawing.Size(891, 460)
         Me.AddressTabPage.Text = "ที่อยู่"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AddressTabPage, "")
         '
@@ -1371,7 +1422,7 @@ Partial Class frmAgency
         Me.UcAddress1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcAddress1, True)
         Me.UcAddress1.Name = "UcAddress1"
-        Me.UcAddress1.Size = New System.Drawing.Size(887, 457)
+        Me.UcAddress1.Size = New System.Drawing.Size(891, 460)
         Me.UcAddress1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAddress1, "")
         '
@@ -1382,7 +1433,7 @@ Partial Class frmAgency
         Me.SWOTTabPage.Controls.Add(Me.UcSWOT1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.SWOTTabPage, True)
         Me.SWOTTabPage.Name = "SWOTTabPage"
-        Me.SWOTTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.SWOTTabPage.Size = New System.Drawing.Size(891, 460)
         Me.SWOTTabPage.Text = "SWOT"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.SWOTTabPage, "")
         '
@@ -1393,7 +1444,7 @@ Partial Class frmAgency
         Me.UcSWOT1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcSWOT1, True)
         Me.UcSWOT1.Name = "UcSWOT1"
-        Me.UcSWOT1.Size = New System.Drawing.Size(887, 457)
+        Me.UcSWOT1.Size = New System.Drawing.Size(891, 460)
         Me.UcSWOT1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcSWOT1, "")
         '
@@ -1403,7 +1454,7 @@ Partial Class frmAgency
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.NoteTabPage.Size = New System.Drawing.Size(891, 460)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1414,7 +1465,7 @@ Partial Class frmAgency
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(887, 457)
+        Me.UcNote1.Size = New System.Drawing.Size(891, 460)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1424,7 +1475,7 @@ Partial Class frmAgency
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(891, 460)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1435,7 +1486,7 @@ Partial Class frmAgency
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(887, 457)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(891, 460)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1445,7 +1496,7 @@ Partial Class frmAgency
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(887, 457)
+        Me.AdminTabPage.Size = New System.Drawing.Size(891, 460)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -1459,59 +1510,36 @@ Partial Class frmAgency
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
-        'Label13
+        'BarCode
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label13, "")
-        Me.Label13.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label13.Location = New System.Drawing.Point(577, 147)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label13, True)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(20, 14)
-        Me.Label13.TabIndex = 362
-        Me.Label13.Text = "ถึง"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label13, "")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.BarCode, "TextChanged")
+        Me.BarCode.EditValue = ""
+        Me.BarCode.EnterMoveNextControl = True
+        Me.BarCode.Location = New System.Drawing.Point(486, 32)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.BarCode, True)
+        Me.BarCode.Name = "BarCode"
+        Me.BarCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.BarCode.Properties.Appearance.Options.UseFont = True
+        Me.BarCode.Properties.MaxLength = 50
+        Me.BarCode.Properties.ValidateOnEnterKey = True
+        Me.BarCode.Size = New System.Drawing.Size(212, 20)
+        Me.BarCode.TabIndex = 248
+        Me.BarCode.TabStop = False
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.BarCode, "Text")
         '
-        'ChqDayTo
+        'Label6
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.ChqDayTo, "TextChanged")
-        Me.ChqDayTo.Location = New System.Drawing.Point(598, 145)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.ChqDayTo, True)
-        Me.ChqDayTo.Name = "ChqDayTo"
-        Me.ChqDayTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ChqDayTo.Properties.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.ChqDayTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.ChqDayTo.Size = New System.Drawing.Size(95, 20)
-        Me.ChqDayTo.TabIndex = 18
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.ChqDayTo, "Text")
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label10, "")
-        Me.Label10.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label10.Location = New System.Drawing.Point(235, 147)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label10, True)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(20, 14)
-        Me.Label10.TabIndex = 361
-        Me.Label10.Text = "ถึง"
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label10, "")
-        '
-        'BillDayTo
-        '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.BillDayTo, "TextChanged")
-        Me.BillDayTo.Location = New System.Drawing.Point(255, 145)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.BillDayTo, True)
-        Me.BillDayTo.Name = "BillDayTo"
-        Me.BillDayTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.BillDayTo.Properties.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.BillDayTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.BillDayTo.Size = New System.Drawing.Size(95, 20)
-        Me.BillDayTo.TabIndex = 17
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.BillDayTo, "Text")
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label6, "")
+        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label6.Location = New System.Drawing.Point(394, 35)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label6, True)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(90, 14)
+        Me.Label6.TabIndex = 249
+        Me.Label6.Text = "รหัสสร้างบาร์โค้ด"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label6, "")
         '
         'frmAgency
         '
@@ -1538,6 +1566,8 @@ Partial Class frmAgency
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CreditTabPage.ResumeLayout(False)
         Me.CreditTabPage.PerformLayout()
+        CType(Me.ChqDayTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BillDayTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         Me.GroupControl3.PerformLayout()
@@ -1557,9 +1587,9 @@ Partial Class frmAgency
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
-        CType(Me.ChqDayTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BillDayTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BarCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
@@ -1651,4 +1681,6 @@ Partial Class frmAgency
     Friend WithEvents ChqDayTo As DevExpress.XtraEditors.ComboBoxEdit
     Private WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents BillDayTo As DevExpress.XtraEditors.ComboBoxEdit
+    Private WithEvents Label6 As Label
+    Friend WithEvents BarCode As DevExpress.XtraEditors.TextEdit
 End Class

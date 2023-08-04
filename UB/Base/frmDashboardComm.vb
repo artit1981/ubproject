@@ -151,10 +151,10 @@ Public Class frmDashboardComm
 
         Dim items() As CheckedListBoxItem = {
               New CheckedListBoxItem("มกราคม", True), New CheckedListBoxItem("กุมภาพันธ์", True),
-              New CheckedListBoxItem("มีนาคม ", True), New CheckedListBoxItem("เมษายน", True),
-              New CheckedListBoxItem("พฤษภาคม ", True), New CheckedListBoxItem("มิถุนายน", True),
-              New CheckedListBoxItem("กรกฎาคม ", True), New CheckedListBoxItem("สิงหาคม", True),
-              New CheckedListBoxItem("กันยายน ", True), New CheckedListBoxItem("ตุลาคม", True),
+              New CheckedListBoxItem("มีนาคม", True), New CheckedListBoxItem("เมษายน", True),
+              New CheckedListBoxItem("พฤษภาคม", True), New CheckedListBoxItem("มิถุนายน", True),
+              New CheckedListBoxItem("กรกฎาคม", True), New CheckedListBoxItem("สิงหาคม", True),
+              New CheckedListBoxItem("กันยายน", True), New CheckedListBoxItem("ตุลาคม", True),
               New CheckedListBoxItem("พฤศจิกายน", True), New CheckedListBoxItem("ธันวาคม", True)}
         cboMonth.Properties.Items.AddRange(items)
     End Sub
@@ -212,7 +212,7 @@ Public Class frmDashboardComm
     End Sub
 
     Private Function GetMonthNumber(ByVal pMonthName As String) As Integer
-        Select Case pMonthName
+        Select Case pMonthName.Trim
             Case "มกราคม" : Return 1
             Case "กุมภาพันธ์" : Return 2
             Case "มีนาคม" : Return 3

@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[RunningFormatSN](
+	[FormatFront] [nvarchar](50) NULL,	
+	[FormatDate] [nvarchar](50) NULL,
+	[FormatMidle] [nvarchar](50) NULL,
+	[RunningCount] [int] NULL,
+	[FormatYear] [nvarchar](50) NULL,
+	[CreateBy] [bigint] NULL,
+	[CreateTime] [datetime] NULL,
+	[ModifiedBy] [bigint] NULL,
+	[ModifiedTime] [datetime] NULL,		
+) ON [PRIMARY]
+GO
+

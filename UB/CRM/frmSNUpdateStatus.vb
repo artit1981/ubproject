@@ -69,7 +69,7 @@ Public Class frmSNUpdateStatus
         Dim dataSN As New DataTable()
         Try
             mSnList = New List(Of SnDAO)
-            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New','Close'", Nothing, False, "")
+            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New','Close'", Nothing, False, "", False)
             For Each dr2 As DataRow In dataSN.Rows
                 lclsSN = New SnDAO
                 lclsSN.IsSelect = False

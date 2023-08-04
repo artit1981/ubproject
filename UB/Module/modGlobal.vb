@@ -127,6 +127,7 @@ Module modGlobal
         NotiNotSuccess = 120
         ProductGuarantee = 121
         ShippingRec2 = 122
+        RunningSN = 123
     End Enum
 
     Public Enum DataMode
@@ -202,6 +203,7 @@ Module modGlobal
     Public gIsApproveOrderUser As Boolean
 
     Public gCustomerID As Long '' For Refresh uc...
+    Public gSupplierID As Long
 
     Public gIsCheckError As Boolean = False
     Public gConnectionError As Boolean = False

@@ -1270,4 +1270,10 @@ Public Class frmMain
         frmShippingRecordMain2.MdiParent = Me
         frmShippingRecordMain2.Show()
     End Sub
+
+    Private Sub RunningSNBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles RunningSNBar.ItemClick
+        InsertActivity(DataMode.ModeOpen, MasterType.RunningSN, "", Nothing)
+        frmRuningFormatSN.MdiParent = Me
+        frmRuningFormatSN.Show()
+    End Sub
 End Class

@@ -544,6 +544,18 @@ Public Class ProductDAO
         End Set
     End Property
 
+
+    Dim mBarCode As String = ""
+    Public Property BarCode() As String
+        Get
+            Return mBarCode
+        End Get
+        Set(ByVal value As String)
+            mBarCode = value
+        End Set
+    End Property
+
+
 #End Region
 
 
@@ -658,6 +670,7 @@ Public Class ProductDAO
                     sku3 = ConvertNullToString(dr("sku3"))
                     sku4 = ConvertNullToString(dr("sku4"))
                     sku5 = ConvertNullToString(dr("sku5"))
+                    BarCode = ConvertNullToString(dr("BarCode"))
 
                     'Calc Price
                     If pCustomerID > 0 Then
@@ -926,7 +939,7 @@ Public Class ProductDAO
                     SQL &=  " ,ProductCategoryID,ProductBrandID,ProductTypeID,ProductGroupID,ProductGroup1,ProductGroup2"
                     SQL &=  " ,ProductGroup3,ProductGroup4,ProductGroup5,ProductDimension1,ProductDimension2,ProductDimension3 "
                     SQL &=  " ,ProductDimension4,ProductDimension5,Weight,Size,Generation,Color"
-                    SQL &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,ProductGuaranteeID,sku1,sku2,sku3,sku4,sku5)"
+                    SQL &= " ,Remark,CreateBy,CreateTime,IsInActive,IsDelete,ImportTXID,ProductGuaranteeID,sku1,sku2,sku3,sku4,sku5,BarCode)"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @Code"
                     SQL &=  " ,  @ProductName"
@@ -975,7 +988,7 @@ Public Class ProductDAO
                     SQL &= " ,  @sku2"
                     SQL &= " ,  @sku3"
                     SQL &= " ,  @sku4"
-                    SQL &= " ,  @sku5"
+                    SQL &= " ,  @sku5,@BarCode"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Product SET "
@@ -1021,6 +1034,7 @@ Public Class ProductDAO
                     SQL &= " ,  sku3=@sku3"
                     SQL &= " ,  sku4=@sku4"
                     SQL &= " ,  sku5=@sku5"
+                    SQL &= " ,  BarCode=@BarCode"
                     SQL &=  " ,Remark= @Remark"
                     SQL &=  " ,ModifiedBy= @gUserID"
                     SQL &=  " ,ModifiedTime= @CreateTime"
@@ -1083,7 +1097,7 @@ Public Class ProductDAO
             myCommand.Parameters.Add(New SqlParameter("@sku3", ConvertNullToString(sku3)))
             myCommand.Parameters.Add(New SqlParameter("@sku4", ConvertNullToString(sku4)))
             myCommand.Parameters.Add(New SqlParameter("@sku5", ConvertNullToString(sku5)))
-
+            myCommand.Parameters.Add(New SqlParameter("@BarCode", ConvertNullToString(BarCode)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@mIsDelete", 0))

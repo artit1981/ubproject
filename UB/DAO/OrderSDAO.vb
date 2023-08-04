@@ -934,7 +934,7 @@ Public Class OrderSDAO
 
                                     lclsSN = New SnDAO
                                     lSNTable = Nothing
-                                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", tr, False, "")
+                                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", tr, False, "", False)
                                     For Each dr2 As DataRow In lSNTable.Rows
                                         lclsSN2 = New SnDAO
                                         lclsSN2.SetStatusBySN(tr, ConvertNullToZero(dr2("ProductID")), ConvertNullToString(dr2("SerialNumberNo")) _
@@ -1491,7 +1491,7 @@ Public Class OrderSDAO
                     lOrderList.Add(pOrderID)
 
                     lclsSN = New SnDAO
-                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", ptr, False, "")
+                    lSNTable = lclsSN.GetDataTable(lOrderList, pProList.ID, pProList.ProductID, "", ptr, False, "", False)
                     lclsSN = Nothing
                     For Each dr2 As DataRow In lSNTable.Rows
                         lclsSN = New SnDAO
@@ -1510,7 +1510,7 @@ Public Class OrderSDAO
                 lOrderList.Add(pOrderID)
 
                 lclsSN = New SnDAO
-                lSNTable = lclsSN.GetDataTable(lOrderList, pProductDAOs.ID, pProductDAOs.ProductID, "", ptr, False, "")
+                lSNTable = lclsSN.GetDataTable(lOrderList, pProductDAOs.ID, pProductDAOs.ProductID, "", ptr, False, "", False)
                 lclsSN = Nothing
                 For Each dr2 As DataRow In lSNTable.Rows
                     lclsSN = New SnDAO

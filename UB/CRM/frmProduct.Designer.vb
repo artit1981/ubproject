@@ -223,6 +223,8 @@ Partial Class frmProduct
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.FormChangedComponent1 = New UB.FormChangedComponent(Me.components)
         Me.AlertControl1 = New DevExpress.XtraBars.Alerter.AlertControl(Me.components)
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.BarCode = New DevExpress.XtraEditors.TextEdit()
         CType(Me.ProductNameS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Remark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -298,6 +300,7 @@ Partial Class frmProduct
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
+        CType(Me.BarCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProductNameS
@@ -809,6 +812,8 @@ Partial Class frmProduct
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.Label36)
+        Me.GeneralTabPage.Controls.Add(Me.BarCode)
         Me.GeneralTabPage.Controls.Add(Me.ProductGuaranteeID)
         Me.GeneralTabPage.Controls.Add(Me.Price4)
         Me.GeneralTabPage.Controls.Add(Me.UnitBuyRefresh)
@@ -2839,6 +2844,37 @@ Partial Class frmProduct
         'FormChangedComponent1
         '
         '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label36, "")
+        Me.Label36.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label36.Location = New System.Drawing.Point(52, 477)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label36, True)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(90, 14)
+        Me.Label36.TabIndex = 251
+        Me.Label36.Text = "รหัสสร้างบาร์โค้ด"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label36, "")
+        '
+        'BarCode
+        '
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.BarCode, "TextChanged")
+        Me.BarCode.EditValue = ""
+        Me.BarCode.EnterMoveNextControl = True
+        Me.BarCode.Location = New System.Drawing.Point(152, 474)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.BarCode, True)
+        Me.BarCode.Name = "BarCode"
+        Me.BarCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.BarCode.Properties.Appearance.Options.UseFont = True
+        Me.BarCode.Properties.MaxLength = 50
+        Me.BarCode.Properties.ValidateOnEnterKey = True
+        Me.BarCode.Size = New System.Drawing.Size(272, 20)
+        Me.BarCode.TabIndex = 250
+        Me.BarCode.TabStop = False
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.BarCode, "Text")
+        '
         'frmProduct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2929,6 +2965,7 @@ Partial Class frmProduct
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
+        CType(Me.BarCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3136,4 +3173,6 @@ Partial Class frmProduct
     Private WithEvents Label38 As Label
     Friend WithEvents sku1 As DevExpress.XtraEditors.TextEdit
     Friend WithEvents ProductGuaranteeID As DevExpress.XtraEditors.LookUpEdit
+    Private WithEvents Label36 As Label
+    Friend WithEvents BarCode As DevExpress.XtraEditors.TextEdit
 End Class

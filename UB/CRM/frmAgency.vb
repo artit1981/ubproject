@@ -55,7 +55,7 @@ Public Class frmAgency
             mcls.Code = AccountCode.Text.Trim
             mcls.CompanyName = txtCompanyName.Text.Trim
             mcls.Rating = cboRating.EditValue
-            'mcls.ContactPerson = ConvertNullToString(ContactPerson.EditValue)
+            mcls.BarCode = ConvertNullToString(BarCode.Text)
             mcls.NoOfEmployee = ConvertNullToZero(txtNoOfEmployee.EditValue)
             mcls.VatTypeID = ConvertNullToZero(VatTypeID.GetColumnValue("ID"))
             mcls.BillDay = ConvertNullToZero(BillDay.EditValue)
@@ -141,7 +141,7 @@ Public Class frmAgency
                     End If
                     txtCompanyName.Text = mcls.CompanyName
                     cboRating.Text = mcls.Rating
-                    'ContactPerson.EditValue = mcls.ContactPerson
+                    BarCode.Text = mcls.BarCode
                     txtNoOfEmployee.EditValue = mcls.NoOfEmployee
                     VatTypeID.EditValue = mcls.VatTypeID
                     txtRemark.Text = mcls.Remark

@@ -804,6 +804,132 @@ Module modFunction
 
     End Function
 
+    Public Function GenSN(ByRef pSNList As List(Of SnDAO), ByVal pSupID As Long, ByVal pProductID As Long, ByVal pForceClear As Boolean, ByVal pStartNo As Long, ByVal pUnits As Long, ByVal pOrderType As Integer) As String
+        Dim lstrExam As String = "", lRunCount As String = "", i As Integer, lLastCount As Long = 1
+        Dim lCode As String = "", lMidleChar As String = "", lSNAdd As Long = 0
+        'Dim lclsSN As SnDAO
+
+        Try
+
+            If IsNothing(pSNList) Then
+                pSNList = New List(Of SnDAO)
+            Else
+                If pForceClear Then
+                    pSNList.Clear()
+                End If
+
+            End If
+
+            'Get Product bar code
+            Dim lclsPro As New ProductDAO
+            Dim lProductBarCode As String = ""
+            If lclsPro.InitailData(pProductID, "", "", "") Then
+                lProductBarCode = lclsPro.BarCode
+            End If
+
+            'Get Suplier bar code
+            Dim lclsSup As New CustomerDAO
+            Dim lSuplierBarCode As String = ""
+            If lclsSup.InitailData(pSupID) Then
+                lSuplierBarCode = lclsSup.BarCode
+            End If
+
+            Dim lclsFormat As New RunningFormatSNDAO
+            If lclsFormat.InitailData(Nothing) Then
+
+
+                If pStartNo < 0 Then
+                    If pProductID > 0 Then
+                        Dim lclsSN As New SnDAO
+                        Dim dataSN As New DataTable()
+                        Dim lLastSN As String = ""
+
+                        dataSN = lclsSN.GetDataTable(Nothing, 0, pProductID, "'New','Close'", Nothing, False, "", True)
+
+                        For Each dr2 As DataRow In dataSN.Rows
+                            If ConvertNullToZero(dr2("IsReset")) = 1 Then
+                                lLastSN = 0
+                            Else
+                                lLastSN = ConvertNullToString(dr2("SerialNumberNo"))
+                            End If
+                        Next
+
+                        Dim myChars() As Char = lLastSN.ToCharArray()
+                        lLastSN = ""
+                        For Each ch As Char In myChars  ' Loop for get only numberic
+                            If Char.IsDigit(ch) Then
+                                lLastSN &= ch
+                            Else
+                                lLastSN = ""
+                            End If
+                        Next
+                        If lLastSN <> "" And IsNumeric(lLastSN) Then
+                            lLastCount = lLastSN + 1
+                        Else
+                            lLastCount = 1
+                        End If
+                    End If
+                Else
+                    lLastCount = pStartNo
+                End If
+
+                If lclsFormat.FormatMidle <> "None" Then
+                    lMidleChar = lclsFormat.FormatMidle
+                Else
+                    lMidleChar = ""
+                End If
+
+                lstrExam &= lProductBarCode
+                lstrExam &= lMidleChar
+                lstrExam &= lSuplierBarCode
+                lstrExam &= lMidleChar
+
+                If lclsFormat.FormatDate <> "None" Then
+                    lclsFormat.FormatDate = Replace(lclsFormat.FormatDate, "mm", "MM")
+                    If lclsFormat.FormatYear = "TH" Then
+                        lstrExam &= Now.ToString(lclsFormat.FormatDate, cTH)
+                    Else
+                        lstrExam &= Now.ToString(lclsFormat.FormatDate, cEN)
+                    End If
+                    lstrExam &= lMidleChar
+                End If
+
+                For i = 1 To lclsFormat.RunningCount
+                    lRunCount &= "0"
+                Next
+
+                lSNAdd = pSNList.Count
+
+                Do Until lSNAdd >= pUnits
+                    lCode = lstrExam & lLastCount.ToString(lRunCount)
+
+                    Dim lclsSN = New SnDAO
+                    If pOrderType = MasterType.StockIn.ToString Or (pOrderType = MasterType.UpdateStock.ToString And pUnits > 0) Then
+
+                        If lclsSN.CheckSNIsExist(pProductID, lCode, "'New','Close'", Nothing) = True Then
+                            Return "Serial Number ซ้ำ :" & lCode
+                            Exit Do
+                        End If
+                    End If
+
+                    lclsSN.SerialNumberID = 0
+                    lclsSN.SerialNumberNo = lCode
+                    lclsSN.Status = "New"
+                    lclsSN.IsDelete = 0
+                    lSNAdd += 1
+                    lLastCount += 1
+                    pSNList.Add(lclsSN)
+                Loop
+                Return ""
+            End If
+        Catch ex As Exception
+            Err.Raise(Err.Number, ex.Source, "modFunction.GenSN" & ex.Message)
+        Finally
+
+        End Try
+
+    End Function
+
 #Region "Orders"
 
     Public Function GetOrderTypeFromID(ByVal pOrderID As Long, ByRef tr As SqlTransaction) As Long

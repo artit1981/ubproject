@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmSN
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class frmSN
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSN))
@@ -30,13 +30,7 @@ Partial Class frmSN
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.ImageCollection1 = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.RunningCount = New DevExpress.XtraEditors.CalcEdit()
-        Me.FormatMidle = New DevExpress.XtraEditors.ComboBoxEdit()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.FormatFront = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.ProductName = New DevExpress.XtraEditors.TextEdit()
         Me.SNNo = New DevExpress.XtraEditors.TextEdit()
@@ -44,8 +38,6 @@ Partial Class frmSN
         Me.btnGenID = New DevExpress.XtraEditors.SimpleButton()
         Me.ControlNavigator1 = New DevExpress.XtraEditors.ControlNavigator()
         Me.SNType = New DevExpress.XtraEditors.RadioGroup()
-        Me.StartNo = New DevExpress.XtraEditors.CalcEdit()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.btnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.btnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.btnLoadSN = New DevExpress.XtraEditors.SimpleButton()
@@ -63,14 +55,10 @@ Partial Class frmSN
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RunningCount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FormatMidle.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FormatFront.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SNNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SNType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.StartNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SnLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,7 +87,6 @@ Partial Class frmSN
         Me.GridView1.OptionsFilter.AllowFilterIncrementalSearch = False
         Me.GridView1.OptionsFilter.AllowMRUFilterList = False
         Me.GridView1.OptionsFilter.AllowMultiSelectInCheckedFilterPopup = False
-        Me.GridView1.OptionsFilter.FilterEditorUseMenuForOperandsAndOperators = False
         Me.GridView1.OptionsFilter.ShowAllTableValuesInCheckedFilterPopup = False
         Me.GridView1.OptionsFind.AllowFindPanel = False
         Me.GridView1.OptionsFind.ShowFindButton = False
@@ -180,72 +167,6 @@ Partial Class frmSN
         Me.ImageCollection1.Images.SetKeyName(0, "_active__no.png")
         Me.ImageCollection1.Images.SetKeyName(1, "1394817194_stock_insert-slide.png")
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(305, 135)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(95, 14)
-        Me.Label1.TabIndex = 334
-        Me.Label1.Text = "หลักเลข Running"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label7.Location = New System.Drawing.Point(233, 135)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(52, 14)
-        Me.Label7.TabIndex = 333
-        Me.Label7.Text = "อักขระคั่น"
-        '
-        'RunningCount
-        '
-        Me.RunningCount.EnterMoveNextControl = True
-        Me.RunningCount.Location = New System.Drawing.Point(305, 150)
-        Me.RunningCount.Name = "RunningCount"
-        Me.RunningCount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RunningCount.Properties.Appearance.Options.UseFont = True
-        Me.RunningCount.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RunningCount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RunningCount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RunningCount.Properties.Mask.EditMask = "n0"
-        Me.RunningCount.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.RunningCount.Properties.MaxLength = 10
-        Me.RunningCount.Properties.Precision = 0
-        Me.RunningCount.Size = New System.Drawing.Size(95, 20)
-        Me.RunningCount.TabIndex = 3
-        '
-        'FormatMidle
-        '
-        Me.FormatMidle.EnterMoveNextControl = True
-        Me.FormatMidle.Location = New System.Drawing.Point(233, 150)
-        Me.FormatMidle.Name = "FormatMidle"
-        Me.FormatMidle.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.FormatMidle.Properties.Appearance.Options.UseFont = True
-        Me.FormatMidle.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.FormatMidle.Properties.ImmediatePopup = True
-        Me.FormatMidle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.FormatMidle.Properties.UseCtrlScroll = True
-        Me.FormatMidle.Properties.ValidateOnEnterKey = True
-        Me.FormatMidle.Size = New System.Drawing.Size(66, 20)
-        Me.FormatMidle.TabIndex = 2
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.Location = New System.Drawing.Point(152, 135)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(59, 14)
-        Me.Label8.TabIndex = 329
-        Me.Label8.Text = "อักขระหน้า"
-        '
         'LabelControl2
         '
         Me.LabelControl2.Location = New System.Drawing.Point(25, 57)
@@ -253,19 +174,6 @@ Partial Class frmSN
         Me.LabelControl2.Size = New System.Drawing.Size(30, 13)
         Me.LabelControl2.TabIndex = 327
         Me.LabelControl2.Text = "จำนวน"
-        '
-        'FormatFront
-        '
-        Me.FormatFront.EditValue = ""
-        Me.FormatFront.EnterMoveNextControl = True
-        Me.FormatFront.Location = New System.Drawing.Point(152, 150)
-        Me.FormatFront.Name = "FormatFront"
-        Me.FormatFront.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.FormatFront.Properties.Appearance.Options.UseFont = True
-        Me.FormatFront.Properties.MaxLength = 50
-        Me.FormatFront.Properties.ValidateOnEnterKey = True
-        Me.FormatFront.Size = New System.Drawing.Size(75, 20)
-        Me.FormatFront.TabIndex = 1
         '
         'LabelControl1
         '
@@ -295,13 +203,13 @@ Partial Class frmSN
         'SNNo
         '
         Me.SNNo.EditValue = ""
-        Me.SNNo.Location = New System.Drawing.Point(152, 112)
+        Me.SNNo.Location = New System.Drawing.Point(152, 120)
         Me.SNNo.Name = "SNNo"
         Me.SNNo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.SNNo.Properties.Appearance.Options.UseFont = True
         Me.SNNo.Properties.MaxLength = 50
         Me.SNNo.Properties.ValidateOnEnterKey = True
-        Me.SNNo.Size = New System.Drawing.Size(307, 20)
+        Me.SNNo.Size = New System.Drawing.Size(370, 20)
         Me.SNNo.TabIndex = 1
         Me.SNNo.ToolTip = "ยิงบาร์โค้ด หรือพิมพ์รหัสแล้ว Enter"
         Me.SNNo.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
@@ -326,9 +234,9 @@ Partial Class frmSN
         '
         Me.btnGenID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnGenID.Appearance.Options.UseFont = True
-        Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
-        Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnGenID.Location = New System.Drawing.Point(465, 150)
+        Me.btnGenID.ImageOptions.Image = CType(resources.GetObject("btnGenID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnGenID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnGenID.Location = New System.Drawing.Point(151, 146)
         Me.btnGenID.Name = "btnGenID"
         Me.btnGenID.Size = New System.Drawing.Size(88, 23)
         Me.btnGenID.TabIndex = 5
@@ -369,42 +277,13 @@ Partial Class frmSN
         Me.SNType.Size = New System.Drawing.Size(121, 55)
         Me.SNType.TabIndex = 323
         '
-        'StartNo
-        '
-        Me.StartNo.EnterMoveNextControl = True
-        Me.StartNo.Location = New System.Drawing.Point(406, 150)
-        Me.StartNo.Name = "StartNo"
-        Me.StartNo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.StartNo.Properties.Appearance.Options.UseFont = True
-        Me.StartNo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.StartNo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.StartNo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.StartNo.Properties.Mask.EditMask = "n0"
-        Me.StartNo.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.StartNo.Properties.MaxLength = 10
-        Me.StartNo.Properties.Precision = 0
-        Me.StartNo.Size = New System.Drawing.Size(53, 20)
-        Me.StartNo.TabIndex = 4
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(406, 135)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(55, 14)
-        Me.Label2.TabIndex = 336
-        Me.Label2.Text = "เลขเริ่มต้น"
-        '
         'btnOK
         '
         Me.btnOK.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnOK.Appearance.Options.UseFont = True
         Me.btnOK.Appearance.Options.UseImage = True
-        Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
-        Me.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnOK.ImageOptions.Image = CType(resources.GetObject("btnOK.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnOK.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnOK.Location = New System.Drawing.Point(554, 12)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(82, 31)
@@ -417,9 +296,9 @@ Partial Class frmSN
         Me.btnCancel.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnCancel.Appearance.Options.UseFont = True
         Me.btnCancel.Appearance.Options.UseImage = True
-        Me.btnCancel.DialogResult = DialogResult.Cancel
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.ImageOptions.Image = CType(resources.GetObject("btnCancel.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnCancel.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnCancel.Location = New System.Drawing.Point(554, 51)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(82, 31)
@@ -431,11 +310,11 @@ Partial Class frmSN
         '
         Me.btnLoadSN.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnLoadSN.Appearance.Options.UseFont = True
-        Me.btnLoadSN.Image = CType(resources.GetObject("btnLoadSN.Image"), System.Drawing.Image)
-        Me.btnLoadSN.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnLoadSN.Location = New System.Drawing.Point(465, 101)
+        Me.btnLoadSN.ImageOptions.Image = CType(resources.GetObject("btnLoadSN.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnLoadSN.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnLoadSN.Location = New System.Drawing.Point(554, 115)
         Me.btnLoadSN.Name = "btnLoadSN"
-        Me.btnLoadSN.Size = New System.Drawing.Size(88, 23)
+        Me.btnLoadSN.Size = New System.Drawing.Size(82, 23)
         Me.btnLoadSN.TabIndex = 337
         Me.btnLoadSN.Text = "Load S/N"
         Me.btnLoadSN.ToolTip = "Auto Gen S/N"
@@ -470,8 +349,8 @@ Partial Class frmSN
         Me.btnPrint.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnPrint.Appearance.Options.UseFont = True
         Me.btnPrint.Appearance.Options.UseImage = True
-        Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
-        Me.btnPrint.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnPrint.ImageOptions.Image = CType(resources.GetObject("btnPrint.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnPrint.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
         Me.btnPrint.Location = New System.Drawing.Point(554, 11)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(82, 31)
@@ -515,8 +394,8 @@ Partial Class frmSN
         Me.btnFind.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnFind.Appearance.Options.UseFont = True
         Me.btnFind.Appearance.Options.UseImage = True
-        Me.btnFind.Image = CType(resources.GetObject("btnFind.Image"), System.Drawing.Image)
-        Me.btnFind.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnFind.ImageOptions.Image = CType(resources.GetObject("btnFind.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnFind.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnFind.Location = New System.Drawing.Point(213, 23)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(27, 24)
@@ -528,11 +407,11 @@ Partial Class frmSN
         '
         Me.btnSelectSN.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnSelectSN.Appearance.Options.UseFont = True
-        Me.btnSelectSN.Image = CType(resources.GetObject("btnSelectSN.Image"), System.Drawing.Image)
-        Me.btnSelectSN.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleRight
-        Me.btnSelectSN.Location = New System.Drawing.Point(465, 126)
+        Me.btnSelectSN.ImageOptions.Image = CType(resources.GetObject("btnSelectSN.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnSelectSN.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight
+        Me.btnSelectSN.Location = New System.Drawing.Point(554, 140)
         Me.btnSelectSN.Name = "btnSelectSN"
-        Me.btnSelectSN.Size = New System.Drawing.Size(88, 23)
+        Me.btnSelectSN.Size = New System.Drawing.Size(82, 23)
         Me.btnSelectSN.TabIndex = 343
         Me.btnSelectSN.Text = "Select S/N"
         Me.btnSelectSN.ToolTip = "Auto Gen S/N"
@@ -601,7 +480,7 @@ Partial Class frmSN
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(647, 435)
+        Me.ClientSize = New System.Drawing.Size(651, 435)
         Me.Controls.Add(Me.UnitMainName)
         Me.Controls.Add(Me.UnitName)
         Me.Controls.Add(Me.LabelControl4)
@@ -615,15 +494,7 @@ Partial Class frmSN
         Me.Controls.Add(Me.btnLoadSN)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.StartNo)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.RunningCount)
-        Me.Controls.Add(Me.FormatMidle)
-        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.LabelControl2)
-        Me.Controls.Add(Me.FormatFront)
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.ProductName)
         Me.Controls.Add(Me.SNNo)
@@ -634,7 +505,7 @@ Partial Class frmSN
         Me.Controls.Add(Me.SNType)
         Me.Controls.Add(Me.Units)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frmSN.IconOptions.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmSN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -642,14 +513,10 @@ Partial Class frmSN
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RunningCount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FormatMidle.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FormatFront.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SNNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SNType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.StartNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SnLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Units.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UnitsMain.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -667,20 +534,12 @@ Partial Class frmSN
     Friend WithEvents ProductID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
     Friend WithEvents ImageCollection1 As DevExpress.Utils.ImageCollection
-    Private WithEvents Label1 As System.Windows.Forms.Label
-    Private WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents RunningCount As DevExpress.XtraEditors.CalcEdit
-    Friend WithEvents FormatMidle As DevExpress.XtraEditors.ComboBoxEdit
-    Private WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents FormatFront As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SNNo As DevExpress.XtraEditors.TextEdit
     Friend WithEvents btnGenID As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents ControlNavigator1 As DevExpress.XtraEditors.ControlNavigator
     Friend WithEvents SNType As DevExpress.XtraEditors.RadioGroup
-    Friend WithEvents StartNo As DevExpress.XtraEditors.CalcEdit
-    Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents ProductName As DevExpress.XtraEditors.TextEdit
     Private WithEvents ProductCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents btnOK As DevExpress.XtraEditors.SimpleButton

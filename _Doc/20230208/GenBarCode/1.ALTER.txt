@@ -1,0 +1,3 @@
+ALTER TABLE dbo.Customer ADD BarCode nvarchar(100) NULL ;
+ALTER TABLE dbo.Product ADD BarCode nvarchar(100) NULL ;
+ALTER TABLE dbo.SerialNumber ADD IsReset int NULL default 0;

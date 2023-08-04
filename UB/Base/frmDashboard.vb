@@ -21,7 +21,7 @@ Public Class frmDashboard
     Private Sub frmDashboard_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             InitCondition()
-            LoadData()
+            'LoadData()
 
             ' Add a title to the chart and hide the legend.
             Dim chartTitle1 As New ChartTitle With {
@@ -54,6 +54,7 @@ Public Class frmDashboard
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
+
     Private Sub LoadData()
         Try
 
@@ -72,7 +73,7 @@ Public Class frmDashboard
 
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-
+            Me.Cursor = Cursors.Default
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
@@ -95,10 +96,10 @@ Public Class frmDashboard
 
         Dim items() As CheckedListBoxItem = {
               New CheckedListBoxItem("มกราคม", True), New CheckedListBoxItem("กุมภาพันธ์", True),
-              New CheckedListBoxItem("มีนาคม ", True), New CheckedListBoxItem("เมษายน", True),
-              New CheckedListBoxItem("พฤษภาคม ", True), New CheckedListBoxItem("มิถุนายน", True),
-              New CheckedListBoxItem("กรกฎาคม ", True), New CheckedListBoxItem("สิงหาคม", True),
-              New CheckedListBoxItem("กันยายน ", True), New CheckedListBoxItem("ตุลาคม", True),
+              New CheckedListBoxItem("มีนาคม", True), New CheckedListBoxItem("เมษายน", True),
+              New CheckedListBoxItem("พฤษภาคม", True), New CheckedListBoxItem("มิถุนายน", True),
+              New CheckedListBoxItem("กรกฎาคม", True), New CheckedListBoxItem("สิงหาคม", True),
+              New CheckedListBoxItem("กันยายน", True), New CheckedListBoxItem("ตุลาคม", True),
               New CheckedListBoxItem("พฤศจิกายน", True), New CheckedListBoxItem("ธันวาคม", True)}
         ListMonth.Items.AddRange(items)
     End Sub
@@ -146,7 +147,7 @@ Public Class frmDashboard
     End Sub
 
     Private Function GetMonthNumber(ByVal pMonthName As String) As Integer
-        Select Case pMonthName
+        Select Case pMonthName.Trim
             Case "มกราคม" : Return 1
             Case "กุมภาพันธ์" : Return 2
             Case "มีนาคม" : Return 3
@@ -473,17 +474,20 @@ Public Class frmDashboard
     End Sub
 
     Private Sub ListYear_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles ListYear.ItemCheck
-        If ListYear.CheckedItems.Count > 0 Then
-            LoadData()
-        End If
+        'If ListYear.CheckedItems.Count > 0 Then
+        '    LoadData()
+        'End If
     End Sub
 
     Private Sub ListMonth_ItemCheck(sender As Object, e As EventArgs) Handles ListMonth.ItemCheck
-        If ListMonth.CheckedItems.Count > 0 Then
-            LoadData()
-        End If
+        'If ListMonth.CheckedItems.Count > 0 Then
+        '    LoadData()
+        'End If
     End Sub
 
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
+        LoadData()
+    End Sub
 End Class
 
 

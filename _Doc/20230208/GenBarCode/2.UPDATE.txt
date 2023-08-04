@@ -1,0 +1,3 @@
+update dbo.Customer set BarCode='';
+update dbo.Product set BarCode=SUBSTRING([ProductCode], CHARINDEX('-', [ProductCode]) + 1, LEN([ProductCode]));
+update dbo.SerialNumber set IsReset=0;

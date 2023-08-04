@@ -706,7 +706,7 @@ Module modOrder
         Dim lSNList As New List(Of SnDAO)
         LoadSN = Nothing
         Try
-            dataSN = lclsSN.GetDataTable(pOrderID, pProListID, pProID, "", Nothing, True, "")
+            dataSN = lclsSN.GetDataTable(pOrderID, pProListID, pProID, "", Nothing, True, "", False)
             For Each dr2 As DataRow In dataSN.Rows
                 lclsSN = New SnDAO
                 lclsSN.SerialNumberID = 0

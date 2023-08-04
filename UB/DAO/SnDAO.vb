@@ -86,35 +86,42 @@ Public Class SnDAO
 
 
     Public Function GetDataTable(ByVal pOrderID As List(Of Long), ByVal pProductListID As Long, ByVal pProductID As Long _
-                                  , ByVal pStatus As String, ByRef tr As SqlTransaction, ByVal pIsDelete As Boolean, ByVal pExcludeSnID As String) As DataTable
+                                  , ByVal pStatus As String, ByRef tr As SqlTransaction, ByVal pIsDelete As Boolean, ByVal pExcludeSnID As String, ByVal pIsOrderDesc As Boolean) As DataTable
         Dim SQL As String
         Dim dataTable As New DataTable()
         Dim lRefOrderList As String = ConvertListToString(pOrderID)
         Try
-            SQL = "SELECT  SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID,IsDelete"
-            SQL &=  " FROM SerialNumber"
-            SQL &=  " WHERE 1=1 "
+            SQL = "SELECT  "
+            If pIsOrderDesc Then
+                SQL &= " TOP (1) "
+            End If
+
+            SQL &= " SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID,IsDelete,IsReset "
+            SQL &= " FROM SerialNumber"
+            SQL &= " WHERE 1=1 "
             If lRefOrderList <> "" Then
-                SQL &=  " AND OrderID in(" & lRefOrderList & ")"
+                SQL &= " AND OrderID in(" & lRefOrderList & ")"
             End If
             If pProductListID > 0 Then
-                SQL &=  " AND ProductListID=" & pProductListID
+                SQL &= " AND ProductListID=" & pProductListID
             End If
             If pProductID > 0 Then
-                SQL &=  " AND ProductID =" & pProductID
+                SQL &= " AND ProductID =" & pProductID
             End If
             If pStatus <> "" Then
-                SQL &=  " AND Status in(" & pStatus & ")"
+                SQL &= " AND Status in(" & pStatus & ")"
             End If
             If pExcludeSnID <> "" Then ' กันกรณีขายสินค้าเดี่ยวกันใน 1 บิล จะตัด SN ซ้ำเพราะ DB ยังไม่ Commit
-                SQL &=  " AND SerialNumberID not in(" & pExcludeSnID & ")"
+                SQL &= " AND SerialNumberID not in(" & pExcludeSnID & ")"
             End If
             If pIsDelete = False Then
-                SQL &=  " and SerialNumber.IsDelete =0   "
+                SQL &= " and SerialNumber.IsDelete =0   "
             End If
 
-            SQL &=  " ORDER BY SerialNumberID"
-
+            SQL &= " ORDER BY SerialNumberID"
+            If pIsOrderDesc Then
+                SQL &= " DESC "
+            End If
             dataTable = gConnection.executeSelectQuery(SQL, tr)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "SnDAO.GetDataTable : " & e.Message)
@@ -153,7 +160,7 @@ Public Class SnDAO
             Select Case pMode
                 Case DataMode.ModeNew
                     SerialNumberID = GenNewID("SerialNumberID", "SerialNumber", tr)
-                    SQL = " INSERT INTO SerialNumber  (SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID ,IsDelete)"
+                    SQL = " INSERT INTO SerialNumber  (SerialNumberID,SerialNumberNo,OrderID,ProductID,Status,ProductListID ,IsDelete,IsReset)"
                     SQL &=  " VALUES ( "
                     SQL &=  "   @SerialNumberID"
                     SQL &=  " ,  @SerialNumberNo"
@@ -161,7 +168,8 @@ Public Class SnDAO
                     SQL &=  " ,  @ProductID"
                     SQL &=  " ,  @Status"
                     SQL &=  " ,  @ProductListID"
-                    SQL &=  " , 0 "
+                    SQL &= " , 0 "
+                    SQL &= " , 0 "
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " Update SerialNumber   "
@@ -297,8 +305,8 @@ Public Class SnDAO
         SQL = ""
         Try
             SQL = " Update SerialNumber set IsDelete=1  "
-            SQL &=  " WHERE  OrderID=" & pOrderID
-            SQL &=  " AND ProductListID not in (" & pProductListRemove & ") and IsDelete=0 "
+            SQL &= " WHERE  OrderID=" & pOrderID
+            SQL &= " AND ProductListID not in (" & pProductListRemove & ") and IsDelete=0 "
             gConnection.executeInsertQuery(SQL, tr)
             Return True
         Catch e As Exception
@@ -306,5 +314,28 @@ Public Class SnDAO
             Return False
         End Try
     End Function
+
+    'Reset Running of all product in last sn no.
+    Public Sub ResetRunningNo(ByVal tr As SqlTransaction)
+        Dim SQL As String
+        Try
+            SQL = " update [SerialNumber] set IsReset=1   "
+            SQL &= "  where SerialNumberID in("
+            SQL &= "  	select SerialNumberID"
+            SQL &= "  	FROM (select SerialNumberID, SerialNumberNo,ProductID,Status,OrderID, ROW_NUMBER() "
+            SQL &= "  		over (partition by ProductID ORDER BY SerialNumberID DESC) as MAX_ID"
+            SQL &= "  		from [SerialNumber]"
+            SQL &= "  		where Status in ('New','Close')"
+            SQL &= "  	  ) x"
+            SQL &= "  	WHERE MAX_ID = 1 "
+            SQL &= " )"
+            gConnection.executeInsertQuery(SQL, tr)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, "SnDAO.ResetRunningNo : " & e.Message)
+
+        End Try
+    End Sub
+
+
 #End Region
 End Class

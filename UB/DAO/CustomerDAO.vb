@@ -367,6 +367,16 @@ Public Class CustomerDAO
         End Set
     End Property
 
+    Dim mBarCode As String = ""
+    Public Property BarCode() As String
+        Get
+            Return mBarCode
+        End Get
+        Set(ByVal value As String)
+            mBarCode = value
+        End Set
+    End Property
+
 #End Region
 
     Public Function CHECKSUM_AGG() As Long
@@ -465,7 +475,7 @@ Public Class CustomerDAO
             SQL &= " ,C.[BankAccountID1]"
             SQL &= " ,C.[BankAccountID2]"
             SQL &= " ,C.[BankAccountID3]"
-            SQL &= " ,CompanyParent.CustomerID as CompanyParentID"
+            SQL &= " ,CompanyParent.CustomerID as CompanyParentID,BarCode"
             SQL &= " FROM [Customer] C "
             SQL &= " LEFT OUTER JOIN Customer as CompanyParent ON CompanyParent.CompanyRelateID=C.CustomerID  "
             If pName <> "" Then
@@ -558,6 +568,8 @@ Public Class CustomerDAO
                             ModifiedBy = ""
                         End If
                     End If
+
+                    BarCode = ConvertNullToString(dr("BarCode"))
 
 
                     AddressS = Nothing
@@ -789,7 +801,7 @@ Public Class CustomerDAO
                     SQL &=  " ,CreateBy,CreateTime,IsInActive,IsDelete,CustomerZoneID,SendBy,CreditGroupID "
                     SQL &=  " ,Title,Firstname,LastName,CompanyName,Position,Subject,LeadType,LeadStatus,DisqualifyStatus"
                     SQL &=  " ,RelateAccountID,IsConvert,Capital,CustomerType,ContactPersonID,CustomerGroupID,IsCorporation,Branch,ImportTXID,IsMainCompany"
-                    SQL &=  " ,BankAccountID1,BankAccountID2,BankAccountID3"
+                    SQL &= " ,BankAccountID1,BankAccountID2,BankAccountID3,BarCode"
                     SQL &=  " )"
                     SQL &=  " VALUES ( @mIDs"
                     SQL &=  " ,  @CustomerCode"
@@ -849,7 +861,7 @@ Public Class CustomerDAO
                     SQL &=  " ,  @Branch"
                     SQL &=  " ,  @ImportTXID"
                     SQL &=  " ,  @IsMainCompany"
-                    SQL &=  " ,  @BankAccountID1,@BankAccountID2,@BankAccountID3"
+                    SQL &= " ,  @BankAccountID1,@BankAccountID2,@BankAccountID3,@BarCode"
                     SQL &=  " ) "
                 Case DataMode.ModeEdit
                     SQL = " UPDATE Customer"
@@ -904,7 +916,8 @@ Public Class CustomerDAO
                     SQL &=  " ,IsMainCompany= @IsMainCompany"
                     SQL &=  " ,BankAccountID1= @BankAccountID1"
                     SQL &=  " ,BankAccountID2= @BankAccountID2"
-                    SQL &=  " ,BankAccountID3= @BankAccountID3"
+                    SQL &= " ,BankAccountID3= @BankAccountID3"
+                    SQL &= " ,BarCode= @BarCode"
                     SQL &=  " WHERE CustomerID= @mIDs"
                 Case DataMode.ModeDelete
                     SQL = " UPDATE Customer SET IsDelete=@IsDelete "
@@ -975,6 +988,7 @@ Public Class CustomerDAO
             myCommand.Parameters.Add(New SqlParameter("@BankAccountID1", ConvertNullToZero(BankAccountID1)))
             myCommand.Parameters.Add(New SqlParameter("@BankAccountID2", ConvertNullToZero(BankAccountID2)))
             myCommand.Parameters.Add(New SqlParameter("@BankAccountID3", ConvertNullToZero(BankAccountID3)))
+            myCommand.Parameters.Add(New SqlParameter("@BarCode", ConvertNullToString(BarCode)))
             Select Case ModeData
                 Case DataMode.ModeNew
                     myCommand.Parameters.Add(New SqlParameter("@IsDelete", 0))

@@ -119,7 +119,7 @@ Partial Public Class rptTaxSell
         '
         Me.IsMainCompanyDTL.CanGrow = False
         Me.IsMainCompanyDTL.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.IsMainCompany")})
-        Me.IsMainCompanyDTL.LocationFloat = New DevExpress.Utils.PointFloat(586.7499!, 0.0!)
+        Me.IsMainCompanyDTL.LocationFloat = New DevExpress.Utils.PointFloat(586.7499!, 0!)
         Me.IsMainCompanyDTL.Name = "IsMainCompanyDTL"
         Me.IsMainCompanyDTL.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.IsMainCompanyDTL.SizeF = New System.Drawing.SizeF(31.95844!, 23.0!)
@@ -129,7 +129,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel25.CanGrow = False
         Me.XrLabel25.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.CustomerTaxID")})
-        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(404.4792!, 0.0!)
+        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(404.4792!, 0!)
         Me.XrLabel25.Name = "XrLabel25"
         Me.XrLabel25.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel25.SizeF = New System.Drawing.SizeF(105.5208!, 23.0!)
@@ -137,9 +137,8 @@ Partial Public Class rptTaxSell
         '
         'XrLabel20
         '
-        Me.XrLabel20.CanGrow = False
         Me.XrLabel20.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ProductName")})
-        Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(115.0!, 0.0!)
+        Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(115.0!, 0!)
         Me.XrLabel20.Name = "XrLabel20"
         Me.XrLabel20.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel20.SizeF = New System.Drawing.SizeF(99.0!, 22.37504!)
@@ -149,7 +148,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel15.CanGrow = False
         Me.XrLabel15.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.OrderDate", "{0:dd MMM yy}")})
-        Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(36.0!, 0.0!)
+        Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(36.0!, 0!)
         Me.XrLabel15.Name = "XrLabel15"
         Me.XrLabel15.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel15.SizeF = New System.Drawing.SizeF(75.94225!, 22.37504!)
@@ -161,7 +160,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel23.CanGrow = False
         Me.XrLabel23.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Total", "{0:#,##0.00}")})
-        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(620.6249!, 0.0!)
+        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(620.6249!, 0!)
         Me.XrLabel23.Name = "XrLabel23"
         Me.XrLabel23.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel23.SizeF = New System.Drawing.SizeF(95.125!, 22.37504!)
@@ -185,7 +184,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel21.CanGrow = False
         Me.XrLabel21.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Customer")})
-        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(215.7499!, 0.0!)
+        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(215.7499!, 0!)
         Me.XrLabel21.Name = "XrLabel21"
         Me.XrLabel21.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel21.SizeF = New System.Drawing.SizeF(188.2501!, 22.37504!)
@@ -442,13 +441,13 @@ Partial Public Class rptTaxSell
         '
         'XrCrossBandBox1
         '
-        Me.XrCrossBandBox1.BorderWidth = 1
+        Me.XrCrossBandBox1.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
+        Me.XrCrossBandBox1.BorderWidth = 1.0!
         Me.XrCrossBandBox1.EndBand = Me.ReportFooter
         Me.XrCrossBandBox1.EndPointFloat = New DevExpress.Utils.PointFloat(3.474413!, 5.235261!)
-        Me.XrCrossBandBox1.LocationFloat = New DevExpress.Utils.PointFloat(3.474413!, 0.0!)
         Me.XrCrossBandBox1.Name = "XrCrossBandBox1"
         Me.XrCrossBandBox1.StartBand = Me.GroupHeader1
-        Me.XrCrossBandBox1.StartPointFloat = New DevExpress.Utils.PointFloat(3.474413!, 0.0!)
+        Me.XrCrossBandBox1.StartPointFloat = New DevExpress.Utils.PointFloat(3.474413!, 0!)
         Me.XrCrossBandBox1.WidthF = 800.6923!
         '
         'ReportFooter
@@ -603,7 +602,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel26.CanGrow = False
         Me.XrLabel26.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(511.3021!, 0.0!)
+        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(511.3021!, 0!)
         Me.XrLabel26.Name = "XrLabel26"
         Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel26.SizeF = New System.Drawing.SizeF(108.4478!, 32.70839!)
@@ -685,7 +684,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel18.CanGrow = False
         Me.XrLabel18.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(620.6249!, 0.0!)
+        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(620.6249!, 0!)
         Me.XrLabel18.Multiline = True
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -699,7 +698,7 @@ Partial Public Class rptTaxSell
         '
         Me.XrLabel19.CanGrow = False
         Me.XrLabel19.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(719.9999!, 0.0!)
+        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(719.9999!, 0!)
         Me.XrLabel19.Multiline = True
         Me.XrLabel19.Name = "XrLabel19"
         Me.XrLabel19.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -739,29 +738,29 @@ Partial Public Class rptTaxSell
         '
         'XrCrossBandLine1
         '
+        Me.XrCrossBandLine1.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine1.EndBand = Me.ReportFooter
         Me.XrCrossBandLine1.EndPointFloat = New DevExpress.Utils.PointFloat(214.0!, 4.806879!)
-        Me.XrCrossBandLine1.LocationFloat = New DevExpress.Utils.PointFloat(214.0!, 0.0!)
         Me.XrCrossBandLine1.Name = "XrCrossBandLine1"
         Me.XrCrossBandLine1.StartBand = Me.GroupHeader1
-        Me.XrCrossBandLine1.StartPointFloat = New DevExpress.Utils.PointFloat(214.0!, 0.0!)
+        Me.XrCrossBandLine1.StartPointFloat = New DevExpress.Utils.PointFloat(214.0!, 0!)
         Me.XrCrossBandLine1.WidthF = 1.302063!
         '
         'XrCrossBandLine2
         '
+        Me.XrCrossBandLine2.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine2.EndBand = Me.ReportFooter
         Me.XrCrossBandLine2.EndPointFloat = New DevExpress.Utils.PointFloat(404.0!, 4.806879!)
-        Me.XrCrossBandLine2.LocationFloat = New DevExpress.Utils.PointFloat(404.0!, 0.0!)
         Me.XrCrossBandLine2.Name = "XrCrossBandLine2"
         Me.XrCrossBandLine2.StartBand = Me.GroupHeader1
-        Me.XrCrossBandLine2.StartPointFloat = New DevExpress.Utils.PointFloat(404.0!, 0.0!)
+        Me.XrCrossBandLine2.StartPointFloat = New DevExpress.Utils.PointFloat(404.0!, 0!)
         Me.XrCrossBandLine2.WidthF = 1.302155!
         '
         'XrCrossBandLine3
         '
+        Me.XrCrossBandLine3.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine3.EndBand = Me.ReportFooter
         Me.XrCrossBandLine3.EndPointFloat = New DevExpress.Utils.PointFloat(510.0!, 4.245501!)
-        Me.XrCrossBandLine3.LocationFloat = New DevExpress.Utils.PointFloat(510.0!, 1.041669!)
         Me.XrCrossBandLine3.Name = "XrCrossBandLine3"
         Me.XrCrossBandLine3.StartBand = Me.GroupHeader1
         Me.XrCrossBandLine3.StartPointFloat = New DevExpress.Utils.PointFloat(510.0!, 1.041669!)
@@ -769,19 +768,19 @@ Partial Public Class rptTaxSell
         '
         'XrCrossBandLine4
         '
+        Me.XrCrossBandLine4.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine4.EndBand = Me.ReportFooter
         Me.XrCrossBandLine4.EndPointFloat = New DevExpress.Utils.PointFloat(720.0!, 5.490699!)
-        Me.XrCrossBandLine4.LocationFloat = New DevExpress.Utils.PointFloat(720.0!, 0.0!)
         Me.XrCrossBandLine4.Name = "XrCrossBandLine4"
         Me.XrCrossBandLine4.StartBand = Me.GroupHeader1
-        Me.XrCrossBandLine4.StartPointFloat = New DevExpress.Utils.PointFloat(720.0!, 0.0!)
+        Me.XrCrossBandLine4.StartPointFloat = New DevExpress.Utils.PointFloat(720.0!, 0!)
         Me.XrCrossBandLine4.WidthF = 1.302063!
         '
         'XrCrossBandLine5
         '
+        Me.XrCrossBandLine5.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine5.EndBand = Me.ReportFooter
         Me.XrCrossBandLine5.EndPointFloat = New DevExpress.Utils.PointFloat(113.0!, 4.806879!)
-        Me.XrCrossBandLine5.LocationFloat = New DevExpress.Utils.PointFloat(113.0!, 26.04168!)
         Me.XrCrossBandLine5.Name = "XrCrossBandLine5"
         Me.XrCrossBandLine5.StartBand = Me.GroupHeader1
         Me.XrCrossBandLine5.StartPointFloat = New DevExpress.Utils.PointFloat(113.0!, 26.04168!)
@@ -789,19 +788,19 @@ Partial Public Class rptTaxSell
         '
         'XrCrossBandLine6
         '
+        Me.XrCrossBandLine6.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine6.EndBand = Me.ReportFooter
         Me.XrCrossBandLine6.EndPointFloat = New DevExpress.Utils.PointFloat(618.7083!, 4.493359!)
-        Me.XrCrossBandLine6.LocationFloat = New DevExpress.Utils.PointFloat(618.7083!, 0.0!)
         Me.XrCrossBandLine6.Name = "XrCrossBandLine6"
         Me.XrCrossBandLine6.StartBand = Me.GroupHeader1
-        Me.XrCrossBandLine6.StartPointFloat = New DevExpress.Utils.PointFloat(618.7083!, 0.0!)
+        Me.XrCrossBandLine6.StartPointFloat = New DevExpress.Utils.PointFloat(618.7083!, 0!)
         Me.XrCrossBandLine6.WidthF = 1.302063!
         '
         'XrCrossBandLine7
         '
+        Me.XrCrossBandLine7.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine7.EndBand = Me.ReportFooter
         Me.XrCrossBandLine7.EndPointFloat = New DevExpress.Utils.PointFloat(581.2083!, 4.048391!)
-        Me.XrCrossBandLine7.LocationFloat = New DevExpress.Utils.PointFloat(581.2083!, 24.99997!)
         Me.XrCrossBandLine7.Name = "XrCrossBandLine7"
         Me.XrCrossBandLine7.StartBand = Me.GroupHeader1
         Me.XrCrossBandLine7.StartPointFloat = New DevExpress.Utils.PointFloat(581.2083!, 24.99997!)
@@ -834,9 +833,9 @@ Partial Public Class rptTaxSell
         '
         'XrCrossBandLine8
         '
+        Me.XrCrossBandLine8.AnchorVertical = CType((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top Or DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom), DevExpress.XtraReports.UI.VerticalAnchorStyles)
         Me.XrCrossBandLine8.EndBand = Me.ReportFooter
         Me.XrCrossBandLine8.EndPointFloat = New DevExpress.Utils.PointFloat(35.74997!, 5.368256!)
-        Me.XrCrossBandLine8.LocationFloat = New DevExpress.Utils.PointFloat(35.74997!, 0.2500226!)
         Me.XrCrossBandLine8.Name = "XrCrossBandLine8"
         Me.XrCrossBandLine8.StartBand = Me.GroupHeader1
         Me.XrCrossBandLine8.StartPointFloat = New DevExpress.Utils.PointFloat(35.74997!, 0.2500226!)
@@ -856,7 +855,7 @@ Partial Public Class rptTaxSell
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.SnapGridSize = 5.0!
-        Me.Version = "12.2"
+        Me.Version = "21.2"
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 

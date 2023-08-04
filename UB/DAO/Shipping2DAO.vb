@@ -220,7 +220,7 @@ Public Class Shipping2DAO
                 End If
 
                 If gPrivilegeID > 1 Then 'Not admin
-                    SQL &= " AND Orders.EmpID=" & gEmpID
+                    SQL &= " AND ShippingRec2.EmpID=" & gEmpID
                 End If
 
             End If

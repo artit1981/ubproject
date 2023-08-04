@@ -438,7 +438,7 @@ Partial Class frmDashboardComm
         '
         'SimpleButton1
         '
-        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SimpleButton1.Appearance.Options.UseFont = True
         Me.SimpleButton1.Location = New System.Drawing.Point(1215, 24)
         Me.SimpleButton1.Name = "SimpleButton1"

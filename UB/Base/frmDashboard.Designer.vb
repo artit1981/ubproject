@@ -23,6 +23,7 @@ Partial Class frmDashboard
         Dim HatchFillStyle2 As DevExpress.XtraTreeMap.HatchFillStyle = New DevExpress.XtraTreeMap.HatchFillStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl20 = New DevExpress.XtraEditors.GroupControl()
         Me.txtSellTotal = New DevExpress.XtraEditors.TextEdit()
         Me.GroupControl19 = New DevExpress.XtraEditors.GroupControl()
@@ -88,6 +89,7 @@ Partial Class frmDashboard
         Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem20 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem21 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem22 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.GroupControl20, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,10 +163,12 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem22, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.SimpleButton1)
         Me.LayoutControl1.Controls.Add(Me.GroupControl20)
         Me.LayoutControl1.Controls.Add(Me.txtSellTotal)
         Me.LayoutControl1.Controls.Add(Me.GroupControl19)
@@ -189,29 +193,40 @@ Partial Class frmDashboard
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControl1.Name = "LayoutControl1"
-        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(-650, 319, 650, 543)
+        Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(769, 210, 650, 543)
         Me.LayoutControl1.Root = Me.Root
         Me.LayoutControl1.Size = New System.Drawing.Size(1305, 1012)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SimpleButton1.Appearance.Options.UseFont = True
+        Me.SimpleButton1.Location = New System.Drawing.Point(12, 620)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(250, 42)
+        Me.SimpleButton1.StyleController = Me.LayoutControl1
+        Me.SimpleButton1.TabIndex = 21
+        Me.SimpleButton1.Text = "Load Data"
         '
         'GroupControl20
         '
         Me.GroupControl20.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.GroupControl20.Appearance.Options.UseBackColor = True
         Me.GroupControl20.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.GroupControl20.Location = New System.Drawing.Point(12, 620)
+        Me.GroupControl20.Location = New System.Drawing.Point(12, 666)
         Me.GroupControl20.MinimumSize = New System.Drawing.Size(54, 0)
         Me.GroupControl20.Name = "GroupControl20"
         Me.GroupControl20.ShowCaption = False
-        Me.GroupControl20.Size = New System.Drawing.Size(250, 27)
+        Me.GroupControl20.Size = New System.Drawing.Size(250, 17)
         Me.GroupControl20.TabIndex = 15
         Me.GroupControl20.Text = "GroupControl20"
         '
         'txtSellTotal
         '
         Me.txtSellTotal.EditValue = "500M"
-        Me.txtSellTotal.Location = New System.Drawing.Point(12, 651)
+        Me.txtSellTotal.Location = New System.Drawing.Point(12, 687)
         Me.txtSellTotal.Name = "txtSellTotal"
         Me.txtSellTotal.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSellTotal.Properties.Appearance.ForeColor = System.Drawing.Color.Navy
@@ -263,7 +278,7 @@ Partial Class frmDashboard
         'txtCash
         '
         Me.txtCash.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCash.EditValue = "500M"
+        Me.txtCash.EditValue = "NA."
         Me.txtCash.Location = New System.Drawing.Point(2, 23)
         Me.txtCash.Name = "txtCash"
         Me.txtCash.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -333,7 +348,7 @@ Partial Class frmDashboard
         'txtTotalSell
         '
         Me.txtTotalSell.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtTotalSell.EditValue = "500M"
+        Me.txtTotalSell.EditValue = "NA."
         Me.txtTotalSell.Location = New System.Drawing.Point(2, 23)
         Me.txtTotalSell.Name = "txtTotalSell"
         Me.txtTotalSell.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -396,7 +411,7 @@ Partial Class frmDashboard
         'txtProfitPercen
         '
         Me.txtProfitPercen.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtProfitPercen.EditValue = "500M"
+        Me.txtProfitPercen.EditValue = "NA."
         Me.txtProfitPercen.Location = New System.Drawing.Point(2, 23)
         Me.txtProfitPercen.Name = "txtProfitPercen"
         Me.txtProfitPercen.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -426,7 +441,7 @@ Partial Class frmDashboard
         'txtCOGS
         '
         Me.txtCOGS.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCOGS.EditValue = "500M"
+        Me.txtCOGS.EditValue = "NA."
         Me.txtCOGS.Location = New System.Drawing.Point(2, 23)
         Me.txtCOGS.Name = "txtCOGS"
         Me.txtCOGS.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -494,7 +509,7 @@ Partial Class frmDashboard
         'txtProfit
         '
         Me.txtProfit.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtProfit.EditValue = "500M"
+        Me.txtProfit.EditValue = "NA."
         Me.txtProfit.Location = New System.Drawing.Point(2, 23)
         Me.txtProfit.Name = "txtProfit"
         Me.txtProfit.Properties.Appearance.Font = New System.Drawing.Font("Cordia New", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -710,11 +725,11 @@ Partial Class frmDashboard
         'GroupControl2
         '
         Me.GroupControl2.Controls.Add(Me.overdueChart)
-        Me.GroupControl2.Location = New System.Drawing.Point(12, 683)
+        Me.GroupControl2.Location = New System.Drawing.Point(12, 719)
         Me.GroupControl2.MaximumSize = New System.Drawing.Size(250, 0)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.ShowCaption = False
-        Me.GroupControl2.Size = New System.Drawing.Size(250, 306)
+        Me.GroupControl2.Size = New System.Drawing.Size(250, 270)
         Me.GroupControl2.TabIndex = 5
         Me.GroupControl2.Text = "GroupControl2"
         '
@@ -725,14 +740,14 @@ Partial Class frmDashboard
         Me.overdueChart.Margin = New System.Windows.Forms.Padding(3, 3, 3, 50)
         Me.overdueChart.Name = "overdueChart"
         Me.overdueChart.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.overdueChart.Size = New System.Drawing.Size(246, 302)
+        Me.overdueChart.Size = New System.Drawing.Size(246, 266)
         Me.overdueChart.TabIndex = 2
         '
         'Root
         '
         Me.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.Root.GroupBordersVisible = False
-        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem2, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutControlItem14, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.LayoutControlItem1, Me.LayoutControlItem15, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem7, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21})
+        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem2, Me.LayoutControlItem5, Me.LayoutControlItem6, Me.LayoutControlItem10, Me.LayoutControlItem11, Me.LayoutControlItem12, Me.LayoutControlItem8, Me.LayoutControlItem9, Me.LayoutControlItem14, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem2, Me.LayoutControlItem13, Me.LayoutControlItem1, Me.LayoutControlItem15, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem7, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem20, Me.LayoutControlItem21, Me.LayoutControlItem22})
         Me.Root.Name = "Root"
         Me.Root.Size = New System.Drawing.Size(1305, 1012)
         Me.Root.TextVisible = False
@@ -740,9 +755,9 @@ Partial Class frmDashboard
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.GroupControl2
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 671)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 707)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(254, 310)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(254, 274)
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextVisible = False
         '
@@ -922,7 +937,7 @@ Partial Class frmDashboard
         'LayoutControlItem20
         '
         Me.LayoutControlItem20.Control = Me.txtSellTotal
-        Me.LayoutControlItem20.Location = New System.Drawing.Point(0, 639)
+        Me.LayoutControlItem20.Location = New System.Drawing.Point(0, 675)
         Me.LayoutControlItem20.MaxSize = New System.Drawing.Size(0, 32)
         Me.LayoutControlItem20.MinSize = New System.Drawing.Size(54, 32)
         Me.LayoutControlItem20.Name = "LayoutControlItem20"
@@ -934,11 +949,23 @@ Partial Class frmDashboard
         'LayoutControlItem21
         '
         Me.LayoutControlItem21.Control = Me.GroupControl20
-        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 608)
+        Me.LayoutControlItem21.Location = New System.Drawing.Point(0, 654)
         Me.LayoutControlItem21.Name = "LayoutControlItem21"
-        Me.LayoutControlItem21.Size = New System.Drawing.Size(254, 31)
+        Me.LayoutControlItem21.Size = New System.Drawing.Size(254, 21)
         Me.LayoutControlItem21.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem21.TextVisible = False
+        '
+        'LayoutControlItem22
+        '
+        Me.LayoutControlItem22.Control = Me.SimpleButton1
+        Me.LayoutControlItem22.Location = New System.Drawing.Point(0, 608)
+        Me.LayoutControlItem22.MaxSize = New System.Drawing.Size(0, 46)
+        Me.LayoutControlItem22.MinSize = New System.Drawing.Size(68, 46)
+        Me.LayoutControlItem22.Name = "LayoutControlItem22"
+        Me.LayoutControlItem22.Size = New System.Drawing.Size(254, 46)
+        Me.LayoutControlItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutControlItem22.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem22.TextVisible = False
         '
         'frmDashboard
         '
@@ -1021,6 +1048,7 @@ Partial Class frmDashboard
         CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem22, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1091,4 +1119,6 @@ Partial Class frmDashboard
     Friend WithEvents GroupControl20 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LayoutControlItem21 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem22 As DevExpress.XtraLayout.LayoutControlItem
 End Class

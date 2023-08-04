@@ -32,8 +32,8 @@
     <ProductName>Unique Business Center</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>68</ApplicationRevision>
-    <ApplicationVersion>1.0.1.68</ApplicationVersion>
+    <ApplicationRevision>70</ApplicationRevision>
+    <ApplicationVersion>1.0.1.70</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -332,6 +332,12 @@
     <Compile Include="Base\frmProgress.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Base\frmRuningFormatSN.Designer.vb">
+      <DependentUpon>frmRuningFormatSN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmRuningFormatSN.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmRuningFormat.Designer.vb">
       <DependentUpon>frmRuningFormat.vb</DependentUpon>
     </Compile>
@@ -466,6 +472,7 @@
     <Compile Include="DAO\CampaignDetail.vb" />
     <Compile Include="DAO\CampaignSub.vb" />
     <Compile Include="DAO\CashRecordSDAO.vb" />
+    <Compile Include="DAO\RunningFormatSNDAO.vb" />
     <Compile Include="DAO\Shipping2DAO.vb" />
     <Compile Include="ImportData\frmImportOrderOnline.Designer.vb">
       <DependentUpon>frmImportOrderOnline.vb</DependentUpon>
@@ -1366,6 +1373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmProgress.resx">
       <DependentUpon>frmProgress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmRuningFormatSN.resx">
+      <DependentUpon>frmRuningFormatSN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmRuningFormat.resx">
       <DependentUpon>frmRuningFormat.vb</DependentUpon>

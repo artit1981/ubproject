@@ -183,7 +183,7 @@ Public Class ucProductLists
                 rec.SNList = pPro.SNList
                 If rec.IsSN = 1 Then
                     If IsNothing(rec.SNList) OrElse rec.SNList.Count <= 0 Then
-                        dataSN = lclsSN.GetDataTable(pOrderID, rec.ID, rec.ProductID, "", Nothing, False, "")
+                        dataSN = lclsSN.GetDataTable(pOrderID, rec.ID, rec.ProductID, "", Nothing, False, "", False)
                         rec.SNList = New List(Of SnDAO)
                         For Each dr2 As DataRow In dataSN.Rows
                             lclsSN = New SnDAO
@@ -371,7 +371,7 @@ Public Class ucProductLists
                                 Else
                                     Dim lclsSN As New SnDAO
                                     Dim dataSN As New DataTable()
-                                    dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "", Nothing, False, "")
+                                    dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "", Nothing, False, "", False)
                                     For Each dr2 As DataRow In dataSN.Rows
                                         lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
                                         If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo And m.SerialNumberID = 0) >= 0 Then
@@ -387,7 +387,7 @@ Public Class ucProductLists
                                 If IsNothing(lDataDAO.SNList) Then
                                     lDataDAO.SNList = New List(Of SnDAO)
                                 End If
-                                dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "'New'", Nothing, False, lSnIDList)
+                                dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "'New'", Nothing, False, lSnIDList, False)
                                 For Each dr2 As DataRow In dataSN.Rows
                                     lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
                                     If lSNCount < lDataDAO.Units Then
@@ -564,7 +564,7 @@ Public Class ucProductLists
 
                     '*** Stock in not ref sn
                     If pCheckType <> MasterType.StockIn.ToString Or mMode = DataMode.ModeEdit Then
-                        dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "")
+                        dataSN = lclsSN.GetDataTable(pRefID, rec.ID, rec.ProductID, "", Nothing, pIsDelete, "", False)
                         For Each dr2 As DataRow In dataSN.Rows
                             lclsSN = New SnDAO
                             lclsSN.SerialNumberID = ConvertNullToZero(dr2("SerialNumberID"))

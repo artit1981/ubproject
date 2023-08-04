@@ -175,7 +175,7 @@ Public Class frmStockIn
     Private Sub InitialCombo()
         Try
             SetEmployees()
-            'SetComboLocation()
+            SetSearchLookAgency(CustomerID)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".InitialCombo : " & e.Message)
         End Try
@@ -231,7 +231,8 @@ Public Class frmStockIn
                     If txtRefOrder.Text <> "" Then
                         Dim lclsRefOrder As New OrderSDAO
                         If lclsRefOrder.InitailData(mRefOrderID.Item(0)) Then
-                            Customer.EditValue = lclsRefOrder.CustomerDAO.CustomerName
+                            CustomerID.EditValue = lclsRefOrder.CustomerID
+                            gSupplierID = lclsRefOrder.CustomerID
                         End If
                     End If
 
@@ -412,7 +413,8 @@ Public Class frmStockIn
                         txtRefOrder.Text = txtRefOrder.Text & ", " & lcls.Code
                     End If
                     gCustomerID = lcls.CustomerID
-                    Customer.EditValue = lcls.CustomerDAO.CustomerName
+                    gSupplierID = lcls.CustomerID
+                    CustomerID.EditValue = lcls.CustomerID
                     If pInitProduct Then
                         LoadProList(plngOrderID, MasterType.PurchaseOrder)
                     End If

@@ -58,7 +58,17 @@ Partial Class frmStockIn
         Me.UcFileAttach1 = New UB.ucFileAttach()
         Me.AdminTabPage = New DevExpress.XtraTab.XtraTabPage()
         Me.UcAdmin1 = New UB.ucAdmin()
-        Me.Customer = New DevExpress.XtraEditors.MemoEdit()
+        Me.CustomerID = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Code = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CusName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.Type = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Phone1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Fax = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Email1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.EMPNAME = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
@@ -69,12 +79,14 @@ Partial Class frmStockIn
         CType(Me.EmpID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OrderCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OrderDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OrderDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OrderDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.NoteTabPage.SuspendLayout()
         Me.AttachmentTabPage.SuspendLayout()
         Me.AdminTabPage.SuspendLayout()
-        CType(Me.Customer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomerID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -85,11 +97,11 @@ Partial Class frmStockIn
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.XtraTabControl1, "")
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.None
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 37)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 30)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.XtraTabControl1, True)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.GeneralTabPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(921, 462)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(921, 469)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.GeneralTabPage, Me.NoteTabPage, Me.AttachmentTabPage, Me.AdminTabPage})
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.XtraTabControl1, "")
@@ -100,7 +112,7 @@ Partial Class frmStockIn
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
-        Me.GeneralTabPage.Controls.Add(Me.Customer)
+        Me.GeneralTabPage.Controls.Add(Me.CustomerID)
         Me.GeneralTabPage.Controls.Add(Me.IsSumStock)
         Me.GeneralTabPage.Controls.Add(Me.Label2)
         Me.GeneralTabPage.Controls.Add(Me.lblUpdateStr)
@@ -127,7 +139,7 @@ Partial Class frmStockIn
         Me.GeneralTabPage.Controls.Add(Me.Label18)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(915, 434)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(919, 444)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -141,7 +153,7 @@ Partial Class frmStockIn
         Me.IsSumStock.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsSumStock.Properties.Appearance.Options.UseFont = True
         Me.IsSumStock.Properties.Caption = "ปรับคลังรวม"
-        Me.IsSumStock.Size = New System.Drawing.Size(92, 19)
+        Me.IsSumStock.Size = New System.Drawing.Size(92, 20)
         Me.IsSumStock.TabIndex = 288
         Me.IsSumStock.TabStop = False
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.IsSumStock, "Checked")
@@ -183,7 +195,7 @@ Partial Class frmStockIn
         Me.UcProductLists1.Location = New System.Drawing.Point(37, 180)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcProductLists1, True)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(688, 249)
+        Me.UcProductLists1.Size = New System.Drawing.Size(688, 256)
         Me.UcProductLists1.TabIndex = 7
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcProductLists1, "")
         '
@@ -196,7 +208,7 @@ Partial Class frmStockIn
         Me.LocationDTLID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LocationDTLID.Properties.Appearance.Options.UseFont = True
         Me.LocationDTLID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LocationDTLID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", 100, "Name")})
+        Me.LocationDTLID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "Name", 100, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
         Me.LocationDTLID.Properties.NullText = ""
         Me.LocationDTLID.Properties.ShowHeader = False
         Me.LocationDTLID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
@@ -210,8 +222,8 @@ Partial Class frmStockIn
         Me.btnLocation.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnLocation.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnLocation, "")
-        Me.btnLocation.Image = CType(resources.GetObject("btnLocation.Image"), System.Drawing.Image)
-        Me.btnLocation.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnLocation.ImageOptions.Image = CType(resources.GetObject("btnLocation.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnLocation.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnLocation.Location = New System.Drawing.Point(335, 180)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnLocation, True)
         Me.btnLocation.Name = "btnLocation"
@@ -257,8 +269,8 @@ Partial Class frmStockIn
         Me.btnRefOrder.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnRefOrder.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnRefOrder, "")
-        Me.btnRefOrder.Image = CType(resources.GetObject("btnRefOrder.Image"), System.Drawing.Image)
-        Me.btnRefOrder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnRefOrder.ImageOptions.Image = CType(resources.GetObject("btnRefOrder.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnRefOrder.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnRefOrder.Location = New System.Drawing.Point(723, 66)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnRefOrder, True)
         Me.btnRefOrder.Name = "btnRefOrder"
@@ -325,7 +337,7 @@ Partial Class frmStockIn
         Me.EmpID.Properties.Appearance.Options.UseFont = True
         Me.EmpID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.EmpID.Properties.NullText = ""
-        Me.EmpID.Properties.View = Me.GridView1
+        Me.EmpID.Properties.PopupView = Me.GridView1
         Me.EmpID.Size = New System.Drawing.Size(212, 20)
         Me.EmpID.TabIndex = 2
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.EmpID, "Text")
@@ -380,8 +392,8 @@ Partial Class frmStockIn
         Me.btnEmpID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnEmpID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnEmpID, "")
-        Me.btnEmpID.Image = CType(resources.GetObject("btnEmpID.Image"), System.Drawing.Image)
-        Me.btnEmpID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnEmpID.ImageOptions.Image = CType(resources.GetObject("btnEmpID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnEmpID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnEmpID.Location = New System.Drawing.Point(374, 67)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnEmpID, True)
         Me.btnEmpID.Name = "btnEmpID"
@@ -412,8 +424,8 @@ Partial Class frmStockIn
         Me.btnGenID.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btnGenID.Appearance.Options.UseFont = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.btnGenID, "")
-        Me.btnGenID.Image = CType(resources.GetObject("btnGenID.Image"), System.Drawing.Image)
-        Me.btnGenID.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.btnGenID.ImageOptions.Image = CType(resources.GetObject("btnGenID.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnGenID.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
         Me.btnGenID.Location = New System.Drawing.Point(373, 40)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.btnGenID, True)
         Me.btnGenID.Name = "btnGenID"
@@ -450,12 +462,12 @@ Partial Class frmStockIn
         Me.OrderDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.OrderDate.Properties.Appearance.Options.UseFont = True
         Me.OrderDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.OrderDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.OrderDate.Properties.DisplayFormat.FormatString = "D"
         Me.OrderDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.OrderDate.Properties.EditFormat.FormatString = "D"
         Me.OrderDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.OrderDate.Properties.Mask.EditMask = "D"
-        Me.OrderDate.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.OrderDate.Size = New System.Drawing.Size(212, 20)
         Me.OrderDate.TabIndex = 1
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.OrderDate, "Text")
@@ -486,7 +498,7 @@ Partial Class frmStockIn
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(658, 14)
         Me.Label3.TabIndex = 231
-        Me.Label3.Text = "_________________________________________________________________________________" & _
+        Me.Label3.Text = "_________________________________________________________________________________" &
     "____________"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label3, "")
         '
@@ -517,7 +529,7 @@ Partial Class frmStockIn
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(623, 14)
         Me.Label28.TabIndex = 120
-        Me.Label28.Text = "_________________________________________________________________________________" & _
+        Me.Label28.Text = "_________________________________________________________________________________" &
     "_______"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label28, "")
         '
@@ -542,7 +554,7 @@ Partial Class frmStockIn
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(915, 434)
+        Me.NoteTabPage.Size = New System.Drawing.Size(919, 437)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -553,7 +565,7 @@ Partial Class frmStockIn
         Me.UcNote1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(915, 434)
+        Me.UcNote1.Size = New System.Drawing.Size(919, 437)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -563,7 +575,7 @@ Partial Class frmStockIn
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(915, 434)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(919, 437)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -574,7 +586,7 @@ Partial Class frmStockIn
         Me.UcFileAttach1.Location = New System.Drawing.Point(0, 0)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(915, 434)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(919, 437)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -584,7 +596,7 @@ Partial Class frmStockIn
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(915, 434)
+        Me.AdminTabPage.Size = New System.Drawing.Size(919, 437)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '
@@ -598,18 +610,124 @@ Partial Class frmStockIn
         Me.UcAdmin1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcAdmin1, "")
         '
-        'Customer
+        'CustomerID
         '
-        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Customer, "TextChanged")
-        Me.Customer.Location = New System.Drawing.Point(505, 93)
-        Me.FormChangedComponent1.SetMonitorForChanges(Me.Customer, True)
-        Me.Customer.Name = "Customer"
-        Me.Customer.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
-        Me.Customer.Properties.Appearance.Options.UseBackColor = True
-        Me.Customer.Properties.ReadOnly = True
-        Me.Customer.Size = New System.Drawing.Size(212, 55)
-        Me.Customer.TabIndex = 289
-        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Customer, "Text")
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.CustomerID, "TextChanged")
+        Me.CustomerID.EnterMoveNextControl = True
+        Me.CustomerID.Location = New System.Drawing.Point(505, 94)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.CustomerID, True)
+        Me.CustomerID.Name = "CustomerID"
+        Me.CustomerID.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow
+        Me.CustomerID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CustomerID.Properties.Appearance.Options.UseBackColor = True
+        Me.CustomerID.Properties.Appearance.Options.UseFont = True
+        Me.CustomerID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.CustomerID.Properties.NullText = ""
+        Me.CustomerID.Properties.PopupFindMode = DevExpress.XtraEditors.FindMode.Always
+        Me.CustomerID.Properties.PopupFormSize = New System.Drawing.Size(800, 0)
+        Me.CustomerID.Properties.PopupView = Me.SearchLookUpEdit1View
+        Me.CustomerID.Properties.ReadOnly = True
+        Me.CustomerID.Properties.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit1})
+        Me.CustomerID.Size = New System.Drawing.Size(212, 20)
+        Me.CustomerID.TabIndex = 290
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.CustomerID, "Text")
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.Code, Me.CusName, Me.Type, Me.Phone1, Me.Fax, Me.Email1, Me.EMPNAME})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ColumnAutoWidth = False
+        Me.SearchLookUpEdit1View.OptionsView.RowAutoHeight = True
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowViewCaption = True
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "รหัส"
+        Me.GridColumn4.FieldName = " ID"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'Code
+        '
+        Me.Code.Caption = "รหัส"
+        Me.Code.FieldName = "Code"
+        Me.Code.MaxWidth = 100
+        Me.Code.MinWidth = 75
+        Me.Code.Name = "Code"
+        Me.Code.Visible = True
+        Me.Code.VisibleIndex = 0
+        '
+        'CusName
+        '
+        Me.CusName.Caption = "ชื่อ - นามสกุล"
+        Me.CusName.ColumnEdit = Me.RepositoryItemMemoEdit1
+        Me.CusName.FieldName = "CusName"
+        Me.CusName.MinWidth = 150
+        Me.CusName.Name = "CusName"
+        Me.CusName.Visible = True
+        Me.CusName.VisibleIndex = 1
+        Me.CusName.Width = 250
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
+        Me.RepositoryItemMemoEdit1.WordWrap = False
+        '
+        'Type
+        '
+        Me.Type.Caption = "ประเภทลูกค้า"
+        Me.Type.FieldName = "Type"
+        Me.Type.MaxWidth = 75
+        Me.Type.MinWidth = 50
+        Me.Type.Name = "Type"
+        Me.Type.Visible = True
+        Me.Type.VisibleIndex = 2
+        '
+        'Phone1
+        '
+        Me.Phone1.Caption = "เบอร์โทร"
+        Me.Phone1.FieldName = "Phone1"
+        Me.Phone1.MaxWidth = 85
+        Me.Phone1.MinWidth = 85
+        Me.Phone1.Name = "Phone1"
+        Me.Phone1.Visible = True
+        Me.Phone1.VisibleIndex = 3
+        Me.Phone1.Width = 85
+        '
+        'Fax
+        '
+        Me.Fax.Caption = "เบอร์แฟกซ์"
+        Me.Fax.FieldName = "Fax"
+        Me.Fax.MaxWidth = 85
+        Me.Fax.MinWidth = 85
+        Me.Fax.Name = "Fax"
+        Me.Fax.Visible = True
+        Me.Fax.VisibleIndex = 4
+        Me.Fax.Width = 85
+        '
+        'Email1
+        '
+        Me.Email1.Caption = "อีเมล์"
+        Me.Email1.FieldName = "Email1"
+        Me.Email1.MaxWidth = 85
+        Me.Email1.MinWidth = 85
+        Me.Email1.Name = "Email1"
+        Me.Email1.Visible = True
+        Me.Email1.VisibleIndex = 5
+        Me.Email1.Width = 85
+        '
+        'EMPNAME
+        '
+        Me.EMPNAME.Caption = "ผู้รับผิดชอบ"
+        Me.EMPNAME.FieldName = "EMPNAME"
+        Me.EMPNAME.MaxWidth = 150
+        Me.EMPNAME.MinWidth = 120
+        Me.EMPNAME.Name = "EMPNAME"
+        Me.EMPNAME.Visible = True
+        Me.EMPNAME.VisibleIndex = 6
+        Me.EMPNAME.Width = 120
         '
         'frmStockIn
         '
@@ -631,13 +749,16 @@ Partial Class frmStockIn
         CType(Me.EmpID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OrderCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OrderDate.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OrderDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OrderDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.NoteTabPage.ResumeLayout(False)
         Me.AttachmentTabPage.ResumeLayout(False)
         Me.AdminTabPage.ResumeLayout(False)
-        CType(Me.Customer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomerID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents FormChangedComponent1 As FormChangedComponent
@@ -677,5 +798,15 @@ Partial Class frmStockIn
     Private WithEvents lblUpdateStr As System.Windows.Forms.Label
     Private WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents IsSumStock As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents Customer As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents CustomerID As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Code As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CusName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents Type As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Phone1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Fax As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Email1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents EMPNAME As DevExpress.XtraGrid.Columns.GridColumn
 End Class

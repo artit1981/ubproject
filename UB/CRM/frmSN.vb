@@ -206,16 +206,12 @@ Public Class frmSN
                     End If
                     SNNo.Focus()
                 Else
-                    FormatFront.Focus()
+
                     SNNo.EditValue = ""
                 End If
             End If
 
-            FormatFront.Enabled = (SNType.EditValue = "A")
-            FormatMidle.Enabled = (SNType.EditValue = "A")
-            RunningCount.Enabled = (SNType.EditValue = "A")
             btnGenID.Enabled = (SNType.EditValue = "A")
-            StartNo.Enabled = (SNType.EditValue = "A")
             SNNo.Enabled = (SNType.EditValue = "M")
 
 
@@ -228,14 +224,7 @@ Public Class frmSN
 
     Private Sub InitialCombo()
         Try
-            FormatMidle.Properties.Items.Add("None")
-            FormatMidle.Properties.Items.Add("-")
-            FormatMidle.Properties.Items.Add("/")
-            FormatMidle.Properties.Items.Add("\")
-            FormatMidle.EditValue = "None"
-            FormatFront.EditValue = ""
-            RunningCount.EditValue = "10"
-            StartNo.EditValue = "1"
+
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, "frmSN.InitialCombo : " & e.Message)
         End Try
@@ -262,7 +251,7 @@ Public Class frmSN
         Try
             If mProductIDs > 0 Then
 
-                dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New','Close'", Nothing, False, "")
+                dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New','Close'", Nothing, False, "", True)
 
                 For Each dr2 As DataRow In dataSN.Rows
                     SnLast.EditValue = ConvertNullToString(dr2("SerialNumberNo"))
@@ -279,53 +268,15 @@ Public Class frmSN
 
 
     Private Sub btnGenID_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGenID.Click
-        Dim lstrExam As String = "", lRunCount As String = "", i As Integer, lLastCount As Long
-        Dim lCode As String = "", lSNAdd As Long = 0
-        Dim lclsSN As SnDAO
 
         Try
             Cursor = Cursors.WaitCursor
-            If IsNothing(mSnList) Then
-                mSnList = New List(Of SnDAO)
-            Else
-                If mIsModePrint Then
-                    mSnList.Clear()
-                End If
 
+            Dim lError As String = GenSN(mSnList, gSupplierID, mProductIDs, mIsModePrint, -1, UnitsMain.EditValue, MasterType.StockIn)
+            If lError <> "" Then
+                MessageBox.Show(lError, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
 
-            'Dim lUnit = mUnit
-            lLastCount = StartNo.EditValue
-            If FormatFront.EditValue <> "None" Then
-                lstrExam = FormatFront.EditValue.ToString.ToUpper
-            End If
-
-            If FormatMidle.EditValue <> "None" Then
-                lstrExam = lstrExam & FormatMidle.EditValue
-            End If
-
-            For i = 1 To RunningCount.EditValue
-                lRunCount = lRunCount & "0"
-            Next
-            lSNAdd = mSnList.Count
-            Do Until lSNAdd >= UnitsMain.EditValue
-                lCode = lstrExam & lLastCount.ToString(lRunCount)
-                If mOrderType = MasterType.StockIn.ToString Or (mOrderType = MasterType.UpdateStock.ToString And UnitsMain.EditValue > 0) Then
-                    lclsSN = New SnDAO
-                    If lclsSN.CheckSNIsExist(mProductIDs, lCode, "'New','Close'", Nothing) = True Then
-                        MessageBox.Show("Serial Number ซ้ำ :" & lCode, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        Exit Do
-                    End If
-                End If
-                lclsSN = New SnDAO
-                lclsSN.SerialNumberID = 0
-                lclsSN.SerialNumberNo = lCode
-                lclsSN.Status = "New"
-                lclsSN.IsDelete = 0
-                lSNAdd = lSNAdd + 1
-                lLastCount = lLastCount + 1
-                mSnList.Add(lclsSN)
-            Loop
 
             GridControl1.RefreshDataSource()
         Catch ex As Exception
@@ -358,7 +309,7 @@ Public Class frmSN
             If IsNothing(mSnList) Then
                 mSnList = New List(Of SnDAO)
             End If
-            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New'", Nothing, False, "")
+            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New'", Nothing, False, "", False)
             For Each dr2 As DataRow In dataSN.Rows
                 If mSnList.Count < UnitsMain.EditValue Then
                     lclsSN = New SnDAO

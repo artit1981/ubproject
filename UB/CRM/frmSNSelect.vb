@@ -76,7 +76,7 @@ Public Class frmSNSelect
             'End If
 
             'Dim lSnList As New List(Of SnDAO)
-            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New'", Nothing, False, "")
+            dataSN = lclsSN.GetDataTable(Nothing, 0, mProductIDs, "'New'", Nothing, False, "", False)
             For Each dr2 As DataRow In dataSN.Rows
                 'If mSnList.Count < Units.EditValue Then
                 lclsSN = New SnDAO
