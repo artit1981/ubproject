@@ -182,7 +182,7 @@ Public Class frmStockIn
     End Sub
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
-
+        Dim lCusID As Long = 0
         Try
             If pMode = DataMode.ModeNew Then
                 OrderCode.EditValue = AutoGenCode(mOrderType)
@@ -232,7 +232,7 @@ Public Class frmStockIn
                         Dim lclsRefOrder As New OrderSDAO
                         If lclsRefOrder.InitailData(mRefOrderID.Item(0)) Then
                             CustomerID.EditValue = lclsRefOrder.CustomerID
-                            gSupplierID = lclsRefOrder.CustomerID
+                            lCusID = lclsRefOrder.CustomerID
                         End If
                     End If
 
@@ -243,9 +243,10 @@ Public Class frmStockIn
 
             'Note
             UcNote1.ShowControl(mcls.TableName, pID)
-            gCustomerID = 0
+            'gCustomerID = 0
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
+            UcProductLists1.CustomerID = lCusID
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.UnitName + ProColumn.LocationDTLID _
                                         , False, True, Nothing, False, mcls.TableName, False, mcls.IsDelete, "")
         Catch ex As Exception
@@ -368,9 +369,10 @@ Public Class frmStockIn
 
     Private Function ShowProductListBySource(ByVal pMode As Integer, ByVal pSource As List(Of ProductListDAO)) As Boolean
         Try
-            gCustomerID = 0
+            'gCustomerID = 0
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
+            UcProductLists1.CustomerID = CustomerID.EditValue
             UcProductLists1.ShowControlByDataSource(pMode, pSource, ProColumn.Units + ProColumn.UnitName + ProColumn.LocationDTLID _
                                                     , pMode = DataMode.ModeEdit, Nothing, mOrderType.ToString, False, lOrderList, True, False, "")
         Catch ex As Exception
@@ -412,8 +414,9 @@ Public Class frmStockIn
                     Else
                         txtRefOrder.Text = txtRefOrder.Text & ", " & lcls.Code
                     End If
-                    gCustomerID = lcls.CustomerID
-                    gSupplierID = lcls.CustomerID
+                    'gCustomerID = lcls.CustomerID
+                    'gSupplierID = lcls.CustomerID
+                    UcProductLists1.CustomerID = lcls.CustomerID
                     CustomerID.EditValue = lcls.CustomerID
                     If pInitProduct Then
                         LoadProList(plngOrderID, MasterType.PurchaseOrder)

@@ -28,95 +28,69 @@ Public Class OrderControl
         mCtlForm.DatePanel.Visible = True
         Select Case mOrderType
             Case MasterType.SellOrders
-                mCaption = "ใบสั่งขาย"
-                lMakeOrderCation = "Make Invoice & Shiping"
+                lMakeOrderCation = "สร้างใบส่งของ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Quotation
-                mCaption = "ใบเสนอราคา"
-                lMakeOrderCation = "Make Order"
+                lMakeOrderCation = "สร้างใบสั่งขาย"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Bill
-                mCaption = "ใบวางบิล"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Invoice
-                mCaption = "ใบกำกับภาษี(ขาย)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.InvoiceOnline
-                mCaption = "ใบกำกับภาษีออนไลน์"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.InvoiceAbb
-                mCaption = "ใบกำกับภาษีอย่างย่อ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Borrow
-                mCaption = "ยืมสินค้า (ขาย)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.PurchaseOrder
-                mCaption = "ใบสั่งซื้อ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.CancelPO
-                mCaption = "ยกเลิกการสั่งซื้อ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Reserve
-                mCaption = "ใบสั่งจอง"
-                lMakeOrderCation = "Make Order"
+                lMakeOrderCation = "สร้างใบสั่งขาย"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Shiping
-                mCaption = "ใบส่งของ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.AddCredit
-                mCaption = "ตั้งลูกหนี้"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.Receipt
-                mCaption = "ใบเสร็จรับเงิน /ชำระเงิน"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.ReceiptCut
-                mCaption = "ตัดรับชำระ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.InvoiceBuy
-                mCaption = "ใบกำกับภาษี(ซื้อ)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ShipingBuy
-                mCaption = "ใบส่งของ(ซื้อ)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReceiptBuy
-                mCaption = "ใบเสร็จรับเงิน /ชำระเงิน(ซื้อ)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Asset
-                mCaption = "บันทึกค่าใช้จ่ายอื่นๆ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ReduceCredit
-                mCaption = "บันทึกลดหนี้"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName + FilterBy.PO
             Case MasterType.AddCreditBuy
-                mCaption = "ตั้งลูกหนี้"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName + FilterBy.PO
             Case MasterType.ReduceCreditBuy
-                mCaption = "บันทึกลดหนี้"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName + FilterBy.PO
             Case MasterType.ClaimOut
-                mCaption = "แจ้งเคลม Supplier"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.Claim
-                mCaption = "รับแจ้งเคลม"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.StockIn
-                mCaption = "นำสินค้าเข้าระบบ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.EmpName
             Case MasterType.UpdateStock
-                mCaption = "ปรับยอดสินค้า"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.EmpName
             Case MasterType.ClaimResult
-                mCaption = "ผลการเคลม Supplier"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Agency + FilterBy.EmpName
             Case MasterType.ClaimReturn
-                mCaption = "เคลม(ส่งคืน)"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
             Case MasterType.Quotation2
-                mCaption = "ใบเสนอราคาคู่เทียบ"
                 lFilterCol = FilterBy.Code + FilterBy.CustomerCode + FilterBy.Customer + FilterBy.EmpName
         End Select
 
         Call InitialFilterCon(mCtlForm.cboFindIn, lFilterCol)
+        mCaption = GetCaption(mOrderType)
+
         With mCtlForm
             .Text = mCaption
             .MdiParent = frmMain
@@ -125,10 +99,83 @@ Public Class OrderControl
                 .MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
                 .MakeOrderBar.Caption = lMakeOrderCation
             End If
+            If mOrderType = MasterType.SellOrders Then
+                .MakeInvoiceBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                .MakeInvoiceOnlineBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                .MakeInvoiceAbbBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
             Call SetControlMenuPrivilege(mCtlForm, mOrderType)
         End With
 
     End Sub
+
+    Private Function GetCaption(ByVal pOrderType As MasterType) As String
+        Dim lCaption As String
+
+        Select Case pOrderType
+            Case MasterType.SellOrders
+                lCaption = "ใบสั่งขาย"
+            Case MasterType.Quotation
+                lCaption = "ใบเสนอราคา"
+            Case MasterType.Bill
+                lCaption = "ใบวางบิล"
+            Case MasterType.Invoice
+                lCaption = "ใบกำกับภาษี(ขาย)"
+            Case MasterType.InvoiceOnline
+                lCaption = "ใบกำกับภาษีออนไลน์"
+            Case MasterType.InvoiceAbb
+                lCaption = "ใบกำกับภาษีอย่างย่อ"
+            Case MasterType.Borrow
+                lCaption = "ยืมสินค้า (ขาย)"
+            Case MasterType.PurchaseOrder
+                lCaption = "ใบสั่งซื้อ"
+            Case MasterType.CancelPO
+                lCaption = "ยกเลิกการสั่งซื้อ"
+            Case MasterType.Reserve
+                lCaption = "ใบสั่งจอง"
+            Case MasterType.Shiping
+                lCaption = "ใบส่งของ"
+            Case MasterType.AddCredit
+                lCaption = "ตั้งลูกหนี้"
+            Case MasterType.Receipt
+                lCaption = "ใบเสร็จรับเงิน /ชำระเงิน"
+            Case MasterType.ReceiptCut
+                lCaption = "ตัดรับชำระ"
+            Case MasterType.InvoiceBuy
+                lCaption = "ใบกำกับภาษี(ซื้อ)"
+            Case MasterType.ShipingBuy
+                lCaption = "ใบส่งของ(ซื้อ)"
+            Case MasterType.ReceiptBuy
+                lCaption = "ใบเสร็จรับเงิน /ชำระเงิน(ซื้อ)"
+            Case MasterType.Asset
+                lCaption = "บันทึกค่าใช้จ่ายอื่นๆ"
+            Case MasterType.ReduceCredit
+                lCaption = "บันทึกลดหนี้"
+            Case MasterType.AddCreditBuy
+                lCaption = "ตั้งลูกหนี้"
+            Case MasterType.ReduceCreditBuy
+                lCaption = "บันทึกลดหนี้"
+            Case MasterType.ClaimOut
+                lCaption = "แจ้งเคลม Supplier"
+            Case MasterType.Claim
+                lCaption = "รับแจ้งเคลม"
+            Case MasterType.StockIn
+                lCaption = "นำสินค้าเข้าระบบ"
+            Case MasterType.UpdateStock
+                lCaption = "ปรับยอดสินค้า"
+            Case MasterType.ClaimResult
+                lCaption = "ผลการเคลม Supplier"
+            Case MasterType.ClaimReturn
+                lCaption = "เคลม(ส่งคืน)"
+            Case MasterType.Quotation2
+                lCaption = "ใบเสนอราคาคู่เทียบ"
+            Case Else
+                lCaption = "N/A"
+        End Select
+
+        Return lCaption
+
+    End Function
 
     Private Sub LoadData()
         Dim SQL As String = ""
@@ -415,6 +462,9 @@ Public Class OrderControl
             If lcls.InitailData(pID) Then
                 If mCtlForm.MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always Then
                     mCtlForm.MakeOrderBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString Or lcls.OrderStatus = EnumStatus.Receive.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString)
+                    mCtlForm.MakeInvoiceAbbBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString Or lcls.OrderStatus = EnumStatus.Receive.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString)
+                    mCtlForm.MakeInvoiceBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString Or lcls.OrderStatus = EnumStatus.Receive.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString)
+                    mCtlForm.MakeInvoiceOnlineBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString Or lcls.OrderStatus = EnumStatus.Receive.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString)
                 End If
 
                 If mOrderType = MasterType.UpdateStock Then
@@ -432,18 +482,27 @@ Public Class OrderControl
         End Try
     End Sub
 
-    Private Sub mCtlForm_MakeOrder(ByVal pID As Long) Handles mCtlForm.MakeOrder
+    Private Sub mCtlForm_MakeOrder(ByVal pID As Long, ByVal pOrderType As Integer) Handles mCtlForm.MakeOrder
         Try
             Dim lFormEdit As New frmOrderS
             lFormEdit.MdiParent = frmMain
             lFormEdit.IDs = pID
             lFormEdit.ModeData = DataMode.ModeConvert
-            Select Case mOrderType
-                Case MasterType.SellOrders
-                    lFormEdit.OrderType = MasterType.Invoice
-                Case MasterType.Quotation, MasterType.Reserve
-                    lFormEdit.OrderType = MasterType.SellOrders
-            End Select
+
+            If pOrderType = 0 Then
+                Select Case mOrderType
+                    Case MasterType.SellOrders
+                        lFormEdit.OrderType = MasterType.Shiping
+                        lFormEdit.Caption = GetCaption(MasterType.Shiping)
+                    Case MasterType.Quotation, MasterType.Reserve
+                        lFormEdit.OrderType = MasterType.SellOrders
+                        lFormEdit.Caption = GetCaption(MasterType.SellOrders)
+                End Select
+            Else
+                lFormEdit.OrderType = pOrderType
+                lFormEdit.Caption = GetCaption(pOrderType)
+            End If
+
 
             lFormEdit.Show()
         Catch e As Exception

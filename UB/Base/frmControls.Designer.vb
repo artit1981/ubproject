@@ -79,10 +79,12 @@ Partial Class frmControls
         Me.GridView = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.MakeInvoiceBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.MakeInvoiceOnlineBar = New DevExpress.XtraBars.BarButtonItem()
+        Me.MakeInvoiceAbbBar = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockPanel1.SuspendLayout()
-        Me.DockPanel1_Container.SuspendLayout()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,8 +133,8 @@ Partial Class frmControls
         Me.BarManager1.DockManager = Me.DockManager1
         Me.BarManager1.Form = Me
         Me.BarManager1.Images = Me.ImageList1
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.AddBar, Me.EditBar, Me.DeleteBar, Me.RefreshBar, Me.OptionBar, Me.CopyBar, Me.ExitBar, Me.PrintBar, Me.QuickBar, Me.ImportBar, Me.AssignBar, Me.ConvertBar, Me.MakeOrderBar})
-        Me.BarManager1.MaxItemId = 40
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.AddBar, Me.EditBar, Me.DeleteBar, Me.RefreshBar, Me.OptionBar, Me.CopyBar, Me.ExitBar, Me.PrintBar, Me.QuickBar, Me.ImportBar, Me.AssignBar, Me.ConvertBar, Me.MakeOrderBar, Me.MakeInvoiceBar, Me.MakeInvoiceOnlineBar, Me.MakeInvoiceAbbBar})
+        Me.BarManager1.MaxItemId = 43
         Me.BarManager1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemComboBox1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox2, Me.RepositoryItemTextEdit3, Me.RepositoryItemComboBox3, Me.RepositoryItemTextEdit4, Me.RepositoryItemCheckEdit1, Me.RepositoryItemComboBox4})
         '
         'MenuBar
@@ -198,7 +200,7 @@ Partial Class frmControls
         Me.OptionBar.Caption = "เพิ่มเติม"
         Me.OptionBar.Id = 14
         Me.OptionBar.ImageOptions.ImageIndex = 5
-        Me.OptionBar.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.QuickBar), New DevExpress.XtraBars.LinkPersistInfo(Me.CopyBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ImportBar), New DevExpress.XtraBars.LinkPersistInfo(Me.AssignBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ConvertBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeOrderBar)})
+        Me.OptionBar.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.QuickBar), New DevExpress.XtraBars.LinkPersistInfo(Me.CopyBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ImportBar), New DevExpress.XtraBars.LinkPersistInfo(Me.AssignBar), New DevExpress.XtraBars.LinkPersistInfo(Me.ConvertBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeOrderBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeInvoiceBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeInvoiceOnlineBar), New DevExpress.XtraBars.LinkPersistInfo(Me.MakeInvoiceAbbBar)})
         Me.OptionBar.Name = "OptionBar"
         '
         'QuickBar
@@ -234,7 +236,7 @@ Partial Class frmControls
         '
         'MakeOrderBar
         '
-        Me.MakeOrderBar.Caption = "Make Order"
+        Me.MakeOrderBar.Caption = "สร้างใบสั่งขาย"
         Me.MakeOrderBar.Id = 39
         Me.MakeOrderBar.Name = "MakeOrderBar"
         Me.MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
@@ -705,6 +707,27 @@ Partial Class frmControls
         '
         Me.GridView1.Name = "GridView1"
         '
+        'MakeInvoiceBar
+        '
+        Me.MakeInvoiceBar.Caption = "สร้างใบกำกับภาษี"
+        Me.MakeInvoiceBar.Id = 40
+        Me.MakeInvoiceBar.Name = "MakeInvoiceBar"
+        Me.MakeInvoiceBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'MakeInvoiceOnlineBar
+        '
+        Me.MakeInvoiceOnlineBar.Caption = "สร้างใบกำกับภาษีออนไลน์"
+        Me.MakeInvoiceOnlineBar.Id = 41
+        Me.MakeInvoiceOnlineBar.Name = "MakeInvoiceOnlineBar"
+        Me.MakeInvoiceOnlineBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'MakeInvoiceAbbBar
+        '
+        Me.MakeInvoiceAbbBar.Caption = "สร้างใบกำกับภาษีอย่างย่อ"
+        Me.MakeInvoiceAbbBar.Id = 42
+        Me.MakeInvoiceAbbBar.Name = "MakeInvoiceAbbBar"
+        Me.MakeInvoiceAbbBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
         'frmControls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -724,7 +747,6 @@ Partial Class frmControls
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DockPanel1.ResumeLayout(False)
-        Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -825,4 +847,7 @@ Partial Class frmControls
     Friend WithEvents dtpDateTo As DevExpress.XtraEditors.DateEdit
     Private WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents chkShowDelete As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents MakeInvoiceBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents MakeInvoiceOnlineBar As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents MakeInvoiceAbbBar As DevExpress.XtraBars.BarButtonItem
 End Class

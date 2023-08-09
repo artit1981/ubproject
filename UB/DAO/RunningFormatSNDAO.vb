@@ -95,16 +95,13 @@ Public Class RunningFormatSNDAO
 
             Else
                 For Each dr As DataRow In dataTable.Rows
-                    ID = Int32.Parse(dr("MenuID"))
+                    'ID = Int32.Parse(dr("MenuID"))
 
                     FormatFront = ConvertNullToString(dr("FormatFront"))
                     FormatDate = ConvertNullToString(dr("FormatDate"))
                     FormatMidle = ConvertNullToString(dr("FormatMidle"))
                     FormatYear = ConvertNullToString(dr("FormatYear"))
                     RunningCount = ConvertNullToZero(dr("RunningCount"))
-
-                    IsReset = ConvertNullToZero(dr("IsReset"))
-
                     CreateBy = ""
                     CreateTime = ""
                     ModifiedTime = ConvertNullToDateTime(dr("ModifiedTime"))
@@ -144,21 +141,17 @@ Public Class RunningFormatSNDAO
 
                 Case DataMode.ModeEdit
                     SQL = " UPDATE RunningFormatSN SET "
-                    SQL &= " FormatFront=@FormatFront"
+                    SQL &= " FormatFront=''"
                     SQL &= " ,FormatDate=@FormatDate"
                     SQL &= " ,FormatMidle=@FormatMidle"
                     SQL &= " ,RunningCount=@RunningCount"
                     SQL &= " ,FormatYear= @FormatYear"
-                    SQL &= " ,IsReset= " & IIf(IsReset = True, 1, 0)
-                    SQL &= " ,LocationDTLID= @LocationDTLID"
                     SQL &= " ,ModifiedBy= @gUserID"
                     SQL &= " ,ModifiedTime= @CreateTime"
-                    SQL &= " WHERE MenuID= @mIDs"
                 Case DataMode.ModeDelete
             End Select
             myCommand = New SqlCommand
             myCommand.CommandText = SQL
-            myCommand.Parameters.Add(New SqlParameter("@mIDs", ID))
             myCommand.Parameters.Add(New SqlParameter("@FormatFront", Trim(FormatFront)))
             myCommand.Parameters.Add(New SqlParameter("@FormatDate", Trim(FormatDate)))
             myCommand.Parameters.Add(New SqlParameter("@FormatMidle", Trim(FormatMidle)))
@@ -172,6 +165,10 @@ Public Class RunningFormatSNDAO
 
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
+            If IsReset = True Then
+                Dim lclsSN As New SnDAO
+                lclsSN.ResetRunningNo(tr)
+            End If
 
 
             Return True

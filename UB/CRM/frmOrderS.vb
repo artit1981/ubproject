@@ -40,8 +40,8 @@ Public Class frmOrderS
             mcls = New OrderSDAO
             mcls.TableID = mOrderType
             mCustomerID = pCusID
-            OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-            MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            OptionSubItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            MakeOrderBar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
 
 
             'Qua
@@ -344,7 +344,7 @@ Public Class frmOrderS
             mIsFromLoad = True
             MyBase.ClearAllForm(pMode)
             Select Case pMode
-                Case DataMode.ModeNew, DataMode.ModeCopy
+                Case DataMode.ModeNew, DataMode.ModeCopy, DataMode.ModeConvert
                     ClearForm(GeneralTabPage)
                     ClearForm(LayoutControl1)
                     ClearForm(UcAdmin1)
@@ -724,6 +724,8 @@ Public Class frmOrderS
     Private Sub CustomerID_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomerID.EditValueChanged
         Dim lCusID As Long
         lCusID = ConvertNullToZero(CustomerID.EditValue)
+        UcProductLists1.CustomerID = lCusID
+        'gSupplierID = lCusID
         If mIsFromLoad = False Then
 
             InitialCusInfo(lCusID)
@@ -983,7 +985,8 @@ Public Class frmOrderS
                         txtRefOrder.Text = txtRefOrder.Text & ", " & lcls.Subject
                     End If
                     If pInitProduct Then
-                        gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+                        'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+                        UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
                         LoadProList(plngOppID, MasterType.Opportunity)
 
                     End If
@@ -1018,7 +1021,8 @@ Public Class frmOrderS
                         ShipingDate.EditValue = lcls.ShipingDate
                     End If
                     If pInitProduct Then
-                        gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+                        'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+                        UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
                         LoadProList(plngOrderID, pOrderType)
                         If mMode = DataMode.ModeNew Then
                             UcNote2.ShowControl(lcls.TableName & "_PRO", plngOrderID, mRefOrderID.Count > 0)  'Product Remark
@@ -1350,6 +1354,7 @@ Public Class frmOrderS
                     End If
                     PayType.EditValue = mcls.PayType
                     CustomerID.EditValue = mcls.CustomerID
+                    'gSupplierID = mcls.CustomerID
                     EmpID.EditValue = mcls.EmpID
                     SaleOwnerID.EditValue = mcls.SaleOwnerID
                     PO.EditValue = mcls.PO
@@ -1406,6 +1411,7 @@ Public Class frmOrderS
             'Total panel
             Dim lUnits As Long = 0
             If mMode = DataMode.ModeEdit Or pMode = DataMode.ModeConvert Then
+                UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
                 lUnits = UcProductLists1.GetDAOs(False, True, mOrderType = MasterType.SellOrders, Nothing, True, 0, False, "", 0, mcls.StockType).Count
             End If
             InitialTotalPanel(lUnits)
@@ -1423,7 +1429,7 @@ Public Class frmOrderS
             Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
-            gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
             If mMode = DataMode.ModeNew Then
                 lIsReadOnly = False
             ElseIf mcls.IsDelete = True Then
@@ -1439,6 +1445,7 @@ Public Class frmOrderS
             Else
                 lIsReadOnly = True
             End If
+            UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             If IsNothing(ProductList) Then
                 UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, lColData, lIsReadOnly, False, Me, True, mcls.TableName, False, mcls.IsDelete, mcls.StockType)
             Else
@@ -1458,7 +1465,8 @@ Public Class frmOrderS
             Dim lBuyOrSell As Boolean = CheckIsSell(mOrderType)
             Dim lColData As ProColumn = GetColData()
 
-            gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcProductLists1.ShowControlByDataSource(pMode, pSource, lColData, False, Me, mOrderType.ToString, lBuyOrSell, pOrderID, True, mIsMakePO, mcls.StockType)
             Calculation()
         Catch ex As Exception
@@ -1492,6 +1500,11 @@ Public Class frmOrderS
                 CreditRuleID.EditValue = mclsConvert.CreditRuleID
                 VatTypeID.EditValue = mclsConvert.VatTypeID
                 cboCurrency.EditValue = mclsConvert.CurrencyID
+                mIsFromLoad = False
+                InitialVatType(ConvertNullToZero(VatTypeID.EditValue)) '' Initial
+                InitialCurrency(cboCurrency.EditValue)
+                mIsFromLoad = True
+
                 Total.EditValue = mclsConvert.Total
                 DiscountPercen.EditValue = mclsConvert.DiscountPercen
                 DiscountAmount.EditValue = mclsConvert.DiscountAmount
@@ -1505,14 +1518,21 @@ Public Class frmOrderS
                 PayType.EditValue = mclsConvert.PayType
                 PO.EditValue = mclsConvert.PO
 
-                gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+                'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
                 Dim lOrderList As New List(Of Long)
                 lOrderList.Add(mclsConvert.ID)
 
-                UcProductLists1.ShowControl(mMode, lOrderList, mclsConvert.TableName, GetColData, False, True, Me, True, mcls.TableName, False, False, mcls.StockType)
+                UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
+                UcProductLists1.ShowControl(mMode, lOrderList, mclsConvert.TableName, GetColData, False, True, Me, True, mcls.TableName, True, False, mcls.StockType)
                 UcNote1.ShowControl(mclsConvert.TableName, mclsConvert.ID)
                 UcNote2.ShowControl(mclsConvert.TableName & "_PRO", mclsConvert.ID)
+
+                mIsFromLoad = False
+                mRefOrderID.Add(pID)
+                'mProductList = New List(Of ProductListDAO)
                 InitialRefOrder(pID, "", False)
+
+                mIsFromLoad = True
             End If
         Catch ex As Exception
             Err.Raise(Err.Number, ex.Source, mFormName & ".LoadConvert : " & ex.Message)
@@ -1599,6 +1619,7 @@ Public Class frmOrderS
                     TotalTax.EditValue = 0
                     VatAmount.EditValue = 0
                 Else
+
                     Select Case mVatType
                         Case "E"
                             TotalAfterPledge.EditValue = Total.EditValue - PledgeTotal.EditValue
@@ -1730,10 +1751,12 @@ Public Class frmOrderS
                     lclsCredit = New CreditBalanceDAO
                     lclsCredit.InitailCreditBalance(plngCustomerID)
                     CreditBalance.EditValue = lclsCredit.CreditAmount
-                    gCustomerID = plngCustomerID
+                    'gCustomerID = plngCustomerID
+                    UcProductLists1.CustomerID = plngCustomerID
                 Else
                     CreditBalance.Text = ""
-                    gCustomerID = 0
+                    'gCustomerID = 0.
+                    UcProductLists1.CustomerID = 0
                 End If
 
             End If
@@ -2057,7 +2080,5 @@ Public Class frmOrderS
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-
-
 
 End Class

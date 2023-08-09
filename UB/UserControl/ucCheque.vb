@@ -5,6 +5,16 @@ Public Class ucCheque
     Private mIsToApprove As Boolean
     Private mChequeList As List(Of ChequeDAO)
     'Private bindingSource1 As BindingSource
+    Private mCustomerID As Long = 0
+
+    Public Property CustomerID() As Long
+        Get
+            Return mCustomerID
+        End Get
+        Set(ByVal value As Long)
+            mCustomerID = value
+        End Set
+    End Property
 
     Public Function ShowControl(ByVal pIsToApprove As Boolean, ByVal pRefOrderID As Long, Optional ByVal pBankID As Long = 0 _
                                 , Optional ByVal pDateFrom As Date = Nothing, Optional ByVal pDateTo As Date = Nothing, Optional ByVal pIsNewOnly As Boolean = False) As Boolean
@@ -168,7 +178,7 @@ Public Class ucCheque
             If IsNothing(rec1) Then
                 rec1 = New ChequeDAO
                 lclsCus = New CustomerDAO
-                lclsCus.InitailData(gCustomerID)
+                lclsCus.InitailData(mCustomerID)
 
                 If lclsCus.FirstName <> "" Then
                     rec1.ChequeOwnerTH = lclsCus.Title & lclsCus.FirstName & "  " & lclsCus.LastName

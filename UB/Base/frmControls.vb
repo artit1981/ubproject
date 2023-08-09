@@ -19,7 +19,7 @@ Public Class frmControls
     Public Event CHeckRefresh()
     Public Event InitDetail(ByVal pID As Long)
     Public Event InitStatus(ByVal pID As Long)
-    Public Event MakeOrder(ByVal pID As Long)
+    Public Event MakeOrder(ByVal pID As Long, ByVal pOrderType As Integer)
 #End Region
 
 #Region "Private"
@@ -392,30 +392,7 @@ Public Class frmControls
         End Try
     End Sub
 
-    Private Sub MakeOrderBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles MakeOrderBar.ItemClick
-        Dim rowHandle As Integer
-        Try
 
-            If GridView.RowCount = 0 Then Exit Sub
-            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
-
-
-            If rowHandle < 0 Then Exit Sub
-
-            'ShowProgress(True, "Loading...")
-            mID = GridView.GetRowCellDisplayText(rowHandle, "ID")
-            If mID > 0 Then
-                RaiseEvent MakeOrder(mID)
-            End If
-
-
-        Catch ex As Exception
-
-            ShowErrorMsg(False, ex.Message)
-        Finally
-            'ShowProgress(False, "")
-        End Try
-    End Sub
 
     Private Sub btnExportExcel_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportExcel.EditValueChanged
 
@@ -472,15 +449,76 @@ Public Class frmControls
 
     End Sub
 
-    'Private Sub dtpDateFrom_EditValueChanged(sender As Object, e As System.EventArgs) Handles dtpDateFrom.EditValueChanged
-    '    If DatePanel.Visible = True And mIsFromLoad = False Then
-    '        RaiseEvent ReLoad()
-    '    End If
-    'End Sub
+    Private Sub MakeInvoiceBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles MakeInvoiceBar.ItemClick
+        Dim rowHandle As Integer
+        Try
 
-    'Private Sub dtpDateTo_EditValueChanged(sender As Object, e As System.EventArgs) Handles dtpDateTo.EditValueChanged
-    '    If DatePanel.Visible = True And mIsFromLoad = False Then
-    '        RaiseEvent ReLoad()
-    '    End If
-    'End Sub
+            If GridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            mID = GridView.GetRowCellDisplayText(rowHandle, "ID")
+            If mID > 0 Then
+                RaiseEvent MakeOrder(mID, MasterType.Invoice)
+            End If
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
+
+    Private Sub MakeInvoiceOnlineBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles MakeInvoiceOnlineBar.ItemClick
+        Dim rowHandle As Integer
+        Try
+
+            If GridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            mID = GridView.GetRowCellDisplayText(rowHandle, "ID")
+            If mID > 0 Then
+                RaiseEvent MakeOrder(mID, MasterType.InvoiceOnline)
+            End If
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
+
+    Private Sub MakeInvoiceAbbBar_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles MakeInvoiceAbbBar.ItemClick
+        Dim rowHandle As Integer
+        Try
+
+            If GridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            mID = GridView.GetRowCellDisplayText(rowHandle, "ID")
+            If mID > 0 Then
+                RaiseEvent MakeOrder(mID, MasterType.InvoiceAbb)
+            End If
+
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+        End Try
+    End Sub
+
+    Private Sub MakeOrderBar_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles MakeOrderBar.ItemClick
+        Dim rowHandle As Integer
+        Try
+            If GridView.RowCount = 0 Then Exit Sub
+            rowHandle = (TryCast(GridControl.MainView, ColumnView)).FocusedRowHandle
+            If rowHandle < 0 Then Exit Sub
+            mID = GridView.GetRowCellDisplayText(rowHandle, "ID")
+            If mID > 0 Then
+                RaiseEvent MakeOrder(mID, 0)
+            End If
+        Catch ex As Exception
+            ShowErrorMsg(False, ex.Message)
+        Finally
+
+        End Try
+    End Sub
+
+
 End Class

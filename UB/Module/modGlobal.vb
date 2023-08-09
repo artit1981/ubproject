@@ -202,8 +202,8 @@ Module modGlobal
     Public gIsApproveLimitUser As Boolean
     Public gIsApproveOrderUser As Boolean
 
-    Public gCustomerID As Long '' For Refresh uc...
-    Public gSupplierID As Long
+    'Public gCustomerID As Long '' For Refresh uc...
+    'Public gSupplierID As Long
 
     Public gIsCheckError As Boolean = False
     Public gConnectionError As Boolean = False

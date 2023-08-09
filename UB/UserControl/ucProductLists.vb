@@ -44,8 +44,18 @@ Public Class ucProductLists
     Shared mIsForCalc As Boolean
     Shared mIsCheckError As Boolean = False
     Private mStockType As String = ""
+    Private mCustomerID As Long
 
     Public Event SelectedProduct(ByRef pProID As Long)
+
+    Public Property CustomerID() As Long
+        Get
+            Return mCustomerID
+        End Get
+        Set(ByVal value As Long)
+            mCustomerID = value
+        End Set
+    End Property
 
     Public ReadOnly Property IsError() As String
         Get
@@ -78,6 +88,7 @@ Public Class ucProductLists
             mIsCheckError = (pIsReaOnly = False)
             mRefTable = pRefTable
             mOrderID = pRefID
+
 
             mStockType = pStockType
             mIsDelete = pIsDelete
@@ -113,6 +124,8 @@ Public Class ucProductLists
             mRefTable = pRefTable
             mIsLoadFromRef = pIsLoadFromRefOrder
             mOrderID = pOrderID
+
+
             bindingSource1.Clear()
             bindingSource1.DataSource = GetType(ProductSub)
             DxErrorProvider1.DataSource = bindingSource1
@@ -340,111 +353,121 @@ Public Class ucProductLists
                                 mIsError = mIsError & vbNewLine & "กรุณาระบุตำแหน่งเก็บ"
                             End If
 
-                            'Count SN list exclude delete
-                            Dim lSNDup As Boolean = False, lSNList As New List(Of String)
-                            If IsNothing(lDataDAO.SNList) = False Then
-                                For Each pRow As SnDAO In lDataDAO.SNList
-                                    If pRow.IsDelete = 0 Then
-                                        lSNCount = lSNCount + 1
-                                        lstrSNNo = pRow.SerialNumberNo
-
-                                        'Check SN no. Duplicate
-                                        If lSNList.FindIndex(Function(m As String) m = lstrSNNo) >= 0 Then
-                                            lSNDup = True
-                                        End If
-                                        lSNList.Add(lstrSNNo)
-                                    End If
-                                Next
-                            End If
+                            '*** Autogen SN
                             If lDataDAO.IsSN = 1 And (pRefTable = MasterType.StockIn.ToString Or pRefTable = MasterType.UpdateStock.ToString _
                                                 Or (lIsCheckCreditType = True And mStockType = "I")) Then
-                                If IsNothing(lDataDAO.SNList) Then
-                                    mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
-                                ElseIf lSNCount = 0 Then
-                                    mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
-                                ElseIf lDataDAO.SNList.Count > 0 Then
-                                    If lSNCount <> Math.Abs(lDataDAO.Units) Then
-                                        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
+                                If IsNothing(lDataDAO.SNList) OrElse lDataDAO.SNList.Count = 0 Then
+                                    GenSN(lDataDAO.SNList, mCustomerID, lDataDAO.ProductID, False, -1, lDataDAO.Units, MasterType.StockIn)
+                                End If
+                            End If
+
+
+
+                            'Count SN list exclude delete
+                            Dim lSNDup As Boolean = False, lSNList As New List(Of String)
+                                If IsNothing(lDataDAO.SNList) = False Then
+                                    For Each pRow As SnDAO In lDataDAO.SNList
+                                        If pRow.IsDelete = 0 Then
+                                            lSNCount = lSNCount + 1
+                                            lstrSNNo = pRow.SerialNumberNo
+
+                                            'Check SN no. Duplicate
+                                            If lSNList.FindIndex(Function(m As String) m = lstrSNNo) >= 0 Then
+                                                lSNDup = True
+                                            End If
+                                            lSNList.Add(lstrSNNo)
+                                        End If
+                                    Next
+                                End If
+                                If lDataDAO.IsSN = 1 And (pRefTable = MasterType.StockIn.ToString Or pRefTable = MasterType.UpdateStock.ToString _
+                                                Or (lIsCheckCreditType = True And mStockType = "I")) Then
+                                    If IsNothing(lDataDAO.SNList) Then
+                                        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
+                                    ElseIf lSNCount = 0 Then
+                                        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาระบุ Serial Number"
+                                    ElseIf lDataDAO.SNList.Count > 0 Then
+                                        If lSNCount <> Math.Abs(lDataDAO.Units) Then
+                                            mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
+                                        End If
+                                    ElseIf lSNDup = True Then
+                                        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ"
+                                    Else
+                                        Dim lclsSN As New SnDAO
+                                        Dim dataSN As New DataTable()
+                                        dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "", Nothing, False, "", False)
+                                        For Each dr2 As DataRow In dataSN.Rows
+                                            lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
+                                            If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo And m.SerialNumberID = 0) >= 0 Then
+                                                mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" & lstrSNNo & "]"
+                                                Exit For
+                                            End If
+                                        Next
                                     End If
-                                ElseIf lSNDup = True Then
-                                    mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ"
-                                Else
+                                ElseIf lDataDAO.IsSN = 1 And (pRefTable = MasterType.SellOrders.ToString Or (lIsCheckCreditType = True And mStockType = "O")) Then
+
                                     Dim lclsSN As New SnDAO
                                     Dim dataSN As New DataTable()
-                                    dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "", Nothing, False, "", False)
+                                    If IsNothing(lDataDAO.SNList) Then
+                                        lDataDAO.SNList = New List(Of SnDAO)
+                                    End If
+                                    dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "'New'", Nothing, False, lSnIDList, False)
                                     For Each dr2 As DataRow In dataSN.Rows
                                         lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
-                                        If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo And m.SerialNumberID = 0) >= 0 Then
-                                            mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" & lstrSNNo & "]"
+                                        If lSNCount < lDataDAO.Units Then
+                                            If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo) >= 0 Then
+                                                mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" & lstrSNNo & "]"
+                                            Else
+                                                lclsSN = New SnDAO
+                                                lclsSN.SerialNumberID = 0
+                                                lclsSN.SerialNumberNo = lstrSNNo
+                                                lclsSN.Status = "None"
+                                                lDataDAO.SNList.Add(lclsSN)
+                                                lSNCount = lSNCount + 1
+                                                If lSnIDList = "" Then
+                                                    lSnIDList = ConvertNullToZero(dr2("SerialNumberID"))
+                                                Else
+                                                    lSnIDList = lSnIDList & "," & ConvertNullToZero(dr2("SerialNumberID"))
+                                                End If
+                                            End If
+                                        Else
                                             Exit For
                                         End If
                                     Next
-                                End If
-                            ElseIf lDataDAO.IsSN = 1 And (pRefTable = MasterType.SellOrders.ToString Or (lIsCheckCreditType = True And mStockType = "O")) Then
-
-                                Dim lclsSN As New SnDAO
-                                Dim dataSN As New DataTable()
-                                If IsNothing(lDataDAO.SNList) Then
-                                    lDataDAO.SNList = New List(Of SnDAO)
-                                End If
-                                dataSN = lclsSN.GetDataTable(Nothing, 0, lDataDAO.ProductID, "'New'", Nothing, False, lSnIDList, False)
-                                For Each dr2 As DataRow In dataSN.Rows
-                                    lstrSNNo = ConvertNullToString(dr2("SerialNumberNo"))
-                                    If lSNCount < lDataDAO.Units Then
-                                        If lDataDAO.SNList.FindIndex(Function(m As SnDAO) m.SerialNumberNo = lstrSNNo) >= 0 Then
-                                            mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " Serial Number ซ้ำ [" & lstrSNNo & "]"
-                                        Else
-                                            lclsSN = New SnDAO
-                                            lclsSN.SerialNumberID = 0
-                                            lclsSN.SerialNumberNo = lstrSNNo
-                                            lclsSN.Status = "None"
-                                            lDataDAO.SNList.Add(lclsSN)
-                                            lSNCount = lSNCount + 1
-                                            If lSnIDList = "" Then
-                                                lSnIDList = ConvertNullToZero(dr2("SerialNumberID"))
-                                            Else
-                                                lSnIDList = lSnIDList & "," & ConvertNullToZero(dr2("SerialNumberID"))
-                                            End If
-                                        End If
+                                    If lSNCount <> lDataDAO.Units Then
+                                        mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
                                     Else
-                                        Exit For
-                                    End If
-                                Next
-                                If lSNCount <> lDataDAO.Units Then
-                                    mIsError = mIsError & vbNewLine & "สินค้า " & lDataDAO.ProductCode & " กรุณาตรวจสอบ Serial Number"
-                                Else
-                                    For Each pSN In lDataDAO.SNList
-                                        If (pSN.SerialNumberID = 0 Or pMode = DataMode.ModeNew) And pSN.IsDelete = 0 Then
-                                            lclsSN = New SnDAO
-                                            If lclsSN.CheckSNIsExist(lDataDAO.ProductID, pSN.SerialNumberNo, "'New'", Nothing) = False Then
-                                                mIsError = mIsError & vbNewLine & "SN " & pSN.SerialNumberNo & " โดน Close ไปแล้ว"
+                                        For Each pSN In lDataDAO.SNList
+                                            If (pSN.SerialNumberID = 0 Or pMode = DataMode.ModeNew) And pSN.IsDelete = 0 Then
+                                                lclsSN = New SnDAO
+                                                If lclsSN.CheckSNIsExist(lDataDAO.ProductID, pSN.SerialNumberNo, "'New'", Nothing) = False Then
+                                                    mIsError = mIsError & vbNewLine & "SN " & pSN.SerialNumberNo & " โดน Close ไปแล้ว"
+                                                End If
                                             End If
-                                        End If
-                                    Next
+                                        Next
+                                    End If
+                                End If
+
+                                If pCheckSotck = True Then
+                                    If pMode = DataMode.ModeNew Then
+                                        lUnitDiff = lDataDAO.Units
+                                    Else
+                                        lUnitDiff = lDataDAO.Units - lDataDAO.Units_Old
+                                    End If
+                                    '*** lUnitDiff use 2 way
+                                    info.ErrorText = CheckStock(lDataDAO.ProductID, lDataDAO.UnitMainID, lDataDAO.LocationDTLID, lUnitDiff, pStockSum, lUnitDiff)
+                                    If info.ErrorText <> "" Then
+                                        lProductListFail = lDataDAO
+                                        lProductListFail.Units = lUnitDiff
+                                        lProductListFail.AdjustUnit = lUnitDiff
+                                        lProductListFail.IsSelect = True
+                                        pProListStockFail.Add(lProductListFail)
+                                        info.ErrorType = ErrorType.Critical
+                                        mIsError = info.ErrorText
+                                    End If
                                 End If
                             End If
 
-                            If pCheckSotck = True Then
-                                If pMode = DataMode.ModeNew Then
-                                    lUnitDiff = lDataDAO.Units
-                                Else
-                                    lUnitDiff = lDataDAO.Units - lDataDAO.Units_Old
-                                End If
-                                '*** lUnitDiff use 2 way
-                                info.ErrorText = CheckStock(lDataDAO.ProductID, lDataDAO.UnitMainID, lDataDAO.LocationDTLID, lUnitDiff, pStockSum, lUnitDiff)
-                                If info.ErrorText <> "" Then
-                                    lProductListFail = lDataDAO
-                                    lProductListFail.Units = lUnitDiff
-                                    lProductListFail.AdjustUnit = lUnitDiff
-                                    lProductListFail.IsSelect = True
-                                    pProListStockFail.Add(lProductListFail)
-                                    info.ErrorType = ErrorType.Critical
-                                    mIsError = info.ErrorText
-                                End If
-                            End If
-                        End If
-
-                        mDataDAOs.Add(lDataDAO)
+                            mDataDAOs.Add(lDataDAO)
                         info.ErrorText = ""
 
                         If mIsError = "" And mMode = DataMode.ModeEdit And mIsCheckError = True Then
@@ -678,7 +701,7 @@ Public Class ucProductLists
                 Dim lfrmFind As New frmFindProduct
                 Dim i As Long
                 lfrmFind.LookFor = pProductCode
-                lfrmFind.Execute(MasterType.Product, gCustomerID)
+                lfrmFind.Execute(MasterType.Product, mCustomerID)
                 If lfrmFind.IsAccept Then
 
                     If lfrmFind.GetDataKey.Count <= 0 Then
@@ -775,9 +798,9 @@ Public Class ucProductLists
         LoadDataTableProduct = ""
         Try
             If pProCode <> "" Then
-                lcls.InitailData(0, gCustomerID, pProCode, "")
+                lcls.InitailData(0, mCustomerID, pProCode, "")
             Else
-                lcls.InitailData(pllngID, gCustomerID, "", "")
+                lcls.InitailData(pllngID, mCustomerID, "", "")
             End If
 
             If lcls.ID > 0 Then
@@ -1061,6 +1084,7 @@ Public Class ucProductLists
 
     Private Sub RepositoryItemButtonSN_ButtonClick(ByVal sender As Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepositoryItemButtonSN.ButtonClick
         Dim lfrmSN As New frmSN
+        lfrmSN.CustomerID = mCustomerID
         Dim rec As ProductSub = TryCast(gridView.GetFocusedRow, ProductSub)
         Dim lclsUnit As New UnitDAO
         If Not rec Is Nothing Then
@@ -1076,6 +1100,7 @@ Public Class ucProductLists
                 lfrmSN.StockType = mStockType
                 lfrmSN.IsModeDelete = mIsDelete
                 lfrmSN.SnList = rec.SNList
+                lfrmSN.CustomerID = CustomerID
                 If lclsUnit.InitailData(rec.UnitMainID, "") Then
                     lfrmSN.UnitMainNames = lclsUnit.NameThai
                 End If

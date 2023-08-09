@@ -823,7 +823,7 @@ Module modFunction
             'Get Product bar code
             Dim lclsPro As New ProductDAO
             Dim lProductBarCode As String = ""
-            If lclsPro.InitailData(pProductID, "", "", "") Then
+            If lclsPro.InitailData(pProductID, 0, "", "") Then
                 lProductBarCode = lclsPro.BarCode
             End If
 
@@ -879,10 +879,16 @@ Module modFunction
                     lMidleChar = ""
                 End If
 
-                lstrExam &= lProductBarCode
-                lstrExam &= lMidleChar
-                lstrExam &= lSuplierBarCode
-                lstrExam &= lMidleChar
+                If lProductBarCode.Trim <> "" Then
+                    lstrExam &= lProductBarCode
+                    lstrExam &= lMidleChar
+                End If
+
+                If lSuplierBarCode.Trim <> "" Then
+                    lstrExam &= lSuplierBarCode
+                    lstrExam &= lMidleChar
+                End If
+
 
                 If lclsFormat.FormatDate <> "None" Then
                     lclsFormat.FormatDate = Replace(lclsFormat.FormatDate, "mm", "MM")
@@ -904,7 +910,7 @@ Module modFunction
                     lCode = lstrExam & lLastCount.ToString(lRunCount)
 
                     Dim lclsSN = New SnDAO
-                    If pOrderType = MasterType.StockIn.ToString Or (pOrderType = MasterType.UpdateStock.ToString And pUnits > 0) Then
+                    If pOrderType = MasterType.StockIn Or (pOrderType = MasterType.UpdateStock And pUnits > 0) Then
 
                         If lclsSN.CheckSNIsExist(pProductID, lCode, "'New','Close'", Nothing) = True Then
                             Return "Serial Number ซ้ำ :" & lCode

@@ -73,7 +73,7 @@ Public Class frmFindOrder
                     LoadOrder(cboOrderType.EditValue)
 
             End Select
-            gCustomerID = mCustomerID
+            'gCustomerID = mCustomerID
 
             GridView.OptionsView.ShowFooter = False
             GridControl.DataSource = bindingOrder
@@ -280,6 +280,7 @@ Public Class frmFindOrder
         Try
             mSubOrderList = New List(Of SubOrder)
             mProductSubList = New List(Of ProductListDAO)
+            UcProductLists1.CustomerID = mCustomerID
             lProductSubList = UcProductLists1.GetDAOs(False, False, False, Nothing, False, 0, False, "", DataMode.ModeNew, "")
             lProductSubList.Sort(Function(x, y) x.RefID.CompareTo(y.RefID))
 
@@ -590,6 +591,7 @@ Public Class frmFindOrder
             End If
 
             Dim lColData As ProColumn = ProColumn.IsSelect + ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount + ProColumn.Remark + ProColumn.RefOrderCode
+            UcProductLists1.CustomerID = mCustomerID
             UcProductLists1.ShowControlByDataSource(DataMode.ModeNew, lProList, lColData, True, Nothing, pOrderType.ToString, True, lOrderIDList, True, False, "")
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".LoadProListData : " & e.Message)

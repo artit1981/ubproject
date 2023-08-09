@@ -13,6 +13,16 @@ Public Class ucOrderList
     Private mOrderType As MasterType
     Shared mColData As OrdColumn
     Private mMode As DataMode
+    Private mCustomerID As Long = 0
+
+    Public Property CustomerID() As Long
+        Get
+            Return mCustomerID
+        End Get
+        Set(ByVal value As Long)
+            mCustomerID = value
+        End Set
+    End Property
 
     Public ReadOnly Property IsError() As Boolean
         Get
@@ -204,11 +214,11 @@ Public Class ucOrderList
                 CalcToForm()
                 Return lstrProductCode
             Else
-                If gCustomerID = 0 Then
+                If mCustomerID = 0 Then
                     XtraMessageBox.Show(Me, "กรุณาระบุลูกค้า", "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return ""
                 Else
-                    lfrm.CustomerID_ = gCustomerID
+                    lfrm.CustomerID_ = mCustomerID
                     lfrm.OrderDate = mEffectDate
                     lfrm.Text = "ค้นหารายการ "
                     lfrm.OrderType = mOrderType

@@ -475,7 +475,7 @@ Public Class CustomerDAO
             SQL &= " ,C.[BankAccountID1]"
             SQL &= " ,C.[BankAccountID2]"
             SQL &= " ,C.[BankAccountID3]"
-            SQL &= " ,CompanyParent.CustomerID as CompanyParentID,BarCode"
+            SQL &= " ,CompanyParent.CustomerID as CompanyParentID,C.BarCode"
             SQL &= " FROM [Customer] C "
             SQL &= " LEFT OUTER JOIN Customer as CompanyParent ON CompanyParent.CompanyRelateID=C.CustomerID  "
             If pName <> "" Then

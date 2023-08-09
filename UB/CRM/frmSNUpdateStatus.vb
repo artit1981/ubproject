@@ -138,7 +138,7 @@ Public Class frmSNUpdateStatus
             Dim lfrmFind As New frmFindProduct
             Dim i As Long
             'lfrmFind.LookFor = ConvertNullToString(ProductCode.EditValue)
-            lfrmFind.Execute(MasterType.Product, gCustomerID)
+            lfrmFind.Execute(MasterType.Product, 0)
             If lfrmFind.IsAccept Then
                 If lfrmFind.GetDataKey.Count > 0 Then
                     ShowProgress(True, "Loading....")

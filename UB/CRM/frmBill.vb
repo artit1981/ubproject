@@ -388,9 +388,11 @@ Public Class frmBill
             End If
             LoadTaxOrder(pID)
             InitialCusTaxInfo(ConvertNullToZero(CustomerID.EditValue), Nothing)
-            gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            UcCheque1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcCheque1.ShowControl(False, pID)
             UcNote1.ShowControl(mcls.TableName, pID)
+            UcOrderList1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcOrderList1.ShowControl(SubOrderList, mcls.ID, mcls.OrderDate, mMode <> DataMode.ModeNew, ucOrderList.OrdColumn.BillTotal, False, Me, mOrderType, True, pMode)
 
         Catch ex As Exception
@@ -519,7 +521,9 @@ Public Class frmBill
         Try
             CreditBalance.EditValue = ""
             If mIsFromLoad = False And plngCustomerID > 0 Then
-                gCustomerID = plngCustomerID
+                'gCustomerID = plngCustomerID
+                UcCheque1.CustomerID = plngCustomerID
+                UcOrderList1.CustomerID = plngCustomerID
                 lcls = New CustomerDAO
                 lcls.InitailData(plngCustomerID)
                 InitialCusTaxInfo(plngCustomerID, lcls)

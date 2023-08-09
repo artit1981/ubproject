@@ -882,7 +882,7 @@ Public Class ProductDAO
             SQL &= " ,t.NameThai as ProductType,pg.CodeThai as ProductGroup1,d.CodeThai asProductDimension1"
             SQL &= " ,ld.IDCode as LocationMain ,ld2.IDCode as LocationSub"
             SQL &= " ,p.Weight,p.Size,p.Generation,p.Color,p.sku1,p.sku2,p.sku3,p.sku4,p.sku5,p.Remark"
-            SQL &= " ,p.Price1,p.Price2,p.Price3,p.Price4,p.Price5,p.Price6"
+            SQL &= " ,p.Price1,p.Price2,p.Price3,p.Price4,p.Price5,p.Price6,'N' as IsNew"
             SQL &= " FROM " & TableName & " p"
             SQL &= " LEFT OUTER JOIN ProductGuarantee g ON g.MasterID=p.ProductGuaranteeID"
             SQL &= " LEFT OUTER JOIN Product_Unit u ON u.UnitID=p.UnitMainID"

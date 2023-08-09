@@ -4,7 +4,7 @@ Imports DevExpress.XtraEditors
 
 Public Class frmRuningFormatSN
     Inherits iEditForm
-    Dim mcls As New RunningFormatDAO
+    Dim mcls As New RunningFormatSNDAO
     Private Const mFormName As String = "frmRuningFormatSN"
 
 #Region "Event"
@@ -96,7 +96,7 @@ Public Class frmRuningFormatSN
             mcls.RunningCount = RunningCount.EditValue
 
             lstrExam = "รหัสสินค้า" &  mcls.FormatMidle
-            lstrExam = "รหัสซัพพลายเออร์" & mcls.FormatMidle
+            lstrExam &= "รหัสซัพพลายเออร์" & mcls.FormatMidle
 
             If mcls.FormatDate <> "None" Then
                 mcls.FormatDate = Replace(mcls.FormatDate, "mm", "MM")
@@ -131,31 +131,24 @@ Public Class frmRuningFormatSN
 
     Private Function LoadData(ByVal pMode As Integer, ByVal pID As Long) As Boolean
         Try
-            If pMode = DataMode.ModeNew Then
-                FormatYear.EditValue = "EN"
-            ElseIf pMode = DataMode.ModeEdit Then
-                If mcls.InitailData(pID, Nothing) Then
 
-                    FormatFront.EditValue = mcls.FormatFront
-                    FormatDate.EditValue = mcls.FormatDate
-                    If ConvertNullToString(mcls.FormatYear) = "" Then
-                        FormatYear.EditValue = "EN"
-                    Else
-                        FormatYear.EditValue = mcls.FormatYear
-                    End If
-                    FormatMidle.EditValue = mcls.FormatMidle
-                    RunningCount.EditValue = mcls.RunningCount
-
-                    chkIsReset.EditValue = mcls.IsReset
-                    UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
-                    UcAdmin1.txtCreateTime.Text = mcls.CreateTime
-                    UcAdmin1.txtModifiBy.Text = mcls.ModifiedBy.Trim
-                    UcAdmin1.txtModifiTime.Text = mcls.ModifiedTime
-                    DisplayExams()
-
-
-
+            If mcls.InitailData(Nothing) Then
+                'FormatFront.EditValue = mcls.FormatFront
+                FormatDate.EditValue = mcls.FormatDate
+                If ConvertNullToString(mcls.FormatYear) = "" Then
+                    FormatYear.EditValue = "EN"
+                Else
+                    FormatYear.EditValue = mcls.FormatYear
                 End If
+                FormatMidle.EditValue = mcls.FormatMidle
+                RunningCount.EditValue = mcls.RunningCount
+
+                chkIsReset.Checked = False
+                UcAdmin1.txtCreateBy.Text = mcls.CreateBy.Trim
+                UcAdmin1.txtCreateTime.Text = mcls.CreateTime
+                UcAdmin1.txtModifiBy.Text = mcls.ModifiedBy.Trim
+                UcAdmin1.txtModifiTime.Text = mcls.ModifiedTime
+                DisplayExams()
             End If
 
 
@@ -187,9 +180,13 @@ Public Class frmRuningFormatSN
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
-            'FormatYear.EditValue = "EN"
+            Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+
+            FormatYear.EditValue = "TH"
             Call InitialCombo()
             Call LoadData(pMode, pID)
+
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
@@ -218,15 +215,14 @@ Public Class frmRuningFormatSN
         XtraTabControl1.SelectedTabPage = GeneralTabPage
         Try
             'mcls.ID = pID
-            mcls.ModeData = pMode
-            mcls.FormatFront = FormatFront.EditValue
+            mcls.ModeData = DataMode.ModeEdit
             mcls.FormatDate = FormatDate.EditValue
             mcls.FormatYear = FormatYear.EditValue
             mcls.FormatMidle = FormatMidle.EditValue
             mcls.RunningCount = RunningCount.EditValue
             'mcls.LastNo = LastNo.EditValue
 
-            mcls.IsReset = chkIsReset.EditValue
+            mcls.IsReset = chkIsReset.Checked
             If Verify() = True Then
                 Return mcls.SaveData(Nothing)
             Else

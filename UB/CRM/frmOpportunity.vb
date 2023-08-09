@@ -249,9 +249,10 @@ Public Class frmOpportunity
 
             'Note
             UcNote1.ShowControl(mcls.TableName, pID)
-            gCustomerID = ConvertNullToZero(CustomerID.EditValue)
+            'gCustomerID = ConvertNullToZero(CustomerID.EditValue)
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(mcls.ID)
+            UcProductLists1.CustomerID = ConvertNullToZero(CustomerID.EditValue)
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.Units + ProColumn.Price + ProColumn.UnitName + ProColumn.Total + ProColumn.Discount _
                                         , False, True, Nothing, True, mcls.TableName, False, mcls.IsDelete, "")
             UcContactRole1.ShowControl(pID)
@@ -467,7 +468,8 @@ Public Class frmOpportunity
         Dim lCusID As Long
         lCusID = ConvertNullToZero(CustomerID.EditValue)
         If lCusID > 0 Then
-            gCustomerID = lCusID
+            'gCustomerID = lCusID
+            UcProductLists1.CustomerID = lCusID
         End If
     End Sub
 End Class

@@ -248,9 +248,11 @@ Public Class frmProduct
             UcProductLocation1.ShowControl(pID)
             UcProductUnitBuy.ShowControl(pID, 1)
             UcProductUnitSell.ShowControl(pID, 2)
-            gCustomerID = 0
+            'gCustomerID = 0
             Dim lOrderList As New List(Of Long)
             lOrderList.Add(pID)
+            UcProductLists1.CustomerID = 0
+            UcProductLists2.CustomerID = 0
             UcProductLists1.ShowControl(pMode, lOrderList, mcls.TableName, ProColumn.UnitName + ProColumn.Remark, False, True, Nothing, True, mcls.TableName, False, False, "")
             UcProductLists2.ShowControl(pMode, lOrderList, mcls.TableName & "_ProSet", ProColumn.UnitName + ProColumn.Remark + ProColumn.Price + ProColumn.Units _
                                         , False, True, Nothing, True, mcls.TableName, False, False, "")

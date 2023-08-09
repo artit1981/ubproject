@@ -184,6 +184,8 @@ Public Class frmRuningFormat
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
+            Addbar.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            PrintBar2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             'FormatYear.EditValue = "EN"
             Call InitialCombo()
             Call LoadData(pMode, pID)

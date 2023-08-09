@@ -33,7 +33,7 @@ Public Class ProductImport
                         rec.NameEng = ConvertNullToString(dr(2))
                         rec.CostType = ProductCostDAO.CostTypes.Average
                         rec.Price = ConvertNullToZero(dr(3))
-                        rec.IsSN = "No"
+                        'rec.IsSN = "No"
                         rec.UnitMain = ConvertNullToString(dr(4), True, 50)
 
                         rec.ProductCategory = ConvertNullToString(dr(5), True, 50)
@@ -921,6 +921,9 @@ Public Class ProductProperty
                 Else
                     lSuccess = True
                 End If
+                lclsDAO.TaxType = False
+                lclsDAO.IsSN = IIf(IsSN = "Yes", 1, 0)
+                lclsDAO.CostType = CostType
             Else
                 lclsDAO.ModeData = DataMode.ModeEdit
                 lSuccess = lclsDAO.InitailData(ProductID, 0, "", "", ptr)
@@ -934,7 +937,7 @@ Public Class ProductProperty
                 If NameThai.Trim <> "" Then lclsDAO.NameThai = NameThai
                 If NameEng.Trim <> "" Then lclsDAO.NameEng = NameEng
                 If Remark.Trim <> "" Then lclsDAO.Remark = Remark
-                lclsDAO.CostType = CostType
+
                 If Price > 0 Then lclsDAO.PriceStandard = Price
                 If Price1 > 0 Then lclsDAO.Price1 = Price1
                 If Price2 > 0 Then lclsDAO.Price2 = Price2
@@ -942,8 +945,7 @@ Public Class ProductProperty
                 If Price4 > 0 Then lclsDAO.Price4 = Price4
                 If Price5 > 0 Then lclsDAO.Price5 = Price5
                 If Price6 > 0 Then lclsDAO.Price6 = Price6
-                lclsDAO.TaxType = False
-                lclsDAO.IsSN = IIf(IsSN = "Yes", 1, 0)
+
                 If UnitMainID > 0 Then lclsDAO.UnitMainID = UnitMainID
                 If UnitMainID > 0 Then lclsDAO.UnitMainIDBuy = UnitMainID
                 If UnitMainID > 0 Then lclsDAO.UnitSecondID = UnitMainID

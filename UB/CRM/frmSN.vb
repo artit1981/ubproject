@@ -101,6 +101,18 @@ Public Class frmSN
         End Set
     End Property
 
+    Private mCustomerID As Long
+
+
+    Public Property CustomerID() As Long
+        Get
+            Return mCustomerID
+        End Get
+        Set(ByVal value As Long)
+            mCustomerID = value
+        End Set
+    End Property
+
     Private Sub frmSN_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mIsFromLoad = True
         btnPrint.Visible = False
@@ -272,7 +284,7 @@ Public Class frmSN
         Try
             Cursor = Cursors.WaitCursor
 
-            Dim lError As String = GenSN(mSnList, gSupplierID, mProductIDs, mIsModePrint, -1, UnitsMain.EditValue, MasterType.StockIn)
+            Dim lError As String = GenSN(mSnList, mCustomerID, mProductIDs, mIsModePrint, -1, UnitsMain.EditValue, MasterType.StockIn)
             If lError <> "" Then
                 MessageBox.Show(lError, "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
@@ -484,7 +496,7 @@ Public Class frmSN
             Dim lfrmFind As New frmFindProduct
             Dim i As Long
             lfrmFind.LookFor = ConvertNullToString(ProductCode.EditValue)
-            lfrmFind.Execute(MasterType.Product, gCustomerID)
+            lfrmFind.Execute(MasterType.Product, mCustomerID)
             If lfrmFind.IsAccept Then
                 If lfrmFind.GetDataKey.Count > 0 Then
                     For i = 1 To lfrmFind.GetDataKey.Count
