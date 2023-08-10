@@ -860,6 +860,16 @@ Public Class ucProductLists
                 rec.IsDelete = 0
                 rec.Price = rec.PriceMain * rec.RateUnit
                 rec.RealPrice = rec.Price
+                If mRefTable = MasterType.StockIn.ToString Then
+                    'Set Location
+                    Dim lclsProLocat As New ProductLocationSDAO
+                    Dim lDataTable As New DataTable
+                    lDataTable = lclsProLocat.GetDataTableDTL(rec.ProductID, mRefTable)
+                    For Each lDataRow As DataRow In lDataTable.Rows
+                        rec.LocationDTLID = lDataRow.Item("LocationDTLID")
+                        Exit For
+                    Next
+                End If
                 If llIndex = 0 Then
                     bindingSource1.Add(rec)
 

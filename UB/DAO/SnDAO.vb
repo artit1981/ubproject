@@ -62,6 +62,16 @@ Public Class SnDAO
             mSerialNumberNo = value
         End Set
     End Property
+
+    Dim mProductName As String = ""
+    Public Property ProductName() As String
+        Get
+            Return mProductName
+        End Get
+        Set(ByVal value As String)
+            mProductName = value
+        End Set
+    End Property
     Public Property Status() As String
         Get
             Return mStatus

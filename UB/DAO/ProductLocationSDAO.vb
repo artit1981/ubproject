@@ -139,7 +139,7 @@ Public Class ProductLocationSDAO
                 SQL &= " ORDER BY D.NameThai"
             ElseIf pRefTable = MasterType.Invoice.ToString Or pRefTable = MasterType.InvoiceOnline.ToString Or pRefTable = MasterType.InvoiceAbb.ToString Or pRefTable = MasterType.Borrow.ToString _
                 Or pRefTable = MasterType.ReduceCredit.ToString Or pRefTable = MasterType.ReduceCreditBuy.ToString _
-                Or pRefTable = MasterType.AddCredit.ToString Or pRefTable = MasterType.AddCreditBuy.ToString Or pRefTable = MasterType.StockIn.ToString Then
+                Or pRefTable = MasterType.AddCredit.ToString Or pRefTable = MasterType.AddCreditBuy.ToString Or pRefTable = MasterType.StockIn.ToString Or pRefTable = MasterType.PurchaseOrder.ToString Then
                 SQL = "SELECT P.RefID AS ProductID,D.NameThai AS LocationDTL,D.LocationDTLID  "
                 SQL &=  " FROM Product_LocationS P"
                 SQL &=  " LEFT OUTER JOIN Product_LocationDTL D ON D.LocationDTLID=P.LocationDTLID "

@@ -849,7 +849,12 @@ Public Class frmPreReport
                     myCommand.Parameters.Add(New SqlParameter("@UserID", gUserID))
                     myCommand.Parameters.Add(New SqlParameter("@SEQ", lSEQ))
                     myCommand.Parameters.Add(New SqlParameter("@TaxText1", ConvertNullToString(lSN)))
-                    myCommand.Parameters.Add(New SqlParameter("@TaxText6", ConvertNullToString(mProName)))
+                    If mProName = "" Then
+                        myCommand.Parameters.Add(New SqlParameter("@TaxText6", pBarcode.ProductName))
+                    Else
+                        myCommand.Parameters.Add(New SqlParameter("@TaxText6", ConvertNullToString(mProName)))
+                    End If
+
                     'myCommand.Parameters.Add(New SqlParameter("@TaxImage", bdf.Draw(ConvertNullToString(lSN), 20)))
                     Dim ms = New MemoryStream()
                     'bdf.Draw(ConvertNullToString(lSN), 40, 10).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp) ' Use appropriate format here

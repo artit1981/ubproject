@@ -93,7 +93,24 @@ Public Class frmStockIn
             If Verify() = True Then
                 Call mcls.SaveData()
                 ShowProgress(False, "")
-                XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                'XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                If XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ ต้องการพิมพ์บาร์โค้ดหรือไม่", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
+                    Dim lSNList As New List(Of SnDAO)
+                    Dim lSN As New SnDAO
+
+                    For Each pPro In mcls.ProductDAOs
+                        For Each pSN In pPro.SNList
+                            lSN = New SnDAO
+                            lSN.ProductName = pPro.ProductName
+                            lSN.SerialNumberNo = pSN.SerialNumberNo
+                            lSNList.Add(lSN)
+                        Next
+                    Next
+                    If lSNList.Count > 0 Then
+                        modReport.PrintBarCode("", lSNList)
+                    End If
+
+                End If
                 Return True
             Else
                 Return False
