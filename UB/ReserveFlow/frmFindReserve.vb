@@ -137,6 +137,7 @@ Public Class frmFindReserve
                     rec.KeepMin = pProLIst.KeepMin
                     rec.Units = pProLIst.Units
                     rec.Price = pProLIst.Price
+                    rec.RealPrice = pProLIst.RealPrice
                     rec.PriceMain = pProLIst.PriceMain
                     rec.Cost = pProLIst.Cost
                     rec.Discount = pProLIst.Discount
@@ -186,6 +187,7 @@ Public Class frmFindReserve
                             rec.KeepMin = pProLIst.KeepMin
                             rec.Units = pProLIst.Units
                             rec.Price = pProLIst.Price
+                            rec.RealPrice = pProLIst.RealPrice
                             rec.PriceMain = pProLIst.PriceMain
                             rec.Cost = pProLIst.Cost
                             rec.Discount = pProLIst.Discount
@@ -369,6 +371,7 @@ Public Class frmFindReserve
                             rec.KeepMin = ConvertNullToZero(dr("KeepMin"))
                             rec.PriceMain = ConvertNullToZero(dr("PriceMain"))
                             rec.Price = ConvertNullToZero(dr("Price"))
+                            rec.RealPrice = ConvertNullToZero(dr("RealPrice"))
                             rec.Cost = ConvertNullToZero(dr("Cost"))
                             rec.Discount = ConvertNullToZero(dr("Discount"))
                             rec.IsShow = ConvertNullToZero(dr("IsShow"))

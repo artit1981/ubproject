@@ -28,6 +28,7 @@ Partial Class frmFindReserve
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Code = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.Type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Phone1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Fax = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -83,13 +84,13 @@ Partial Class frmFindReserve
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
         CType(Me.cboCustomerID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,7 +118,6 @@ Partial Class frmFindReserve
         CType(Me.txtPriceLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDateLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtSupLast.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -132,7 +132,7 @@ Partial Class frmFindReserve
         Me.GroupControl1.Controls.Add(Me.DateFrom)
         Me.GroupControl1.Location = New System.Drawing.Point(-4, 1)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1102, 75)
+        Me.GroupControl1.Size = New System.Drawing.Size(1384, 75)
         Me.GroupControl1.TabIndex = 1
         Me.GroupControl1.Text = "เงื่อนไขการค้นหาข้อมูล"
         '
@@ -144,7 +144,7 @@ Partial Class frmFindReserve
         Me.GroupControl2.Controls.Add(Me.cboCustomerID)
         Me.GroupControl2.Controls.Add(Me.Label1)
         Me.GroupControl2.Controls.Add(Me.btnMakeOrder)
-        Me.GroupControl2.Location = New System.Drawing.Point(579, 24)
+        Me.GroupControl2.Location = New System.Drawing.Point(861, 24)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.Size = New System.Drawing.Size(518, 51)
         Me.GroupControl2.TabIndex = 309
@@ -214,6 +214,10 @@ Partial Class frmFindReserve
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 1
         Me.GridColumn1.Width = 150
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         '
         'Type
         '
@@ -379,7 +383,7 @@ Partial Class frmFindReserve
         Me.GridControl.MainView = Me.GridView
         Me.GridControl.Name = "GridControl"
         Me.GridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.IsSelectCheckEdit, Me.RepositoryItemCalcEdit1, Me.btnOrderCode})
-        Me.GridControl.Size = New System.Drawing.Size(1098, 228)
+        Me.GridControl.Size = New System.Drawing.Size(1380, 228)
         Me.GridControl.TabIndex = 21
         Me.GridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView})
         '
@@ -624,9 +628,10 @@ Partial Class frmFindReserve
         Me.UcProductLists1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.UcProductLists1.CustomerID = CType(0, Long)
         Me.UcProductLists1.Location = New System.Drawing.Point(0, 313)
         Me.UcProductLists1.Name = "UcProductLists1"
-        Me.UcProductLists1.Size = New System.Drawing.Size(772, 209)
+        Me.UcProductLists1.Size = New System.Drawing.Size(1054, 316)
         Me.UcProductLists1.TabIndex = 22
         '
         'PanelControl1
@@ -654,7 +659,7 @@ Partial Class frmFindReserve
         Me.PanelControl1.Controls.Add(Me.LabelControl3)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Location = New System.Drawing.Point(777, 340)
+        Me.PanelControl1.Location = New System.Drawing.Point(1059, 340)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(321, 152)
         Me.PanelControl1.TabIndex = 129
@@ -943,15 +948,11 @@ Partial Class frmFindReserve
         Me.LabelControl1.TabIndex = 129
         Me.LabelControl1.Text = "รายการซื้อล่าสุด"
         '
-        'RepositoryItemMemoEdit1
-        '
-        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
-        '
         'frmFindReserve
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1100, 504)
+        Me.ClientSize = New System.Drawing.Size(1382, 630)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.UcProductLists1)
         Me.Controls.Add(Me.GridControl)
@@ -969,6 +970,7 @@ Partial Class frmFindReserve
         Me.GroupControl2.PerformLayout()
         CType(Me.cboCustomerID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -997,7 +999,6 @@ Partial Class frmFindReserve
         CType(Me.txtPriceLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDateLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtSupLast.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

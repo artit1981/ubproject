@@ -638,6 +638,7 @@ Public Class ucProductLists
             End If
 
             .Columns("Price").Visible = (mColData And ProColumn.Price) = ProColumn.Price
+            .Columns("RealPrice").Visible = (mColData And ProColumn.Price) = ProColumn.Price
             .Columns("Cost").Visible = (mColData And ProColumn.Cost) = ProColumn.Cost
             .Columns("Total").Visible = (mColData And ProColumn.Total) = ProColumn.Total
             .Columns("Discount").Visible = (mColData And ProColumn.Discount) = ProColumn.Discount
