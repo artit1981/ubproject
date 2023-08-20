@@ -71,6 +71,7 @@ Partial Class frmShippingRecordMain
         Me.ReceiptCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BillCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.EMPNAME = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AssignDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ShippingPeriod = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ShippingMethod = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ShippingEmp = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -454,7 +455,7 @@ Partial Class frmShippingRecordMain
         '
         'GridView
         '
-        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.OrderCode, Me.OrderDate, Me.CustomerCode, Me.Customer, Me.OrderStatus, Me.GrandTotal, Me.ReceiptCode, Me.BillCode, Me.EMPNAME, Me.ShippingPeriod, Me.ShippingMethod, Me.ShippingEmp, Me.ShippingStatus, Me.ShippingRemark, Me.OrderID})
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.OrderCode, Me.OrderDate, Me.CustomerCode, Me.Customer, Me.OrderStatus, Me.GrandTotal, Me.ReceiptCode, Me.BillCode, Me.EMPNAME, Me.AssignDate, Me.ShippingPeriod, Me.ShippingMethod, Me.ShippingEmp, Me.ShippingStatus, Me.ShippingRemark, Me.OrderID})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -549,13 +550,21 @@ Partial Class frmShippingRecordMain
         Me.EMPNAME.Visible = True
         Me.EMPNAME.VisibleIndex = 9
         '
+        'AssignDate
+        '
+        Me.AssignDate.Caption = "GridColumn1"
+        Me.AssignDate.FieldName = "AssignDate"
+        Me.AssignDate.Name = "AssignDate"
+        Me.AssignDate.Visible = True
+        Me.AssignDate.VisibleIndex = 10
+        '
         'ShippingPeriod
         '
         Me.ShippingPeriod.Caption = "ShippingPeriod"
         Me.ShippingPeriod.FieldName = "ShippingPeriod"
         Me.ShippingPeriod.Name = "ShippingPeriod"
         Me.ShippingPeriod.Visible = True
-        Me.ShippingPeriod.VisibleIndex = 10
+        Me.ShippingPeriod.VisibleIndex = 11
         '
         'ShippingMethod
         '
@@ -563,7 +572,7 @@ Partial Class frmShippingRecordMain
         Me.ShippingMethod.FieldName = "ShippingMethod"
         Me.ShippingMethod.Name = "ShippingMethod"
         Me.ShippingMethod.Visible = True
-        Me.ShippingMethod.VisibleIndex = 11
+        Me.ShippingMethod.VisibleIndex = 12
         '
         'ShippingEmp
         '
@@ -571,7 +580,7 @@ Partial Class frmShippingRecordMain
         Me.ShippingEmp.FieldName = "ShippingEmp"
         Me.ShippingEmp.Name = "ShippingEmp"
         Me.ShippingEmp.Visible = True
-        Me.ShippingEmp.VisibleIndex = 12
+        Me.ShippingEmp.VisibleIndex = 13
         '
         'ShippingStatus
         '
@@ -579,7 +588,7 @@ Partial Class frmShippingRecordMain
         Me.ShippingStatus.FieldName = "ShippingStatus"
         Me.ShippingStatus.Name = "ShippingStatus"
         Me.ShippingStatus.Visible = True
-        Me.ShippingStatus.VisibleIndex = 13
+        Me.ShippingStatus.VisibleIndex = 14
         '
         'ShippingRemark
         '
@@ -587,7 +596,7 @@ Partial Class frmShippingRecordMain
         Me.ShippingRemark.FieldName = "ShippingRemark"
         Me.ShippingRemark.Name = "ShippingRemark"
         Me.ShippingRemark.Visible = True
-        Me.ShippingRemark.VisibleIndex = 14
+        Me.ShippingRemark.VisibleIndex = 15
         '
         'OrderID
         '
@@ -595,7 +604,7 @@ Partial Class frmShippingRecordMain
         Me.OrderID.FieldName = "OrderID"
         Me.OrderID.Name = "OrderID"
         Me.OrderID.Visible = True
-        Me.OrderID.VisibleIndex = 15
+        Me.OrderID.VisibleIndex = 16
         '
         'GridView1
         '
@@ -701,4 +710,5 @@ Partial Class frmShippingRecordMain
     Friend WithEvents ShippingEmp As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ShippingStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ShippingRemark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents AssignDate As DevExpress.XtraGrid.Columns.GridColumn
 End Class

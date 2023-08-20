@@ -29,6 +29,12 @@ Public Class frmShippingRecordMain
                 lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
                 lRecProperty.BillCode = pRow("BillCode").ToString.Trim
                 lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                If pRow("ShippingEmp").ToString.Trim = "" Then
+                    lRecProperty.AssignDate = GetCurrentDate(Nothing)
+                Else
+                    lRecProperty.AssignDate = pRow("AssignDate")
+                End If
+
                 lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
                 lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
                 lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
@@ -99,6 +105,11 @@ Public Class frmShippingRecordMain
             .Columns("EMPNAME").MaxWidth = 150
             .Columns("EMPNAME").OptionsColumn.ReadOnly = True
 
+            .Columns("AssignDate").Caption = "วันที่ Assign"
+            .Columns("AssignDate").Width = 80
+            .Columns("AssignDate").MaxWidth = 90
+
+            .Columns("AssignDate").OptionsColumn.ReadOnly = True
             .Columns("ShippingPeriod").Caption = "กำหนดเวลาส่ง"
             .Columns("ShippingPeriod").Width = 90
             .Columns("ShippingPeriod").MaxWidth = 90
@@ -344,6 +355,17 @@ Public Class ShippingRecProperty
         End Set
     End Property
 
+    Private mAssignDate As Date
+    Public Property AssignDate() As Date
+        Get
+            Return mAssignDate
+        End Get
+        Set(ByVal value As Date)
+            mAssignDate = value
+        End Set
+    End Property
+
+
     Dim mShippingPeriod As String = ""
     Public Property ShippingPeriod() As String
         Get
@@ -407,7 +429,7 @@ Public Class ShippingRecProperty
         End Set
     End Property
 
-
+    '
 #End Region
 
 

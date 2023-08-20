@@ -61,7 +61,7 @@ Public Class frmShippingRecordDTL
             ShippingStatus.Properties.Items.Add("กำลังดำเนินการ")
             ShippingStatus.SelectedIndex = 0
 
-
+            AssignDate.EditValue = GetCurrentDate(Nothing)
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
         End Try
@@ -94,7 +94,7 @@ Public Class frmShippingRecordDTL
                             lOrder.ShippingRemark = ShippingRemark.Text.Trim
                             lOrder.ShippingEmpID = ShippingEmp.EditValue
                             lOrder.AssignEmpID = gUserID
-                            lOrder.AssignDate = GetCurrentDate(tr)
+                            lOrder.AssignDate = AssignDate.EditValue
                             lOrder.UpdateAssignShipping(tr)
                         Next
 
@@ -110,7 +110,7 @@ Public Class frmShippingRecordDTL
                                 lOrder.ShippingRemark = ShippingRemark.Text.Trim
                                 lOrder.ShippingEmpID = ShippingEmp.EditValue
                                 lOrder.AssignEmpID = gUserID
-                                lOrder.AssignDate = GetCurrentDate(tr)
+                                lOrder.AssignDate = AssignDate.EditValue
                                 lOrder.ModeData = DataMode.ModeEdit
                                 lOrder.SaveData()
                             End If

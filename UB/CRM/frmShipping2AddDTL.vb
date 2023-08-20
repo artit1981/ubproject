@@ -24,10 +24,12 @@ Public Class frmShipping2AddDTL
         Try
             loadComboEmp()
             loadComboShipping()
-            OrderDate.EditValue = GetCurrentDate(Nothing)
 
             If mIDs > 0 Then
                 LoadData()
+            Else
+                OrderDate.EditValue = GetCurrentDate(Nothing)
+                AssignDate.EditValue = GetCurrentDate(Nothing)
             End If
         Catch ex As Exception
             ShowErrorMsg(False, ex.Message)
@@ -132,7 +134,7 @@ Public Class frmShipping2AddDTL
                     lOrder.ShippingPeriod = ShippingPeriod.Text.Trim
                     lOrder.ShippingMethod = ShippingMethod.Text.Trim
                     lOrder.ShippingStatus = ShippingStatus.Text.Trim
-                    lOrder.AssignDate = GetCurrentDate(Nothing)
+                    lOrder.AssignDate = AssignDate.EditValue
                     lOrder.AssignEmpID = gUserID
                     lOrder.SaveData()
 
@@ -169,6 +171,7 @@ Public Class frmShipping2AddDTL
                 EmpID.EditValue = lOrder.EmpID
                 Remark.Text = lOrder.Remark
 
+                AssignDate.EditValue = lOrder.AssignDate
                 ShippingEmp.EditValue = lOrder.ShippingEmpID
                 ShippingPeriod.Text = lOrder.ShippingPeriod
                 ShippingMethod.Text = lOrder.ShippingMethod

@@ -26,6 +26,7 @@ Public Class frmShippingRecordMain2
                 lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
                 lRecProperty.BillCode = pRow("BillCode").ToString.Trim
                 lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                lRecProperty.AssignDate = pRow("AssignDate")
                 lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
                 lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
                 lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
@@ -86,6 +87,11 @@ Public Class frmShippingRecordMain2
             .Columns("EMPNAME").Width = 140
             .Columns("EMPNAME").MaxWidth = 150
             .Columns("EMPNAME").OptionsColumn.ReadOnly = True
+
+            .Columns("AssignDate").Caption = "วันที่ Assign"
+            .Columns("AssignDate").Width = 80
+            .Columns("AssignDate").MaxWidth = 90
+            .Columns("AssignDate").OptionsColumn.ReadOnly = True
 
             .Columns("ShippingPeriod").Caption = "กำหนดเวลาส่ง"
             .Columns("ShippingPeriod").Width = 90

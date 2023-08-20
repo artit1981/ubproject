@@ -1057,6 +1057,7 @@ Public Class frmMain
                     lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
                     lRecProperty.BillCode = pRow("BillCode").ToString.Trim
                     lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.AssignDate = pRow("AssignDate")
                     lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
                     lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
                     lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
@@ -1085,6 +1086,7 @@ Public Class frmMain
                     lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
                     lRecProperty.BillCode = pRow("BillCode").ToString.Trim
                     lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                    lRecProperty.AssignDate = pRow("AssignDate")
                     lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
                     lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
                     lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim

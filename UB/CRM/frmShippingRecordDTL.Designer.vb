@@ -28,6 +28,9 @@ Partial Class frmShippingRecordDTL
         Me.ShippingRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.ShippingEmp = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ShippingMethod = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.ShippingPeriod = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.ShippingStatus = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -38,9 +41,8 @@ Partial Class frmShippingRecordDTL
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AssignDate = New DevExpress.XtraEditors.DateEdit()
+        Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
@@ -57,6 +59,9 @@ Partial Class frmShippingRecordDTL
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageCollection1
@@ -97,6 +102,7 @@ Partial Class frmShippingRecordDTL
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.AssignDate)
         Me.LayoutControl1.Controls.Add(Me.ShippingRemark)
         Me.LayoutControl1.Controls.Add(Me.ShippingEmp)
         Me.LayoutControl1.Controls.Add(Me.ShippingMethod)
@@ -112,19 +118,19 @@ Partial Class frmShippingRecordDTL
         'ShippingRemark
         '
         Me.ShippingRemark.EnterMoveNextControl = True
-        Me.ShippingRemark.Location = New System.Drawing.Point(90, 108)
+        Me.ShippingRemark.Location = New System.Drawing.Point(90, 132)
         Me.ShippingRemark.Name = "ShippingRemark"
         Me.ShippingRemark.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.ShippingRemark.Properties.Appearance.Options.UseFont = True
         Me.ShippingRemark.Properties.MaxLength = 100
-        Me.ShippingRemark.Size = New System.Drawing.Size(430, 92)
+        Me.ShippingRemark.Size = New System.Drawing.Size(430, 69)
         Me.ShippingRemark.StyleController = Me.LayoutControl1
         Me.ShippingRemark.TabIndex = 321
         '
         'ShippingEmp
         '
         Me.ShippingEmp.EnterMoveNextControl = True
-        Me.ShippingEmp.Location = New System.Drawing.Point(90, 12)
+        Me.ShippingEmp.Location = New System.Drawing.Point(90, 36)
         Me.ShippingEmp.Name = "ShippingEmp"
         Me.ShippingEmp.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ShippingEmp.Properties.Appearance.Options.UseFont = True
@@ -142,118 +148,6 @@ Partial Class frmShippingRecordDTL
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'ShippingMethod
-        '
-        Me.ShippingMethod.EditValue = CType(0, Short)
-        Me.ShippingMethod.Location = New System.Drawing.Point(90, 60)
-        Me.ShippingMethod.Name = "ShippingMethod"
-        Me.ShippingMethod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingMethod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingMethod.Properties.Appearance.Options.UseFont = True
-        Me.ShippingMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingMethod.Properties.ImmediatePopup = True
-        Me.ShippingMethod.Properties.NullText = "[EditValue is null]"
-        Me.ShippingMethod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingMethod.Properties.PopupSizeable = True
-        Me.ShippingMethod.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingMethod.StyleController = Me.LayoutControl1
-        Me.ShippingMethod.TabIndex = 25
-        '
-        'ShippingPeriod
-        '
-        Me.ShippingPeriod.EditValue = CType(0, Short)
-        Me.ShippingPeriod.Location = New System.Drawing.Point(90, 36)
-        Me.ShippingPeriod.Name = "ShippingPeriod"
-        Me.ShippingPeriod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingPeriod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingPeriod.Properties.Appearance.Options.UseFont = True
-        Me.ShippingPeriod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingPeriod.Properties.ImmediatePopup = True
-        Me.ShippingPeriod.Properties.NullText = "[EditValue is null]"
-        Me.ShippingPeriod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingPeriod.Properties.PopupSizeable = True
-        Me.ShippingPeriod.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingPeriod.StyleController = Me.LayoutControl1
-        Me.ShippingPeriod.TabIndex = 24
-        '
-        'ShippingStatus
-        '
-        Me.ShippingStatus.EditValue = CType(0, Short)
-        Me.ShippingStatus.Location = New System.Drawing.Point(90, 84)
-        Me.ShippingStatus.Name = "ShippingStatus"
-        Me.ShippingStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
-        Me.ShippingStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShippingStatus.Properties.Appearance.Options.UseFont = True
-        Me.ShippingStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ShippingStatus.Properties.ImmediatePopup = True
-        Me.ShippingStatus.Properties.NullText = "[EditValue is null]"
-        Me.ShippingStatus.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
-        Me.ShippingStatus.Properties.PopupSizeable = True
-        Me.ShippingStatus.Size = New System.Drawing.Size(430, 20)
-        Me.ShippingStatus.StyleController = Me.LayoutControl1
-        Me.ShippingStatus.TabIndex = 26
-        '
-        'Root
-        '
-        Me.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
-        Me.Root.GroupBordersVisible = False
-        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.กำหนดเวลาส่ง, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.EmptySpaceItem1})
-        Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(532, 223)
-        Me.Root.TextVisible = False
-        '
-        'LayoutControlItem1
-        '
-        Me.LayoutControlItem1.Control = Me.ShippingEmp
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(512, 24)
-        Me.LayoutControlItem1.Text = "ผู้ส่ง"
-        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(66, 13)
-        '
-        'กำหนดเวลาส่ง
-        '
-        Me.กำหนดเวลาส่ง.Control = Me.ShippingPeriod
-        Me.กำหนดเวลาส่ง.Location = New System.Drawing.Point(0, 24)
-        Me.กำหนดเวลาส่ง.Name = "กำหนดเวลาส่ง"
-        Me.กำหนดเวลาส่ง.Size = New System.Drawing.Size(512, 24)
-        Me.กำหนดเวลาส่ง.TextSize = New System.Drawing.Size(66, 13)
-        '
-        'LayoutControlItem3
-        '
-        Me.LayoutControlItem3.Control = Me.ShippingMethod
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 48)
-        Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(512, 24)
-        Me.LayoutControlItem3.Text = "ลักษณะงาน"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(66, 13)
-        '
-        'LayoutControlItem4
-        '
-        Me.LayoutControlItem4.Control = Me.ShippingStatus
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 72)
-        Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(512, 24)
-        Me.LayoutControlItem4.Text = "สถานะ"
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(66, 13)
-        '
-        'LayoutControlItem5
-        '
-        Me.LayoutControlItem5.Control = Me.ShippingRemark
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 96)
-        Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(512, 96)
-        Me.LayoutControlItem5.Text = "หมายเหตุ"
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(66, 13)
-        '
-        'EmptySpaceItem1
-        '
-        Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 192)
-        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(512, 11)
-        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'GridColumn1
         '
@@ -276,6 +170,138 @@ Partial Class frmShippingRecordDTL
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 1
+        '
+        'ShippingMethod
+        '
+        Me.ShippingMethod.EditValue = CType(0, Short)
+        Me.ShippingMethod.Location = New System.Drawing.Point(90, 84)
+        Me.ShippingMethod.Name = "ShippingMethod"
+        Me.ShippingMethod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingMethod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingMethod.Properties.Appearance.Options.UseFont = True
+        Me.ShippingMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingMethod.Properties.ImmediatePopup = True
+        Me.ShippingMethod.Properties.NullText = "[EditValue is null]"
+        Me.ShippingMethod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingMethod.Properties.PopupSizeable = True
+        Me.ShippingMethod.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingMethod.StyleController = Me.LayoutControl1
+        Me.ShippingMethod.TabIndex = 25
+        '
+        'ShippingPeriod
+        '
+        Me.ShippingPeriod.EditValue = CType(0, Short)
+        Me.ShippingPeriod.Location = New System.Drawing.Point(90, 60)
+        Me.ShippingPeriod.Name = "ShippingPeriod"
+        Me.ShippingPeriod.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingPeriod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingPeriod.Properties.Appearance.Options.UseFont = True
+        Me.ShippingPeriod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingPeriod.Properties.ImmediatePopup = True
+        Me.ShippingPeriod.Properties.NullText = "[EditValue is null]"
+        Me.ShippingPeriod.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingPeriod.Properties.PopupSizeable = True
+        Me.ShippingPeriod.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingPeriod.StyleController = Me.LayoutControl1
+        Me.ShippingPeriod.TabIndex = 24
+        '
+        'ShippingStatus
+        '
+        Me.ShippingStatus.EditValue = CType(0, Short)
+        Me.ShippingStatus.Location = New System.Drawing.Point(90, 108)
+        Me.ShippingStatus.Name = "ShippingStatus"
+        Me.ShippingStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[True]
+        Me.ShippingStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShippingStatus.Properties.Appearance.Options.UseFont = True
+        Me.ShippingStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ShippingStatus.Properties.ImmediatePopup = True
+        Me.ShippingStatus.Properties.NullText = "[EditValue is null]"
+        Me.ShippingStatus.Properties.PopupFormSize = New System.Drawing.Size(300, 0)
+        Me.ShippingStatus.Properties.PopupSizeable = True
+        Me.ShippingStatus.Size = New System.Drawing.Size(430, 20)
+        Me.ShippingStatus.StyleController = Me.LayoutControl1
+        Me.ShippingStatus.TabIndex = 26
+        '
+        'Root
+        '
+        Me.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
+        Me.Root.GroupBordersVisible = False
+        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.กำหนดเวลาส่ง, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.EmptySpaceItem1, Me.LayoutControlItem2})
+        Me.Root.Name = "Root"
+        Me.Root.Size = New System.Drawing.Size(532, 223)
+        Me.Root.TextVisible = False
+        '
+        'LayoutControlItem1
+        '
+        Me.LayoutControlItem1.Control = Me.ShippingEmp
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 24)
+        Me.LayoutControlItem1.Name = "LayoutControlItem1"
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(512, 24)
+        Me.LayoutControlItem1.Text = "ผู้ส่ง"
+        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(66, 13)
+        '
+        'กำหนดเวลาส่ง
+        '
+        Me.กำหนดเวลาส่ง.Control = Me.ShippingPeriod
+        Me.กำหนดเวลาส่ง.Location = New System.Drawing.Point(0, 48)
+        Me.กำหนดเวลาส่ง.Name = "กำหนดเวลาส่ง"
+        Me.กำหนดเวลาส่ง.Size = New System.Drawing.Size(512, 24)
+        Me.กำหนดเวลาส่ง.TextSize = New System.Drawing.Size(66, 13)
+        '
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.ShippingMethod
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 72)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(512, 24)
+        Me.LayoutControlItem3.Text = "ลักษณะงาน"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(66, 13)
+        '
+        'LayoutControlItem4
+        '
+        Me.LayoutControlItem4.Control = Me.ShippingStatus
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(0, 96)
+        Me.LayoutControlItem4.Name = "LayoutControlItem4"
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(512, 24)
+        Me.LayoutControlItem4.Text = "สถานะ"
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(66, 13)
+        '
+        'LayoutControlItem5
+        '
+        Me.LayoutControlItem5.Control = Me.ShippingRemark
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 120)
+        Me.LayoutControlItem5.Name = "LayoutControlItem5"
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(512, 73)
+        Me.LayoutControlItem5.Text = "หมายเหตุ"
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(66, 13)
+        '
+        'EmptySpaceItem1
+        '
+        Me.EmptySpaceItem1.AllowHotTrack = False
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 193)
+        Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(512, 10)
+        Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'AssignDate
+        '
+        Me.AssignDate.EditValue = Nothing
+        Me.AssignDate.Location = New System.Drawing.Point(90, 12)
+        Me.AssignDate.Name = "AssignDate"
+        Me.AssignDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AssignDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AssignDate.Size = New System.Drawing.Size(430, 20)
+        Me.AssignDate.StyleController = Me.LayoutControl1
+        Me.AssignDate.TabIndex = 336
+        '
+        'LayoutControlItem2
+        '
+        Me.LayoutControlItem2.Control = Me.AssignDate
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem2.Name = "LayoutControlItem2"
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(512, 24)
+        Me.LayoutControlItem2.Text = "วันที่ Assign"
+        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(66, 13)
         '
         'frmShippingRecordDTL
         '
@@ -310,6 +336,9 @@ Partial Class frmShippingRecordDTL
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -333,4 +362,6 @@ Partial Class frmShippingRecordDTL
     Friend WithEvents ShippingMethod As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents ShippingPeriod As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents ShippingStatus As DevExpress.XtraEditors.ComboBoxEdit
+    Friend WithEvents AssignDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LayoutControlItem2 As DevExpress.XtraLayout.LayoutControlItem
 End Class

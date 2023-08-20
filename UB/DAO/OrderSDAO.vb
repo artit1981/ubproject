@@ -610,10 +610,11 @@ Public Class OrderSDAO
             SQL &= " ,Orders.OrderStatus,Orders.GrandTotal "
             SQL &= " ,Bill.OrderCode AS BillCode,Receipt.OrderCode AS ReceiptCode "
             SQL &= " ,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EMPNAME"
+            SQL &= "  ,Orders.AssignDate"
             SQL &= " ,Orders.ShippingPeriod,Orders.ShippingMethod "
             SQL &= " ,ShippingEmp.Title + ShippingEmp.Firstname + ' ' + ShippingEmp.LastName AS ShippingEmp"
             SQL &= " ,Orders.ShippingStatus,Orders.ShippingRemark"
-            'SQL &= "  ,AssignDate"
+
             'SQL &= " ,AssignEmp.Title + AssignEmp.Firstname + ' ' + AssignEmp.LastName AS AssignEmp"
             SQL &= " FROM Orders  "
             SQL &= " LEFT OUTER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "

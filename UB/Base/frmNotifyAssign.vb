@@ -47,6 +47,7 @@ Public Class frmNotifyAssign
             .Columns("OrderID").Visible = False
             .Columns("IsSelect").Visible = False
 
+
             .Columns("ShippingGroup").Caption = "หน้าจอ"
             .Columns("ShippingGroup").Width = 100
             .Columns("ShippingGroup").MaxWidth = 120
@@ -70,6 +71,8 @@ Public Class frmNotifyAssign
 
             .Columns("Customer").Caption = "ลูกค้า"
             .Columns("Customer").OptionsColumn.ReadOnly = True
+            .Columns("Customer").Width = 200
+            .Columns("Customer").MaxWidth = 0
 
             .Columns("OrderStatus").Caption = "สถานะ"
             .Columns("OrderStatus").Width = 70
@@ -129,10 +132,16 @@ Public Class frmNotifyAssign
             .Columns("ShippingRemark").MaxWidth = 120
             .Columns("ShippingRemark").OptionsColumn.ReadOnly = True
 
+            .Columns("AssignDate").Caption = "วันที่ Assign"
+            .Columns("AssignDate").Width = 90
+            .Columns("AssignDate").MaxWidth = 100
+            .Columns("AssignDate").OptionsColumn.ReadOnly = True
+
             If mMenuID = MasterType.NotiNotAssign Then
                 .Columns("ShippingPeriod").Visible = False
                 .Columns("ShippingEmp").Visible = False
                 .Columns("ShippingRemark").Visible = False
+                .Columns("AssignDate").Visible = False
             End If
         End With
     End Sub
