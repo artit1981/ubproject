@@ -132,11 +132,18 @@ Public Class frmLogin
             txtLogin.Text = gLastLogin
             txtPassword.Select()
         End If
+        If gDBServerName.ToString.Trim = "" Then
+            DBServerName.Text = "SERVER-UNIQUE"
+            DatabaseName.Text = "UBC"
+            txtDBUser.Text = "adminubc1"
+            txtDBPass.Text = "Ubc123456"
+        Else
+            DBServerName.Text = gDBServerName
+            DatabaseName.Text = gDatabaseName
+            txtDBUser.Text = gDBUser
+            txtDBPass.Text = gDBPass
+        End If
 
-        DBServerName.Text = gDBServerName
-        DatabaseName.Text = gDatabaseName
-        txtDBUser.Text = gDBUser
-        txtDBPass.Text = gDBPass
 
         If (ApplicationDeployment.IsNetworkDeployed) Then
             Me.Text = "Login : V." & ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
