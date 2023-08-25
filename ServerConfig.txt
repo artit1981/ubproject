@@ -2,5 +2,11 @@ SERVER-UNIQUE\MSSQLSERVER2
 pass-db   admin1234
 inst. MSSQLSERVER2
 
+DBServerName:SERVER-UNIQUE
+Database: UBC
+DB User: adminubc1
+DB Pass:Ubc123456
+
+
 
 NASUBC1104/Public/office/deploy
