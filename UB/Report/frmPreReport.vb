@@ -369,7 +369,7 @@ Public Class frmPreReport
                 End If
 
                 Select Case mOrderType
-                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose
+                    Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.InvoiceBuy, MasterType.Shiping, MasterType.ShipingBuy, MasterType.Borrow, MasterType.Claim, MasterType.Expose, MasterType.ReduceCredit
                         lSnCodeList = ""
                         If chkSN.Checked = True Then
                             lSN = New SnDAO
