@@ -309,7 +309,7 @@ Partial Class frmBill
         Me.GeneralTabPage.Controls.Add(Me.LayoutControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.GeneralTabPage, True)
         Me.GeneralTabPage.Name = "GeneralTabPage"
-        Me.GeneralTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.GeneralTabPage.Size = New System.Drawing.Size(1011, 646)
         Me.GeneralTabPage.Text = "ข้อมูลทั่วไป"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.GeneralTabPage, "")
         '
@@ -544,6 +544,7 @@ Partial Class frmBill
         Me.UcOrderList1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcOrderList1, "")
+        Me.UcOrderList1.CustomerID = CType(0, Long)
         Me.UcOrderList1.Location = New System.Drawing.Point(12, 179)
         Me.UcOrderList1.Margin = New System.Windows.Forms.Padding(4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcOrderList1, True)
@@ -1291,7 +1292,7 @@ Partial Class frmBill
         Me.VatTabPage.Controls.Add(Me.GroupControl1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.VatTabPage, True)
         Me.VatTabPage.Name = "VatTabPage"
-        Me.VatTabPage.Size = New System.Drawing.Size(1011, 646)
+        Me.VatTabPage.Size = New System.Drawing.Size(0, 646)
         Me.VatTabPage.Text = "การยื่นภาษี"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.VatTabPage, "")
         '
@@ -1876,19 +1877,20 @@ Partial Class frmBill
         Me.ChequeTabPage.Controls.Add(Me.UcCheque1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.ChequeTabPage, True)
         Me.ChequeTabPage.Name = "ChequeTabPage"
-        Me.ChequeTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.ChequeTabPage.Size = New System.Drawing.Size(1011, 646)
         Me.ChequeTabPage.Text = "รายการรับ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.ChequeTabPage, "")
         '
         'UcCheque1
         '
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.UcCheque1, "")
+        Me.UcCheque1.CustomerID = CType(0, Long)
         Me.UcCheque1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.UcCheque1.Location = New System.Drawing.Point(0, 0)
         Me.UcCheque1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcCheque1, True)
         Me.UcCheque1.Name = "UcCheque1"
-        Me.UcCheque1.Size = New System.Drawing.Size(1011, 664)
+        Me.UcCheque1.Size = New System.Drawing.Size(1011, 646)
         Me.UcCheque1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcCheque1, "")
         '
@@ -1898,7 +1900,7 @@ Partial Class frmBill
         Me.RemarkTabPage.Controls.Add(Me.Remark)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.RemarkTabPage, True)
         Me.RemarkTabPage.Name = "RemarkTabPage"
-        Me.RemarkTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.RemarkTabPage.Size = New System.Drawing.Size(1011, 646)
         Me.RemarkTabPage.Text = "รายละเอียด"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.RemarkTabPage, "")
         '
@@ -1924,7 +1926,7 @@ Partial Class frmBill
         Me.NoteTabPage.Controls.Add(Me.UcNote1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.NoteTabPage, True)
         Me.NoteTabPage.Name = "NoteTabPage"
-        Me.NoteTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.NoteTabPage.Size = New System.Drawing.Size(1011, 646)
         Me.NoteTabPage.Text = "บันทึกข้อความ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.NoteTabPage, "")
         '
@@ -1936,7 +1938,7 @@ Partial Class frmBill
         Me.UcNote1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcNote1, True)
         Me.UcNote1.Name = "UcNote1"
-        Me.UcNote1.Size = New System.Drawing.Size(1011, 664)
+        Me.UcNote1.Size = New System.Drawing.Size(1011, 646)
         Me.UcNote1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcNote1, "")
         '
@@ -1946,7 +1948,7 @@ Partial Class frmBill
         Me.AttachmentTabPage.Controls.Add(Me.UcFileAttach1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AttachmentTabPage, True)
         Me.AttachmentTabPage.Name = "AttachmentTabPage"
-        Me.AttachmentTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.AttachmentTabPage.Size = New System.Drawing.Size(0, 646)
         Me.AttachmentTabPage.Text = "ไฟล์แนบ"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AttachmentTabPage, "")
         '
@@ -1958,7 +1960,7 @@ Partial Class frmBill
         Me.UcFileAttach1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.UcFileAttach1, True)
         Me.UcFileAttach1.Name = "UcFileAttach1"
-        Me.UcFileAttach1.Size = New System.Drawing.Size(1011, 664)
+        Me.UcFileAttach1.Size = New System.Drawing.Size(0, 646)
         Me.UcFileAttach1.TabIndex = 0
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.UcFileAttach1, "")
         '
@@ -1968,7 +1970,7 @@ Partial Class frmBill
         Me.AdminTabPage.Controls.Add(Me.UcAdmin1)
         Me.FormChangedComponent1.SetMonitorForChanges(Me.AdminTabPage, True)
         Me.AdminTabPage.Name = "AdminTabPage"
-        Me.AdminTabPage.Size = New System.Drawing.Size(1011, 664)
+        Me.AdminTabPage.Size = New System.Drawing.Size(0, 646)
         Me.AdminTabPage.Text = "ผู้บันทึก"
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.AdminTabPage, "")
         '

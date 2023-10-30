@@ -975,6 +975,8 @@ Public Class OrderSDAO
                                             lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, "New", 0)
                                         ElseIf TableName = MasterType.SellOrders.ToString Or (lIsUpdate = 3 And StockType = "O") Then 'Close SN
                                             lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, "Close", 0)
+                                        ElseIf TableName = MasterType.ReduceCredit.ToString And (lIsUpdate = 3 And StockType = "I") Then 'Reopen SN
+                                            lclsSN2.SetStatusBySN(tr, pProList.ProductID, pclsSN.SerialNumberNo, "New", 0)
                                         End If
                                     Next
                                 End If
