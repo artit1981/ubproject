@@ -297,7 +297,7 @@ Public Class frmPreReport
                     If lclsOrder.QuotationRemarkID > 0 Then
                         lclsMaster = New MasterDAO
                         lclsMaster.InitailData(lclsOrder.QuotationRemarkID, MasterType.QuotationRemark)
-                        lclsReport.Remark = lclsMaster.Remark
+                        lclsReport.Remark = "หมายเหตุ : " & lclsMaster.NameThai
                     Else
                         lclsReport.Remark = ""
                     End If

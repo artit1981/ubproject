@@ -85,11 +85,20 @@ Public Class frmImportOrderOnline
                 data.Columns.Add("OrderStatus", GetType(String))
                 data.Columns.Add("OrderUnit", GetType(Decimal))
 
+                Dim lparts(5) As String
                 For Each line In lines.Skip(7)
                     Dim parts = line.Split(",")
                     'Dim ltmp = parts
-                    data.Rows.Add(parts)
+                    lparts(0) = parts(0)
+                    lparts(1) = parts(1)
+                    lparts(2) = parts(2)
+                    lparts(3) = parts(3)
+                    lparts(4) = parts(4)
+                    lparts(5) = parts(5)
+                    data.Rows.Add(lparts)
                 Next
+
+
             Else
                 Using stream As FileStream = File.Open(fullFileName, FileMode.Open, FileAccess.Read)
                     Dim excelReader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)

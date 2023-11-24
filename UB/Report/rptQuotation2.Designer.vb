@@ -137,6 +137,7 @@ Partial Public Class rptQuotation2
         Me.CalUnit = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPrice = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CalPhone = New DevExpress.XtraReports.UI.CalculatedField()
+        Me.XrLabel80 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -1221,7 +1222,7 @@ Partial Public Class rptQuotation2
         '
         'PanelTotal
         '
-        Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLine7, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLabel59, Me.XrLine14, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10, Me.XrLabel18})
+        Me.PanelTotal.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel80, Me.XrLabel77, Me.XrLine5, Me.XrLabel76, Me.XrLabel71, Me.XrLabel67, Me.XrLabel66, Me.XrLabel65, Me.XrLabel64, Me.lblEmp, Me.XrLine2, Me.XrLine7, Me.XrLabel60, Me.XrLine11, Me.XrLabel17, Me.XrLabel16, Me.XrLabel59, Me.XrLine14, Me.XrLabel58, Me.XrLabel56, Me.XrLabel52, Me.XrLabel51, Me.XrLabel14, Me.XrLabel57, Me.XrLabel55, Me.XrLabel49, Me.XrLabel48, Me.XrLabel10, Me.XrLabel18})
         Me.PanelTotal.LocationFloat = New DevExpress.Utils.PointFloat(3.750006!, 0!)
         Me.PanelTotal.Name = "PanelTotal"
         Me.PanelTotal.SizeF = New System.Drawing.SizeF(793.2499!, 343.1505!)
@@ -1543,6 +1544,19 @@ Partial Public Class rptQuotation2
         Me.CalPhone.Expression = "Concat([CompanyPhone], '  MB: 086-355-1154 , 089-616-2255') "
         Me.CalPhone.Name = "CalPhone"
         '
+        'XrLabel80
+        '
+        Me.XrLabel80.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.Remark")})
+        Me.XrLabel80.Font = New System.Drawing.Font("Cordia New", 14.0!)
+        Me.XrLabel80.LocationFloat = New DevExpress.Utils.PointFloat(25.29421!, 54.33331!)
+        Me.XrLabel80.Multiline = True
+        Me.XrLabel80.Name = "XrLabel80"
+        Me.XrLabel80.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel80.SizeF = New System.Drawing.SizeF(440.3826!, 27.16669!)
+        Me.XrLabel80.StylePriority.UseFont = False
+        Me.XrLabel80.StylePriority.UseTextAlignment = False
+        Me.XrLabel80.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
         'rptQuotation2
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportHeader})
@@ -1681,4 +1695,5 @@ Partial Public Class rptQuotation2
     Friend WithEvents XrLabel78 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents CalPhone As DevExpress.XtraReports.UI.CalculatedField
     Friend WithEvents PanelTotal As DevExpress.XtraReports.UI.XRPanel
+    Friend WithEvents XrLabel80 As DevExpress.XtraReports.UI.XRLabel
 End Class
