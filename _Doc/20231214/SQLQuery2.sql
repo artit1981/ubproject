@@ -1,0 +1,115 @@
+ 
+
+SELECT OrderID,CustomerID,CustomerCode,OrderCode,TableID, OrderDate,ProductID
+,ProductCode,ProductName,ProductBrandID,Price,Units
+,case when VatType='I' then round( (Units * Price) / ((100+VatPercen)/100),2) else Units * Price end Total
+,Cost
+,SaleOwnerID,[EmpCode],EmpName,CommissionID,TerritoryID
+,TargetPerMonth,CustomerGroupID
+,CampaignPrice ,CampaignDiscount,CampaignType,CpTypeCont3_1,CpTypeCont3_2
+,CampaignPriceBuy ,CampaignDiscountBuy,CampaignTypeBuy,CpTypeCont3_1_Buy,CpTypeCont3_2_Buy,OrderTotal,OrderDiscountAmount,OrderVatAmount,OrderGrandTotal
+,VatTypeID,VatTypeCode,VatType
+from(
+--Calc price with Campaign
+SELECT Orders.OrderID,[Orders].CustomerID,Customer.CustomerCode,Orders.OrderCode,Orders.TableID, Orders.OrderDate
+,Orders.Total AS OrderTotal
+,Orders.DiscountAmount AS OrderDiscountAmount
+,Orders.VatAmount AS OrderVatAmount
+,Orders.GrandTotal AS OrderGrandTotal
+,ProductList.ProductID
+,Product.ProductCode,ProductList.ProductName,Product.ProductBrandID
+,ProductList.Price as ProductPrice
+--Campaign Sell
+,case when Campaign.CampaignID=0 then ProductList.Price 
+when Campaign.CampaignID>0 and Campaign.CampaignType=3 and Campaign.CpTypeCont3_1>0 then ProductList.Price-Campaign.CpTypeCont3_1
+when Campaign.CampaignID>0 and Campaign.CampaignType=3 and Campaign.CpTypeCont3_2>0 then ProductList.Price-(ProductList.Price * (Campaign.CpTypeCont3_2/100))
+when Campaign.CampaignID>0 and Campaign.CampaignType=4 and Campaign.CampaignPrice >0 then Campaign.CampaignPrice 
+when Campaign.CampaignID>0 and Campaign.CampaignType=4 and Campaign.CampaignDiscount >0 then ProductList.Price-Campaign.CampaignDiscount
+else ProductList.Price  end Price
+,Campaign.CampaignPrice ,Campaign.CampaignDiscount,Campaign.CampaignType
+,Campaign.CpTypeCont3_1,Campaign.CpTypeCont3_2
+--Calc cost with Campaign
+--Campaign Buy
+,case when CampaignBuy.CampaignID=0 then ProductList.Cost 
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=3 and CampaignBuy.CpTypeCont3_1>0 then ProductList.Cost-CampaignBuy.CpTypeCont3_1
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=3 and CampaignBuy.CpTypeCont3_2>0 then ProductList.Cost-(ProductList.Cost * (CampaignBuy.CpTypeCont3_2/100))
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=4 and CampaignBuy.CampaignPrice >0 then CampaignBuy.CampaignPrice 
+when CampaignBuy.CampaignID>0 and CampaignBuy.CampaignType=4 and CampaignBuy.CampaignDiscount >0 then ProductList.Cost-CampaignBuy.CampaignDiscount
+else ProductList.Cost  end Cost
+,CampaignBuy.CampaignPrice as CampaignPriceBuy ,CampaignBuy.CampaignDiscount as CampaignDiscountBuy,CampaignBuy.CampaignType as CampaignTypeBuy
+,CampaignBuy.CpTypeCont3_1 as CpTypeCont3_1_Buy,CampaignBuy.CpTypeCont3_2 as CpTypeCont3_2_Buy
+
+,case when Orders.TableID=55 then ProductList.AdjustUnit * -1 else ProductList.AdjustUnit end  Units
+,Orders.SaleOwnerID,[EmpCode],[Employee].Title + [Employee].Firstname + ' ' + [Employee].LastName AS EmpName,[Employee].CommissionID,[Employee].TerritoryID
+,[Employee].TargetPerMonth
+,Customer.CustomerGroupID
+,Orders.VatTypeID,VatType.VatType,VatType.VatTypeCode
+,Orders.VatPercen
+FROM Orders  
+inner join VatType on VatType.VatTypeID=Orders.VatTypeID
+inner JOIN ProductList ON Orders.OrderID=ProductList.RefID AND ProductList.IsDelete =0  
+inner JOIN Product ON Product.ProductID=ProductList.ProductID 
+INNER JOIN [Employee] on [Orders].SaleOwnerID = [Employee].EmpID and [Employee].IsDelete=0
+INNER JOIN Customer on Customer.CustomerID = [Orders].CustomerID
+LEFT OUTER JOIN  --Campaign Sell
+( 
+ Select max( isnull(Campaign.CampaignID,0))CampaignID
+ --,Campaign.Subject
+ ,min(Campaign.StartDate) StartDate,max(Campaign.ExpireDate)ExpireDate
+ ,max(Campaign.CampaignType)CampaignType,max(Campaign.CpTypeCont3_1)CpTypeCont3_1,max(Campaign.CpTypeCont3_2)CpTypeCont3_2
+ ,ProductList.ProductID,CustomerList.CustomerID
+ ,max(ProductList.Price) as CampaignPrice
+ ,max(ProductList.Discount) as CampaignDiscount
+  from Campaign
+  left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='Campaign' 
+  left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 91  
+  where Campaign.TableID= 91  
+  group by ProductList.ProductID,CustomerList.CustomerID
+  ) Campaign ON Campaign.ProductID=ProductList.ProductID  
+			and Campaign.CustomerID=Orders.CustomerID
+			and Campaign.StartDate < Orders.OrderDate and Campaign.ExpireDate > Orders.OrderDate
+LEFT OUTER JOIN  --Campaign Buy
+( 
+ Select max( isnull(Campaign.CampaignID,0))CampaignID
+ --,Campaign.Subject
+ ,min(Campaign.StartDate) StartDate,max(Campaign.ExpireDate)ExpireDate
+ ,max(Campaign.CampaignType)CampaignType,max(Campaign.CpTypeCont3_1)CpTypeCont3_1,max(Campaign.CpTypeCont3_2)CpTypeCont3_2
+ ,ProductList.ProductID
+ --,CustomerList.CustomerID
+ ,max(ProductList.Price) as CampaignPrice,max(ProductList.Discount) as CampaignDiscount
+  from Campaign
+  left outer join ProductList on ProductList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and ProductList.RefTable='CampaignBuy' 
+  --left outer join CustomerList on CustomerList.RefID=Campaign.CampaignID and ProductList.IsDelete =0 and CustomerList.RefTableID= 115  
+  where Campaign.TableID= 115  
+  group by ProductList.ProductID
+  ) CampaignBuy ON CampaignBuy.ProductID=ProductList.ProductID  
+			--and CampaignBuy.CustomerID=Orders.CustomerID
+			and CampaignBuy.StartDate <= Orders.OrderDate and CampaignBuy.ExpireDate > Orders.OrderDate
+WHERE Orders.IsDelete =0 AND Orders.IsCancel = 0   
+and Orders.TableID in(39,41,54,55,111,116)
+--and Orders.OrderDate between '2021-12-01' and '2021-12-31'
+--and Orders.OrderID= 306362
+) as tmp
+   --order by [OrderID]
+ 
+
+
+ ---------------------
+SELECT Orders.OrderID,Orders.OrderCode  ,Orders.OrderDate ,Orders.InvoiceSuplierID ,Orders.PO
+,CASE WHEN Customer.CompanyName <>'' THEN Customer.CompanyName ELSE Customer.Title + Customer.Firstname + ' ' + Customer.LastName END Customer 
+,case when Orders.TableID=55 then Orders.Total * -1 else Orders.Total end  Total 
+,case when Orders.TableID=55 then Orders.DiscountAmount * -1 else Orders.DiscountAmount end  DiscountAmount 
+,case when Orders.TableID=55 then Orders.VatAmount * -1 else Orders.VatAmount end  VatAmount 
+,case when Orders.TableID=55 then Orders.GrandTotal * -1 else Orders.GrandTotal end  GrandTotal 
+, Orders.TableID
+,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission 
+FROM Orders  
+INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  
+LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  
+WHERE Orders.IsDelete =0   
+and Orders.OrderDate between '' and ''
+and Orders.IsInActive = 0
+and Orders.TableID in  ( 39,111,116,41,54,55)
+and Customer.CustomerID in ( )
+ORDER BY Customer.Title,Customer.Firstname,Orders.OrderDate ,Orders.OrderCode
+             
