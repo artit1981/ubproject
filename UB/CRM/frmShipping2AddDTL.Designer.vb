@@ -25,6 +25,7 @@ Partial Class frmShipping2AddDTL
         Me.btnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.btnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.AssignDate = New DevExpress.XtraEditors.DateEdit()
         Me.ShippingRemark = New DevExpress.XtraEditors.MemoEdit()
         Me.ShippingStatus = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.ShippingMethod = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -63,11 +64,12 @@ Partial Class frmShipping2AddDTL
         Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.AssignDate = New DevExpress.XtraEditors.DateEdit()
         Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShippingRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,8 +103,6 @@ Partial Class frmShipping2AddDTL
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -165,6 +165,17 @@ Partial Class frmShipping2AddDTL
         Me.LayoutControl1.Size = New System.Drawing.Size(540, 525)
         Me.LayoutControl1.TabIndex = 334
         Me.LayoutControl1.Text = "LayoutControl1"
+        '
+        'AssignDate
+        '
+        Me.AssignDate.EditValue = Nothing
+        Me.AssignDate.Location = New System.Drawing.Point(102, 344)
+        Me.AssignDate.Name = "AssignDate"
+        Me.AssignDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AssignDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AssignDate.Size = New System.Drawing.Size(414, 20)
+        Me.AssignDate.StyleController = Me.LayoutControl1
+        Me.AssignDate.TabIndex = 335
         '
         'ShippingRemark
         '
@@ -543,17 +554,6 @@ Partial Class frmShipping2AddDTL
         Me.LayoutControlItem13.Text = "หมายเหตุ"
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(66, 13)
         '
-        'AssignDate
-        '
-        Me.AssignDate.EditValue = Nothing
-        Me.AssignDate.Location = New System.Drawing.Point(102, 344)
-        Me.AssignDate.Name = "AssignDate"
-        Me.AssignDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.AssignDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.AssignDate.Size = New System.Drawing.Size(414, 20)
-        Me.AssignDate.StyleController = Me.LayoutControl1
-        Me.AssignDate.TabIndex = 335
-        '
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.AssignDate
@@ -568,7 +568,7 @@ Partial Class frmShipping2AddDTL
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(644, 532)
+        Me.ClientSize = New System.Drawing.Size(644, 307)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
@@ -583,6 +583,8 @@ Partial Class frmShipping2AddDTL
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ShippingRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ShippingStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ShippingMethod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -616,8 +618,6 @@ Partial Class frmShipping2AddDTL
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AssignDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AssignDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

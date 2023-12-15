@@ -130,12 +130,12 @@ Public Class frmShipping2AddDTL
                     lOrder.EmpID = EmpID.EditValue
                     lOrder.Remark = Remark.Text.Trim
 
-                    lOrder.ShippingEmpID = ShippingEmp.EditValue
-                    lOrder.ShippingPeriod = ShippingPeriod.Text.Trim
-                    lOrder.ShippingMethod = ShippingMethod.Text.Trim
-                    lOrder.ShippingStatus = ShippingStatus.Text.Trim
-                    lOrder.AssignDate = AssignDate.EditValue
-                    lOrder.AssignEmpID = gUserID
+                    'lOrder.ShippingEmpID = ShippingEmp.EditValue
+                    'lOrder.ShippingPeriod = ShippingPeriod.Text.Trim
+                    'lOrder.ShippingMethod = ShippingMethod.Text.Trim
+                    'lOrder.ShippingStatus = ShippingStatus.Text.Trim
+                    'lOrder.AssignDate = AssignDate.EditValue
+                    'lOrder.AssignEmpID = gUserID
                     lOrder.SaveData()
 
                     XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)

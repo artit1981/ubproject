@@ -18,6 +18,7 @@ Public Class frmShippingRecordMain
             Dim dataTable = lcls.GetDataTableForShippingRec(dtpDateFrom.EditValue, dtpDateTo.EditValue, False, False, 1)
             For Each pRow In dataTable.Rows
                 Dim lRecProperty As New ShippingRecProperty
+                lRecProperty.ShippingType = 1
                 lRecProperty.IsSelect = False
                 lRecProperty.OrderID = pRow("OrderID")
                 lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
@@ -42,6 +43,33 @@ Public Class frmShippingRecordMain
                 lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
                 lList.Add(lRecProperty)
             Next
+
+            'RecordMain2
+            Dim lcls2 As New Shipping2DAO
+            dataTable = lcls2.GetDataTable(dtpDateFrom.EditValue, dtpDateTo.EditValue, False, 0)
+            For Each pRow In dataTable.Rows
+                Dim lRecProperty As New ShippingRecProperty
+                lRecProperty.ShippingType = 2
+                lRecProperty.IsSelect = False
+                lRecProperty.OrderID = pRow("OrderID")
+                lRecProperty.OrderCode = pRow("OrderCode").ToString.Trim
+                lRecProperty.OrderDate = pRow("OrderDate")
+                lRecProperty.Customer = pRow("Customer").ToString.Trim
+                lRecProperty.GrandTotal = ConvertNullToZero(pRow("GrandTotal"))
+                lRecProperty.OrderStatus = ""
+                lRecProperty.ReceiptCode = pRow("ReceiptCode").ToString.Trim
+                lRecProperty.BillCode = pRow("BillCode").ToString.Trim
+                lRecProperty.EMPNAME = pRow("EMPNAME").ToString.Trim
+                lRecProperty.AssignDate = pRow("AssignDate")
+                lRecProperty.ShippingPeriod = pRow("ShippingPeriod").ToString.Trim
+                lRecProperty.ShippingMethod = pRow("ShippingMethod").ToString.Trim
+                lRecProperty.ShippingEmp = pRow("ShippingEmp").ToString.Trim
+                lRecProperty.ShippingStatus = pRow("ShippingStatus").ToString.Trim
+                lRecProperty.ShippingRemark = pRow("ShippingRemark").ToString.Trim
+                lList.Add(lRecProperty)
+            Next
+
+            lList.Sort(Function(x, y) x.OrderDate.CompareTo(y.OrderDate))
             GridControl.DataSource = lList
 
             GridStyle()
@@ -55,7 +83,7 @@ Public Class frmShippingRecordMain
 
     Private Sub GridStyle()
         With GridView
-
+            .Columns("ShippingType").Visible = False
             .Columns("OrderID").Visible = False
             '.Columns("IsSelect").Visible = False
 
@@ -176,9 +204,10 @@ Public Class frmShippingRecordMain
             Dim lList As New List(Of iOrder)
             For lRow = 0 To GridView.RowCount
                 If GridView.GetRowCellValue(lRow, "IsSelect") = True Then
-                    Dim liorder As New iOrder With {
-                            .ID = GridView.GetRowCellValue(lRow, "OrderID")
-                        }
+                    Dim liorder As New iOrder
+                    liorder.ID = GridView.GetRowCellValue(lRow, "OrderID")
+                    liorder.ShipingByID = GridView.GetRowCellValue(lRow, "ShippingType")
+
                     lList.Add(liorder)
                 End If
             Next
@@ -429,7 +458,15 @@ Public Class ShippingRecProperty
         End Set
     End Property
 
-    '
+    Dim mShippingType As Long = 1
+    Public Property ShippingType() As Long
+        Get
+            Return mShippingType
+        End Get
+        Set(ByVal value As Long)
+            mShippingType = value
+        End Set
+    End Property
 #End Region
 
 

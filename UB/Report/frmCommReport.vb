@@ -142,7 +142,7 @@ Public Class frmCommReport
             SQL &= " ,Employee.EmpCode,Employee.Title + Employee.Firstname + ' ' + Employee.LastName AS EmployeeName,Employee.Commission "
             SQL &= " FROM Orders  "
             SQL &=  " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID  "
-            SQL &=  " LEFT OUTER JOIN Employee ON Customer.EmpID=Employee.EmpID  "
+            SQL &= " LEFT OUTER JOIN Employee ON Orders.SaleOwnerID=Employee.EmpID  "
             SQL &=  " WHERE Orders.IsDelete =0   "
             SQL &=  " and Orders.OrderDate between '" & formatSQLDate(DateFrom.EditValue) & "'"
             SQL &=  "                      and '" & formatSQLDate(DateTo.EditValue) & "'"
@@ -152,7 +152,7 @@ Public Class frmCommReport
                 Case 1
                     SQL &=  " and Customer.CustomerID in (" & lEmployeeList & ")"
                 Case 2
-                    SQL &=  " and Customer.EmpID in (" & lEmployeeList & ")"
+                    SQL &= " and Orders.SaleOwnerID in (" & lEmployeeList & ")"
             End Select
             Select Case ReportType.EditValue
                 Case 1

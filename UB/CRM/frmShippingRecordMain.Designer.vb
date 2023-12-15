@@ -79,6 +79,7 @@ Partial Class frmShippingRecordMain
         Me.ShippingRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.OrderID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ShippingType = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -455,7 +456,7 @@ Partial Class frmShippingRecordMain
         '
         'GridView
         '
-        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.OrderCode, Me.OrderDate, Me.CustomerCode, Me.Customer, Me.OrderStatus, Me.GrandTotal, Me.ReceiptCode, Me.BillCode, Me.EMPNAME, Me.AssignDate, Me.ShippingPeriod, Me.ShippingMethod, Me.ShippingEmp, Me.ShippingStatus, Me.ShippingRemark, Me.OrderID})
+        Me.GridView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.OrderCode, Me.OrderDate, Me.CustomerCode, Me.Customer, Me.OrderStatus, Me.GrandTotal, Me.ReceiptCode, Me.BillCode, Me.EMPNAME, Me.AssignDate, Me.ShippingPeriod, Me.ShippingMethod, Me.ShippingEmp, Me.ShippingStatus, Me.ShippingRemark, Me.OrderID, Me.ShippingType})
         Me.GridView.GridControl = Me.GridControl
         Me.GridView.Name = "GridView"
         Me.GridView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -604,11 +605,19 @@ Partial Class frmShippingRecordMain
         Me.OrderID.FieldName = "OrderID"
         Me.OrderID.Name = "OrderID"
         Me.OrderID.Visible = True
-        Me.OrderID.VisibleIndex = 16
+        Me.OrderID.VisibleIndex = 17
         '
         'GridView1
         '
         Me.GridView1.Name = "GridView1"
+        '
+        'ShippingType
+        '
+        Me.ShippingType.Caption = "GridColumn1"
+        Me.ShippingType.FieldName = "ShippingType"
+        Me.ShippingType.Name = "ShippingType"
+        Me.ShippingType.Visible = True
+        Me.ShippingType.VisibleIndex = 16
         '
         'frmShippingRecordMain
         '
@@ -711,4 +720,5 @@ Partial Class frmShippingRecordMain
     Friend WithEvents ShippingStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ShippingRemark As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents AssignDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ShippingType As DevExpress.XtraGrid.Columns.GridColumn
 End Class

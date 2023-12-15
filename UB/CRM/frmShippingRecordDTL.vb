@@ -76,34 +76,19 @@ Public Class frmShippingRecordDTL
 
     Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
 
-        Dim tr As SqlTransaction = Nothing
+
         Dim lUnits As Long = 0
         Try
             If Verify() Then
                 If XtraMessageBox.Show(Me, "ยืนยันการบันทึกข้อมูล", "Assign To", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
 
-                    If mTypeID = 1 Then
-                        tr = gConnection.Connection.BeginTransaction
+                    'If mTypeID = 1 Then
 
-                        For Each pRow In miOrderListDAO
-                            Dim lOrder As New OrderSDAO
-                            lOrder.ID = pRow.ID
-                            lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
-                            lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
-                            lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
-                            lOrder.ShippingRemark = ShippingRemark.Text.Trim
-                            lOrder.ShippingEmpID = ShippingEmp.EditValue
-                            lOrder.AssignEmpID = gUserID
-                            lOrder.AssignDate = AssignDate.EditValue
-                            lOrder.UpdateAssignShipping(tr)
-                        Next
 
-                        tr.Commit()
-
-                    ElseIf mTypeID = 2 Then
-                        For Each pRow In miOrderListDAO
-                            Dim lOrder As New Shipping2DAO
-                            If lOrder.InitailData(pRow.ID) Then
+                    For Each pRow In miOrderListDAO
+                            If pRow.ShipingByID = 1 Then
+                                Dim lOrder As New OrderSDAO
+                                lOrder.ID = pRow.ID
                                 lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
                                 lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
                                 lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
@@ -111,14 +96,45 @@ Public Class frmShippingRecordDTL
                                 lOrder.ShippingEmpID = ShippingEmp.EditValue
                                 lOrder.AssignEmpID = gUserID
                                 lOrder.AssignDate = AssignDate.EditValue
-                                lOrder.ModeData = DataMode.ModeEdit
-                                lOrder.SaveData()
+                                lOrder.UpdateAssignShipping(Nothing)
+                            Else
+                                Dim lOrder As New Shipping2DAO
+                                If lOrder.InitailData(pRow.ID) Then
+                                    lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
+                                    lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
+                                    lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
+                                    lOrder.ShippingRemark = ShippingRemark.Text.Trim
+                                    lOrder.ShippingEmpID = ShippingEmp.EditValue
+                                    lOrder.AssignEmpID = gUserID
+                                    lOrder.AssignDate = AssignDate.EditValue
+                                    lOrder.ModeData = DataMode.ModeEdit
+                                    lOrder.SaveData()
+                                End If
                             End If
 
                         Next
-                    End If
 
-                    XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+
+
+                        'ElseIf mTypeID = 2 Then
+                        '    For Each pRow In miOrderListDAO
+                        '        Dim lOrder As New Shipping2DAO
+                        '        If lOrder.InitailData(pRow.ID) Then
+                        '            lOrder.ShippingPeriod = ShippingPeriod.EditValue.ToString.Trim
+                        '            lOrder.ShippingMethod = ShippingMethod.EditValue.ToString.Trim
+                        '            lOrder.ShippingStatus = ShippingStatus.EditValue.ToString.Trim
+                        '            lOrder.ShippingRemark = ShippingRemark.Text.Trim
+                        '            lOrder.ShippingEmpID = ShippingEmp.EditValue
+                        '            lOrder.AssignEmpID = gUserID
+                        '            lOrder.AssignDate = AssignDate.EditValue
+                        '            lOrder.ModeData = DataMode.ModeEdit
+                        '            lOrder.SaveData()
+                        '        End If
+
+                        '    Next
+                        'End If
+
+                        XtraMessageBox.Show(Me, "บันทึกรายการสำเร็จ", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     Me.DialogResult = DialogResult.OK
                     Me.Close()
                 End If
@@ -126,7 +142,7 @@ Public Class frmShippingRecordDTL
                 Me.DialogResult = DialogResult.None
             End If
         Catch ex As Exception
-            tr.Rollback()
+
             ShowErrorMsg(False, ex.Message)
         End Try
     End Sub
