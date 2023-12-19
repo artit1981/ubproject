@@ -29,6 +29,8 @@ Partial Public Class rptInvoiceAbb
         Me.XrLabel17 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
+        Me.XrLabel29 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel26 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel25 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel24 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine3 = New DevExpress.XtraReports.UI.XRLine()
@@ -71,8 +73,6 @@ Partial Public Class rptInvoiceAbb
         Me.CalUnitSum = New DevExpress.XtraReports.UI.CalculatedField()
         Me.CompanyTaxCal = New DevExpress.XtraReports.UI.CalculatedField()
         Me.XrCrossBandBox2 = New DevExpress.XtraReports.UI.XRCrossBandBox()
-        Me.XrLabel26 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel29 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -182,6 +182,27 @@ Partial Public Class rptInvoiceAbb
         Me.PageHeader.HeightF = 233.6032!
         Me.PageHeader.Name = "PageHeader"
         Me.PageHeader.StylePriority.UseFont = False
+        '
+        'XrLabel29
+        '
+        Me.XrLabel29.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.PO")})
+        Me.XrLabel29.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(79.0141!, 188.4583!)
+        Me.XrLabel29.Name = "XrLabel29"
+        Me.XrLabel29.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel29.SizeF = New System.Drawing.SizeF(213.238!, 21.14813!)
+        Me.XrLabel29.StylePriority.UseFont = False
+        '
+        'XrLabel26
+        '
+        Me.XrLabel26.CanGrow = False
+        Me.XrLabel26.Font = New System.Drawing.Font("Angsana New", 12.0!)
+        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(1.041664!, 188.4583!)
+        Me.XrLabel26.Name = "XrLabel26"
+        Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel26.SizeF = New System.Drawing.SizeF(85.26389!, 21.14815!)
+        Me.XrLabel26.StylePriority.UseFont = False
+        Me.XrLabel26.Text = "เลขที่ใบสั่งซื้อ :"
         '
         'XrLabel25
         '
@@ -535,7 +556,7 @@ Partial Public Class rptInvoiceAbb
         '
         'ReportHeader
         '
-        Me.ReportHeader.HeightF = 0!
+        Me.ReportHeader.HeightF = 39.58333!
         Me.ReportHeader.Name = "ReportHeader"
         '
         'ProName
@@ -584,27 +605,6 @@ Partial Public Class rptInvoiceAbb
         Me.XrCrossBandBox2.StartPointFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrCrossBandBox2.WidthF = 294.0!
         '
-        'XrLabel26
-        '
-        Me.XrLabel26.CanGrow = False
-        Me.XrLabel26.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(1.041664!, 188.4583!)
-        Me.XrLabel26.Name = "XrLabel26"
-        Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel26.SizeF = New System.Drawing.SizeF(85.26389!, 21.14815!)
-        Me.XrLabel26.StylePriority.UseFont = False
-        Me.XrLabel26.Text = "เลขที่ใบสั่งซื้อ :"
-        '
-        'XrLabel29
-        '
-        Me.XrLabel29.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpOrders.PO")})
-        Me.XrLabel29.Font = New System.Drawing.Font("Angsana New", 12.0!)
-        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(79.0141!, 188.4583!)
-        Me.XrLabel29.Name = "XrLabel29"
-        Me.XrLabel29.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel29.SizeF = New System.Drawing.SizeF(213.238!, 21.14813!)
-        Me.XrLabel29.StylePriority.UseFont = False
-        '
         'rptInvoiceAbb
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader, Me.PageFooter, Me.ReportFooter, Me.ReportHeader})
@@ -616,7 +616,7 @@ Partial Public Class rptInvoiceAbb
         Me.DisplayName = "Order Report"
         Me.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormattingRuleSheet.AddRange(New DevExpress.XtraReports.UI.FormattingRule() {Me.Number2Dit, Me.Total})
-        Me.Margins = New System.Drawing.Printing.Margins(17, 515, 0, 0)
+        Me.Margins = New System.Drawing.Printing.Margins(34, 515, 0, 0)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
