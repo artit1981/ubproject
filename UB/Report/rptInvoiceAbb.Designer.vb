@@ -616,7 +616,7 @@ Partial Public Class rptInvoiceAbb
         Me.DisplayName = "Order Report"
         Me.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormattingRuleSheet.AddRange(New DevExpress.XtraReports.UI.FormattingRule() {Me.Number2Dit, Me.Total})
-        Me.Margins = New System.Drawing.Printing.Margins(34, 515, 0, 0)
+        Me.Margins = New System.Drawing.Printing.Margins(34, 497, 0, 0)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
