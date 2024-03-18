@@ -41,10 +41,10 @@ Public Class frmStockReport
             For Each item As Object In ProductTypeID.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
                 If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToZero(row(0))
+                    sQN = "0"
                 End If
+                sQN = sQN & "," & ConvertNullToZero(row(0))
+
             Next
             If sQN <> "" Then
                 lSQL = " and Product.ProductTypeID in (" & sQN & ") "
@@ -55,14 +55,18 @@ Public Class frmStockReport
             For Each item As Object In ProductBrandID.CheckedItems
                 Dim row As DataRowView = CType(item, DataRowView)
                 If sQN = "" Then
-                    sQN = ConvertNullToString(row(0))
-                Else
-                    sQN = sQN & "," & ConvertNullToZero(row(0))
+                    sQN = "0"
                 End If
+                sQN = sQN & "," & ConvertNullToZero(row(0))
+
             Next
             If sQN <> "" Then
                 lSQL = lSQL & " and Product.ProductBrandID in (" & sQN & ") "
             End If
+
+            'If sQN <> "" Then
+            '    lSQL = lSQL & " and (Product.ProductBrandID=0 or Product.ProductTypeID=0 ) "
+            'End If
 
             'Product
             dataTable = Nothing

@@ -60,7 +60,7 @@ Partial Public Class rptReceipt
         Me.XrLabel12.CanGrow = False
         Me.XrLabel12.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Remark")})
         Me.XrLabel12.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(711.9583!, 0.0!)
+        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(711.9583!, 0!)
         Me.XrLabel12.Name = "XrLabel12"
         Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel12.SizeF = New System.Drawing.SizeF(126.0417!, 19.87499!)
@@ -72,7 +72,7 @@ Partial Public Class rptReceipt
         Me.XrLabel11.CanGrow = False
         Me.XrLabel11.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.Total", "{0:#,##0.00}")})
         Me.XrLabel11.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel11.LocationFloat = New DevExpress.Utils.PointFloat(533.9584!, 0.0!)
+        Me.XrLabel11.LocationFloat = New DevExpress.Utils.PointFloat(533.9584!, 0!)
         Me.XrLabel11.Name = "XrLabel11"
         Me.XrLabel11.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel11.SizeF = New System.Drawing.SizeF(143.75!, 19.87499!)
@@ -86,7 +86,7 @@ Partial Public Class rptReceipt
         Me.XrLabel10.CanGrow = False
         Me.XrLabel10.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ExpiryDate", "{0:dd/MM/yyyy}")})
         Me.XrLabel10.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel10.LocationFloat = New DevExpress.Utils.PointFloat(415.2084!, 0.0!)
+        Me.XrLabel10.LocationFloat = New DevExpress.Utils.PointFloat(415.2084!, 0!)
         Me.XrLabel10.Name = "XrLabel10"
         Me.XrLabel10.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel10.SizeF = New System.Drawing.SizeF(118.75!, 19.87499!)
@@ -98,7 +98,7 @@ Partial Public Class rptReceipt
         Me.XrLabel9.CanGrow = False
         Me.XrLabel9.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.OrderDate", "{0:dd/MM/yyyy}")})
         Me.XrLabel9.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(296.875!, 0.0!)
+        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(296.875!, 0!)
         Me.XrLabel9.Name = "XrLabel9"
         Me.XrLabel9.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel9.SizeF = New System.Drawing.SizeF(115.625!, 19.87499!)
@@ -112,7 +112,7 @@ Partial Public Class rptReceipt
         Me.XrLabel7.CanGrow = False
         Me.XrLabel7.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.SEQ")})
         Me.XrLabel7.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(9.999998!, 0.0!)
+        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(9.999998!, 0!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel7.SizeF = New System.Drawing.SizeF(55.625!, 19.87499!)
@@ -126,7 +126,7 @@ Partial Public Class rptReceipt
         Me.XrLabel8.CanGrow = False
         Me.XrLabel8.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "TmpProductList.ProductName")})
         Me.XrLabel8.Font = New System.Drawing.Font("Cordia New", 12.0!)
-        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(86.45834!, 0.0!)
+        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(86.45834!, 0!)
         Me.XrLabel8.Name = "XrLabel8"
         Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel8.SizeF = New System.Drawing.SizeF(210.4167!, 19.87499!)
@@ -265,7 +265,7 @@ Partial Public Class rptReceipt
         '
         'ReportFooter
         '
-        Me.ReportFooter.HeightF = 0.0!
+        Me.ReportFooter.HeightF = 0!
         Me.ReportFooter.Name = "ReportFooter"
         '
         'TmpProductListTableAdapter
@@ -315,7 +315,7 @@ Partial Public Class rptReceipt
         Me.DataSource = Me.TmpOrders1
         Me.Font = New System.Drawing.Font("Cordia New", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margins = New System.Drawing.Printing.Margins(0, 2, 82, 39)
-        Me.Version = "12.2"
+        Me.Version = "21.2"
         CType(Me.TmpOrders1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
