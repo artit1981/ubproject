@@ -14,6 +14,8 @@ Public Class frmTerritory
             Call SetComboManager()
             SetComboCommission()
             Call LoadData(pMode, pID)
+            CommissionID.Enabled = False
+            btnRefreshCommissionID.Enabled = False
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
         End Try

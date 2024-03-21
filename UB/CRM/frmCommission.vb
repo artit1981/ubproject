@@ -15,11 +15,21 @@ Public Class frmCommission
 #Region "Overrides"
     Protected Overrides Sub OnLoadForm(ByVal pMode As Integer, ByVal pID As Long, ByVal pOrderType As Long, ByVal pclsConvert As iOrder, ByVal pCusID As Long)
         Try
+            SetComboTerritory()
 
             Call LoadData(pMode, pID)
 
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".OnLoadForm : " & e.Message)
+        End Try
+    End Sub
+
+    Private Sub SetComboTerritory()
+        Try
+            SetLookUpTerritory(TerritoryID)
+        Catch e As Exception
+            Err.Raise(Err.Number, e.Source, mFormName & ".SetComboTerritory : " & e.Message)
+        Finally
         End Try
     End Sub
 
@@ -50,6 +60,7 @@ Public Class frmCommission
             mcls.ModeData = pMode
             mcls.Subject = Subject.Text.Trim
             mcls.CommissionType = CommissionType.EditValue
+            mcls.TerritoryID = TerritoryID.EditValue
             mcls.StartDate = StartDate.EditValue
             mcls.ExpireDate = ExpireDate.EditValue
             mcls.Remark = Remark.Text.Trim
@@ -214,6 +225,7 @@ Public Class frmCommission
                     Subject.Text = mcls.Subject
 
                     CommissionType.EditValue = mcls.CommissionType
+                    TerritoryID.EditValue = mcls.TerritoryID
                     StartDate.EditValue = mcls.StartDate
                     ExpireDate.EditValue = mcls.ExpireDate
                     Remark.EditValue = mcls.Remark

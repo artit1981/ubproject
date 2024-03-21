@@ -54,6 +54,15 @@ Public Class CommissionDAO
         End Set
     End Property
 
+    Private mTerritoryID As Long = 0
+    Public Property TerritoryID() As Long
+        Get
+            Return mTerritoryID
+        End Get
+        Set(ByVal value As Long)
+            mTerritoryID = value
+        End Set
+    End Property
 
 #End Region
 
@@ -103,6 +112,7 @@ Public Class CommissionDAO
                     ID = ConvertNullToZero(dr("CommissionID"))
 
                     CommissionType = ConvertNullToZero(dr("CommissionType"))
+                    TerritoryID = ConvertNullToZero(dr("TerritoryID"))
 
                     If IsDBNull(dr("StartDate")) Then
                         StartDate = GetCurrentDate(tr)
@@ -240,12 +250,13 @@ Public Class CommissionDAO
 
                     EmpID = gEmpID
                     ID = GenNewID("CommissionID", "Commission", tr)
-                    SQL = " INSERT INTO Commission (CommissionID,Subject,CommissionType,StartDate ,ExpireDate, Remark "
+                    SQL = " INSERT INTO Commission (CommissionID,Subject,CommissionType,TerritoryID,StartDate ,ExpireDate, Remark "
                     SQL &= " ,CreateBy,CreateTime,IsInActive,IsDelete  "
                     SQL &= " )"
                     SQL &= " VALUES ( @IDs"
                     SQL &= " ,  @Subject"
                     SQL &= " ,  @CommissionType"
+                    SQL &= " ,  @TerritoryID"
                     SQL &= " ,  @StartDate"
                     SQL &= " ,  @ExpireDate"
                     SQL &= " ,  @Remark "
@@ -258,6 +269,7 @@ Public Class CommissionDAO
                     SQL = " UPDATE Commission SET "
                     SQL &= " Subject=@Subject"
                     SQL &= " , CommissionType=@CommissionType "
+                    SQL &= " , TerritoryID=@TerritoryID "
                     SQL &= " , StartDate=@StartDate "
                     SQL &= " , ExpireDate=@ExpireDate "
                     SQL &= " , Remark=@Remark "
@@ -276,6 +288,7 @@ Public Class CommissionDAO
             myCommand.Parameters.Add(New SqlParameter("@IDs", ID))
             myCommand.Parameters.Add(New SqlParameter("@Subject", Trim(Subject)))
             myCommand.Parameters.Add(New SqlParameter("@CommissionType", ConvertNullToZero(CommissionType)))
+            myCommand.Parameters.Add(New SqlParameter("@TerritoryID", ConvertNullToZero(TerritoryID)))
             myCommand.Parameters.Add(New SqlParameter("@StartDate", formatSQLDate(StartDate)))
             myCommand.Parameters.Add(New SqlParameter("@ExpireDate", formatSQLDate(ExpireDate)))
             myCommand.Parameters.Add(New SqlParameter("@Remark", ConvertNullToString(Remark)))

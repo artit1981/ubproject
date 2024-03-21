@@ -58,7 +58,7 @@ Public Class frmCommissionReport
 
     Private Sub SetComboTerritory()
         Try '  
-            SetComboCheckTerritory(cboCheckedTerritory, " and [CommissionID]>0 ")
+            SetComboCheckTerritory(cboCheckedTerritory)
         Catch e As Exception
             Err.Raise(Err.Number, e.Source, mFormName & ".SetComboTerritory : " & e.Message)
         End Try

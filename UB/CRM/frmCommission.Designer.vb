@@ -32,9 +32,13 @@ Partial Class frmCommission
         Me.CommissionID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SEQ = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.AmountFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AmountFromSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.AmountEnd = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.AmountEndSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.ComPercen = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ComPercenSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.ComAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ComAmountSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.IsChange = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.IsDelete = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -54,16 +58,18 @@ Partial Class frmCommission
         Me.UcAdmin1 = New UB.ucAdmin()
         Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
-        Me.AmountFromSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.AmountEndSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.ComPercenSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.ComAmountSpinEdit = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.TerritoryID = New DevExpress.XtraEditors.LookUpEdit()
+        Me.Label20 = New System.Windows.Forms.Label()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.GeneralTabPage.SuspendLayout()
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AmountFromSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AmountEndSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ComPercenSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ComAmountSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CommissionType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,10 +81,7 @@ Partial Class frmCommission
         Me.AdminTabPage.SuspendLayout()
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AmountFromSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AmountEndSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ComPercenSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ComAmountSpinEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TerritoryID.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FormChangedComponent1
@@ -104,6 +107,8 @@ Partial Class frmCommission
         Me.GeneralTabPage.Appearance.PageClient.Options.UseBackColor = True
         Me.GeneralTabPage.AutoScroll = True
         Me.FormChangedComponent1.SetChangeEventToMonitor(Me.GeneralTabPage, "")
+        Me.GeneralTabPage.Controls.Add(Me.TerritoryID)
+        Me.GeneralTabPage.Controls.Add(Me.Label20)
         Me.GeneralTabPage.Controls.Add(Me.ControlNavigator1)
         Me.GeneralTabPage.Controls.Add(Me.gridControl)
         Me.GeneralTabPage.Controls.Add(Me.CommissionType)
@@ -161,12 +166,12 @@ Partial Class frmCommission
         Me.gridControl.EmbeddedNavigator.Buttons.CancelEdit.Visible = False
         Me.gridControl.EmbeddedNavigator.Buttons.Edit.ImageIndex = 0
         Me.gridControl.EmbeddedNavigator.Buttons.EndEdit.Visible = False
-        Me.gridControl.Location = New System.Drawing.Point(48, 193)
+        Me.gridControl.Location = New System.Drawing.Point(48, 214)
         Me.gridControl.MainView = Me.gridView
         Me.FormChangedComponent1.SetMonitorForChanges(Me.gridControl, True)
         Me.gridControl.Name = "gridControl"
         Me.gridControl.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.AmountFromSpinEdit, Me.AmountEndSpinEdit, Me.ComPercenSpinEdit, Me.ComAmountSpinEdit})
-        Me.gridControl.Size = New System.Drawing.Size(721, 335)
+        Me.gridControl.Size = New System.Drawing.Size(721, 314)
         Me.gridControl.TabIndex = 247
         Me.FormChangedComponent1.SetValueNameToMonitor(Me.gridControl, "")
         Me.gridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridView})
@@ -234,6 +239,16 @@ Partial Class frmCommission
         Me.AmountFrom.VisibleIndex = 1
         Me.AmountFrom.Width = 200
         '
+        'AmountFromSpinEdit
+        '
+        Me.AmountFromSpinEdit.AutoHeight = False
+        Me.AmountFromSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AmountFromSpinEdit.DisplayFormat.FormatString = "n2"
+        Me.AmountFromSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountFromSpinEdit.EditFormat.FormatString = "n2"
+        Me.AmountFromSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountFromSpinEdit.Name = "AmountFromSpinEdit"
+        '
         'AmountEnd
         '
         Me.AmountEnd.AppearanceHeader.Options.UseTextOptions = True
@@ -249,6 +264,16 @@ Partial Class frmCommission
         Me.AmountEnd.Visible = True
         Me.AmountEnd.VisibleIndex = 2
         Me.AmountEnd.Width = 200
+        '
+        'AmountEndSpinEdit
+        '
+        Me.AmountEndSpinEdit.AutoHeight = False
+        Me.AmountEndSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.AmountEndSpinEdit.DisplayFormat.FormatString = "n2"
+        Me.AmountEndSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountEndSpinEdit.EditFormat.FormatString = "n2"
+        Me.AmountEndSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.AmountEndSpinEdit.Name = "AmountEndSpinEdit"
         '
         'ComPercen
         '
@@ -266,6 +291,17 @@ Partial Class frmCommission
         Me.ComPercen.VisibleIndex = 3
         Me.ComPercen.Width = 100
         '
+        'ComPercenSpinEdit
+        '
+        Me.ComPercenSpinEdit.AutoHeight = False
+        Me.ComPercenSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ComPercenSpinEdit.DisplayFormat.FormatString = "n2"
+        Me.ComPercenSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComPercenSpinEdit.EditFormat.FormatString = "n2"
+        Me.ComPercenSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComPercenSpinEdit.MaxValue = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ComPercenSpinEdit.Name = "ComPercenSpinEdit"
+        '
         'ComAmount
         '
         Me.ComAmount.AppearanceHeader.Options.UseTextOptions = True
@@ -280,6 +316,16 @@ Partial Class frmCommission
         Me.ComAmount.Visible = True
         Me.ComAmount.VisibleIndex = 4
         Me.ComAmount.Width = 150
+        '
+        'ComAmountSpinEdit
+        '
+        Me.ComAmountSpinEdit.AutoHeight = False
+        Me.ComAmountSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.ComAmountSpinEdit.DisplayFormat.FormatString = "n2"
+        Me.ComAmountSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComAmountSpinEdit.EditFormat.FormatString = "n2"
+        Me.ComAmountSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.ComAmountSpinEdit.Name = "ComAmountSpinEdit"
         '
         'IsChange
         '
@@ -504,46 +550,39 @@ Partial Class frmCommission
         '
         Me.DxErrorProvider1.ContainerControl = Me
         '
-        'AmountFromSpinEdit
+        'TerritoryID
         '
-        Me.AmountFromSpinEdit.AutoHeight = False
-        Me.AmountFromSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.AmountFromSpinEdit.DisplayFormat.FormatString = "n2"
-        Me.AmountFromSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.AmountFromSpinEdit.EditFormat.FormatString = "n2"
-        Me.AmountFromSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.AmountFromSpinEdit.Name = "AmountFromSpinEdit"
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.TerritoryID, "TextChanged")
+        Me.TerritoryID.EditValue = ""
+        Me.TerritoryID.Location = New System.Drawing.Point(183, 178)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.TerritoryID, True)
+        Me.TerritoryID.Name = "TerritoryID"
+        Me.TerritoryID.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.TerritoryID.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TerritoryID.Properties.Appearance.Options.UseFont = True
+        Me.TerritoryID.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
+        Me.TerritoryID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TerritoryID.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 50, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("TerritoryCode", "รหัสทีมขาย", 30, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("NameThai", "ชื่อทีมขาย", 70, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.[Default], DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.[Default])})
+        Me.TerritoryID.Properties.DropDownRows = 10
+        Me.TerritoryID.Properties.NullText = ""
+        Me.TerritoryID.Properties.PopupWidth = 300
+        Me.TerritoryID.Size = New System.Drawing.Size(189, 20)
+        Me.TerritoryID.TabIndex = 249
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.TerritoryID, "Text")
         '
-        'AmountEndSpinEdit
+        'Label20
         '
-        Me.AmountEndSpinEdit.AutoHeight = False
-        Me.AmountEndSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.AmountEndSpinEdit.DisplayFormat.FormatString = "n2"
-        Me.AmountEndSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.AmountEndSpinEdit.EditFormat.FormatString = "n2"
-        Me.AmountEndSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.AmountEndSpinEdit.Name = "AmountEndSpinEdit"
-        '
-        'ComPercenSpinEdit
-        '
-        Me.ComPercenSpinEdit.AutoHeight = False
-        Me.ComPercenSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ComPercenSpinEdit.DisplayFormat.FormatString = "n2"
-        Me.ComPercenSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.ComPercenSpinEdit.EditFormat.FormatString = "n2"
-        Me.ComPercenSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.ComPercenSpinEdit.MaxValue = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ComPercenSpinEdit.Name = "ComPercenSpinEdit"
-        '
-        'ComAmountSpinEdit
-        '
-        Me.ComAmountSpinEdit.AutoHeight = False
-        Me.ComAmountSpinEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.ComAmountSpinEdit.DisplayFormat.FormatString = "n2"
-        Me.ComAmountSpinEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.ComAmountSpinEdit.EditFormat.FormatString = "n2"
-        Me.ComAmountSpinEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.ComAmountSpinEdit.Name = "ComAmountSpinEdit"
+        Me.Label20.AutoSize = True
+        Me.Label20.BackColor = System.Drawing.Color.Transparent
+        Me.FormChangedComponent1.SetChangeEventToMonitor(Me.Label20, "")
+        Me.Label20.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label20.Location = New System.Drawing.Point(45, 181)
+        Me.FormChangedComponent1.SetMonitorForChanges(Me.Label20, True)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(23, 14)
+        Me.Label20.TabIndex = 250
+        Me.Label20.Text = "ทีม"
+        Me.FormChangedComponent1.SetValueNameToMonitor(Me.Label20, "")
         '
         'frmCommission
         '
@@ -561,6 +600,10 @@ Partial Class frmCommission
         CType(Me.ImageCollection1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AmountFromSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AmountEndSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ComPercenSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ComAmountSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CommissionType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ExpireDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ExpireDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -572,10 +615,7 @@ Partial Class frmCommission
         Me.AdminTabPage.ResumeLayout(False)
         CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AmountFromSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AmountEndSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ComPercenSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ComAmountSpinEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TerritoryID.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -618,4 +658,6 @@ Partial Class frmCommission
     Friend WithEvents AmountEndSpinEdit As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Friend WithEvents ComPercenSpinEdit As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Friend WithEvents ComAmountSpinEdit As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Private WithEvents TerritoryID As DevExpress.XtraEditors.LookUpEdit
+    Private WithEvents Label20 As Label
 End Class
