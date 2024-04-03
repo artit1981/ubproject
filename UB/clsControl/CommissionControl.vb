@@ -57,11 +57,11 @@ Public Class CommissionControl
         Dim lIsActiveOnly As Boolean = True
         Try
 
-            If mCtlForm.chkShowDelete.Checked = True Then
-                lIsActiveOnly = False
-            Else
-                lIsActiveOnly = True
-            End If
+            'If mCtlForm.chkShowDelete.Checked = True Then
+            '    lIsActiveOnly = False
+            'Else
+            lIsActiveOnly = True
+            'End If
 
             dataTable = lcls.GetDataTable(0, lIsActiveOnly)
 

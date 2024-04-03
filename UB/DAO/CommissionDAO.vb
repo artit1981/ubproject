@@ -306,9 +306,11 @@ Public Class CommissionDAO
 
             gConnection.executeInsertSqlCommand(myCommand, tr)
 
-            For Each pData In DtlList
-                pData.SaveData(tr, ID)
-            Next
+            If DtlList IsNot Nothing Then
+                For Each pData In DtlList
+                    pData.SaveData(tr, ID)
+                Next
+            End If
 
 
             SaveNote(NoteDAOs, ModeData, ID, TableName, tr)
