@@ -348,7 +348,16 @@ Module modOrder
                 Else
                     lStatus = EnumStatus.Close.ToString
                 End If
-
+            ElseIf (pOrderType = MasterType.ReduceCredit Or pOrderType = MasterType.AddCredit) And (lRefOrderType = MasterType.SellOrders Or lRefOrderType = MasterType.Invoice _
+                     Or lRefOrderType = MasterType.InvoiceAbb Or lRefOrderType = MasterType.InvoiceOnline Or lRefOrderType = MasterType.Shiping) Then
+                lRefStatus = GetUnitNotRef(pRefOrderID, "'SellOrders','Invoice','InvoiceAbb','InvoiceOnline','Shiping'", "'ReduceCredit','AddCredit'", MasterType.AddCredit & "," & MasterType.ReduceCredit, tr, pProListID, pProID, pUnitNotRef)
+                If lRefStatus = RefOrderStatus.NotToRef Then
+                    lStatus = EnumStatus.Open.ToString
+                ElseIf lRefStatus = RefOrderStatus.RefSome Then
+                    lStatus = EnumStatus.Waiting.ToString
+                Else
+                    lStatus = EnumStatus.Close.ToString
+                End If
             Else ''อื่นๆ
                 'lStatus = EnumStatus.Open.ToString
                 pUnitNotRef = pOrderUnit  'Return all unit

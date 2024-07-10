@@ -470,8 +470,9 @@ Public Class OrderControl
                 If mOrderType = MasterType.UpdateStock Then
                     mCtlForm.DeleteBar.Enabled = False
                 Else
-                    mCtlForm.DeleteBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString _
-                                                  Or lcls.OrderStatus = EnumStatus.Approve.ToString) And lcls.IsDelete = False
+                    'mCtlForm.DeleteBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Waiting.ToString _
+                    '                              Or lcls.OrderStatus = EnumStatus.Approve.ToString) And lcls.IsDelete = False
+                    mCtlForm.DeleteBar.Enabled = (lcls.OrderStatus = EnumStatus.Open.ToString Or lcls.OrderStatus = EnumStatus.Approve.ToString) And lcls.IsDelete = False
                 End If
 
             End If

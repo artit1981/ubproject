@@ -356,8 +356,10 @@ Public Class OrderSDAO
             'Ref Order Status
             If IsNothing(RefToOrderID) = False Then
                 Select Case TableID
+                    'Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
+                    '    , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn
                     Case MasterType.SellOrders, MasterType.Invoice, MasterType.InvoiceOnline, MasterType.InvoiceAbb, MasterType.Borrow, MasterType.Shiping, MasterType.InvoiceBuy, MasterType.Reserve, MasterType.ShipingBuy _
-                        , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn
+                        , MasterType.ClaimOut, MasterType.ClaimResult, MasterType.ClaimReturn, MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy
                         If RefToOrderID.Count > 0 Then
                             If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Close.ToString, tr, ModeData)
@@ -365,8 +367,6 @@ Public Class OrderSDAO
                                 UpdateRefOrderStatus(RefToOrderID, TableID, ID, EnumStatus.Open.ToString, tr, DataMode.ModeDelete)
 
                             End If
-
-
                             For Each pOrderID As Long In RefToOrderID
                                 If (ModeData = DataMode.ModeNew Or ModeData = DataMode.ModeEdit) And OrderStatus <> EnumStatus.NotApprove.ToString Then
                                     SetFlagProductList(ProductDAOs, True, pOrderID, tr)
@@ -375,8 +375,9 @@ Public Class OrderSDAO
                                 End If
                             Next
                         End If
-                    Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset _
-                        , MasterType.Claim, MasterType.Expose, MasterType.ReceiptCut
+                        'Case MasterType.ReduceCredit, MasterType.ReduceCreditBuy, MasterType.AddCredit, MasterType.AddCreditBuy, MasterType.StockIn, MasterType.Asset _
+                        '    , MasterType.Claim, MasterType.Expose, MasterType.ReceiptCut
+                    Case MasterType.StockIn, MasterType.Asset, MasterType.Claim, MasterType.Expose, MasterType.ReceiptCut
                         If RefToOrderID.Count > 0 Then
                             UpdateRefOrderStatus(RefToOrderID, TableID, ID, "", tr, ModeData) ''Not change ref status
                         End If

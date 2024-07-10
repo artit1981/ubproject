@@ -149,6 +149,8 @@ Public Class frmFindOrder
                     Else
                         lIsOpen = False
                     End If
+                Case MasterType.Bill, MasterType.Receipt
+                    lIsOpen = False
             End Select
 
             lcls.TableID = pOrderType
