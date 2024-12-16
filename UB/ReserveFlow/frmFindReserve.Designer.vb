@@ -448,7 +448,6 @@ Partial Class frmFindReserve
         Me.เลขที่เอกสาร.MaxWidth = 150
         Me.เลขที่เอกสาร.MinWidth = 100
         Me.เลขที่เอกสาร.Name = "เลขที่เอกสาร"
-        Me.เลขที่เอกสาร.OptionsColumn.AllowEdit = False
         Me.เลขที่เอกสาร.OptionsColumn.ReadOnly = True
         Me.เลขที่เอกสาร.Visible = True
         Me.เลขที่เอกสาร.VisibleIndex = 1
