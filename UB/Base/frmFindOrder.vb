@@ -140,7 +140,9 @@ Public Class frmFindOrder
                 Case MasterType.ClaimOut, MasterType.ClaimReturn
                     mCustomerID = 0
                     lIsOpen = True
-                Case MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.Claim, MasterType.ReceiptBuy, MasterType.InvoiceBuy
+                Case MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.Claim
+                    lIsOpen = False
+                Case MasterType.ReceiptBuy
                     lIsOpen = False
                 Case MasterType.AddCredit, MasterType.ReduceCredit
                     If pOrderType = MasterType.ClaimResult Then
