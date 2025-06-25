@@ -1638,10 +1638,10 @@ Public Class frmOrderS
                             lVatAmt = 0
                     End Select
 
-                    If chkIsEditVat.CheckState = CheckState.Unchecked Then
-                        VatAmount.EditValue = lVatAmt
-                    End If
+                    'If chkIsEditVat.CheckState = CheckState.Unchecked Then
 
+                    'End If
+                    VatAmount.EditValue = lVatAmt
                     GrandTotal.EditValue = TotalAfterDis.EditValue + VatAmount.EditValue
                     TotalTax.EditValue = mTaxOrderTotal
                     GrandTotal.EditValue = (GrandTotal.EditValue - TotalTax.EditValue) * ConvertNullToZero(Exchange.EditValue)

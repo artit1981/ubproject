@@ -1,0 +1,1 @@
+alter table TmpProductList add SEQ2 bigint ;

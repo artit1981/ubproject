@@ -143,7 +143,7 @@ Public Class frmFindOrder
                 Case MasterType.AddCreditBuy, MasterType.ReduceCreditBuy, MasterType.Claim
                     lIsOpen = False
                 Case MasterType.ReceiptBuy
-                    lIsOpen = False
+                    lIsOpen = True
                 Case MasterType.AddCredit, MasterType.ReduceCredit
                     If pOrderType = MasterType.ClaimResult Then
                         mCustomerID = 0

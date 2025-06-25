@@ -5,6 +5,7 @@ Public Class TmpProductList
 
 #Region "Property"
     Dim mSEQ As Integer
+    Dim mSEQ2 As Integer
     Dim mProductID As Long
     Dim mProductName As String
     Dim mProductNameExt As String
@@ -36,7 +37,14 @@ Public Class TmpProductList
             mSEQ = value
         End Set
     End Property
-
+    Public Property SEQ2() As Integer
+        Get
+            Return mSEQ2
+        End Get
+        Set(ByVal value As Integer)
+            mSEQ2 = value
+        End Set
+    End Property
     Public Property ProductID() As Long
         Get
             Return mProductID
@@ -209,10 +217,10 @@ Public Class TmpProductList
         Dim tr As SqlTransaction = Nothing
         SQL = ""
         Try
-            SQL = " INSERT INTO TmpProductList (UserID,SEQ,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
+            SQL = " INSERT INTO TmpProductList (UserID,SEQ,SEQ2,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
             SQL &=  " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany,ClaimRemark)"
             SQL &=  " VALUES ( @UserID"
-            SQL &=  " ,  @SEQ"
+            SQL &= " ,  @SEQ,  @SEQ2"
             SQL &=  " ,  @ProductID"
             SQL &=  " ,  @ProductCode"
             SQL &=  " ,  @ProductName"
@@ -236,6 +244,7 @@ Public Class TmpProductList
             myCommand.CommandText = SQL
             myCommand.Parameters.Add(New SqlParameter("@UserID", UserID))
             myCommand.Parameters.Add(New SqlParameter("@SEQ", ConvertNullToZero(SEQ)))
+            myCommand.Parameters.Add(New SqlParameter("@SEQ2", ConvertNullToZero(SEQ2)))
             myCommand.Parameters.Add(New SqlParameter("@ProductID", ConvertNullToZero(ProductID)))
             myCommand.Parameters.Add(New SqlParameter("@ProductCode", ConvertNullToString(ProductCode)))
             myCommand.Parameters.Add(New SqlParameter("@ProductName", ConvertNullToString(ProductName)))
@@ -269,10 +278,11 @@ Public Class TmpProductList
         SQL = ""
         Try
             Do While pLoop > 0
-                SQL = " INSERT INTO TmpProductList (UserID,SEQ,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
+                SQL = " INSERT INTO TmpProductList (UserID,SEQ,SEQ2,ProductID,ProductCode,ProductName,ProductNameExt,UnitCode,Units"
                 SQL &=  " ,Cost,Price,Discount,Total,Remark,OrderDate,ExpiryDate,Customer,CustomerTaxID,IsMainCompany,ClaimRemark)"
                 SQL &=  " VALUES ( @UserID"
-                SQL &=  " , 999"
+                SQL &= " , 999"
+                SQL &= " , 999"
                 SQL &=  " , NULL"
                 SQL &=  " , NULL"
                 SQL &=  " , NULL"
@@ -308,6 +318,7 @@ Public Class TmpProductList
 
     Public Sub New()
         mSEQ = 0
+        mSEQ2 = 0
         mProductID = 0
         mProductName = ""
         mProductNameExt = ""

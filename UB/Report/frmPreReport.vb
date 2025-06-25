@@ -326,7 +326,7 @@ Public Class frmPreReport
             Dim lclsProList As New ProductListDAO
             Dim lclsTmpProList As New TmpProductList
             Dim lTableProList As DataTable
-            Dim lIsSeqDup As Boolean, lSEQ As Long = 1
+            Dim lIsSeqDup As Boolean, lIsNote As Boolean = False, lSEQ As Long = 1
             Dim lOrderList As New List(Of Long)
             Dim lSN As SnDAO, lSNTable As DataTable, lSnCodeList As String = ""
 
@@ -334,16 +334,26 @@ Public Class frmPreReport
 
             lTableProList = lclsProList.GetDataTable(lOrderList, mOrderType.ToString, Nothing, False, "", False, 0, False)
             lIsSeqDup = lclsProList.CheckSeqDup(pOrderID, mOrderType.ToString, Nothing, False)
-
+            Dim drFilter = lTableProList.Select("ProductCode LIKE '%หมายเหตุ:%'")
+            lIsNote = drFilter.Length > 0
             lclsTmpProList.ClearTemp()
             For Each pRow As DataRow In lTableProList.Rows
 
                 lclsTmpProList = New TmpProductList
 
-                If lIsSeqDup Then
+                If lIsNote Then
+                    If ConvertNullToString(pRow.Item("ProductCode")).Trim.Contains("หมายเหตุ:") Then
+                        lclsTmpProList.SEQ = 999
+                    Else
+                        lclsTmpProList.SEQ = lSEQ
+                    End If
+                    lclsTmpProList.SEQ2 = pRow.Item("SEQ")
+                ElseIf lIsSeqDup Then
                     lclsTmpProList.SEQ = lSEQ
+                    lclsTmpProList.SEQ2 = lSEQ
                 Else
                     lclsTmpProList.SEQ = pRow.Item("SEQ")
+                    lclsTmpProList.SEQ2 = pRow.Item("SEQ")
                 End If
 
                 lclsTmpProList.ProductID = pRow.Item("ProductID")
@@ -409,7 +419,17 @@ Public Class frmPreReport
                 End Select
 
                 lclsTmpProList.SaveData()
-                lSEQ = lSEQ + 1
+                If lIsNote Then
+                    If ConvertNullToString(pRow.Item("ProductCode")).Trim.Contains("หมายเหตุ:") Then
+                        ''
+                    Else
+                        lSEQ += 1
+                    End If
+
+                Else
+                    lSEQ += 1
+                End If
+
             Next
 
             pSEQ = lSEQ
@@ -428,6 +448,7 @@ Public Class frmPreReport
             lTableNote = lclsNote.GetDataTable(mOrderType.ToString & "_PRO", pOrderID)
             For Each pRow As DataRow In lTableNote.Rows
                 lclsTmpProList.SEQ = 999
+                lclsTmpProList.SEQ2 = 999
                 lclsTmpProList.ProductID = 0
                 lclsTmpProList.ProductCode = ""
                 lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("Description"))
@@ -1038,7 +1059,7 @@ Public Class frmPreReport
             SQL = "SELECT TmpProductList.* "
             SQL &=  " FROM TmpProductList  "
             SQL &=  " WHERE UserID= " & gUserID
-            SQL &=  " Order by SEQ"
+            SQL &= " Order by SEQ2"
             lDataTable = New DBConnection.DataTableList
             lDataTable.SQL = SQL
             lDataTable.TableName = "TmpProductList"
