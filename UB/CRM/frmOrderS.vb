@@ -1017,6 +1017,11 @@ Public Class frmOrderS
                     DiscountAmount.EditValue = FormatNumber(lcls.DiscountAmount, 2)
                     Institute.EditValue = lcls.Institute
                     PO.EditValue = lcls.PO
+                    chkIsEditVat.EditValue = lcls.IsEditVat
+                    If lcls.IsEditVat = True Then
+                        VatAmount.EditValue = lcls.VatAmount
+                    End If
+
                     If LayoutShipingDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always Then
                         ShipingDate.EditValue = lcls.ShipingDate
                     End If
@@ -1638,10 +1643,10 @@ Public Class frmOrderS
                             lVatAmt = 0
                     End Select
 
-                    'If chkIsEditVat.CheckState = CheckState.Unchecked Then
+                    If chkIsEditVat.CheckState = CheckState.Unchecked Then
+                        VatAmount.EditValue = lVatAmt
+                    End If
 
-                    'End If
-                    VatAmount.EditValue = lVatAmt
                     GrandTotal.EditValue = TotalAfterDis.EditValue + VatAmount.EditValue
                     TotalTax.EditValue = mTaxOrderTotal
                     GrandTotal.EditValue = (GrandTotal.EditValue - TotalTax.EditValue) * ConvertNullToZero(Exchange.EditValue)

@@ -74,6 +74,7 @@ Public Class frmTaxReport
                 lclsTmpProList.ClearTemp()
                 For Each pRow As DataRow In lTableOrder.Rows
                     lclsTmpProList.SEQ = i
+                    lclsTmpProList.SEQ2 = i
                     lclsTmpProList.ProductID = pRow.Item("OrderID")
                     If OrderType.EditValue = "S" Or OrderType.EditValue = "A" Then 'Sell
                         lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("OrderCode"))

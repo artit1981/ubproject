@@ -517,6 +517,7 @@ Public Class frmPreReport
             lclsTmpProList.ClearTemp()
             For Each pRow As DataRow In lTableProList.Rows
                 lclsTmpProList.SEQ = i
+                lclsTmpProList.SEQ2 = i
                 lclsTmpProList.ProductID = pRow.Item("OrderID")
                 lclsTmpProList.ProductName = ConvertNullToString(pRow.Item("OrderCode"))
                 lclsTmpProList.OrderDate = pRow.Item("OrderDate")
